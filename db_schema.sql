@@ -40,6 +40,7 @@ CREATE TABLE `module` (
 LOCK TABLES `module` WRITE;
 /*!40000 ALTER TABLE `module` DISABLE KEYS */;
 INSERT INTO `module` VALUES ('CS5721','Software Design','J.J.Collins',6);
+INSERT INTO `module` VALUES ('CS6081','Research Methods and Practice','J.J.Collins',6);
 /*!40000 ALTER TABLE `module` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
