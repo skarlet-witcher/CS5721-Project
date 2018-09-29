@@ -29,6 +29,7 @@ public class Main {
 			System.out.println(" Credit: " + module.getCredit());
 			System.out.println("");
 		}
+		// git commit test
 	}
 
 }
