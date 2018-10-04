@@ -3,7 +3,7 @@ package controller;
 import java.util.List;
 
 import dao.DataAccess;
-import entities.Module;
+import model.Module;
 
 public class Controller {
 	

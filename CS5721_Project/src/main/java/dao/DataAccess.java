@@ -9,7 +9,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import dao.HibernateUtils;
-import entities.Module;
+import model.Module;
 
 public class DataAccess {
 	private Session session;

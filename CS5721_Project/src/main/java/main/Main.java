@@ -1,13 +1,20 @@
 package main;
 
-import controller.Controller;
-import entities.Module;
+//import controller.Controller;
+//import model.Module;
+import view.MainMenu;
 
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		
+		try {
+			new MainMenu().run();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		/*
 		// test
 		for (Module module : Controller.getInstance().getAllModule()) {
 			System.out.println(" Module Code: " + module.getModule_no());
@@ -30,6 +37,7 @@ public class Main {
 			System.out.println("");
 		}
 		// git commit test
+		*/
 	}
 
 }

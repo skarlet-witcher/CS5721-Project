@@ -8,7 +8,7 @@ import org.hibernate.EmptyInterceptor;
 import org.hibernate.Transaction;
 import org.hibernate.type.Type;
 
-import entities.Module;
+import model.Module;
 
 public class Interceptor extends EmptyInterceptor {
 	private int updates;
