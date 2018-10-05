@@ -6,8 +6,10 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class ModifyAccountWindow {
+public class CustomerModifyAccountWindow {
 
 	private JFrame frmModifyAnAccount;
 	private String accountNum;
@@ -18,6 +20,7 @@ public class ModifyAccountWindow {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
+	private JButton btnBack;
 
 	/**
 	 * Launch the application.
@@ -33,7 +36,7 @@ public class ModifyAccountWindow {
 	/**
 	 * Create the application.
 	 */
-	public ModifyAccountWindow(String accountNum) {
+	public CustomerModifyAccountWindow(String accountNum) {
 		this.accountNum = accountNum;
 		initialize();
 	}
@@ -126,5 +129,16 @@ public class ModifyAccountWindow {
 		textField_5.setColumns(10);
 		textField_5.setBounds(207, 385, 193, 26);
 		frmModifyAnAccount.getContentPane().add(textField_5);
+		
+		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmModifyAnAccount.dispose();
+				new CustomerWindow(accountNum).run();
+			}
+		});
+		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnBack.setBounds(166, 542, 135, 38);
+		frmModifyAnAccount.getContentPane().add(btnBack);
 	}
 }

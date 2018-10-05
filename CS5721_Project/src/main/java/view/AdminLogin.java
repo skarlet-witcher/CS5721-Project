@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class StaffLogin {
+public class AdminLogin {
 
 	private JFrame frmStaffLogin;
 	private JTextField tf_staffId;
@@ -27,7 +27,7 @@ public class StaffLogin {
 	/**
 	 * Create the application.
 	 */
-	public StaffLogin() {
+	public AdminLogin() {
 		initialize();
 	}
 
@@ -41,7 +41,7 @@ public class StaffLogin {
 		frmStaffLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmStaffLogin.getContentPane().setLayout(null);
 		
-		JLabel lblStaffId = new JLabel("Staff Id:");
+		JLabel lblStaffId = new JLabel("Admin Id:");
 		lblStaffId.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblStaffId.setBounds(81, 99, 163, 32);
 		frmStaffLogin.getContentPane().add(lblStaffId);
@@ -65,7 +65,7 @@ public class StaffLogin {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmStaffLogin.dispose();
-				new StaffWindow().run();
+				new AdminWindow().run();
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 20));

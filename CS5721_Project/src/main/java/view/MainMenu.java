@@ -43,7 +43,7 @@ public class MainMenu {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("I'm a customer\r\n");
+		JButton btnNewButton = new JButton("Customer Portal");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -51,18 +51,18 @@ public class MainMenu {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(85, 274, 175, 69);
+		btnNewButton.setBounds(85, 274, 229, 69);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnImAStaff = new JButton("I'm a staff\r\n\r\n");
+		JButton btnImAStaff = new JButton("Admin Portal\r\n\r\n");
 		btnImAStaff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new StaffLogin().run();
+				new AdminLogin().run();
 			}
 		});
 		btnImAStaff.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnImAStaff.setBounds(478, 274, 175, 69);
+		btnImAStaff.setBounds(478, 274, 229, 69);
 		frame.getContentPane().add(btnImAStaff);
 		
 		JLabel lblFinancialBankAccount = new JLabel("Welcome Financial Bank Account System!");

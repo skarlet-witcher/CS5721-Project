@@ -6,6 +6,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CustomerWithdrawWindow {
 
@@ -13,6 +15,7 @@ public class CustomerWithdrawWindow {
 	private String accountNum;
 	private JTextField textField;
 	private JTextField tf_accountNum;
+	private JButton btnBack;
 
 	/**
 	 * Launch the application.
@@ -46,7 +49,7 @@ public class CustomerWithdrawWindow {
 		
 		JButton btnWithdraw = new JButton("Withdraw");
 		btnWithdraw.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnWithdraw.setBounds(163, 267, 170, 57);
+		btnWithdraw.setBounds(163, 226, 170, 57);
 		frmWithdrawWindow.getContentPane().add(btnWithdraw);
 		
 		JLabel lblMoneyAmounts = new JLabel("Money Amounts: ");
@@ -70,6 +73,17 @@ public class CustomerWithdrawWindow {
 		tf_accountNum.setBounds(208, 79, 178, 35);
 		tf_accountNum.setText(accountNum);
 		frmWithdrawWindow.getContentPane().add(tf_accountNum);
+		
+		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmWithdrawWindow.dispose();
+				new CustomerWindow(accountNum).run();
+			}
+		});
+		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnBack.setBounds(163, 309, 170, 57);
+		frmWithdrawWindow.getContentPane().add(btnBack);
 	}
 
 }

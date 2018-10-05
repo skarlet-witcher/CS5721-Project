@@ -54,7 +54,7 @@ public class CustomerWindow {
 		
 		JButton btnNewButton = new JButton("View Balance");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(244, 229, 213, 63);
+		btnNewButton.setBounds(256, 269, 213, 63);
 		frmCustomerWindow.getContentPane().add(btnNewButton);
 		
 		JLabel lbl_accountNum = new JLabel("**********");
@@ -66,11 +66,12 @@ public class CustomerWindow {
 		JButton btnMakeADeposit = new JButton("Withdraw");
 		btnMakeADeposit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frmCustomerWindow.dispose();
 				new CustomerWithdrawWindow(accountNum).run();
 			}
 		});
 		btnMakeADeposit.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnMakeADeposit.setBounds(244, 341, 213, 63);
+		btnMakeADeposit.setBounds(490, 269, 213, 63);
 		frmCustomerWindow.getContentPane().add(btnMakeADeposit);
 		
 		JButton btnSignOut = new JButton("Sign out");
@@ -84,7 +85,17 @@ public class CustomerWindow {
 		btnSignOut.setBounds(244, 446, 213, 63);
 		frmCustomerWindow.getContentPane().add(btnSignOut);
 		
+		JButton btnModifyAccount = new JButton("Modify Account\r\n");
+		btnModifyAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmCustomerWindow.dispose();
+				new CustomerModifyAccountWindow(accountNum).run();
+			}
+		});
+		btnModifyAccount.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnModifyAccount.setBounds(10, 269, 213, 63);
+		frmCustomerWindow.getContentPane().add(btnModifyAccount);
+		
 		
 	}
-
 }
