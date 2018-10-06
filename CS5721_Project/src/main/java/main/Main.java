@@ -33,8 +33,11 @@ public class Main {
 				}
 				
 				// Update the lecturer name
-				Controller.getInstance().updateLecturerName(
+				int a = Controller.getInstance().updateLecturerName(
 						new Module("CS6081", "Research Method and Practice", "Xiangkai Tang", 6));
+				if(a > 0) {
+					System.out.println("Update Complete");
+				}
 		
 				// test
 				for (Module module : Controller.getInstance().getAllModule()) {
@@ -44,6 +47,7 @@ public class Main {
 					System.out.println(" Credit: " + module.getCredit());
 					System.out.println("");
 				}
+				System.out.println(Controller.getInstance().getNumModule().size());
 		
 
 				
