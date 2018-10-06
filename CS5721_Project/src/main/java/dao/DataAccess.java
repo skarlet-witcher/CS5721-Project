@@ -6,6 +6,9 @@ import controller.Interceptor;
 
 import java.util.List;
 
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import dao.HibernateUtils;
@@ -30,7 +33,7 @@ public class DataAccess {
 		return dataAccess;
 	}
 
-	public List OperationsByList(String sql) {
+	public List OperationsByList(String procedureName, Class obj, String[] params, Object[] values) {
 
 		try {
 
@@ -42,10 +45,29 @@ public class DataAccess {
 			// Create an HQL statement, query the object.
 			// Equivalent to the SQL statement:
 			// Select e.* from module e
-			sqlQuery = sql;
+			// sqlQuery = sql;
 
 			// Create Query object.
-			Query<Module> query = session.createQuery(sqlQuery);
+			String paramList = "";
+			for (int i = 0; i < params.length; i++) {
+				if (params.length <= 0) {
+					paramList = "()";
+					break;
+				}
+				if (i == params.length - 1) {
+					paramList += "?";
+					break;
+				}
+				paramList += "?,";
+			}
+			Query query = session.createNativeQuery("CALL " + procedureName + "(" + paramList + ")", obj);
+
+			for (int j = 0; j < params.length; j++) {
+				if (params.length <= 0) {
+					break;
+				}
+				query.setParameter(j + 1, values[j]);
+			}
 
 			// Execute query.
 			List list = query.getResultList();
@@ -61,7 +83,7 @@ public class DataAccess {
 		}
 	}
 
-	public void operationsForDeleteAndUpdate(String sql, Object object) {
+	public void operationsForDeleteAndUpdate(String procedureName, Class obj, String[] params, Object[] values) {
 
 		try {
 
@@ -71,12 +93,31 @@ public class DataAccess {
 			session.getTransaction().begin();
 
 			// Create Query object.
-			Query query = session.createQuery(sql);
+			String paramList = "";
+			// format the stored procedure like CALL procedureName(?,?,?)
+			for (int i = 0; i < params.length; i++) {
+				if (params.length <= 0) {
+					paramList = "()";
+					break;
+				}
+				if (i == params.length - 1) {
+					paramList += "?";
+					break;
+				}
+				paramList += "?,";
+			}
+			Query query = session.createNativeQuery("CALL " + procedureName + "(" + paramList + ")", obj);
+
+			for (int j = 0; j < params.length; j++) {
+				if (params.length <= 0) {
+					break;
+				}
+				query.setParameter(j + 1, values[j]);
+			}
 
 			// Execute query.
 			query.executeUpdate();
-			
-			session.update(object);
+
 			session.getTransaction().commit();
 
 			// return 1;
