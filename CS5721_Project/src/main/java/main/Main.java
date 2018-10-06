@@ -8,21 +8,18 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		/*
+		
 		try {
 			new MainMenu().run();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		*/
-		/*
 		
 		
 		
 
-		
-		// git commit test
-		*/
+		/*
+		// for testing MVC
 		// test
 				for (Module module : Controller.getInstance().getAllModule()) {
 					System.out.println(" Module Code: " + module.getModule_no());
@@ -48,7 +45,7 @@ public class Main {
 					System.out.println("");
 				}
 				System.out.println(Controller.getInstance().getNumModule().size());
-		
+			*/
 
 				
 	}
