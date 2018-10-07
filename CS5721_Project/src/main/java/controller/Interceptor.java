@@ -45,11 +45,12 @@ public class Interceptor extends EmptyInterceptor {
 
 	// called before commit into database
 	public void preFlush(Iterator iterator) {
-		// System.out.println("Interceptor: preFlush");
+		System.out.println("Interceptor: preFlush (called before commit into database)");
 	}
 
 	// called after committed into database
 	public void postFlush(Iterator iterator) {
-		// System.out.println("Interceptor: postFlush");
+		System.out.println("Interceptor: postFlush (called after committed into database)");
+		System.out.println("");
 	}
 }

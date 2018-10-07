@@ -33,7 +33,7 @@ public class DataAccess {
 		return dataAccess;
 	}
 
-	public List OperationsByList(String procedureName, Class obj, String[] params, Object[] values) {
+	public List Operations(String procedureName, Class obj, String[] params, Object[] values) {
 
 		try {
 
@@ -82,8 +82,8 @@ public class DataAccess {
 			return null;
 		}
 	}
-
-	public void operationsForDeleteAndUpdate(String procedureName, Class obj, String[] params, Object[] values) {
+	/*
+	public List operationsForDeleteAndUpdate(String procedureName, Class obj, String[] params, Object[] values) {
 
 		try {
 
@@ -117,16 +117,19 @@ public class DataAccess {
 
 			// Execute query.
 			query.executeUpdate();
+			List list = query.getResultList();
 
 			session.getTransaction().commit();
-
+			return list;
 			// return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
 			// Rollback in case of an error occurred.
 			session.getTransaction().rollback();
+			return null;
 			// return -1;
 		}
 	}
+	*/
 
 }

@@ -19,6 +19,11 @@ public class Controller {
 		return controller;
 	}
 	
+	public List operation(String procedureName, Class entityName, String[] params, Object[] values) {
+		return DataAccess.getInstance().Operations(procedureName, entityName, params, values);
+	}
+
+	
 	/*
 	
 	public List<Module> insertModule() {
@@ -26,12 +31,7 @@ public class Controller {
 		return (List<Module>)DataAccess.getInstance().OperationsByList(sql);
 	}*/
 	
-	public List<Module> getAllModule() {
-		String[] params = {};
-		Object[] values = {};
-		return (List<Module>)DataAccess.getInstance().OperationsByList("get_all_modules", Module.class, params, values);
-	}
-	
+	/*
 	public List<Module> getNumModule() {
 		String[] params = { "var_module_no" };
 		Object[] values = { "CS6081" };
@@ -45,6 +45,6 @@ public class Controller {
 		
 		/*String sql = "update " + Module.class.getName() +
 				" e set e.lecturer_name = '" + module.getLecturer_name() + "'" + " where e.module_no= '"+ module.getModule_no() + "' ";
-		DataAccess.getInstance().operationsForDeleteAndUpdate(sql, module);*/
-	}
+		DataAccess.getInstance().operationsForDeleteAndUpdate(sql, module);
+	}*/
 }
