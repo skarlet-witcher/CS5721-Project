@@ -1,9 +1,7 @@
 package controller;
 
 import java.util.List;
-
 import dao.DataAccess;
-import model.Module;
 
 public class Controller {
 	

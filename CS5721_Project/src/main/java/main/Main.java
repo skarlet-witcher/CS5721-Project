@@ -18,7 +18,13 @@ public class Main {
 			e.printStackTrace();
 		}
 		
-		// test
+		
+		
+
+		/*
+		// for testing MVC
+		
+				// test
 		for (Module module : Services.getInstance().getAllModule("get_all_modules")) {
 			System.out.println(" Module Code: " + module.getModule_no());
 			System.out.println(" Module Name: " + module.getModule_name());
@@ -41,23 +47,8 @@ public class Main {
 			System.out.println(" Credit: " + module3.getCredit());
 			System.out.println("");
 		}
-		
-
-		/*
-		// for testing MVC
-		
-				
 				
 		
-				// test
-				for (Module module : Controller.getInstance().getAllModule()) {
-					System.out.println(" Module Code: " + module.getModule_no());
-					System.out.println(" Module Name: " + module.getModule_name());
-					System.out.println(" Lecturer Name: " + module.getLecturer_name());
-					System.out.println(" Credit: " + module.getCredit());
-					System.out.println("");
-				}
-				System.out.println(Controller.getInstance().getNumModule().size());
 			*/
 
 				
