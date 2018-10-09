@@ -1,25 +1,34 @@
 package main;
 
 import view.MainMenu;
+import model.Module;
+import service.Services;
 
 public class Main {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 
-        try {
+    	try {
             new MainMenu().run();
         } catch (Exception e) {
             e.printStackTrace();
         }
-		
-		
+
+		// test
+		for (Module module : Services.getInstance().getAllModule("get_all_modules")) {
+			System.out.println(" Module Code: " + module.getModule_no());
+			System.out.println(" Module Name: " + module.getModule_name());
+			System.out.println(" Lecturer Name: " + module.getLecturer_name());
+			System.out.println(" Credit: " + module.getCredit());
+			System.out.println("");
+		}
 		
 
 		/*
 		// for testing MVC
 		
-				// test
+		// test
 		for (Module module : Services.getInstance().getAllModule("get_all_modules")) {
 			System.out.println(" Module Code: " + module.getModule_no());
 			System.out.println(" Module Name: " + module.getModule_name());
