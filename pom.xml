@@ -11,6 +11,7 @@
     <modules>
         <module>bank-client</module>
         <module>bank-server</module>
+        <module>bank-rpc</module>
     </modules>
 
 

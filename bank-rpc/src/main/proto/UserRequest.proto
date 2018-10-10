@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+message UserRequest {
+    int64 user_id = 1;
+}

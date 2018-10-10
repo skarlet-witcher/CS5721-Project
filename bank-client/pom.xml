@@ -11,5 +11,12 @@
 
     <artifactId>bank-client</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>nuclear</groupId>
+            <artifactId>bank-rpc</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 
 </project>
