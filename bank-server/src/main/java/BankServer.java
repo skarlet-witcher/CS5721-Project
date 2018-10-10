@@ -1,7 +1,8 @@
 import model.Module;
 import service.Services;
 import view.MainMenu;
-public class Server {
+
+public class BankServer {
     public static void main(String[] args) {
 
         try {
@@ -16,7 +17,7 @@ public class Server {
             System.out.println(" Module Name: " + module.getModule_name());
             System.out.println(" Lecturer Name: " + module.getLecturer_name());
             System.out.println(" Credit: " + module.getCredit());
-            System.out.println("");
+            System.out.println();
         }
     }
 }
