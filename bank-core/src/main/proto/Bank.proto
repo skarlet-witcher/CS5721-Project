@@ -93,6 +93,8 @@ message UserLoginReply {
     string last_name = 3;
     string phone = 4;
     string address = 5;
+    string username = 6;
+    string email = 7;
     //        string card_no = 6;
     //        string account_no = 7;
     //        string card_balance = 8;

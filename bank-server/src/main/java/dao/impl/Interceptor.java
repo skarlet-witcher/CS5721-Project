@@ -1,6 +1,6 @@
-package controller;
+package dao.impl;
 
-import model.Module;
+
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.type.Type;
 
@@ -17,14 +17,14 @@ public class Interceptor extends EmptyInterceptor {
     }
 
     // This method is called when Module object gets updated.
-    public boolean onFlushDirty(Object entity, Serializable id, Object[] currentState, Object[] previousState,
-                                String[] propertyNames, Type[] types) {
-        if (entity instanceof Module) {
-            System.out.println("Interceptor: Update Operation");
-            return true;
-        }
-        return false;
-    }
+//    public boolean onFlushDirty(Object entity, Serializable id, Object[] currentState, Object[] previousState,
+//                                String[] propertyNames, Type[] types) {
+//        if (entity instanceof Module) {
+//            System.out.println("Interceptor: Update Operation");
+//            return true;
+//        }
+//        return false;
+//    }
 
     public boolean onLoad(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types) {
         // do nothing
@@ -32,13 +32,13 @@ public class Interceptor extends EmptyInterceptor {
     }
 
     // This method is called when Module object gets created.
-    public boolean onSave(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types) {
-        if (entity instanceof Module) {
-            System.out.println("Interceptor: Create Operation");
-            return true;
-        }
-        return false;
-    }
+//    public boolean onSave(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types) {
+//        if (entity instanceof Module) {
+//            System.out.println("Interceptor: Create Operation");
+//            return true;
+//        }
+//        return false;
+//    }
 
     // called before commit into database
     public void preFlush(Iterator iterator) {

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bank-rpc</artifactId>
+    <artifactId>bank-core</artifactId>
 
     <build>
         <extensions>

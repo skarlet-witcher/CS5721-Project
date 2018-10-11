@@ -15,6 +15,8 @@ public final class UserLoginReply extends
     public static final int LAST_NAME_FIELD_NUMBER = 3;
     public static final int PHONE_FIELD_NUMBER = 4;
     public static final int ADDRESS_FIELD_NUMBER = 5;
+    public static final int USERNAME_FIELD_NUMBER = 6;
+    public static final int EMAIL_FIELD_NUMBER = 7;
     private static final long serialVersionUID = 0L;
     // @@protoc_insertion_point(class_scope:rpc.UserLoginReply)
     private static final UserLoginReply DEFAULT_INSTANCE;
@@ -37,6 +39,8 @@ public final class UserLoginReply extends
     private volatile Object lastName_;
     private volatile Object phone_;
     private volatile Object address_;
+    private volatile Object username_;
+    private volatile Object email_;
     private byte memoizedIsInitialized = -1;
 
     // Use UserLoginReply.newBuilder() to construct.
@@ -50,6 +54,8 @@ public final class UserLoginReply extends
         lastName_ = "";
         phone_ = "";
         address_ = "";
+        username_ = "";
+        email_ = "";
     }
 
     private UserLoginReply(
@@ -105,6 +111,18 @@ public final class UserLoginReply extends
                         String s = input.readStringRequireUtf8();
 
                         address_ = s;
+                        break;
+                    }
+                    case 50: {
+                        String s = input.readStringRequireUtf8();
+
+                        username_ = s;
+                        break;
+                    }
+                    case 58: {
+                        String s = input.readStringRequireUtf8();
+
+                        email_ = s;
                         break;
                     }
                 }
@@ -342,12 +360,6 @@ public final class UserLoginReply extends
     }
 
     /**
-     * <pre>
-     *        string card_no = 6;
-     *        string account_no = 7;
-     *        string card_balance = 8;
-     * </pre>
-     *
      * <code>string address = 5;</code>
      */
     public String getAddress() {
@@ -364,12 +376,6 @@ public final class UserLoginReply extends
     }
 
     /**
-     * <pre>
-     *        string card_no = 6;
-     *        string account_no = 7;
-     *        string card_balance = 8;
-     * </pre>
-     *
      * <code>string address = 5;</code>
      */
     public com.google.protobuf.ByteString
@@ -380,6 +386,84 @@ public final class UserLoginReply extends
                     com.google.protobuf.ByteString.copyFromUtf8(
                             (String) ref);
             address_ = b;
+            return b;
+        } else {
+            return (com.google.protobuf.ByteString) ref;
+        }
+    }
+
+    /**
+     * <code>string username = 6;</code>
+     */
+    public String getUsername() {
+        Object ref = username_;
+        if (ref instanceof String) {
+            return (String) ref;
+        } else {
+            com.google.protobuf.ByteString bs =
+                    (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            username_ = s;
+            return s;
+        }
+    }
+
+    /**
+     * <code>string username = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+    getUsernameBytes() {
+        Object ref = username_;
+        if (ref instanceof String) {
+            com.google.protobuf.ByteString b =
+                    com.google.protobuf.ByteString.copyFromUtf8(
+                            (String) ref);
+            username_ = b;
+            return b;
+        } else {
+            return (com.google.protobuf.ByteString) ref;
+        }
+    }
+
+    /**
+     * <pre>
+     *        string card_no = 6;
+     *        string account_no = 7;
+     *        string card_balance = 8;
+     * </pre>
+     *
+     * <code>string email = 7;</code>
+     */
+    public String getEmail() {
+        Object ref = email_;
+        if (ref instanceof String) {
+            return (String) ref;
+        } else {
+            com.google.protobuf.ByteString bs =
+                    (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            email_ = s;
+            return s;
+        }
+    }
+
+    /**
+     * <pre>
+     *        string card_no = 6;
+     *        string account_no = 7;
+     *        string card_balance = 8;
+     * </pre>
+     *
+     * <code>string email = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+    getEmailBytes() {
+        Object ref = email_;
+        if (ref instanceof String) {
+            com.google.protobuf.ByteString b =
+                    com.google.protobuf.ByteString.copyFromUtf8(
+                            (String) ref);
+            email_ = b;
             return b;
         } else {
             return (com.google.protobuf.ByteString) ref;
@@ -412,6 +496,12 @@ public final class UserLoginReply extends
         if (!getAddressBytes().isEmpty()) {
             com.google.protobuf.GeneratedMessageV3.writeString(output, 5, address_);
         }
+        if (!getUsernameBytes().isEmpty()) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 6, username_);
+        }
+        if (!getEmailBytes().isEmpty()) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 7, email_);
+        }
         unknownFields.writeTo(output);
     }
 
@@ -435,6 +525,12 @@ public final class UserLoginReply extends
         }
         if (!getAddressBytes().isEmpty()) {
             size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, address_);
+        }
+        if (!getUsernameBytes().isEmpty()) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, username_);
+        }
+        if (!getEmailBytes().isEmpty()) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, email_);
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -462,6 +558,10 @@ public final class UserLoginReply extends
                 .equals(other.getPhone());
         result = result && getAddress()
                 .equals(other.getAddress());
+        result = result && getUsername()
+                .equals(other.getUsername());
+        result = result && getEmail()
+                .equals(other.getEmail());
         result = result && unknownFields.equals(other.unknownFields);
         return result;
     }
@@ -484,6 +584,10 @@ public final class UserLoginReply extends
         hash = (53 * hash) + getPhone().hashCode();
         hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
         hash = (53 * hash) + getAddress().hashCode();
+        hash = (37 * hash) + USERNAME_FIELD_NUMBER;
+        hash = (53 * hash) + getUsername().hashCode();
+        hash = (37 * hash) + EMAIL_FIELD_NUMBER;
+        hash = (53 * hash) + getEmail().hashCode();
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -526,6 +630,8 @@ public final class UserLoginReply extends
         private Object lastName_ = "";
         private Object phone_ = "";
         private Object address_ = "";
+        private Object username_ = "";
+        private Object email_ = "";
 
         // Construct using rpc.UserLoginReply.newBuilder()
         private Builder() {
@@ -568,6 +674,10 @@ public final class UserLoginReply extends
 
             address_ = "";
 
+            username_ = "";
+
+            email_ = "";
+
             return this;
         }
 
@@ -595,6 +705,8 @@ public final class UserLoginReply extends
             result.lastName_ = lastName_;
             result.phone_ = phone_;
             result.address_ = address_;
+            result.username_ = username_;
+            result.email_ = email_;
             onBuilt();
             return result;
         }
@@ -659,6 +771,14 @@ public final class UserLoginReply extends
             }
             if (!other.getAddress().isEmpty()) {
                 address_ = other.address_;
+                onChanged();
+            }
+            if (!other.getUsername().isEmpty()) {
+                username_ = other.username_;
+                onChanged();
+            }
+            if (!other.getEmail().isEmpty()) {
+                email_ = other.email_;
                 onChanged();
             }
             this.mergeUnknownFields(other.unknownFields);
@@ -932,12 +1052,6 @@ public final class UserLoginReply extends
         }
 
         /**
-         * <pre>
-         *        string card_no = 6;
-         *        string account_no = 7;
-         *        string card_balance = 8;
-         * </pre>
-         *
          * <code>string address = 5;</code>
          */
         public String getAddress() {
@@ -954,12 +1068,6 @@ public final class UserLoginReply extends
         }
 
         /**
-         * <pre>
-         *        string card_no = 6;
-         *        string account_no = 7;
-         *        string card_balance = 8;
-         * </pre>
-         *
          * <code>string address = 5;</code>
          */
         public Builder setAddress(
@@ -974,12 +1082,6 @@ public final class UserLoginReply extends
         }
 
         /**
-         * <pre>
-         *        string card_no = 6;
-         *        string account_no = 7;
-         *        string card_balance = 8;
-         * </pre>
-         *
          * <code>string address = 5;</code>
          */
         public com.google.protobuf.ByteString
@@ -997,12 +1099,6 @@ public final class UserLoginReply extends
         }
 
         /**
-         * <pre>
-         *        string card_no = 6;
-         *        string account_no = 7;
-         *        string card_balance = 8;
-         * </pre>
-         *
          * <code>string address = 5;</code>
          */
         public Builder setAddressBytes(
@@ -1018,17 +1114,185 @@ public final class UserLoginReply extends
         }
 
         /**
+         * <code>string address = 5;</code>
+         */
+        public Builder clearAddress() {
+
+            address_ = getDefaultInstance().getAddress();
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>string username = 6;</code>
+         */
+        public String getUsername() {
+            Object ref = username_;
+            if (!(ref instanceof String)) {
+                com.google.protobuf.ByteString bs =
+                        (com.google.protobuf.ByteString) ref;
+                String s = bs.toStringUtf8();
+                username_ = s;
+                return s;
+            } else {
+                return (String) ref;
+            }
+        }
+
+        /**
+         * <code>string username = 6;</code>
+         */
+        public Builder setUsername(
+                String value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+
+            username_ = value;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>string username = 6;</code>
+         */
+        public com.google.protobuf.ByteString
+        getUsernameBytes() {
+            Object ref = username_;
+            if (ref instanceof String) {
+                com.google.protobuf.ByteString b =
+                        com.google.protobuf.ByteString.copyFromUtf8(
+                                (String) ref);
+                username_ = b;
+                return b;
+            } else {
+                return (com.google.protobuf.ByteString) ref;
+            }
+        }
+
+        /**
+         * <code>string username = 6;</code>
+         */
+        public Builder setUsernameBytes(
+                com.google.protobuf.ByteString value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            checkByteStringIsUtf8(value);
+
+            username_ = value;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>string username = 6;</code>
+         */
+        public Builder clearUsername() {
+
+            username_ = getDefaultInstance().getUsername();
+            onChanged();
+            return this;
+        }
+
+        /**
          * <pre>
          *        string card_no = 6;
          *        string account_no = 7;
          *        string card_balance = 8;
          * </pre>
          *
-         * <code>string address = 5;</code>
+         * <code>string email = 7;</code>
          */
-        public Builder clearAddress() {
+        public String getEmail() {
+            Object ref = email_;
+            if (!(ref instanceof String)) {
+                com.google.protobuf.ByteString bs =
+                        (com.google.protobuf.ByteString) ref;
+                String s = bs.toStringUtf8();
+                email_ = s;
+                return s;
+            } else {
+                return (String) ref;
+            }
+        }
 
-            address_ = getDefaultInstance().getAddress();
+        /**
+         * <pre>
+         *        string card_no = 6;
+         *        string account_no = 7;
+         *        string card_balance = 8;
+         * </pre>
+         *
+         * <code>string email = 7;</code>
+         */
+        public Builder setEmail(
+                String value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+
+            email_ = value;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <pre>
+         *        string card_no = 6;
+         *        string account_no = 7;
+         *        string card_balance = 8;
+         * </pre>
+         *
+         * <code>string email = 7;</code>
+         */
+        public com.google.protobuf.ByteString
+        getEmailBytes() {
+            Object ref = email_;
+            if (ref instanceof String) {
+                com.google.protobuf.ByteString b =
+                        com.google.protobuf.ByteString.copyFromUtf8(
+                                (String) ref);
+                email_ = b;
+                return b;
+            } else {
+                return (com.google.protobuf.ByteString) ref;
+            }
+        }
+
+        /**
+         * <pre>
+         *        string card_no = 6;
+         *        string account_no = 7;
+         *        string card_balance = 8;
+         * </pre>
+         *
+         * <code>string email = 7;</code>
+         */
+        public Builder setEmailBytes(
+                com.google.protobuf.ByteString value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            checkByteStringIsUtf8(value);
+
+            email_ = value;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <pre>
+         *        string card_no = 6;
+         *        string account_no = 7;
+         *        string card_balance = 8;
+         * </pre>
+         *
+         * <code>string email = 7;</code>
+         */
+        public Builder clearEmail() {
+
+            email_ = getDefaultInstance().getEmail();
             onChanged();
             return this;
         }

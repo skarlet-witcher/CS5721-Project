@@ -18,7 +18,7 @@ public class LoginService implements ILoginService {
     /**
      * @param username
      * @param password
-     * @param role     0 customer, 1 staff
+     * @param role 0 customer, 1 staff
      * @return
      */
     public UserEntity LoginByUsername(String username, String password, Integer role) {
@@ -34,6 +34,7 @@ public class LoginService implements ILoginService {
             entity.setUsername(staff.getUsername());
             entity.setEmail(staff.getEmail());
             entity.setAddress(staff.getAddress());
+            entity.setPhone(null);
             user = entity;
         }
         return user;

@@ -103,7 +103,6 @@ public final class UserLoginGrpc {
       asyncUnimplementedUnaryCall(getLoginMethod(), responseObserver);
     }
 
-    @Override
     public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
               .addMethod(
@@ -210,7 +209,7 @@ public final class UserLoginGrpc {
       this.methodId = methodId;
     }
 
-    @Override
+
     @SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
@@ -223,7 +222,7 @@ public final class UserLoginGrpc {
       }
     }
 
-    @Override
+
     @SuppressWarnings("unchecked")
     public io.grpc.stub.StreamObserver<Req> invoke(
             io.grpc.stub.StreamObserver<Resp> responseObserver) {
@@ -239,12 +238,12 @@ public final class UserLoginGrpc {
     UserLoginBaseDescriptorSupplier() {
     }
 
-    @Override
+
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
       return BankProto.getDescriptor();
     }
 
-    @Override
+
     public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
       return getFileDescriptor().findServiceByName("UserLogin");
     }
@@ -265,7 +264,7 @@ public final class UserLoginGrpc {
       this.methodName = methodName;
     }
 
-    @Override
+
     public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
       return getServiceDescriptor().findMethodByName(methodName);
     }

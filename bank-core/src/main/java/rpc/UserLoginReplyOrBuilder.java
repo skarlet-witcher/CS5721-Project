@@ -46,15 +46,26 @@ public interface UserLoginReplyOrBuilder extends
     getPhoneBytes();
 
     /**
-     * <pre>
-     *        string card_no = 6;
-     *        string account_no = 7;
-     *        string card_balance = 8;
-     * </pre>
-     *
      * <code>string address = 5;</code>
      */
     String getAddress();
+
+    /**
+     * <code>string address = 5;</code>
+     */
+    com.google.protobuf.ByteString
+    getAddressBytes();
+
+    /**
+     * <code>string username = 6;</code>
+     */
+    String getUsername();
+
+    /**
+     * <code>string username = 6;</code>
+     */
+    com.google.protobuf.ByteString
+    getUsernameBytes();
 
     /**
      * <pre>
@@ -63,8 +74,19 @@ public interface UserLoginReplyOrBuilder extends
      *        string card_balance = 8;
      * </pre>
      *
-     * <code>string address = 5;</code>
+     * <code>string email = 7;</code>
+     */
+    String getEmail();
+
+    /**
+     * <pre>
+     *        string card_no = 6;
+     *        string account_no = 7;
+     *        string card_balance = 8;
+     * </pre>
+     *
+     * <code>string email = 7;</code>
      */
     com.google.protobuf.ByteString
-    getAddressBytes();
+    getEmailBytes();
 }
