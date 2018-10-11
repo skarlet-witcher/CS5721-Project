@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-message ReplyBase {
-    int32 status_code = 1;
-    string message = 2;
-    int32 page_number = 3;
-    int32 total_number = 4;
-    int32 result_per_page = 5;
-}

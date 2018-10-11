@@ -7,9 +7,7 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/cs5721proj</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">1234</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/bank_manage</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
@@ -24,6 +22,11 @@
         <property name="show_sql">true</property>
 
         <mapping class="model.Module"/>
+        <mapping class="model.CardEntity"/>
+        <mapping class="model.CardTransactionEntity"/>
+        <mapping class="model.UserEntity"/>
+        <mapping class="model.UserLogEntity"/>
+        <mapping class="model.UserStaffEntity"/>
 
     </session-factory>
 

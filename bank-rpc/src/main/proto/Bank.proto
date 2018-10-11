@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "rpc";
+option java_outer_classname = "BankProto";
+
+package rpc;
+
+service UserLogin {
+    rpc Login (UserLoginRequest) returns (Response);
+}
+
+service UserStaff {
+    rpc AddNewAccount (UserStaffAddAccountRequest) returns (Response);
+    rpc RemoveAccount (UserRequest) returns (Response);
+}
+
+service UserCustomer {
+    rpc EditUserPhone (UserCustomerEditRequest) returns (Response);
+    rpc EditUserAddress (UserCustomerEditRequest) returns (Response);
+    rpc GetUserTransaction (UserRequest) returns (Response);
+    rpc GetUserOperateLog (UserRequest) returns (Response);
+    rpc MakeTran (UserCustomerTranRequest) returns (Response);
+}
+
+message UserCustomerEditRequest {
+    string user_id = 1;
+    string phone = 2;
+    string address = 3;
+}
+
+message UserCustomerTranRequest {
+    string user_id = 1;
+    string to_card_no = 2;
+    string amount = 3;
+    string currency = 4;
+    string description = 5;
+}
+message UserStaffAddAccountRequest {
+    string first_name = 1;
+    string last_name = 2;
+    string phone = 3;
+    string address = 4;
+    string password = 5;
+}
+
+message UserRequest {
+    int64 user_id = 1;
+}
+
+message UserLoginRequest {
+    string username = 1;
+    string password = 2;
+    int32 role = 3;
+}
+
+message Response {
+    int32 status_code = 1;
+    string description = 2;
+    int32 page_number = 3;
+    int32 total_number = 4;
+    int32 result_per_page = 5;
+    UserCustomerTransReply user_customer_trans = 6;
+    UserLoginReply user_login = 7;
+    UserCustomerLogsReply user_customer_logs = 8;
+}
+
+message UserCustomerTran {
+    int64 trans_id = 1;
+    string trans_no = 2;
+    string from_card_no = 3;
+    string to_card_no = 4;
+    string description = 5;
+    int32 status = 6;
+}
+
+message UserCustomerLog {
+    int64 log_id = 1;
+    int32 operate_type = 2;
+    string operate_time = 3;
+    string description = 4;
+    int32 status = 5;
+    UserCustomerTran tran = 6;
+}
+
+message UserCustomerTransReply {
+    repeated UserCustomerTran trans = 1;
+}
+
+message UserLoginReply {
+    int64 user_id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string phone = 4;
+    string address = 5;
+    //        string card_no = 6;
+    //        string account_no = 7;
+    //        string card_balance = 8;
+}
+message UserCustomerLogsReply {
+    repeated UserCustomerLog trans = 1;
+}
