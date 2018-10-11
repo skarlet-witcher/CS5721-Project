@@ -5,12 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>nuclear</groupId>
-    <artifactId>bank-manager</artifactId>
+    <artifactId>bank-manage</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>BankClient</module>
-        <module>BankServer</module>
+        <module>bank-client</module>
+        <module>bank-server</module>
+        <module>bank-rpc</module>
     </modules>
 
 
@@ -36,6 +37,23 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.34</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.grpc/grpc-all -->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty-shaded</artifactId>
+            <version>1.15.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf</artifactId>
+            <version>1.15.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-stub</artifactId>
+            <version>1.15.1</version>
         </dependency>
 
     </dependencies>
