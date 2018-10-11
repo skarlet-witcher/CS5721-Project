@@ -15,6 +15,11 @@ public class Main {
             e.printStackTrace();
         }
 
+		
+		
+
+		/*
+		// for testing MVC
 		// test
 		for (Module module : Services.getInstance().getAllModule("get_all_modules")) {
 			System.out.println(" Module Code: " + module.getModule_no());
@@ -23,11 +28,6 @@ public class Main {
 			System.out.println(" Credit: " + module.getCredit());
 			System.out.println("");
 		}
-		
-
-		/*
-		// for testing MVC
-		
 		// test
 		for (Module module : Services.getInstance().getAllModule("get_all_modules")) {
 			System.out.println(" Module Code: " + module.getModule_no());
