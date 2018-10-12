@@ -1,6 +1,7 @@
 package service.impl;
 
 import dao.impl.UserDao;
+import dao.impl.UserStaffDao;
 import model.UserEntity;
 import model.UserStaffEntity;
 import service.ILoginService;
@@ -26,7 +27,7 @@ public class LoginService implements ILoginService {
         if (role == 0) {
             user = UserDao.getInstance().LoginCustomerByUsername(username, password);
         } else {
-            UserStaffEntity staff = UserDao.getInstance().LoginStaffByUsername(username, password);
+            UserStaffEntity staff = UserStaffDao.getInstance().LoginStaffByUsername(username, password);
             UserEntity entity = new UserEntity();
             entity.setId(staff.getId());
             entity.setFirstName(staff.getFirstName());

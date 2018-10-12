@@ -58,7 +58,7 @@ public class MainMenu {
 		btnImAStaff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new AdminLogin().run();
+				new StaffLogin().run();
 			}
 		});
 		btnImAStaff.setFont(new Font("Tahoma", Font.PLAIN, 20));
