@@ -7,6 +7,10 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
+
 import net.miginfocom.swing.*;
 
 /**
@@ -23,7 +27,7 @@ public class CustomerMainView extends JFrame {
         customerTabPane = new JTabbedPane();
         homePanel = new JPanel();
         scrollPane1 = new JScrollPane();
-        accounTable = new JTable();
+        table_home_accountTable = new JTable();
         profilePanel = new JPanel();
         lbl_profile_userId = new JLabel();
         tf_profile_userId = new JTextField();
@@ -38,29 +42,29 @@ public class CustomerMainView extends JFrame {
         lbl_email = new JLabel();
         tf_profile_email = new JTextField();
         lbl_contactNum = new JLabel();
-        tf_contactNumber = new JTextField();
+        tf_profile_contactNumber = new JTextField();
         btn_profile_modify = new JButton();
         btn_profile_reset = new JButton();
-        button5 = new JButton();
+        btn_profile_deleteAccount = new JButton();
         transactionPanel = new JPanel();
         cb_accountList = new JComboBox();
         scrollPane2 = new JScrollPane();
-        table1 = new JTable();
+        table_transaction_accountTable = new JTable();
         payeePanel = new JPanel();
-        button2 = new JButton();
-        button3 = new JButton();
+        btn_payee_add = new JButton();
+        btn_payee_remove = new JButton();
         scrollPane3 = new JScrollPane();
-        table2 = new JTable();
+        table_payee_payeeList = new JTable();
         transferPanel = new JPanel();
         label7 = new JLabel();
-        comboBox1 = new JComboBox();
+        cb_payee_payeeList = new JComboBox();
         label8 = new JLabel();
-        comboBox2 = new JComboBox();
+        cb_transfer_accountList = new JComboBox();
         label10 = new JLabel();
-        textField8 = new JTextField();
+        btn_transfer_balance = new JTextField();
         label9 = new JLabel();
-        textField7 = new JTextField();
-        button4 = new JButton();
+        tf_transfer_amounts = new JTextField();
+        btn_transfer_transfer = new JButton();
 
         //======== rootPanel ========
         {
@@ -102,8 +106,8 @@ public class CustomerMainView extends JFrame {
                     //======== scrollPane1 ========
                     {
 
-                        //---- accounTable ----
-                        accounTable.setModel(new DefaultTableModel(
+                        //---- table_home_accountTable ----
+                        table_home_accountTable.setModel(new DefaultTableModel(
                             new Object[][] {
                                 {null, null, null, null, null},
                             },
@@ -111,10 +115,10 @@ public class CustomerMainView extends JFrame {
                                 "AccountNumber", "AccountType", "CurrencyType", "Balance", "Status"
                             }
                         ));
-                        accounTable.setMinimumSize(new Dimension(75, 200));
-                        accounTable.setMaximumSize(new Dimension(2147483647, 2147483647));
-                        accounTable.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                        scrollPane1.setViewportView(accounTable);
+                        table_home_accountTable.setMinimumSize(new Dimension(75, 200));
+                        table_home_accountTable.setMaximumSize(new Dimension(2147483647, 2147483647));
+                        table_home_accountTable.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                        scrollPane1.setViewportView(table_home_accountTable);
                     }
                     homePanel.add(scrollPane1, "cell 1 1");
                 }
@@ -201,7 +205,7 @@ public class CustomerMainView extends JFrame {
                     lbl_contactNum.setText("Contact Number");
                     lbl_contactNum.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                     profilePanel.add(lbl_contactNum, "cell 2 13");
-                    profilePanel.add(tf_contactNumber, "cell 3 13");
+                    profilePanel.add(tf_profile_contactNumber, "cell 3 13");
 
                     //---- btn_profile_modify ----
                     btn_profile_modify.setText("Modify");
@@ -213,10 +217,10 @@ public class CustomerMainView extends JFrame {
                     btn_profile_reset.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                     profilePanel.add(btn_profile_reset, "cell 3 15");
 
-                    //---- button5 ----
-                    button5.setText("Delete Account");
-                    button5.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                    profilePanel.add(button5, "cell 1 17 3 1");
+                    //---- btn_profile_deleteAccount ----
+                    btn_profile_deleteAccount.setText("Delete Account");
+                    btn_profile_deleteAccount.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                    profilePanel.add(btn_profile_deleteAccount, "cell 2 17 2 1");
                 }
                 customerTabPane.addTab("Profile", profilePanel);
 
@@ -242,8 +246,8 @@ public class CustomerMainView extends JFrame {
                     //======== scrollPane2 ========
                     {
 
-                        //---- table1 ----
-                        table1.setModel(new DefaultTableModel(
+                        //---- table_transaction_accountTable ----
+                        table_transaction_accountTable.setModel(new DefaultTableModel(
                             new Object[][] {
                                 {null, null, null, null, null},
                                 {null, null, null, null, null},
@@ -252,10 +256,10 @@ public class CustomerMainView extends JFrame {
                                 "Date", "Details", "Debit", "Credit", "Balance"
                             }
                         ));
-                        table1.setMinimumSize(new Dimension(75, 200));
-                        table1.setMaximumSize(new Dimension(2147483647, 2147483647));
-                        table1.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                        scrollPane2.setViewportView(table1);
+                        table_transaction_accountTable.setMinimumSize(new Dimension(75, 200));
+                        table_transaction_accountTable.setMaximumSize(new Dimension(2147483647, 2147483647));
+                        table_transaction_accountTable.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                        scrollPane2.setViewportView(table_transaction_accountTable);
                     }
                     transactionPanel.add(scrollPane2, "cell 0 1");
                 }
@@ -275,21 +279,21 @@ public class CustomerMainView extends JFrame {
                         "[]" +
                         "[]"));
 
-                    //---- button2 ----
-                    button2.setText("Add");
-                    button2.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                    payeePanel.add(button2, "cell 0 0");
+                    //---- btn_payee_add ----
+                    btn_payee_add.setText("Add");
+                    btn_payee_add.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                    payeePanel.add(btn_payee_add, "cell 0 0");
 
-                    //---- button3 ----
-                    button3.setText("Remove");
-                    button3.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                    payeePanel.add(button3, "cell 0 0");
+                    //---- btn_payee_remove ----
+                    btn_payee_remove.setText("Remove");
+                    btn_payee_remove.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                    payeePanel.add(btn_payee_remove, "cell 0 0");
 
                     //======== scrollPane3 ========
                     {
 
-                        //---- table2 ----
-                        table2.setModel(new DefaultTableModel(
+                        //---- table_payee_payeeList ----
+                        table_payee_payeeList.setModel(new DefaultTableModel(
                             new Object[][] {
                                 {"", null, null},
                                 {null, null, null},
@@ -298,8 +302,8 @@ public class CustomerMainView extends JFrame {
                                 "IBAN", "firstName", "lastName"
                             }
                         ));
-                        table2.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                        scrollPane3.setViewportView(table2);
+                        table_payee_payeeList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                        scrollPane3.setViewportView(table_payee_payeeList);
                     }
                     payeePanel.add(scrollPane3, "cell 0 1");
                 }
@@ -327,42 +331,42 @@ public class CustomerMainView extends JFrame {
                     label7.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                     transferPanel.add(label7, "cell 1 0");
 
-                    //---- comboBox1 ----
-                    comboBox1.setModel(new DefaultComboBoxModel(new String[] {
+                    //---- cb_payee_payeeList ----
+                    cb_payee_payeeList.setModel(new DefaultComboBoxModel(new String[] {
                         "Choose Your Payee"
                     }));
-                    transferPanel.add(comboBox1, "cell 2 0");
+                    transferPanel.add(cb_payee_payeeList, "cell 2 0");
 
                     //---- label8 ----
                     label8.setText("Account Number: ");
                     label8.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                     transferPanel.add(label8, "cell 1 1");
 
-                    //---- comboBox2 ----
-                    comboBox2.setModel(new DefaultComboBoxModel(new String[] {
+                    //---- cb_transfer_accountList ----
+                    cb_transfer_accountList.setModel(new DefaultComboBoxModel(new String[] {
                         "Select Your Account"
                     }));
-                    transferPanel.add(comboBox2, "cell 2 1");
+                    transferPanel.add(cb_transfer_accountList, "cell 2 1");
 
                     //---- label10 ----
                     label10.setText("Balance");
                     label10.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                     transferPanel.add(label10, "cell 1 2");
 
-                    //---- textField8 ----
-                    textField8.setEditable(false);
-                    transferPanel.add(textField8, "cell 2 2");
+                    //---- btn_transfer_balance ----
+                    btn_transfer_balance.setEditable(false);
+                    transferPanel.add(btn_transfer_balance, "cell 2 2");
 
                     //---- label9 ----
                     label9.setText("Amounts");
                     label9.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                     transferPanel.add(label9, "cell 1 3");
-                    transferPanel.add(textField7, "cell 2 3");
+                    transferPanel.add(tf_transfer_amounts, "cell 2 3");
 
-                    //---- button4 ----
-                    button4.setText("Transfer");
-                    button4.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                    transferPanel.add(button4, "cell 2 5");
+                    //---- btn_transfer_transfer ----
+                    btn_transfer_transfer.setText("Transfer");
+                    btn_transfer_transfer.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                    transferPanel.add(btn_transfer_transfer, "cell 2 5");
                 }
                 customerTabPane.addTab("Transfer", transferPanel);
             }
@@ -382,7 +386,7 @@ public class CustomerMainView extends JFrame {
     private JTabbedPane customerTabPane;
     private JPanel homePanel;
     private JScrollPane scrollPane1;
-    private JTable accounTable;
+    private JTable table_home_accountTable;
     private JPanel profilePanel;
     private JLabel lbl_profile_userId;
     private JTextField tf_profile_userId;
@@ -397,28 +401,51 @@ public class CustomerMainView extends JFrame {
     private JLabel lbl_email;
     private JTextField tf_profile_email;
     private JLabel lbl_contactNum;
-    private JTextField tf_contactNumber;
+    private JTextField tf_profile_contactNumber;
     private JButton btn_profile_modify;
     private JButton btn_profile_reset;
-    private JButton button5;
+    private JButton btn_profile_deleteAccount;
     private JPanel transactionPanel;
     private JComboBox cb_accountList;
     private JScrollPane scrollPane2;
-    private JTable table1;
+    private JTable table_transaction_accountTable;
     private JPanel payeePanel;
-    private JButton button2;
-    private JButton button3;
+    private JButton btn_payee_add;
+    private JButton btn_payee_remove;
     private JScrollPane scrollPane3;
-    private JTable table2;
+    private JTable table_payee_payeeList;
     private JPanel transferPanel;
     private JLabel label7;
-    private JComboBox comboBox1;
+    private JComboBox cb_payee_payeeList;
     private JLabel label8;
-    private JComboBox comboBox2;
+    private JComboBox cb_transfer_accountList;
     private JLabel label10;
-    private JTextField textField8;
+    private JTextField btn_transfer_balance;
     private JLabel label9;
-    private JTextField textField7;
-    private JButton button4;
+    private JTextField tf_transfer_amounts;
+    private JButton btn_transfer_transfer;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    class JTextFieldLimit extends PlainDocument {
+        private int limit;
+
+        JTextFieldLimit(int limit) {
+            super();
+            this.limit = limit;
+        }
+
+        JTextFieldLimit(int limit, boolean upper) {
+            super();
+            this.limit = limit;
+        }
+
+        public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+            if (str == null)
+                return;
+
+            if ((getLength() + str.length()) <= limit) {
+                super.insertString(offset, str, attr);
+            }
+        }
+    }
 }
