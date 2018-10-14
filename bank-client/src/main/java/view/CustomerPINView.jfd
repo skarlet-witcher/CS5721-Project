@@ -5,8 +5,8 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[fill][fill][fill][fill][fill][fill]"
-			"$rowConstraints": "[][][][][][][]"
+			"$columnConstraints": "[5:n,grow,fill][fill][40:n,fill][40:n,fill][40:n,fill][5:n,grow,fill]"
+			"$rowConstraints": "[][][][][][][][5:n,grow,fill]"
 		} ) {
 			name: "this"
 			"title": "Customer PIN View"
@@ -14,96 +14,96 @@ new FormModel {
 				name: "lbl_PIN"
 				"text": "PIN: "
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 0"
+				"value": "cell 1 0"
 			} )
 			add( new FormComponent( "javax.swing.JPasswordField" ) {
 				name: "pf_PIN"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 0 3 1"
+				"value": "cell 2 0 3 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_1"
 				"text": "text"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_1ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 1"
+				"value": "cell 2 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_2"
 				"text": "text"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_2ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 1"
+				"value": "cell 3 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_3"
 				"text": "text"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_3ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 1"
+				"value": "cell 4 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_4"
 				"text": "text"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_4ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 2"
+				"value": "cell 2 2"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_5"
 				"text": "text"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_5ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 2"
+				"value": "cell 3 2"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_6"
 				"text": "text"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_6ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 2"
+				"value": "cell 4 2"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_7"
 				"text": "text"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_7ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 3"
+				"value": "cell 2 3"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_8"
 				"text": "text"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_8ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 3"
+				"value": "cell 3 3"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_9"
 				"text": "text"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_9ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 3"
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "btn_backSpace"
-				"text": "Backspace"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_backSpaceActionPerformed", true ) )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 4"
+				"value": "cell 4 3"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_10"
 				"text": "text"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_10ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 4"
+				"value": "cell 2 4 2 1"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_backSpace"
+				"text": "Backspace"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_backSpaceActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 4 4"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_confirm"
 				"text": "Confirm"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_confirmActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 4"
+				"value": "cell 2 6 3 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_back"
@@ -111,11 +111,11 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button13ActionPerformed", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_backActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 6 3 1"
+				"value": "cell 2 6 3 1"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 440, 375 )
+			"size": new java.awt.Dimension( 440, 270 )
 		} )
 	}
 }
