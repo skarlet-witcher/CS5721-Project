@@ -16,8 +16,8 @@ service UserLogin {
 }
 
 service UserCustomer {
-    rpc EditUserPhone (UserCustomerEditRequest) returns (Response);
-    rpc EditUserAddress (UserCustomerEditRequest) returns (Response);
+    rpc GetAccounts (UserCustomerGetAccountsRequest) returns (Response);
+    rpc EditUserProfile (UserCustomerEditRequest) returns (Response);
     rpc GetUserTransaction (UserRequest) returns (Response);
     rpc GetUserOperateLog (UserRequest) returns (Response);
     rpc MakeTran (UserCustomerTranRequest) returns (Response);
