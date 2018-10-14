@@ -6,7 +6,6 @@ import java.util.List;
 
 public class KeyPadGenerator {
     private static KeyPadGenerator keyPadGenerator = null;
-    private List<Integer> li = new ArrayList<Integer>();
 
     private KeyPadGenerator() {
 
@@ -20,6 +19,7 @@ public class KeyPadGenerator {
     }
 
     public List<Integer> getKeyPadArr() {
+        List<Integer> li = new ArrayList<Integer>();
         for(int i = 0; i< 10; i++) {
             li.add(i);
         }

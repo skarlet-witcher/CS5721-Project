@@ -277,7 +277,13 @@ public class CustomerPINView extends JFrame {
     }
 
     private void generateKeyPad() {
+        keyPadList = null;
         keyPadList = KeyPadGenerator.getInstance().getKeyPadArr();
+
+        for(int i : keyPadList) {
+            System.out.println(i);
+        }
+        System.out.println("------------");
 
         btn_1.setText(keyPadList.get(0).toString());
         btn_2.setText(keyPadList.get(1).toString());

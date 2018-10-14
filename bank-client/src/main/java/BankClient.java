@@ -2,6 +2,8 @@ import util.KeyPadGenerator;
 import view.CustomerApplyView;
 import view.CustomerLoginView;
 
+import java.security.Key;
+
 public class BankClient {
 
     public static void main(String[] args) {
@@ -12,6 +14,7 @@ public class BankClient {
             // new CustomerForgotUserIdView().run();
             // new CustomerMainView().run();
              new CustomerLoginView().run();
+
 
         } catch (Exception e) {
             e.printStackTrace();
