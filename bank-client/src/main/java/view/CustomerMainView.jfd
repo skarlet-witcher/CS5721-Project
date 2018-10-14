@@ -200,6 +200,20 @@ new FormModel {
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 0 0"
 					} )
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "cb_transaction_filter"
+						"font": new java.awt.Font( "Segoe UI", 0, 18 )
+						"model": new javax.swing.DefaultComboBoxModel {
+							selectedItem: "Select the time"
+							addElement( "Select the time" )
+							addElement( "Recent 7 days" )
+							addElement( "Recent 1 month" )
+							addElement( "Recent 6 months" )
+							addElement( "Recent 1 year" )
+						}
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 0 0"
+					} )
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 						name: "scrollPane2"
 						add( new FormComponent( "javax.swing.JTable" ) {
