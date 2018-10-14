@@ -6,13 +6,10 @@ package view;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Random;
 import javax.swing.*;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
 
 import net.miginfocom.swing.*;
+import util.JTextFieldLimit;
 import util.RandomUtil;
 
 /**
@@ -248,29 +245,5 @@ public class CustomerLoginView extends JFrame {
         // JFormDesigner - End of component initialization  //  /// GEN-END:initComponents
 
     }
-}
-
-class JTextFieldLimit extends PlainDocument {
-    private int limit;
-    JTextFieldLimit(int limit) {
-        super();
-        this.limit = limit;
-    }
-
-    JTextFieldLimit(int limit, boolean upper) {
-        super();
-        this.limit = limit;
-    }
-
-    public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-        if (str == null)
-            return;
-
-        if ((getLength() + str.length()) <= limit) {
-            super.insertString(offset, str, attr);
-        }
-    }
-
-
 }
 
