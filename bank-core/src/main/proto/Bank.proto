@@ -3,16 +3,16 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "rpc";
 option java_outer_classname = "BankProto";
+import "google/protobuf/timestamp.proto";
 
 package rpc;
 
 service UserLogin {
+    rpc LoginReq (UserLoginReqRequest) returns (Response);
     rpc Login (UserLoginRequest) returns (Response);
-}
-
-service UserStaff {
-    rpc AddNewAccount (UserStaffAddAccountRequest) returns (Response);
-    rpc RemoveAccount (UserRequest) returns (Response);
+    rpc ApplyNewAccount (UserApplyNewAccountRequest) returns (Response);
+    rpc ForgetUserId (UserForgetUserIdRequest) returns (Response);
+    rpc ForgetPin (UserForgetPinRequest) returns (Response);
 }
 
 service UserCustomer {
@@ -23,8 +23,63 @@ service UserCustomer {
     rpc MakeTran (UserCustomerTranRequest) returns (Response);
 }
 
-message UserCustomerEditRequest {
+service UserStaff {
+    rpc AddNewAccount (UserStaffAddAccountRequest) returns (Response);
+    rpc RemoveAccount (UserRequest) returns (Response);
+}
+
+service UserAdmin {
+    rpc AddNewStaff (UserStaffAddAccountRequest) returns (Response);
+    rpc RemoveStaff (UserRequest) returns (Response);
+}
+
+message UserLoginReqRequest {
+    int64 user_id = 1;
+    int32 phone_last4 = 2;
+    int32 birth_day = 3;
+    int32 birth_mon = 4;
+    int32 birth_year = 5;
+}
+
+message UserLoginRequest {
     string user_id = 1;
+    int32 pin1 = 2;
+    int32 pin2 = 3;
+    int32 pin3 = 4;
+    int32 pin4 = 5;
+    int32 pin5 = 6;
+    int32 pin6 = 7;
+}
+
+message UserApplyNewAccountRequest {
+    string first_name = 1;
+    string last_name = 2;
+    int32 gender = 3;
+    int32 identity_id_type = 4;
+    string identity_id = 5;
+    int32 account_type = 6;
+    google.protobuf.Timestamp graduate_date = 7;
+    google.protobuf.Timestamp birth_date = 8;
+    string address = 9;
+    string email = 10;
+    string phone = 11;
+}
+
+message UserForgetUserIdRequest {
+    string iban = 1;
+    google.protobuf.Timestamp birth_date = 2;
+    string phone = 3;
+    string email = 4;
+}
+
+message UserForgetPinRequest {
+    string user_id = 1;
+    string birth_date = 2;
+    string email = 3;
+}
+
+message UserCustomerEditRequest {
+    int64 user_id = 1;
     string phone = 2;
     string address = 3;
 }
@@ -46,12 +101,6 @@ message UserStaffAddAccountRequest {
 
 message UserRequest {
     int64 user_id = 1;
-}
-
-message UserLoginRequest {
-    string username = 1;
-    string password = 2;
-    int32 role = 3;
 }
 
 message Response {
@@ -99,6 +148,7 @@ message UserLoginReply {
     //        string account_no = 7;
     //        string card_balance = 8;
 }
+
 message UserCustomerLogsReply {
     repeated UserCustomerLog trans = 1;
 }
