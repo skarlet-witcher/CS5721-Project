@@ -13,7 +13,7 @@ import util.JTextFieldLimit;
 /**
  * @author xiangkai22
  */
-public class CustomerForgotPINView  {
+public class CustomerForgotPINView extends JFrame  {
     public CustomerForgotPINView() {
         initComponents();
         initTextFields();
@@ -111,12 +111,6 @@ public class CustomerForgotPINView  {
 
             //---- tf_year ----
             tf_year.setMinimumSize(new Dimension(80, 24));
-            tf_year.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    tf_yearFocusGained(e);
-                }
-            });
             rootPanelContentPane.add(tf_year, "cell 1 2");
 
             //---- btn_confirm ----
@@ -144,7 +138,7 @@ public class CustomerForgotPINView  {
     }
 
     public void run() {
-        this.rootPanel.setVisible(true);
+        this.setVisible(true);
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

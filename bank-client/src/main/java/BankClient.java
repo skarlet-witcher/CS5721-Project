@@ -1,12 +1,12 @@
-import view.CustomerForgotPINView;
-import view.CustomerForgotUserIdView;
+import view.CustomerApplyView;
 
 public class BankClient {
 
     public static void main(String[] args) {
 
         try {
-            new CustomerForgotPINView().run();
+            new CustomerApplyView().run();
+            // new CustomerForgotPINView().run();
             // new CustomerForgotUserIdView().run();
             // new CustomerLoginView().run();
             // new CustomerMainView().run();
