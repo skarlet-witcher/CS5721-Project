@@ -82,6 +82,8 @@ create table bank_apply (
   comment '1.passport 2.driver license',
   account_type     int          not null
   comment '1.current account 2.student current account',
+  card_type        int          not null
+  comment '1.debit card 2.credit card',
   graduate_date    datetime comment 'if the type is 2',
   birth_date       datetime     not null,
   gender           int          not null
@@ -117,7 +119,7 @@ create table bank_admin (
 
 CREATE TABLE user_operate (
   id                  BIGINT AUTO_INCREMENT PRIMARY KEY,
-  operate_type        int comment '1.deposit 2.withdraw 3.transfer 4.change_phone 5.change_address 6.change_email 7.create 8.remove 9.login',
+  operate_type        int comment '1.deposit 2.withdraw 3.transfer 4.change_profile 5.login 6.create 7.remove',
   operate_time        datetime not null,
   balance             double   not null,
   operate_description varchar(500),

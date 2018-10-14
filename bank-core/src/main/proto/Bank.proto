@@ -21,7 +21,7 @@ service UserCustomer {
     rpc EditProfile (UserCustomerEditProfileRequest) returns (Response);
     rpc GetTransactions (UserCustomerGetTransactionsRequest) returns (Response);
     rpc GetPayees (UserCustomerGetPayeesRequest) returns (Response);
-    rpc AddPayees (UserCustomerAddPayeesRequest) returns (Response);
+    rpc AddPayee (UserCustomerAddPayeeRequest) returns (Response);
     rpc RemovePayee (UserCustomerRemovePayeeRequest) returns (Response);
     rpc Transfer (UserCustomerTransferRequest) returns (Response);
 }
@@ -61,11 +61,12 @@ message UserApplyNewAccountRequest {
     int32 identity_id_type = 4;
     string identity_id = 5;
     int32 account_type = 6;
-    google.protobuf.Timestamp graduate_date = 7;
-    google.protobuf.Timestamp birth_date = 8;
-    string address = 9;
-    string email = 10;
-    string phone = 11;
+    int32 card_type = 7;
+    google.protobuf.Timestamp graduate_date = 8;
+    google.protobuf.Timestamp birth_date = 9;
+    string address = 10;
+    string email = 11;
+    string phone = 12;
 }
 
 message UserForgetUserIdRequest {
@@ -97,10 +98,36 @@ message UserCustomerEditProfileRequest {
 }
 
 message UserCustomerGetTransactionsRequest {
-    string user_id = 1;
-    int32 page_number = 2;
-    int32 result_per_page = 3;
+    int64 user_id = 1;
+    int32 filter_by_account = 2;
+    int32 filter_by_date = 3;
 }
+
+message UserCustomerGetPayeesRequest {
+    int64 user_id = 1;
+}
+
+message UserCustomerAddPayeeRequest {
+    int64 user_id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string iban = 4;
+    int32 pin = 5;
+}
+
+message UserCustomerRemovePayeeRequest {
+    int64 user_id = 1;
+    int64 payee_id = 2;
+}
+
+message UserCustomerTransferRequest {
+    int64 user_id = 1;
+    int64 payee_id = 2;
+    int64 account_id = 3;
+    double amount = 4;
+    int32 pin = 5;
+}
+
 message UserCustomerEditRequest {
     int64 user_id = 1;
     string phone = 2;
@@ -114,6 +141,7 @@ message UserCustomerTranRequest {
     string currency = 4;
     string description = 5;
 }
+
 message UserStaffAddAccountRequest {
     string first_name = 1;
     string last_name = 2;
@@ -132,9 +160,20 @@ message Response {
     int32 page_number = 3;
     int32 total_number = 4;
     int32 result_per_page = 5;
-    UserCustomerTransReply user_customer_trans = 6;
-    UserLoginReply user_login = 7;
-    UserCustomerLogsReply user_customer_logs = 8;
+
+    repeated UserAccounts user_accounts = 6;
+    //    UserCustomerTransReply user_customer_trans = 6;
+    //    UserLoginReply user_login = 7;
+    //    UserCustomerLogsReply user_customer_logs = 8;
+}
+
+message UserAccounts {
+    int64 account_id = 1;
+    int64 account_number = 2;
+    int32 account_type = 3;
+    int32 currency_type = 4;
+    int32 balance = 5;
+    int32 status = 6;
 }
 
 message UserCustomerTran {
