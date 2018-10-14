@@ -17,10 +17,13 @@ service UserLogin {
 
 service UserCustomer {
     rpc GetAccounts (UserCustomerGetAccountsRequest) returns (Response);
-    rpc EditUserProfile (UserCustomerEditRequest) returns (Response);
-    rpc GetUserTransaction (UserRequest) returns (Response);
-    rpc GetUserOperateLog (UserRequest) returns (Response);
-    rpc MakeTran (UserCustomerTranRequest) returns (Response);
+    rpc GetProfile (UserCustomerGetProfileRequest) returns (Response);
+    rpc EditProfile (UserCustomerEditProfileRequest) returns (Response);
+    rpc GetTransactions (UserCustomerGetTransactionsRequest) returns (Response);
+    rpc GetPayees (UserCustomerGetPayeesRequest) returns (Response);
+    rpc AddPayees (UserCustomerAddPayeesRequest) returns (Response);
+    rpc RemovePayee (UserCustomerRemovePayeeRequest) returns (Response);
+    rpc Transfer (UserCustomerTransferRequest) returns (Response);
 }
 
 service UserStaff {
@@ -78,6 +81,26 @@ message UserForgetPinRequest {
     string email = 3;
 }
 
+message UserCustomerGetAccountsRequest {
+    int64 user_id = 1;
+}
+
+message UserCustomerGetProfileRequest {
+    int64 user_id = 1;
+}
+
+message UserCustomerEditProfileRequest {
+    int64 user_id = 1;
+    string address = 2;
+    string phone = 3;
+    string email = 4;
+}
+
+message UserCustomerGetTransactionsRequest {
+    string user_id = 1;
+    int32 page_number = 2;
+    int32 result_per_page = 3;
+}
 message UserCustomerEditRequest {
     int64 user_id = 1;
     string phone = 2;
