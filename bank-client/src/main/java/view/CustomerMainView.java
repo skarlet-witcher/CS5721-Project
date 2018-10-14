@@ -48,6 +48,7 @@ public class CustomerMainView extends JFrame {
         btn_profile_deleteAccount = new JButton();
         transactionPanel = new JPanel();
         cb_accountList = new JComboBox();
+        cb_transaction_filter = new JComboBox();
         scrollPane2 = new JScrollPane();
         table_transaction_accountTable = new JTable();
         payeePanel = new JPanel();
@@ -243,6 +244,17 @@ public class CustomerMainView extends JFrame {
                     cb_accountList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                     transactionPanel.add(cb_accountList, "cell 0 0");
 
+                    //---- cb_transaction_filter ----
+                    cb_transaction_filter.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                    cb_transaction_filter.setModel(new DefaultComboBoxModel(new String[] {
+                        "Select the time",
+                        "Recent 7 days",
+                        "Recent 1 month",
+                        "Recent 6 months",
+                        "Recent 1 year"
+                    }));
+                    transactionPanel.add(cb_transaction_filter, "cell 0 0");
+
                     //======== scrollPane2 ========
                     {
 
@@ -407,6 +419,7 @@ public class CustomerMainView extends JFrame {
     private JButton btn_profile_deleteAccount;
     private JPanel transactionPanel;
     private JComboBox cb_accountList;
+    private JComboBox cb_transaction_filter;
     private JScrollPane scrollPane2;
     private JTable table_transaction_accountTable;
     private JPanel payeePanel;
