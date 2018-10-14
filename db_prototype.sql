@@ -82,6 +82,8 @@ create table bank_apply (
   comment '1.passport 2.driver license',
   account_type     int          not null
   comment '1.current account 2.student current account',
+  card_type        int          not null
+  comment '1.debit card 2.credit card',
   graduate_date    datetime comment 'if the type is 2',
   birth_date       datetime     not null,
   gender           int          not null

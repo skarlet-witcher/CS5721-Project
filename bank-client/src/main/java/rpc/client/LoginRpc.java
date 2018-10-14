@@ -2,13 +2,10 @@ package rpc.client;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
-import io.grpc.examples.helloworld.GreeterGrpc;
 import model.UserEntity;
 import rpc.*;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static Const.Server.SERVER_HOST;
