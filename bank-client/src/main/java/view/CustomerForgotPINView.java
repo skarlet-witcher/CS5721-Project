@@ -31,6 +31,15 @@ public class CustomerForgotPINView extends JFrame  {
         tf_year.selectAll();
     }
 
+    private void btn_confirmActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void btn_backActionPerformed(ActionEvent e) {
+        this.dispose();
+        new CustomerLoginView().run();
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -115,10 +124,20 @@ public class CustomerForgotPINView extends JFrame  {
 
             //---- btn_confirm ----
             btn_confirm.setText("Confirm");
+            btn_confirm.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    btn_confirmActionPerformed(e);
+                }
+            });
             rootPanelContentPane.add(btn_confirm, "cell 1 3");
 
             //---- btn_back ----
             btn_back.setText("Back");
+            btn_back.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    btn_backActionPerformed(e);
+                }
+            });
             rootPanelContentPane.add(btn_back, "cell 1 4");
             rootPanel.pack();
             rootPanel.setLocationRelativeTo(rootPanel.getOwner());
@@ -138,6 +157,7 @@ public class CustomerForgotPINView extends JFrame  {
     }
 
     public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 

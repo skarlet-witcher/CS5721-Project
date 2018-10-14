@@ -71,6 +71,7 @@ public class CustomerLoginView extends JFrame {
 
 
     public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -87,15 +88,18 @@ public class CustomerLoginView extends JFrame {
     }
 
     private void btn_loginActionPerformed(ActionEvent e) {
-        // TODO check and go to login page
+        this.dispose();
+        new CustomerPINView().run();
     }
 
     private void btn_forgotUserIdActionPerformed(ActionEvent e) {
-        // TODO Go to forgot userId page
+        this.dispose();
+        new CustomerForgotUserIdView().run();
     }
 
     private void btn_registerActionPerformed(ActionEvent e) {
-        // TODO Go to Register page
+        this.dispose();
+        new CustomerApplyView().run();
     }
 
     private void initTextFields() {

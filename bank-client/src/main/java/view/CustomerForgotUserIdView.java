@@ -32,6 +32,15 @@ public class CustomerForgotUserIdView extends JFrame {
         tf_year.selectAll();
     }
 
+    private void btn_confirmActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void btn_backActionPerformed(ActionEvent e) {
+        this.dispose();
+        new CustomerLoginView().run();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         lbl_IBAN = new JLabel();
@@ -131,11 +140,21 @@ public class CustomerForgotUserIdView extends JFrame {
         //---- btn_confirm ----
         btn_confirm.setText("Confirm");
         btn_confirm.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        btn_confirm.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btn_confirmActionPerformed(e);
+            }
+        });
         contentPane.add(btn_confirm, "cell 2 4");
 
         //---- btn_back ----
         btn_back.setText("Back");
         btn_back.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        btn_back.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btn_backActionPerformed(e);
+            }
+        });
         contentPane.add(btn_back, "cell 2 5");
         pack();
         setLocationRelativeTo(getOwner());
@@ -154,6 +173,7 @@ public class CustomerForgotUserIdView extends JFrame {
     }
 
     public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 

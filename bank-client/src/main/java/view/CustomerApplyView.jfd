@@ -8,7 +8,7 @@ new FormModel {
 			"$columnConstraints": "[30:n,fill][fill][fill][30:n,fill]"
 			"$rowConstraints": "[][][][][][][][][][][][][][]"
 		} ) {
-			name: "rootPanel"
+			name: "this"
 			"title": "Customer Apply View"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_firstname"
@@ -210,12 +210,14 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_apply"
 				"text": "Apply"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_applyActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 2 12"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_back"
 				"text": "Back"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_backActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 2 13"
 			} )

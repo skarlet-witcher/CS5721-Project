@@ -39,9 +39,17 @@ public class CustomerApplyView extends JFrame {
         tf_dob_year.selectAll();
     }
 
+    private void btn_applyActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void btn_backActionPerformed(ActionEvent e) {
+        this.dispose();
+        new CustomerLoginView().run();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        rootPanel = new JFrame();
         lbl_firstname = new JLabel();
         tf_firstName = new JTextField();
         lbl_lastName = new JLabel();
@@ -75,189 +83,197 @@ public class CustomerApplyView extends JFrame {
         btn_apply = new JButton();
         btn_back = new JButton();
 
-        //======== rootPanel ========
-        {
-            rootPanel.setTitle("Customer Apply View");
-            Container rootPanelContentPane = rootPanel.getContentPane();
-            rootPanelContentPane.setLayout(new MigLayout(
-                "hidemode 3",
-                // columns
-                "[30:n,fill]" +
-                "[fill]" +
-                "[fill]" +
-                "[30:n,fill]",
-                // rows
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]"));
+        //======== this ========
+        setTitle("Customer Apply View");
+        Container contentPane = getContentPane();
+        contentPane.setLayout(new MigLayout(
+            "hidemode 3",
+            // columns
+            "[30:n,fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[30:n,fill]",
+            // rows
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]"));
 
-            //---- lbl_firstname ----
-            lbl_firstname.setText("First Name");
-            rootPanelContentPane.add(lbl_firstname, "cell 1 0");
-            rootPanelContentPane.add(tf_firstName, "cell 2 0");
+        //---- lbl_firstname ----
+        lbl_firstname.setText("First Name");
+        contentPane.add(lbl_firstname, "cell 1 0");
+        contentPane.add(tf_firstName, "cell 2 0");
 
-            //---- lbl_lastName ----
-            lbl_lastName.setText("Last Name");
-            rootPanelContentPane.add(lbl_lastName, "cell 1 1");
-            rootPanelContentPane.add(tf_lastName, "cell 2 1");
+        //---- lbl_lastName ----
+        lbl_lastName.setText("Last Name");
+        contentPane.add(lbl_lastName, "cell 1 1");
+        contentPane.add(tf_lastName, "cell 2 1");
 
-            //---- lbl_gender ----
-            lbl_gender.setText("Gender");
-            rootPanelContentPane.add(lbl_gender, "cell 1 2");
+        //---- lbl_gender ----
+        lbl_gender.setText("Gender");
+        contentPane.add(lbl_gender, "cell 1 2");
 
-            //---- cb_genderList ----
-            cb_genderList.setModel(new DefaultComboBoxModel(new String[] {
-                "Select Your Gender",
-                "Male",
-                "Female"
-            }));
-            rootPanelContentPane.add(cb_genderList, "cell 2 2");
+        //---- cb_genderList ----
+        cb_genderList.setModel(new DefaultComboBoxModel(new String[] {
+            "Select Your Gender",
+            "Male",
+            "Female"
+        }));
+        contentPane.add(cb_genderList, "cell 2 2");
 
-            //---- lbl_identityType ----
-            lbl_identityType.setText("Identity Type");
-            rootPanelContentPane.add(lbl_identityType, "cell 1 3");
+        //---- lbl_identityType ----
+        lbl_identityType.setText("Identity Type");
+        contentPane.add(lbl_identityType, "cell 1 3");
 
-            //---- cb_identityTypeList ----
-            cb_identityTypeList.setModel(new DefaultComboBoxModel(new String[] {
-                "Select Yout Identity Type",
-                "Driving License",
-                "Passport"
-            }));
-            rootPanelContentPane.add(cb_identityTypeList, "cell 2 3");
+        //---- cb_identityTypeList ----
+        cb_identityTypeList.setModel(new DefaultComboBoxModel(new String[] {
+            "Select Yout Identity Type",
+            "Driving License",
+            "Passport"
+        }));
+        contentPane.add(cb_identityTypeList, "cell 2 3");
 
-            //---- lbl_identityNum ----
-            lbl_identityNum.setText("Identity Number");
-            rootPanelContentPane.add(lbl_identityNum, "cell 1 4");
-            rootPanelContentPane.add(tf_identityNum, "cell 2 4");
+        //---- lbl_identityNum ----
+        lbl_identityNum.setText("Identity Number");
+        contentPane.add(lbl_identityNum, "cell 1 4");
+        contentPane.add(tf_identityNum, "cell 2 4");
 
-            //---- lbl_accountType ----
-            lbl_accountType.setText("Account Type");
-            rootPanelContentPane.add(lbl_accountType, "cell 1 5");
+        //---- lbl_accountType ----
+        lbl_accountType.setText("Account Type");
+        contentPane.add(lbl_accountType, "cell 1 5");
 
-            //---- cb_accountTypeList ----
-            cb_accountTypeList.setModel(new DefaultComboBoxModel(new String[] {
-                "Select Your Account Type",
-                "Current Account",
-                "Student Current Account"
-            }));
-            rootPanelContentPane.add(cb_accountTypeList, "cell 2 5");
+        //---- cb_accountTypeList ----
+        cb_accountTypeList.setModel(new DefaultComboBoxModel(new String[] {
+            "Select Your Account Type",
+            "Current Account",
+            "Student Current Account"
+        }));
+        contentPane.add(cb_accountTypeList, "cell 2 5");
 
-            //---- lbl_cardType ----
-            lbl_cardType.setText("Card Type");
-            rootPanelContentPane.add(lbl_cardType, "cell 1 6");
+        //---- lbl_cardType ----
+        lbl_cardType.setText("Card Type");
+        contentPane.add(lbl_cardType, "cell 1 6");
 
-            //---- cb_cardTypeList ----
-            cb_cardTypeList.setModel(new DefaultComboBoxModel(new String[] {
-                "Select Your Card Type",
-                "Debit Card",
-                "Credit Card"
-            }));
-            rootPanelContentPane.add(cb_cardTypeList, "cell 2 6");
+        //---- cb_cardTypeList ----
+        cb_cardTypeList.setModel(new DefaultComboBoxModel(new String[] {
+            "Select Your Card Type",
+            "Debit Card",
+            "Credit Card"
+        }));
+        contentPane.add(cb_cardTypeList, "cell 2 6");
 
-            //---- lbl_graduateDate ----
-            lbl_graduateDate.setText("Graduate Date");
-            rootPanelContentPane.add(lbl_graduateDate, "cell 1 7");
+        //---- lbl_graduateDate ----
+        lbl_graduateDate.setText("Graduate Date");
+        contentPane.add(lbl_graduateDate, "cell 1 7");
 
-            //---- tf_graduate_month ----
-            tf_graduate_month.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    tf_graduate_monthFocusGained(e);
-                }
-            });
-            rootPanelContentPane.add(tf_graduate_month, "cell 2 7");
+        //---- tf_graduate_month ----
+        tf_graduate_month.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                tf_graduate_monthFocusGained(e);
+            }
+        });
+        contentPane.add(tf_graduate_month, "cell 2 7");
 
-            //---- label8 ----
-            label8.setText("/");
-            label8.setPreferredSize(new Dimension(2, 10));
-            label8.setHorizontalTextPosition(SwingConstants.CENTER);
-            label8.setMinimumSize(new Dimension(1, 16));
-            rootPanelContentPane.add(label8, "cell 2 7");
+        //---- label8 ----
+        label8.setText("/");
+        label8.setPreferredSize(new Dimension(2, 10));
+        label8.setHorizontalTextPosition(SwingConstants.CENTER);
+        label8.setMinimumSize(new Dimension(1, 16));
+        contentPane.add(label8, "cell 2 7");
 
-            //---- tf_graduate_year ----
-            tf_graduate_year.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    tf_graduate_yearFocusGained(e);
-                }
-            });
-            rootPanelContentPane.add(tf_graduate_year, "cell 2 7");
+        //---- tf_graduate_year ----
+        tf_graduate_year.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                tf_graduate_yearFocusGained(e);
+            }
+        });
+        contentPane.add(tf_graduate_year, "cell 2 7");
 
-            //---- lbl_dob ----
-            lbl_dob.setText("Date of Birth");
-            rootPanelContentPane.add(lbl_dob, "cell 1 8");
+        //---- lbl_dob ----
+        lbl_dob.setText("Date of Birth");
+        contentPane.add(lbl_dob, "cell 1 8");
 
-            //---- tf_dob_day ----
-            tf_dob_day.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    tf_dob_dayFocusGained(e);
-                }
-            });
-            rootPanelContentPane.add(tf_dob_day, "cell 2 8");
+        //---- tf_dob_day ----
+        tf_dob_day.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                tf_dob_dayFocusGained(e);
+            }
+        });
+        contentPane.add(tf_dob_day, "cell 2 8");
 
-            //---- label10 ----
-            label10.setText("/");
-            rootPanelContentPane.add(label10, "cell 2 8");
+        //---- label10 ----
+        label10.setText("/");
+        contentPane.add(label10, "cell 2 8");
 
-            //---- tf_dob_month ----
-            tf_dob_month.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    tf_dob_monthFocusGained(e);
-                }
-            });
-            rootPanelContentPane.add(tf_dob_month, "cell 2 8");
+        //---- tf_dob_month ----
+        tf_dob_month.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                tf_dob_monthFocusGained(e);
+            }
+        });
+        contentPane.add(tf_dob_month, "cell 2 8");
 
-            //---- label11 ----
-            label11.setText("/");
-            rootPanelContentPane.add(label11, "cell 2 8");
+        //---- label11 ----
+        label11.setText("/");
+        contentPane.add(label11, "cell 2 8");
 
-            //---- tf_dob_year ----
-            tf_dob_year.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    tf_dob_yearFocusGained(e);
-                }
-            });
-            rootPanelContentPane.add(tf_dob_year, "cell 2 8");
+        //---- tf_dob_year ----
+        tf_dob_year.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                tf_dob_yearFocusGained(e);
+            }
+        });
+        contentPane.add(tf_dob_year, "cell 2 8");
 
-            //---- lbl_address ----
-            lbl_address.setText("Address");
-            rootPanelContentPane.add(lbl_address, "cell 1 9");
-            rootPanelContentPane.add(tf_address, "cell 2 9");
+        //---- lbl_address ----
+        lbl_address.setText("Address");
+        contentPane.add(lbl_address, "cell 1 9");
+        contentPane.add(tf_address, "cell 2 9");
 
-            //---- lbl_email ----
-            lbl_email.setText("Email");
-            rootPanelContentPane.add(lbl_email, "cell 1 10");
-            rootPanelContentPane.add(tf_email, "cell 2 10");
+        //---- lbl_email ----
+        lbl_email.setText("Email");
+        contentPane.add(lbl_email, "cell 1 10");
+        contentPane.add(tf_email, "cell 2 10");
 
-            //---- lbl_contactNum ----
-            lbl_contactNum.setText("Contact Number");
-            rootPanelContentPane.add(lbl_contactNum, "cell 1 11");
-            rootPanelContentPane.add(tf_contactNum, "cell 2 11");
+        //---- lbl_contactNum ----
+        lbl_contactNum.setText("Contact Number");
+        contentPane.add(lbl_contactNum, "cell 1 11");
+        contentPane.add(tf_contactNum, "cell 2 11");
 
-            //---- btn_apply ----
-            btn_apply.setText("Apply");
-            rootPanelContentPane.add(btn_apply, "cell 2 12");
+        //---- btn_apply ----
+        btn_apply.setText("Apply");
+        btn_apply.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btn_applyActionPerformed(e);
+            }
+        });
+        contentPane.add(btn_apply, "cell 2 12");
 
-            //---- btn_back ----
-            btn_back.setText("Back");
-            rootPanelContentPane.add(btn_back, "cell 2 13");
-            rootPanel.pack();
-            rootPanel.setLocationRelativeTo(rootPanel.getOwner());
-        }
+        //---- btn_back ----
+        btn_back.setText("Back");
+        btn_back.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btn_backActionPerformed(e);
+            }
+        });
+        contentPane.add(btn_back, "cell 2 13");
+        pack();
+        setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -276,11 +292,11 @@ public class CustomerApplyView extends JFrame {
     }
 
     public void run() {
-        this.rootPanel.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JFrame rootPanel;
     private JLabel lbl_firstname;
     private JTextField tf_firstName;
     private JLabel lbl_lastName;
