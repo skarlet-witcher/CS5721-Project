@@ -1,3 +1,4 @@
+import view.CustomerLoginView;
 import view.MainMenu;
 
 public class BankClient {
@@ -5,7 +6,7 @@ public class BankClient {
     public static void main(String[] args) {
 
         try {
-            new MainMenu().run();
+            new CustomerLoginView().run();
         } catch (Exception e) {
             e.printStackTrace();
         }
