@@ -1,6 +1,7 @@
 package Const;
 
 public class UserOperateType {
+    public static final int CHARGE = 0;
     public static final int DEPOSIT = 1;
     public static final int WITHDRAW = 2;
     public static final int TRANSFER = 3;

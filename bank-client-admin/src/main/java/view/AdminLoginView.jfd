@@ -5,14 +5,14 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[100:n,fill][fill][fill][100:n,fill]"
+			"$columnConstraints": "[50:n,fill][fill][fill][50:n,fill]"
 			"$rowConstraints": "[50:n][][][][100:n]"
 		} ) {
 			name: "this"
 			"title": "Admin Login View"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_adminId"
-				"text": "Admin ID"
+				"text": "Username"
 				"font": new java.awt.Font( "Segoe UI", 0, 16 )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 1 1"

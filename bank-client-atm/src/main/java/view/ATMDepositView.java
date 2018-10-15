@@ -1,20 +1,22 @@
 /*
- * Created by JFormDesigner on Mon Oct 15 20:52:09 BST 2018
+ * Created by JFormDesigner on Mon Oct 15 20:37:12 BST 2018
  */
 
-package ATMView;
+package view;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import net.miginfocom.swing.*;
+import net.miginfocom.swing.MigLayout;
 import util.JTextFieldLimit;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author xiangkai22
  */
-public class ATMWithdrawView extends JFrame {
-    public ATMWithdrawView() {
+public class ATMDepositView extends JFrame {
+    public ATMDepositView() {
         initComponents();
         initTextField();
     }
@@ -22,16 +24,6 @@ public class ATMWithdrawView extends JFrame {
     private void btn_backActionPerformed(ActionEvent e) {
         this.dispose();
         new ATMMainView().run();
-    }
-
-    private void btn_Withdraw_ConfirmActionPerformed(ActionEvent e) {
-        this.dispose();
-        // new ATMPINView().run();
-    }
-
-    private void btn_confirmActionPerformed(ActionEvent e) {
-        this.dispose();
-        // new ATMPINView().run();
     }
 
     private void initComponents() {
@@ -44,7 +36,7 @@ public class ATMWithdrawView extends JFrame {
         btn_back = new JButton();
 
         //======== this ========
-        setTitle("ATM Withdraw View");
+        setTitle("ATM Deposit View");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
@@ -56,10 +48,12 @@ public class ATMWithdrawView extends JFrame {
             // rows
             "[50:n]" +
             "[]" +
+            "[]0" +
+            "[]0" +
             "[]" +
             "[]" +
             "[]" +
-            "[100:n]"));
+            "[50:n]"));
 
         //---- lbl_cardNum ----
         lbl_cardNum.setText("Card Number");
@@ -82,13 +76,7 @@ public class ATMWithdrawView extends JFrame {
         //---- btn_confirm ----
         btn_confirm.setText("Confirm");
         btn_confirm.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        btn_confirm.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_Withdraw_ConfirmActionPerformed(e);
-                btn_confirmActionPerformed(e);
-            }
-        });
-        contentPane.add(btn_confirm, "cell 2 3");
+        contentPane.add(btn_confirm, "cell 2 5");
 
         //---- btn_back ----
         btn_back.setText("Back");
@@ -96,24 +84,24 @@ public class ATMWithdrawView extends JFrame {
         btn_back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 btn_backActionPerformed(e);
+                btn_backActionPerformed(e);
             }
         });
-        contentPane.add(btn_back, "cell 2 4");
+        contentPane.add(btn_back, "cell 2 6");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+    private void initTextField() {
+        tf_cardNum.setDocument(new JTextFieldLimit(16));
+
     }
 
     public void run() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
-    private void initTextField() {
-        tf_cardNum.setDocument(new JTextFieldLimit(16));
-    }
-
-
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_cardNum;

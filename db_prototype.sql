@@ -37,23 +37,16 @@ create table user_account (
 CREATE TABLE user_card (
   id            BIGINT AUTO_INCREMENT PRIMARY KEY,
   card_number   bigint   NOT NULL,
-     account_id    BIGINT,              
+  card_type     int      not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 1
+  comment '1.debit card 2.credit card(Not supported yet)',
+  pin           int      not null
+  comment 'get by auto-generated 6 digit',
+  balance       double,
+  currency_type int      not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 0
+  comment '0.euro 1.....',
+  expired_date  datetime not null,
+  account_id    BIGINT,
   FOREIGN KEY (account_id) REFERENCES user_account (id)
-);
-
-CREATE TABLE user_card_transfer (
-  id                 BIGINT          AUTO_INCREMENT PRIMARY KEY,
-  transfer_no        BIGINT NOT NULL
-  comment 'long int. get by auto-generated',
-  from_card_id       bigint,
-  to_payee_id        bigint,
-  amount             double,
-  currency_type      int    not null default 0
-  comment '0.euro 1......',
-  transaction_status INT,
-  description        varchar(500),
-  FOREIGN KEY (from_card_id) REFERENCES user_card (id),
-  FOREIGN KEY (to_payee_id) REFERENCES user_payee (id)
 );
 
 create table user_payee (
@@ -65,56 +58,79 @@ create table user_payee (
 );
 
 create table bank_apply (
-  id               bigint                AUTO_INCREMENT PRIMARY KEY,
-  first_name       varchar(32)  not null,
-  last_name        varchar(32)  not null,
-  identity_id      varchar(50)  not null
+  id                bigint                AUTO_INCREMENT PRIMARY KEY,
+  first_name        varchar(255) not null,
+  last_name         varchar(255) not null,
+  identity_id       varchar(50)  not null
   comment 'passport/license id number',
-  identity_id_type int          not null
+  identity_id_type  int          not null
   comment '1.passport 2.driver license',
-  account_type     int          not null
+  account_type      int          not null
   comment '1.current account 2.student current account',
-  card_type        int          not null
-  comment '1.debit card 2.credit card',
-  graduate_date    datetime comment 'if the type is 2',
-  birth_date       datetime     not null,
-  gender           int          not null
+  card_type         int          not null
+  comment '1.debit card 2.credit card(Not supported yet)',
+  graduate_date     datetime
+  comment 'if the account type is student current account',
+  university        varchar(255)
+  comment 'if the account type is student current account',
+  student_id        varchar(50)
+  comment 'if the account type is student current account',
+  parent_user_id    bigint
+  comment 'if the account type is young savers account',
+  parent_first_name varchar(255)
+  comment 'if the account type is young savers account',
+  parent_last_name  varchar(255)
+  comment 'if the account type is young savers account',
+  birth_date        datetime     not null,
+  gender            int          not null
   comment '0.woman 1.man',
-  address          varchar(255) not null,
-  email            varchar(128) not null,
-  phone            varchar(20)  not null,
-  apply_time       datetime     not null,
-  status           int          not null default 0
+  address           varchar(255) not null,
+  email             varchar(128) not null,
+  phone             varchar(20)  not null,
+  apply_time        datetime     not null,
+  status            int          not null default 0
   comment '0.pending for being approved 1.pass 2.deny',
-  remark           varchar(255)          default ''
-  comment 'Approved / reason for being denied.'
+  remark            varchar(255)          default ''
+  comment 'Approved / reason for being denied.',
+  user_id           bigint
+  comment 'after being approved, get connected to user id',
 );
 
 CREATE TABLE bank_staff (
-  id             BIGINT AUTO_INCREMENT PRIMARY KEY,
-  staff_id       varchar(20) UNIQUE
+  id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+  staff_id   varchar(20) UNIQUE
   comment 'staff visible, for login. get by auto-generated',
-  password       varchar(20),
-  first_name     varchar(32),
-  last_name      varchar(32),
-  email_host     varchar(255),
-  email_port     varchar(255),
-  email          varchar(255),
-  email_password varchar(255)
+  password   varchar(20),
+  first_name varchar(32),
+  last_name  varchar(32)
 );
 
 create table bank_admin (
-  id       bigint AUTO_INCREMENT PRIMARY KEY,
-  username varchar(255),
-  password varchar(255)
+  id             bigint AUTO_INCREMENT PRIMARY KEY,
+  username       varchar(255),
+  password       varchar(255),
+  email_host     varchar(255),
+  email_port     varchar(255),
+  email_account  varchar(255),
+  email_password varchar(255)
 );
 
-CREATE TABLE user_operate (
-  id                  BIGINT AUTO_INCREMENT PRIMARY KEY,
-  operate_type        int comment '1.deposit 2.withdraw 3.transfer 4.change_profile 5.login 6.create 7.remove',
-  operate_time        datetime not null,
-  balance             double   not null,
-  operate_description varchar(500),
-  user_id             BIGINT,
-  FOREIGN KEY (user_id) REFERENCES user (id)
+CREATE TABLE user_operation_history (
+  id             BIGINT            AUTO_INCREMENT PRIMARY KEY,
+  operate_no     bigint   not null
+  comment 'long int. get by auto-generated',
+  operate_type   int comment '0.charge 1.deposit 2.withdraw 3.transfer sent 4.transfer received 5.change_profile 6.login 7.create 8.remove',
+  operate_time   datetime not null,
+  operate_source int comment '1.self-service 2.ATM 3.other',
+  amount         double,
+  currency_type  int      not null default 0
+  comment '0.euro 1......',
+  balance        double   not null,
+  description    varchar(500),
+  status         int      not null
+  comment '0.pending 1.fail 2.success',
+  user_id        BIGINT,
+  account_id     BIGINT,
+  FOREIGN KEY (user_id) REFERENCES user (id),
+  FOREIGN KEY (account_id) REFERENCES user_account (id)
 );

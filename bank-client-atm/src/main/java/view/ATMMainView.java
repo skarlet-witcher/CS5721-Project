@@ -2,12 +2,14 @@
  * Created by JFormDesigner on Mon Oct 15 20:01:50 BST 2018
  */
 
-package ATMView;
+package view;
 
-import java.awt.*;
-import java.awt.event.*;
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
-import net.miginfocom.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author xiangkai22

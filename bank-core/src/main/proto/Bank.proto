@@ -27,8 +27,9 @@ service UserCustomer {
 }
 
 service UserStaff {
-    rpc AddNewAccount (UserStaffAddAccountRequest) returns (Response);
-    rpc RemoveAccount (UserRequest) returns (Response);
+    rpc GetNewApplys (UserStaffAddAccountRequest) returns (Response);
+    rpc GetDeletes (UserRequest) returns (Response);
+    rpc GetBlocks (UserRequest) returns (Response);
 }
 
 service UserAdmin {

@@ -2,13 +2,15 @@
  * Created by JFormDesigner on Mon Oct 15 22:02:45 BST 2018
  */
 
-package StaffView;
+package view;
 
-import java.awt.*;
-import java.awt.event.*;
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
-import javax.swing.table.*;
-import net.miginfocom.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author xiangkai22

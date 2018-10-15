@@ -69,7 +69,7 @@ new FormModel {
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 					"$layoutConstraints": "hidemode 3"
 					"$columnConstraints": "[56:n,fill][fill][fill][110:n,fill]"
-					"$rowConstraints": "[][][][][][][][][]0[][][][][][][][][]"
+					"$rowConstraints": "[][][][][][][][][][][]"
 				} ) {
 					name: "profilePanel"
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -90,96 +90,96 @@ new FormModel {
 						"text": "FirstName"
 						"font": #Font0
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 2 2"
+						"value": "cell 2 1"
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "tf_profile_firstName"
 						"enabled": false
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 3 2"
+						"value": "cell 3 1"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "lbl_profile_lastName"
 						"text": "LastName"
 						"font": #Font0
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 2 4"
+						"value": "cell 2 2"
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "tf_profile_lastName"
 						"enabled": false
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 3 4"
+						"value": "cell 3 2"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "lbl_gender"
 						"text": "Gender"
 						"font": #Font0
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 2 6"
+						"value": "cell 2 3"
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "tf_profileGender"
 						"enabled": false
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 3 6"
+						"value": "cell 3 3"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "lbl_address"
 						"text": "Address"
 						"font": #Font0
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 2 8"
+						"value": "cell 2 4"
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "tf_profile_address"
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 3 8"
+						"value": "cell 3 4"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "lbl_email"
 						"text": "Email"
 						"font": #Font0
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 2 11"
+						"value": "cell 2 5"
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "tf_profile_email"
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 3 11"
+						"value": "cell 3 5"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "lbl_contactNum"
 						"text": "Contact Number"
 						"font": #Font0
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 2 13"
+						"value": "cell 2 6"
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "tf_profile_contactNumber"
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 3 13"
+						"value": "cell 3 6"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "btn_profile_modify"
 						"text": "Modify"
 						"font": #Font0
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 2 15"
+						"value": "cell 2 8"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "btn_profile_reset"
-						"text": "Reset"
+						name: "btn_profile_revert"
+						"text": "Revert"
 						"font": #Font0
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 3 15"
+						"value": "cell 3 8"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "btn_profile_deleteAccount"
-						"text": "Delete Account"
+						"text": "Delete Account Apply"
 						"font": #Font0
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 2 17 2 1"
+						"value": "cell 2 10 2 1"
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "Profile"
@@ -331,7 +331,7 @@ new FormModel {
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 					"$layoutConstraints": "hidemode 3"
 					"$columnConstraints": "[50:n,center][fill][fill]"
-					"$rowConstraints": "[][][][][][]"
+					"$rowConstraints": "[][][][][][][][]"
 				} ) {
 					name: "transferPanel"
 					"font": &Font2 new java.awt.Font( "Segoe UI", 0, 18 )
@@ -368,36 +368,49 @@ new FormModel {
 						"value": "cell 2 1"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label10"
-						"text": "Balance"
+						name: "label11"
+						"text": "Currency"
 						"font": #Font2
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 1 2"
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "btn_transfer_balance"
+						name: "btn_transfer_balance2"
 						"editable": false
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 2 2"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label10"
+						"text": "Balance"
+						"font": #Font2
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 1 3"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "btn_transfer_balance"
+						"editable": false
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 2 3"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label9"
 						"text": "Amounts"
 						"font": #Font2
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 1 3"
+						"value": "cell 1 4"
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "tf_transfer_amounts"
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 2 3"
+						"value": "cell 2 4"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "btn_transfer_transfer"
 						"text": "Transfer"
 						"font": #Font2
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 2 5"
+						"value": "cell 2 6"
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "Transfer"

@@ -2,12 +2,14 @@
  * Created by JFormDesigner on Mon Oct 15 22:27:37 BST 2018
  */
 
-package AdminView;
+package view;
 
-import java.awt.*;
-import java.awt.event.*;
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
-import net.miginfocom.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author xiangkai22
@@ -41,10 +43,10 @@ public class AdminLoginView extends JFrame {
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
             // columns
-            "[100:n,fill]" +
+                "[50:n,fill]" +
             "[fill]" +
             "[fill]" +
-            "[100:n,fill]",
+                        "[50:n,fill]",
             // rows
             "[50:n]" +
             "[]" +
@@ -53,7 +55,7 @@ public class AdminLoginView extends JFrame {
             "[100:n]"));
 
         //---- lbl_adminId ----
-        lbl_adminId.setText("Admin ID");
+        lbl_adminId.setText("Username");
         lbl_adminId.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         contentPane.add(lbl_adminId, "cell 1 1");
 

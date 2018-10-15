@@ -4,15 +4,16 @@
 
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-
-import net.miginfocom.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author xiangkai22
@@ -26,6 +27,53 @@ public class CustomerMainView extends JFrame {
         this.dispose();
         new CustomerLoginView().run();
     }
+
+    private JButton btn_profile_revert;
+
+    public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JTabbedPane customerTabPane;
+    private JPanel homePanel;
+    private JScrollPane scrollPane1;
+    private JTable table_home_accountTable;
+    private JPanel profilePanel;
+    private JLabel lbl_profile_userId;
+    private JTextField tf_profile_userId;
+    private JLabel lbl_profile_firstName;
+    private JTextField tf_profile_firstName;
+    private JLabel lbl_profile_lastName;
+    private JTextField tf_profile_lastName;
+    private JLabel lbl_gender;
+    private JTextField tf_profileGender;
+    private JLabel lbl_address;
+    private JTextField tf_profile_address;
+    private JLabel lbl_email;
+    private JTextField tf_profile_email;
+    private JLabel lbl_contactNum;
+    private JTextField tf_profile_contactNumber;
+    private JButton btn_profile_modify;
+    private JLabel label11;
+    private JButton btn_profile_deleteAccount;
+    private JPanel transactionPanel;
+    private JComboBox cb_accountList;
+    private JComboBox cb_transaction_filter;
+    private JScrollPane scrollPane2;
+    private JTable table_transaction_accountTable;
+    private JPanel payeePanel;
+    private JButton btn_payee_add;
+    private JButton btn_payee_remove;
+    private JScrollPane scrollPane3;
+    private JTable table_payee_payeeList;
+    private JPanel transferPanel;
+    private JLabel label7;
+    private JComboBox cb_payee_payeeList;
+    private JLabel label8;
+    private JComboBox cb_transfer_accountList;
+    private JTextField btn_transfer_balance2;
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -49,7 +97,7 @@ public class CustomerMainView extends JFrame {
         lbl_contactNum = new JLabel();
         tf_profile_contactNumber = new JTextField();
         btn_profile_modify = new JButton();
-        btn_profile_reset = new JButton();
+        btn_profile_revert = new JButton();
         btn_profile_deleteAccount = new JButton();
         transactionPanel = new JPanel();
         cb_accountList = new JComboBox();
@@ -66,6 +114,8 @@ public class CustomerMainView extends JFrame {
         cb_payee_payeeList = new JComboBox();
         label8 = new JLabel();
         cb_transfer_accountList = new JComboBox();
+        label11 = new JLabel();
+        btn_transfer_balance2 = new JTextField();
         label10 = new JLabel();
         btn_transfer_balance = new JTextField();
         label9 = new JLabel();
@@ -155,13 +205,6 @@ public class CustomerMainView extends JFrame {
                     "[]" +
                     "[]" +
                     "[]" +
-                    "[]0" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
                     "[]" +
                     "[]" +
                     "[]"));
@@ -178,62 +221,62 @@ public class CustomerMainView extends JFrame {
                 //---- lbl_profile_firstName ----
                 lbl_profile_firstName.setText("FirstName");
                 lbl_profile_firstName.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                profilePanel.add(lbl_profile_firstName, "cell 2 2");
+                profilePanel.add(lbl_profile_firstName, "cell 2 1");
 
                 //---- tf_profile_firstName ----
                 tf_profile_firstName.setEnabled(false);
-                profilePanel.add(tf_profile_firstName, "cell 3 2");
+                profilePanel.add(tf_profile_firstName, "cell 3 1");
 
                 //---- lbl_profile_lastName ----
                 lbl_profile_lastName.setText("LastName");
                 lbl_profile_lastName.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                profilePanel.add(lbl_profile_lastName, "cell 2 4");
+                profilePanel.add(lbl_profile_lastName, "cell 2 2");
 
                 //---- tf_profile_lastName ----
                 tf_profile_lastName.setEnabled(false);
-                profilePanel.add(tf_profile_lastName, "cell 3 4");
+                profilePanel.add(tf_profile_lastName, "cell 3 2");
 
                 //---- lbl_gender ----
                 lbl_gender.setText("Gender");
                 lbl_gender.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                profilePanel.add(lbl_gender, "cell 2 6");
+                profilePanel.add(lbl_gender, "cell 2 3");
 
                 //---- tf_profileGender ----
                 tf_profileGender.setEnabled(false);
-                profilePanel.add(tf_profileGender, "cell 3 6");
+                profilePanel.add(tf_profileGender, "cell 3 3");
 
                 //---- lbl_address ----
                 lbl_address.setText("Address");
                 lbl_address.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                profilePanel.add(lbl_address, "cell 2 8");
-                profilePanel.add(tf_profile_address, "cell 3 8");
+                profilePanel.add(lbl_address, "cell 2 4");
+                profilePanel.add(tf_profile_address, "cell 3 4");
 
                 //---- lbl_email ----
                 lbl_email.setText("Email");
                 lbl_email.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                profilePanel.add(lbl_email, "cell 2 11");
-                profilePanel.add(tf_profile_email, "cell 3 11");
+                profilePanel.add(lbl_email, "cell 2 5");
+                profilePanel.add(tf_profile_email, "cell 3 5");
 
                 //---- lbl_contactNum ----
                 lbl_contactNum.setText("Contact Number");
                 lbl_contactNum.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                profilePanel.add(lbl_contactNum, "cell 2 13");
-                profilePanel.add(tf_profile_contactNumber, "cell 3 13");
+                profilePanel.add(lbl_contactNum, "cell 2 6");
+                profilePanel.add(tf_profile_contactNumber, "cell 3 6");
 
                 //---- btn_profile_modify ----
                 btn_profile_modify.setText("Modify");
                 btn_profile_modify.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                profilePanel.add(btn_profile_modify, "cell 2 15");
+                profilePanel.add(btn_profile_modify, "cell 2 8");
 
-                //---- btn_profile_reset ----
-                btn_profile_reset.setText("Reset");
-                btn_profile_reset.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                profilePanel.add(btn_profile_reset, "cell 3 15");
+                //---- btn_profile_revert ----
+                btn_profile_revert.setText("Revert");
+                btn_profile_revert.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                profilePanel.add(btn_profile_revert, "cell 3 8");
 
                 //---- btn_profile_deleteAccount ----
-                btn_profile_deleteAccount.setText("Delete Account");
+                btn_profile_deleteAccount.setText("Delete Account Apply");
                 btn_profile_deleteAccount.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                profilePanel.add(btn_profile_deleteAccount, "cell 2 17 2 1");
+                profilePanel.add(btn_profile_deleteAccount, "cell 2 10 2 1");
             }
             customerTabPane.addTab("Profile", profilePanel);
 
@@ -348,6 +391,8 @@ public class CustomerMainView extends JFrame {
                     "[]" +
                     "[]" +
                     "[]" +
+                            "[]" +
+                            "[]" +
                     "[]"));
 
                 //---- label7 ----
@@ -372,25 +417,34 @@ public class CustomerMainView extends JFrame {
                 }));
                 transferPanel.add(cb_transfer_accountList, "cell 2 1");
 
+                //---- label11 ----
+                label11.setText("Currency");
+                label11.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                transferPanel.add(label11, "cell 1 2");
+
+                //---- btn_transfer_balance2 ----
+                btn_transfer_balance2.setEditable(false);
+                transferPanel.add(btn_transfer_balance2, "cell 2 2");
+
                 //---- label10 ----
                 label10.setText("Balance");
                 label10.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                transferPanel.add(label10, "cell 1 2");
+                transferPanel.add(label10, "cell 1 3");
 
                 //---- btn_transfer_balance ----
                 btn_transfer_balance.setEditable(false);
-                transferPanel.add(btn_transfer_balance, "cell 2 2");
+                transferPanel.add(btn_transfer_balance, "cell 2 3");
 
                 //---- label9 ----
                 label9.setText("Amounts");
                 label9.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                transferPanel.add(label9, "cell 1 3");
-                transferPanel.add(tf_transfer_amounts, "cell 2 3");
+                transferPanel.add(label9, "cell 1 4");
+                transferPanel.add(tf_transfer_amounts, "cell 2 4");
 
                 //---- btn_transfer_transfer ----
                 btn_transfer_transfer.setText("Transfer");
                 btn_transfer_transfer.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                transferPanel.add(btn_transfer_transfer, "cell 2 5");
+                transferPanel.add(btn_transfer_transfer, "cell 2 6");
             }
             customerTabPane.addTab("Transfer", transferPanel);
         }
@@ -410,50 +464,6 @@ public class CustomerMainView extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JTabbedPane customerTabPane;
-    private JPanel homePanel;
-    private JScrollPane scrollPane1;
-    private JTable table_home_accountTable;
-    private JPanel profilePanel;
-    private JLabel lbl_profile_userId;
-    private JTextField tf_profile_userId;
-    private JLabel lbl_profile_firstName;
-    private JTextField tf_profile_firstName;
-    private JLabel lbl_profile_lastName;
-    private JTextField tf_profile_lastName;
-    private JLabel lbl_gender;
-    private JTextField tf_profileGender;
-    private JLabel lbl_address;
-    private JTextField tf_profile_address;
-    private JLabel lbl_email;
-    private JTextField tf_profile_email;
-    private JLabel lbl_contactNum;
-    private JTextField tf_profile_contactNumber;
-    private JButton btn_profile_modify;
-    private JButton btn_profile_reset;
-    private JButton btn_profile_deleteAccount;
-    private JPanel transactionPanel;
-    private JComboBox cb_accountList;
-    private JComboBox cb_transaction_filter;
-    private JScrollPane scrollPane2;
-    private JTable table_transaction_accountTable;
-    private JPanel payeePanel;
-    private JButton btn_payee_add;
-    private JButton btn_payee_remove;
-    private JScrollPane scrollPane3;
-    private JTable table_payee_payeeList;
-    private JPanel transferPanel;
-    private JLabel label7;
-    private JComboBox cb_payee_payeeList;
-    private JLabel label8;
-    private JComboBox cb_transfer_accountList;
     private JLabel label10;
     private JTextField btn_transfer_balance;
     private JLabel label9;
