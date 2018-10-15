@@ -37,15 +37,7 @@ create table user_account (
 CREATE TABLE user_card (
   id            BIGINT AUTO_INCREMENT PRIMARY KEY,
   card_number   bigint   NOT NULL,
-  card_type     int      not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 1
-  comment '1.debit card 2.credit card(Not supported yet)',
-  pin           int      not null
-  comment 'get by auto-generated 6 digit',
-  balance       double,
-  currency_type int      not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 0
-  comment '0.euro 1.....',
-  expired_date  datetime not null,
-  account_id    BIGINT,
+     account_id    BIGINT,              
   FOREIGN KEY (account_id) REFERENCES user_account (id)
 );
 

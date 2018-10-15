@@ -140,20 +140,20 @@ public class CustomerLoginView extends JFrame {
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
             // columns
-                "[30:n,grow,fill]" +
-                        "[28,fill]0" +
+            "[30:n,grow,fill]" +
+            "[28,fill]0" +
             "[fill]" +
             "[92,grow,fill]" +
-                        "[30:n,grow,fill]",
+            "[30:n,grow,fill]",
             // rows
-                "[50:n]" +
-                        "[fill]" +
+            "[50:n]" +
+            "[fill]" +
             "[]" +
-                        "[fill]" +
-                        "[15:n,grow,fill]" +
+            "[fill]" +
+            "[15:n,grow,fill]" +
             "[]" +
             "[]" +
-                        "[30:n,grow]"));
+            "[30:n,grow]"));
 
         //---- lbl_userId ----
         lbl_userId.setText("<html>Please enter your <strong>User ID</strong></html>");
