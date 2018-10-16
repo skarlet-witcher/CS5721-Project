@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 package rpc;
 
-service UserLogin {
+service UserCustomerLogin {
     rpc LoginReq (UserLoginReqRequest) returns (Response);
     rpc Login (UserLoginRequest) returns (Response);
     rpc ApplyNewAccount (UserApplyNewAccountRequest) returns (Response);
@@ -20,6 +20,7 @@ service UserCustomer {
     rpc GetProfile (UserCustomerGetProfileRequest) returns (Response);
     rpc EditProfile (UserCustomerEditProfileRequest) returns (Response);
     rpc GetTransactions (UserCustomerGetTransactionsRequest) returns (Response);
+    rpc ApplyForStatement (UserCustomerApplyForStatementRequest) returns (Response);
     rpc GetPayees (UserCustomerGetPayeesRequest) returns (Response);
     rpc AddPayee (UserCustomerAddPayeeRequest) returns (Response);
     rpc RemovePayee (UserCustomerRemovePayeeRequest) returns (Response);
@@ -27,14 +28,41 @@ service UserCustomer {
 }
 
 service UserStaff {
-    rpc GetNewApplys (UserStaffAddAccountRequest) returns (Response);
-    rpc GetDeletes (UserRequest) returns (Response);
-    rpc GetBlocks (UserRequest) returns (Response);
+    rpc Login (UserStaffRequest) returns (Response);
+    rpc GetNewApplyUsers (UserStaffRequest) returns (Response);
+    rpc GetDeleteUsers (UserStaffRequest) returns (Response);
+    rpc GetBlockUsers (UserStaffRequest) returns (Response);
+    rpc RespondApply (UserStaffRequest) returns (Response);
 }
 
 service UserAdmin {
-    rpc AddNewStaff (UserStaffAddAccountRequest) returns (Response);
-    rpc RemoveStaff (UserRequest) returns (Response);
+    rpc Login (UserAdminRequest) returns (Response);
+    rpc GetStaffs (UserAdminRequest) returns (Response);
+    rpc AddNewStaff (UserAdminRequest) returns (Response);
+    rpc RemoveStaff (UserAdminRequest) returns (Response);
+    rpc ConfigEmail (UserAdminRequest) returns (Response);
+}
+
+message UserStaffRequest {
+    int64 staff_id = 1;
+    string password = 2;
+    int64 respond_id = 3;
+    int32 respond_result = 4;
+    int32 respond_description = 5;
+    int32 filter_by_result_type = 6;
+}
+
+message UserAdminRequest {
+    string username = 1;
+    string password = 2;
+    string staff_first_name = 3;
+    string staff_last_name = 4;
+    string staff_email = 5; //staff_id and password will be generated then sent to staff email.
+    string staff_id = 6; //for remove staff
+    string email_host = 7;
+    string email_port = 8;
+    string email_account = 9;
+    string email_password = 10;
 }
 
 message UserLoginReqRequest {
@@ -104,6 +132,12 @@ message UserCustomerGetTransactionsRequest {
     int32 filter_by_date = 3;
 }
 
+message UserCustomerApplyForStatementRequest {
+    int64 user_id = 1;
+    int32 filter_by_account = 2;
+    int32 filter_by_date = 3;
+}
+
 message UserCustomerGetPayeesRequest {
     int64 user_id = 1;
 }
@@ -127,32 +161,6 @@ message UserCustomerTransferRequest {
     int64 account_id = 3;
     double amount = 4;
     int32 pin = 5;
-}
-
-message UserCustomerEditRequest {
-    int64 user_id = 1;
-    string phone = 2;
-    string address = 3;
-}
-
-message UserCustomerTranRequest {
-    string user_id = 1;
-    string to_card_no = 2;
-    string amount = 3;
-    string currency = 4;
-    string description = 5;
-}
-
-message UserStaffAddAccountRequest {
-    string first_name = 1;
-    string last_name = 2;
-    string phone = 3;
-    string address = 4;
-    string password = 5;
-}
-
-message UserRequest {
-    int64 user_id = 1;
 }
 
 message Response {
