@@ -93,7 +93,7 @@ create table bank_apply (
   remark            varchar(255)          default ''
   comment 'Approved / reason for being denied.',
   user_id           bigint
-  comment 'after being approved, get connected to user id',
+  comment 'after being approved, get connected to user id'
 );
 
 CREATE TABLE bank_staff (
@@ -130,7 +130,9 @@ CREATE TABLE user_operation_history (
   status         int      not null
   comment '0.pending 1.fail 2.success',
   user_id        BIGINT,
+  to_payee_id    BIGINT,
   account_id     BIGINT,
   FOREIGN KEY (user_id) REFERENCES user (id),
+  foreign key (to_payee_id) references user_payee (id),
   FOREIGN KEY (account_id) REFERENCES user_account (id)
 );
