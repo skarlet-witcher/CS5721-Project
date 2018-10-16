@@ -6,7 +6,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
 			"$columnConstraints": "[30:n,fill][fill][fill][30:n,fill]"
-			"$rowConstraints": "[][][][][][][][][][][][][][]"
+			"$rowConstraints": "[][][][][][][]0[][][][][][][][]"
 		} ) {
 			name: "this"
 			"title": "Customer Apply View"
@@ -86,11 +86,14 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "cb_accountTypeList"
 				"model": new javax.swing.DefaultComboBoxModel {
-					selectedItem: "Select Your Account Type"
-					addElement( "Select Your Account Type" )
-					addElement( "Current Account" )
+					selectedItem: "Personal Current Account"
+					addElement( "Personal Current Account" )
 					addElement( "Student Current Account" )
+					addElement( "Young Saver Account" )
+					addElement( "Golden Account" )
 				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cb_accountTypeListActionPerformed", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cb_accountTypeListActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 2 5"
 			} )
@@ -98,7 +101,7 @@ new FormModel {
 				name: "lbl_cardType"
 				"text": "Card Type"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 6"
+				"value": "cell 1 7"
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "cb_cardTypeList"
@@ -109,19 +112,19 @@ new FormModel {
 					addElement( "Credit Card" )
 				}
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 6"
+				"value": "cell 2 7"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_graduateDate"
 				"text": "Graduate Date"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 7"
+				"value": "cell 1 8"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "tf_graduate_month"
 				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "tf_graduate_monthFocusGained", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 7"
+				"value": "cell 2 8"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label8"
@@ -130,96 +133,96 @@ new FormModel {
 				"horizontalTextPosition": 0
 				"minimumSize": new java.awt.Dimension( 1, 16 )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 7"
+				"value": "cell 2 8"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "tf_graduate_year"
 				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "tf_graduate_yearFocusGained", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 7"
+				"value": "cell 2 8"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_dob"
 				"text": "Date of Birth"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 8"
+				"value": "cell 1 9"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "tf_dob_day"
 				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "tf_dob_dayFocusGained", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 8"
+				"value": "cell 2 9"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label10"
 				"text": "/"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 8"
+				"value": "cell 2 9"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "tf_dob_month"
 				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "tf_dob_monthFocusGained", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 8"
+				"value": "cell 2 9"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label11"
 				"text": "/"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 8"
+				"value": "cell 2 9"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "tf_dob_year"
 				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "tf_dob_yearFocusGained", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 8"
+				"value": "cell 2 9"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_address"
 				"text": "Address"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 9"
+				"value": "cell 1 10"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "tf_address"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 9"
+				"value": "cell 2 10"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_email"
 				"text": "Email"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 10"
+				"value": "cell 1 11"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "tf_email"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 10"
+				"value": "cell 2 11"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_contactNum"
 				"text": "Contact Number"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 11"
+				"value": "cell 1 12"
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "tf_contactNum"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 11"
+				"value": "cell 2 12"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_apply"
 				"text": "Apply"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_applyActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 12"
+				"value": "cell 2 13"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_back"
 				"text": "Back"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_backActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 13"
+				"value": "cell 2 14"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

@@ -48,6 +48,22 @@ public class CustomerApplyView extends JFrame {
         new CustomerLoginView().run();
     }
 
+    private void cb_accountTypeListActionPerformed(ActionEvent e) {
+        if(cb_accountTypeList.getSelectedIndex() == 1) {
+            initStudentAccountField();
+            pack();
+        }
+    }
+
+    private void initStudentAccountField() {
+        JLabel lbl_studentId = new JLabel("Student ID");
+        JTextField tf_studentId = new JTextField();
+
+
+        this.add(lbl_studentId, "cell 1 6");
+        this.add(tf_studentId, "cell 2 6");
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         lbl_firstname = new JLabel();
@@ -100,6 +116,7 @@ public class CustomerApplyView extends JFrame {
             "[]" +
             "[]" +
             "[]" +
+            "[]0" +
             "[]" +
             "[]" +
             "[]" +
@@ -154,15 +171,22 @@ public class CustomerApplyView extends JFrame {
 
         //---- cb_accountTypeList ----
         cb_accountTypeList.setModel(new DefaultComboBoxModel(new String[] {
-            "Select Your Account Type",
-            "Current Account",
-            "Student Current Account"
+            "Personal Current Account",
+            "Student Current Account",
+            "Young Saver Account",
+            "Golden Account"
         }));
+        cb_accountTypeList.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cb_accountTypeListActionPerformed(e);
+                cb_accountTypeListActionPerformed(e);
+            }
+        });
         contentPane.add(cb_accountTypeList, "cell 2 5");
 
         //---- lbl_cardType ----
         lbl_cardType.setText("Card Type");
-        contentPane.add(lbl_cardType, "cell 1 6");
+        contentPane.add(lbl_cardType, "cell 1 7");
 
         //---- cb_cardTypeList ----
         cb_cardTypeList.setModel(new DefaultComboBoxModel(new String[] {
@@ -170,11 +194,11 @@ public class CustomerApplyView extends JFrame {
             "Debit Card",
             "Credit Card"
         }));
-        contentPane.add(cb_cardTypeList, "cell 2 6");
+        contentPane.add(cb_cardTypeList, "cell 2 7");
 
         //---- lbl_graduateDate ----
         lbl_graduateDate.setText("Graduate Date");
-        contentPane.add(lbl_graduateDate, "cell 1 7");
+        contentPane.add(lbl_graduateDate, "cell 1 8");
 
         //---- tf_graduate_month ----
         tf_graduate_month.addFocusListener(new FocusAdapter() {
@@ -183,14 +207,14 @@ public class CustomerApplyView extends JFrame {
                 tf_graduate_monthFocusGained(e);
             }
         });
-        contentPane.add(tf_graduate_month, "cell 2 7");
+        contentPane.add(tf_graduate_month, "cell 2 8");
 
         //---- label8 ----
         label8.setText("/");
         label8.setPreferredSize(new Dimension(2, 10));
         label8.setHorizontalTextPosition(SwingConstants.CENTER);
         label8.setMinimumSize(new Dimension(1, 16));
-        contentPane.add(label8, "cell 2 7");
+        contentPane.add(label8, "cell 2 8");
 
         //---- tf_graduate_year ----
         tf_graduate_year.addFocusListener(new FocusAdapter() {
@@ -199,11 +223,11 @@ public class CustomerApplyView extends JFrame {
                 tf_graduate_yearFocusGained(e);
             }
         });
-        contentPane.add(tf_graduate_year, "cell 2 7");
+        contentPane.add(tf_graduate_year, "cell 2 8");
 
         //---- lbl_dob ----
         lbl_dob.setText("Date of Birth");
-        contentPane.add(lbl_dob, "cell 1 8");
+        contentPane.add(lbl_dob, "cell 1 9");
 
         //---- tf_dob_day ----
         tf_dob_day.addFocusListener(new FocusAdapter() {
@@ -212,11 +236,11 @@ public class CustomerApplyView extends JFrame {
                 tf_dob_dayFocusGained(e);
             }
         });
-        contentPane.add(tf_dob_day, "cell 2 8");
+        contentPane.add(tf_dob_day, "cell 2 9");
 
         //---- label10 ----
         label10.setText("/");
-        contentPane.add(label10, "cell 2 8");
+        contentPane.add(label10, "cell 2 9");
 
         //---- tf_dob_month ----
         tf_dob_month.addFocusListener(new FocusAdapter() {
@@ -225,11 +249,11 @@ public class CustomerApplyView extends JFrame {
                 tf_dob_monthFocusGained(e);
             }
         });
-        contentPane.add(tf_dob_month, "cell 2 8");
+        contentPane.add(tf_dob_month, "cell 2 9");
 
         //---- label11 ----
         label11.setText("/");
-        contentPane.add(label11, "cell 2 8");
+        contentPane.add(label11, "cell 2 9");
 
         //---- tf_dob_year ----
         tf_dob_year.addFocusListener(new FocusAdapter() {
@@ -238,22 +262,22 @@ public class CustomerApplyView extends JFrame {
                 tf_dob_yearFocusGained(e);
             }
         });
-        contentPane.add(tf_dob_year, "cell 2 8");
+        contentPane.add(tf_dob_year, "cell 2 9");
 
         //---- lbl_address ----
         lbl_address.setText("Address");
-        contentPane.add(lbl_address, "cell 1 9");
-        contentPane.add(tf_address, "cell 2 9");
+        contentPane.add(lbl_address, "cell 1 10");
+        contentPane.add(tf_address, "cell 2 10");
 
         //---- lbl_email ----
         lbl_email.setText("Email");
-        contentPane.add(lbl_email, "cell 1 10");
-        contentPane.add(tf_email, "cell 2 10");
+        contentPane.add(lbl_email, "cell 1 11");
+        contentPane.add(tf_email, "cell 2 11");
 
         //---- lbl_contactNum ----
         lbl_contactNum.setText("Contact Number");
-        contentPane.add(lbl_contactNum, "cell 1 11");
-        contentPane.add(tf_contactNum, "cell 2 11");
+        contentPane.add(lbl_contactNum, "cell 1 12");
+        contentPane.add(tf_contactNum, "cell 2 12");
 
         //---- btn_apply ----
         btn_apply.setText("Apply");
@@ -262,7 +286,7 @@ public class CustomerApplyView extends JFrame {
                 btn_applyActionPerformed(e);
             }
         });
-        contentPane.add(btn_apply, "cell 2 12");
+        contentPane.add(btn_apply, "cell 2 13");
 
         //---- btn_back ----
         btn_back.setText("Back");
@@ -271,7 +295,7 @@ public class CustomerApplyView extends JFrame {
                 btn_backActionPerformed(e);
             }
         });
-        contentPane.add(btn_back, "cell 2 13");
+        contentPane.add(btn_back, "cell 2 14");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -330,4 +354,5 @@ public class CustomerApplyView extends JFrame {
     private JButton btn_apply;
     private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
 }

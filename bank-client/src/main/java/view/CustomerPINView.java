@@ -4,14 +4,18 @@
 
 package view;
 
+import java.beans.*;
+import javax.swing.event.*;
 import net.miginfocom.swing.MigLayout;
 import util.JTextFieldLimit;
 import util.KeyPadGenerator;
+import util.PINFieldSetter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +24,10 @@ import java.util.List;
 public class CustomerPINView extends JFrame {
     public CustomerPINView() {
         initComponents();
-        initPasswordField();
         generateKeyPad();
+        initPasswordFieldList();
+        initPasswordField();
+
     }
 
 
@@ -70,21 +76,10 @@ public class CustomerPINView extends JFrame {
         inputPIN(keyPadList.get(9).toString());
     }
 
-    private void inputPIN(String str) {
-        String tempStr = "";
-        if(pf_PIN.getPassword().length <= 0) {
-            pf_PIN.setText(str);
-        } else {
-            for(int i = 0; i < pf_PIN.getPassword().length; i++) {
-                tempStr += (pf_PIN.getPassword()[i]);
-            }
-            tempStr += str;
-            pf_PIN.setText(tempStr);
-        }
-    }
 
     private void btn_backSpaceActionPerformed(ActionEvent e) {
-        backspacePwd();
+        if(passwordFieldCheckerForRemove()==null) return;
+        passwordFieldCheckerForRemove().setText("");
     }
 
     private void button13ActionPerformed(ActionEvent e) {
@@ -92,26 +87,45 @@ public class CustomerPINView extends JFrame {
     }
 
     private void btn_confirmActionPerformed(ActionEvent e) {
-        // for test
-        String temp_str = "";
-        if(pf_PIN.getPassword().length <= 0) {
-            System.out.println("Password: " + "null");
-            this.dispose();
-            new CustomerMainView().run();
-            return;
+        for(JPasswordField a : passwordFieldsList) {
+            System.out.print(a.getPassword()[0] + " ");
         }
-        for(int i = 0; i< pf_PIN.getPassword().length; i++) {
-            temp_str += pf_PIN.getPassword()[i];
-        }
-        System.out.println("Password: " +temp_str);
-        this.dispose();
-        new CustomerMainView().run();
+        System.out.println("");
     }
 
-    private JButton btn_10;
+    private void pf_PIN_1PropertyChange(PropertyChangeEvent e) {
+        // TODO add your code here
+    }
+
+    private void pf_PIN_1ActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void pf_PIN_1CaretUpdate(CaretEvent e) {
+    }
+
+    private void inputPIN(String str) {
+        if(emptyPasswordFieldCheckerForInput()==null) return;
+        emptyPasswordFieldCheckerForInput().setText(str);
+    }
+
 
     private void initPasswordField() {
-        pf_PIN.setDocument(new JTextFieldLimit(6));
+       pf_PIN_1.setDocument(new JTextFieldLimit(1));
+       pf_PIN_2.setDocument(new JTextFieldLimit(1));
+       pf_PIN_3.setDocument(new JTextFieldLimit(1));
+       pf_PIN_4.setDocument(new JTextFieldLimit(1));
+       pf_PIN_5.setDocument(new JTextFieldLimit(1));
+       pf_PIN_6.setDocument(new JTextFieldLimit(1));
+
+       List<Integer> accessList = PINFieldSetter.getInstance().setPINField();
+
+       for(int i = 0; i < 6; i++) {
+           if(accessList.get(i) == 1) {
+               passwordFieldsList.get(i).setText("*");
+               passwordFieldsList.get(i).setEnabled(false);
+           }
+       }
     }
 
     private void generateKeyPad() {
@@ -129,15 +143,38 @@ public class CustomerPINView extends JFrame {
         btn_10.setText(keyPadList.get(9).toString());
     }
 
-    private void backspacePwd() {
-        String temp_str = "";
-        if (pf_PIN.getPassword().length <= 0) {
-            return;
+    private void initPasswordFieldList() {
+        passwordFieldsList.add(pf_PIN_1);
+        passwordFieldsList.add(pf_PIN_2);
+        passwordFieldsList.add(pf_PIN_3);
+        passwordFieldsList.add(pf_PIN_4);
+        passwordFieldsList.add(pf_PIN_5);
+        passwordFieldsList.add(pf_PIN_6);
+
+    }
+
+    private JPasswordField emptyPasswordFieldCheckerForInput() {
+        JPasswordField result = null;
+        for(int i = 0; i < 6; i++) {
+            if(passwordFieldsList.get(i).isEnabled() == true &&
+                    passwordFieldsList.get(i).getPassword().length <=0) {
+                result = passwordFieldsList.get(i);
+                break;
+            }
         }
-        for (int i = 0; i < pf_PIN.getPassword().length - 1; i++) {
-            temp_str += pf_PIN.getPassword()[i];
+        return result;
+    }
+
+    private JPasswordField passwordFieldCheckerForRemove() {
+        JPasswordField result = null;
+        for(int i = 5; i >= 0; i--) {
+            if(passwordFieldsList.get(i).isEnabled() == true &&
+                    passwordFieldsList.get(i).getPassword().length >0) {
+                result = passwordFieldsList.get(i);
+                break;
+            }
         }
-        pf_PIN.setText(temp_str);
+        return result;
     }
 
     public void run() {
@@ -145,9 +182,18 @@ public class CustomerPINView extends JFrame {
         this.setVisible(true);
     }
 
+
+
+
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_PIN;
-    private JPasswordField pf_PIN;
+    private JPasswordField pf_PIN_1;
+    private JPasswordField pf_PIN_2;
+    private JPasswordField pf_PIN_3;
+    private JPasswordField pf_PIN_4;
+    private JPasswordField pf_PIN_5;
+    private JPasswordField pf_PIN_6;
     private JButton btn_1;
     private JButton btn_2;
     private JButton btn_3;
@@ -157,11 +203,21 @@ public class CustomerPINView extends JFrame {
     private JButton btn_7;
     private JButton btn_8;
     private JButton btn_9;
+    private JButton btn_10;
+    private JButton btn_backSpace;
+    private JButton btn_confirm;
+    private JButton btn_back;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         lbl_PIN = new JLabel();
-        pf_PIN = new JPasswordField();
+        pf_PIN_1 = new JPasswordField();
+        pf_PIN_2 = new JPasswordField();
+        pf_PIN_3 = new JPasswordField();
+        pf_PIN_4 = new JPasswordField();
+        pf_PIN_5 = new JPasswordField();
+        pf_PIN_6 = new JPasswordField();
         btn_1 = new JButton();
         btn_2 = new JButton();
         btn_3 = new JButton();
@@ -182,12 +238,12 @@ public class CustomerPINView extends JFrame {
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
             // columns
-                "[5:n,grow,fill]" +
-                        "[fill]" +
-                        "[40:n,fill]" +
-                        "[40:n,fill]" +
-                        "[40:n,fill]" +
-                        "[5:n,grow,fill]",
+            "[5:n,grow,fill]" +
+            "[fill]" +
+            "[40:n,fill]" +
+            "[40:n,fill]" +
+            "[40:n,fill]" +
+            "[5:n,grow,fill]",
             // rows
             "[]" +
             "[]" +
@@ -195,13 +251,75 @@ public class CustomerPINView extends JFrame {
             "[]" +
             "[]" +
             "[]" +
-                    "[]" +
-                    "[5:n,grow,fill]"));
+            "[]" +
+            "[5:n,grow,fill]"));
 
         //---- lbl_PIN ----
         lbl_PIN.setText("PIN: ");
         contentPane.add(lbl_PIN, "cell 1 0");
-        contentPane.add(pf_PIN, "cell 2 0 3 1");
+
+        //---- pf_PIN_1 ----
+        pf_PIN_1.setEditable(false);
+        pf_PIN_1.setFocusable(false);
+        pf_PIN_1.setRequestFocusEnabled(false);
+        pf_PIN_1.setVerifyInputWhenFocusTarget(false);
+        pf_PIN_1.setOpaque(false);
+        pf_PIN_1.addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent e) {
+                pf_PIN_1PropertyChange(e);
+            }
+        });
+        pf_PIN_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                pf_PIN_1ActionPerformed(e);
+            }
+        });
+        pf_PIN_1.addCaretListener(new CaretListener() {
+            public void caretUpdate(CaretEvent e) {
+                pf_PIN_1CaretUpdate(e);
+            }
+        });
+        contentPane.add(pf_PIN_1, "cell 2 0");
+
+        //---- pf_PIN_2 ----
+        pf_PIN_2.setEditable(false);
+        pf_PIN_2.setFocusable(false);
+        pf_PIN_2.setRequestFocusEnabled(false);
+        pf_PIN_2.setVerifyInputWhenFocusTarget(false);
+        pf_PIN_2.setOpaque(false);
+        contentPane.add(pf_PIN_2, "cell 2 0");
+
+        //---- pf_PIN_3 ----
+        pf_PIN_3.setEditable(false);
+        pf_PIN_3.setFocusable(false);
+        pf_PIN_3.setRequestFocusEnabled(false);
+        pf_PIN_3.setVerifyInputWhenFocusTarget(false);
+        pf_PIN_3.setOpaque(false);
+        contentPane.add(pf_PIN_3, "cell 3 0");
+
+        //---- pf_PIN_4 ----
+        pf_PIN_4.setEditable(false);
+        pf_PIN_4.setFocusable(false);
+        pf_PIN_4.setRequestFocusEnabled(false);
+        pf_PIN_4.setVerifyInputWhenFocusTarget(false);
+        pf_PIN_4.setOpaque(false);
+        contentPane.add(pf_PIN_4, "cell 3 0");
+
+        //---- pf_PIN_5 ----
+        pf_PIN_5.setEditable(false);
+        pf_PIN_5.setFocusable(false);
+        pf_PIN_5.setRequestFocusEnabled(false);
+        pf_PIN_5.setVerifyInputWhenFocusTarget(false);
+        pf_PIN_5.setOpaque(false);
+        contentPane.add(pf_PIN_5, "cell 4 0");
+
+        //---- pf_PIN_6 ----
+        pf_PIN_6.setEditable(false);
+        pf_PIN_6.setFocusable(false);
+        pf_PIN_6.setRequestFocusEnabled(false);
+        pf_PIN_6.setVerifyInputWhenFocusTarget(false);
+        pf_PIN_6.setOpaque(false);
+        contentPane.add(pf_PIN_6, "cell 4 0");
 
         //---- btn_1 ----
         btn_1.setText("text");
@@ -216,6 +334,7 @@ public class CustomerPINView extends JFrame {
         btn_2.setText("text");
         btn_2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                btn_2ActionPerformed(e);
                 btn_2ActionPerformed(e);
             }
         });
@@ -324,9 +443,7 @@ public class CustomerPINView extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-    private JButton btn_backSpace;
-    private JButton btn_confirm;
-    private JButton btn_back;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
     private List<Integer> keyPadList;
+    List<JPasswordField> passwordFieldsList = new ArrayList<JPasswordField>();
 }
