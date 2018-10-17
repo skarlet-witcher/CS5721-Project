@@ -4,33 +4,31 @@
 package rpc;
 
 public interface UserPayeesOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserPayees)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.UserPayees)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>int64 payee_id = 1;</code>
-     */
-    long getPayeeId();
+  /**
+   * <code>int64 payee_id = 1;</code>
+   */
+  long getPayeeId();
 
-    /**
-     * <code>string name = 2;</code>
-     */
-    String getName();
+  /**
+   * <code>string name = 2;</code>
+   */
+  String getName();
+  /**
+   * <code>string name = 2;</code>
+   */
+  com.google.protobuf.ByteString
+      getNameBytes();
 
-    /**
-     * <code>string name = 2;</code>
-     */
-    com.google.protobuf.ByteString
-    getNameBytes();
-
-    /**
-     * <code>string iban = 3;</code>
-     */
-    String getIban();
-
-    /**
-     * <code>string iban = 3;</code>
-     */
-    com.google.protobuf.ByteString
-    getIbanBytes();
+  /**
+   * <code>string iban = 3;</code>
+   */
+  String getIban();
+  /**
+   * <code>string iban = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getIbanBytes();
 }

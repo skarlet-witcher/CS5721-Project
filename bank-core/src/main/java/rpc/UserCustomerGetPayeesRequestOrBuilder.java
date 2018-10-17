@@ -4,11 +4,11 @@
 package rpc;
 
 public interface UserCustomerGetPayeesRequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserCustomerGetPayeesRequest)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.UserCustomerGetPayeesRequest)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>int64 user_id = 1;</code>
-     */
-    long getUserId();
+  /**
+   * <code>int64 user_id = 1;</code>
+   */
+  long getUserId();
 }

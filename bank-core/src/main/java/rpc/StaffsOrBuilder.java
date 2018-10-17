@@ -4,60 +4,56 @@
 package rpc;
 
 public interface StaffsOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.Staffs)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.Staffs)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>int64 id = 1;</code>
-     */
-    long getId();
+  /**
+   * <code>int64 id = 1;</code>
+   */
+  long getId();
 
-    /**
-     * <code>int64 staff_id = 2;</code>
-     */
-    long getStaffId();
+  /**
+   * <code>int64 staff_id = 2;</code>
+   */
+  long getStaffId();
 
-    /**
-     * <code>string password = 3;</code>
-     */
-    String getPassword();
+  /**
+   * <code>string password = 3;</code>
+   */
+  String getPassword();
+  /**
+   * <code>string password = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getPasswordBytes();
 
-    /**
-     * <code>string password = 3;</code>
-     */
-    com.google.protobuf.ByteString
-    getPasswordBytes();
+  /**
+   * <code>string first_name = 4;</code>
+   */
+  String getFirstName();
+  /**
+   * <code>string first_name = 4;</code>
+   */
+  com.google.protobuf.ByteString
+      getFirstNameBytes();
 
-    /**
-     * <code>string first_name = 4;</code>
-     */
-    String getFirstName();
+  /**
+   * <code>string last_name = 5;</code>
+   */
+  String getLastName();
+  /**
+   * <code>string last_name = 5;</code>
+   */
+  com.google.protobuf.ByteString
+      getLastNameBytes();
 
-    /**
-     * <code>string first_name = 4;</code>
-     */
-    com.google.protobuf.ByteString
-    getFirstNameBytes();
-
-    /**
-     * <code>string last_name = 5;</code>
-     */
-    String getLastName();
-
-    /**
-     * <code>string last_name = 5;</code>
-     */
-    com.google.protobuf.ByteString
-    getLastNameBytes();
-
-    /**
-     * <code>string email = 6;</code>
-     */
-    String getEmail();
-
-    /**
-     * <code>string email = 6;</code>
-     */
-    com.google.protobuf.ByteString
-    getEmailBytes();
+  /**
+   * <code>string email = 6;</code>
+   */
+  String getEmail();
+  /**
+   * <code>string email = 6;</code>
+   */
+  com.google.protobuf.ByteString
+      getEmailBytes();
 }

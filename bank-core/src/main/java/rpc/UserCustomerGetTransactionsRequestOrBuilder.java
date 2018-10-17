@@ -4,21 +4,21 @@
 package rpc;
 
 public interface UserCustomerGetTransactionsRequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserCustomerGetTransactionsRequest)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.UserCustomerGetTransactionsRequest)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>int64 user_id = 1;</code>
-     */
-    long getUserId();
+  /**
+   * <code>int64 user_id = 1;</code>
+   */
+  long getUserId();
 
-    /**
-     * <code>int32 filter_by_account = 2;</code>
-     */
-    int getFilterByAccount();
+  /**
+   * <code>int32 filter_by_account = 2;</code>
+   */
+  int getFilterByAccount();
 
-    /**
-     * <code>int32 filter_by_date = 3;</code>
-     */
-    int getFilterByDate();
+  /**
+   * <code>int32 filter_by_date = 3;</code>
+   */
+  int getFilterByDate();
 }

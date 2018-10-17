@@ -4,11 +4,11 @@
 package rpc;
 
 public interface UserCustomerGetProfileRequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserCustomerGetProfileRequest)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.UserCustomerGetProfileRequest)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>int64 user_id = 1;</code>
-     */
-    long getUserId();
+  /**
+   * <code>int64 user_id = 1;</code>
+   */
+  long getUserId();
 }

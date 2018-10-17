@@ -4,16 +4,16 @@
 package rpc;
 
 public interface UserCustomerRemovePayeeRequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserCustomerRemovePayeeRequest)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.UserCustomerRemovePayeeRequest)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>int64 user_id = 1;</code>
-     */
-    long getUserId();
+  /**
+   * <code>int64 user_id = 1;</code>
+   */
+  long getUserId();
 
-    /**
-     * <code>int64 payee_id = 2;</code>
-     */
-    long getPayeeId();
+  /**
+   * <code>int64 payee_id = 2;</code>
+   */
+  long getPayeeId();
 }

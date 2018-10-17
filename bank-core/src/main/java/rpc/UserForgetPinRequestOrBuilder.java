@@ -4,39 +4,36 @@
 package rpc;
 
 public interface UserForgetPinRequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserForgetPinRequest)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.UserForgetPinRequest)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>string user_id = 1;</code>
-     */
-    String getUserId();
+  /**
+   * <code>string user_id = 1;</code>
+   */
+  String getUserId();
+  /**
+   * <code>string user_id = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getUserIdBytes();
 
-    /**
-     * <code>string user_id = 1;</code>
-     */
-    com.google.protobuf.ByteString
-    getUserIdBytes();
+  /**
+   * <code>string birth_date = 2;</code>
+   */
+  String getBirthDate();
+  /**
+   * <code>string birth_date = 2;</code>
+   */
+  com.google.protobuf.ByteString
+      getBirthDateBytes();
 
-    /**
-     * <code>string birth_date = 2;</code>
-     */
-    String getBirthDate();
-
-    /**
-     * <code>string birth_date = 2;</code>
-     */
-    com.google.protobuf.ByteString
-    getBirthDateBytes();
-
-    /**
-     * <code>string email = 3;</code>
-     */
-    String getEmail();
-
-    /**
-     * <code>string email = 3;</code>
-     */
-    com.google.protobuf.ByteString
-    getEmailBytes();
+  /**
+   * <code>string email = 3;</code>
+   */
+  String getEmail();
+  /**
+   * <code>string email = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getEmailBytes();
 }
