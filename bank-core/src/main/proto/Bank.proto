@@ -20,7 +20,7 @@ service UserCustomer {
     rpc GetProfile (UserCustomerGetProfileRequest) returns (Response);
     rpc EditProfile (UserCustomerEditProfileRequest) returns (Response);
     rpc GetTransactions (UserCustomerGetTransactionsRequest) returns (Response);
-    rpc ApplyForStatement (UserCustomerApplyForStatementRequest) returns (Response);
+    //    rpc ApplyForStatement (UserCustomerApplyForStatementRequest) returns (Response);
     rpc GetPayees (UserCustomerGetPayeesRequest) returns (Response);
     rpc AddPayee (UserCustomerAddPayeeRequest) returns (Response);
     rpc RemovePayee (UserCustomerRemovePayeeRequest) returns (Response);
@@ -30,9 +30,9 @@ service UserCustomer {
 service UserStaff {
     rpc Login (UserStaffRequest) returns (Response);
     rpc GetNewApplyUsers (UserStaffRequest) returns (Response);
-    rpc GetDeleteUsers (UserStaffRequest) returns (Response);
+    rpc GetDeleteAccounts (UserStaffRequest) returns (Response);
     rpc GetBlockUsers (UserStaffRequest) returns (Response);
-    rpc RespondApply (UserStaffRequest) returns (Response);
+    rpc RespondApply (UserStaffRequest) returns (Response); // approve/disapprove
 }
 
 service UserAdmin {
@@ -41,6 +41,7 @@ service UserAdmin {
     rpc AddNewStaff (UserAdminRequest) returns (Response);
     rpc RemoveStaff (UserAdminRequest) returns (Response);
     rpc ConfigEmail (UserAdminRequest) returns (Response);
+    rpc CheckEmailAvailability (UserAdminRequest) returns (Response);
 }
 
 message UserStaffRequest {
@@ -49,7 +50,8 @@ message UserStaffRequest {
     int64 respond_id = 3;
     int32 respond_result = 4;
     int32 respond_description = 5;
-    int32 filter_by_result_type = 6;
+    int32 filter_by_status_type = 6;
+    string filter_by_user_id_name = 7;
 }
 
 message UserAdminRequest {
@@ -63,6 +65,7 @@ message UserAdminRequest {
     string email_port = 8;
     string email_account = 9;
     string email_password = 10;
+    string filter_by_id_name = 11;
 }
 
 message UserLoginReqRequest {
@@ -96,6 +99,11 @@ message UserApplyNewAccountRequest {
     string address = 10;
     string email = 11;
     string phone = 12;
+    string university_name = 13;
+    string student_id = 14;
+    int64 parent_id = 15;
+    string parent_first_name = 16;
+    string parent_last_name = 17;
 }
 
 message UserForgetUserIdRequest {
@@ -132,11 +140,11 @@ message UserCustomerGetTransactionsRequest {
     int32 filter_by_date = 3;
 }
 
-message UserCustomerApplyForStatementRequest {
-    int64 user_id = 1;
-    int32 filter_by_account = 2;
-    int32 filter_by_date = 3;
-}
+//message UserCustomerApplyForStatementRequest {
+//    int64 user_id = 1;
+//    int32 filter_by_account = 2;
+//    int32 filter_by_date = 3;
+//}
 
 message UserCustomerGetPayeesRequest {
     int64 user_id = 1;
@@ -170,10 +178,141 @@ message Response {
     int32 total_number = 4;
     int32 result_per_page = 5;
 
-    repeated UserAccounts user_accounts = 6;
+    UserLoginReqReply user_login_req_reply = 6;
+    UserLoginReply user_login_reply = 7;
+    // apply new account
+    // forget user id/pin
+    repeated UserAccounts user_accounts = 8;
+    UserProfile user_profile = 9;
+    // edit profile
+    repeated UserTransactions user_transactions = 10;
+    repeated UserPayees user_payees = 11;
+    // add payee
+    // remove payee
+    // transfer
+    // staff login
+    repeated UserNewApplys user_new_applys = 12;
+    repeated UserAccountDeleteApplys user_delete_applys = 13;
+    repeated UserBlocks user_block_lists = 14;
+    // respond apply
+    // admin login
+    repeated Staffs staffs = 15;
+    // add staff
+    // remove staff
+    // config email
+
     //    UserCustomerTransReply user_customer_trans = 6;
     //    UserLoginReply user_login = 7;
     //    UserCustomerLogsReply user_customer_logs = 8;
+}
+
+message UserBlocks {
+    int64 apply_id = 6;
+    string first_name = 1;
+    string last_name = 2;
+    int32 gender = 3;
+    int32 identity_id_type = 4;
+    string identity_id = 5;
+    google.protobuf.Timestamp birth_date = 9;
+    string address = 10;
+    string email = 11;
+    string phone = 12;
+    int64 account_id = 13;
+    string reason = 14;
+    google.protobuf.Timestamp block_date = 15;
+    int32 status = 16;
+}
+
+message Staffs {
+    int64 id = 1;
+    int64 staff_id = 2;
+    string password = 3;
+    string first_name = 4;
+    string last_name = 5;
+    string email = 6;
+}
+
+message UserProfile {
+    int64 user_id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    int32 gender = 4;
+    google.protobuf.Timestamp birth_date = 5;
+    string address = 6;
+    string email = 7;
+    string phone = 8;
+}
+
+message UserTransactions {
+    int64 user_id = 1;
+    google.protobuf.Timestamp date = 2;
+    string description = 3;
+    string debit = 4;
+    string credit = 5;
+    double balance = 6;
+}
+
+message UserPayees {
+    int64 payee_id = 1;
+    string name = 2;
+    string iban = 3;
+}
+
+message UserNewApplys {
+    int64 apply_id = 18;
+    string first_name = 1;
+    string last_name = 2;
+    int32 gender = 3;
+    int32 identity_id_type = 4;
+    string identity_id = 5;
+    int32 account_type = 6;
+    int32 card_type = 7;
+    google.protobuf.Timestamp graduate_date = 8;
+    google.protobuf.Timestamp birth_date = 9;
+    string address = 10;
+    string email = 11;
+    string phone = 12;
+    string university_name = 13;
+    string student_id = 14;
+    int64 parent_id = 15;
+    string parent_first_name = 16;
+    string parent_last_name = 17;
+    int32 status = 19;
+}
+
+message UserAccountDeleteApplys {
+    int64 apply_id = 6;
+    string first_name = 1;
+    string last_name = 2;
+    int32 gender = 3;
+    int32 identity_id_type = 4;
+    string identity_id = 5;
+    google.protobuf.Timestamp birth_date = 9;
+    string address = 10;
+    string email = 11;
+    string phone = 12;
+    int32 status = 13;
+}
+
+message UserProfileReply {
+    int64 user_id = 1;
+    string first_name = 2;
+    string last_name = 3;
+}
+
+message UserLoginReqReply {
+    int32 pin1 = 1;
+    int32 pin2 = 2;
+    int32 pin3 = 3;
+    int32 pin4 = 4;
+    int32 pin5 = 5;
+    int32 pin6 = 6;
+}
+
+message UserLoginReply {
+    int64 user_id = 1;
+    string first_name = 2;
+    string last_name = 3;
 }
 
 message UserAccounts {
@@ -183,43 +322,4 @@ message UserAccounts {
     int32 currency_type = 4;
     int32 balance = 5;
     int32 status = 6;
-}
-
-message UserCustomerTran {
-    int64 trans_id = 1;
-    string trans_no = 2;
-    string from_card_no = 3;
-    string to_card_no = 4;
-    string description = 5;
-    int32 status = 6;
-}
-
-message UserCustomerLog {
-    int64 log_id = 1;
-    int32 operate_type = 2;
-    string operate_time = 3;
-    string description = 4;
-    int32 status = 5;
-    UserCustomerTran tran = 6;
-}
-
-message UserCustomerTransReply {
-    repeated UserCustomerTran trans = 1;
-}
-
-message UserLoginReply {
-    int64 user_id = 1;
-    string first_name = 2;
-    string last_name = 3;
-    string phone = 4;
-    string address = 5;
-    string username = 6;
-    string email = 7;
-    //        string card_no = 6;
-    //        string account_no = 7;
-    //        string card_balance = 8;
-}
-
-message UserCustomerLogsReply {
-    repeated UserCustomerLog trans = 1;
 }

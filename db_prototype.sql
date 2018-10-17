@@ -27,6 +27,8 @@ create table user_account (
   iban           varchar(255) not null
   comment 'iban, get by auto-generated.',
   user_id        bigint,
+  status         int          not null default 1
+  comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.',
   FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
@@ -42,6 +44,8 @@ CREATE TABLE user_card (
   comment '0.euro 1.....',
   expired_date  datetime not null,
   account_id    BIGINT   not null,
+  status        int      not null default 1
+  comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.',
   FOREIGN KEY (account_id) REFERENCES user_account (id)
 );
 
@@ -99,7 +103,9 @@ CREATE TABLE bank_staff (
   password   varchar(255)  not null,
   first_name varchar(255)  not null,
   last_name  varchar(255)  not null,
-  email      varchar(255)  not null
+  email      varchar(255)  not null,
+  status     int           not null
+  comment '0.invalid 1.valid'
 );
 
 create table bank_admin (

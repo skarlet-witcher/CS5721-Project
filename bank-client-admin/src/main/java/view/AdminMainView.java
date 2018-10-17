@@ -4,13 +4,14 @@
 
 package view;
 
-import java.awt.event.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  * @author xiangkai22
@@ -38,6 +39,27 @@ public class AdminMainView extends JFrame {
 
     }
 
+    private JButton button1;
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JTabbedPane tabbedPane1;
+    private JPanel addStaffPanel;
+    private JTextField tf_search;
+    private JButton btn_search;
+    private JScrollPane scrollPane1;
+    private JTable table1;
+    private JPanel modifyEmailPanel;
+    private JLabel lbl_emailHost;
+    private JTextField tf_emailHost;
+    private JLabel lbl_emailPort;
+    private JTextField tf_emailPort;
+    private JLabel lbl_email;
+    private JTextField tf_email;
+    private JLabel lbl_emailPwd;
+    private JPasswordField pf_emailPwd;
+    private JLabel lbl_emailConfirmPwd;
+    private JPasswordField pf_emailConfirmPwd;
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         tabbedPane1 = new JTabbedPane();
@@ -57,6 +79,7 @@ public class AdminMainView extends JFrame {
         pf_emailPwd = new JPasswordField();
         lbl_emailConfirmPwd = new JLabel();
         pf_emailConfirmPwd = new JPasswordField();
+        button1 = new JButton();
         button4 = new JButton();
         btn_signout = new JButton();
 
@@ -145,8 +168,16 @@ public class AdminMainView extends JFrame {
                     "[]" +
                     "[]" +
                     "[]" +
+                            "[]0" +
+                            "[]0" +
+                            "[]0" +
+                            "[]0" +
+                            "[]0" +
                     "[]" +
-                    "[100:n]"));
+                            "[]0" +
+                            "[]0" +
+                            "[100:n]" +
+                            "[]"));
 
                 //---- lbl_emailHost ----
                 lbl_emailHost.setText("Email host");
@@ -193,10 +224,15 @@ public class AdminMainView extends JFrame {
                 pf_emailConfirmPwd.setMinimumSize(new Dimension(100, 30));
                 modifyEmailPanel.add(pf_emailConfirmPwd, "cell 2 5");
 
+                //---- button1 ----
+                button1.setText("Check Availablity");
+                button1.setFont(button1.getFont().deriveFont(button1.getFont().getSize() + 4f));
+                modifyEmailPanel.add(button1, "cell 1 10");
+
                 //---- button4 ----
                 button4.setText("Modify");
                 button4.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                modifyEmailPanel.add(button4, "cell 1 6 2 1");
+                modifyEmailPanel.add(button4, "cell 2 10");
             }
             tabbedPane1.addTab("Modify System Email", modifyEmailPanel);
         }
@@ -215,25 +251,6 @@ public class AdminMainView extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JTabbedPane tabbedPane1;
-    private JPanel addStaffPanel;
-    private JTextField tf_search;
-    private JButton btn_search;
-    private JScrollPane scrollPane1;
-    private JTable table1;
-    private JPanel modifyEmailPanel;
-    private JLabel lbl_emailHost;
-    private JTextField tf_emailHost;
-    private JLabel lbl_emailPort;
-    private JTextField tf_emailPort;
-    private JLabel lbl_email;
-    private JTextField tf_email;
-    private JLabel lbl_emailPwd;
-    private JPasswordField pf_emailPwd;
-    private JLabel lbl_emailConfirmPwd;
-    private JPasswordField pf_emailConfirmPwd;
     private JButton button4;
     private JButton btn_signout;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
