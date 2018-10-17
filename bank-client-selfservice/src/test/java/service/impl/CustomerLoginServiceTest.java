@@ -2,7 +2,7 @@ package service.impl;
 
 import org.junit.jupiter.api.Test;
 
-class LoginServiceTest {
+class CustomerLoginServiceTest {
 
     @Test
     void loginByUsername() {
