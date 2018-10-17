@@ -4,49 +4,52 @@
 package rpc;
 
 /**
- * Protobuf type {@code rpc.UserLoginReply}
+ * Protobuf type {@code rpc.UserCustomerEditProfileRequest}
  */
-public final class UserLoginReply extends
+public final class UserCustomerEditProfileRequest extends
         com.google.protobuf.GeneratedMessageV3 implements
-        // @@protoc_insertion_point(message_implements:rpc.UserLoginReply)
-        UserLoginReplyOrBuilder {
+        // @@protoc_insertion_point(message_implements:rpc.UserCustomerEditProfileRequest)
+        UserCustomerEditProfileRequestOrBuilder {
     public static final int USER_ID_FIELD_NUMBER = 1;
-    public static final int FIRST_NAME_FIELD_NUMBER = 2;
-    public static final int LAST_NAME_FIELD_NUMBER = 3;
+    public static final int ADDRESS_FIELD_NUMBER = 2;
+    public static final int PHONE_FIELD_NUMBER = 3;
+    public static final int EMAIL_FIELD_NUMBER = 4;
     private static final long serialVersionUID = 0L;
-    // @@protoc_insertion_point(class_scope:rpc.UserLoginReply)
-    private static final UserLoginReply DEFAULT_INSTANCE;
-    private static final com.google.protobuf.Parser<UserLoginReply>
-            PARSER = new com.google.protobuf.AbstractParser<UserLoginReply>() {
-        public UserLoginReply parsePartialFrom(
+    // @@protoc_insertion_point(class_scope:rpc.UserCustomerEditProfileRequest)
+    private static final UserCustomerEditProfileRequest DEFAULT_INSTANCE;
+    private static final com.google.protobuf.Parser<UserCustomerEditProfileRequest>
+            PARSER = new com.google.protobuf.AbstractParser<UserCustomerEditProfileRequest>() {
+        public UserCustomerEditProfileRequest parsePartialFrom(
                 com.google.protobuf.CodedInputStream input,
                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
                 throws com.google.protobuf.InvalidProtocolBufferException {
-            return new UserLoginReply(input, extensionRegistry);
+            return new UserCustomerEditProfileRequest(input, extensionRegistry);
         }
     };
 
     static {
-        DEFAULT_INSTANCE = new UserLoginReply();
+        DEFAULT_INSTANCE = new UserCustomerEditProfileRequest();
     }
 
     private long userId_;
-    private volatile Object firstName_;
-    private volatile Object lastName_;
+    private volatile Object address_;
+    private volatile Object phone_;
+    private volatile Object email_;
     private byte memoizedIsInitialized = -1;
 
-    // Use UserLoginReply.newBuilder() to construct.
-    private UserLoginReply(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use UserCustomerEditProfileRequest.newBuilder() to construct.
+    private UserCustomerEditProfileRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
     }
 
-    private UserLoginReply() {
+    private UserCustomerEditProfileRequest() {
         userId_ = 0L;
-        firstName_ = "";
-        lastName_ = "";
+        address_ = "";
+        phone_ = "";
+        email_ = "";
     }
 
-    private UserLoginReply(
+    private UserCustomerEditProfileRequest(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
@@ -80,13 +83,19 @@ public final class UserLoginReply extends
                     case 18: {
                         String s = input.readStringRequireUtf8();
 
-                        firstName_ = s;
+                        address_ = s;
                         break;
                     }
                     case 26: {
                         String s = input.readStringRequireUtf8();
 
-                        lastName_ = s;
+                        phone_ = s;
+                        break;
+                    }
+                    case 34: {
+                        String s = input.readStringRequireUtf8();
+
+                        email_ = s;
                         break;
                     }
                 }
@@ -104,54 +113,54 @@ public final class UserLoginReply extends
 
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-        return BankProto.internal_static_rpc_UserLoginReply_descriptor;
+        return BankProto.internal_static_rpc_UserCustomerEditProfileRequest_descriptor;
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerEditProfileRequest parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerEditProfileRequest parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerEditProfileRequest parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerEditProfileRequest parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
     }
 
-    public static UserLoginReply parseFrom(byte[] data)
+    public static UserCustomerEditProfileRequest parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerEditProfileRequest parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
     }
 
-    public static UserLoginReply parseFrom(java.io.InputStream input)
+    public static UserCustomerEditProfileRequest parseFrom(java.io.InputStream input)
             throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
                 .parseWithIOException(PARSER, input);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerEditProfileRequest parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -159,13 +168,13 @@ public final class UserLoginReply extends
                 .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static UserLoginReply parseDelimitedFrom(java.io.InputStream input)
+    public static UserCustomerEditProfileRequest parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
                 .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static UserLoginReply parseDelimitedFrom(
+    public static UserCustomerEditProfileRequest parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -173,14 +182,14 @@ public final class UserLoginReply extends
                 .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerEditProfileRequest parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
                 .parseWithIOException(PARSER, input);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerEditProfileRequest parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -192,15 +201,15 @@ public final class UserLoginReply extends
         return DEFAULT_INSTANCE.toBuilder();
     }
 
-    public static Builder newBuilder(UserLoginReply prototype) {
+    public static Builder newBuilder(UserCustomerEditProfileRequest prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
-    public static UserLoginReply getDefaultInstance() {
+    public static UserCustomerEditProfileRequest getDefaultInstance() {
         return DEFAULT_INSTANCE;
     }
 
-    public static com.google.protobuf.Parser<UserLoginReply> parser() {
+    public static com.google.protobuf.Parser<UserCustomerEditProfileRequest> parser() {
         return PARSER;
     }
 
@@ -212,9 +221,9 @@ public final class UserLoginReply extends
 
     protected FieldAccessorTable
     internalGetFieldAccessorTable() {
-        return BankProto.internal_static_rpc_UserLoginReply_fieldAccessorTable
+        return BankProto.internal_static_rpc_UserCustomerEditProfileRequest_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        UserLoginReply.class, UserLoginReply.Builder.class);
+                        UserCustomerEditProfileRequest.class, UserCustomerEditProfileRequest.Builder.class);
     }
 
     /**
@@ -225,32 +234,32 @@ public final class UserLoginReply extends
     }
 
     /**
-     * <code>string first_name = 2;</code>
+     * <code>string address = 2;</code>
      */
-    public String getFirstName() {
-        Object ref = firstName_;
+    public String getAddress() {
+        Object ref = address_;
         if (ref instanceof String) {
             return (String) ref;
         } else {
             com.google.protobuf.ByteString bs =
                     (com.google.protobuf.ByteString) ref;
             String s = bs.toStringUtf8();
-            firstName_ = s;
+            address_ = s;
             return s;
         }
     }
 
     /**
-     * <code>string first_name = 2;</code>
+     * <code>string address = 2;</code>
      */
     public com.google.protobuf.ByteString
-    getFirstNameBytes() {
-        Object ref = firstName_;
+    getAddressBytes() {
+        Object ref = address_;
         if (ref instanceof String) {
             com.google.protobuf.ByteString b =
                     com.google.protobuf.ByteString.copyFromUtf8(
                             (String) ref);
-            firstName_ = b;
+            address_ = b;
             return b;
         } else {
             return (com.google.protobuf.ByteString) ref;
@@ -258,32 +267,65 @@ public final class UserLoginReply extends
     }
 
     /**
-     * <code>string last_name = 3;</code>
+     * <code>string phone = 3;</code>
      */
-    public String getLastName() {
-        Object ref = lastName_;
+    public String getPhone() {
+        Object ref = phone_;
         if (ref instanceof String) {
             return (String) ref;
         } else {
             com.google.protobuf.ByteString bs =
                     (com.google.protobuf.ByteString) ref;
             String s = bs.toStringUtf8();
-            lastName_ = s;
+            phone_ = s;
             return s;
         }
     }
 
     /**
-     * <code>string last_name = 3;</code>
+     * <code>string phone = 3;</code>
      */
     public com.google.protobuf.ByteString
-    getLastNameBytes() {
-        Object ref = lastName_;
+    getPhoneBytes() {
+        Object ref = phone_;
         if (ref instanceof String) {
             com.google.protobuf.ByteString b =
                     com.google.protobuf.ByteString.copyFromUtf8(
                             (String) ref);
-            lastName_ = b;
+            phone_ = b;
+            return b;
+        } else {
+            return (com.google.protobuf.ByteString) ref;
+        }
+    }
+
+    /**
+     * <code>string email = 4;</code>
+     */
+    public String getEmail() {
+        Object ref = email_;
+        if (ref instanceof String) {
+            return (String) ref;
+        } else {
+            com.google.protobuf.ByteString bs =
+                    (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            email_ = s;
+            return s;
+        }
+    }
+
+    /**
+     * <code>string email = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+    getEmailBytes() {
+        Object ref = email_;
+        if (ref instanceof String) {
+            com.google.protobuf.ByteString b =
+                    com.google.protobuf.ByteString.copyFromUtf8(
+                            (String) ref);
+            email_ = b;
             return b;
         } else {
             return (com.google.protobuf.ByteString) ref;
@@ -304,11 +346,14 @@ public final class UserLoginReply extends
         if (userId_ != 0L) {
             output.writeInt64(1, userId_);
         }
-        if (!getFirstNameBytes().isEmpty()) {
-            com.google.protobuf.GeneratedMessageV3.writeString(output, 2, firstName_);
+        if (!getAddressBytes().isEmpty()) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 2, address_);
         }
-        if (!getLastNameBytes().isEmpty()) {
-            com.google.protobuf.GeneratedMessageV3.writeString(output, 3, lastName_);
+        if (!getPhoneBytes().isEmpty()) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 3, phone_);
+        }
+        if (!getEmailBytes().isEmpty()) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 4, email_);
         }
         unknownFields.writeTo(output);
     }
@@ -322,11 +367,14 @@ public final class UserLoginReply extends
             size += com.google.protobuf.CodedOutputStream
                     .computeInt64Size(1, userId_);
         }
-        if (!getFirstNameBytes().isEmpty()) {
-            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, firstName_);
+        if (!getAddressBytes().isEmpty()) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, address_);
         }
-        if (!getLastNameBytes().isEmpty()) {
-            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, lastName_);
+        if (!getPhoneBytes().isEmpty()) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, phone_);
+        }
+        if (!getEmailBytes().isEmpty()) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, email_);
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -338,18 +386,20 @@ public final class UserLoginReply extends
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof UserLoginReply)) {
+        if (!(obj instanceof UserCustomerEditProfileRequest)) {
             return super.equals(obj);
         }
-        UserLoginReply other = (UserLoginReply) obj;
+        UserCustomerEditProfileRequest other = (UserCustomerEditProfileRequest) obj;
 
         boolean result = true;
         result = result && (getUserId()
                 == other.getUserId());
-        result = result && getFirstName()
-                .equals(other.getFirstName());
-        result = result && getLastName()
-                .equals(other.getLastName());
+        result = result && getAddress()
+                .equals(other.getAddress());
+        result = result && getPhone()
+                .equals(other.getPhone());
+        result = result && getEmail()
+                .equals(other.getEmail());
         result = result && unknownFields.equals(other.unknownFields);
         return result;
     }
@@ -364,10 +414,12 @@ public final class UserLoginReply extends
         hash = (37 * hash) + USER_ID_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
                 getUserId());
-        hash = (37 * hash) + FIRST_NAME_FIELD_NUMBER;
-        hash = (53 * hash) + getFirstName().hashCode();
-        hash = (37 * hash) + LAST_NAME_FIELD_NUMBER;
-        hash = (53 * hash) + getLastName().hashCode();
+        hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
+        hash = (53 * hash) + getAddress().hashCode();
+        hash = (37 * hash) + PHONE_FIELD_NUMBER;
+        hash = (53 * hash) + getPhone().hashCode();
+        hash = (37 * hash) + EMAIL_FIELD_NUMBER;
+        hash = (53 * hash) + getEmail().hashCode();
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -390,26 +442,27 @@ public final class UserLoginReply extends
     }
 
     @Override
-    public com.google.protobuf.Parser<UserLoginReply> getParserForType() {
+    public com.google.protobuf.Parser<UserCustomerEditProfileRequest> getParserForType() {
         return PARSER;
     }
 
-    public UserLoginReply getDefaultInstanceForType() {
+    public UserCustomerEditProfileRequest getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
     }
 
     /**
-     * Protobuf type {@code rpc.UserLoginReply}
+     * Protobuf type {@code rpc.UserCustomerEditProfileRequest}
      */
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:rpc.UserLoginReply)
-            UserLoginReplyOrBuilder {
+            // @@protoc_insertion_point(builder_implements:rpc.UserCustomerEditProfileRequest)
+            UserCustomerEditProfileRequestOrBuilder {
         private long userId_;
-        private Object firstName_ = "";
-        private Object lastName_ = "";
+        private Object address_ = "";
+        private Object phone_ = "";
+        private Object email_ = "";
 
-        // Construct using rpc.UserLoginReply.newBuilder()
+        // Construct using rpc.UserCustomerEditProfileRequest.newBuilder()
         private Builder() {
             maybeForceBuilderInitialization();
         }
@@ -422,14 +475,14 @@ public final class UserLoginReply extends
 
         public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-            return BankProto.internal_static_rpc_UserLoginReply_descriptor;
+            return BankProto.internal_static_rpc_UserCustomerEditProfileRequest_descriptor;
         }
 
         protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-            return BankProto.internal_static_rpc_UserLoginReply_fieldAccessorTable
+            return BankProto.internal_static_rpc_UserCustomerEditProfileRequest_fieldAccessorTable
                     .ensureFieldAccessorsInitialized(
-                            UserLoginReply.class, UserLoginReply.Builder.class);
+                            UserCustomerEditProfileRequest.class, UserCustomerEditProfileRequest.Builder.class);
         }
 
         private void maybeForceBuilderInitialization() {
@@ -442,35 +495,38 @@ public final class UserLoginReply extends
             super.clear();
             userId_ = 0L;
 
-            firstName_ = "";
+            address_ = "";
 
-            lastName_ = "";
+            phone_ = "";
+
+            email_ = "";
 
             return this;
         }
 
         public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-            return BankProto.internal_static_rpc_UserLoginReply_descriptor;
+            return BankProto.internal_static_rpc_UserCustomerEditProfileRequest_descriptor;
         }
 
-        public UserLoginReply getDefaultInstanceForType() {
-            return UserLoginReply.getDefaultInstance();
+        public UserCustomerEditProfileRequest getDefaultInstanceForType() {
+            return UserCustomerEditProfileRequest.getDefaultInstance();
         }
 
-        public UserLoginReply build() {
-            UserLoginReply result = buildPartial();
+        public UserCustomerEditProfileRequest build() {
+            UserCustomerEditProfileRequest result = buildPartial();
             if (!result.isInitialized()) {
                 throw newUninitializedMessageException(result);
             }
             return result;
         }
 
-        public UserLoginReply buildPartial() {
-            UserLoginReply result = new UserLoginReply(this);
+        public UserCustomerEditProfileRequest buildPartial() {
+            UserCustomerEditProfileRequest result = new UserCustomerEditProfileRequest(this);
             result.userId_ = userId_;
-            result.firstName_ = firstName_;
-            result.lastName_ = lastName_;
+            result.address_ = address_;
+            result.phone_ = phone_;
+            result.email_ = email_;
             onBuilt();
             return result;
         }
@@ -508,25 +564,29 @@ public final class UserLoginReply extends
         }
 
         public Builder mergeFrom(com.google.protobuf.Message other) {
-            if (other instanceof UserLoginReply) {
-                return mergeFrom((UserLoginReply) other);
+            if (other instanceof UserCustomerEditProfileRequest) {
+                return mergeFrom((UserCustomerEditProfileRequest) other);
             } else {
                 super.mergeFrom(other);
                 return this;
             }
         }
 
-        public Builder mergeFrom(UserLoginReply other) {
-            if (other == UserLoginReply.getDefaultInstance()) return this;
+        public Builder mergeFrom(UserCustomerEditProfileRequest other) {
+            if (other == UserCustomerEditProfileRequest.getDefaultInstance()) return this;
             if (other.getUserId() != 0L) {
                 setUserId(other.getUserId());
             }
-            if (!other.getFirstName().isEmpty()) {
-                firstName_ = other.firstName_;
+            if (!other.getAddress().isEmpty()) {
+                address_ = other.address_;
                 onChanged();
             }
-            if (!other.getLastName().isEmpty()) {
-                lastName_ = other.lastName_;
+            if (!other.getPhone().isEmpty()) {
+                phone_ = other.phone_;
+                onChanged();
+            }
+            if (!other.getEmail().isEmpty()) {
+                email_ = other.email_;
                 onChanged();
             }
             this.mergeUnknownFields(other.unknownFields);
@@ -542,11 +602,11 @@ public final class UserLoginReply extends
                 com.google.protobuf.CodedInputStream input,
                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
                 throws java.io.IOException {
-            UserLoginReply parsedMessage = null;
+            UserCustomerEditProfileRequest parsedMessage = null;
             try {
                 parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
             } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-                parsedMessage = (UserLoginReply) e.getUnfinishedMessage();
+                parsedMessage = (UserCustomerEditProfileRequest) e.getUnfinishedMessage();
                 throw e.unwrapIOException();
             } finally {
                 if (parsedMessage != null) {
@@ -584,15 +644,15 @@ public final class UserLoginReply extends
         }
 
         /**
-         * <code>string first_name = 2;</code>
+         * <code>string address = 2;</code>
          */
-        public String getFirstName() {
-            Object ref = firstName_;
+        public String getAddress() {
+            Object ref = address_;
             if (!(ref instanceof String)) {
                 com.google.protobuf.ByteString bs =
                         (com.google.protobuf.ByteString) ref;
                 String s = bs.toStringUtf8();
-                firstName_ = s;
+                address_ = s;
                 return s;
             } else {
                 return (String) ref;
@@ -600,30 +660,30 @@ public final class UserLoginReply extends
         }
 
         /**
-         * <code>string first_name = 2;</code>
+         * <code>string address = 2;</code>
          */
-        public Builder setFirstName(
+        public Builder setAddress(
                 String value) {
             if (value == null) {
                 throw new NullPointerException();
             }
 
-            firstName_ = value;
+            address_ = value;
             onChanged();
             return this;
         }
 
         /**
-         * <code>string first_name = 2;</code>
+         * <code>string address = 2;</code>
          */
         public com.google.protobuf.ByteString
-        getFirstNameBytes() {
-            Object ref = firstName_;
+        getAddressBytes() {
+            Object ref = address_;
             if (ref instanceof String) {
                 com.google.protobuf.ByteString b =
                         com.google.protobuf.ByteString.copyFromUtf8(
                                 (String) ref);
-                firstName_ = b;
+                address_ = b;
                 return b;
             } else {
                 return (com.google.protobuf.ByteString) ref;
@@ -631,40 +691,40 @@ public final class UserLoginReply extends
         }
 
         /**
-         * <code>string first_name = 2;</code>
+         * <code>string address = 2;</code>
          */
-        public Builder setFirstNameBytes(
+        public Builder setAddressBytes(
                 com.google.protobuf.ByteString value) {
             if (value == null) {
                 throw new NullPointerException();
             }
             checkByteStringIsUtf8(value);
 
-            firstName_ = value;
+            address_ = value;
             onChanged();
             return this;
         }
 
         /**
-         * <code>string first_name = 2;</code>
+         * <code>string address = 2;</code>
          */
-        public Builder clearFirstName() {
+        public Builder clearAddress() {
 
-            firstName_ = getDefaultInstance().getFirstName();
+            address_ = getDefaultInstance().getAddress();
             onChanged();
             return this;
         }
 
         /**
-         * <code>string last_name = 3;</code>
+         * <code>string phone = 3;</code>
          */
-        public String getLastName() {
-            Object ref = lastName_;
+        public String getPhone() {
+            Object ref = phone_;
             if (!(ref instanceof String)) {
                 com.google.protobuf.ByteString bs =
                         (com.google.protobuf.ByteString) ref;
                 String s = bs.toStringUtf8();
-                lastName_ = s;
+                phone_ = s;
                 return s;
             } else {
                 return (String) ref;
@@ -672,30 +732,30 @@ public final class UserLoginReply extends
         }
 
         /**
-         * <code>string last_name = 3;</code>
+         * <code>string phone = 3;</code>
          */
-        public Builder setLastName(
+        public Builder setPhone(
                 String value) {
             if (value == null) {
                 throw new NullPointerException();
             }
 
-            lastName_ = value;
+            phone_ = value;
             onChanged();
             return this;
         }
 
         /**
-         * <code>string last_name = 3;</code>
+         * <code>string phone = 3;</code>
          */
         public com.google.protobuf.ByteString
-        getLastNameBytes() {
-            Object ref = lastName_;
+        getPhoneBytes() {
+            Object ref = phone_;
             if (ref instanceof String) {
                 com.google.protobuf.ByteString b =
                         com.google.protobuf.ByteString.copyFromUtf8(
                                 (String) ref);
-                lastName_ = b;
+                phone_ = b;
                 return b;
             } else {
                 return (com.google.protobuf.ByteString) ref;
@@ -703,26 +763,98 @@ public final class UserLoginReply extends
         }
 
         /**
-         * <code>string last_name = 3;</code>
+         * <code>string phone = 3;</code>
          */
-        public Builder setLastNameBytes(
+        public Builder setPhoneBytes(
                 com.google.protobuf.ByteString value) {
             if (value == null) {
                 throw new NullPointerException();
             }
             checkByteStringIsUtf8(value);
 
-            lastName_ = value;
+            phone_ = value;
             onChanged();
             return this;
         }
 
         /**
-         * <code>string last_name = 3;</code>
+         * <code>string phone = 3;</code>
          */
-        public Builder clearLastName() {
+        public Builder clearPhone() {
 
-            lastName_ = getDefaultInstance().getLastName();
+            phone_ = getDefaultInstance().getPhone();
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>string email = 4;</code>
+         */
+        public String getEmail() {
+            Object ref = email_;
+            if (!(ref instanceof String)) {
+                com.google.protobuf.ByteString bs =
+                        (com.google.protobuf.ByteString) ref;
+                String s = bs.toStringUtf8();
+                email_ = s;
+                return s;
+            } else {
+                return (String) ref;
+            }
+        }
+
+        /**
+         * <code>string email = 4;</code>
+         */
+        public Builder setEmail(
+                String value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+
+            email_ = value;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>string email = 4;</code>
+         */
+        public com.google.protobuf.ByteString
+        getEmailBytes() {
+            Object ref = email_;
+            if (ref instanceof String) {
+                com.google.protobuf.ByteString b =
+                        com.google.protobuf.ByteString.copyFromUtf8(
+                                (String) ref);
+                email_ = b;
+                return b;
+            } else {
+                return (com.google.protobuf.ByteString) ref;
+            }
+        }
+
+        /**
+         * <code>string email = 4;</code>
+         */
+        public Builder setEmailBytes(
+                com.google.protobuf.ByteString value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            checkByteStringIsUtf8(value);
+
+            email_ = value;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>string email = 4;</code>
+         */
+        public Builder clearEmail() {
+
+            email_ = getDefaultInstance().getEmail();
             onChanged();
             return this;
         }
@@ -735,11 +867,11 @@ public final class UserLoginReply extends
         public final Builder mergeUnknownFields(
                 final com.google.protobuf.UnknownFieldSet unknownFields) {
             return super.mergeUnknownFields(unknownFields);
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:rpc.UserCustomerEditProfileRequest)
     }
-
-
-    // @@protoc_insertion_point(builder_scope:rpc.UserLoginReply)
-  }
 
 }
 

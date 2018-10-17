@@ -4,49 +4,55 @@
 package rpc;
 
 /**
- * Protobuf type {@code rpc.UserLoginReply}
+ * Protobuf type {@code rpc.UserCustomerAddPayeeRequest}
  */
-public final class UserLoginReply extends
+public final class UserCustomerAddPayeeRequest extends
         com.google.protobuf.GeneratedMessageV3 implements
-        // @@protoc_insertion_point(message_implements:rpc.UserLoginReply)
-        UserLoginReplyOrBuilder {
+        // @@protoc_insertion_point(message_implements:rpc.UserCustomerAddPayeeRequest)
+        UserCustomerAddPayeeRequestOrBuilder {
     public static final int USER_ID_FIELD_NUMBER = 1;
     public static final int FIRST_NAME_FIELD_NUMBER = 2;
     public static final int LAST_NAME_FIELD_NUMBER = 3;
+    public static final int IBAN_FIELD_NUMBER = 4;
+    public static final int PIN_FIELD_NUMBER = 5;
     private static final long serialVersionUID = 0L;
-    // @@protoc_insertion_point(class_scope:rpc.UserLoginReply)
-    private static final UserLoginReply DEFAULT_INSTANCE;
-    private static final com.google.protobuf.Parser<UserLoginReply>
-            PARSER = new com.google.protobuf.AbstractParser<UserLoginReply>() {
-        public UserLoginReply parsePartialFrom(
+    // @@protoc_insertion_point(class_scope:rpc.UserCustomerAddPayeeRequest)
+    private static final UserCustomerAddPayeeRequest DEFAULT_INSTANCE;
+    private static final com.google.protobuf.Parser<UserCustomerAddPayeeRequest>
+            PARSER = new com.google.protobuf.AbstractParser<UserCustomerAddPayeeRequest>() {
+        public UserCustomerAddPayeeRequest parsePartialFrom(
                 com.google.protobuf.CodedInputStream input,
                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
                 throws com.google.protobuf.InvalidProtocolBufferException {
-            return new UserLoginReply(input, extensionRegistry);
+            return new UserCustomerAddPayeeRequest(input, extensionRegistry);
         }
     };
 
     static {
-        DEFAULT_INSTANCE = new UserLoginReply();
+        DEFAULT_INSTANCE = new UserCustomerAddPayeeRequest();
     }
 
     private long userId_;
     private volatile Object firstName_;
     private volatile Object lastName_;
+    private volatile Object iban_;
+    private int pin_;
     private byte memoizedIsInitialized = -1;
 
-    // Use UserLoginReply.newBuilder() to construct.
-    private UserLoginReply(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use UserCustomerAddPayeeRequest.newBuilder() to construct.
+    private UserCustomerAddPayeeRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
     }
 
-    private UserLoginReply() {
+    private UserCustomerAddPayeeRequest() {
         userId_ = 0L;
         firstName_ = "";
         lastName_ = "";
+        iban_ = "";
+        pin_ = 0;
     }
 
-    private UserLoginReply(
+    private UserCustomerAddPayeeRequest(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
@@ -89,6 +95,17 @@ public final class UserLoginReply extends
                         lastName_ = s;
                         break;
                     }
+                    case 34: {
+                        String s = input.readStringRequireUtf8();
+
+                        iban_ = s;
+                        break;
+                    }
+                    case 40: {
+
+                        pin_ = input.readInt32();
+                        break;
+                    }
                 }
             }
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -104,54 +121,54 @@ public final class UserLoginReply extends
 
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-        return BankProto.internal_static_rpc_UserLoginReply_descriptor;
+        return BankProto.internal_static_rpc_UserCustomerAddPayeeRequest_descriptor;
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerAddPayeeRequest parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerAddPayeeRequest parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerAddPayeeRequest parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerAddPayeeRequest parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
     }
 
-    public static UserLoginReply parseFrom(byte[] data)
+    public static UserCustomerAddPayeeRequest parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerAddPayeeRequest parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
     }
 
-    public static UserLoginReply parseFrom(java.io.InputStream input)
+    public static UserCustomerAddPayeeRequest parseFrom(java.io.InputStream input)
             throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
                 .parseWithIOException(PARSER, input);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerAddPayeeRequest parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -159,13 +176,13 @@ public final class UserLoginReply extends
                 .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static UserLoginReply parseDelimitedFrom(java.io.InputStream input)
+    public static UserCustomerAddPayeeRequest parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
                 .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static UserLoginReply parseDelimitedFrom(
+    public static UserCustomerAddPayeeRequest parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -173,14 +190,14 @@ public final class UserLoginReply extends
                 .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerAddPayeeRequest parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
                 .parseWithIOException(PARSER, input);
     }
 
-    public static UserLoginReply parseFrom(
+    public static UserCustomerAddPayeeRequest parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -192,15 +209,15 @@ public final class UserLoginReply extends
         return DEFAULT_INSTANCE.toBuilder();
     }
 
-    public static Builder newBuilder(UserLoginReply prototype) {
+    public static Builder newBuilder(UserCustomerAddPayeeRequest prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
-    public static UserLoginReply getDefaultInstance() {
+    public static UserCustomerAddPayeeRequest getDefaultInstance() {
         return DEFAULT_INSTANCE;
     }
 
-    public static com.google.protobuf.Parser<UserLoginReply> parser() {
+    public static com.google.protobuf.Parser<UserCustomerAddPayeeRequest> parser() {
         return PARSER;
     }
 
@@ -212,9 +229,9 @@ public final class UserLoginReply extends
 
     protected FieldAccessorTable
     internalGetFieldAccessorTable() {
-        return BankProto.internal_static_rpc_UserLoginReply_fieldAccessorTable
+        return BankProto.internal_static_rpc_UserCustomerAddPayeeRequest_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        UserLoginReply.class, UserLoginReply.Builder.class);
+                        UserCustomerAddPayeeRequest.class, UserCustomerAddPayeeRequest.Builder.class);
     }
 
     /**
@@ -290,6 +307,46 @@ public final class UserLoginReply extends
         }
     }
 
+    /**
+     * <code>string iban = 4;</code>
+     */
+    public String getIban() {
+        Object ref = iban_;
+        if (ref instanceof String) {
+            return (String) ref;
+        } else {
+            com.google.protobuf.ByteString bs =
+                    (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            iban_ = s;
+            return s;
+        }
+    }
+
+    /**
+     * <code>string iban = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+    getIbanBytes() {
+        Object ref = iban_;
+        if (ref instanceof String) {
+            com.google.protobuf.ByteString b =
+                    com.google.protobuf.ByteString.copyFromUtf8(
+                            (String) ref);
+            iban_ = b;
+            return b;
+        } else {
+            return (com.google.protobuf.ByteString) ref;
+        }
+    }
+
+    /**
+     * <code>int32 pin = 5;</code>
+     */
+    public int getPin() {
+        return pin_;
+    }
+
     public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized == 1) return true;
@@ -310,6 +367,12 @@ public final class UserLoginReply extends
         if (!getLastNameBytes().isEmpty()) {
             com.google.protobuf.GeneratedMessageV3.writeString(output, 3, lastName_);
         }
+        if (!getIbanBytes().isEmpty()) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 4, iban_);
+        }
+        if (pin_ != 0) {
+            output.writeInt32(5, pin_);
+        }
         unknownFields.writeTo(output);
     }
 
@@ -328,6 +391,13 @@ public final class UserLoginReply extends
         if (!getLastNameBytes().isEmpty()) {
             size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, lastName_);
         }
+        if (!getIbanBytes().isEmpty()) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, iban_);
+        }
+        if (pin_ != 0) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeInt32Size(5, pin_);
+        }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
         return size;
@@ -338,10 +408,10 @@ public final class UserLoginReply extends
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof UserLoginReply)) {
+        if (!(obj instanceof UserCustomerAddPayeeRequest)) {
             return super.equals(obj);
         }
-        UserLoginReply other = (UserLoginReply) obj;
+        UserCustomerAddPayeeRequest other = (UserCustomerAddPayeeRequest) obj;
 
         boolean result = true;
         result = result && (getUserId()
@@ -350,6 +420,10 @@ public final class UserLoginReply extends
                 .equals(other.getFirstName());
         result = result && getLastName()
                 .equals(other.getLastName());
+        result = result && getIban()
+                .equals(other.getIban());
+        result = result && (getPin()
+                == other.getPin());
         result = result && unknownFields.equals(other.unknownFields);
         return result;
     }
@@ -368,6 +442,10 @@ public final class UserLoginReply extends
         hash = (53 * hash) + getFirstName().hashCode();
         hash = (37 * hash) + LAST_NAME_FIELD_NUMBER;
         hash = (53 * hash) + getLastName().hashCode();
+        hash = (37 * hash) + IBAN_FIELD_NUMBER;
+        hash = (53 * hash) + getIban().hashCode();
+        hash = (37 * hash) + PIN_FIELD_NUMBER;
+        hash = (53 * hash) + getPin();
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -390,26 +468,28 @@ public final class UserLoginReply extends
     }
 
     @Override
-    public com.google.protobuf.Parser<UserLoginReply> getParserForType() {
+    public com.google.protobuf.Parser<UserCustomerAddPayeeRequest> getParserForType() {
         return PARSER;
     }
 
-    public UserLoginReply getDefaultInstanceForType() {
+    public UserCustomerAddPayeeRequest getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
     }
 
     /**
-     * Protobuf type {@code rpc.UserLoginReply}
+     * Protobuf type {@code rpc.UserCustomerAddPayeeRequest}
      */
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:rpc.UserLoginReply)
-            UserLoginReplyOrBuilder {
+            // @@protoc_insertion_point(builder_implements:rpc.UserCustomerAddPayeeRequest)
+            UserCustomerAddPayeeRequestOrBuilder {
         private long userId_;
         private Object firstName_ = "";
         private Object lastName_ = "";
+        private Object iban_ = "";
+        private int pin_;
 
-        // Construct using rpc.UserLoginReply.newBuilder()
+        // Construct using rpc.UserCustomerAddPayeeRequest.newBuilder()
         private Builder() {
             maybeForceBuilderInitialization();
         }
@@ -422,14 +502,14 @@ public final class UserLoginReply extends
 
         public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-            return BankProto.internal_static_rpc_UserLoginReply_descriptor;
+            return BankProto.internal_static_rpc_UserCustomerAddPayeeRequest_descriptor;
         }
 
         protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-            return BankProto.internal_static_rpc_UserLoginReply_fieldAccessorTable
+            return BankProto.internal_static_rpc_UserCustomerAddPayeeRequest_fieldAccessorTable
                     .ensureFieldAccessorsInitialized(
-                            UserLoginReply.class, UserLoginReply.Builder.class);
+                            UserCustomerAddPayeeRequest.class, UserCustomerAddPayeeRequest.Builder.class);
         }
 
         private void maybeForceBuilderInitialization() {
@@ -446,31 +526,37 @@ public final class UserLoginReply extends
 
             lastName_ = "";
 
+            iban_ = "";
+
+            pin_ = 0;
+
             return this;
         }
 
         public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-            return BankProto.internal_static_rpc_UserLoginReply_descriptor;
+            return BankProto.internal_static_rpc_UserCustomerAddPayeeRequest_descriptor;
         }
 
-        public UserLoginReply getDefaultInstanceForType() {
-            return UserLoginReply.getDefaultInstance();
+        public UserCustomerAddPayeeRequest getDefaultInstanceForType() {
+            return UserCustomerAddPayeeRequest.getDefaultInstance();
         }
 
-        public UserLoginReply build() {
-            UserLoginReply result = buildPartial();
+        public UserCustomerAddPayeeRequest build() {
+            UserCustomerAddPayeeRequest result = buildPartial();
             if (!result.isInitialized()) {
                 throw newUninitializedMessageException(result);
             }
             return result;
         }
 
-        public UserLoginReply buildPartial() {
-            UserLoginReply result = new UserLoginReply(this);
+        public UserCustomerAddPayeeRequest buildPartial() {
+            UserCustomerAddPayeeRequest result = new UserCustomerAddPayeeRequest(this);
             result.userId_ = userId_;
             result.firstName_ = firstName_;
             result.lastName_ = lastName_;
+            result.iban_ = iban_;
+            result.pin_ = pin_;
             onBuilt();
             return result;
         }
@@ -508,16 +594,16 @@ public final class UserLoginReply extends
         }
 
         public Builder mergeFrom(com.google.protobuf.Message other) {
-            if (other instanceof UserLoginReply) {
-                return mergeFrom((UserLoginReply) other);
+            if (other instanceof UserCustomerAddPayeeRequest) {
+                return mergeFrom((UserCustomerAddPayeeRequest) other);
             } else {
                 super.mergeFrom(other);
                 return this;
             }
         }
 
-        public Builder mergeFrom(UserLoginReply other) {
-            if (other == UserLoginReply.getDefaultInstance()) return this;
+        public Builder mergeFrom(UserCustomerAddPayeeRequest other) {
+            if (other == UserCustomerAddPayeeRequest.getDefaultInstance()) return this;
             if (other.getUserId() != 0L) {
                 setUserId(other.getUserId());
             }
@@ -528,6 +614,13 @@ public final class UserLoginReply extends
             if (!other.getLastName().isEmpty()) {
                 lastName_ = other.lastName_;
                 onChanged();
+            }
+            if (!other.getIban().isEmpty()) {
+                iban_ = other.iban_;
+                onChanged();
+            }
+            if (other.getPin() != 0) {
+                setPin(other.getPin());
             }
             this.mergeUnknownFields(other.unknownFields);
             onChanged();
@@ -542,11 +635,11 @@ public final class UserLoginReply extends
                 com.google.protobuf.CodedInputStream input,
                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
                 throws java.io.IOException {
-            UserLoginReply parsedMessage = null;
+            UserCustomerAddPayeeRequest parsedMessage = null;
             try {
                 parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
             } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-                parsedMessage = (UserLoginReply) e.getUnfinishedMessage();
+                parsedMessage = (UserCustomerAddPayeeRequest) e.getUnfinishedMessage();
                 throw e.unwrapIOException();
             } finally {
                 if (parsedMessage != null) {
@@ -727,6 +820,105 @@ public final class UserLoginReply extends
             return this;
         }
 
+        /**
+         * <code>string iban = 4;</code>
+         */
+        public String getIban() {
+            Object ref = iban_;
+            if (!(ref instanceof String)) {
+                com.google.protobuf.ByteString bs =
+                        (com.google.protobuf.ByteString) ref;
+                String s = bs.toStringUtf8();
+                iban_ = s;
+                return s;
+            } else {
+                return (String) ref;
+            }
+        }
+
+        /**
+         * <code>string iban = 4;</code>
+         */
+        public Builder setIban(
+                String value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+
+            iban_ = value;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>string iban = 4;</code>
+         */
+        public com.google.protobuf.ByteString
+        getIbanBytes() {
+            Object ref = iban_;
+            if (ref instanceof String) {
+                com.google.protobuf.ByteString b =
+                        com.google.protobuf.ByteString.copyFromUtf8(
+                                (String) ref);
+                iban_ = b;
+                return b;
+            } else {
+                return (com.google.protobuf.ByteString) ref;
+            }
+        }
+
+        /**
+         * <code>string iban = 4;</code>
+         */
+        public Builder setIbanBytes(
+                com.google.protobuf.ByteString value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            checkByteStringIsUtf8(value);
+
+            iban_ = value;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>string iban = 4;</code>
+         */
+        public Builder clearIban() {
+
+            iban_ = getDefaultInstance().getIban();
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>int32 pin = 5;</code>
+         */
+        public int getPin() {
+            return pin_;
+        }
+
+        /**
+         * <code>int32 pin = 5;</code>
+         */
+        public Builder setPin(int value) {
+
+            pin_ = value;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>int32 pin = 5;</code>
+         */
+        public Builder clearPin() {
+
+            pin_ = 0;
+            onChanged();
+            return this;
+        }
+
         public final Builder setUnknownFields(
                 final com.google.protobuf.UnknownFieldSet unknownFields) {
             return super.setUnknownFieldsProto3(unknownFields);
@@ -735,11 +927,11 @@ public final class UserLoginReply extends
         public final Builder mergeUnknownFields(
                 final com.google.protobuf.UnknownFieldSet unknownFields) {
             return super.mergeUnknownFields(unknownFields);
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:rpc.UserCustomerAddPayeeRequest)
     }
-
-
-    // @@protoc_insertion_point(builder_scope:rpc.UserLoginReply)
-  }
 
 }
 

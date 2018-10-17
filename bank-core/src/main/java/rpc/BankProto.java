@@ -5,109 +5,296 @@ package rpc;
 
 public final class BankProto {
     static final com.google.protobuf.Descriptors.Descriptor
-            internal_static_rpc_UserCustomerEditRequest_descriptor;
+            internal_static_rpc_UserStaffRequest_descriptor;
     static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internal_static_rpc_UserCustomerEditRequest_fieldAccessorTable;
+            internal_static_rpc_UserStaffRequest_fieldAccessorTable;
     static final com.google.protobuf.Descriptors.Descriptor
-            internal_static_rpc_UserCustomerTranRequest_descriptor;
+            internal_static_rpc_UserAdminRequest_descriptor;
     static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internal_static_rpc_UserCustomerTranRequest_fieldAccessorTable;
+            internal_static_rpc_UserAdminRequest_fieldAccessorTable;
     static final com.google.protobuf.Descriptors.Descriptor
-            internal_static_rpc_UserStaffAddAccountRequest_descriptor;
+            internal_static_rpc_UserLoginReqRequest_descriptor;
     static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internal_static_rpc_UserStaffAddAccountRequest_fieldAccessorTable;
-    static final com.google.protobuf.Descriptors.Descriptor
-            internal_static_rpc_UserRequest_descriptor;
-    static final
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internal_static_rpc_UserRequest_fieldAccessorTable;
+            internal_static_rpc_UserLoginReqRequest_fieldAccessorTable;
     static final com.google.protobuf.Descriptors.Descriptor
             internal_static_rpc_UserLoginRequest_descriptor;
     static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internal_static_rpc_UserLoginRequest_fieldAccessorTable;
     static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserApplyNewAccountRequest_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserApplyNewAccountRequest_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserForgetUserIdRequest_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserForgetUserIdRequest_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserForgetPinRequest_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserForgetPinRequest_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserCustomerGetAccountsRequest_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserCustomerGetAccountsRequest_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserCustomerGetProfileRequest_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserCustomerGetProfileRequest_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserCustomerEditProfileRequest_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserCustomerEditProfileRequest_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserCustomerGetTransactionsRequest_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserCustomerGetTransactionsRequest_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserCustomerGetPayeesRequest_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserCustomerGetPayeesRequest_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserCustomerAddPayeeRequest_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserCustomerAddPayeeRequest_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserCustomerRemovePayeeRequest_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserCustomerRemovePayeeRequest_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserCustomerTransferRequest_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserCustomerTransferRequest_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
             internal_static_rpc_Response_descriptor;
     static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internal_static_rpc_Response_fieldAccessorTable;
     static final com.google.protobuf.Descriptors.Descriptor
-            internal_static_rpc_UserCustomerTran_descriptor;
+            internal_static_rpc_UserBlocks_descriptor;
     static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internal_static_rpc_UserCustomerTran_fieldAccessorTable;
+            internal_static_rpc_UserBlocks_fieldAccessorTable;
     static final com.google.protobuf.Descriptors.Descriptor
-            internal_static_rpc_UserCustomerLog_descriptor;
+            internal_static_rpc_Staffs_descriptor;
     static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internal_static_rpc_UserCustomerLog_fieldAccessorTable;
+            internal_static_rpc_Staffs_fieldAccessorTable;
     static final com.google.protobuf.Descriptors.Descriptor
-            internal_static_rpc_UserCustomerTransReply_descriptor;
+            internal_static_rpc_UserProfile_descriptor;
     static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internal_static_rpc_UserCustomerTransReply_fieldAccessorTable;
+            internal_static_rpc_UserProfile_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserTransactions_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserTransactions_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserPayees_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserPayees_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserNewApplys_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserNewApplys_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserAccountDeleteApplys_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserAccountDeleteApplys_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserProfileReply_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserProfileReply_fieldAccessorTable;
+    static final com.google.protobuf.Descriptors.Descriptor
+            internal_static_rpc_UserLoginReqReply_descriptor;
+    static final
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internal_static_rpc_UserLoginReqReply_fieldAccessorTable;
     static final com.google.protobuf.Descriptors.Descriptor
             internal_static_rpc_UserLoginReply_descriptor;
     static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internal_static_rpc_UserLoginReply_fieldAccessorTable;
     static final com.google.protobuf.Descriptors.Descriptor
-            internal_static_rpc_UserCustomerLogsReply_descriptor;
+            internal_static_rpc_UserAccounts_descriptor;
     static final
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-            internal_static_rpc_UserCustomerLogsReply_fieldAccessorTable;
+            internal_static_rpc_UserAccounts_fieldAccessorTable;
     private static com.google.protobuf.Descriptors.FileDescriptor
             descriptor;
 
     static {
         String[] descriptorData = {
-                "\n\nBank.proto\022\003rpc\"J\n\027UserCustomerEditReq" +
-                        "uest\022\017\n\007user_id\030\001 \001(\t\022\r\n\005phone\030\002 \001(\t\022\017\n\007" +
-                        "address\030\003 \001(\t\"u\n\027UserCustomerTranRequest" +
-                        "\022\017\n\007user_id\030\001 \001(\t\022\022\n\nto_card_no\030\002 \001(\t\022\016\n" +
-                        "\006amount\030\003 \001(\t\022\020\n\010currency\030\004 \001(\t\022\023\n\013descr" +
-                        "iption\030\005 \001(\t\"u\n\032UserStaffAddAccountReque" +
-                        "st\022\022\n\nfirst_name\030\001 \001(\t\022\021\n\tlast_name\030\002 \001(" +
-                        "\t\022\r\n\005phone\030\003 \001(\t\022\017\n\007address\030\004 \001(\t\022\020\n\010pas" +
-                        "sword\030\005 \001(\t\"\036\n\013UserRequest\022\017\n\007user_id\030\001 " +
-                        "\001(\003\"D\n\020UserLoginRequest\022\020\n\010username\030\001 \001(" +
-                        "\t\022\020\n\010password\030\002 \001(\t\022\014\n\004role\030\003 \001(\005\"\223\002\n\010Re" +
-                        "sponse\022\023\n\013status_code\030\001 \001(\005\022\023\n\013descripti" +
-                        "on\030\002 \001(\t\022\023\n\013page_number\030\003 \001(\005\022\024\n\014total_n" +
-                        "umber\030\004 \001(\005\022\027\n\017result_per_page\030\005 \001(\005\0228\n\023" +
-                        "user_customer_trans\030\006 \001(\0132\033.rpc.UserCust" +
-                        "omerTransReply\022\'\n\nuser_login\030\007 \001(\0132\023.rpc" +
-                        ".UserLoginReply\0226\n\022user_customer_logs\030\010 " +
-                        "\001(\0132\032.rpc.UserCustomerLogsReply\"\205\001\n\020User" +
-                        "CustomerTran\022\020\n\010trans_id\030\001 \001(\003\022\020\n\010trans_" +
-                        "no\030\002 \001(\t\022\024\n\014from_card_no\030\003 \001(\t\022\022\n\nto_car" +
-                        "d_no\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\022\016\n\006statu" +
-                        "s\030\006 \001(\005\"\227\001\n\017UserCustomerLog\022\016\n\006log_id\030\001 " +
-                        "\001(\003\022\024\n\014operate_type\030\002 \001(\005\022\024\n\014operate_tim" +
-                        "e\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\016\n\006status\030\005" +
-                        " \001(\005\022#\n\004tran\030\006 \001(\0132\025.rpc.UserCustomerTra" +
-                        "n\">\n\026UserCustomerTransReply\022$\n\005trans\030\001 \003" +
-                        "(\0132\025.rpc.UserCustomerTran\"h\n\016UserLoginRe" +
-                        "ply\022\017\n\007user_id\030\001 \001(\003\022\022\n\nfirst_name\030\002 \001(\t" +
-                        "\022\021\n\tlast_name\030\003 \001(\t\022\r\n\005phone\030\004 \001(\t\022\017\n\007ad" +
-                        "dress\030\005 \001(\t\"<\n\025UserCustomerLogsReply\022#\n\005" +
-                        "trans\030\001 \003(\0132\024.rpc.UserCustomerLog2:\n\tUse" +
-                        "rLogin\022-\n\005Login\022\025.rpc.UserLoginRequest\032\r" +
-                        ".rpc.Response2~\n\tUserStaff\022?\n\rAddNewAcco" +
-                        "unt\022\037.rpc.UserStaffAddAccountRequest\032\r.r" +
-                        "pc.Response\0220\n\rRemoveAccount\022\020.rpc.UserR" +
-                        "equest\032\r.rpc.Response2\262\002\n\014UserCustomer\022<" +
-                        "\n\rEditUserPhone\022\034.rpc.UserCustomerEditRe" +
-                        "quest\032\r.rpc.Response\022>\n\017EditUserAddress\022" +
-                        "\034.rpc.UserCustomerEditRequest\032\r.rpc.Resp" +
-                        "onse\0225\n\022GetUserTransaction\022\020.rpc.UserReq" +
-                        "uest\032\r.rpc.Response\0224\n\021GetUserOperateLog" +
-                        "\022\020.rpc.UserRequest\032\r.rpc.Response\0227\n\010Mak" +
-                        "eTran\022\034.rpc.UserCustomerTranRequest\032\r.rp" +
-                        "c.ResponseB\022\n\003rpcB\tBankProtoP\001b\006proto3"
+                "\n\nBank.proto\022\003rpc\032\037google/protobuf/times" +
+                        "tamp.proto\"\276\001\n\020UserStaffRequest\022\020\n\010staff" +
+                        "_id\030\001 \001(\003\022\020\n\010password\030\002 \001(\t\022\022\n\nrespond_i" +
+                        "d\030\003 \001(\003\022\026\n\016respond_result\030\004 \001(\005\022\033\n\023respo" +
+                        "nd_description\030\005 \001(\005\022\035\n\025filter_by_status" +
+                        "_type\030\006 \001(\005\022\036\n\026filter_by_user_id_name\030\007 " +
+                        "\001(\t\"\202\002\n\020UserAdminRequest\022\020\n\010username\030\001 \001" +
+                        "(\t\022\020\n\010password\030\002 \001(\t\022\030\n\020staff_first_name" +
+                        "\030\003 \001(\t\022\027\n\017staff_last_name\030\004 \001(\t\022\023\n\013staff" +
+                        "_email\030\005 \001(\t\022\020\n\010staff_id\030\006 \001(\t\022\022\n\nemail_" +
+                        "host\030\007 \001(\t\022\022\n\nemail_port\030\010 \001(\t\022\025\n\remail_" +
+                        "account\030\t \001(\t\022\026\n\016email_password\030\n \001(\t\022\031\n" +
+                        "\021filter_by_id_name\030\013 \001(\t\"u\n\023UserLoginReq" +
+                        "Request\022\017\n\007user_id\030\001 \001(\003\022\023\n\013phone_last4\030" +
+                        "\002 \001(\005\022\021\n\tbirth_day\030\003 \001(\005\022\021\n\tbirth_mon\030\004 " +
+                        "\001(\005\022\022\n\nbirth_year\030\005 \001(\005\"w\n\020UserLoginRequ" +
+                        "est\022\017\n\007user_id\030\001 \001(\t\022\014\n\004pin1\030\002 \001(\005\022\014\n\004pi" +
+                        "n2\030\003 \001(\005\022\014\n\004pin3\030\004 \001(\005\022\014\n\004pin4\030\005 \001(\005\022\014\n\004" +
+                        "pin5\030\006 \001(\005\022\014\n\004pin6\030\007 \001(\005\"\262\003\n\032UserApplyNe" +
+                        "wAccountRequest\022\022\n\nfirst_name\030\001 \001(\t\022\021\n\tl" +
+                        "ast_name\030\002 \001(\t\022\016\n\006gender\030\003 \001(\005\022\030\n\020identi" +
+                        "ty_id_type\030\004 \001(\005\022\023\n\013identity_id\030\005 \001(\t\022\024\n" +
+                        "\014account_type\030\006 \001(\005\022\021\n\tcard_type\030\007 \001(\005\0221" +
+                        "\n\rgraduate_date\030\010 \001(\0132\032.google.protobuf." +
+                        "Timestamp\022.\n\nbirth_date\030\t \001(\0132\032.google.p" +
+                        "rotobuf.Timestamp\022\017\n\007address\030\n \001(\t\022\r\n\005em" +
+                        "ail\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\027\n\017university_n" +
+                        "ame\030\r \001(\t\022\022\n\nstudent_id\030\016 \001(\t\022\021\n\tparent_" +
+                        "id\030\017 \001(\003\022\031\n\021parent_first_name\030\020 \001(\t\022\030\n\020p" +
+                        "arent_last_name\030\021 \001(\t\"u\n\027UserForgetUserI" +
+                        "dRequest\022\014\n\004iban\030\001 \001(\t\022.\n\nbirth_date\030\002 \001" +
+                        "(\0132\032.google.protobuf.Timestamp\022\r\n\005phone\030" +
+                        "\003 \001(\t\022\r\n\005email\030\004 \001(\t\"J\n\024UserForgetPinReq" +
+                        "uest\022\017\n\007user_id\030\001 \001(\t\022\022\n\nbirth_date\030\002 \001(" +
+                        "\t\022\r\n\005email\030\003 \001(\t\"1\n\036UserCustomerGetAccou" +
+                        "ntsRequest\022\017\n\007user_id\030\001 \001(\003\"0\n\035UserCusto" +
+                        "merGetProfileRequest\022\017\n\007user_id\030\001 \001(\003\"`\n" +
+                        "\036UserCustomerEditProfileRequest\022\017\n\007user_" +
+                        "id\030\001 \001(\003\022\017\n\007address\030\002 \001(\t\022\r\n\005phone\030\003 \001(\t" +
+                        "\022\r\n\005email\030\004 \001(\t\"h\n\"UserCustomerGetTransa" +
+                        "ctionsRequest\022\017\n\007user_id\030\001 \001(\003\022\031\n\021filter" +
+                        "_by_account\030\002 \001(\005\022\026\n\016filter_by_date\030\003 \001(" +
+                        "\005\"/\n\034UserCustomerGetPayeesRequest\022\017\n\007use" +
+                        "r_id\030\001 \001(\003\"p\n\033UserCustomerAddPayeeReques" +
+                        "t\022\017\n\007user_id\030\001 \001(\003\022\022\n\nfirst_name\030\002 \001(\t\022\021" +
+                        "\n\tlast_name\030\003 \001(\t\022\014\n\004iban\030\004 \001(\t\022\013\n\003pin\030\005" +
+                        " \001(\005\"C\n\036UserCustomerRemovePayeeRequest\022\017" +
+                        "\n\007user_id\030\001 \001(\003\022\020\n\010payee_id\030\002 \001(\003\"q\n\033Use" +
+                        "rCustomerTransferRequest\022\017\n\007user_id\030\001 \001(" +
+                        "\003\022\020\n\010payee_id\030\002 \001(\003\022\022\n\naccount_id\030\003 \001(\003\022" +
+                        "\016\n\006amount\030\004 \001(\001\022\013\n\003pin\030\005 \001(\005\"\266\004\n\010Respons" +
+                        "e\022\023\n\013status_code\030\001 \001(\005\022\023\n\013description\030\002 " +
+                        "\001(\t\022\023\n\013page_number\030\003 \001(\005\022\024\n\014total_number" +
+                        "\030\004 \001(\005\022\027\n\017result_per_page\030\005 \001(\005\0224\n\024user_" +
+                        "login_req_reply\030\006 \001(\0132\026.rpc.UserLoginReq" +
+                        "Reply\022-\n\020user_login_reply\030\007 \001(\0132\023.rpc.Us" +
+                        "erLoginReply\022(\n\ruser_accounts\030\010 \003(\0132\021.rp" +
+                        "c.UserAccounts\022&\n\014user_profile\030\t \001(\0132\020.r" +
+                        "pc.UserProfile\0220\n\021user_transactions\030\n \003(" +
+                        "\0132\025.rpc.UserTransactions\022$\n\013user_payees\030" +
+                        "\013 \003(\0132\017.rpc.UserPayees\022+\n\017user_new_apply" +
+                        "s\030\014 \003(\0132\022.rpc.UserNewApplys\0228\n\022user_dele" +
+                        "te_applys\030\r \003(\0132\034.rpc.UserAccountDeleteA" +
+                        "pplys\022)\n\020user_block_lists\030\016 \003(\0132\017.rpc.Us" +
+                        "erBlocks\022\033\n\006staffs\030\017 \003(\0132\013.rpc.Staffs\"\307\002" +
+                        "\n\nUserBlocks\022\020\n\010apply_id\030\006 \001(\003\022\022\n\nfirst_" +
+                        "name\030\001 \001(\t\022\021\n\tlast_name\030\002 \001(\t\022\016\n\006gender\030" +
+                        "\003 \001(\005\022\030\n\020identity_id_type\030\004 \001(\005\022\023\n\013ident" +
+                        "ity_id\030\005 \001(\t\022.\n\nbirth_date\030\t \001(\0132\032.googl" +
+                        "e.protobuf.Timestamp\022\017\n\007address\030\n \001(\t\022\r\n" +
+                        "\005email\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\022\n\naccount_i" +
+                        "d\030\r \001(\003\022\016\n\006reason\030\016 \001(\t\022.\n\nblock_date\030\017 " +
+                        "\001(\0132\032.google.protobuf.Timestamp\022\016\n\006statu" +
+                        "s\030\020 \001(\005\"n\n\006Staffs\022\n\n\002id\030\001 \001(\003\022\020\n\010staff_i" +
+                        "d\030\002 \001(\003\022\020\n\010password\030\003 \001(\t\022\022\n\nfirst_name\030" +
+                        "\004 \001(\t\022\021\n\tlast_name\030\005 \001(\t\022\r\n\005email\030\006 \001(\t\"" +
+                        "\264\001\n\013UserProfile\022\017\n\007user_id\030\001 \001(\003\022\022\n\nfirs" +
+                        "t_name\030\002 \001(\t\022\021\n\tlast_name\030\003 \001(\t\022\016\n\006gende" +
+                        "r\030\004 \001(\005\022.\n\nbirth_date\030\005 \001(\0132\032.google.pro" +
+                        "tobuf.Timestamp\022\017\n\007address\030\006 \001(\t\022\r\n\005emai" +
+                        "l\030\007 \001(\t\022\r\n\005phone\030\010 \001(\t\"\222\001\n\020UserTransacti" +
+                        "ons\022\017\n\007user_id\030\001 \001(\003\022(\n\004date\030\002 \001(\0132\032.goo" +
+                        "gle.protobuf.Timestamp\022\023\n\013description\030\003 " +
+                        "\001(\t\022\r\n\005debit\030\004 \001(\t\022\016\n\006credit\030\005 \001(\t\022\017\n\007ba" +
+                        "lance\030\006 \001(\001\":\n\nUserPayees\022\020\n\010payee_id\030\001 " +
+                        "\001(\003\022\014\n\004name\030\002 \001(\t\022\014\n\004iban\030\003 \001(\t\"\307\003\n\rUser" +
+                        "NewApplys\022\020\n\010apply_id\030\022 \001(\003\022\022\n\nfirst_nam" +
+                        "e\030\001 \001(\t\022\021\n\tlast_name\030\002 \001(\t\022\016\n\006gender\030\003 \001" +
+                        "(\005\022\030\n\020identity_id_type\030\004 \001(\005\022\023\n\013identity" +
+                        "_id\030\005 \001(\t\022\024\n\014account_type\030\006 \001(\005\022\021\n\tcard_" +
+                        "type\030\007 \001(\005\0221\n\rgraduate_date\030\010 \001(\0132\032.goog" +
+                        "le.protobuf.Timestamp\022.\n\nbirth_date\030\t \001(" +
+                        "\0132\032.google.protobuf.Timestamp\022\017\n\007address" +
+                        "\030\n \001(\t\022\r\n\005email\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\027\n\017" +
+                        "university_name\030\r \001(\t\022\022\n\nstudent_id\030\016 \001(" +
+                        "\t\022\021\n\tparent_id\030\017 \001(\003\022\031\n\021parent_first_nam" +
+                        "e\030\020 \001(\t\022\030\n\020parent_last_name\030\021 \001(\t\022\016\n\006sta" +
+                        "tus\030\023 \001(\005\"\200\002\n\027UserAccountDeleteApplys\022\020\n" +
+                        "\010apply_id\030\006 \001(\003\022\022\n\nfirst_name\030\001 \001(\t\022\021\n\tl" +
+                        "ast_name\030\002 \001(\t\022\016\n\006gender\030\003 \001(\005\022\030\n\020identi" +
+                        "ty_id_type\030\004 \001(\005\022\023\n\013identity_id\030\005 \001(\t\022.\n" +
+                        "\nbirth_date\030\t \001(\0132\032.google.protobuf.Time" +
+                        "stamp\022\017\n\007address\030\n \001(\t\022\r\n\005email\030\013 \001(\t\022\r\n" +
+                        "\005phone\030\014 \001(\t\022\016\n\006status\030\r \001(\005\"J\n\020UserProf" +
+                        "ileReply\022\017\n\007user_id\030\001 \001(\003\022\022\n\nfirst_name\030" +
+                        "\002 \001(\t\022\021\n\tlast_name\030\003 \001(\t\"g\n\021UserLoginReq" +
+                        "Reply\022\014\n\004pin1\030\001 \001(\005\022\014\n\004pin2\030\002 \001(\005\022\014\n\004pin" +
+                        "3\030\003 \001(\005\022\014\n\004pin4\030\004 \001(\005\022\014\n\004pin5\030\005 \001(\005\022\014\n\004p" +
+                        "in6\030\006 \001(\005\"H\n\016UserLoginReply\022\017\n\007user_id\030\001" +
+                        " \001(\003\022\022\n\nfirst_name\030\002 \001(\t\022\021\n\tlast_name\030\003 " +
+                        "\001(\t\"\210\001\n\014UserAccounts\022\022\n\naccount_id\030\001 \001(\003" +
+                        "\022\026\n\016account_number\030\002 \001(\003\022\024\n\014account_type" +
+                        "\030\003 \001(\005\022\025\n\rcurrency_type\030\004 \001(\005\022\017\n\007balance" +
+                        "\030\005 \001(\005\022\016\n\006status\030\006 \001(\0052\256\002\n\021UserCustomerL" +
+                        "ogin\0223\n\010LoginReq\022\030.rpc.UserLoginReqReque" +
+                        "st\032\r.rpc.Response\022-\n\005Login\022\025.rpc.UserLog" +
+                        "inRequest\032\r.rpc.Response\022A\n\017ApplyNewAcco" +
+                        "unt\022\037.rpc.UserApplyNewAccountRequest\032\r.r" +
+                        "pc.Response\022;\n\014ForgetUserId\022\034.rpc.UserFo" +
+                        "rgetUserIdRequest\032\r.rpc.Response\0225\n\tForg" +
+                        "etPin\022\031.rpc.UserForgetPinRequest\032\r.rpc.R" +
+                        "esponse2\234\004\n\014UserCustomer\022A\n\013GetAccounts\022" +
+                        "#.rpc.UserCustomerGetAccountsRequest\032\r.r" +
+                        "pc.Response\022?\n\nGetProfile\022\".rpc.UserCust" +
+                        "omerGetProfileRequest\032\r.rpc.Response\022A\n\013" +
+                        "EditProfile\022#.rpc.UserCustomerEditProfil" +
+                        "eRequest\032\r.rpc.Response\022I\n\017GetTransactio" +
+                        "ns\022\'.rpc.UserCustomerGetTransactionsRequ" +
+                        "est\032\r.rpc.Response\022=\n\tGetPayees\022!.rpc.Us" +
+                        "erCustomerGetPayeesRequest\032\r.rpc.Respons" +
+                        "e\022;\n\010AddPayee\022 .rpc.UserCustomerAddPayee" +
+                        "Request\032\r.rpc.Response\022A\n\013RemovePayee\022#." +
+                        "rpc.UserCustomerRemovePayeeRequest\032\r.rpc" +
+                        ".Response\022;\n\010Transfer\022 .rpc.UserCustomer" +
+                        "TransferRequest\032\r.rpc.Response2\234\002\n\tUserS" +
+                        "taff\022-\n\005Login\022\025.rpc.UserStaffRequest\032\r.r" +
+                        "pc.Response\0228\n\020GetNewApplyUsers\022\025.rpc.Us" +
+                        "erStaffRequest\032\r.rpc.Response\0229\n\021GetDele" +
+                        "teAccounts\022\025.rpc.UserStaffRequest\032\r.rpc." +
+                        "Response\0225\n\rGetBlockUsers\022\025.rpc.UserStaf" +
+                        "fRequest\032\r.rpc.Response\0224\n\014RespondApply\022" +
+                        "\025.rpc.UserStaffRequest\032\r.rpc.Response2\314\002" +
+                        "\n\tUserAdmin\022-\n\005Login\022\025.rpc.UserAdminRequ" +
+                        "est\032\r.rpc.Response\0221\n\tGetStaffs\022\025.rpc.Us" +
+                        "erAdminRequest\032\r.rpc.Response\0223\n\013AddNewS" +
+                        "taff\022\025.rpc.UserAdminRequest\032\r.rpc.Respon" +
+                        "se\0223\n\013RemoveStaff\022\025.rpc.UserAdminRequest" +
+                        "\032\r.rpc.Response\0223\n\013ConfigEmail\022\025.rpc.Use" +
+                        "rAdminRequest\032\r.rpc.Response\022>\n\026CheckEma" +
+                        "ilAvailability\022\025.rpc.UserAdminRequest\032\r." +
+                        "rpc.ResponseB\022\n\003rpcB\tBankProtoP\001b\006proto3"
         };
         com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
                 new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -120,73 +307,171 @@ public final class BankProto {
         com.google.protobuf.Descriptors.FileDescriptor
                 .internalBuildGeneratedFileFrom(descriptorData,
                         new com.google.protobuf.Descriptors.FileDescriptor[]{
+                                com.google.protobuf.TimestampProto.getDescriptor(),
                         }, assigner);
-        internal_static_rpc_UserCustomerEditRequest_descriptor =
+        internal_static_rpc_UserStaffRequest_descriptor =
                 getDescriptor().getMessageTypes().get(0);
-        internal_static_rpc_UserCustomerEditRequest_fieldAccessorTable = new
+        internal_static_rpc_UserStaffRequest_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-                internal_static_rpc_UserCustomerEditRequest_descriptor,
-                new String[]{"UserId", "Phone", "Address",});
-        internal_static_rpc_UserCustomerTranRequest_descriptor =
+                internal_static_rpc_UserStaffRequest_descriptor,
+                new String[]{"StaffId", "Password", "RespondId", "RespondResult", "RespondDescription", "FilterByStatusType", "FilterByUserIdName",});
+        internal_static_rpc_UserAdminRequest_descriptor =
                 getDescriptor().getMessageTypes().get(1);
-        internal_static_rpc_UserCustomerTranRequest_fieldAccessorTable = new
+        internal_static_rpc_UserAdminRequest_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-                internal_static_rpc_UserCustomerTranRequest_descriptor,
-                new String[]{"UserId", "ToCardNo", "Amount", "Currency", "Description",});
-        internal_static_rpc_UserStaffAddAccountRequest_descriptor =
+                internal_static_rpc_UserAdminRequest_descriptor,
+                new String[]{"Username", "Password", "StaffFirstName", "StaffLastName", "StaffEmail", "StaffId", "EmailHost", "EmailPort", "EmailAccount", "EmailPassword", "FilterByIdName",});
+        internal_static_rpc_UserLoginReqRequest_descriptor =
                 getDescriptor().getMessageTypes().get(2);
-        internal_static_rpc_UserStaffAddAccountRequest_fieldAccessorTable = new
+        internal_static_rpc_UserLoginReqRequest_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-                internal_static_rpc_UserStaffAddAccountRequest_descriptor,
-                new String[]{"FirstName", "LastName", "Phone", "Address", "Password",});
-        internal_static_rpc_UserRequest_descriptor =
-                getDescriptor().getMessageTypes().get(3);
-        internal_static_rpc_UserRequest_fieldAccessorTable = new
-                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-                internal_static_rpc_UserRequest_descriptor,
-                new String[]{"UserId",});
+                internal_static_rpc_UserLoginReqRequest_descriptor,
+                new String[]{"UserId", "PhoneLast4", "BirthDay", "BirthMon", "BirthYear",});
         internal_static_rpc_UserLoginRequest_descriptor =
-                getDescriptor().getMessageTypes().get(4);
+                getDescriptor().getMessageTypes().get(3);
         internal_static_rpc_UserLoginRequest_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
                 internal_static_rpc_UserLoginRequest_descriptor,
-                new String[]{"Username", "Password", "Role",});
-        internal_static_rpc_Response_descriptor =
+                new String[]{"UserId", "Pin1", "Pin2", "Pin3", "Pin4", "Pin5", "Pin6",});
+        internal_static_rpc_UserApplyNewAccountRequest_descriptor =
+                getDescriptor().getMessageTypes().get(4);
+        internal_static_rpc_UserApplyNewAccountRequest_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserApplyNewAccountRequest_descriptor,
+                new String[]{"FirstName", "LastName", "Gender", "IdentityIdType", "IdentityId", "AccountType", "CardType", "GraduateDate", "BirthDate", "Address", "Email", "Phone", "UniversityName", "StudentId", "ParentId", "ParentFirstName", "ParentLastName",});
+        internal_static_rpc_UserForgetUserIdRequest_descriptor =
                 getDescriptor().getMessageTypes().get(5);
+        internal_static_rpc_UserForgetUserIdRequest_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserForgetUserIdRequest_descriptor,
+                new String[]{"Iban", "BirthDate", "Phone", "Email",});
+        internal_static_rpc_UserForgetPinRequest_descriptor =
+                getDescriptor().getMessageTypes().get(6);
+        internal_static_rpc_UserForgetPinRequest_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserForgetPinRequest_descriptor,
+                new String[]{"UserId", "BirthDate", "Email",});
+        internal_static_rpc_UserCustomerGetAccountsRequest_descriptor =
+                getDescriptor().getMessageTypes().get(7);
+        internal_static_rpc_UserCustomerGetAccountsRequest_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserCustomerGetAccountsRequest_descriptor,
+                new String[]{"UserId",});
+        internal_static_rpc_UserCustomerGetProfileRequest_descriptor =
+                getDescriptor().getMessageTypes().get(8);
+        internal_static_rpc_UserCustomerGetProfileRequest_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserCustomerGetProfileRequest_descriptor,
+                new String[]{"UserId",});
+        internal_static_rpc_UserCustomerEditProfileRequest_descriptor =
+                getDescriptor().getMessageTypes().get(9);
+        internal_static_rpc_UserCustomerEditProfileRequest_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserCustomerEditProfileRequest_descriptor,
+                new String[]{"UserId", "Address", "Phone", "Email",});
+        internal_static_rpc_UserCustomerGetTransactionsRequest_descriptor =
+                getDescriptor().getMessageTypes().get(10);
+        internal_static_rpc_UserCustomerGetTransactionsRequest_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserCustomerGetTransactionsRequest_descriptor,
+                new String[]{"UserId", "FilterByAccount", "FilterByDate",});
+        internal_static_rpc_UserCustomerGetPayeesRequest_descriptor =
+                getDescriptor().getMessageTypes().get(11);
+        internal_static_rpc_UserCustomerGetPayeesRequest_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserCustomerGetPayeesRequest_descriptor,
+                new String[]{"UserId",});
+        internal_static_rpc_UserCustomerAddPayeeRequest_descriptor =
+                getDescriptor().getMessageTypes().get(12);
+        internal_static_rpc_UserCustomerAddPayeeRequest_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserCustomerAddPayeeRequest_descriptor,
+                new String[]{"UserId", "FirstName", "LastName", "Iban", "Pin",});
+        internal_static_rpc_UserCustomerRemovePayeeRequest_descriptor =
+                getDescriptor().getMessageTypes().get(13);
+        internal_static_rpc_UserCustomerRemovePayeeRequest_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserCustomerRemovePayeeRequest_descriptor,
+                new String[]{"UserId", "PayeeId",});
+        internal_static_rpc_UserCustomerTransferRequest_descriptor =
+                getDescriptor().getMessageTypes().get(14);
+        internal_static_rpc_UserCustomerTransferRequest_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserCustomerTransferRequest_descriptor,
+                new String[]{"UserId", "PayeeId", "AccountId", "Amount", "Pin",});
+        internal_static_rpc_Response_descriptor =
+                getDescriptor().getMessageTypes().get(15);
         internal_static_rpc_Response_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
                 internal_static_rpc_Response_descriptor,
-                new String[]{"StatusCode", "Description", "PageNumber", "TotalNumber", "ResultPerPage", "UserCustomerTrans", "UserLogin", "UserCustomerLogs",});
-        internal_static_rpc_UserCustomerTran_descriptor =
-                getDescriptor().getMessageTypes().get(6);
-        internal_static_rpc_UserCustomerTran_fieldAccessorTable = new
+                new String[]{"StatusCode", "Description", "PageNumber", "TotalNumber", "ResultPerPage", "UserLoginReqReply", "UserLoginReply", "UserAccounts", "UserProfile", "UserTransactions", "UserPayees", "UserNewApplys", "UserDeleteApplys", "UserBlockLists", "Staffs",});
+        internal_static_rpc_UserBlocks_descriptor =
+                getDescriptor().getMessageTypes().get(16);
+        internal_static_rpc_UserBlocks_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-                internal_static_rpc_UserCustomerTran_descriptor,
-                new String[]{"TransId", "TransNo", "FromCardNo", "ToCardNo", "Description", "Status",});
-        internal_static_rpc_UserCustomerLog_descriptor =
-                getDescriptor().getMessageTypes().get(7);
-        internal_static_rpc_UserCustomerLog_fieldAccessorTable = new
+                internal_static_rpc_UserBlocks_descriptor,
+                new String[]{"ApplyId", "FirstName", "LastName", "Gender", "IdentityIdType", "IdentityId", "BirthDate", "Address", "Email", "Phone", "AccountId", "Reason", "BlockDate", "Status",});
+        internal_static_rpc_Staffs_descriptor =
+                getDescriptor().getMessageTypes().get(17);
+        internal_static_rpc_Staffs_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-                internal_static_rpc_UserCustomerLog_descriptor,
-                new String[]{"LogId", "OperateType", "OperateTime", "Description", "Status", "Tran",});
-        internal_static_rpc_UserCustomerTransReply_descriptor =
-                getDescriptor().getMessageTypes().get(8);
-        internal_static_rpc_UserCustomerTransReply_fieldAccessorTable = new
+                internal_static_rpc_Staffs_descriptor,
+                new String[]{"Id", "StaffId", "Password", "FirstName", "LastName", "Email",});
+        internal_static_rpc_UserProfile_descriptor =
+                getDescriptor().getMessageTypes().get(18);
+        internal_static_rpc_UserProfile_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-                internal_static_rpc_UserCustomerTransReply_descriptor,
-                new String[]{"Trans",});
+                internal_static_rpc_UserProfile_descriptor,
+                new String[]{"UserId", "FirstName", "LastName", "Gender", "BirthDate", "Address", "Email", "Phone",});
+        internal_static_rpc_UserTransactions_descriptor =
+                getDescriptor().getMessageTypes().get(19);
+        internal_static_rpc_UserTransactions_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserTransactions_descriptor,
+                new String[]{"UserId", "Date", "Description", "Debit", "Credit", "Balance",});
+        internal_static_rpc_UserPayees_descriptor =
+                getDescriptor().getMessageTypes().get(20);
+        internal_static_rpc_UserPayees_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserPayees_descriptor,
+                new String[]{"PayeeId", "Name", "Iban",});
+        internal_static_rpc_UserNewApplys_descriptor =
+                getDescriptor().getMessageTypes().get(21);
+        internal_static_rpc_UserNewApplys_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserNewApplys_descriptor,
+                new String[]{"ApplyId", "FirstName", "LastName", "Gender", "IdentityIdType", "IdentityId", "AccountType", "CardType", "GraduateDate", "BirthDate", "Address", "Email", "Phone", "UniversityName", "StudentId", "ParentId", "ParentFirstName", "ParentLastName", "Status",});
+        internal_static_rpc_UserAccountDeleteApplys_descriptor =
+                getDescriptor().getMessageTypes().get(22);
+        internal_static_rpc_UserAccountDeleteApplys_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserAccountDeleteApplys_descriptor,
+                new String[]{"ApplyId", "FirstName", "LastName", "Gender", "IdentityIdType", "IdentityId", "BirthDate", "Address", "Email", "Phone", "Status",});
+        internal_static_rpc_UserProfileReply_descriptor =
+                getDescriptor().getMessageTypes().get(23);
+        internal_static_rpc_UserProfileReply_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserProfileReply_descriptor,
+                new String[]{"UserId", "FirstName", "LastName",});
+        internal_static_rpc_UserLoginReqReply_descriptor =
+                getDescriptor().getMessageTypes().get(24);
+        internal_static_rpc_UserLoginReqReply_fieldAccessorTable = new
+                com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+                internal_static_rpc_UserLoginReqReply_descriptor,
+                new String[]{"Pin1", "Pin2", "Pin3", "Pin4", "Pin5", "Pin6",});
         internal_static_rpc_UserLoginReply_descriptor =
-                getDescriptor().getMessageTypes().get(9);
+                getDescriptor().getMessageTypes().get(25);
         internal_static_rpc_UserLoginReply_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
                 internal_static_rpc_UserLoginReply_descriptor,
-                new String[]{"UserId", "FirstName", "LastName", "Phone", "Address",});
-        internal_static_rpc_UserCustomerLogsReply_descriptor =
-                getDescriptor().getMessageTypes().get(10);
-        internal_static_rpc_UserCustomerLogsReply_fieldAccessorTable = new
+                new String[]{"UserId", "FirstName", "LastName",});
+        internal_static_rpc_UserAccounts_descriptor =
+                getDescriptor().getMessageTypes().get(26);
+        internal_static_rpc_UserAccounts_fieldAccessorTable = new
                 com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-                internal_static_rpc_UserCustomerLogsReply_descriptor,
-                new String[]{"Trans",});
+                internal_static_rpc_UserAccounts_descriptor,
+                new String[]{"AccountId", "AccountNumber", "AccountType", "CurrencyType", "Balance", "Status",});
+        com.google.protobuf.TimestampProto.getDescriptor();
     }
 
     private BankProto() {

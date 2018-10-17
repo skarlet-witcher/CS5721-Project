@@ -3,8 +3,8 @@
 
 package rpc;
 
-public interface UserLoginReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserLoginReply)
+public interface UserCustomerAddPayeeRequestOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:rpc.UserCustomerAddPayeeRequest)
         com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -33,4 +33,20 @@ public interface UserLoginReplyOrBuilder extends
      */
     com.google.protobuf.ByteString
     getLastNameBytes();
+
+    /**
+     * <code>string iban = 4;</code>
+     */
+    String getIban();
+
+    /**
+     * <code>string iban = 4;</code>
+     */
+    com.google.protobuf.ByteString
+    getIbanBytes();
+
+    /**
+     * <code>int32 pin = 5;</code>
+     */
+    int getPin();
 }

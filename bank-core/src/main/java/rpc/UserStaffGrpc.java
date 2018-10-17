@@ -14,82 +14,179 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
         comments = "Source: Bank.proto")
 public final class UserStaffGrpc {
 
+  private static final int METHODID_LOGIN = 0;
+
   public static final String SERVICE_NAME = "rpc.UserStaff";
-  private static final int METHODID_ADD_NEW_ACCOUNT = 0;
-  private static final int METHODID_REMOVE_ACCOUNT = 1;
+  private static final int METHODID_GET_NEW_APPLY_USERS = 1;
+  private static final int METHODID_GET_DELETE_ACCOUNTS = 2;
+  private static final int METHODID_GET_BLOCK_USERS = 3;
+  private static final int METHODID_RESPOND_APPLY = 4;
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<UserStaffAddAccountRequest,
-          Response> getAddNewAccountMethod;
-  private static volatile io.grpc.MethodDescriptor<UserRequest,
-          Response> getRemoveAccountMethod;
+  private static volatile io.grpc.MethodDescriptor<UserStaffRequest,
+          Response> getLoginMethod;
+  private static volatile io.grpc.MethodDescriptor<UserStaffRequest,
+          Response> getGetNewApplyUsersMethod;
+  private static volatile io.grpc.MethodDescriptor<UserStaffRequest,
+          Response> getGetDeleteAccountsMethod;
+  private static volatile io.grpc.MethodDescriptor<UserStaffRequest,
+          Response> getGetBlockUsersMethod;
+  private static volatile io.grpc.MethodDescriptor<UserStaffRequest,
+          Response> getRespondApplyMethod;
   private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
-
-  private UserStaffGrpc() {
-  }
-
-  @io.grpc.stub.annotations.RpcMethod(
-          fullMethodName = SERVICE_NAME + '/' + "AddNewAccount",
-          requestType = UserStaffAddAccountRequest.class,
-          responseType = Response.class,
-          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<UserStaffAddAccountRequest,
-          Response> getAddNewAccountMethod() {
-    io.grpc.MethodDescriptor<UserStaffAddAccountRequest, Response> getAddNewAccountMethod;
-    if ((getAddNewAccountMethod = UserStaffGrpc.getAddNewAccountMethod) == null) {
-      synchronized (UserStaffGrpc.class) {
-        if ((getAddNewAccountMethod = UserStaffGrpc.getAddNewAccountMethod) == null) {
-          UserStaffGrpc.getAddNewAccountMethod = getAddNewAccountMethod =
-                  io.grpc.MethodDescriptor.<UserStaffAddAccountRequest, Response>newBuilder()
-                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-                          .setFullMethodName(generateFullMethodName(
-                                  "rpc.UserStaff", "AddNewAccount"))
-                          .setSampledToLocalTracing(true)
-                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  UserStaffAddAccountRequest.getDefaultInstance()))
-                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  Response.getDefaultInstance()))
-                          .setSchemaDescriptor(new UserStaffMethodDescriptorSupplier("AddNewAccount"))
-                          .build();
-        }
-      }
-    }
-    return getAddNewAccountMethod;
-  }
-
-  @io.grpc.stub.annotations.RpcMethod(
-          fullMethodName = SERVICE_NAME + '/' + "RemoveAccount",
-          requestType = UserRequest.class,
-          responseType = Response.class,
-          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<UserRequest,
-          Response> getRemoveAccountMethod() {
-    io.grpc.MethodDescriptor<UserRequest, Response> getRemoveAccountMethod;
-    if ((getRemoveAccountMethod = UserStaffGrpc.getRemoveAccountMethod) == null) {
-      synchronized (UserStaffGrpc.class) {
-        if ((getRemoveAccountMethod = UserStaffGrpc.getRemoveAccountMethod) == null) {
-          UserStaffGrpc.getRemoveAccountMethod = getRemoveAccountMethod =
-                  io.grpc.MethodDescriptor.<UserRequest, Response>newBuilder()
-                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-                          .setFullMethodName(generateFullMethodName(
-                                  "rpc.UserStaff", "RemoveAccount"))
-                          .setSampledToLocalTracing(true)
-                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  UserRequest.getDefaultInstance()))
-                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  Response.getDefaultInstance()))
-                          .setSchemaDescriptor(new UserStaffMethodDescriptorSupplier("RemoveAccount"))
-                          .build();
-        }
-      }
-    }
-    return getRemoveAccountMethod;
-  }
 
   /**
    * Creates a new async stub that supports all call types for the service
    */
   public static UserStaffStub newStub(io.grpc.Channel channel) {
     return new UserStaffStub(channel);
+  }
+
+  private UserStaffGrpc() {
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "Login",
+          requestType = UserStaffRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserStaffRequest,
+          Response> getLoginMethod() {
+    io.grpc.MethodDescriptor<UserStaffRequest, Response> getLoginMethod;
+    if ((getLoginMethod = UserStaffGrpc.getLoginMethod) == null) {
+      synchronized (UserStaffGrpc.class) {
+        if ((getLoginMethod = UserStaffGrpc.getLoginMethod) == null) {
+          UserStaffGrpc.getLoginMethod = getLoginMethod =
+                  io.grpc.MethodDescriptor.<UserStaffRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserStaff", "Login"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserStaffRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserStaffMethodDescriptorSupplier("Login"))
+                          .build();
+        }
+      }
+    }
+    return getLoginMethod;
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "GetNewApplyUsers",
+          requestType = UserStaffRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserStaffRequest,
+          Response> getGetNewApplyUsersMethod() {
+    io.grpc.MethodDescriptor<UserStaffRequest, Response> getGetNewApplyUsersMethod;
+    if ((getGetNewApplyUsersMethod = UserStaffGrpc.getGetNewApplyUsersMethod) == null) {
+      synchronized (UserStaffGrpc.class) {
+        if ((getGetNewApplyUsersMethod = UserStaffGrpc.getGetNewApplyUsersMethod) == null) {
+          UserStaffGrpc.getGetNewApplyUsersMethod = getGetNewApplyUsersMethod =
+                  io.grpc.MethodDescriptor.<UserStaffRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserStaff", "GetNewApplyUsers"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserStaffRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserStaffMethodDescriptorSupplier("GetNewApplyUsers"))
+                          .build();
+        }
+      }
+    }
+    return getGetNewApplyUsersMethod;
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "GetDeleteAccounts",
+          requestType = UserStaffRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserStaffRequest,
+          Response> getGetDeleteAccountsMethod() {
+    io.grpc.MethodDescriptor<UserStaffRequest, Response> getGetDeleteAccountsMethod;
+    if ((getGetDeleteAccountsMethod = UserStaffGrpc.getGetDeleteAccountsMethod) == null) {
+      synchronized (UserStaffGrpc.class) {
+        if ((getGetDeleteAccountsMethod = UserStaffGrpc.getGetDeleteAccountsMethod) == null) {
+          UserStaffGrpc.getGetDeleteAccountsMethod = getGetDeleteAccountsMethod =
+                  io.grpc.MethodDescriptor.<UserStaffRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserStaff", "GetDeleteAccounts"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserStaffRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserStaffMethodDescriptorSupplier("GetDeleteAccounts"))
+                          .build();
+        }
+      }
+    }
+    return getGetDeleteAccountsMethod;
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "GetBlockUsers",
+          requestType = UserStaffRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserStaffRequest,
+          Response> getGetBlockUsersMethod() {
+    io.grpc.MethodDescriptor<UserStaffRequest, Response> getGetBlockUsersMethod;
+    if ((getGetBlockUsersMethod = UserStaffGrpc.getGetBlockUsersMethod) == null) {
+      synchronized (UserStaffGrpc.class) {
+        if ((getGetBlockUsersMethod = UserStaffGrpc.getGetBlockUsersMethod) == null) {
+          UserStaffGrpc.getGetBlockUsersMethod = getGetBlockUsersMethod =
+                  io.grpc.MethodDescriptor.<UserStaffRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserStaff", "GetBlockUsers"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserStaffRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserStaffMethodDescriptorSupplier("GetBlockUsers"))
+                          .build();
+        }
+      }
+    }
+    return getGetBlockUsersMethod;
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "RespondApply",
+          requestType = UserStaffRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserStaffRequest,
+          Response> getRespondApplyMethod() {
+    io.grpc.MethodDescriptor<UserStaffRequest, Response> getRespondApplyMethod;
+    if ((getRespondApplyMethod = UserStaffGrpc.getRespondApplyMethod) == null) {
+      synchronized (UserStaffGrpc.class) {
+        if ((getRespondApplyMethod = UserStaffGrpc.getRespondApplyMethod) == null) {
+          UserStaffGrpc.getRespondApplyMethod = getRespondApplyMethod =
+                  io.grpc.MethodDescriptor.<UserStaffRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserStaff", "RespondApply"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserStaffRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserStaffMethodDescriptorSupplier("RespondApply"))
+                          .build();
+        }
+      }
+    }
+    return getRespondApplyMethod;
   }
 
   /**
@@ -116,8 +213,11 @@ public final class UserStaffGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
                   .setSchemaDescriptor(new UserStaffFileDescriptorSupplier())
-                  .addMethod(getAddNewAccountMethod())
-                  .addMethod(getRemoveAccountMethod())
+                  .addMethod(getLoginMethod())
+                  .addMethod(getGetNewApplyUsersMethod())
+                  .addMethod(getGetDeleteAccountsMethod())
+                  .addMethod(getGetBlockUsersMethod())
+                  .addMethod(getRespondApplyMethod())
                   .build();
         }
       }
@@ -131,36 +231,81 @@ public final class UserStaffGrpc {
 
     /**
      */
-    public void addNewAccount(UserStaffAddAccountRequest request,
-                              io.grpc.stub.StreamObserver<Response> responseObserver) {
-      asyncUnimplementedUnaryCall(getAddNewAccountMethod(), responseObserver);
+    public void login(UserStaffRequest request,
+                      io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getLoginMethod(), responseObserver);
     }
 
     /**
      */
-    public void removeAccount(UserRequest request,
+    public void getNewApplyUsers(UserStaffRequest request,
+                                 io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetNewApplyUsersMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getDeleteAccounts(UserStaffRequest request,
+                                  io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetDeleteAccountsMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getBlockUsers(UserStaffRequest request,
                               io.grpc.stub.StreamObserver<Response> responseObserver) {
-      asyncUnimplementedUnaryCall(getRemoveAccountMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getGetBlockUsersMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     * approve/disapprove
+     * </pre>
+     */
+    public void respondApply(UserStaffRequest request,
+                             io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getRespondApplyMethod(), responseObserver);
     }
 
     @Override
     public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
               .addMethod(
-                      getAddNewAccountMethod(),
+                      getLoginMethod(),
                       asyncUnaryCall(
                               new MethodHandlers<
-                                      UserStaffAddAccountRequest,
+                                      UserStaffRequest,
                                       Response>(
-                                      this, METHODID_ADD_NEW_ACCOUNT)))
+                                      this, METHODID_LOGIN)))
               .addMethod(
-                      getRemoveAccountMethod(),
+                      getGetNewApplyUsersMethod(),
                       asyncUnaryCall(
                               new MethodHandlers<
-                                      UserRequest,
+                                      UserStaffRequest,
                                       Response>(
-                                      this, METHODID_REMOVE_ACCOUNT)))
-              .build();
+                                      this, METHODID_GET_NEW_APPLY_USERS)))
+              .addMethod(
+                      getGetDeleteAccountsMethod(),
+                      asyncUnaryCall(
+                              new MethodHandlers<
+                                      UserStaffRequest,
+                                      Response>(
+                                      this, METHODID_GET_DELETE_ACCOUNTS)))
+              .addMethod(
+                      getGetBlockUsersMethod(),
+                      asyncUnaryCall(
+                              new MethodHandlers<
+                                      UserStaffRequest,
+                                      Response>(
+                                      this, METHODID_GET_BLOCK_USERS)))
+              .addMethod(
+                      getRespondApplyMethod(),
+                      asyncUnaryCall(
+                              new MethodHandlers<
+                                      UserStaffRequest,
+                                      Response>(
+                                      this, METHODID_RESPOND_APPLY)))
+          .build();
     }
   }
 
@@ -184,18 +329,45 @@ public final class UserStaffGrpc {
 
     /**
      */
-    public void addNewAccount(UserStaffAddAccountRequest request,
-                              io.grpc.stub.StreamObserver<Response> responseObserver) {
+    public void login(UserStaffRequest request,
+                      io.grpc.stub.StreamObserver<Response> responseObserver) {
       asyncUnaryCall(
-              getChannel().newCall(getAddNewAccountMethod(), getCallOptions()), request, responseObserver);
+              getChannel().newCall(getLoginMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void removeAccount(UserRequest request,
+    public void getNewApplyUsers(UserStaffRequest request,
+                                 io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnaryCall(
+              getChannel().newCall(getGetNewApplyUsersMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getDeleteAccounts(UserStaffRequest request,
+                                  io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnaryCall(
+              getChannel().newCall(getGetDeleteAccountsMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getBlockUsers(UserStaffRequest request,
                               io.grpc.stub.StreamObserver<Response> responseObserver) {
       asyncUnaryCall(
-              getChannel().newCall(getRemoveAccountMethod(), getCallOptions()), request, responseObserver);
+              getChannel().newCall(getGetBlockUsersMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     * <pre>
+     * approve/disapprove
+     * </pre>
+     */
+    public void respondApply(UserStaffRequest request,
+                             io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnaryCall(
+              getChannel().newCall(getRespondApplyMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -219,16 +391,40 @@ public final class UserStaffGrpc {
 
     /**
      */
-    public Response addNewAccount(UserStaffAddAccountRequest request) {
+    public Response login(UserStaffRequest request) {
       return blockingUnaryCall(
-              getChannel(), getAddNewAccountMethod(), getCallOptions(), request);
+              getChannel(), getLoginMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public Response removeAccount(UserRequest request) {
+    public Response getNewApplyUsers(UserStaffRequest request) {
       return blockingUnaryCall(
-              getChannel(), getRemoveAccountMethod(), getCallOptions(), request);
+              getChannel(), getGetNewApplyUsersMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public Response getDeleteAccounts(UserStaffRequest request) {
+      return blockingUnaryCall(
+              getChannel(), getGetDeleteAccountsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public Response getBlockUsers(UserStaffRequest request) {
+      return blockingUnaryCall(
+              getChannel(), getGetBlockUsersMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * approve/disapprove
+     * </pre>
+     */
+    public Response respondApply(UserStaffRequest request) {
+      return blockingUnaryCall(
+              getChannel(), getRespondApplyMethod(), getCallOptions(), request);
     }
   }
 
@@ -252,18 +448,45 @@ public final class UserStaffGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Response> addNewAccount(
-            UserStaffAddAccountRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> login(
+            UserStaffRequest request) {
       return futureUnaryCall(
-              getChannel().newCall(getAddNewAccountMethod(), getCallOptions()), request);
+              getChannel().newCall(getLoginMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Response> removeAccount(
-            UserRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> getNewApplyUsers(
+        UserStaffRequest request) {
       return futureUnaryCall(
-              getChannel().newCall(getRemoveAccountMethod(), getCallOptions()), request);
+              getChannel().newCall(getGetNewApplyUsersMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<Response> getDeleteAccounts(
+        UserStaffRequest request) {
+      return futureUnaryCall(
+              getChannel().newCall(getGetDeleteAccountsMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<Response> getBlockUsers(
+            UserStaffRequest request) {
+      return futureUnaryCall(
+              getChannel().newCall(getGetBlockUsersMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     * approve/disapprove
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<Response> respondApply(
+            UserStaffRequest request) {
+      return futureUnaryCall(
+              getChannel().newCall(getRespondApplyMethod(), getCallOptions()), request);
     }
   }
 
@@ -284,12 +507,24 @@ public final class UserStaffGrpc {
     @SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_ADD_NEW_ACCOUNT:
-          serviceImpl.addNewAccount((UserStaffAddAccountRequest) request,
+        case METHODID_LOGIN:
+          serviceImpl.login((UserStaffRequest) request,
                   (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
-        case METHODID_REMOVE_ACCOUNT:
-          serviceImpl.removeAccount((UserRequest) request,
+        case METHODID_GET_NEW_APPLY_USERS:
+          serviceImpl.getNewApplyUsers((UserStaffRequest) request,
+                  (io.grpc.stub.StreamObserver<Response>) responseObserver);
+          break;
+        case METHODID_GET_DELETE_ACCOUNTS:
+          serviceImpl.getDeleteAccounts((UserStaffRequest) request,
+                  (io.grpc.stub.StreamObserver<Response>) responseObserver);
+          break;
+        case METHODID_GET_BLOCK_USERS:
+          serviceImpl.getBlockUsers((UserStaffRequest) request,
+                  (io.grpc.stub.StreamObserver<Response>) responseObserver);
+          break;
+        case METHODID_RESPOND_APPLY:
+          serviceImpl.respondApply((UserStaffRequest) request,
                   (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
         default:
@@ -310,8 +545,7 @@ public final class UserStaffGrpc {
 
   private static abstract class UserStaffBaseDescriptorSupplier
           implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    UserStaffBaseDescriptorSupplier() {
-    }
+    UserStaffBaseDescriptorSupplier() {}
 
     @Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
@@ -326,8 +560,7 @@ public final class UserStaffGrpc {
 
   private static final class UserStaffFileDescriptorSupplier
           extends UserStaffBaseDescriptorSupplier {
-    UserStaffFileDescriptorSupplier() {
-    }
+    UserStaffFileDescriptorSupplier() {}
   }
 
   private static final class UserStaffMethodDescriptorSupplier

@@ -4,61 +4,49 @@
 package rpc;
 
 /**
- * Protobuf type {@code rpc.UserLoginRequest}
+ * Protobuf type {@code rpc.UserForgetPinRequest}
  */
-public final class UserLoginRequest extends
+public final class UserForgetPinRequest extends
         com.google.protobuf.GeneratedMessageV3 implements
-        // @@protoc_insertion_point(message_implements:rpc.UserLoginRequest)
-        UserLoginRequestOrBuilder {
+        // @@protoc_insertion_point(message_implements:rpc.UserForgetPinRequest)
+        UserForgetPinRequestOrBuilder {
     public static final int USER_ID_FIELD_NUMBER = 1;
-    public static final int PIN1_FIELD_NUMBER = 2;
-    public static final int PIN2_FIELD_NUMBER = 3;
-    public static final int PIN3_FIELD_NUMBER = 4;
-    public static final int PIN4_FIELD_NUMBER = 5;
-    public static final int PIN5_FIELD_NUMBER = 6;
-    public static final int PIN6_FIELD_NUMBER = 7;
+    public static final int BIRTH_DATE_FIELD_NUMBER = 2;
+    public static final int EMAIL_FIELD_NUMBER = 3;
     private static final long serialVersionUID = 0L;
-    // @@protoc_insertion_point(class_scope:rpc.UserLoginRequest)
-    private static final UserLoginRequest DEFAULT_INSTANCE;
-    private static final com.google.protobuf.Parser<UserLoginRequest>
-            PARSER = new com.google.protobuf.AbstractParser<UserLoginRequest>() {
-        public UserLoginRequest parsePartialFrom(
+    // @@protoc_insertion_point(class_scope:rpc.UserForgetPinRequest)
+    private static final UserForgetPinRequest DEFAULT_INSTANCE;
+    private static final com.google.protobuf.Parser<UserForgetPinRequest>
+            PARSER = new com.google.protobuf.AbstractParser<UserForgetPinRequest>() {
+        public UserForgetPinRequest parsePartialFrom(
                 com.google.protobuf.CodedInputStream input,
                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
                 throws com.google.protobuf.InvalidProtocolBufferException {
-            return new UserLoginRequest(input, extensionRegistry);
+            return new UserForgetPinRequest(input, extensionRegistry);
         }
     };
 
     static {
-        DEFAULT_INSTANCE = new UserLoginRequest();
+        DEFAULT_INSTANCE = new UserForgetPinRequest();
     }
 
     private volatile Object userId_;
-    private int pin1_;
-    private int pin2_;
-    private int pin3_;
-    private int pin4_;
-    private int pin5_;
-    private int pin6_;
+    private volatile Object birthDate_;
+    private volatile Object email_;
     private byte memoizedIsInitialized = -1;
 
-    // Use UserLoginRequest.newBuilder() to construct.
-    private UserLoginRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use UserForgetPinRequest.newBuilder() to construct.
+    private UserForgetPinRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
         super(builder);
     }
 
-    private UserLoginRequest() {
+    private UserForgetPinRequest() {
         userId_ = "";
-        pin1_ = 0;
-        pin2_ = 0;
-        pin3_ = 0;
-        pin4_ = 0;
-        pin5_ = 0;
-        pin6_ = 0;
+        birthDate_ = "";
+        email_ = "";
     }
 
-    private UserLoginRequest(
+    private UserForgetPinRequest(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
@@ -90,34 +78,16 @@ public final class UserLoginRequest extends
                         userId_ = s;
                         break;
                     }
-                    case 16: {
+                    case 18: {
+                        String s = input.readStringRequireUtf8();
 
-                        pin1_ = input.readInt32();
+                        birthDate_ = s;
                         break;
                     }
-                    case 24: {
+                    case 26: {
+                        String s = input.readStringRequireUtf8();
 
-                        pin2_ = input.readInt32();
-                        break;
-                    }
-                    case 32: {
-
-                        pin3_ = input.readInt32();
-                        break;
-                    }
-                    case 40: {
-
-                        pin4_ = input.readInt32();
-                        break;
-                    }
-                    case 48: {
-
-                        pin5_ = input.readInt32();
-                        break;
-                    }
-                    case 56: {
-
-                        pin6_ = input.readInt32();
+                        email_ = s;
                         break;
                     }
                 }
@@ -135,54 +105,54 @@ public final class UserLoginRequest extends
 
     public static final com.google.protobuf.Descriptors.Descriptor
     getDescriptor() {
-        return BankProto.internal_static_rpc_UserLoginRequest_descriptor;
+        return BankProto.internal_static_rpc_UserForgetPinRequest_descriptor;
     }
 
-    public static UserLoginRequest parseFrom(
+    public static UserForgetPinRequest parseFrom(
             java.nio.ByteBuffer data)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
     }
 
-    public static UserLoginRequest parseFrom(
+    public static UserForgetPinRequest parseFrom(
             java.nio.ByteBuffer data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
     }
 
-    public static UserLoginRequest parseFrom(
+    public static UserForgetPinRequest parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
     }
 
-    public static UserLoginRequest parseFrom(
+    public static UserForgetPinRequest parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
     }
 
-    public static UserLoginRequest parseFrom(byte[] data)
+    public static UserForgetPinRequest parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data);
     }
 
-    public static UserLoginRequest parseFrom(
+    public static UserForgetPinRequest parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
     }
 
-    public static UserLoginRequest parseFrom(java.io.InputStream input)
+    public static UserForgetPinRequest parseFrom(java.io.InputStream input)
             throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
                 .parseWithIOException(PARSER, input);
     }
 
-    public static UserLoginRequest parseFrom(
+    public static UserForgetPinRequest parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -190,13 +160,13 @@ public final class UserLoginRequest extends
                 .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static UserLoginRequest parseDelimitedFrom(java.io.InputStream input)
+    public static UserForgetPinRequest parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
                 .parseDelimitedWithIOException(PARSER, input);
     }
 
-    public static UserLoginRequest parseDelimitedFrom(
+    public static UserForgetPinRequest parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -204,14 +174,14 @@ public final class UserLoginRequest extends
                 .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static UserLoginRequest parseFrom(
+    public static UserForgetPinRequest parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
         return com.google.protobuf.GeneratedMessageV3
                 .parseWithIOException(PARSER, input);
     }
 
-    public static UserLoginRequest parseFrom(
+    public static UserForgetPinRequest parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -223,15 +193,15 @@ public final class UserLoginRequest extends
         return DEFAULT_INSTANCE.toBuilder();
     }
 
-    public static Builder newBuilder(UserLoginRequest prototype) {
+    public static Builder newBuilder(UserForgetPinRequest prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
 
-    public static UserLoginRequest getDefaultInstance() {
+    public static UserForgetPinRequest getDefaultInstance() {
         return DEFAULT_INSTANCE;
     }
 
-    public static com.google.protobuf.Parser<UserLoginRequest> parser() {
+    public static com.google.protobuf.Parser<UserForgetPinRequest> parser() {
         return PARSER;
     }
 
@@ -243,9 +213,9 @@ public final class UserLoginRequest extends
 
     protected FieldAccessorTable
     internalGetFieldAccessorTable() {
-        return BankProto.internal_static_rpc_UserLoginRequest_fieldAccessorTable
+        return BankProto.internal_static_rpc_UserForgetPinRequest_fieldAccessorTable
                 .ensureFieldAccessorsInitialized(
-                        UserLoginRequest.class, UserLoginRequest.Builder.class);
+                        UserForgetPinRequest.class, UserForgetPinRequest.Builder.class);
     }
 
     /**
@@ -282,45 +252,69 @@ public final class UserLoginRequest extends
     }
 
     /**
-     * <code>int32 pin1 = 2;</code>
+     * <code>string birth_date = 2;</code>
      */
-    public int getPin1() {
-        return pin1_;
+    public String getBirthDate() {
+        Object ref = birthDate_;
+        if (ref instanceof String) {
+            return (String) ref;
+        } else {
+            com.google.protobuf.ByteString bs =
+                    (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            birthDate_ = s;
+            return s;
+        }
     }
 
     /**
-     * <code>int32 pin2 = 3;</code>
+     * <code>string birth_date = 2;</code>
      */
-    public int getPin2() {
-        return pin2_;
+    public com.google.protobuf.ByteString
+    getBirthDateBytes() {
+        Object ref = birthDate_;
+        if (ref instanceof String) {
+            com.google.protobuf.ByteString b =
+                    com.google.protobuf.ByteString.copyFromUtf8(
+                            (String) ref);
+            birthDate_ = b;
+            return b;
+        } else {
+            return (com.google.protobuf.ByteString) ref;
+        }
     }
 
     /**
-     * <code>int32 pin3 = 4;</code>
+     * <code>string email = 3;</code>
      */
-    public int getPin3() {
-        return pin3_;
+    public String getEmail() {
+        Object ref = email_;
+        if (ref instanceof String) {
+            return (String) ref;
+        } else {
+            com.google.protobuf.ByteString bs =
+                    (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            email_ = s;
+            return s;
+        }
     }
 
     /**
-     * <code>int32 pin4 = 5;</code>
+     * <code>string email = 3;</code>
      */
-    public int getPin4() {
-        return pin4_;
-    }
-
-    /**
-     * <code>int32 pin5 = 6;</code>
-     */
-    public int getPin5() {
-        return pin5_;
-    }
-
-    /**
-     * <code>int32 pin6 = 7;</code>
-     */
-    public int getPin6() {
-        return pin6_;
+    public com.google.protobuf.ByteString
+    getEmailBytes() {
+        Object ref = email_;
+        if (ref instanceof String) {
+            com.google.protobuf.ByteString b =
+                    com.google.protobuf.ByteString.copyFromUtf8(
+                            (String) ref);
+            email_ = b;
+            return b;
+        } else {
+            return (com.google.protobuf.ByteString) ref;
+        }
     }
 
     public final boolean isInitialized() {
@@ -337,23 +331,11 @@ public final class UserLoginRequest extends
         if (!getUserIdBytes().isEmpty()) {
             com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userId_);
         }
-        if (pin1_ != 0) {
-            output.writeInt32(2, pin1_);
+        if (!getBirthDateBytes().isEmpty()) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 2, birthDate_);
         }
-        if (pin2_ != 0) {
-            output.writeInt32(3, pin2_);
-        }
-        if (pin3_ != 0) {
-            output.writeInt32(4, pin3_);
-        }
-        if (pin4_ != 0) {
-            output.writeInt32(5, pin4_);
-        }
-        if (pin5_ != 0) {
-            output.writeInt32(6, pin5_);
-        }
-        if (pin6_ != 0) {
-            output.writeInt32(7, pin6_);
+        if (!getEmailBytes().isEmpty()) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 3, email_);
         }
         unknownFields.writeTo(output);
     }
@@ -366,29 +348,11 @@ public final class UserLoginRequest extends
         if (!getUserIdBytes().isEmpty()) {
             size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userId_);
         }
-        if (pin1_ != 0) {
-            size += com.google.protobuf.CodedOutputStream
-                    .computeInt32Size(2, pin1_);
+        if (!getBirthDateBytes().isEmpty()) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, birthDate_);
         }
-        if (pin2_ != 0) {
-            size += com.google.protobuf.CodedOutputStream
-                    .computeInt32Size(3, pin2_);
-        }
-        if (pin3_ != 0) {
-            size += com.google.protobuf.CodedOutputStream
-                    .computeInt32Size(4, pin3_);
-        }
-        if (pin4_ != 0) {
-            size += com.google.protobuf.CodedOutputStream
-                    .computeInt32Size(5, pin4_);
-        }
-        if (pin5_ != 0) {
-            size += com.google.protobuf.CodedOutputStream
-                    .computeInt32Size(6, pin5_);
-        }
-        if (pin6_ != 0) {
-            size += com.google.protobuf.CodedOutputStream
-                    .computeInt32Size(7, pin6_);
+        if (!getEmailBytes().isEmpty()) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, email_);
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -400,26 +364,18 @@ public final class UserLoginRequest extends
         if (obj == this) {
             return true;
         }
-        if (!(obj instanceof UserLoginRequest)) {
+        if (!(obj instanceof UserForgetPinRequest)) {
             return super.equals(obj);
         }
-        UserLoginRequest other = (UserLoginRequest) obj;
+        UserForgetPinRequest other = (UserForgetPinRequest) obj;
 
         boolean result = true;
         result = result && getUserId()
                 .equals(other.getUserId());
-        result = result && (getPin1()
-                == other.getPin1());
-        result = result && (getPin2()
-                == other.getPin2());
-        result = result && (getPin3()
-                == other.getPin3());
-        result = result && (getPin4()
-                == other.getPin4());
-        result = result && (getPin5()
-                == other.getPin5());
-        result = result && (getPin6()
-                == other.getPin6());
+        result = result && getBirthDate()
+                .equals(other.getBirthDate());
+        result = result && getEmail()
+                .equals(other.getEmail());
         result = result && unknownFields.equals(other.unknownFields);
         return result;
     }
@@ -433,18 +389,10 @@ public final class UserLoginRequest extends
         hash = (19 * hash) + getDescriptor().hashCode();
         hash = (37 * hash) + USER_ID_FIELD_NUMBER;
         hash = (53 * hash) + getUserId().hashCode();
-        hash = (37 * hash) + PIN1_FIELD_NUMBER;
-        hash = (53 * hash) + getPin1();
-        hash = (37 * hash) + PIN2_FIELD_NUMBER;
-        hash = (53 * hash) + getPin2();
-        hash = (37 * hash) + PIN3_FIELD_NUMBER;
-        hash = (53 * hash) + getPin3();
-        hash = (37 * hash) + PIN4_FIELD_NUMBER;
-        hash = (53 * hash) + getPin4();
-        hash = (37 * hash) + PIN5_FIELD_NUMBER;
-        hash = (53 * hash) + getPin5();
-        hash = (37 * hash) + PIN6_FIELD_NUMBER;
-        hash = (53 * hash) + getPin6();
+        hash = (37 * hash) + BIRTH_DATE_FIELD_NUMBER;
+        hash = (53 * hash) + getBirthDate().hashCode();
+        hash = (37 * hash) + EMAIL_FIELD_NUMBER;
+        hash = (53 * hash) + getEmail().hashCode();
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
         return hash;
@@ -467,30 +415,26 @@ public final class UserLoginRequest extends
     }
 
     @Override
-    public com.google.protobuf.Parser<UserLoginRequest> getParserForType() {
+    public com.google.protobuf.Parser<UserForgetPinRequest> getParserForType() {
         return PARSER;
     }
 
-    public UserLoginRequest getDefaultInstanceForType() {
+    public UserForgetPinRequest getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
     }
 
     /**
-     * Protobuf type {@code rpc.UserLoginRequest}
+     * Protobuf type {@code rpc.UserForgetPinRequest}
      */
     public static final class Builder extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:rpc.UserLoginRequest)
-            UserLoginRequestOrBuilder {
+            // @@protoc_insertion_point(builder_implements:rpc.UserForgetPinRequest)
+            UserForgetPinRequestOrBuilder {
         private Object userId_ = "";
-        private int pin1_;
-        private int pin2_;
-        private int pin3_;
-        private int pin4_;
-        private int pin5_;
-        private int pin6_;
+        private Object birthDate_ = "";
+        private Object email_ = "";
 
-        // Construct using rpc.UserLoginRequest.newBuilder()
+        // Construct using rpc.UserForgetPinRequest.newBuilder()
         private Builder() {
             maybeForceBuilderInitialization();
         }
@@ -503,15 +447,15 @@ public final class UserLoginRequest extends
 
         public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-            return BankProto.internal_static_rpc_UserLoginRequest_descriptor;
+            return BankProto.internal_static_rpc_UserForgetPinRequest_descriptor;
         }
 
-    protected FieldAccessorTable
-    internalGetFieldAccessorTable() {
-        return BankProto.internal_static_rpc_UserLoginRequest_fieldAccessorTable
-                .ensureFieldAccessorsInitialized(
-                        UserLoginRequest.class, UserLoginRequest.Builder.class);
-    }
+        protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+            return BankProto.internal_static_rpc_UserForgetPinRequest_fieldAccessorTable
+                    .ensureFieldAccessorsInitialized(
+                            UserForgetPinRequest.class, UserForgetPinRequest.Builder.class);
+        }
 
         private void maybeForceBuilderInitialization() {
             if (com.google.protobuf.GeneratedMessageV3
@@ -523,47 +467,35 @@ public final class UserLoginRequest extends
             super.clear();
             userId_ = "";
 
-            pin1_ = 0;
+            birthDate_ = "";
 
-            pin2_ = 0;
-
-            pin3_ = 0;
-
-            pin4_ = 0;
-
-            pin5_ = 0;
-
-            pin6_ = 0;
+            email_ = "";
 
             return this;
         }
 
         public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-            return BankProto.internal_static_rpc_UserLoginRequest_descriptor;
+            return BankProto.internal_static_rpc_UserForgetPinRequest_descriptor;
         }
 
-        public UserLoginRequest getDefaultInstanceForType() {
-            return UserLoginRequest.getDefaultInstance();
+        public UserForgetPinRequest getDefaultInstanceForType() {
+            return UserForgetPinRequest.getDefaultInstance();
         }
 
-        public UserLoginRequest build() {
-            UserLoginRequest result = buildPartial();
+        public UserForgetPinRequest build() {
+            UserForgetPinRequest result = buildPartial();
             if (!result.isInitialized()) {
                 throw newUninitializedMessageException(result);
             }
             return result;
         }
 
-        public UserLoginRequest buildPartial() {
-            UserLoginRequest result = new UserLoginRequest(this);
+        public UserForgetPinRequest buildPartial() {
+            UserForgetPinRequest result = new UserForgetPinRequest(this);
             result.userId_ = userId_;
-            result.pin1_ = pin1_;
-            result.pin2_ = pin2_;
-            result.pin3_ = pin3_;
-            result.pin4_ = pin4_;
-            result.pin5_ = pin5_;
-            result.pin6_ = pin6_;
+            result.birthDate_ = birthDate_;
+            result.email_ = email_;
             onBuilt();
             return result;
         }
@@ -601,37 +533,27 @@ public final class UserLoginRequest extends
         }
 
         public Builder mergeFrom(com.google.protobuf.Message other) {
-            if (other instanceof UserLoginRequest) {
-                return mergeFrom((UserLoginRequest) other);
+            if (other instanceof UserForgetPinRequest) {
+                return mergeFrom((UserForgetPinRequest) other);
             } else {
                 super.mergeFrom(other);
                 return this;
             }
         }
 
-        public Builder mergeFrom(UserLoginRequest other) {
-            if (other == UserLoginRequest.getDefaultInstance()) return this;
+        public Builder mergeFrom(UserForgetPinRequest other) {
+            if (other == UserForgetPinRequest.getDefaultInstance()) return this;
             if (!other.getUserId().isEmpty()) {
                 userId_ = other.userId_;
                 onChanged();
             }
-            if (other.getPin1() != 0) {
-                setPin1(other.getPin1());
+            if (!other.getBirthDate().isEmpty()) {
+                birthDate_ = other.birthDate_;
+                onChanged();
             }
-            if (other.getPin2() != 0) {
-                setPin2(other.getPin2());
-            }
-            if (other.getPin3() != 0) {
-                setPin3(other.getPin3());
-            }
-            if (other.getPin4() != 0) {
-                setPin4(other.getPin4());
-            }
-            if (other.getPin5() != 0) {
-                setPin5(other.getPin5());
-            }
-            if (other.getPin6() != 0) {
-                setPin6(other.getPin6());
+            if (!other.getEmail().isEmpty()) {
+                email_ = other.email_;
+                onChanged();
             }
             this.mergeUnknownFields(other.unknownFields);
             onChanged();
@@ -646,11 +568,11 @@ public final class UserLoginRequest extends
                 com.google.protobuf.CodedInputStream input,
                 com.google.protobuf.ExtensionRegistryLite extensionRegistry)
                 throws java.io.IOException {
-            UserLoginRequest parsedMessage = null;
+            UserForgetPinRequest parsedMessage = null;
             try {
                 parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
             } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-                parsedMessage = (UserLoginRequest) e.getUnfinishedMessage();
+                parsedMessage = (UserForgetPinRequest) e.getUnfinishedMessage();
                 throw e.unwrapIOException();
             } finally {
                 if (parsedMessage != null) {
@@ -733,163 +655,145 @@ public final class UserLoginRequest extends
         }
 
         /**
-         * <code>int32 pin1 = 2;</code>
+         * <code>string birth_date = 2;</code>
          */
-        public int getPin1() {
-            return pin1_;
+        public String getBirthDate() {
+            Object ref = birthDate_;
+            if (!(ref instanceof String)) {
+                com.google.protobuf.ByteString bs =
+                        (com.google.protobuf.ByteString) ref;
+                String s = bs.toStringUtf8();
+                birthDate_ = s;
+                return s;
+            } else {
+                return (String) ref;
+            }
         }
 
         /**
-         * <code>int32 pin1 = 2;</code>
+         * <code>string birth_date = 2;</code>
          */
-        public Builder setPin1(int value) {
+        public Builder setBirthDate(
+                String value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
 
-            pin1_ = value;
+            birthDate_ = value;
             onChanged();
             return this;
         }
 
         /**
-         * <code>int32 pin1 = 2;</code>
+         * <code>string birth_date = 2;</code>
          */
-        public Builder clearPin1() {
+        public com.google.protobuf.ByteString
+        getBirthDateBytes() {
+            Object ref = birthDate_;
+            if (ref instanceof String) {
+                com.google.protobuf.ByteString b =
+                        com.google.protobuf.ByteString.copyFromUtf8(
+                                (String) ref);
+                birthDate_ = b;
+                return b;
+            } else {
+                return (com.google.protobuf.ByteString) ref;
+            }
+        }
 
-            pin1_ = 0;
+        /**
+         * <code>string birth_date = 2;</code>
+         */
+        public Builder setBirthDateBytes(
+                com.google.protobuf.ByteString value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            checkByteStringIsUtf8(value);
+
+            birthDate_ = value;
             onChanged();
             return this;
         }
 
         /**
-         * <code>int32 pin2 = 3;</code>
+         * <code>string birth_date = 2;</code>
          */
-        public int getPin2() {
-            return pin2_;
-        }
+        public Builder clearBirthDate() {
 
-        /**
-         * <code>int32 pin2 = 3;</code>
-         */
-        public Builder setPin2(int value) {
-
-            pin2_ = value;
+            birthDate_ = getDefaultInstance().getBirthDate();
             onChanged();
             return this;
         }
 
         /**
-         * <code>int32 pin2 = 3;</code>
+         * <code>string email = 3;</code>
          */
-        public Builder clearPin2() {
+        public String getEmail() {
+            Object ref = email_;
+            if (!(ref instanceof String)) {
+                com.google.protobuf.ByteString bs =
+                        (com.google.protobuf.ByteString) ref;
+                String s = bs.toStringUtf8();
+                email_ = s;
+                return s;
+            } else {
+                return (String) ref;
+            }
+        }
 
-            pin2_ = 0;
+        /**
+         * <code>string email = 3;</code>
+         */
+        public Builder setEmail(
+                String value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+
+            email_ = value;
             onChanged();
             return this;
         }
 
         /**
-         * <code>int32 pin3 = 4;</code>
+         * <code>string email = 3;</code>
          */
-        public int getPin3() {
-            return pin3_;
+        public com.google.protobuf.ByteString
+        getEmailBytes() {
+            Object ref = email_;
+            if (ref instanceof String) {
+                com.google.protobuf.ByteString b =
+                        com.google.protobuf.ByteString.copyFromUtf8(
+                                (String) ref);
+                email_ = b;
+                return b;
+            } else {
+                return (com.google.protobuf.ByteString) ref;
+            }
         }
 
         /**
-         * <code>int32 pin3 = 4;</code>
+         * <code>string email = 3;</code>
          */
-        public Builder setPin3(int value) {
+        public Builder setEmailBytes(
+                com.google.protobuf.ByteString value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            checkByteStringIsUtf8(value);
 
-            pin3_ = value;
+            email_ = value;
             onChanged();
             return this;
         }
 
         /**
-         * <code>int32 pin3 = 4;</code>
+         * <code>string email = 3;</code>
          */
-        public Builder clearPin3() {
+        public Builder clearEmail() {
 
-            pin3_ = 0;
-            onChanged();
-            return this;
-        }
-
-        /**
-         * <code>int32 pin4 = 5;</code>
-         */
-        public int getPin4() {
-            return pin4_;
-        }
-
-        /**
-         * <code>int32 pin4 = 5;</code>
-         */
-        public Builder setPin4(int value) {
-
-            pin4_ = value;
-            onChanged();
-            return this;
-        }
-
-        /**
-         * <code>int32 pin4 = 5;</code>
-         */
-        public Builder clearPin4() {
-
-            pin4_ = 0;
-            onChanged();
-            return this;
-        }
-
-        /**
-         * <code>int32 pin5 = 6;</code>
-         */
-        public int getPin5() {
-            return pin5_;
-        }
-
-        /**
-         * <code>int32 pin5 = 6;</code>
-         */
-        public Builder setPin5(int value) {
-
-            pin5_ = value;
-            onChanged();
-            return this;
-        }
-
-        /**
-         * <code>int32 pin5 = 6;</code>
-         */
-        public Builder clearPin5() {
-
-            pin5_ = 0;
-            onChanged();
-            return this;
-        }
-
-        /**
-         * <code>int32 pin6 = 7;</code>
-         */
-        public int getPin6() {
-            return pin6_;
-        }
-
-        /**
-         * <code>int32 pin6 = 7;</code>
-         */
-        public Builder setPin6(int value) {
-
-            pin6_ = value;
-            onChanged();
-            return this;
-        }
-
-        /**
-         * <code>int32 pin6 = 7;</code>
-         */
-        public Builder clearPin6() {
-
-            pin6_ = 0;
+            email_ = getDefaultInstance().getEmail();
             onChanged();
             return this;
         }
@@ -905,8 +809,8 @@ public final class UserLoginRequest extends
         }
 
 
-        // @@protoc_insertion_point(builder_scope:rpc.UserLoginRequest)
-  }
+        // @@protoc_insertion_point(builder_scope:rpc.UserForgetPinRequest)
+    }
 
 }
 

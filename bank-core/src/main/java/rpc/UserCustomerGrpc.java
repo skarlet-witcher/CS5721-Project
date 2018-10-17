@@ -14,178 +14,275 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
         comments = "Source: Bank.proto")
 public final class UserCustomerGrpc {
 
+  private static final int METHODID_GET_ACCOUNTS = 0;
+
   public static final String SERVICE_NAME = "rpc.UserCustomer";
-  private static final int METHODID_EDIT_USER_PHONE = 0;
-  private static final int METHODID_EDIT_USER_ADDRESS = 1;
-  private static final int METHODID_GET_USER_TRANSACTION = 2;
-  private static final int METHODID_GET_USER_OPERATE_LOG = 3;
-  private static final int METHODID_MAKE_TRAN = 4;
+  private static final int METHODID_GET_PROFILE = 1;
+  private static final int METHODID_EDIT_PROFILE = 2;
+  private static final int METHODID_GET_TRANSACTIONS = 3;
+  private static final int METHODID_GET_PAYEES = 4;
+  private static final int METHODID_ADD_PAYEE = 5;
+  private static final int METHODID_REMOVE_PAYEE = 6;
+  private static final int METHODID_TRANSFER = 7;
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<UserCustomerEditRequest,
-          Response> getEditUserPhoneMethod;
-  private static volatile io.grpc.MethodDescriptor<UserCustomerEditRequest,
-          Response> getEditUserAddressMethod;
-  private static volatile io.grpc.MethodDescriptor<UserRequest,
-          Response> getGetUserTransactionMethod;
-  private static volatile io.grpc.MethodDescriptor<UserRequest,
-          Response> getGetUserOperateLogMethod;
-  private static volatile io.grpc.MethodDescriptor<UserCustomerTranRequest,
-          Response> getMakeTranMethod;
+  private static volatile io.grpc.MethodDescriptor<UserCustomerGetAccountsRequest,
+          Response> getGetAccountsMethod;
+  private static volatile io.grpc.MethodDescriptor<UserCustomerGetProfileRequest,
+          Response> getGetProfileMethod;
+  private static volatile io.grpc.MethodDescriptor<UserCustomerEditProfileRequest,
+          Response> getEditProfileMethod;
+  private static volatile io.grpc.MethodDescriptor<UserCustomerGetTransactionsRequest,
+          Response> getGetTransactionsMethod;
+  private static volatile io.grpc.MethodDescriptor<UserCustomerGetPayeesRequest,
+          Response> getGetPayeesMethod;
+  private static volatile io.grpc.MethodDescriptor<UserCustomerAddPayeeRequest,
+          Response> getAddPayeeMethod;
+  private static volatile io.grpc.MethodDescriptor<UserCustomerRemovePayeeRequest,
+          Response> getRemovePayeeMethod;
+  private static volatile io.grpc.MethodDescriptor<UserCustomerTransferRequest,
+          Response> getTransferMethod;
   private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
-
-  private UserCustomerGrpc() {
-  }
-
-  @io.grpc.stub.annotations.RpcMethod(
-          fullMethodName = SERVICE_NAME + '/' + "EditUserPhone",
-          requestType = UserCustomerEditRequest.class,
-          responseType = Response.class,
-          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<UserCustomerEditRequest,
-          Response> getEditUserPhoneMethod() {
-    io.grpc.MethodDescriptor<UserCustomerEditRequest, Response> getEditUserPhoneMethod;
-    if ((getEditUserPhoneMethod = UserCustomerGrpc.getEditUserPhoneMethod) == null) {
-      synchronized (UserCustomerGrpc.class) {
-        if ((getEditUserPhoneMethod = UserCustomerGrpc.getEditUserPhoneMethod) == null) {
-          UserCustomerGrpc.getEditUserPhoneMethod = getEditUserPhoneMethod =
-                  io.grpc.MethodDescriptor.<UserCustomerEditRequest, Response>newBuilder()
-                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-                          .setFullMethodName(generateFullMethodName(
-                                  "rpc.UserCustomer", "EditUserPhone"))
-                          .setSampledToLocalTracing(true)
-                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  UserCustomerEditRequest.getDefaultInstance()))
-                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  Response.getDefaultInstance()))
-                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("EditUserPhone"))
-                          .build();
-        }
-      }
-    }
-    return getEditUserPhoneMethod;
-  }
-
-  @io.grpc.stub.annotations.RpcMethod(
-          fullMethodName = SERVICE_NAME + '/' + "EditUserAddress",
-          requestType = UserCustomerEditRequest.class,
-          responseType = Response.class,
-          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<UserCustomerEditRequest,
-          Response> getEditUserAddressMethod() {
-    io.grpc.MethodDescriptor<UserCustomerEditRequest, Response> getEditUserAddressMethod;
-    if ((getEditUserAddressMethod = UserCustomerGrpc.getEditUserAddressMethod) == null) {
-      synchronized (UserCustomerGrpc.class) {
-        if ((getEditUserAddressMethod = UserCustomerGrpc.getEditUserAddressMethod) == null) {
-          UserCustomerGrpc.getEditUserAddressMethod = getEditUserAddressMethod =
-                  io.grpc.MethodDescriptor.<UserCustomerEditRequest, Response>newBuilder()
-                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-                          .setFullMethodName(generateFullMethodName(
-                                  "rpc.UserCustomer", "EditUserAddress"))
-                          .setSampledToLocalTracing(true)
-                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  UserCustomerEditRequest.getDefaultInstance()))
-                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  Response.getDefaultInstance()))
-                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("EditUserAddress"))
-                          .build();
-        }
-      }
-    }
-    return getEditUserAddressMethod;
-  }
-
-  @io.grpc.stub.annotations.RpcMethod(
-          fullMethodName = SERVICE_NAME + '/' + "GetUserTransaction",
-          requestType = UserRequest.class,
-          responseType = Response.class,
-          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<UserRequest,
-          Response> getGetUserTransactionMethod() {
-    io.grpc.MethodDescriptor<UserRequest, Response> getGetUserTransactionMethod;
-    if ((getGetUserTransactionMethod = UserCustomerGrpc.getGetUserTransactionMethod) == null) {
-      synchronized (UserCustomerGrpc.class) {
-        if ((getGetUserTransactionMethod = UserCustomerGrpc.getGetUserTransactionMethod) == null) {
-          UserCustomerGrpc.getGetUserTransactionMethod = getGetUserTransactionMethod =
-                  io.grpc.MethodDescriptor.<UserRequest, Response>newBuilder()
-                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-                          .setFullMethodName(generateFullMethodName(
-                                  "rpc.UserCustomer", "GetUserTransaction"))
-                          .setSampledToLocalTracing(true)
-                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  UserRequest.getDefaultInstance()))
-                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  Response.getDefaultInstance()))
-                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("GetUserTransaction"))
-                          .build();
-        }
-      }
-    }
-    return getGetUserTransactionMethod;
-  }
-
-  @io.grpc.stub.annotations.RpcMethod(
-          fullMethodName = SERVICE_NAME + '/' + "GetUserOperateLog",
-          requestType = UserRequest.class,
-          responseType = Response.class,
-          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<UserRequest,
-          Response> getGetUserOperateLogMethod() {
-    io.grpc.MethodDescriptor<UserRequest, Response> getGetUserOperateLogMethod;
-    if ((getGetUserOperateLogMethod = UserCustomerGrpc.getGetUserOperateLogMethod) == null) {
-      synchronized (UserCustomerGrpc.class) {
-        if ((getGetUserOperateLogMethod = UserCustomerGrpc.getGetUserOperateLogMethod) == null) {
-          UserCustomerGrpc.getGetUserOperateLogMethod = getGetUserOperateLogMethod =
-                  io.grpc.MethodDescriptor.<UserRequest, Response>newBuilder()
-                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-                          .setFullMethodName(generateFullMethodName(
-                                  "rpc.UserCustomer", "GetUserOperateLog"))
-                          .setSampledToLocalTracing(true)
-                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  UserRequest.getDefaultInstance()))
-                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  Response.getDefaultInstance()))
-                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("GetUserOperateLog"))
-                          .build();
-        }
-      }
-    }
-    return getGetUserOperateLogMethod;
-  }
-
-  @io.grpc.stub.annotations.RpcMethod(
-          fullMethodName = SERVICE_NAME + '/' + "MakeTran",
-          requestType = UserCustomerTranRequest.class,
-          responseType = Response.class,
-          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<UserCustomerTranRequest,
-          Response> getMakeTranMethod() {
-    io.grpc.MethodDescriptor<UserCustomerTranRequest, Response> getMakeTranMethod;
-    if ((getMakeTranMethod = UserCustomerGrpc.getMakeTranMethod) == null) {
-      synchronized (UserCustomerGrpc.class) {
-        if ((getMakeTranMethod = UserCustomerGrpc.getMakeTranMethod) == null) {
-          UserCustomerGrpc.getMakeTranMethod = getMakeTranMethod =
-                  io.grpc.MethodDescriptor.<UserCustomerTranRequest, Response>newBuilder()
-                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-                          .setFullMethodName(generateFullMethodName(
-                                  "rpc.UserCustomer", "MakeTran"))
-                          .setSampledToLocalTracing(true)
-                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  UserCustomerTranRequest.getDefaultInstance()))
-                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                                  Response.getDefaultInstance()))
-                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("MakeTran"))
-                          .build();
-        }
-      }
-    }
-    return getMakeTranMethod;
-  }
 
   /**
    * Creates a new async stub that supports all call types for the service
    */
   public static UserCustomerStub newStub(io.grpc.Channel channel) {
     return new UserCustomerStub(channel);
+  }
+
+  private UserCustomerGrpc() {
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "GetAccounts",
+          requestType = UserCustomerGetAccountsRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserCustomerGetAccountsRequest,
+          Response> getGetAccountsMethod() {
+    io.grpc.MethodDescriptor<UserCustomerGetAccountsRequest, Response> getGetAccountsMethod;
+    if ((getGetAccountsMethod = UserCustomerGrpc.getGetAccountsMethod) == null) {
+      synchronized (UserCustomerGrpc.class) {
+        if ((getGetAccountsMethod = UserCustomerGrpc.getGetAccountsMethod) == null) {
+          UserCustomerGrpc.getGetAccountsMethod = getGetAccountsMethod =
+                  io.grpc.MethodDescriptor.<UserCustomerGetAccountsRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserCustomer", "GetAccounts"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserCustomerGetAccountsRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("GetAccounts"))
+                          .build();
+        }
+      }
+    }
+    return getGetAccountsMethod;
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "GetProfile",
+          requestType = UserCustomerGetProfileRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserCustomerGetProfileRequest,
+          Response> getGetProfileMethod() {
+    io.grpc.MethodDescriptor<UserCustomerGetProfileRequest, Response> getGetProfileMethod;
+    if ((getGetProfileMethod = UserCustomerGrpc.getGetProfileMethod) == null) {
+      synchronized (UserCustomerGrpc.class) {
+        if ((getGetProfileMethod = UserCustomerGrpc.getGetProfileMethod) == null) {
+          UserCustomerGrpc.getGetProfileMethod = getGetProfileMethod =
+                  io.grpc.MethodDescriptor.<UserCustomerGetProfileRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserCustomer", "GetProfile"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserCustomerGetProfileRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("GetProfile"))
+                          .build();
+        }
+      }
+    }
+    return getGetProfileMethod;
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "EditProfile",
+          requestType = UserCustomerEditProfileRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserCustomerEditProfileRequest,
+          Response> getEditProfileMethod() {
+    io.grpc.MethodDescriptor<UserCustomerEditProfileRequest, Response> getEditProfileMethod;
+    if ((getEditProfileMethod = UserCustomerGrpc.getEditProfileMethod) == null) {
+      synchronized (UserCustomerGrpc.class) {
+        if ((getEditProfileMethod = UserCustomerGrpc.getEditProfileMethod) == null) {
+          UserCustomerGrpc.getEditProfileMethod = getEditProfileMethod =
+                  io.grpc.MethodDescriptor.<UserCustomerEditProfileRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserCustomer", "EditProfile"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserCustomerEditProfileRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("EditProfile"))
+                          .build();
+        }
+      }
+    }
+    return getEditProfileMethod;
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "GetTransactions",
+          requestType = UserCustomerGetTransactionsRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserCustomerGetTransactionsRequest,
+          Response> getGetTransactionsMethod() {
+    io.grpc.MethodDescriptor<UserCustomerGetTransactionsRequest, Response> getGetTransactionsMethod;
+    if ((getGetTransactionsMethod = UserCustomerGrpc.getGetTransactionsMethod) == null) {
+      synchronized (UserCustomerGrpc.class) {
+        if ((getGetTransactionsMethod = UserCustomerGrpc.getGetTransactionsMethod) == null) {
+          UserCustomerGrpc.getGetTransactionsMethod = getGetTransactionsMethod =
+                  io.grpc.MethodDescriptor.<UserCustomerGetTransactionsRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserCustomer", "GetTransactions"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserCustomerGetTransactionsRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("GetTransactions"))
+                          .build();
+        }
+      }
+    }
+    return getGetTransactionsMethod;
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "GetPayees",
+          requestType = UserCustomerGetPayeesRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserCustomerGetPayeesRequest,
+          Response> getGetPayeesMethod() {
+    io.grpc.MethodDescriptor<UserCustomerGetPayeesRequest, Response> getGetPayeesMethod;
+    if ((getGetPayeesMethod = UserCustomerGrpc.getGetPayeesMethod) == null) {
+      synchronized (UserCustomerGrpc.class) {
+        if ((getGetPayeesMethod = UserCustomerGrpc.getGetPayeesMethod) == null) {
+          UserCustomerGrpc.getGetPayeesMethod = getGetPayeesMethod =
+                  io.grpc.MethodDescriptor.<UserCustomerGetPayeesRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserCustomer", "GetPayees"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserCustomerGetPayeesRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("GetPayees"))
+                          .build();
+        }
+      }
+    }
+    return getGetPayeesMethod;
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "AddPayee",
+          requestType = UserCustomerAddPayeeRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserCustomerAddPayeeRequest,
+          Response> getAddPayeeMethod() {
+    io.grpc.MethodDescriptor<UserCustomerAddPayeeRequest, Response> getAddPayeeMethod;
+    if ((getAddPayeeMethod = UserCustomerGrpc.getAddPayeeMethod) == null) {
+      synchronized (UserCustomerGrpc.class) {
+        if ((getAddPayeeMethod = UserCustomerGrpc.getAddPayeeMethod) == null) {
+          UserCustomerGrpc.getAddPayeeMethod = getAddPayeeMethod =
+                  io.grpc.MethodDescriptor.<UserCustomerAddPayeeRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserCustomer", "AddPayee"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserCustomerAddPayeeRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("AddPayee"))
+                          .build();
+        }
+      }
+    }
+    return getAddPayeeMethod;
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "RemovePayee",
+          requestType = UserCustomerRemovePayeeRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserCustomerRemovePayeeRequest,
+          Response> getRemovePayeeMethod() {
+    io.grpc.MethodDescriptor<UserCustomerRemovePayeeRequest, Response> getRemovePayeeMethod;
+    if ((getRemovePayeeMethod = UserCustomerGrpc.getRemovePayeeMethod) == null) {
+      synchronized (UserCustomerGrpc.class) {
+        if ((getRemovePayeeMethod = UserCustomerGrpc.getRemovePayeeMethod) == null) {
+          UserCustomerGrpc.getRemovePayeeMethod = getRemovePayeeMethod =
+                  io.grpc.MethodDescriptor.<UserCustomerRemovePayeeRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserCustomer", "RemovePayee"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserCustomerRemovePayeeRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("RemovePayee"))
+                          .build();
+        }
+      }
+    }
+    return getRemovePayeeMethod;
+  }
+
+  @io.grpc.stub.annotations.RpcMethod(
+          fullMethodName = SERVICE_NAME + '/' + "Transfer",
+          requestType = UserCustomerTransferRequest.class,
+          responseType = Response.class,
+          methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<UserCustomerTransferRequest,
+          Response> getTransferMethod() {
+    io.grpc.MethodDescriptor<UserCustomerTransferRequest, Response> getTransferMethod;
+    if ((getTransferMethod = UserCustomerGrpc.getTransferMethod) == null) {
+      synchronized (UserCustomerGrpc.class) {
+        if ((getTransferMethod = UserCustomerGrpc.getTransferMethod) == null) {
+          UserCustomerGrpc.getTransferMethod = getTransferMethod =
+                  io.grpc.MethodDescriptor.<UserCustomerTransferRequest, Response>newBuilder()
+                          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+                          .setFullMethodName(generateFullMethodName(
+                                  "rpc.UserCustomer", "Transfer"))
+                          .setSampledToLocalTracing(true)
+                          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  UserCustomerTransferRequest.getDefaultInstance()))
+                          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                                  Response.getDefaultInstance()))
+                          .setSchemaDescriptor(new UserCustomerMethodDescriptorSupplier("Transfer"))
+                          .build();
+        }
+      }
+    }
+    return getTransferMethod;
   }
 
   /**
@@ -212,11 +309,14 @@ public final class UserCustomerGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
                   .setSchemaDescriptor(new UserCustomerFileDescriptorSupplier())
-                  .addMethod(getEditUserPhoneMethod())
-                  .addMethod(getEditUserAddressMethod())
-                  .addMethod(getGetUserTransactionMethod())
-                  .addMethod(getGetUserOperateLogMethod())
-                  .addMethod(getMakeTranMethod())
+                  .addMethod(getGetAccountsMethod())
+                  .addMethod(getGetProfileMethod())
+                  .addMethod(getEditProfileMethod())
+                  .addMethod(getGetTransactionsMethod())
+                  .addMethod(getGetPayeesMethod())
+                  .addMethod(getAddPayeeMethod())
+                  .addMethod(getRemovePayeeMethod())
+                  .addMethod(getTransferMethod())
                   .build();
         }
       }
@@ -230,77 +330,122 @@ public final class UserCustomerGrpc {
 
     /**
      */
-    public void editUserPhone(UserCustomerEditRequest request,
-                              io.grpc.stub.StreamObserver<Response> responseObserver) {
-      asyncUnimplementedUnaryCall(getEditUserPhoneMethod(), responseObserver);
+    public void getAccounts(UserCustomerGetAccountsRequest request,
+                            io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetAccountsMethod(), responseObserver);
     }
 
     /**
      */
-    public void editUserAddress(UserCustomerEditRequest request,
+    public void getProfile(UserCustomerGetProfileRequest request,
+                           io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetProfileMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void editProfile(UserCustomerEditProfileRequest request,
+                            io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getEditProfileMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getTransactions(UserCustomerGetTransactionsRequest request,
                                 io.grpc.stub.StreamObserver<Response> responseObserver) {
-      asyncUnimplementedUnaryCall(getEditUserAddressMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getGetTransactionsMethod(), responseObserver);
+    }
+
+    /**
+     * <pre>
+     *    rpc ApplyForStatement (UserCustomerApplyForStatementRequest) returns (Response);
+     * </pre>
+     */
+    public void getPayees(UserCustomerGetPayeesRequest request,
+                          io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetPayeesMethod(), responseObserver);
     }
 
     /**
      */
-    public void getUserTransaction(UserRequest request,
-                                   io.grpc.stub.StreamObserver<Response> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetUserTransactionMethod(), responseObserver);
-    }
-
-    /**
-     */
-    public void getUserOperateLog(UserRequest request,
-                                  io.grpc.stub.StreamObserver<Response> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetUserOperateLogMethod(), responseObserver);
-    }
-
-    /**
-     */
-    public void makeTran(UserCustomerTranRequest request,
+    public void addPayee(UserCustomerAddPayeeRequest request,
                          io.grpc.stub.StreamObserver<Response> responseObserver) {
-      asyncUnimplementedUnaryCall(getMakeTranMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getAddPayeeMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void removePayee(UserCustomerRemovePayeeRequest request,
+                            io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getRemovePayeeMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void transfer(UserCustomerTransferRequest request,
+                         io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnimplementedUnaryCall(getTransferMethod(), responseObserver);
     }
 
     @Override
     public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
               .addMethod(
-                      getEditUserPhoneMethod(),
+                      getGetAccountsMethod(),
                       asyncUnaryCall(
                               new MethodHandlers<
-                                      UserCustomerEditRequest,
+                                      UserCustomerGetAccountsRequest,
                                       Response>(
-                                      this, METHODID_EDIT_USER_PHONE)))
+                                      this, METHODID_GET_ACCOUNTS)))
               .addMethod(
-                      getEditUserAddressMethod(),
+                      getGetProfileMethod(),
                       asyncUnaryCall(
                               new MethodHandlers<
-                                      UserCustomerEditRequest,
+                                      UserCustomerGetProfileRequest,
                                       Response>(
-                                      this, METHODID_EDIT_USER_ADDRESS)))
+                                      this, METHODID_GET_PROFILE)))
               .addMethod(
-                      getGetUserTransactionMethod(),
+                      getEditProfileMethod(),
                       asyncUnaryCall(
                               new MethodHandlers<
-                                      UserRequest,
+                                      UserCustomerEditProfileRequest,
                                       Response>(
-                                      this, METHODID_GET_USER_TRANSACTION)))
+                                      this, METHODID_EDIT_PROFILE)))
               .addMethod(
-                      getGetUserOperateLogMethod(),
+                      getGetTransactionsMethod(),
                       asyncUnaryCall(
                               new MethodHandlers<
-                                      UserRequest,
+                                      UserCustomerGetTransactionsRequest,
                                       Response>(
-                                      this, METHODID_GET_USER_OPERATE_LOG)))
+                                      this, METHODID_GET_TRANSACTIONS)))
               .addMethod(
-                      getMakeTranMethod(),
+                      getGetPayeesMethod(),
                       asyncUnaryCall(
                               new MethodHandlers<
-                                      UserCustomerTranRequest,
+                                      UserCustomerGetPayeesRequest,
                                       Response>(
-                                      this, METHODID_MAKE_TRAN)))
+                                      this, METHODID_GET_PAYEES)))
+              .addMethod(
+                      getAddPayeeMethod(),
+                      asyncUnaryCall(
+                              new MethodHandlers<
+                                      UserCustomerAddPayeeRequest,
+                                      Response>(
+                                      this, METHODID_ADD_PAYEE)))
+              .addMethod(
+                      getRemovePayeeMethod(),
+                      asyncUnaryCall(
+                              new MethodHandlers<
+                                      UserCustomerRemovePayeeRequest,
+                                      Response>(
+                                      this, METHODID_REMOVE_PAYEE)))
+              .addMethod(
+                      getTransferMethod(),
+                      asyncUnaryCall(
+                              new MethodHandlers<
+                                      UserCustomerTransferRequest,
+                                      Response>(
+                                      this, METHODID_TRANSFER)))
               .build();
     }
   }
@@ -325,42 +470,69 @@ public final class UserCustomerGrpc {
 
     /**
      */
-    public void editUserPhone(UserCustomerEditRequest request,
-                              io.grpc.stub.StreamObserver<Response> responseObserver) {
+    public void getAccounts(UserCustomerGetAccountsRequest request,
+                            io.grpc.stub.StreamObserver<Response> responseObserver) {
       asyncUnaryCall(
-              getChannel().newCall(getEditUserPhoneMethod(), getCallOptions()), request, responseObserver);
+              getChannel().newCall(getGetAccountsMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void editUserAddress(UserCustomerEditRequest request,
+    public void getProfile(UserCustomerGetProfileRequest request,
+                           io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnaryCall(
+              getChannel().newCall(getGetProfileMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void editProfile(UserCustomerEditProfileRequest request,
+                            io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnaryCall(
+              getChannel().newCall(getEditProfileMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getTransactions(UserCustomerGetTransactionsRequest request,
                                 io.grpc.stub.StreamObserver<Response> responseObserver) {
       asyncUnaryCall(
-              getChannel().newCall(getEditUserAddressMethod(), getCallOptions()), request, responseObserver);
+              getChannel().newCall(getGetTransactionsMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
+     * <pre>
+     *    rpc ApplyForStatement (UserCustomerApplyForStatementRequest) returns (Response);
+     * </pre>
      */
-    public void getUserTransaction(UserRequest request,
-                                   io.grpc.stub.StreamObserver<Response> responseObserver) {
+    public void getPayees(UserCustomerGetPayeesRequest request,
+                          io.grpc.stub.StreamObserver<Response> responseObserver) {
       asyncUnaryCall(
-              getChannel().newCall(getGetUserTransactionMethod(), getCallOptions()), request, responseObserver);
+              getChannel().newCall(getGetPayeesMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void getUserOperateLog(UserRequest request,
-                                  io.grpc.stub.StreamObserver<Response> responseObserver) {
-      asyncUnaryCall(
-              getChannel().newCall(getGetUserOperateLogMethod(), getCallOptions()), request, responseObserver);
-    }
-
-    /**
-     */
-    public void makeTran(UserCustomerTranRequest request,
+    public void addPayee(UserCustomerAddPayeeRequest request,
                          io.grpc.stub.StreamObserver<Response> responseObserver) {
       asyncUnaryCall(
-              getChannel().newCall(getMakeTranMethod(), getCallOptions()), request, responseObserver);
+              getChannel().newCall(getAddPayeeMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void removePayee(UserCustomerRemovePayeeRequest request,
+                            io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnaryCall(
+              getChannel().newCall(getRemovePayeeMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void transfer(UserCustomerTransferRequest request,
+                         io.grpc.stub.StreamObserver<Response> responseObserver) {
+      asyncUnaryCall(
+              getChannel().newCall(getTransferMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -384,37 +556,61 @@ public final class UserCustomerGrpc {
 
     /**
      */
-    public Response editUserPhone(UserCustomerEditRequest request) {
+    public Response getAccounts(UserCustomerGetAccountsRequest request) {
       return blockingUnaryCall(
-              getChannel(), getEditUserPhoneMethod(), getCallOptions(), request);
+              getChannel(), getGetAccountsMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public Response editUserAddress(UserCustomerEditRequest request) {
+    public Response getProfile(UserCustomerGetProfileRequest request) {
       return blockingUnaryCall(
-              getChannel(), getEditUserAddressMethod(), getCallOptions(), request);
+              getChannel(), getGetProfileMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public Response getUserTransaction(UserRequest request) {
+    public Response editProfile(UserCustomerEditProfileRequest request) {
       return blockingUnaryCall(
-              getChannel(), getGetUserTransactionMethod(), getCallOptions(), request);
+              getChannel(), getEditProfileMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public Response getUserOperateLog(UserRequest request) {
+    public Response getTransactions(UserCustomerGetTransactionsRequest request) {
       return blockingUnaryCall(
-              getChannel(), getGetUserOperateLogMethod(), getCallOptions(), request);
+              getChannel(), getGetTransactionsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     *    rpc ApplyForStatement (UserCustomerApplyForStatementRequest) returns (Response);
+     * </pre>
+     */
+    public Response getPayees(UserCustomerGetPayeesRequest request) {
+      return blockingUnaryCall(
+              getChannel(), getGetPayeesMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public Response makeTran(UserCustomerTranRequest request) {
+    public Response addPayee(UserCustomerAddPayeeRequest request) {
       return blockingUnaryCall(
-              getChannel(), getMakeTranMethod(), getCallOptions(), request);
+              getChannel(), getAddPayeeMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public Response removePayee(UserCustomerRemovePayeeRequest request) {
+      return blockingUnaryCall(
+              getChannel(), getRemovePayeeMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public Response transfer(UserCustomerTransferRequest request) {
+      return blockingUnaryCall(
+              getChannel(), getTransferMethod(), getCallOptions(), request);
     }
   }
 
@@ -438,42 +634,69 @@ public final class UserCustomerGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Response> editUserPhone(
-            UserCustomerEditRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> getAccounts(
+            UserCustomerGetAccountsRequest request) {
       return futureUnaryCall(
-              getChannel().newCall(getEditUserPhoneMethod(), getCallOptions()), request);
+              getChannel().newCall(getGetAccountsMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Response> editUserAddress(
-            UserCustomerEditRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> getProfile(
+            UserCustomerGetProfileRequest request) {
       return futureUnaryCall(
-              getChannel().newCall(getEditUserAddressMethod(), getCallOptions()), request);
+              getChannel().newCall(getGetProfileMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Response> getUserTransaction(
-            UserRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> editProfile(
+            UserCustomerEditProfileRequest request) {
       return futureUnaryCall(
-              getChannel().newCall(getGetUserTransactionMethod(), getCallOptions()), request);
+              getChannel().newCall(getEditProfileMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Response> getUserOperateLog(
-            UserRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> getTransactions(
+            UserCustomerGetTransactionsRequest request) {
       return futureUnaryCall(
-              getChannel().newCall(getGetUserOperateLogMethod(), getCallOptions()), request);
+              getChannel().newCall(getGetTransactionsMethod(), getCallOptions()), request);
+    }
+
+    /**
+     * <pre>
+     *    rpc ApplyForStatement (UserCustomerApplyForStatementRequest) returns (Response);
+     * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<Response> getPayees(
+            UserCustomerGetPayeesRequest request) {
+      return futureUnaryCall(
+              getChannel().newCall(getGetPayeesMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<Response> makeTran(
-            UserCustomerTranRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<Response> addPayee(
+            UserCustomerAddPayeeRequest request) {
       return futureUnaryCall(
-              getChannel().newCall(getMakeTranMethod(), getCallOptions()), request);
+              getChannel().newCall(getAddPayeeMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<Response> removePayee(
+            UserCustomerRemovePayeeRequest request) {
+      return futureUnaryCall(
+              getChannel().newCall(getRemovePayeeMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<Response> transfer(
+            UserCustomerTransferRequest request) {
+      return futureUnaryCall(
+              getChannel().newCall(getTransferMethod(), getCallOptions()), request);
     }
   }
 
@@ -494,24 +717,36 @@ public final class UserCustomerGrpc {
     @SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_EDIT_USER_PHONE:
-          serviceImpl.editUserPhone((UserCustomerEditRequest) request,
+        case METHODID_GET_ACCOUNTS:
+          serviceImpl.getAccounts((UserCustomerGetAccountsRequest) request,
                   (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
-        case METHODID_EDIT_USER_ADDRESS:
-          serviceImpl.editUserAddress((UserCustomerEditRequest) request,
+        case METHODID_GET_PROFILE:
+          serviceImpl.getProfile((UserCustomerGetProfileRequest) request,
                   (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
-        case METHODID_GET_USER_TRANSACTION:
-          serviceImpl.getUserTransaction((UserRequest) request,
+        case METHODID_EDIT_PROFILE:
+          serviceImpl.editProfile((UserCustomerEditProfileRequest) request,
                   (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
-        case METHODID_GET_USER_OPERATE_LOG:
-          serviceImpl.getUserOperateLog((UserRequest) request,
+        case METHODID_GET_TRANSACTIONS:
+          serviceImpl.getTransactions((UserCustomerGetTransactionsRequest) request,
                   (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
-        case METHODID_MAKE_TRAN:
-          serviceImpl.makeTran((UserCustomerTranRequest) request,
+        case METHODID_GET_PAYEES:
+          serviceImpl.getPayees((UserCustomerGetPayeesRequest) request,
+                  (io.grpc.stub.StreamObserver<Response>) responseObserver);
+          break;
+        case METHODID_ADD_PAYEE:
+          serviceImpl.addPayee((UserCustomerAddPayeeRequest) request,
+                  (io.grpc.stub.StreamObserver<Response>) responseObserver);
+          break;
+        case METHODID_REMOVE_PAYEE:
+          serviceImpl.removePayee((UserCustomerRemovePayeeRequest) request,
+                  (io.grpc.stub.StreamObserver<Response>) responseObserver);
+          break;
+        case METHODID_TRANSFER:
+          serviceImpl.transfer((UserCustomerTransferRequest) request,
                   (io.grpc.stub.StreamObserver<Response>) responseObserver);
           break;
         default:
@@ -532,8 +767,7 @@ public final class UserCustomerGrpc {
 
   private static abstract class UserCustomerBaseDescriptorSupplier
           implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    UserCustomerBaseDescriptorSupplier() {
-    }
+    UserCustomerBaseDescriptorSupplier() {}
 
     @Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
@@ -548,8 +782,7 @@ public final class UserCustomerGrpc {
 
   private static final class UserCustomerFileDescriptorSupplier
           extends UserCustomerBaseDescriptorSupplier {
-    UserCustomerFileDescriptorSupplier() {
-    }
+    UserCustomerFileDescriptorSupplier() {}
   }
 
   private static final class UserCustomerMethodDescriptorSupplier

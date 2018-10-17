@@ -8,29 +8,43 @@ public interface UserLoginRequestOrBuilder extends
         com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string username = 1;</code>
+     * <code>string user_id = 1;</code>
      */
-    String getUsername();
+    String getUserId();
 
     /**
-     * <code>string username = 1;</code>
+     * <code>string user_id = 1;</code>
      */
     com.google.protobuf.ByteString
-    getUsernameBytes();
+    getUserIdBytes();
 
     /**
-     * <code>string password = 2;</code>
+     * <code>int32 pin1 = 2;</code>
      */
-    String getPassword();
+    int getPin1();
 
     /**
-     * <code>string password = 2;</code>
+     * <code>int32 pin2 = 3;</code>
      */
-    com.google.protobuf.ByteString
-    getPasswordBytes();
+    int getPin2();
 
     /**
-     * <code>int32 role = 3;</code>
+     * <code>int32 pin3 = 4;</code>
      */
-    int getRole();
+    int getPin3();
+
+    /**
+     * <code>int32 pin4 = 5;</code>
+     */
+    int getPin4();
+
+    /**
+     * <code>int32 pin5 = 6;</code>
+     */
+    int getPin5();
+
+    /**
+     * <code>int32 pin6 = 7;</code>
+     */
+    int getPin6();
 }

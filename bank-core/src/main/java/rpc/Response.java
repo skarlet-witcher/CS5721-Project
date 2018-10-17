@@ -15,9 +15,16 @@ public final class Response extends
     public static final int PAGE_NUMBER_FIELD_NUMBER = 3;
     public static final int TOTAL_NUMBER_FIELD_NUMBER = 4;
     public static final int RESULT_PER_PAGE_FIELD_NUMBER = 5;
-    public static final int USER_CUSTOMER_TRANS_FIELD_NUMBER = 6;
-    public static final int USER_LOGIN_FIELD_NUMBER = 7;
-    public static final int USER_CUSTOMER_LOGS_FIELD_NUMBER = 8;
+    public static final int USER_LOGIN_REQ_REPLY_FIELD_NUMBER = 6;
+    public static final int USER_LOGIN_REPLY_FIELD_NUMBER = 7;
+    public static final int USER_ACCOUNTS_FIELD_NUMBER = 8;
+    public static final int USER_PROFILE_FIELD_NUMBER = 9;
+    public static final int USER_TRANSACTIONS_FIELD_NUMBER = 10;
+    public static final int USER_PAYEES_FIELD_NUMBER = 11;
+    public static final int USER_NEW_APPLYS_FIELD_NUMBER = 12;
+    public static final int USER_DELETE_APPLYS_FIELD_NUMBER = 13;
+    public static final int USER_BLOCK_LISTS_FIELD_NUMBER = 14;
+    public static final int STAFFS_FIELD_NUMBER = 15;
     private static final long serialVersionUID = 0L;
     // @@protoc_insertion_point(class_scope:rpc.Response)
     private static final Response DEFAULT_INSTANCE;
@@ -35,14 +42,22 @@ public final class Response extends
         DEFAULT_INSTANCE = new Response();
     }
 
+    private int bitField0_;
     private int statusCode_;
     private volatile Object description_;
     private int pageNumber_;
     private int totalNumber_;
     private int resultPerPage_;
-    private UserCustomerTransReply userCustomerTrans_;
-    private UserLoginReply userLogin_;
-    private UserCustomerLogsReply userCustomerLogs_;
+    private UserLoginReqReply userLoginReqReply_;
+    private UserLoginReply userLoginReply_;
+    private java.util.List<UserAccounts> userAccounts_;
+    private UserProfile userProfile_;
+    private java.util.List<UserTransactions> userTransactions_;
+    private java.util.List<UserPayees> userPayees_;
+    private java.util.List<UserNewApplys> userNewApplys_;
+    private java.util.List<UserAccountDeleteApplys> userDeleteApplys_;
+    private java.util.List<UserBlocks> userBlockLists_;
+    private java.util.List<Staffs> staffs_;
     private byte memoizedIsInitialized = -1;
 
     // Use Response.newBuilder() to construct.
@@ -56,6 +71,13 @@ public final class Response extends
         pageNumber_ = 0;
         totalNumber_ = 0;
         resultPerPage_ = 0;
+        userAccounts_ = java.util.Collections.emptyList();
+        userTransactions_ = java.util.Collections.emptyList();
+        userPayees_ = java.util.Collections.emptyList();
+        userNewApplys_ = java.util.Collections.emptyList();
+        userDeleteApplys_ = java.util.Collections.emptyList();
+        userBlockLists_ = java.util.Collections.emptyList();
+        staffs_ = java.util.Collections.emptyList();
     }
 
     private Response(
@@ -111,42 +133,105 @@ public final class Response extends
                         break;
                     }
                     case 50: {
-                        UserCustomerTransReply.Builder subBuilder = null;
-                        if (userCustomerTrans_ != null) {
-                            subBuilder = userCustomerTrans_.toBuilder();
+                        UserLoginReqReply.Builder subBuilder = null;
+                        if (userLoginReqReply_ != null) {
+                            subBuilder = userLoginReqReply_.toBuilder();
                         }
-                        userCustomerTrans_ = input.readMessage(UserCustomerTransReply.parser(), extensionRegistry);
+                        userLoginReqReply_ = input.readMessage(UserLoginReqReply.parser(), extensionRegistry);
                         if (subBuilder != null) {
-                            subBuilder.mergeFrom(userCustomerTrans_);
-                            userCustomerTrans_ = subBuilder.buildPartial();
+                            subBuilder.mergeFrom(userLoginReqReply_);
+                            userLoginReqReply_ = subBuilder.buildPartial();
                         }
 
                         break;
                     }
                     case 58: {
                         UserLoginReply.Builder subBuilder = null;
-                        if (userLogin_ != null) {
-                            subBuilder = userLogin_.toBuilder();
+                        if (userLoginReply_ != null) {
+                            subBuilder = userLoginReply_.toBuilder();
                         }
-                        userLogin_ = input.readMessage(UserLoginReply.parser(), extensionRegistry);
+                        userLoginReply_ = input.readMessage(UserLoginReply.parser(), extensionRegistry);
                         if (subBuilder != null) {
-                            subBuilder.mergeFrom(userLogin_);
-                            userLogin_ = subBuilder.buildPartial();
+                            subBuilder.mergeFrom(userLoginReply_);
+                            userLoginReply_ = subBuilder.buildPartial();
                         }
 
                         break;
                     }
                     case 66: {
-                        UserCustomerLogsReply.Builder subBuilder = null;
-                        if (userCustomerLogs_ != null) {
-                            subBuilder = userCustomerLogs_.toBuilder();
+                        if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                            userAccounts_ = new java.util.ArrayList<UserAccounts>();
+                            mutable_bitField0_ |= 0x00000080;
                         }
-                        userCustomerLogs_ = input.readMessage(UserCustomerLogsReply.parser(), extensionRegistry);
+                        userAccounts_.add(
+                                input.readMessage(UserAccounts.parser(), extensionRegistry));
+                        break;
+                    }
+                    case 74: {
+                        UserProfile.Builder subBuilder = null;
+                        if (userProfile_ != null) {
+                            subBuilder = userProfile_.toBuilder();
+                        }
+                        userProfile_ = input.readMessage(UserProfile.parser(), extensionRegistry);
                         if (subBuilder != null) {
-                            subBuilder.mergeFrom(userCustomerLogs_);
-                            userCustomerLogs_ = subBuilder.buildPartial();
+                            subBuilder.mergeFrom(userProfile_);
+                            userProfile_ = subBuilder.buildPartial();
                         }
 
+                        break;
+                    }
+                    case 82: {
+                        if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                            userTransactions_ = new java.util.ArrayList<UserTransactions>();
+                            mutable_bitField0_ |= 0x00000200;
+                        }
+                        userTransactions_.add(
+                                input.readMessage(UserTransactions.parser(), extensionRegistry));
+                        break;
+                    }
+                    case 90: {
+                        if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                            userPayees_ = new java.util.ArrayList<UserPayees>();
+                            mutable_bitField0_ |= 0x00000400;
+                        }
+                        userPayees_.add(
+                                input.readMessage(UserPayees.parser(), extensionRegistry));
+                        break;
+                    }
+                    case 98: {
+                        if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+                            userNewApplys_ = new java.util.ArrayList<UserNewApplys>();
+                            mutable_bitField0_ |= 0x00000800;
+                        }
+                        userNewApplys_.add(
+                                input.readMessage(UserNewApplys.parser(), extensionRegistry));
+                        break;
+                    }
+                    case 106: {
+                        if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+                            userDeleteApplys_ = new java.util.ArrayList<UserAccountDeleteApplys>();
+                            mutable_bitField0_ |= 0x00001000;
+                        }
+                        userDeleteApplys_.add(
+                                input.readMessage(UserAccountDeleteApplys.parser(), extensionRegistry));
+                        break;
+                    }
+                    case 114: {
+                        if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+                            userBlockLists_ = new java.util.ArrayList<UserBlocks>();
+                            mutable_bitField0_ |= 0x00002000;
+                        }
+                        userBlockLists_.add(
+                                input.readMessage(UserBlocks.parser(), extensionRegistry));
+                        break;
+                    }
+                    case 122: {
+                        if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+                            staffs_ = new java.util.ArrayList<Staffs>();
+                            mutable_bitField0_ |= 0x00004000;
+                        }
+                        staffs_.add(
+                                input.readMessage(Staffs.parser(), extensionRegistry));
                         break;
                     }
                 }
@@ -157,6 +242,27 @@ public final class Response extends
             throw new com.google.protobuf.InvalidProtocolBufferException(
                     e).setUnfinishedMessage(this);
         } finally {
+            if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                userAccounts_ = java.util.Collections.unmodifiableList(userAccounts_);
+            }
+            if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                userTransactions_ = java.util.Collections.unmodifiableList(userTransactions_);
+            }
+            if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+                userPayees_ = java.util.Collections.unmodifiableList(userPayees_);
+            }
+            if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+                userNewApplys_ = java.util.Collections.unmodifiableList(userNewApplys_);
+            }
+            if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+                userDeleteApplys_ = java.util.Collections.unmodifiableList(userDeleteApplys_);
+            }
+            if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+                userBlockLists_ = java.util.Collections.unmodifiableList(userBlockLists_);
+            }
+            if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+                staffs_ = java.util.Collections.unmodifiableList(staffs_);
+            }
             this.unknownFields = unknownFields.build();
             makeExtensionsImmutable();
         }
@@ -339,66 +445,430 @@ public final class Response extends
     }
 
     /**
-     * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+     * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
      */
-    public boolean hasUserCustomerTrans() {
-        return userCustomerTrans_ != null;
+    public boolean hasUserLoginReqReply() {
+        return userLoginReqReply_ != null;
     }
 
     /**
-     * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+     * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
      */
-    public UserCustomerTransReply getUserCustomerTrans() {
-        return userCustomerTrans_ == null ? UserCustomerTransReply.getDefaultInstance() : userCustomerTrans_;
+    public UserLoginReqReply getUserLoginReqReply() {
+        return userLoginReqReply_ == null ? UserLoginReqReply.getDefaultInstance() : userLoginReqReply_;
     }
 
     /**
-     * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+     * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
      */
-    public UserCustomerTransReplyOrBuilder getUserCustomerTransOrBuilder() {
-        return getUserCustomerTrans();
+    public UserLoginReqReplyOrBuilder getUserLoginReqReplyOrBuilder() {
+        return getUserLoginReqReply();
     }
 
     /**
-     * <code>.rpc.UserLoginReply user_login = 7;</code>
+     * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
      */
-    public boolean hasUserLogin() {
-        return userLogin_ != null;
+    public boolean hasUserLoginReply() {
+        return userLoginReply_ != null;
     }
 
     /**
-     * <code>.rpc.UserLoginReply user_login = 7;</code>
+     * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
      */
-    public UserLoginReply getUserLogin() {
-        return userLogin_ == null ? UserLoginReply.getDefaultInstance() : userLogin_;
+    public UserLoginReply getUserLoginReply() {
+        return userLoginReply_ == null ? UserLoginReply.getDefaultInstance() : userLoginReply_;
     }
 
     /**
-     * <code>.rpc.UserLoginReply user_login = 7;</code>
+     * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
      */
-    public UserLoginReplyOrBuilder getUserLoginOrBuilder() {
-        return getUserLogin();
+    public UserLoginReplyOrBuilder getUserLoginReplyOrBuilder() {
+        return getUserLoginReply();
     }
 
     /**
-     * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
+     * <pre>
+     * apply new account
+     * forget user id/pin
+     * </pre>
+     *
+     * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
      */
-    public boolean hasUserCustomerLogs() {
-        return userCustomerLogs_ != null;
+    public java.util.List<UserAccounts> getUserAccountsList() {
+        return userAccounts_;
     }
 
     /**
-     * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
+     * <pre>
+     * apply new account
+     * forget user id/pin
+     * </pre>
+     *
+     * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
      */
-    public UserCustomerLogsReply getUserCustomerLogs() {
-        return userCustomerLogs_ == null ? UserCustomerLogsReply.getDefaultInstance() : userCustomerLogs_;
+    public java.util.List<? extends UserAccountsOrBuilder>
+    getUserAccountsOrBuilderList() {
+        return userAccounts_;
     }
 
     /**
-     * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
+     * <pre>
+     * apply new account
+     * forget user id/pin
+     * </pre>
+     *
+     * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
      */
-    public UserCustomerLogsReplyOrBuilder getUserCustomerLogsOrBuilder() {
-        return getUserCustomerLogs();
+    public int getUserAccountsCount() {
+        return userAccounts_.size();
+    }
+
+    /**
+     * <pre>
+     * apply new account
+     * forget user id/pin
+     * </pre>
+     *
+     * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+     */
+    public UserAccounts getUserAccounts(int index) {
+        return userAccounts_.get(index);
+    }
+
+    /**
+     * <pre>
+     * apply new account
+     * forget user id/pin
+     * </pre>
+     *
+     * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+     */
+    public UserAccountsOrBuilder getUserAccountsOrBuilder(
+            int index) {
+        return userAccounts_.get(index);
+    }
+
+    /**
+     * <code>.rpc.UserProfile user_profile = 9;</code>
+     */
+    public boolean hasUserProfile() {
+        return userProfile_ != null;
+    }
+
+    /**
+     * <code>.rpc.UserProfile user_profile = 9;</code>
+     */
+    public UserProfile getUserProfile() {
+        return userProfile_ == null ? UserProfile.getDefaultInstance() : userProfile_;
+    }
+
+    /**
+     * <code>.rpc.UserProfile user_profile = 9;</code>
+     */
+    public UserProfileOrBuilder getUserProfileOrBuilder() {
+        return getUserProfile();
+    }
+
+    /**
+     * <pre>
+     * edit profile
+     * </pre>
+     *
+     * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+     */
+    public java.util.List<UserTransactions> getUserTransactionsList() {
+        return userTransactions_;
+    }
+
+    /**
+     * <pre>
+     * edit profile
+     * </pre>
+     *
+     * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+     */
+    public java.util.List<? extends UserTransactionsOrBuilder>
+    getUserTransactionsOrBuilderList() {
+        return userTransactions_;
+    }
+
+    /**
+     * <pre>
+     * edit profile
+     * </pre>
+     *
+     * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+     */
+    public int getUserTransactionsCount() {
+        return userTransactions_.size();
+    }
+
+    /**
+     * <pre>
+     * edit profile
+     * </pre>
+     *
+     * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+     */
+    public UserTransactions getUserTransactions(int index) {
+        return userTransactions_.get(index);
+    }
+
+    /**
+     * <pre>
+     * edit profile
+     * </pre>
+     *
+     * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+     */
+    public UserTransactionsOrBuilder getUserTransactionsOrBuilder(
+            int index) {
+        return userTransactions_.get(index);
+    }
+
+    /**
+     * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+     */
+    public java.util.List<UserPayees> getUserPayeesList() {
+        return userPayees_;
+    }
+
+    /**
+     * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+     */
+    public java.util.List<? extends UserPayeesOrBuilder>
+    getUserPayeesOrBuilderList() {
+        return userPayees_;
+    }
+
+    /**
+     * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+     */
+    public int getUserPayeesCount() {
+        return userPayees_.size();
+    }
+
+    /**
+     * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+     */
+    public UserPayees getUserPayees(int index) {
+        return userPayees_.get(index);
+    }
+
+    /**
+     * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+     */
+    public UserPayeesOrBuilder getUserPayeesOrBuilder(
+            int index) {
+        return userPayees_.get(index);
+    }
+
+    /**
+     * <pre>
+     * add payee
+     * remove payee
+     * transfer
+     * staff login
+     * </pre>
+     *
+     * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+     */
+    public java.util.List<UserNewApplys> getUserNewApplysList() {
+        return userNewApplys_;
+    }
+
+    /**
+     * <pre>
+     * add payee
+     * remove payee
+     * transfer
+     * staff login
+     * </pre>
+     *
+     * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+     */
+    public java.util.List<? extends UserNewApplysOrBuilder>
+    getUserNewApplysOrBuilderList() {
+        return userNewApplys_;
+    }
+
+    /**
+     * <pre>
+     * add payee
+     * remove payee
+     * transfer
+     * staff login
+     * </pre>
+     *
+     * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+     */
+    public int getUserNewApplysCount() {
+        return userNewApplys_.size();
+    }
+
+    /**
+     * <pre>
+     * add payee
+     * remove payee
+     * transfer
+     * staff login
+     * </pre>
+     *
+     * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+     */
+    public UserNewApplys getUserNewApplys(int index) {
+        return userNewApplys_.get(index);
+    }
+
+    /**
+     * <pre>
+     * add payee
+     * remove payee
+     * transfer
+     * staff login
+     * </pre>
+     *
+     * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+     */
+    public UserNewApplysOrBuilder getUserNewApplysOrBuilder(
+            int index) {
+        return userNewApplys_.get(index);
+    }
+
+    /**
+     * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+     */
+    public java.util.List<UserAccountDeleteApplys> getUserDeleteApplysList() {
+        return userDeleteApplys_;
+    }
+
+    /**
+     * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+     */
+    public java.util.List<? extends UserAccountDeleteApplysOrBuilder>
+    getUserDeleteApplysOrBuilderList() {
+        return userDeleteApplys_;
+    }
+
+    /**
+     * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+     */
+    public int getUserDeleteApplysCount() {
+        return userDeleteApplys_.size();
+    }
+
+    /**
+     * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+     */
+    public UserAccountDeleteApplys getUserDeleteApplys(int index) {
+        return userDeleteApplys_.get(index);
+    }
+
+    /**
+     * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+     */
+    public UserAccountDeleteApplysOrBuilder getUserDeleteApplysOrBuilder(
+            int index) {
+        return userDeleteApplys_.get(index);
+    }
+
+    /**
+     * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+     */
+    public java.util.List<UserBlocks> getUserBlockListsList() {
+        return userBlockLists_;
+    }
+
+    /**
+     * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+     */
+    public java.util.List<? extends UserBlocksOrBuilder>
+    getUserBlockListsOrBuilderList() {
+        return userBlockLists_;
+    }
+
+    /**
+     * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+     */
+    public int getUserBlockListsCount() {
+        return userBlockLists_.size();
+    }
+
+    /**
+     * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+     */
+    public UserBlocks getUserBlockLists(int index) {
+        return userBlockLists_.get(index);
+    }
+
+    /**
+     * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+     */
+    public UserBlocksOrBuilder getUserBlockListsOrBuilder(
+            int index) {
+        return userBlockLists_.get(index);
+    }
+
+    /**
+     * <pre>
+     * respond apply
+     * admin login
+     * </pre>
+     *
+     * <code>repeated .rpc.Staffs staffs = 15;</code>
+     */
+    public java.util.List<Staffs> getStaffsList() {
+        return staffs_;
+    }
+
+    /**
+     * <pre>
+     * respond apply
+     * admin login
+     * </pre>
+     *
+     * <code>repeated .rpc.Staffs staffs = 15;</code>
+     */
+    public java.util.List<? extends StaffsOrBuilder>
+    getStaffsOrBuilderList() {
+        return staffs_;
+    }
+
+    /**
+     * <pre>
+     * respond apply
+     * admin login
+     * </pre>
+     *
+     * <code>repeated .rpc.Staffs staffs = 15;</code>
+     */
+    public int getStaffsCount() {
+        return staffs_.size();
+    }
+
+    /**
+     * <pre>
+     * respond apply
+     * admin login
+     * </pre>
+     *
+     * <code>repeated .rpc.Staffs staffs = 15;</code>
+     */
+    public Staffs getStaffs(int index) {
+        return staffs_.get(index);
+    }
+
+    /**
+     * <pre>
+     * respond apply
+     * admin login
+     * </pre>
+     *
+     * <code>repeated .rpc.Staffs staffs = 15;</code>
+     */
+    public StaffsOrBuilder getStaffsOrBuilder(
+            int index) {
+        return staffs_.get(index);
     }
 
     public final boolean isInitialized() {
@@ -427,14 +897,35 @@ public final class Response extends
         if (resultPerPage_ != 0) {
             output.writeInt32(5, resultPerPage_);
         }
-        if (userCustomerTrans_ != null) {
-            output.writeMessage(6, getUserCustomerTrans());
+        if (userLoginReqReply_ != null) {
+            output.writeMessage(6, getUserLoginReqReply());
         }
-        if (userLogin_ != null) {
-            output.writeMessage(7, getUserLogin());
+        if (userLoginReply_ != null) {
+            output.writeMessage(7, getUserLoginReply());
         }
-        if (userCustomerLogs_ != null) {
-            output.writeMessage(8, getUserCustomerLogs());
+        for (int i = 0; i < userAccounts_.size(); i++) {
+            output.writeMessage(8, userAccounts_.get(i));
+        }
+        if (userProfile_ != null) {
+            output.writeMessage(9, getUserProfile());
+        }
+        for (int i = 0; i < userTransactions_.size(); i++) {
+            output.writeMessage(10, userTransactions_.get(i));
+        }
+        for (int i = 0; i < userPayees_.size(); i++) {
+            output.writeMessage(11, userPayees_.get(i));
+        }
+        for (int i = 0; i < userNewApplys_.size(); i++) {
+            output.writeMessage(12, userNewApplys_.get(i));
+        }
+        for (int i = 0; i < userDeleteApplys_.size(); i++) {
+            output.writeMessage(13, userDeleteApplys_.get(i));
+        }
+        for (int i = 0; i < userBlockLists_.size(); i++) {
+            output.writeMessage(14, userBlockLists_.get(i));
+        }
+        for (int i = 0; i < staffs_.size(); i++) {
+            output.writeMessage(15, staffs_.get(i));
         }
         unknownFields.writeTo(output);
     }
@@ -463,17 +954,45 @@ public final class Response extends
             size += com.google.protobuf.CodedOutputStream
                     .computeInt32Size(5, resultPerPage_);
         }
-        if (userCustomerTrans_ != null) {
+        if (userLoginReqReply_ != null) {
             size += com.google.protobuf.CodedOutputStream
-                    .computeMessageSize(6, getUserCustomerTrans());
+                    .computeMessageSize(6, getUserLoginReqReply());
         }
-        if (userLogin_ != null) {
+        if (userLoginReply_ != null) {
             size += com.google.protobuf.CodedOutputStream
-                    .computeMessageSize(7, getUserLogin());
+                    .computeMessageSize(7, getUserLoginReply());
         }
-        if (userCustomerLogs_ != null) {
+        for (int i = 0; i < userAccounts_.size(); i++) {
             size += com.google.protobuf.CodedOutputStream
-                    .computeMessageSize(8, getUserCustomerLogs());
+                    .computeMessageSize(8, userAccounts_.get(i));
+        }
+        if (userProfile_ != null) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(9, getUserProfile());
+        }
+        for (int i = 0; i < userTransactions_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(10, userTransactions_.get(i));
+        }
+        for (int i = 0; i < userPayees_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(11, userPayees_.get(i));
+        }
+        for (int i = 0; i < userNewApplys_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(12, userNewApplys_.get(i));
+        }
+        for (int i = 0; i < userDeleteApplys_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(13, userDeleteApplys_.get(i));
+        }
+        for (int i = 0; i < userBlockLists_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(14, userBlockLists_.get(i));
+        }
+        for (int i = 0; i < staffs_.size(); i++) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeMessageSize(15, staffs_.get(i));
         }
         size += unknownFields.getSerializedSize();
         memoizedSize = size;
@@ -501,21 +1020,35 @@ public final class Response extends
                 == other.getTotalNumber());
         result = result && (getResultPerPage()
                 == other.getResultPerPage());
-        result = result && (hasUserCustomerTrans() == other.hasUserCustomerTrans());
-        if (hasUserCustomerTrans()) {
-            result = result && getUserCustomerTrans()
-                    .equals(other.getUserCustomerTrans());
+        result = result && (hasUserLoginReqReply() == other.hasUserLoginReqReply());
+        if (hasUserLoginReqReply()) {
+            result = result && getUserLoginReqReply()
+                    .equals(other.getUserLoginReqReply());
         }
-        result = result && (hasUserLogin() == other.hasUserLogin());
-        if (hasUserLogin()) {
-            result = result && getUserLogin()
-                    .equals(other.getUserLogin());
+        result = result && (hasUserLoginReply() == other.hasUserLoginReply());
+        if (hasUserLoginReply()) {
+            result = result && getUserLoginReply()
+                    .equals(other.getUserLoginReply());
         }
-        result = result && (hasUserCustomerLogs() == other.hasUserCustomerLogs());
-        if (hasUserCustomerLogs()) {
-            result = result && getUserCustomerLogs()
-                    .equals(other.getUserCustomerLogs());
+        result = result && getUserAccountsList()
+                .equals(other.getUserAccountsList());
+        result = result && (hasUserProfile() == other.hasUserProfile());
+        if (hasUserProfile()) {
+            result = result && getUserProfile()
+                    .equals(other.getUserProfile());
         }
+        result = result && getUserTransactionsList()
+                .equals(other.getUserTransactionsList());
+        result = result && getUserPayeesList()
+                .equals(other.getUserPayeesList());
+        result = result && getUserNewApplysList()
+                .equals(other.getUserNewApplysList());
+        result = result && getUserDeleteApplysList()
+                .equals(other.getUserDeleteApplysList());
+        result = result && getUserBlockListsList()
+                .equals(other.getUserBlockListsList());
+        result = result && getStaffsList()
+                .equals(other.getStaffsList());
         result = result && unknownFields.equals(other.unknownFields);
         return result;
     }
@@ -537,17 +1070,45 @@ public final class Response extends
         hash = (53 * hash) + getTotalNumber();
         hash = (37 * hash) + RESULT_PER_PAGE_FIELD_NUMBER;
         hash = (53 * hash) + getResultPerPage();
-        if (hasUserCustomerTrans()) {
-            hash = (37 * hash) + USER_CUSTOMER_TRANS_FIELD_NUMBER;
-            hash = (53 * hash) + getUserCustomerTrans().hashCode();
+        if (hasUserLoginReqReply()) {
+            hash = (37 * hash) + USER_LOGIN_REQ_REPLY_FIELD_NUMBER;
+            hash = (53 * hash) + getUserLoginReqReply().hashCode();
         }
-        if (hasUserLogin()) {
-            hash = (37 * hash) + USER_LOGIN_FIELD_NUMBER;
-            hash = (53 * hash) + getUserLogin().hashCode();
+        if (hasUserLoginReply()) {
+            hash = (37 * hash) + USER_LOGIN_REPLY_FIELD_NUMBER;
+            hash = (53 * hash) + getUserLoginReply().hashCode();
         }
-        if (hasUserCustomerLogs()) {
-            hash = (37 * hash) + USER_CUSTOMER_LOGS_FIELD_NUMBER;
-            hash = (53 * hash) + getUserCustomerLogs().hashCode();
+        if (getUserAccountsCount() > 0) {
+            hash = (37 * hash) + USER_ACCOUNTS_FIELD_NUMBER;
+            hash = (53 * hash) + getUserAccountsList().hashCode();
+        }
+        if (hasUserProfile()) {
+            hash = (37 * hash) + USER_PROFILE_FIELD_NUMBER;
+            hash = (53 * hash) + getUserProfile().hashCode();
+        }
+        if (getUserTransactionsCount() > 0) {
+            hash = (37 * hash) + USER_TRANSACTIONS_FIELD_NUMBER;
+            hash = (53 * hash) + getUserTransactionsList().hashCode();
+        }
+        if (getUserPayeesCount() > 0) {
+            hash = (37 * hash) + USER_PAYEES_FIELD_NUMBER;
+            hash = (53 * hash) + getUserPayeesList().hashCode();
+        }
+        if (getUserNewApplysCount() > 0) {
+            hash = (37 * hash) + USER_NEW_APPLYS_FIELD_NUMBER;
+            hash = (53 * hash) + getUserNewApplysList().hashCode();
+        }
+        if (getUserDeleteApplysCount() > 0) {
+            hash = (37 * hash) + USER_DELETE_APPLYS_FIELD_NUMBER;
+            hash = (53 * hash) + getUserDeleteApplysList().hashCode();
+        }
+        if (getUserBlockListsCount() > 0) {
+            hash = (37 * hash) + USER_BLOCK_LISTS_FIELD_NUMBER;
+            hash = (53 * hash) + getUserBlockListsList().hashCode();
+        }
+        if (getStaffsCount() > 0) {
+            hash = (37 * hash) + STAFFS_FIELD_NUMBER;
+            hash = (53 * hash) + getStaffsList().hashCode();
         }
         hash = (29 * hash) + unknownFields.hashCode();
         memoizedHashCode = hash;
@@ -586,20 +1147,49 @@ public final class Response extends
             com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
             // @@protoc_insertion_point(builder_implements:rpc.Response)
             ResponseOrBuilder {
+        private int bitField0_;
         private int statusCode_;
         private Object description_ = "";
         private int pageNumber_;
         private int totalNumber_;
         private int resultPerPage_;
-        private UserCustomerTransReply userCustomerTrans_ = null;
+        private UserLoginReqReply userLoginReqReply_ = null;
         private com.google.protobuf.SingleFieldBuilderV3<
-                UserCustomerTransReply, UserCustomerTransReply.Builder, UserCustomerTransReplyOrBuilder> userCustomerTransBuilder_;
-        private UserLoginReply userLogin_ = null;
+                UserLoginReqReply, UserLoginReqReply.Builder, UserLoginReqReplyOrBuilder> userLoginReqReplyBuilder_;
+        private UserLoginReply userLoginReply_ = null;
         private com.google.protobuf.SingleFieldBuilderV3<
-                UserLoginReply, UserLoginReply.Builder, UserLoginReplyOrBuilder> userLoginBuilder_;
-        private UserCustomerLogsReply userCustomerLogs_ = null;
+                UserLoginReply, UserLoginReply.Builder, UserLoginReplyOrBuilder> userLoginReplyBuilder_;
+        private java.util.List<UserAccounts> userAccounts_ =
+                java.util.Collections.emptyList();
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserAccounts, UserAccounts.Builder, UserAccountsOrBuilder> userAccountsBuilder_;
+        private UserProfile userProfile_ = null;
         private com.google.protobuf.SingleFieldBuilderV3<
-                UserCustomerLogsReply, UserCustomerLogsReply.Builder, UserCustomerLogsReplyOrBuilder> userCustomerLogsBuilder_;
+                UserProfile, UserProfile.Builder, UserProfileOrBuilder> userProfileBuilder_;
+        private java.util.List<UserTransactions> userTransactions_ =
+                java.util.Collections.emptyList();
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserTransactions, UserTransactions.Builder, UserTransactionsOrBuilder> userTransactionsBuilder_;
+        private java.util.List<UserPayees> userPayees_ =
+                java.util.Collections.emptyList();
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserPayees, UserPayees.Builder, UserPayeesOrBuilder> userPayeesBuilder_;
+        private java.util.List<UserNewApplys> userNewApplys_ =
+                java.util.Collections.emptyList();
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserNewApplys, UserNewApplys.Builder, UserNewApplysOrBuilder> userNewApplysBuilder_;
+        private java.util.List<UserAccountDeleteApplys> userDeleteApplys_ =
+                java.util.Collections.emptyList();
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserAccountDeleteApplys, UserAccountDeleteApplys.Builder, UserAccountDeleteApplysOrBuilder> userDeleteApplysBuilder_;
+        private java.util.List<UserBlocks> userBlockLists_ =
+                java.util.Collections.emptyList();
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserBlocks, UserBlocks.Builder, UserBlocksOrBuilder> userBlockListsBuilder_;
+        private java.util.List<Staffs> staffs_ =
+                java.util.Collections.emptyList();
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                Staffs, Staffs.Builder, StaffsOrBuilder> staffsBuilder_;
 
         // Construct using rpc.Response.newBuilder()
         private Builder() {
@@ -627,6 +1217,13 @@ public final class Response extends
         private void maybeForceBuilderInitialization() {
             if (com.google.protobuf.GeneratedMessageV3
                     .alwaysUseFieldBuilders) {
+                getUserAccountsFieldBuilder();
+                getUserTransactionsFieldBuilder();
+                getUserPayeesFieldBuilder();
+                getUserNewApplysFieldBuilder();
+                getUserDeleteApplysFieldBuilder();
+                getUserBlockListsFieldBuilder();
+                getStaffsFieldBuilder();
             }
         }
 
@@ -642,23 +1239,65 @@ public final class Response extends
 
             resultPerPage_ = 0;
 
-            if (userCustomerTransBuilder_ == null) {
-                userCustomerTrans_ = null;
+            if (userLoginReqReplyBuilder_ == null) {
+                userLoginReqReply_ = null;
             } else {
-                userCustomerTrans_ = null;
-                userCustomerTransBuilder_ = null;
+                userLoginReqReply_ = null;
+                userLoginReqReplyBuilder_ = null;
             }
-            if (userLoginBuilder_ == null) {
-                userLogin_ = null;
+            if (userLoginReplyBuilder_ == null) {
+                userLoginReply_ = null;
             } else {
-                userLogin_ = null;
-                userLoginBuilder_ = null;
+                userLoginReply_ = null;
+                userLoginReplyBuilder_ = null;
             }
-            if (userCustomerLogsBuilder_ == null) {
-                userCustomerLogs_ = null;
+            if (userAccountsBuilder_ == null) {
+                userAccounts_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000080);
             } else {
-                userCustomerLogs_ = null;
-                userCustomerLogsBuilder_ = null;
+                userAccountsBuilder_.clear();
+            }
+            if (userProfileBuilder_ == null) {
+                userProfile_ = null;
+            } else {
+                userProfile_ = null;
+                userProfileBuilder_ = null;
+            }
+            if (userTransactionsBuilder_ == null) {
+                userTransactions_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000200);
+            } else {
+                userTransactionsBuilder_.clear();
+            }
+            if (userPayeesBuilder_ == null) {
+                userPayees_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000400);
+            } else {
+                userPayeesBuilder_.clear();
+            }
+            if (userNewApplysBuilder_ == null) {
+                userNewApplys_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000800);
+            } else {
+                userNewApplysBuilder_.clear();
+            }
+            if (userDeleteApplysBuilder_ == null) {
+                userDeleteApplys_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00001000);
+            } else {
+                userDeleteApplysBuilder_.clear();
+            }
+            if (userBlockListsBuilder_ == null) {
+                userBlockLists_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00002000);
+            } else {
+                userBlockListsBuilder_.clear();
+            }
+            if (staffsBuilder_ == null) {
+                staffs_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00004000);
+            } else {
+                staffsBuilder_.clear();
             }
             return this;
         }
@@ -682,26 +1321,92 @@ public final class Response extends
 
         public Response buildPartial() {
             Response result = new Response(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
             result.statusCode_ = statusCode_;
             result.description_ = description_;
             result.pageNumber_ = pageNumber_;
             result.totalNumber_ = totalNumber_;
             result.resultPerPage_ = resultPerPage_;
-            if (userCustomerTransBuilder_ == null) {
-                result.userCustomerTrans_ = userCustomerTrans_;
+            if (userLoginReqReplyBuilder_ == null) {
+                result.userLoginReqReply_ = userLoginReqReply_;
             } else {
-                result.userCustomerTrans_ = userCustomerTransBuilder_.build();
+                result.userLoginReqReply_ = userLoginReqReplyBuilder_.build();
             }
-            if (userLoginBuilder_ == null) {
-                result.userLogin_ = userLogin_;
+            if (userLoginReplyBuilder_ == null) {
+                result.userLoginReply_ = userLoginReply_;
             } else {
-                result.userLogin_ = userLoginBuilder_.build();
+                result.userLoginReply_ = userLoginReplyBuilder_.build();
             }
-            if (userCustomerLogsBuilder_ == null) {
-                result.userCustomerLogs_ = userCustomerLogs_;
+            if (userAccountsBuilder_ == null) {
+                if (((bitField0_ & 0x00000080) == 0x00000080)) {
+                    userAccounts_ = java.util.Collections.unmodifiableList(userAccounts_);
+                    bitField0_ = (bitField0_ & ~0x00000080);
+                }
+                result.userAccounts_ = userAccounts_;
             } else {
-                result.userCustomerLogs_ = userCustomerLogsBuilder_.build();
+                result.userAccounts_ = userAccountsBuilder_.build();
             }
+            if (userProfileBuilder_ == null) {
+                result.userProfile_ = userProfile_;
+            } else {
+                result.userProfile_ = userProfileBuilder_.build();
+            }
+            if (userTransactionsBuilder_ == null) {
+                if (((bitField0_ & 0x00000200) == 0x00000200)) {
+                    userTransactions_ = java.util.Collections.unmodifiableList(userTransactions_);
+                    bitField0_ = (bitField0_ & ~0x00000200);
+                }
+                result.userTransactions_ = userTransactions_;
+            } else {
+                result.userTransactions_ = userTransactionsBuilder_.build();
+            }
+            if (userPayeesBuilder_ == null) {
+                if (((bitField0_ & 0x00000400) == 0x00000400)) {
+                    userPayees_ = java.util.Collections.unmodifiableList(userPayees_);
+                    bitField0_ = (bitField0_ & ~0x00000400);
+                }
+                result.userPayees_ = userPayees_;
+            } else {
+                result.userPayees_ = userPayeesBuilder_.build();
+            }
+            if (userNewApplysBuilder_ == null) {
+                if (((bitField0_ & 0x00000800) == 0x00000800)) {
+                    userNewApplys_ = java.util.Collections.unmodifiableList(userNewApplys_);
+                    bitField0_ = (bitField0_ & ~0x00000800);
+                }
+                result.userNewApplys_ = userNewApplys_;
+            } else {
+                result.userNewApplys_ = userNewApplysBuilder_.build();
+            }
+            if (userDeleteApplysBuilder_ == null) {
+                if (((bitField0_ & 0x00001000) == 0x00001000)) {
+                    userDeleteApplys_ = java.util.Collections.unmodifiableList(userDeleteApplys_);
+                    bitField0_ = (bitField0_ & ~0x00001000);
+                }
+                result.userDeleteApplys_ = userDeleteApplys_;
+            } else {
+                result.userDeleteApplys_ = userDeleteApplysBuilder_.build();
+            }
+            if (userBlockListsBuilder_ == null) {
+                if (((bitField0_ & 0x00002000) == 0x00002000)) {
+                    userBlockLists_ = java.util.Collections.unmodifiableList(userBlockLists_);
+                    bitField0_ = (bitField0_ & ~0x00002000);
+                }
+                result.userBlockLists_ = userBlockLists_;
+            } else {
+                result.userBlockLists_ = userBlockListsBuilder_.build();
+            }
+            if (staffsBuilder_ == null) {
+                if (((bitField0_ & 0x00004000) == 0x00004000)) {
+                    staffs_ = java.util.Collections.unmodifiableList(staffs_);
+                    bitField0_ = (bitField0_ & ~0x00004000);
+                }
+                result.staffs_ = staffs_;
+            } else {
+                result.staffs_ = staffsBuilder_.build();
+            }
+            result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
         }
@@ -765,14 +1470,196 @@ public final class Response extends
             if (other.getResultPerPage() != 0) {
                 setResultPerPage(other.getResultPerPage());
             }
-            if (other.hasUserCustomerTrans()) {
-                mergeUserCustomerTrans(other.getUserCustomerTrans());
+            if (other.hasUserLoginReqReply()) {
+                mergeUserLoginReqReply(other.getUserLoginReqReply());
             }
-            if (other.hasUserLogin()) {
-                mergeUserLogin(other.getUserLogin());
+            if (other.hasUserLoginReply()) {
+                mergeUserLoginReply(other.getUserLoginReply());
             }
-            if (other.hasUserCustomerLogs()) {
-                mergeUserCustomerLogs(other.getUserCustomerLogs());
+            if (userAccountsBuilder_ == null) {
+                if (!other.userAccounts_.isEmpty()) {
+                    if (userAccounts_.isEmpty()) {
+                        userAccounts_ = other.userAccounts_;
+                        bitField0_ = (bitField0_ & ~0x00000080);
+                    } else {
+                        ensureUserAccountsIsMutable();
+                        userAccounts_.addAll(other.userAccounts_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.userAccounts_.isEmpty()) {
+                    if (userAccountsBuilder_.isEmpty()) {
+                        userAccountsBuilder_.dispose();
+                        userAccountsBuilder_ = null;
+                        userAccounts_ = other.userAccounts_;
+                        bitField0_ = (bitField0_ & ~0x00000080);
+                        userAccountsBuilder_ =
+                                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                                        getUserAccountsFieldBuilder() : null;
+                    } else {
+                        userAccountsBuilder_.addAllMessages(other.userAccounts_);
+                    }
+                }
+            }
+            if (other.hasUserProfile()) {
+                mergeUserProfile(other.getUserProfile());
+            }
+            if (userTransactionsBuilder_ == null) {
+                if (!other.userTransactions_.isEmpty()) {
+                    if (userTransactions_.isEmpty()) {
+                        userTransactions_ = other.userTransactions_;
+                        bitField0_ = (bitField0_ & ~0x00000200);
+                    } else {
+                        ensureUserTransactionsIsMutable();
+                        userTransactions_.addAll(other.userTransactions_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.userTransactions_.isEmpty()) {
+                    if (userTransactionsBuilder_.isEmpty()) {
+                        userTransactionsBuilder_.dispose();
+                        userTransactionsBuilder_ = null;
+                        userTransactions_ = other.userTransactions_;
+                        bitField0_ = (bitField0_ & ~0x00000200);
+                        userTransactionsBuilder_ =
+                                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                                        getUserTransactionsFieldBuilder() : null;
+                    } else {
+                        userTransactionsBuilder_.addAllMessages(other.userTransactions_);
+                    }
+                }
+            }
+            if (userPayeesBuilder_ == null) {
+                if (!other.userPayees_.isEmpty()) {
+                    if (userPayees_.isEmpty()) {
+                        userPayees_ = other.userPayees_;
+                        bitField0_ = (bitField0_ & ~0x00000400);
+                    } else {
+                        ensureUserPayeesIsMutable();
+                        userPayees_.addAll(other.userPayees_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.userPayees_.isEmpty()) {
+                    if (userPayeesBuilder_.isEmpty()) {
+                        userPayeesBuilder_.dispose();
+                        userPayeesBuilder_ = null;
+                        userPayees_ = other.userPayees_;
+                        bitField0_ = (bitField0_ & ~0x00000400);
+                        userPayeesBuilder_ =
+                                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                                        getUserPayeesFieldBuilder() : null;
+                    } else {
+                        userPayeesBuilder_.addAllMessages(other.userPayees_);
+                    }
+                }
+            }
+            if (userNewApplysBuilder_ == null) {
+                if (!other.userNewApplys_.isEmpty()) {
+                    if (userNewApplys_.isEmpty()) {
+                        userNewApplys_ = other.userNewApplys_;
+                        bitField0_ = (bitField0_ & ~0x00000800);
+                    } else {
+                        ensureUserNewApplysIsMutable();
+                        userNewApplys_.addAll(other.userNewApplys_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.userNewApplys_.isEmpty()) {
+                    if (userNewApplysBuilder_.isEmpty()) {
+                        userNewApplysBuilder_.dispose();
+                        userNewApplysBuilder_ = null;
+                        userNewApplys_ = other.userNewApplys_;
+                        bitField0_ = (bitField0_ & ~0x00000800);
+                        userNewApplysBuilder_ =
+                                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                                        getUserNewApplysFieldBuilder() : null;
+                    } else {
+                        userNewApplysBuilder_.addAllMessages(other.userNewApplys_);
+                    }
+                }
+            }
+            if (userDeleteApplysBuilder_ == null) {
+                if (!other.userDeleteApplys_.isEmpty()) {
+                    if (userDeleteApplys_.isEmpty()) {
+                        userDeleteApplys_ = other.userDeleteApplys_;
+                        bitField0_ = (bitField0_ & ~0x00001000);
+                    } else {
+                        ensureUserDeleteApplysIsMutable();
+                        userDeleteApplys_.addAll(other.userDeleteApplys_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.userDeleteApplys_.isEmpty()) {
+                    if (userDeleteApplysBuilder_.isEmpty()) {
+                        userDeleteApplysBuilder_.dispose();
+                        userDeleteApplysBuilder_ = null;
+                        userDeleteApplys_ = other.userDeleteApplys_;
+                        bitField0_ = (bitField0_ & ~0x00001000);
+                        userDeleteApplysBuilder_ =
+                                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                                        getUserDeleteApplysFieldBuilder() : null;
+                    } else {
+                        userDeleteApplysBuilder_.addAllMessages(other.userDeleteApplys_);
+                    }
+                }
+            }
+            if (userBlockListsBuilder_ == null) {
+                if (!other.userBlockLists_.isEmpty()) {
+                    if (userBlockLists_.isEmpty()) {
+                        userBlockLists_ = other.userBlockLists_;
+                        bitField0_ = (bitField0_ & ~0x00002000);
+                    } else {
+                        ensureUserBlockListsIsMutable();
+                        userBlockLists_.addAll(other.userBlockLists_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.userBlockLists_.isEmpty()) {
+                    if (userBlockListsBuilder_.isEmpty()) {
+                        userBlockListsBuilder_.dispose();
+                        userBlockListsBuilder_ = null;
+                        userBlockLists_ = other.userBlockLists_;
+                        bitField0_ = (bitField0_ & ~0x00002000);
+                        userBlockListsBuilder_ =
+                                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                                        getUserBlockListsFieldBuilder() : null;
+                    } else {
+                        userBlockListsBuilder_.addAllMessages(other.userBlockLists_);
+                    }
+                }
+            }
+            if (staffsBuilder_ == null) {
+                if (!other.staffs_.isEmpty()) {
+                    if (staffs_.isEmpty()) {
+                        staffs_ = other.staffs_;
+                        bitField0_ = (bitField0_ & ~0x00004000);
+                    } else {
+                        ensureStaffsIsMutable();
+                        staffs_.addAll(other.staffs_);
+                    }
+                    onChanged();
+                }
+            } else {
+                if (!other.staffs_.isEmpty()) {
+                    if (staffsBuilder_.isEmpty()) {
+                        staffsBuilder_.dispose();
+                        staffsBuilder_ = null;
+                        staffs_ = other.staffs_;
+                        bitField0_ = (bitField0_ & ~0x00004000);
+                        staffsBuilder_ =
+                                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                                        getStaffsFieldBuilder() : null;
+                    } else {
+                        staffsBuilder_.addAllMessages(other.staffs_);
+                    }
+                }
             }
             this.mergeUnknownFields(other.unknownFields);
             onChanged();
@@ -982,384 +1869,2539 @@ public final class Response extends
         }
 
         /**
-         * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+         * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
          */
-        public boolean hasUserCustomerTrans() {
-            return userCustomerTransBuilder_ != null || userCustomerTrans_ != null;
+        public boolean hasUserLoginReqReply() {
+            return userLoginReqReplyBuilder_ != null || userLoginReqReply_ != null;
         }
 
         /**
-         * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+         * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
          */
-        public UserCustomerTransReply getUserCustomerTrans() {
-            if (userCustomerTransBuilder_ == null) {
-                return userCustomerTrans_ == null ? UserCustomerTransReply.getDefaultInstance() : userCustomerTrans_;
+        public UserLoginReqReply getUserLoginReqReply() {
+            if (userLoginReqReplyBuilder_ == null) {
+                return userLoginReqReply_ == null ? UserLoginReqReply.getDefaultInstance() : userLoginReqReply_;
             } else {
-                return userCustomerTransBuilder_.getMessage();
+                return userLoginReqReplyBuilder_.getMessage();
             }
         }
 
         /**
-         * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+         * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
          */
-        public Builder setUserCustomerTrans(
-                UserCustomerTransReply.Builder builderForValue) {
-            if (userCustomerTransBuilder_ == null) {
-                userCustomerTrans_ = builderForValue.build();
+        public Builder setUserLoginReqReply(
+                UserLoginReqReply.Builder builderForValue) {
+            if (userLoginReqReplyBuilder_ == null) {
+                userLoginReqReply_ = builderForValue.build();
                 onChanged();
             } else {
-                userCustomerTransBuilder_.setMessage(builderForValue.build());
+                userLoginReqReplyBuilder_.setMessage(builderForValue.build());
             }
 
             return this;
         }
 
         /**
-         * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+         * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
          */
-        public Builder setUserCustomerTrans(UserCustomerTransReply value) {
-            if (userCustomerTransBuilder_ == null) {
+        public Builder setUserLoginReqReply(UserLoginReqReply value) {
+            if (userLoginReqReplyBuilder_ == null) {
                 if (value == null) {
                     throw new NullPointerException();
                 }
-                userCustomerTrans_ = value;
+                userLoginReqReply_ = value;
                 onChanged();
             } else {
-                userCustomerTransBuilder_.setMessage(value);
+                userLoginReqReplyBuilder_.setMessage(value);
             }
 
             return this;
         }
 
         /**
-         * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+         * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
          */
-        public Builder mergeUserCustomerTrans(UserCustomerTransReply value) {
-            if (userCustomerTransBuilder_ == null) {
-                if (userCustomerTrans_ != null) {
-                    userCustomerTrans_ =
-                            UserCustomerTransReply.newBuilder(userCustomerTrans_).mergeFrom(value).buildPartial();
+        public Builder mergeUserLoginReqReply(UserLoginReqReply value) {
+            if (userLoginReqReplyBuilder_ == null) {
+                if (userLoginReqReply_ != null) {
+                    userLoginReqReply_ =
+                            UserLoginReqReply.newBuilder(userLoginReqReply_).mergeFrom(value).buildPartial();
                 } else {
-                    userCustomerTrans_ = value;
+                    userLoginReqReply_ = value;
                 }
                 onChanged();
             } else {
-                userCustomerTransBuilder_.mergeFrom(value);
+                userLoginReqReplyBuilder_.mergeFrom(value);
             }
 
             return this;
         }
 
         /**
-         * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+         * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
          */
-        public Builder clearUserCustomerTrans() {
-            if (userCustomerTransBuilder_ == null) {
-                userCustomerTrans_ = null;
+        public Builder clearUserLoginReqReply() {
+            if (userLoginReqReplyBuilder_ == null) {
+                userLoginReqReply_ = null;
                 onChanged();
             } else {
-                userCustomerTrans_ = null;
-                userCustomerTransBuilder_ = null;
+                userLoginReqReply_ = null;
+                userLoginReqReplyBuilder_ = null;
             }
 
             return this;
         }
 
         /**
-         * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+         * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
          */
-        public UserCustomerTransReply.Builder getUserCustomerTransBuilder() {
+        public UserLoginReqReply.Builder getUserLoginReqReplyBuilder() {
 
             onChanged();
-            return getUserCustomerTransFieldBuilder().getBuilder();
+            return getUserLoginReqReplyFieldBuilder().getBuilder();
         }
 
         /**
-         * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+         * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
          */
-        public UserCustomerTransReplyOrBuilder getUserCustomerTransOrBuilder() {
-            if (userCustomerTransBuilder_ != null) {
-                return userCustomerTransBuilder_.getMessageOrBuilder();
+        public UserLoginReqReplyOrBuilder getUserLoginReqReplyOrBuilder() {
+            if (userLoginReqReplyBuilder_ != null) {
+                return userLoginReqReplyBuilder_.getMessageOrBuilder();
             } else {
-                return userCustomerTrans_ == null ?
-                        UserCustomerTransReply.getDefaultInstance() : userCustomerTrans_;
+                return userLoginReqReply_ == null ?
+                        UserLoginReqReply.getDefaultInstance() : userLoginReqReply_;
             }
         }
 
         /**
-         * <code>.rpc.UserCustomerTransReply user_customer_trans = 6;</code>
+         * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
-                UserCustomerTransReply, UserCustomerTransReply.Builder, UserCustomerTransReplyOrBuilder>
-        getUserCustomerTransFieldBuilder() {
-            if (userCustomerTransBuilder_ == null) {
-                userCustomerTransBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-                        UserCustomerTransReply, UserCustomerTransReply.Builder, UserCustomerTransReplyOrBuilder>(
-                        getUserCustomerTrans(),
+                UserLoginReqReply, UserLoginReqReply.Builder, UserLoginReqReplyOrBuilder>
+        getUserLoginReqReplyFieldBuilder() {
+            if (userLoginReqReplyBuilder_ == null) {
+                userLoginReqReplyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                        UserLoginReqReply, UserLoginReqReply.Builder, UserLoginReqReplyOrBuilder>(
+                        getUserLoginReqReply(),
                         getParentForChildren(),
                         isClean());
-                userCustomerTrans_ = null;
+                userLoginReqReply_ = null;
             }
-            return userCustomerTransBuilder_;
+            return userLoginReqReplyBuilder_;
         }
 
         /**
-         * <code>.rpc.UserLoginReply user_login = 7;</code>
+         * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
          */
-        public boolean hasUserLogin() {
-            return userLoginBuilder_ != null || userLogin_ != null;
+        public boolean hasUserLoginReply() {
+            return userLoginReplyBuilder_ != null || userLoginReply_ != null;
         }
 
         /**
-         * <code>.rpc.UserLoginReply user_login = 7;</code>
+         * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
          */
-        public UserLoginReply getUserLogin() {
-            if (userLoginBuilder_ == null) {
-                return userLogin_ == null ? UserLoginReply.getDefaultInstance() : userLogin_;
+        public UserLoginReply getUserLoginReply() {
+            if (userLoginReplyBuilder_ == null) {
+                return userLoginReply_ == null ? UserLoginReply.getDefaultInstance() : userLoginReply_;
             } else {
-                return userLoginBuilder_.getMessage();
+                return userLoginReplyBuilder_.getMessage();
             }
         }
 
         /**
-         * <code>.rpc.UserLoginReply user_login = 7;</code>
+         * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
          */
-        public Builder setUserLogin(
+        public Builder setUserLoginReply(
                 UserLoginReply.Builder builderForValue) {
-            if (userLoginBuilder_ == null) {
-                userLogin_ = builderForValue.build();
+            if (userLoginReplyBuilder_ == null) {
+                userLoginReply_ = builderForValue.build();
                 onChanged();
             } else {
-                userLoginBuilder_.setMessage(builderForValue.build());
+                userLoginReplyBuilder_.setMessage(builderForValue.build());
             }
 
             return this;
         }
 
         /**
-         * <code>.rpc.UserLoginReply user_login = 7;</code>
+         * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
          */
-        public Builder setUserLogin(UserLoginReply value) {
-            if (userLoginBuilder_ == null) {
+        public Builder setUserLoginReply(UserLoginReply value) {
+            if (userLoginReplyBuilder_ == null) {
                 if (value == null) {
                     throw new NullPointerException();
                 }
-                userLogin_ = value;
+                userLoginReply_ = value;
                 onChanged();
             } else {
-                userLoginBuilder_.setMessage(value);
+                userLoginReplyBuilder_.setMessage(value);
             }
 
             return this;
         }
 
         /**
-         * <code>.rpc.UserLoginReply user_login = 7;</code>
+         * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
          */
-        public Builder mergeUserLogin(UserLoginReply value) {
-            if (userLoginBuilder_ == null) {
-                if (userLogin_ != null) {
-                    userLogin_ =
-                            UserLoginReply.newBuilder(userLogin_).mergeFrom(value).buildPartial();
+        public Builder mergeUserLoginReply(UserLoginReply value) {
+            if (userLoginReplyBuilder_ == null) {
+                if (userLoginReply_ != null) {
+                    userLoginReply_ =
+                            UserLoginReply.newBuilder(userLoginReply_).mergeFrom(value).buildPartial();
                 } else {
-                    userLogin_ = value;
+                    userLoginReply_ = value;
                 }
                 onChanged();
             } else {
-                userLoginBuilder_.mergeFrom(value);
+                userLoginReplyBuilder_.mergeFrom(value);
             }
 
             return this;
         }
 
         /**
-         * <code>.rpc.UserLoginReply user_login = 7;</code>
+         * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
          */
-        public Builder clearUserLogin() {
-            if (userLoginBuilder_ == null) {
-                userLogin_ = null;
+        public Builder clearUserLoginReply() {
+            if (userLoginReplyBuilder_ == null) {
+                userLoginReply_ = null;
                 onChanged();
             } else {
-                userLogin_ = null;
-                userLoginBuilder_ = null;
+                userLoginReply_ = null;
+                userLoginReplyBuilder_ = null;
             }
 
             return this;
         }
 
         /**
-         * <code>.rpc.UserLoginReply user_login = 7;</code>
+         * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
          */
-        public UserLoginReply.Builder getUserLoginBuilder() {
+        public UserLoginReply.Builder getUserLoginReplyBuilder() {
 
             onChanged();
-            return getUserLoginFieldBuilder().getBuilder();
+            return getUserLoginReplyFieldBuilder().getBuilder();
         }
 
         /**
-         * <code>.rpc.UserLoginReply user_login = 7;</code>
+         * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
          */
-        public UserLoginReplyOrBuilder getUserLoginOrBuilder() {
-            if (userLoginBuilder_ != null) {
-                return userLoginBuilder_.getMessageOrBuilder();
+        public UserLoginReplyOrBuilder getUserLoginReplyOrBuilder() {
+            if (userLoginReplyBuilder_ != null) {
+                return userLoginReplyBuilder_.getMessageOrBuilder();
             } else {
-                return userLogin_ == null ?
-                        UserLoginReply.getDefaultInstance() : userLogin_;
+                return userLoginReply_ == null ?
+                        UserLoginReply.getDefaultInstance() : userLoginReply_;
             }
         }
 
         /**
-         * <code>.rpc.UserLoginReply user_login = 7;</code>
+         * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
                 UserLoginReply, UserLoginReply.Builder, UserLoginReplyOrBuilder>
-        getUserLoginFieldBuilder() {
-            if (userLoginBuilder_ == null) {
-                userLoginBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+        getUserLoginReplyFieldBuilder() {
+            if (userLoginReplyBuilder_ == null) {
+                userLoginReplyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
                         UserLoginReply, UserLoginReply.Builder, UserLoginReplyOrBuilder>(
-                        getUserLogin(),
+                        getUserLoginReply(),
                         getParentForChildren(),
                         isClean());
-                userLogin_ = null;
+                userLoginReply_ = null;
             }
-            return userLoginBuilder_;
+            return userLoginReplyBuilder_;
+        }
+
+        private void ensureUserAccountsIsMutable() {
+            if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+                userAccounts_ = new java.util.ArrayList<UserAccounts>(userAccounts_);
+                bitField0_ |= 0x00000080;
+            }
         }
 
         /**
-         * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
          */
-        public boolean hasUserCustomerLogs() {
-            return userCustomerLogsBuilder_ != null || userCustomerLogs_ != null;
-        }
-
-        /**
-         * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
-         */
-        public UserCustomerLogsReply getUserCustomerLogs() {
-            if (userCustomerLogsBuilder_ == null) {
-                return userCustomerLogs_ == null ? UserCustomerLogsReply.getDefaultInstance() : userCustomerLogs_;
+        public java.util.List<UserAccounts> getUserAccountsList() {
+            if (userAccountsBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(userAccounts_);
             } else {
-                return userCustomerLogsBuilder_.getMessage();
+                return userAccountsBuilder_.getMessageList();
             }
         }
 
         /**
-         * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
          */
-        public Builder setUserCustomerLogs(
-                UserCustomerLogsReply.Builder builderForValue) {
-            if (userCustomerLogsBuilder_ == null) {
-                userCustomerLogs_ = builderForValue.build();
-                onChanged();
+        public int getUserAccountsCount() {
+            if (userAccountsBuilder_ == null) {
+                return userAccounts_.size();
             } else {
-                userCustomerLogsBuilder_.setMessage(builderForValue.build());
+                return userAccountsBuilder_.getCount();
             }
-
-            return this;
         }
 
         /**
-         * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
          */
-        public Builder setUserCustomerLogs(UserCustomerLogsReply value) {
-            if (userCustomerLogsBuilder_ == null) {
+        public UserAccounts getUserAccounts(int index) {
+            if (userAccountsBuilder_ == null) {
+                return userAccounts_.get(index);
+            } else {
+                return userAccountsBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public Builder setUserAccounts(
+                int index, UserAccounts value) {
+            if (userAccountsBuilder_ == null) {
                 if (value == null) {
                     throw new NullPointerException();
                 }
-                userCustomerLogs_ = value;
+                ensureUserAccountsIsMutable();
+                userAccounts_.set(index, value);
                 onChanged();
             } else {
-                userCustomerLogsBuilder_.setMessage(value);
+                userAccountsBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public Builder setUserAccounts(
+                int index, UserAccounts.Builder builderForValue) {
+            if (userAccountsBuilder_ == null) {
+                ensureUserAccountsIsMutable();
+                userAccounts_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                userAccountsBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public Builder addUserAccounts(UserAccounts value) {
+            if (userAccountsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserAccountsIsMutable();
+                userAccounts_.add(value);
+                onChanged();
+            } else {
+                userAccountsBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public Builder addUserAccounts(
+                int index, UserAccounts value) {
+            if (userAccountsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserAccountsIsMutable();
+                userAccounts_.add(index, value);
+                onChanged();
+            } else {
+                userAccountsBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public Builder addUserAccounts(
+                UserAccounts.Builder builderForValue) {
+            if (userAccountsBuilder_ == null) {
+                ensureUserAccountsIsMutable();
+                userAccounts_.add(builderForValue.build());
+                onChanged();
+            } else {
+                userAccountsBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public Builder addUserAccounts(
+                int index, UserAccounts.Builder builderForValue) {
+            if (userAccountsBuilder_ == null) {
+                ensureUserAccountsIsMutable();
+                userAccounts_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                userAccountsBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public Builder addAllUserAccounts(
+                Iterable<? extends UserAccounts> values) {
+            if (userAccountsBuilder_ == null) {
+                ensureUserAccountsIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, userAccounts_);
+                onChanged();
+            } else {
+                userAccountsBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public Builder clearUserAccounts() {
+            if (userAccountsBuilder_ == null) {
+                userAccounts_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000080);
+                onChanged();
+            } else {
+                userAccountsBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public Builder removeUserAccounts(int index) {
+            if (userAccountsBuilder_ == null) {
+                ensureUserAccountsIsMutable();
+                userAccounts_.remove(index);
+                onChanged();
+            } else {
+                userAccountsBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public UserAccounts.Builder getUserAccountsBuilder(
+                int index) {
+            return getUserAccountsFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public UserAccountsOrBuilder getUserAccountsOrBuilder(
+                int index) {
+            if (userAccountsBuilder_ == null) {
+                return userAccounts_.get(index);
+            } else {
+                return userAccountsBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public java.util.List<? extends UserAccountsOrBuilder>
+        getUserAccountsOrBuilderList() {
+            if (userAccountsBuilder_ != null) {
+                return userAccountsBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(userAccounts_);
+            }
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public UserAccounts.Builder addUserAccountsBuilder() {
+            return getUserAccountsFieldBuilder().addBuilder(
+                    UserAccounts.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public UserAccounts.Builder addUserAccountsBuilder(
+                int index) {
+            return getUserAccountsFieldBuilder().addBuilder(
+                    index, UserAccounts.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * apply new account
+         * forget user id/pin
+         * </pre>
+         *
+         * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
+         */
+        public java.util.List<UserAccounts.Builder>
+        getUserAccountsBuilderList() {
+            return getUserAccountsFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserAccounts, UserAccounts.Builder, UserAccountsOrBuilder>
+        getUserAccountsFieldBuilder() {
+            if (userAccountsBuilder_ == null) {
+                userAccountsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+                        UserAccounts, UserAccounts.Builder, UserAccountsOrBuilder>(
+                        userAccounts_,
+                        ((bitField0_ & 0x00000080) == 0x00000080),
+                        getParentForChildren(),
+                        isClean());
+                userAccounts_ = null;
+            }
+            return userAccountsBuilder_;
+        }
+
+        /**
+         * <code>.rpc.UserProfile user_profile = 9;</code>
+         */
+        public boolean hasUserProfile() {
+            return userProfileBuilder_ != null || userProfile_ != null;
+        }
+
+        /**
+         * <code>.rpc.UserProfile user_profile = 9;</code>
+         */
+        public UserProfile getUserProfile() {
+            if (userProfileBuilder_ == null) {
+                return userProfile_ == null ? UserProfile.getDefaultInstance() : userProfile_;
+            } else {
+                return userProfileBuilder_.getMessage();
+            }
+        }
+
+        /**
+         * <code>.rpc.UserProfile user_profile = 9;</code>
+         */
+        public Builder setUserProfile(
+                UserProfile.Builder builderForValue) {
+            if (userProfileBuilder_ == null) {
+                userProfile_ = builderForValue.build();
+                onChanged();
+            } else {
+                userProfileBuilder_.setMessage(builderForValue.build());
             }
 
             return this;
         }
 
         /**
-         * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
+         * <code>.rpc.UserProfile user_profile = 9;</code>
          */
-        public Builder mergeUserCustomerLogs(UserCustomerLogsReply value) {
-            if (userCustomerLogsBuilder_ == null) {
-                if (userCustomerLogs_ != null) {
-                    userCustomerLogs_ =
-                            UserCustomerLogsReply.newBuilder(userCustomerLogs_).mergeFrom(value).buildPartial();
+        public Builder setUserProfile(UserProfile value) {
+            if (userProfileBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                userProfile_ = value;
+                onChanged();
+            } else {
+                userProfileBuilder_.setMessage(value);
+            }
+
+            return this;
+        }
+
+        /**
+         * <code>.rpc.UserProfile user_profile = 9;</code>
+         */
+        public Builder mergeUserProfile(UserProfile value) {
+            if (userProfileBuilder_ == null) {
+                if (userProfile_ != null) {
+                    userProfile_ =
+                            UserProfile.newBuilder(userProfile_).mergeFrom(value).buildPartial();
                 } else {
-                    userCustomerLogs_ = value;
+                    userProfile_ = value;
                 }
                 onChanged();
             } else {
-                userCustomerLogsBuilder_.mergeFrom(value);
+                userProfileBuilder_.mergeFrom(value);
             }
 
             return this;
         }
 
         /**
-         * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
+         * <code>.rpc.UserProfile user_profile = 9;</code>
          */
-        public Builder clearUserCustomerLogs() {
-            if (userCustomerLogsBuilder_ == null) {
-                userCustomerLogs_ = null;
+        public Builder clearUserProfile() {
+            if (userProfileBuilder_ == null) {
+                userProfile_ = null;
                 onChanged();
             } else {
-                userCustomerLogs_ = null;
-                userCustomerLogsBuilder_ = null;
+                userProfile_ = null;
+                userProfileBuilder_ = null;
             }
 
             return this;
         }
 
         /**
-         * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
+         * <code>.rpc.UserProfile user_profile = 9;</code>
          */
-        public UserCustomerLogsReply.Builder getUserCustomerLogsBuilder() {
+        public UserProfile.Builder getUserProfileBuilder() {
 
             onChanged();
-            return getUserCustomerLogsFieldBuilder().getBuilder();
+            return getUserProfileFieldBuilder().getBuilder();
         }
 
         /**
-         * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
+         * <code>.rpc.UserProfile user_profile = 9;</code>
          */
-        public UserCustomerLogsReplyOrBuilder getUserCustomerLogsOrBuilder() {
-            if (userCustomerLogsBuilder_ != null) {
-                return userCustomerLogsBuilder_.getMessageOrBuilder();
+        public UserProfileOrBuilder getUserProfileOrBuilder() {
+            if (userProfileBuilder_ != null) {
+                return userProfileBuilder_.getMessageOrBuilder();
             } else {
-                return userCustomerLogs_ == null ?
-                        UserCustomerLogsReply.getDefaultInstance() : userCustomerLogs_;
+                return userProfile_ == null ?
+                        UserProfile.getDefaultInstance() : userProfile_;
             }
         }
 
         /**
-         * <code>.rpc.UserCustomerLogsReply user_customer_logs = 8;</code>
+         * <code>.rpc.UserProfile user_profile = 9;</code>
          */
         private com.google.protobuf.SingleFieldBuilderV3<
-                UserCustomerLogsReply, UserCustomerLogsReply.Builder, UserCustomerLogsReplyOrBuilder>
-        getUserCustomerLogsFieldBuilder() {
-            if (userCustomerLogsBuilder_ == null) {
-                userCustomerLogsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-                        UserCustomerLogsReply, UserCustomerLogsReply.Builder, UserCustomerLogsReplyOrBuilder>(
-                        getUserCustomerLogs(),
+                UserProfile, UserProfile.Builder, UserProfileOrBuilder>
+        getUserProfileFieldBuilder() {
+            if (userProfileBuilder_ == null) {
+                userProfileBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                        UserProfile, UserProfile.Builder, UserProfileOrBuilder>(
+                        getUserProfile(),
                         getParentForChildren(),
                         isClean());
-                userCustomerLogs_ = null;
+                userProfile_ = null;
             }
-            return userCustomerLogsBuilder_;
+            return userProfileBuilder_;
         }
 
-        public final Builder setUnknownFields(
-                final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return super.setUnknownFieldsProto3(unknownFields);
+        private void ensureUserTransactionsIsMutable() {
+            if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+                userTransactions_ = new java.util.ArrayList<UserTransactions>(userTransactions_);
+                bitField0_ |= 0x00000200;
+            }
         }
 
-        public final Builder mergeUnknownFields(
-                final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return super.mergeUnknownFields(unknownFields);
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public java.util.List<UserTransactions> getUserTransactionsList() {
+            if (userTransactionsBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(userTransactions_);
+            } else {
+                return userTransactionsBuilder_.getMessageList();
+            }
         }
 
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public int getUserTransactionsCount() {
+            if (userTransactionsBuilder_ == null) {
+                return userTransactions_.size();
+            } else {
+                return userTransactionsBuilder_.getCount();
+            }
+        }
 
-        // @@protoc_insertion_point(builder_scope:rpc.Response)
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public UserTransactions getUserTransactions(int index) {
+            if (userTransactionsBuilder_ == null) {
+                return userTransactions_.get(index);
+            } else {
+                return userTransactionsBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public Builder setUserTransactions(
+                int index, UserTransactions value) {
+            if (userTransactionsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserTransactionsIsMutable();
+                userTransactions_.set(index, value);
+                onChanged();
+            } else {
+                userTransactionsBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public Builder setUserTransactions(
+                int index, UserTransactions.Builder builderForValue) {
+            if (userTransactionsBuilder_ == null) {
+                ensureUserTransactionsIsMutable();
+                userTransactions_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                userTransactionsBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public Builder addUserTransactions(UserTransactions value) {
+            if (userTransactionsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserTransactionsIsMutable();
+                userTransactions_.add(value);
+                onChanged();
+            } else {
+                userTransactionsBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public Builder addUserTransactions(
+                int index, UserTransactions value) {
+            if (userTransactionsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserTransactionsIsMutable();
+                userTransactions_.add(index, value);
+                onChanged();
+            } else {
+                userTransactionsBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public Builder addUserTransactions(
+                UserTransactions.Builder builderForValue) {
+            if (userTransactionsBuilder_ == null) {
+                ensureUserTransactionsIsMutable();
+                userTransactions_.add(builderForValue.build());
+                onChanged();
+            } else {
+                userTransactionsBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public Builder addUserTransactions(
+                int index, UserTransactions.Builder builderForValue) {
+            if (userTransactionsBuilder_ == null) {
+                ensureUserTransactionsIsMutable();
+                userTransactions_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                userTransactionsBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public Builder addAllUserTransactions(
+                Iterable<? extends UserTransactions> values) {
+            if (userTransactionsBuilder_ == null) {
+                ensureUserTransactionsIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, userTransactions_);
+                onChanged();
+            } else {
+                userTransactionsBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public Builder clearUserTransactions() {
+            if (userTransactionsBuilder_ == null) {
+                userTransactions_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000200);
+                onChanged();
+            } else {
+                userTransactionsBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public Builder removeUserTransactions(int index) {
+            if (userTransactionsBuilder_ == null) {
+                ensureUserTransactionsIsMutable();
+                userTransactions_.remove(index);
+                onChanged();
+            } else {
+                userTransactionsBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public UserTransactions.Builder getUserTransactionsBuilder(
+                int index) {
+            return getUserTransactionsFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public UserTransactionsOrBuilder getUserTransactionsOrBuilder(
+                int index) {
+            if (userTransactionsBuilder_ == null) {
+                return userTransactions_.get(index);
+            } else {
+                return userTransactionsBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public java.util.List<? extends UserTransactionsOrBuilder>
+        getUserTransactionsOrBuilderList() {
+            if (userTransactionsBuilder_ != null) {
+                return userTransactionsBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(userTransactions_);
+            }
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public UserTransactions.Builder addUserTransactionsBuilder() {
+            return getUserTransactionsFieldBuilder().addBuilder(
+                    UserTransactions.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public UserTransactions.Builder addUserTransactionsBuilder(
+                int index) {
+            return getUserTransactionsFieldBuilder().addBuilder(
+                    index, UserTransactions.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * edit profile
+         * </pre>
+         *
+         * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
+         */
+        public java.util.List<UserTransactions.Builder>
+        getUserTransactionsBuilderList() {
+            return getUserTransactionsFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserTransactions, UserTransactions.Builder, UserTransactionsOrBuilder>
+        getUserTransactionsFieldBuilder() {
+            if (userTransactionsBuilder_ == null) {
+                userTransactionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+                        UserTransactions, UserTransactions.Builder, UserTransactionsOrBuilder>(
+                        userTransactions_,
+                        ((bitField0_ & 0x00000200) == 0x00000200),
+                        getParentForChildren(),
+                        isClean());
+                userTransactions_ = null;
+            }
+            return userTransactionsBuilder_;
+        }
+
+        private void ensureUserPayeesIsMutable() {
+            if (!((bitField0_ & 0x00000400) == 0x00000400)) {
+                userPayees_ = new java.util.ArrayList<UserPayees>(userPayees_);
+                bitField0_ |= 0x00000400;
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public java.util.List<UserPayees> getUserPayeesList() {
+            if (userPayeesBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(userPayees_);
+            } else {
+                return userPayeesBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public int getUserPayeesCount() {
+            if (userPayeesBuilder_ == null) {
+                return userPayees_.size();
+            } else {
+                return userPayeesBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public UserPayees getUserPayees(int index) {
+            if (userPayeesBuilder_ == null) {
+                return userPayees_.get(index);
+            } else {
+                return userPayeesBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public Builder setUserPayees(
+                int index, UserPayees value) {
+            if (userPayeesBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserPayeesIsMutable();
+                userPayees_.set(index, value);
+                onChanged();
+            } else {
+                userPayeesBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public Builder setUserPayees(
+                int index, UserPayees.Builder builderForValue) {
+            if (userPayeesBuilder_ == null) {
+                ensureUserPayeesIsMutable();
+                userPayees_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                userPayeesBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public Builder addUserPayees(UserPayees value) {
+            if (userPayeesBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserPayeesIsMutable();
+                userPayees_.add(value);
+                onChanged();
+            } else {
+                userPayeesBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public Builder addUserPayees(
+                int index, UserPayees value) {
+            if (userPayeesBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserPayeesIsMutable();
+                userPayees_.add(index, value);
+                onChanged();
+            } else {
+                userPayeesBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public Builder addUserPayees(
+                UserPayees.Builder builderForValue) {
+            if (userPayeesBuilder_ == null) {
+                ensureUserPayeesIsMutable();
+                userPayees_.add(builderForValue.build());
+                onChanged();
+            } else {
+                userPayeesBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public Builder addUserPayees(
+                int index, UserPayees.Builder builderForValue) {
+            if (userPayeesBuilder_ == null) {
+                ensureUserPayeesIsMutable();
+                userPayees_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                userPayeesBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public Builder addAllUserPayees(
+                Iterable<? extends UserPayees> values) {
+            if (userPayeesBuilder_ == null) {
+                ensureUserPayeesIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, userPayees_);
+                onChanged();
+            } else {
+                userPayeesBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public Builder clearUserPayees() {
+            if (userPayeesBuilder_ == null) {
+                userPayees_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000400);
+                onChanged();
+            } else {
+                userPayeesBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public Builder removeUserPayees(int index) {
+            if (userPayeesBuilder_ == null) {
+                ensureUserPayeesIsMutable();
+                userPayees_.remove(index);
+                onChanged();
+            } else {
+                userPayeesBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public UserPayees.Builder getUserPayeesBuilder(
+                int index) {
+            return getUserPayeesFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public UserPayeesOrBuilder getUserPayeesOrBuilder(
+                int index) {
+            if (userPayeesBuilder_ == null) {
+                return userPayees_.get(index);
+            } else {
+                return userPayeesBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public java.util.List<? extends UserPayeesOrBuilder>
+        getUserPayeesOrBuilderList() {
+            if (userPayeesBuilder_ != null) {
+                return userPayeesBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(userPayees_);
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public UserPayees.Builder addUserPayeesBuilder() {
+            return getUserPayeesFieldBuilder().addBuilder(
+                    UserPayees.getDefaultInstance());
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public UserPayees.Builder addUserPayeesBuilder(
+                int index) {
+            return getUserPayeesFieldBuilder().addBuilder(
+                    index, UserPayees.getDefaultInstance());
+        }
+
+        /**
+         * <code>repeated .rpc.UserPayees user_payees = 11;</code>
+         */
+        public java.util.List<UserPayees.Builder>
+        getUserPayeesBuilderList() {
+            return getUserPayeesFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserPayees, UserPayees.Builder, UserPayeesOrBuilder>
+        getUserPayeesFieldBuilder() {
+            if (userPayeesBuilder_ == null) {
+                userPayeesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+                        UserPayees, UserPayees.Builder, UserPayeesOrBuilder>(
+                        userPayees_,
+                        ((bitField0_ & 0x00000400) == 0x00000400),
+                        getParentForChildren(),
+                        isClean());
+                userPayees_ = null;
+            }
+            return userPayeesBuilder_;
+        }
+
+        private void ensureUserNewApplysIsMutable() {
+            if (!((bitField0_ & 0x00000800) == 0x00000800)) {
+                userNewApplys_ = new java.util.ArrayList<UserNewApplys>(userNewApplys_);
+                bitField0_ |= 0x00000800;
+            }
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public java.util.List<UserNewApplys> getUserNewApplysList() {
+            if (userNewApplysBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(userNewApplys_);
+            } else {
+                return userNewApplysBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public int getUserNewApplysCount() {
+            if (userNewApplysBuilder_ == null) {
+                return userNewApplys_.size();
+            } else {
+                return userNewApplysBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public UserNewApplys getUserNewApplys(int index) {
+            if (userNewApplysBuilder_ == null) {
+                return userNewApplys_.get(index);
+            } else {
+                return userNewApplysBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public Builder setUserNewApplys(
+                int index, UserNewApplys value) {
+            if (userNewApplysBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserNewApplysIsMutable();
+                userNewApplys_.set(index, value);
+                onChanged();
+            } else {
+                userNewApplysBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public Builder setUserNewApplys(
+                int index, UserNewApplys.Builder builderForValue) {
+            if (userNewApplysBuilder_ == null) {
+                ensureUserNewApplysIsMutable();
+                userNewApplys_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                userNewApplysBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public Builder addUserNewApplys(UserNewApplys value) {
+            if (userNewApplysBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserNewApplysIsMutable();
+                userNewApplys_.add(value);
+                onChanged();
+            } else {
+                userNewApplysBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public Builder addUserNewApplys(
+                int index, UserNewApplys value) {
+            if (userNewApplysBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserNewApplysIsMutable();
+                userNewApplys_.add(index, value);
+                onChanged();
+            } else {
+                userNewApplysBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public Builder addUserNewApplys(
+                UserNewApplys.Builder builderForValue) {
+            if (userNewApplysBuilder_ == null) {
+                ensureUserNewApplysIsMutable();
+                userNewApplys_.add(builderForValue.build());
+                onChanged();
+            } else {
+                userNewApplysBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public Builder addUserNewApplys(
+                int index, UserNewApplys.Builder builderForValue) {
+            if (userNewApplysBuilder_ == null) {
+                ensureUserNewApplysIsMutable();
+                userNewApplys_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                userNewApplysBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public Builder addAllUserNewApplys(
+                Iterable<? extends UserNewApplys> values) {
+            if (userNewApplysBuilder_ == null) {
+                ensureUserNewApplysIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, userNewApplys_);
+                onChanged();
+            } else {
+                userNewApplysBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public Builder clearUserNewApplys() {
+            if (userNewApplysBuilder_ == null) {
+                userNewApplys_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00000800);
+                onChanged();
+            } else {
+                userNewApplysBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public Builder removeUserNewApplys(int index) {
+            if (userNewApplysBuilder_ == null) {
+                ensureUserNewApplysIsMutable();
+                userNewApplys_.remove(index);
+                onChanged();
+            } else {
+                userNewApplysBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public UserNewApplys.Builder getUserNewApplysBuilder(
+                int index) {
+            return getUserNewApplysFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public UserNewApplysOrBuilder getUserNewApplysOrBuilder(
+                int index) {
+            if (userNewApplysBuilder_ == null) {
+                return userNewApplys_.get(index);
+            } else {
+                return userNewApplysBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public java.util.List<? extends UserNewApplysOrBuilder>
+        getUserNewApplysOrBuilderList() {
+            if (userNewApplysBuilder_ != null) {
+                return userNewApplysBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(userNewApplys_);
+            }
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public UserNewApplys.Builder addUserNewApplysBuilder() {
+            return getUserNewApplysFieldBuilder().addBuilder(
+                    UserNewApplys.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public UserNewApplys.Builder addUserNewApplysBuilder(
+                int index) {
+            return getUserNewApplysFieldBuilder().addBuilder(
+                    index, UserNewApplys.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * add payee
+         * remove payee
+         * transfer
+         * staff login
+         * </pre>
+         *
+         * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
+         */
+        public java.util.List<UserNewApplys.Builder>
+        getUserNewApplysBuilderList() {
+            return getUserNewApplysFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserNewApplys, UserNewApplys.Builder, UserNewApplysOrBuilder>
+        getUserNewApplysFieldBuilder() {
+            if (userNewApplysBuilder_ == null) {
+                userNewApplysBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+                        UserNewApplys, UserNewApplys.Builder, UserNewApplysOrBuilder>(
+                        userNewApplys_,
+                        ((bitField0_ & 0x00000800) == 0x00000800),
+                        getParentForChildren(),
+                        isClean());
+                userNewApplys_ = null;
+            }
+            return userNewApplysBuilder_;
+        }
+
+        private void ensureUserDeleteApplysIsMutable() {
+            if (!((bitField0_ & 0x00001000) == 0x00001000)) {
+                userDeleteApplys_ = new java.util.ArrayList<UserAccountDeleteApplys>(userDeleteApplys_);
+                bitField0_ |= 0x00001000;
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public java.util.List<UserAccountDeleteApplys> getUserDeleteApplysList() {
+            if (userDeleteApplysBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(userDeleteApplys_);
+            } else {
+                return userDeleteApplysBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public int getUserDeleteApplysCount() {
+            if (userDeleteApplysBuilder_ == null) {
+                return userDeleteApplys_.size();
+            } else {
+                return userDeleteApplysBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public UserAccountDeleteApplys getUserDeleteApplys(int index) {
+            if (userDeleteApplysBuilder_ == null) {
+                return userDeleteApplys_.get(index);
+            } else {
+                return userDeleteApplysBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public Builder setUserDeleteApplys(
+                int index, UserAccountDeleteApplys value) {
+            if (userDeleteApplysBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserDeleteApplysIsMutable();
+                userDeleteApplys_.set(index, value);
+                onChanged();
+            } else {
+                userDeleteApplysBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public Builder setUserDeleteApplys(
+                int index, UserAccountDeleteApplys.Builder builderForValue) {
+            if (userDeleteApplysBuilder_ == null) {
+                ensureUserDeleteApplysIsMutable();
+                userDeleteApplys_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                userDeleteApplysBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public Builder addUserDeleteApplys(UserAccountDeleteApplys value) {
+            if (userDeleteApplysBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserDeleteApplysIsMutable();
+                userDeleteApplys_.add(value);
+                onChanged();
+            } else {
+                userDeleteApplysBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public Builder addUserDeleteApplys(
+                int index, UserAccountDeleteApplys value) {
+            if (userDeleteApplysBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserDeleteApplysIsMutable();
+                userDeleteApplys_.add(index, value);
+                onChanged();
+            } else {
+                userDeleteApplysBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public Builder addUserDeleteApplys(
+                UserAccountDeleteApplys.Builder builderForValue) {
+            if (userDeleteApplysBuilder_ == null) {
+                ensureUserDeleteApplysIsMutable();
+                userDeleteApplys_.add(builderForValue.build());
+                onChanged();
+            } else {
+                userDeleteApplysBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public Builder addUserDeleteApplys(
+                int index, UserAccountDeleteApplys.Builder builderForValue) {
+            if (userDeleteApplysBuilder_ == null) {
+                ensureUserDeleteApplysIsMutable();
+                userDeleteApplys_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                userDeleteApplysBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public Builder addAllUserDeleteApplys(
+                Iterable<? extends UserAccountDeleteApplys> values) {
+            if (userDeleteApplysBuilder_ == null) {
+                ensureUserDeleteApplysIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, userDeleteApplys_);
+                onChanged();
+            } else {
+                userDeleteApplysBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public Builder clearUserDeleteApplys() {
+            if (userDeleteApplysBuilder_ == null) {
+                userDeleteApplys_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00001000);
+                onChanged();
+            } else {
+                userDeleteApplysBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public Builder removeUserDeleteApplys(int index) {
+            if (userDeleteApplysBuilder_ == null) {
+                ensureUserDeleteApplysIsMutable();
+                userDeleteApplys_.remove(index);
+                onChanged();
+            } else {
+                userDeleteApplysBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public UserAccountDeleteApplys.Builder getUserDeleteApplysBuilder(
+                int index) {
+            return getUserDeleteApplysFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public UserAccountDeleteApplysOrBuilder getUserDeleteApplysOrBuilder(
+                int index) {
+            if (userDeleteApplysBuilder_ == null) {
+                return userDeleteApplys_.get(index);
+            } else {
+                return userDeleteApplysBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public java.util.List<? extends UserAccountDeleteApplysOrBuilder>
+        getUserDeleteApplysOrBuilderList() {
+            if (userDeleteApplysBuilder_ != null) {
+                return userDeleteApplysBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(userDeleteApplys_);
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public UserAccountDeleteApplys.Builder addUserDeleteApplysBuilder() {
+            return getUserDeleteApplysFieldBuilder().addBuilder(
+                    UserAccountDeleteApplys.getDefaultInstance());
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public UserAccountDeleteApplys.Builder addUserDeleteApplysBuilder(
+                int index) {
+            return getUserDeleteApplysFieldBuilder().addBuilder(
+                    index, UserAccountDeleteApplys.getDefaultInstance());
+        }
+
+        /**
+         * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
+         */
+        public java.util.List<UserAccountDeleteApplys.Builder>
+        getUserDeleteApplysBuilderList() {
+            return getUserDeleteApplysFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserAccountDeleteApplys, UserAccountDeleteApplys.Builder, UserAccountDeleteApplysOrBuilder>
+        getUserDeleteApplysFieldBuilder() {
+            if (userDeleteApplysBuilder_ == null) {
+                userDeleteApplysBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+                        UserAccountDeleteApplys, UserAccountDeleteApplys.Builder, UserAccountDeleteApplysOrBuilder>(
+                        userDeleteApplys_,
+                        ((bitField0_ & 0x00001000) == 0x00001000),
+                        getParentForChildren(),
+                        isClean());
+                userDeleteApplys_ = null;
+            }
+            return userDeleteApplysBuilder_;
+        }
+
+        private void ensureUserBlockListsIsMutable() {
+            if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+                userBlockLists_ = new java.util.ArrayList<UserBlocks>(userBlockLists_);
+                bitField0_ |= 0x00002000;
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public java.util.List<UserBlocks> getUserBlockListsList() {
+            if (userBlockListsBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(userBlockLists_);
+            } else {
+                return userBlockListsBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public int getUserBlockListsCount() {
+            if (userBlockListsBuilder_ == null) {
+                return userBlockLists_.size();
+            } else {
+                return userBlockListsBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public UserBlocks getUserBlockLists(int index) {
+            if (userBlockListsBuilder_ == null) {
+                return userBlockLists_.get(index);
+            } else {
+                return userBlockListsBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public Builder setUserBlockLists(
+                int index, UserBlocks value) {
+            if (userBlockListsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserBlockListsIsMutable();
+                userBlockLists_.set(index, value);
+                onChanged();
+            } else {
+                userBlockListsBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public Builder setUserBlockLists(
+                int index, UserBlocks.Builder builderForValue) {
+            if (userBlockListsBuilder_ == null) {
+                ensureUserBlockListsIsMutable();
+                userBlockLists_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                userBlockListsBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public Builder addUserBlockLists(UserBlocks value) {
+            if (userBlockListsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserBlockListsIsMutable();
+                userBlockLists_.add(value);
+                onChanged();
+            } else {
+                userBlockListsBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public Builder addUserBlockLists(
+                int index, UserBlocks value) {
+            if (userBlockListsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureUserBlockListsIsMutable();
+                userBlockLists_.add(index, value);
+                onChanged();
+            } else {
+                userBlockListsBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public Builder addUserBlockLists(
+                UserBlocks.Builder builderForValue) {
+            if (userBlockListsBuilder_ == null) {
+                ensureUserBlockListsIsMutable();
+                userBlockLists_.add(builderForValue.build());
+                onChanged();
+            } else {
+                userBlockListsBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public Builder addUserBlockLists(
+                int index, UserBlocks.Builder builderForValue) {
+            if (userBlockListsBuilder_ == null) {
+                ensureUserBlockListsIsMutable();
+                userBlockLists_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                userBlockListsBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public Builder addAllUserBlockLists(
+                Iterable<? extends UserBlocks> values) {
+            if (userBlockListsBuilder_ == null) {
+                ensureUserBlockListsIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, userBlockLists_);
+                onChanged();
+            } else {
+                userBlockListsBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public Builder clearUserBlockLists() {
+            if (userBlockListsBuilder_ == null) {
+                userBlockLists_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00002000);
+                onChanged();
+            } else {
+                userBlockListsBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public Builder removeUserBlockLists(int index) {
+            if (userBlockListsBuilder_ == null) {
+                ensureUserBlockListsIsMutable();
+                userBlockLists_.remove(index);
+                onChanged();
+            } else {
+                userBlockListsBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public UserBlocks.Builder getUserBlockListsBuilder(
+                int index) {
+            return getUserBlockListsFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public UserBlocksOrBuilder getUserBlockListsOrBuilder(
+                int index) {
+            if (userBlockListsBuilder_ == null) {
+                return userBlockLists_.get(index);
+            } else {
+                return userBlockListsBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public java.util.List<? extends UserBlocksOrBuilder>
+        getUserBlockListsOrBuilderList() {
+            if (userBlockListsBuilder_ != null) {
+                return userBlockListsBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(userBlockLists_);
+            }
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public UserBlocks.Builder addUserBlockListsBuilder() {
+            return getUserBlockListsFieldBuilder().addBuilder(
+                    UserBlocks.getDefaultInstance());
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public UserBlocks.Builder addUserBlockListsBuilder(
+                int index) {
+            return getUserBlockListsFieldBuilder().addBuilder(
+                    index, UserBlocks.getDefaultInstance());
+        }
+
+        /**
+         * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
+         */
+        public java.util.List<UserBlocks.Builder>
+        getUserBlockListsBuilderList() {
+            return getUserBlockListsFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                UserBlocks, UserBlocks.Builder, UserBlocksOrBuilder>
+        getUserBlockListsFieldBuilder() {
+            if (userBlockListsBuilder_ == null) {
+                userBlockListsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+                        UserBlocks, UserBlocks.Builder, UserBlocksOrBuilder>(
+                        userBlockLists_,
+                        ((bitField0_ & 0x00002000) == 0x00002000),
+                        getParentForChildren(),
+                        isClean());
+                userBlockLists_ = null;
+            }
+            return userBlockListsBuilder_;
+        }
+
+        private void ensureStaffsIsMutable() {
+            if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+                staffs_ = new java.util.ArrayList<Staffs>(staffs_);
+                bitField0_ |= 0x00004000;
+            }
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public java.util.List<Staffs> getStaffsList() {
+            if (staffsBuilder_ == null) {
+                return java.util.Collections.unmodifiableList(staffs_);
+            } else {
+                return staffsBuilder_.getMessageList();
+            }
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public int getStaffsCount() {
+            if (staffsBuilder_ == null) {
+                return staffs_.size();
+            } else {
+                return staffsBuilder_.getCount();
+            }
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Staffs getStaffs(int index) {
+            if (staffsBuilder_ == null) {
+                return staffs_.get(index);
+            } else {
+                return staffsBuilder_.getMessage(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Builder setStaffs(
+                int index, Staffs value) {
+            if (staffsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureStaffsIsMutable();
+                staffs_.set(index, value);
+                onChanged();
+            } else {
+                staffsBuilder_.setMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Builder setStaffs(
+                int index, Staffs.Builder builderForValue) {
+            if (staffsBuilder_ == null) {
+                ensureStaffsIsMutable();
+                staffs_.set(index, builderForValue.build());
+                onChanged();
+            } else {
+                staffsBuilder_.setMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Builder addStaffs(Staffs value) {
+            if (staffsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureStaffsIsMutable();
+                staffs_.add(value);
+                onChanged();
+            } else {
+                staffsBuilder_.addMessage(value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Builder addStaffs(
+                int index, Staffs value) {
+            if (staffsBuilder_ == null) {
+                if (value == null) {
+                    throw new NullPointerException();
+                }
+                ensureStaffsIsMutable();
+                staffs_.add(index, value);
+                onChanged();
+            } else {
+                staffsBuilder_.addMessage(index, value);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Builder addStaffs(
+                Staffs.Builder builderForValue) {
+            if (staffsBuilder_ == null) {
+                ensureStaffsIsMutable();
+                staffs_.add(builderForValue.build());
+                onChanged();
+            } else {
+                staffsBuilder_.addMessage(builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Builder addStaffs(
+                int index, Staffs.Builder builderForValue) {
+            if (staffsBuilder_ == null) {
+                ensureStaffsIsMutable();
+                staffs_.add(index, builderForValue.build());
+                onChanged();
+            } else {
+                staffsBuilder_.addMessage(index, builderForValue.build());
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Builder addAllStaffs(
+                Iterable<? extends Staffs> values) {
+            if (staffsBuilder_ == null) {
+                ensureStaffsIsMutable();
+                com.google.protobuf.AbstractMessageLite.Builder.addAll(
+                        values, staffs_);
+                onChanged();
+            } else {
+                staffsBuilder_.addAllMessages(values);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Builder clearStaffs() {
+            if (staffsBuilder_ == null) {
+                staffs_ = java.util.Collections.emptyList();
+                bitField0_ = (bitField0_ & ~0x00004000);
+                onChanged();
+            } else {
+                staffsBuilder_.clear();
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Builder removeStaffs(int index) {
+            if (staffsBuilder_ == null) {
+                ensureStaffsIsMutable();
+                staffs_.remove(index);
+                onChanged();
+            } else {
+                staffsBuilder_.remove(index);
+            }
+            return this;
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Staffs.Builder getStaffsBuilder(
+                int index) {
+            return getStaffsFieldBuilder().getBuilder(index);
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public StaffsOrBuilder getStaffsOrBuilder(
+                int index) {
+            if (staffsBuilder_ == null) {
+                return staffs_.get(index);
+            } else {
+                return staffsBuilder_.getMessageOrBuilder(index);
+            }
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public java.util.List<? extends StaffsOrBuilder>
+        getStaffsOrBuilderList() {
+            if (staffsBuilder_ != null) {
+                return staffsBuilder_.getMessageOrBuilderList();
+            } else {
+                return java.util.Collections.unmodifiableList(staffs_);
+            }
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Staffs.Builder addStaffsBuilder() {
+            return getStaffsFieldBuilder().addBuilder(
+                    Staffs.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public Staffs.Builder addStaffsBuilder(
+                int index) {
+            return getStaffsFieldBuilder().addBuilder(
+                    index, Staffs.getDefaultInstance());
+        }
+
+        /**
+         * <pre>
+         * respond apply
+         * admin login
+         * </pre>
+         *
+         * <code>repeated .rpc.Staffs staffs = 15;</code>
+         */
+        public java.util.List<Staffs.Builder>
+        getStaffsBuilderList() {
+            return getStaffsFieldBuilder().getBuilderList();
+        }
+
+        private com.google.protobuf.RepeatedFieldBuilderV3<
+                Staffs, Staffs.Builder, StaffsOrBuilder>
+        getStaffsFieldBuilder() {
+            if (staffsBuilder_ == null) {
+                staffsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+                        Staffs, Staffs.Builder, StaffsOrBuilder>(
+                        staffs_,
+                        ((bitField0_ & 0x00004000) == 0x00004000),
+                        getParentForChildren(),
+                        isClean());
+                staffs_ = null;
+            }
+            return staffsBuilder_;
     }
+    public final Builder setUnknownFields(
+        final com.google.protobuf.UnknownFieldSet unknownFields) {
+      return super.setUnknownFieldsProto3(unknownFields);
+    }
+
+    public final Builder mergeUnknownFields(
+        final com.google.protobuf.UnknownFieldSet unknownFields) {
+      return super.mergeUnknownFields(unknownFields);
+    }
+
+
+    // @@protoc_insertion_point(builder_scope:rpc.Response)
+  }
 
 }
 

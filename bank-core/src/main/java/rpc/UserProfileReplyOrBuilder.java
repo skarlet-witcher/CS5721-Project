@@ -3,8 +3,8 @@
 
 package rpc;
 
-public interface UserLoginReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserLoginReply)
+public interface UserProfileReplyOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:rpc.UserProfileReply)
         com.google.protobuf.MessageOrBuilder {
 
     /**
