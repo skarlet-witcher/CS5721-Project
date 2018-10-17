@@ -22,11 +22,12 @@ import java.util.List;
  * @author xiangkai22
  */
 public class CustomerPINView extends JFrame {
-    public CustomerPINView() {
+    public CustomerPINView(String type) {
         initComponents();
         generateKeyPad();
         initPasswordFieldList();
         initPasswordField();
+        initWindowType(type);
 
     }
 
@@ -87,10 +88,16 @@ public class CustomerPINView extends JFrame {
     }
 
     private void btn_confirmActionPerformed(ActionEvent e) {
+        // for test
+        /*
         for(JPasswordField a : passwordFieldsList) {
             System.out.print(a.getPassword()[0] + " ");
         }
         System.out.println("");
+        */
+        this.dispose();
+        new CustomerMainView().run();
+
     }
 
     private void pf_PIN_1PropertyChange(PropertyChangeEvent e) {
@@ -102,6 +109,10 @@ public class CustomerPINView extends JFrame {
     }
 
     private void pf_PIN_1CaretUpdate(CaretEvent e) {
+    }
+
+    private void initWindowType(String type) {
+        this.windowType = type;
     }
 
     private void inputPIN(String str) {
@@ -446,4 +457,5 @@ public class CustomerPINView extends JFrame {
 
     private List<Integer> keyPadList;
     List<JPasswordField> passwordFieldsList = new ArrayList<JPasswordField>();
+    private String windowType;
 }

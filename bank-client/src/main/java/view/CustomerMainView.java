@@ -5,6 +5,7 @@
 package view;
 
 import net.miginfocom.swing.MigLayout;
+import util.JTextFieldLimit;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +22,7 @@ import java.awt.event.ActionListener;
 public class CustomerMainView extends JFrame {
     public CustomerMainView() {
         initComponents();
+        initTextArea();
     }
 
     private void button1ActionPerformed(ActionEvent e) {
@@ -35,7 +37,20 @@ public class CustomerMainView extends JFrame {
         this.setVisible(true);
     }
 
+    private void btn_payee_addActionPerformed(ActionEvent e) {
+        this.dispose();
+        new CustomerAddPayeeView().run();
+    }
+
+    private void initTextArea() {
+        ta_postScript.setDocument(new JTextFieldLimit(200));
+    }
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel lbl_welcome;
+    private JLabel lbl_nameField;
+    private JLabel lbl_lastLogin;
+    private JLabel lbl_lastLoginTime;
     private JTabbedPane customerTabPane;
     private JPanel homePanel;
     private JScrollPane scrollPane1;
@@ -56,13 +71,13 @@ public class CustomerMainView extends JFrame {
     private JLabel lbl_contactNum;
     private JTextField tf_profile_contactNumber;
     private JButton btn_profile_modify;
-    private JLabel label11;
     private JButton btn_profile_deleteAccount;
     private JPanel transactionPanel;
     private JComboBox cb_accountList;
     private JComboBox cb_transaction_filter;
     private JScrollPane scrollPane2;
     private JTable table_transaction_accountTable;
+    private JButton btn_printStatement;
     private JPanel payeePanel;
     private JButton btn_payee_add;
     private JButton btn_payee_remove;
@@ -73,10 +88,25 @@ public class CustomerMainView extends JFrame {
     private JComboBox cb_payee_payeeList;
     private JLabel label8;
     private JComboBox cb_transfer_accountList;
+    private JLabel label11;
     private JTextField btn_transfer_balance2;
+    private JLabel label10;
+    private JTextField btn_transfer_balance;
+    private JLabel label9;
+    private JTextField tf_transfer_amounts;
+    private JLabel lbl_postScript;
+    private JScrollPane scrollPane4;
+    private JTextArea ta_postScript;
+    private JButton btn_transfer_transfer;
+    private JButton btn_signout;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        lbl_welcome = new JLabel();
+        lbl_nameField = new JLabel();
+        lbl_lastLogin = new JLabel();
+        lbl_lastLoginTime = new JLabel();
         customerTabPane = new JTabbedPane();
         homePanel = new JPanel();
         scrollPane1 = new JScrollPane();
@@ -104,6 +134,7 @@ public class CustomerMainView extends JFrame {
         cb_transaction_filter = new JComboBox();
         scrollPane2 = new JScrollPane();
         table_transaction_accountTable = new JTable();
+        btn_printStatement = new JButton();
         payeePanel = new JPanel();
         btn_payee_add = new JButton();
         btn_payee_remove = new JButton();
@@ -120,6 +151,9 @@ public class CustomerMainView extends JFrame {
         btn_transfer_balance = new JTextField();
         label9 = new JLabel();
         tf_transfer_amounts = new JTextField();
+        lbl_postScript = new JLabel();
+        scrollPane4 = new JScrollPane();
+        ta_postScript = new JTextArea();
         btn_transfer_transfer = new JButton();
         btn_signout = new JButton();
 
@@ -145,7 +179,29 @@ public class CustomerMainView extends JFrame {
             "[]" +
             "[]" +
             "[]" +
+            "[]" +
+            "[]" +
             "[]"));
+
+        //---- lbl_welcome ----
+        lbl_welcome.setText("Welcome");
+        lbl_welcome.setFont(new Font("Segoe UI", Font.PLAIN, 26));
+        contentPane.add(lbl_welcome, "cell 2 1");
+
+        //---- lbl_nameField ----
+        lbl_nameField.setText("*FirstName*");
+        lbl_nameField.setFont(new Font("Segoe UI", Font.PLAIN, 24));
+        contentPane.add(lbl_nameField, "cell 2 1");
+
+        //---- lbl_lastLogin ----
+        lbl_lastLogin.setText("Last login: ");
+        lbl_lastLogin.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        contentPane.add(lbl_lastLogin, "cell 2 2");
+
+        //---- lbl_lastLoginTime ----
+        lbl_lastLoginTime.setText("****");
+        lbl_lastLoginTime.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        contentPane.add(lbl_lastLoginTime, "cell 2 2");
 
         //======== customerTabPane ========
         {
@@ -289,6 +345,14 @@ public class CustomerMainView extends JFrame {
                     "[fill]",
                     // rows
                     "[]" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[20:n]0" +
                     "[]" +
                     "[]"));
 
@@ -329,6 +393,11 @@ public class CustomerMainView extends JFrame {
                     scrollPane2.setViewportView(table_transaction_accountTable);
                 }
                 transactionPanel.add(scrollPane2, "cell 0 1");
+
+                //---- btn_printStatement ----
+                btn_printStatement.setText("Print Statement");
+                btn_printStatement.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+                transactionPanel.add(btn_printStatement, "cell 0 9");
             }
             customerTabPane.addTab("Transaction", transactionPanel);
 
@@ -349,6 +418,11 @@ public class CustomerMainView extends JFrame {
                 //---- btn_payee_add ----
                 btn_payee_add.setText("Add");
                 btn_payee_add.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                btn_payee_add.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        btn_payee_addActionPerformed(e);
+                    }
+                });
                 payeePanel.add(btn_payee_add, "cell 0 0");
 
                 //---- btn_payee_remove ----
@@ -391,8 +465,9 @@ public class CustomerMainView extends JFrame {
                     "[]" +
                     "[]" +
                     "[]" +
-                            "[]" +
-                            "[]" +
+                    "[]" +
+                    "[]" +
+                    "[]" +
                     "[]"));
 
                 //---- label7 ----
@@ -441,14 +516,29 @@ public class CustomerMainView extends JFrame {
                 transferPanel.add(label9, "cell 1 4");
                 transferPanel.add(tf_transfer_amounts, "cell 2 4");
 
+                //---- lbl_postScript ----
+                lbl_postScript.setText("Postscript");
+                lbl_postScript.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                transferPanel.add(lbl_postScript, "cell 1 5");
+
+                //======== scrollPane4 ========
+                {
+                    scrollPane4.setMinimumSize(new Dimension(16, 80));
+
+                    //---- ta_postScript ----
+                    ta_postScript.setMinimumSize(new Dimension(0, 30));
+                    scrollPane4.setViewportView(ta_postScript);
+                }
+                transferPanel.add(scrollPane4, "cell 2 5");
+
                 //---- btn_transfer_transfer ----
                 btn_transfer_transfer.setText("Transfer");
                 btn_transfer_transfer.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                transferPanel.add(btn_transfer_transfer, "cell 2 6");
+                transferPanel.add(btn_transfer_transfer, "cell 2 7");
             }
             customerTabPane.addTab("Transfer", transferPanel);
         }
-        contentPane.add(customerTabPane, "cell 2 1");
+        contentPane.add(customerTabPane, "cell 2 3");
 
         //---- btn_signout ----
         btn_signout.setText("Sign out");
@@ -459,18 +549,12 @@ public class CustomerMainView extends JFrame {
                 button1ActionPerformed(e);
             }
         });
-        contentPane.add(btn_signout, "cell 2 3");
+        contentPane.add(btn_signout, "cell 2 5");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-    private JLabel label10;
-    private JTextField btn_transfer_balance;
-    private JLabel label9;
-    private JTextField tf_transfer_amounts;
-    private JButton btn_transfer_transfer;
-    private JButton btn_signout;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
 
 
 }

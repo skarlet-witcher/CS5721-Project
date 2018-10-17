@@ -21,6 +21,7 @@ import java.awt.event.FocusEvent;
 public class CustomerLoginView extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel lbl_title;
     private JLabel lbl_userId;
     private JTextField tf_userId;
     private JLabel lbl_dob;
@@ -91,7 +92,7 @@ public class CustomerLoginView extends JFrame {
 
     private void btn_loginActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerPINView().run();
+        new CustomerPINView("CustomerLogin").run();
     }
 
     private void btn_forgotUserIdActionPerformed(ActionEvent e) {
@@ -119,6 +120,7 @@ public class CustomerLoginView extends JFrame {
     private void initComponents() {
 
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        lbl_title = new JLabel();
         lbl_userId = new JLabel();
         tf_userId = new JTextField();
         lbl_dob = new JLabel();
@@ -147,6 +149,7 @@ public class CustomerLoginView extends JFrame {
             "[30:n,grow,fill]",
             // rows
             "[50:n]" +
+            "[]" +
             "[fill]" +
             "[]" +
             "[fill]" +
@@ -155,25 +158,31 @@ public class CustomerLoginView extends JFrame {
             "[]" +
             "[30:n,grow]"));
 
+        //---- lbl_title ----
+        lbl_title.setText("Customer Bank System Login");
+        lbl_title.setFont(new Font("Segoe UI", Font.PLAIN, 28));
+        lbl_title.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(lbl_title, "cell 2 0 2 1");
+
         //---- lbl_userId ----
         lbl_userId.setText("<html>Please enter your <strong>User ID</strong></html>");
         lbl_userId.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        contentPane.add(lbl_userId, "cell 2 1");
+        contentPane.add(lbl_userId, "cell 2 2");
 
         //---- tf_userId ----
         tf_userId.setMinimumSize(new Dimension(90, 30));
-        contentPane.add(tf_userId, "cell 3 1");
+        contentPane.add(tf_userId, "cell 3 2");
 
         //---- lbl_dob ----
         lbl_dob.setText("Date of Birth");
         lbl_dob.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-        contentPane.add(lbl_dob, "cell 2 3");
+        contentPane.add(lbl_dob, "cell 2 4");
 
         //---- lbl_contactNum ----
         lbl_contactNum.setText("<html><strong>Last four digits</strong> of Contact Number</html>");
         lbl_contactNum.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         lbl_contactNum.setMinimumSize(new Dimension(102, 15));
-        contentPane.add(lbl_contactNum, "cell 2 3");
+        contentPane.add(lbl_contactNum, "cell 2 4");
 
         //---- tf_day ----
         tf_day.addFocusListener(new FocusAdapter() {
@@ -182,11 +191,11 @@ public class CustomerLoginView extends JFrame {
                 tf_dayFocusGained(e);
             }
         });
-        contentPane.add(tf_day, "cell 3 3");
+        contentPane.add(tf_day, "cell 3 4");
 
         //---- lbl_dob_mark1 ----
         lbl_dob_mark1.setText("/");
-        contentPane.add(lbl_dob_mark1, "cell 3 3");
+        contentPane.add(lbl_dob_mark1, "cell 3 4");
 
         //---- tf_month ----
         tf_month.addFocusListener(new FocusAdapter() {
@@ -195,11 +204,11 @@ public class CustomerLoginView extends JFrame {
                 tf_monthFocusGained(e);
             }
         });
-        contentPane.add(tf_month, "cell 3 3");
+        contentPane.add(tf_month, "cell 3 4");
 
         //---- lbl_dob_mark2 ----
         lbl_dob_mark2.setText("/");
-        contentPane.add(lbl_dob_mark2, "cell 3 3");
+        contentPane.add(lbl_dob_mark2, "cell 3 4");
 
         //---- tf_year ----
         tf_year.setMinimumSize(new Dimension(64, 30));
@@ -209,11 +218,11 @@ public class CustomerLoginView extends JFrame {
                 tf_yearFocusGained(e);
             }
         });
-        contentPane.add(tf_year, "cell 3 3");
+        contentPane.add(tf_year, "cell 3 4");
 
         //---- tf_contactNum ----
         tf_contactNum.setMinimumSize(new Dimension(90, 30));
-        contentPane.add(tf_contactNum, "cell 3 3");
+        contentPane.add(tf_contactNum, "cell 3 4");
 
         //---- btn_login ----
         btn_login.setText("Continue");
@@ -223,7 +232,7 @@ public class CustomerLoginView extends JFrame {
                 btn_loginActionPerformed(e);
             }
         });
-        contentPane.add(btn_login, "cell 2 5 2 1");
+        contentPane.add(btn_login, "cell 2 6 2 1");
 
         //---- btn_forgotUserId ----
         btn_forgotUserId.setText("Forgot User ID ?");
@@ -236,7 +245,7 @@ public class CustomerLoginView extends JFrame {
                 btn_forgotUserIdActionPerformed(e);
             }
         });
-        contentPane.add(btn_forgotUserId, "cell 2 6 2 1");
+        contentPane.add(btn_forgotUserId, "cell 2 7 2 1");
 
         //---- btn_register ----
         btn_register.setText("Apply now !");
@@ -249,7 +258,7 @@ public class CustomerLoginView extends JFrame {
                 btn_registerActionPerformed(e);
             }
         });
-        contentPane.add(btn_register, "cell 2 6 2 1");
+        contentPane.add(btn_register, "cell 2 7 2 1");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //  /// GEN-END:initComponents
