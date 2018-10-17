@@ -4,8 +4,8 @@
 package rpc;
 
 public interface ResponseOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.Response)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.Response)
+    com.google.protobuf.MessageOrBuilder {
 
   /**
    * <code>int32 status_code = 1;</code>
@@ -16,12 +16,11 @@ public interface ResponseOrBuilder extends
    * <code>string description = 2;</code>
    */
   String getDescription();
-
   /**
    * <code>string description = 2;</code>
    */
   com.google.protobuf.ByteString
-  getDescriptionBytes();
+      getDescriptionBytes();
 
   /**
    * <code>int32 page_number = 3;</code>
@@ -42,12 +41,10 @@ public interface ResponseOrBuilder extends
    * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
    */
   boolean hasUserLoginReqReply();
-
   /**
    * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
    */
   UserLoginReqReply getUserLoginReqReply();
-
   /**
    * <code>.rpc.UserLoginReqReply user_login_req_reply = 6;</code>
    */
@@ -57,12 +54,10 @@ public interface ResponseOrBuilder extends
    * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
    */
   boolean hasUserLoginReply();
-
   /**
    * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
    */
   UserLoginReply getUserLoginReply();
-
   /**
    * <code>.rpc.UserLoginReply user_login_reply = 7;</code>
    */
@@ -77,8 +72,7 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
    */
   java.util.List<UserAccounts>
-  getUserAccountsList();
-
+      getUserAccountsList();
   /**
    * <pre>
    * apply new account
@@ -88,7 +82,6 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
    */
   UserAccounts getUserAccounts(int index);
-
   /**
    * <pre>
    * apply new account
@@ -98,7 +91,6 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
    */
   int getUserAccountsCount();
-
   /**
    * <pre>
    * apply new account
@@ -108,8 +100,7 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserAccounts user_accounts = 8;</code>
    */
   java.util.List<? extends UserAccountsOrBuilder>
-  getUserAccountsOrBuilderList();
-
+      getUserAccountsOrBuilderList();
   /**
    * <pre>
    * apply new account
@@ -125,12 +116,10 @@ public interface ResponseOrBuilder extends
    * <code>.rpc.UserProfile user_profile = 9;</code>
    */
   boolean hasUserProfile();
-
   /**
    * <code>.rpc.UserProfile user_profile = 9;</code>
    */
   UserProfile getUserProfile();
-
   /**
    * <code>.rpc.UserProfile user_profile = 9;</code>
    */
@@ -144,8 +133,7 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
    */
   java.util.List<UserTransactions>
-  getUserTransactionsList();
-
+      getUserTransactionsList();
   /**
    * <pre>
    * edit profile
@@ -154,7 +142,6 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
    */
   UserTransactions getUserTransactions(int index);
-
   /**
    * <pre>
    * edit profile
@@ -163,7 +150,6 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
    */
   int getUserTransactionsCount();
-
   /**
    * <pre>
    * edit profile
@@ -172,8 +158,7 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserTransactions user_transactions = 10;</code>
    */
   java.util.List<? extends UserTransactionsOrBuilder>
-  getUserTransactionsOrBuilderList();
-
+      getUserTransactionsOrBuilderList();
   /**
    * <pre>
    * edit profile
@@ -188,24 +173,20 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserPayees user_payees = 11;</code>
    */
   java.util.List<UserPayees>
-  getUserPayeesList();
-
+      getUserPayeesList();
   /**
    * <code>repeated .rpc.UserPayees user_payees = 11;</code>
    */
   UserPayees getUserPayees(int index);
-
   /**
    * <code>repeated .rpc.UserPayees user_payees = 11;</code>
    */
   int getUserPayeesCount();
-
   /**
    * <code>repeated .rpc.UserPayees user_payees = 11;</code>
    */
   java.util.List<? extends UserPayeesOrBuilder>
-  getUserPayeesOrBuilderList();
-
+      getUserPayeesOrBuilderList();
   /**
    * <code>repeated .rpc.UserPayees user_payees = 11;</code>
    */
@@ -223,8 +204,7 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
    */
   java.util.List<UserNewApplys>
-  getUserNewApplysList();
-
+      getUserNewApplysList();
   /**
    * <pre>
    * add payee
@@ -236,7 +216,6 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
    */
   UserNewApplys getUserNewApplys(int index);
-
   /**
    * <pre>
    * add payee
@@ -248,7 +227,6 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
    */
   int getUserNewApplysCount();
-
   /**
    * <pre>
    * add payee
@@ -260,8 +238,7 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserNewApplys user_new_applys = 12;</code>
    */
   java.util.List<? extends UserNewApplysOrBuilder>
-  getUserNewApplysOrBuilderList();
-
+      getUserNewApplysOrBuilderList();
   /**
    * <pre>
    * add payee
@@ -279,24 +256,20 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
    */
   java.util.List<UserAccountDeleteApplys>
-  getUserDeleteApplysList();
-
+      getUserDeleteApplysList();
   /**
    * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
    */
   UserAccountDeleteApplys getUserDeleteApplys(int index);
-
   /**
    * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
    */
   int getUserDeleteApplysCount();
-
   /**
    * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
    */
   java.util.List<? extends UserAccountDeleteApplysOrBuilder>
-  getUserDeleteApplysOrBuilderList();
-
+      getUserDeleteApplysOrBuilderList();
   /**
    * <code>repeated .rpc.UserAccountDeleteApplys user_delete_applys = 13;</code>
    */
@@ -307,24 +280,20 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
    */
   java.util.List<UserBlocks>
-  getUserBlockListsList();
-
+      getUserBlockListsList();
   /**
    * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
    */
   UserBlocks getUserBlockLists(int index);
-
   /**
    * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
    */
   int getUserBlockListsCount();
-
   /**
    * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
    */
   java.util.List<? extends UserBlocksOrBuilder>
-  getUserBlockListsOrBuilderList();
-
+      getUserBlockListsOrBuilderList();
   /**
    * <code>repeated .rpc.UserBlocks user_block_lists = 14;</code>
    */
@@ -340,8 +309,7 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.Staffs staffs = 15;</code>
    */
   java.util.List<Staffs>
-  getStaffsList();
-
+      getStaffsList();
   /**
    * <pre>
    * respond apply
@@ -351,7 +319,6 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.Staffs staffs = 15;</code>
    */
   Staffs getStaffs(int index);
-
   /**
    * <pre>
    * respond apply
@@ -361,7 +328,6 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.Staffs staffs = 15;</code>
    */
   int getStaffsCount();
-
   /**
    * <pre>
    * respond apply
@@ -371,8 +337,7 @@ public interface ResponseOrBuilder extends
    * <code>repeated .rpc.Staffs staffs = 15;</code>
    */
   java.util.List<? extends StaffsOrBuilder>
-  getStaffsOrBuilderList();
-
+      getStaffsOrBuilderList();
   /**
    * <pre>
    * respond apply

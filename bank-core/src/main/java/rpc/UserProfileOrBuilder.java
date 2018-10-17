@@ -4,86 +4,79 @@
 package rpc;
 
 public interface UserProfileOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserProfile)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.UserProfile)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>int64 user_id = 1;</code>
-     */
-    long getUserId();
+  /**
+   * <code>int64 user_id = 1;</code>
+   */
+  long getUserId();
 
-    /**
-     * <code>string first_name = 2;</code>
-     */
-    String getFirstName();
+  /**
+   * <code>string first_name = 2;</code>
+   */
+  String getFirstName();
+  /**
+   * <code>string first_name = 2;</code>
+   */
+  com.google.protobuf.ByteString
+      getFirstNameBytes();
 
-    /**
-     * <code>string first_name = 2;</code>
-     */
-    com.google.protobuf.ByteString
-    getFirstNameBytes();
+  /**
+   * <code>string last_name = 3;</code>
+   */
+  String getLastName();
+  /**
+   * <code>string last_name = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getLastNameBytes();
 
-    /**
-     * <code>string last_name = 3;</code>
-     */
-    String getLastName();
+  /**
+   * <code>int32 gender = 4;</code>
+   */
+  int getGender();
 
-    /**
-     * <code>string last_name = 3;</code>
-     */
-    com.google.protobuf.ByteString
-    getLastNameBytes();
+  /**
+   * <code>.google.protobuf.Timestamp birth_date = 5;</code>
+   */
+  boolean hasBirthDate();
+  /**
+   * <code>.google.protobuf.Timestamp birth_date = 5;</code>
+   */
+  com.google.protobuf.Timestamp getBirthDate();
+  /**
+   * <code>.google.protobuf.Timestamp birth_date = 5;</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getBirthDateOrBuilder();
 
-    /**
-     * <code>int32 gender = 4;</code>
-     */
-    int getGender();
+  /**
+   * <code>string address = 6;</code>
+   */
+  String getAddress();
+  /**
+   * <code>string address = 6;</code>
+   */
+  com.google.protobuf.ByteString
+      getAddressBytes();
 
-    /**
-     * <code>.google.protobuf.Timestamp birth_date = 5;</code>
-     */
-    boolean hasBirthDate();
+  /**
+   * <code>string email = 7;</code>
+   */
+  String getEmail();
+  /**
+   * <code>string email = 7;</code>
+   */
+  com.google.protobuf.ByteString
+      getEmailBytes();
 
-    /**
-     * <code>.google.protobuf.Timestamp birth_date = 5;</code>
-     */
-    com.google.protobuf.Timestamp getBirthDate();
-
-    /**
-     * <code>.google.protobuf.Timestamp birth_date = 5;</code>
-     */
-    com.google.protobuf.TimestampOrBuilder getBirthDateOrBuilder();
-
-    /**
-     * <code>string address = 6;</code>
-     */
-    String getAddress();
-
-    /**
-     * <code>string address = 6;</code>
-     */
-    com.google.protobuf.ByteString
-    getAddressBytes();
-
-    /**
-     * <code>string email = 7;</code>
-     */
-    String getEmail();
-
-    /**
-     * <code>string email = 7;</code>
-     */
-    com.google.protobuf.ByteString
-    getEmailBytes();
-
-    /**
-     * <code>string phone = 8;</code>
-     */
-    String getPhone();
-
-    /**
-     * <code>string phone = 8;</code>
-     */
-    com.google.protobuf.ByteString
-    getPhoneBytes();
+  /**
+   * <code>string phone = 8;</code>
+   */
+  String getPhone();
+  /**
+   * <code>string phone = 8;</code>
+   */
+  com.google.protobuf.ByteString
+      getPhoneBytes();
 }

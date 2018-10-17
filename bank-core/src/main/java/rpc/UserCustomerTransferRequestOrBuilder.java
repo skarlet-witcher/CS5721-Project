@@ -4,31 +4,31 @@
 package rpc;
 
 public interface UserCustomerTransferRequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserCustomerTransferRequest)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.UserCustomerTransferRequest)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>int64 user_id = 1;</code>
-     */
-    long getUserId();
+  /**
+   * <code>int64 user_id = 1;</code>
+   */
+  long getUserId();
 
-    /**
-     * <code>int64 payee_id = 2;</code>
-     */
-    long getPayeeId();
+  /**
+   * <code>int64 payee_id = 2;</code>
+   */
+  long getPayeeId();
 
-    /**
-     * <code>int64 account_id = 3;</code>
-     */
-    long getAccountId();
+  /**
+   * <code>int64 account_id = 3;</code>
+   */
+  long getAccountId();
 
-    /**
-     * <code>double amount = 4;</code>
-     */
-    double getAmount();
+  /**
+   * <code>double amount = 4;</code>
+   */
+  double getAmount();
 
-    /**
-     * <code>int32 pin = 5;</code>
-     */
-    int getPin();
+  /**
+   * <code>int32 pin = 5;</code>
+   */
+  int getPin();
 }

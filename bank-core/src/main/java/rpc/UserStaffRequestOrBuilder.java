@@ -4,53 +4,51 @@
 package rpc;
 
 public interface UserStaffRequestOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserStaffRequest)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.UserStaffRequest)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>int64 staff_id = 1;</code>
-     */
-    long getStaffId();
+  /**
+   * <code>int64 staff_id = 1;</code>
+   */
+  long getStaffId();
 
-    /**
-     * <code>string password = 2;</code>
-     */
-    String getPassword();
+  /**
+   * <code>string password = 2;</code>
+   */
+  String getPassword();
+  /**
+   * <code>string password = 2;</code>
+   */
+  com.google.protobuf.ByteString
+      getPasswordBytes();
 
-    /**
-     * <code>string password = 2;</code>
-     */
-    com.google.protobuf.ByteString
-    getPasswordBytes();
+  /**
+   * <code>int64 respond_id = 3;</code>
+   */
+  long getRespondId();
 
-    /**
-     * <code>int64 respond_id = 3;</code>
-     */
-    long getRespondId();
+  /**
+   * <code>int32 respond_result = 4;</code>
+   */
+  int getRespondResult();
 
-    /**
-     * <code>int32 respond_result = 4;</code>
-     */
-    int getRespondResult();
+  /**
+   * <code>int32 respond_description = 5;</code>
+   */
+  int getRespondDescription();
 
-    /**
-     * <code>int32 respond_description = 5;</code>
-     */
-    int getRespondDescription();
+  /**
+   * <code>int32 filter_by_status_type = 6;</code>
+   */
+  int getFilterByStatusType();
 
-    /**
-     * <code>int32 filter_by_status_type = 6;</code>
-     */
-    int getFilterByStatusType();
-
-    /**
-     * <code>string filter_by_user_id_name = 7;</code>
-     */
-    String getFilterByUserIdName();
-
-    /**
-     * <code>string filter_by_user_id_name = 7;</code>
-     */
-    com.google.protobuf.ByteString
-    getFilterByUserIdNameBytes();
+  /**
+   * <code>string filter_by_user_id_name = 7;</code>
+   */
+  String getFilterByUserIdName();
+  /**
+   * <code>string filter_by_user_id_name = 7;</code>
+   */
+  com.google.protobuf.ByteString
+      getFilterByUserIdNameBytes();
 }

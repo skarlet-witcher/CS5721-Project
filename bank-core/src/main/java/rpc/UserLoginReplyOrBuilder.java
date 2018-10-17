@@ -4,33 +4,44 @@
 package rpc;
 
 public interface UserLoginReplyOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserLoginReply)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.UserLoginReply)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>int64 user_id = 1;</code>
-     */
-    long getUserId();
+  /**
+   * <code>int64 user_id = 1;</code>
+   */
+  long getUserId();
 
-    /**
-     * <code>string first_name = 2;</code>
-     */
-    String getFirstName();
+  /**
+   * <code>string first_name = 2;</code>
+   */
+  String getFirstName();
+  /**
+   * <code>string first_name = 2;</code>
+   */
+  com.google.protobuf.ByteString
+      getFirstNameBytes();
 
-    /**
-     * <code>string first_name = 2;</code>
-     */
-    com.google.protobuf.ByteString
-    getFirstNameBytes();
+  /**
+   * <code>string last_name = 3;</code>
+   */
+  String getLastName();
+  /**
+   * <code>string last_name = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getLastNameBytes();
 
-    /**
-     * <code>string last_name = 3;</code>
-     */
-    String getLastName();
-
-    /**
-     * <code>string last_name = 3;</code>
-     */
-    com.google.protobuf.ByteString
-    getLastNameBytes();
+  /**
+   * <code>.google.protobuf.Timestamp last_login = 4;</code>
+   */
+  boolean hasLastLogin();
+  /**
+   * <code>.google.protobuf.Timestamp last_login = 4;</code>
+   */
+  com.google.protobuf.Timestamp getLastLogin();
+  /**
+   * <code>.google.protobuf.Timestamp last_login = 4;</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getLastLoginOrBuilder();
 }

@@ -4,138 +4,127 @@
 package rpc;
 
 public interface UserBlocksOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:rpc.UserBlocks)
-        com.google.protobuf.MessageOrBuilder {
+    // @@protoc_insertion_point(interface_extends:rpc.UserBlocks)
+    com.google.protobuf.MessageOrBuilder {
 
-    /**
-     * <code>int64 apply_id = 6;</code>
-     */
-    long getApplyId();
+  /**
+   * <code>int64 apply_id = 6;</code>
+   */
+  long getApplyId();
 
-    /**
-     * <code>string first_name = 1;</code>
-     */
-    String getFirstName();
+  /**
+   * <code>string first_name = 1;</code>
+   */
+  String getFirstName();
+  /**
+   * <code>string first_name = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getFirstNameBytes();
 
-    /**
-     * <code>string first_name = 1;</code>
-     */
-    com.google.protobuf.ByteString
-    getFirstNameBytes();
+  /**
+   * <code>string last_name = 2;</code>
+   */
+  String getLastName();
+  /**
+   * <code>string last_name = 2;</code>
+   */
+  com.google.protobuf.ByteString
+      getLastNameBytes();
 
-    /**
-     * <code>string last_name = 2;</code>
-     */
-    String getLastName();
+  /**
+   * <code>int32 gender = 3;</code>
+   */
+  int getGender();
 
-    /**
-     * <code>string last_name = 2;</code>
-     */
-    com.google.protobuf.ByteString
-    getLastNameBytes();
+  /**
+   * <code>int32 identity_id_type = 4;</code>
+   */
+  int getIdentityIdType();
 
-    /**
-     * <code>int32 gender = 3;</code>
-     */
-    int getGender();
+  /**
+   * <code>string identity_id = 5;</code>
+   */
+  String getIdentityId();
+  /**
+   * <code>string identity_id = 5;</code>
+   */
+  com.google.protobuf.ByteString
+      getIdentityIdBytes();
 
-    /**
-     * <code>int32 identity_id_type = 4;</code>
-     */
-    int getIdentityIdType();
+  /**
+   * <code>.google.protobuf.Timestamp birth_date = 9;</code>
+   */
+  boolean hasBirthDate();
+  /**
+   * <code>.google.protobuf.Timestamp birth_date = 9;</code>
+   */
+  com.google.protobuf.Timestamp getBirthDate();
+  /**
+   * <code>.google.protobuf.Timestamp birth_date = 9;</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getBirthDateOrBuilder();
 
-    /**
-     * <code>string identity_id = 5;</code>
-     */
-    String getIdentityId();
+  /**
+   * <code>string address = 10;</code>
+   */
+  String getAddress();
+  /**
+   * <code>string address = 10;</code>
+   */
+  com.google.protobuf.ByteString
+      getAddressBytes();
 
-    /**
-     * <code>string identity_id = 5;</code>
-     */
-    com.google.protobuf.ByteString
-    getIdentityIdBytes();
+  /**
+   * <code>string email = 11;</code>
+   */
+  String getEmail();
+  /**
+   * <code>string email = 11;</code>
+   */
+  com.google.protobuf.ByteString
+      getEmailBytes();
 
-    /**
-     * <code>.google.protobuf.Timestamp birth_date = 9;</code>
-     */
-    boolean hasBirthDate();
+  /**
+   * <code>string phone = 12;</code>
+   */
+  String getPhone();
+  /**
+   * <code>string phone = 12;</code>
+   */
+  com.google.protobuf.ByteString
+      getPhoneBytes();
 
-    /**
-     * <code>.google.protobuf.Timestamp birth_date = 9;</code>
-     */
-    com.google.protobuf.Timestamp getBirthDate();
+  /**
+   * <code>int64 account_id = 13;</code>
+   */
+  long getAccountId();
 
-    /**
-     * <code>.google.protobuf.Timestamp birth_date = 9;</code>
-     */
-    com.google.protobuf.TimestampOrBuilder getBirthDateOrBuilder();
+  /**
+   * <code>string reason = 14;</code>
+   */
+  String getReason();
+  /**
+   * <code>string reason = 14;</code>
+   */
+  com.google.protobuf.ByteString
+      getReasonBytes();
 
-    /**
-     * <code>string address = 10;</code>
-     */
-    String getAddress();
+  /**
+   * <code>.google.protobuf.Timestamp block_date = 15;</code>
+   */
+  boolean hasBlockDate();
+  /**
+   * <code>.google.protobuf.Timestamp block_date = 15;</code>
+   */
+  com.google.protobuf.Timestamp getBlockDate();
+  /**
+   * <code>.google.protobuf.Timestamp block_date = 15;</code>
+   */
+  com.google.protobuf.TimestampOrBuilder getBlockDateOrBuilder();
 
-    /**
-     * <code>string address = 10;</code>
-     */
-    com.google.protobuf.ByteString
-    getAddressBytes();
-
-    /**
-     * <code>string email = 11;</code>
-     */
-    String getEmail();
-
-    /**
-     * <code>string email = 11;</code>
-     */
-    com.google.protobuf.ByteString
-    getEmailBytes();
-
-    /**
-     * <code>string phone = 12;</code>
-     */
-    String getPhone();
-
-    /**
-     * <code>string phone = 12;</code>
-     */
-    com.google.protobuf.ByteString
-    getPhoneBytes();
-
-    /**
-     * <code>int64 account_id = 13;</code>
-     */
-    long getAccountId();
-
-    /**
-     * <code>string reason = 14;</code>
-     */
-    String getReason();
-
-    /**
-     * <code>string reason = 14;</code>
-     */
-    com.google.protobuf.ByteString
-    getReasonBytes();
-
-    /**
-     * <code>.google.protobuf.Timestamp block_date = 15;</code>
-     */
-    boolean hasBlockDate();
-
-    /**
-     * <code>.google.protobuf.Timestamp block_date = 15;</code>
-     */
-    com.google.protobuf.Timestamp getBlockDate();
-
-    /**
-     * <code>.google.protobuf.Timestamp block_date = 15;</code>
-     */
-    com.google.protobuf.TimestampOrBuilder getBlockDateOrBuilder();
-
-    /**
-     * <code>int32 status = 16;</code>
-     */
-    int getStatus();
+  /**
+   * <code>int32 status = 16;</code>
+   */
+  int getStatus();
 }

@@ -6,596 +6,559 @@ package rpc;
 /**
  * Protobuf type {@code rpc.UserCustomerGetTransactionsRequest}
  */
-public final class UserCustomerGetTransactionsRequest extends
-        com.google.protobuf.GeneratedMessageV3 implements
-        // @@protoc_insertion_point(message_implements:rpc.UserCustomerGetTransactionsRequest)
-        UserCustomerGetTransactionsRequestOrBuilder {
-    public static final int USER_ID_FIELD_NUMBER = 1;
-    public static final int FILTER_BY_ACCOUNT_FIELD_NUMBER = 2;
-    public static final int FILTER_BY_DATE_FIELD_NUMBER = 3;
-    private static final long serialVersionUID = 0L;
-    // @@protoc_insertion_point(class_scope:rpc.UserCustomerGetTransactionsRequest)
-    private static final UserCustomerGetTransactionsRequest DEFAULT_INSTANCE;
-    private static final com.google.protobuf.Parser<UserCustomerGetTransactionsRequest>
-            PARSER = new com.google.protobuf.AbstractParser<UserCustomerGetTransactionsRequest>() {
-        public UserCustomerGetTransactionsRequest parsePartialFrom(
-                com.google.protobuf.CodedInputStream input,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws com.google.protobuf.InvalidProtocolBufferException {
-            return new UserCustomerGetTransactionsRequest(input, extensionRegistry);
-        }
-    };
+public  final class UserCustomerGetTransactionsRequest extends
+    com.google.protobuf.GeneratedMessageV3 implements
+    // @@protoc_insertion_point(message_implements:rpc.UserCustomerGetTransactionsRequest)
+    UserCustomerGetTransactionsRequestOrBuilder {
+private static final long serialVersionUID = 0L;
+  // Use UserCustomerGetTransactionsRequest.newBuilder() to construct.
+  private UserCustomerGetTransactionsRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    super(builder);
+  }
+  private UserCustomerGetTransactionsRequest() {
+    userId_ = 0L;
+    filterByAccount_ = 0;
+    filterByDate_ = 0;
+  }
 
-    static {
-        DEFAULT_INSTANCE = new UserCustomerGetTransactionsRequest();
+  @Override
+  public final com.google.protobuf.UnknownFieldSet
+  getUnknownFields() {
+    return this.unknownFields;
+  }
+  private UserCustomerGetTransactionsRequest(
+      com.google.protobuf.CodedInputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    this();
+    if (extensionRegistry == null) {
+      throw new NullPointerException();
     }
-
-    private long userId_;
-    private int filterByAccount_;
-    private int filterByDate_;
-    private byte memoizedIsInitialized = -1;
-
-    // Use UserCustomerGetTransactionsRequest.newBuilder() to construct.
-    private UserCustomerGetTransactionsRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-        super(builder);
-    }
-
-    private UserCustomerGetTransactionsRequest() {
-        userId_ = 0L;
-        filterByAccount_ = 0;
-        filterByDate_ = 0;
-    }
-
-    private UserCustomerGetTransactionsRequest(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-        this();
-        if (extensionRegistry == null) {
-            throw new NullPointerException();
-        }
-        int mutable_bitField0_ = 0;
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-                com.google.protobuf.UnknownFieldSet.newBuilder();
-        try {
-            boolean done = false;
-            while (!done) {
-                int tag = input.readTag();
-                switch (tag) {
-                    case 0:
-                        done = true;
-                        break;
-                    default: {
-                        if (!parseUnknownFieldProto3(
-                                input, unknownFields, extensionRegistry, tag)) {
-                            done = true;
-                        }
-                        break;
-                    }
-                    case 8: {
-
-                        userId_ = input.readInt64();
-                        break;
-                    }
-                    case 16: {
-
-                        filterByAccount_ = input.readInt32();
-                        break;
-                    }
-                    case 24: {
-
-                        filterByDate_ = input.readInt32();
-                        break;
-                    }
-                }
+    int mutable_bitField0_ = 0;
+    com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+        com.google.protobuf.UnknownFieldSet.newBuilder();
+    try {
+      boolean done = false;
+      while (!done) {
+        int tag = input.readTag();
+        switch (tag) {
+          case 0:
+            done = true;
+            break;
+          default: {
+            if (!parseUnknownFieldProto3(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
             }
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            throw e.setUnfinishedMessage(this);
-        } catch (java.io.IOException e) {
-            throw new com.google.protobuf.InvalidProtocolBufferException(
-                    e).setUnfinishedMessage(this);
-        } finally {
-            this.unknownFields = unknownFields.build();
-            makeExtensionsImmutable();
+            break;
+          }
+          case 8: {
+
+            userId_ = input.readInt64();
+            break;
+          }
+          case 16: {
+
+            filterByAccount_ = input.readInt32();
+            break;
+          }
+          case 24: {
+
+            filterByDate_ = input.readInt32();
+            break;
+          }
         }
+      }
+    } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+      throw e.setUnfinishedMessage(this);
+    } catch (java.io.IOException e) {
+      throw new com.google.protobuf.InvalidProtocolBufferException(
+          e).setUnfinishedMessage(this);
+    } finally {
+      this.unknownFields = unknownFields.build();
+      makeExtensionsImmutable();
     }
+  }
+  public static final com.google.protobuf.Descriptors.Descriptor
+      getDescriptor() {
+    return BankProto.internal_static_rpc_UserCustomerGetTransactionsRequest_descriptor;
+  }
 
+  protected FieldAccessorTable
+      internalGetFieldAccessorTable() {
+    return BankProto.internal_static_rpc_UserCustomerGetTransactionsRequest_fieldAccessorTable
+        .ensureFieldAccessorsInitialized(
+            UserCustomerGetTransactionsRequest.class, UserCustomerGetTransactionsRequest.Builder.class);
+  }
+
+  public static final int USER_ID_FIELD_NUMBER = 1;
+  private long userId_;
+  /**
+   * <code>int64 user_id = 1;</code>
+   */
+  public long getUserId() {
+    return userId_;
+  }
+
+  public static final int FILTER_BY_ACCOUNT_FIELD_NUMBER = 2;
+  private int filterByAccount_;
+  /**
+   * <code>int32 filter_by_account = 2;</code>
+   */
+  public int getFilterByAccount() {
+    return filterByAccount_;
+  }
+
+  public static final int FILTER_BY_DATE_FIELD_NUMBER = 3;
+  private int filterByDate_;
+  /**
+   * <code>int32 filter_by_date = 3;</code>
+   */
+  public int getFilterByDate() {
+    return filterByDate_;
+  }
+
+  private byte memoizedIsInitialized = -1;
+  public final boolean isInitialized() {
+    byte isInitialized = memoizedIsInitialized;
+    if (isInitialized == 1) return true;
+    if (isInitialized == 0) return false;
+
+    memoizedIsInitialized = 1;
+    return true;
+  }
+
+  public void writeTo(com.google.protobuf.CodedOutputStream output)
+                      throws java.io.IOException {
+    if (userId_ != 0L) {
+      output.writeInt64(1, userId_);
+    }
+    if (filterByAccount_ != 0) {
+      output.writeInt32(2, filterByAccount_);
+    }
+    if (filterByDate_ != 0) {
+      output.writeInt32(3, filterByDate_);
+    }
+    unknownFields.writeTo(output);
+  }
+
+  public int getSerializedSize() {
+    int size = memoizedSize;
+    if (size != -1) return size;
+
+    size = 0;
+    if (userId_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(1, userId_);
+    }
+    if (filterByAccount_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, filterByAccount_);
+    }
+    if (filterByDate_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(3, filterByDate_);
+    }
+    size += unknownFields.getSerializedSize();
+    memoizedSize = size;
+    return size;
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (obj == this) {
+     return true;
+    }
+    if (!(obj instanceof UserCustomerGetTransactionsRequest)) {
+      return super.equals(obj);
+    }
+    UserCustomerGetTransactionsRequest other = (UserCustomerGetTransactionsRequest) obj;
+
+    boolean result = true;
+    result = result && (getUserId()
+        == other.getUserId());
+    result = result && (getFilterByAccount()
+        == other.getFilterByAccount());
+    result = result && (getFilterByDate()
+        == other.getFilterByDate());
+    result = result && unknownFields.equals(other.unknownFields);
+    return result;
+  }
+
+  @Override
+  public int hashCode() {
+    if (memoizedHashCode != 0) {
+      return memoizedHashCode;
+    }
+    int hash = 41;
+    hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + USER_ID_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getUserId());
+    hash = (37 * hash) + FILTER_BY_ACCOUNT_FIELD_NUMBER;
+    hash = (53 * hash) + getFilterByAccount();
+    hash = (37 * hash) + FILTER_BY_DATE_FIELD_NUMBER;
+    hash = (53 * hash) + getFilterByDate();
+    hash = (29 * hash) + unknownFields.hashCode();
+    memoizedHashCode = hash;
+    return hash;
+  }
+
+  public static UserCustomerGetTransactionsRequest parseFrom(
+      java.nio.ByteBuffer data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+  public static UserCustomerGetTransactionsRequest parseFrom(
+      java.nio.ByteBuffer data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+  public static UserCustomerGetTransactionsRequest parseFrom(
+      com.google.protobuf.ByteString data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+  public static UserCustomerGetTransactionsRequest parseFrom(
+      com.google.protobuf.ByteString data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+  public static UserCustomerGetTransactionsRequest parseFrom(byte[] data)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data);
+  }
+  public static UserCustomerGetTransactionsRequest parseFrom(
+      byte[] data,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
+    return PARSER.parseFrom(data, extensionRegistry);
+  }
+  public static UserCustomerGetTransactionsRequest parseFrom(java.io.InputStream input)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input);
+  }
+  public static UserCustomerGetTransactionsRequest parseFrom(
+      java.io.InputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input, extensionRegistry);
+  }
+  public static UserCustomerGetTransactionsRequest parseDelimitedFrom(java.io.InputStream input)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseDelimitedWithIOException(PARSER, input);
+  }
+  public static UserCustomerGetTransactionsRequest parseDelimitedFrom(
+      java.io.InputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+  }
+  public static UserCustomerGetTransactionsRequest parseFrom(
+      com.google.protobuf.CodedInputStream input)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input);
+  }
+  public static UserCustomerGetTransactionsRequest parseFrom(
+      com.google.protobuf.CodedInputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws java.io.IOException {
+    return com.google.protobuf.GeneratedMessageV3
+        .parseWithIOException(PARSER, input, extensionRegistry);
+  }
+
+  public Builder newBuilderForType() { return newBuilder(); }
+  public static Builder newBuilder() {
+    return DEFAULT_INSTANCE.toBuilder();
+  }
+  public static Builder newBuilder(UserCustomerGetTransactionsRequest prototype) {
+    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+  }
+  public Builder toBuilder() {
+    return this == DEFAULT_INSTANCE
+        ? new Builder() : new Builder().mergeFrom(this);
+  }
+
+  @Override
+  protected Builder newBuilderForType(
+      BuilderParent parent) {
+    Builder builder = new Builder(parent);
+    return builder;
+  }
+  /**
+   * Protobuf type {@code rpc.UserCustomerGetTransactionsRequest}
+   */
+  public static final class Builder extends
+      com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+      // @@protoc_insertion_point(builder_implements:rpc.UserCustomerGetTransactionsRequest)
+      UserCustomerGetTransactionsRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
-    getDescriptor() {
-        return BankProto.internal_static_rpc_UserCustomerGetTransactionsRequest_descriptor;
-    }
-
-    public static UserCustomerGetTransactionsRequest parseFrom(
-            java.nio.ByteBuffer data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-    }
-
-    public static UserCustomerGetTransactionsRequest parseFrom(
-            java.nio.ByteBuffer data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-    }
-
-    public static UserCustomerGetTransactionsRequest parseFrom(
-            com.google.protobuf.ByteString data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-    }
-
-    public static UserCustomerGetTransactionsRequest parseFrom(
-            com.google.protobuf.ByteString data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-    }
-
-    public static UserCustomerGetTransactionsRequest parseFrom(byte[] data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-    }
-
-    public static UserCustomerGetTransactionsRequest parseFrom(
-            byte[] data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-    }
-
-    public static UserCustomerGetTransactionsRequest parseFrom(java.io.InputStream input)
-            throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-                .parseWithIOException(PARSER, input);
-    }
-
-    public static UserCustomerGetTransactionsRequest parseFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-                .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public static UserCustomerGetTransactionsRequest parseDelimitedFrom(java.io.InputStream input)
-            throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-                .parseDelimitedWithIOException(PARSER, input);
-    }
-
-    public static UserCustomerGetTransactionsRequest parseDelimitedFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-                .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public static UserCustomerGetTransactionsRequest parseFrom(
-            com.google.protobuf.CodedInputStream input)
-            throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-                .parseWithIOException(PARSER, input);
-    }
-
-    public static UserCustomerGetTransactionsRequest parseFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-        return com.google.protobuf.GeneratedMessageV3
-                .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() {
-        return DEFAULT_INSTANCE.toBuilder();
-    }
-
-    public static Builder newBuilder(UserCustomerGetTransactionsRequest prototype) {
-        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-
-    public static UserCustomerGetTransactionsRequest getDefaultInstance() {
-        return DEFAULT_INSTANCE;
-    }
-
-    public static com.google.protobuf.Parser<UserCustomerGetTransactionsRequest> parser() {
-        return PARSER;
-    }
-
-    @Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-        return this.unknownFields;
+        getDescriptor() {
+      return BankProto.internal_static_rpc_UserCustomerGetTransactionsRequest_descriptor;
     }
 
     protected FieldAccessorTable
-    internalGetFieldAccessorTable() {
-        return BankProto.internal_static_rpc_UserCustomerGetTransactionsRequest_fieldAccessorTable
-                .ensureFieldAccessorsInitialized(
-                        UserCustomerGetTransactionsRequest.class, UserCustomerGetTransactionsRequest.Builder.class);
+        internalGetFieldAccessorTable() {
+      return BankProto.internal_static_rpc_UserCustomerGetTransactionsRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              UserCustomerGetTransactionsRequest.class, UserCustomerGetTransactionsRequest.Builder.class);
     }
 
+    // Construct using rpc.UserCustomerGetTransactionsRequest.newBuilder()
+    private Builder() {
+      maybeForceBuilderInitialization();
+    }
+
+    private Builder(
+        BuilderParent parent) {
+      super(parent);
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+      }
+    }
+    public Builder clear() {
+      super.clear();
+      userId_ = 0L;
+
+      filterByAccount_ = 0;
+
+      filterByDate_ = 0;
+
+      return this;
+    }
+
+    public com.google.protobuf.Descriptors.Descriptor
+        getDescriptorForType() {
+      return BankProto.internal_static_rpc_UserCustomerGetTransactionsRequest_descriptor;
+    }
+
+    public UserCustomerGetTransactionsRequest getDefaultInstanceForType() {
+      return UserCustomerGetTransactionsRequest.getDefaultInstance();
+    }
+
+    public UserCustomerGetTransactionsRequest build() {
+      UserCustomerGetTransactionsRequest result = buildPartial();
+      if (!result.isInitialized()) {
+        throw newUninitializedMessageException(result);
+      }
+      return result;
+    }
+
+    public UserCustomerGetTransactionsRequest buildPartial() {
+      UserCustomerGetTransactionsRequest result = new UserCustomerGetTransactionsRequest(this);
+      result.userId_ = userId_;
+      result.filterByAccount_ = filterByAccount_;
+      result.filterByDate_ = filterByDate_;
+      onBuilt();
+      return result;
+    }
+
+    public Builder clone() {
+      return (Builder) super.clone();
+    }
+    public Builder setField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        Object value) {
+      return (Builder) super.setField(field, value);
+    }
+    public Builder clearField(
+        com.google.protobuf.Descriptors.FieldDescriptor field) {
+      return (Builder) super.clearField(field);
+    }
+    public Builder clearOneof(
+        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+      return (Builder) super.clearOneof(oneof);
+    }
+    public Builder setRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        int index, Object value) {
+      return (Builder) super.setRepeatedField(field, index, value);
+    }
+    public Builder addRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        Object value) {
+      return (Builder) super.addRepeatedField(field, value);
+    }
+    public Builder mergeFrom(com.google.protobuf.Message other) {
+      if (other instanceof UserCustomerGetTransactionsRequest) {
+        return mergeFrom((UserCustomerGetTransactionsRequest)other);
+      } else {
+        super.mergeFrom(other);
+        return this;
+      }
+    }
+
+    public Builder mergeFrom(UserCustomerGetTransactionsRequest other) {
+      if (other == UserCustomerGetTransactionsRequest.getDefaultInstance()) return this;
+      if (other.getUserId() != 0L) {
+        setUserId(other.getUserId());
+      }
+      if (other.getFilterByAccount() != 0) {
+        setFilterByAccount(other.getFilterByAccount());
+      }
+      if (other.getFilterByDate() != 0) {
+        setFilterByDate(other.getFilterByDate());
+      }
+      this.mergeUnknownFields(other.unknownFields);
+      onChanged();
+      return this;
+    }
+
+    public final boolean isInitialized() {
+      return true;
+    }
+
+    public Builder mergeFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      UserCustomerGetTransactionsRequest parsedMessage = null;
+      try {
+        parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        parsedMessage = (UserCustomerGetTransactionsRequest) e.getUnfinishedMessage();
+        throw e.unwrapIOException();
+      } finally {
+        if (parsedMessage != null) {
+          mergeFrom(parsedMessage);
+        }
+      }
+      return this;
+    }
+
+    private long userId_ ;
     /**
      * <code>int64 user_id = 1;</code>
      */
     public long getUserId() {
-        return userId_;
+      return userId_;
+    }
+    /**
+     * <code>int64 user_id = 1;</code>
+     */
+    public Builder setUserId(long value) {
+
+      userId_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int64 user_id = 1;</code>
+     */
+    public Builder clearUserId() {
+
+      userId_ = 0L;
+      onChanged();
+      return this;
     }
 
+    private int filterByAccount_ ;
     /**
      * <code>int32 filter_by_account = 2;</code>
      */
     public int getFilterByAccount() {
-        return filterByAccount_;
+      return filterByAccount_;
+    }
+    /**
+     * <code>int32 filter_by_account = 2;</code>
+     */
+    public Builder setFilterByAccount(int value) {
+
+      filterByAccount_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 filter_by_account = 2;</code>
+     */
+    public Builder clearFilterByAccount() {
+
+      filterByAccount_ = 0;
+      onChanged();
+      return this;
     }
 
+    private int filterByDate_ ;
     /**
      * <code>int32 filter_by_date = 3;</code>
      */
     public int getFilterByDate() {
-        return filterByDate_;
+      return filterByDate_;
     }
-
-    public final boolean isInitialized() {
-        byte isInitialized = memoizedIsInitialized;
-        if (isInitialized == 1) return true;
-        if (isInitialized == 0) return false;
-
-        memoizedIsInitialized = 1;
-        return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-            throws java.io.IOException {
-        if (userId_ != 0L) {
-            output.writeInt64(1, userId_);
-        }
-        if (filterByAccount_ != 0) {
-            output.writeInt32(2, filterByAccount_);
-        }
-        if (filterByDate_ != 0) {
-            output.writeInt32(3, filterByDate_);
-        }
-        unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-        int size = memoizedSize;
-        if (size != -1) return size;
-
-        size = 0;
-        if (userId_ != 0L) {
-            size += com.google.protobuf.CodedOutputStream
-                    .computeInt64Size(1, userId_);
-        }
-        if (filterByAccount_ != 0) {
-            size += com.google.protobuf.CodedOutputStream
-                    .computeInt32Size(2, filterByAccount_);
-        }
-        if (filterByDate_ != 0) {
-            size += com.google.protobuf.CodedOutputStream
-                    .computeInt32Size(3, filterByDate_);
-        }
-        size += unknownFields.getSerializedSize();
-        memoizedSize = size;
-        return size;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (!(obj instanceof UserCustomerGetTransactionsRequest)) {
-            return super.equals(obj);
-        }
-        UserCustomerGetTransactionsRequest other = (UserCustomerGetTransactionsRequest) obj;
-
-        boolean result = true;
-        result = result && (getUserId()
-                == other.getUserId());
-        result = result && (getFilterByAccount()
-                == other.getFilterByAccount());
-        result = result && (getFilterByDate()
-                == other.getFilterByDate());
-        result = result && unknownFields.equals(other.unknownFields);
-        return result;
-    }
-
-    @Override
-    public int hashCode() {
-        if (memoizedHashCode != 0) {
-            return memoizedHashCode;
-        }
-        int hash = 41;
-        hash = (19 * hash) + getDescriptor().hashCode();
-        hash = (37 * hash) + USER_ID_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-                getUserId());
-        hash = (37 * hash) + FILTER_BY_ACCOUNT_FIELD_NUMBER;
-        hash = (53 * hash) + getFilterByAccount();
-        hash = (37 * hash) + FILTER_BY_DATE_FIELD_NUMBER;
-        hash = (53 * hash) + getFilterByDate();
-        hash = (29 * hash) + unknownFields.hashCode();
-        memoizedHashCode = hash;
-        return hash;
-    }
-
-    public Builder newBuilderForType() {
-        return newBuilder();
-    }
-
-    public Builder toBuilder() {
-        return this == DEFAULT_INSTANCE
-                ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @Override
-    protected Builder newBuilderForType(
-            BuilderParent parent) {
-        Builder builder = new Builder(parent);
-        return builder;
-    }
-
-    @Override
-    public com.google.protobuf.Parser<UserCustomerGetTransactionsRequest> getParserForType() {
-        return PARSER;
-    }
-
-    public UserCustomerGetTransactionsRequest getDefaultInstanceForType() {
-        return DEFAULT_INSTANCE;
-    }
-
     /**
-     * Protobuf type {@code rpc.UserCustomerGetTransactionsRequest}
+     * <code>int32 filter_by_date = 3;</code>
      */
-    public static final class Builder extends
-            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-            // @@protoc_insertion_point(builder_implements:rpc.UserCustomerGetTransactionsRequest)
-            UserCustomerGetTransactionsRequestOrBuilder {
-        private long userId_;
-        private int filterByAccount_;
-        private int filterByDate_;
+    public Builder setFilterByDate(int value) {
 
-        // Construct using rpc.UserCustomerGetTransactionsRequest.newBuilder()
-        private Builder() {
-            maybeForceBuilderInitialization();
-        }
-
-        private Builder(
-                BuilderParent parent) {
-            super(parent);
-            maybeForceBuilderInitialization();
-        }
-
-        public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-            return BankProto.internal_static_rpc_UserCustomerGetTransactionsRequest_descriptor;
-        }
-
-        protected FieldAccessorTable
-        internalGetFieldAccessorTable() {
-            return BankProto.internal_static_rpc_UserCustomerGetTransactionsRequest_fieldAccessorTable
-                    .ensureFieldAccessorsInitialized(
-                            UserCustomerGetTransactionsRequest.class, UserCustomerGetTransactionsRequest.Builder.class);
-        }
-
-        private void maybeForceBuilderInitialization() {
-            if (com.google.protobuf.GeneratedMessageV3
-                    .alwaysUseFieldBuilders) {
-            }
-        }
-
-        public Builder clear() {
-            super.clear();
-            userId_ = 0L;
-
-            filterByAccount_ = 0;
-
-            filterByDate_ = 0;
-
-            return this;
-        }
-
-        public com.google.protobuf.Descriptors.Descriptor
-        getDescriptorForType() {
-            return BankProto.internal_static_rpc_UserCustomerGetTransactionsRequest_descriptor;
-        }
-
-        public UserCustomerGetTransactionsRequest getDefaultInstanceForType() {
-            return UserCustomerGetTransactionsRequest.getDefaultInstance();
-        }
-
-        public UserCustomerGetTransactionsRequest build() {
-            UserCustomerGetTransactionsRequest result = buildPartial();
-            if (!result.isInitialized()) {
-                throw newUninitializedMessageException(result);
-            }
-            return result;
-        }
-
-        public UserCustomerGetTransactionsRequest buildPartial() {
-            UserCustomerGetTransactionsRequest result = new UserCustomerGetTransactionsRequest(this);
-            result.userId_ = userId_;
-            result.filterByAccount_ = filterByAccount_;
-            result.filterByDate_ = filterByDate_;
-            onBuilt();
-            return result;
-        }
-
-        public Builder clone() {
-            return super.clone();
-        }
-
-        public Builder setField(
-                com.google.protobuf.Descriptors.FieldDescriptor field,
-                Object value) {
-            return super.setField(field, value);
-        }
-
-        public Builder clearField(
-                com.google.protobuf.Descriptors.FieldDescriptor field) {
-            return super.clearField(field);
-        }
-
-        public Builder clearOneof(
-                com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-            return super.clearOneof(oneof);
-        }
-
-        public Builder setRepeatedField(
-                com.google.protobuf.Descriptors.FieldDescriptor field,
-                int index, Object value) {
-            return super.setRepeatedField(field, index, value);
-        }
-
-        public Builder addRepeatedField(
-                com.google.protobuf.Descriptors.FieldDescriptor field,
-                Object value) {
-            return super.addRepeatedField(field, value);
-        }
-
-        public Builder mergeFrom(com.google.protobuf.Message other) {
-            if (other instanceof UserCustomerGetTransactionsRequest) {
-                return mergeFrom((UserCustomerGetTransactionsRequest) other);
-            } else {
-                super.mergeFrom(other);
-                return this;
-            }
-        }
-
-        public Builder mergeFrom(UserCustomerGetTransactionsRequest other) {
-            if (other == UserCustomerGetTransactionsRequest.getDefaultInstance()) return this;
-            if (other.getUserId() != 0L) {
-                setUserId(other.getUserId());
-            }
-            if (other.getFilterByAccount() != 0) {
-                setFilterByAccount(other.getFilterByAccount());
-            }
-            if (other.getFilterByDate() != 0) {
-                setFilterByDate(other.getFilterByDate());
-            }
-            this.mergeUnknownFields(other.unknownFields);
-            onChanged();
-            return this;
-        }
-
-        public final boolean isInitialized() {
-            return true;
-        }
-
-        public Builder mergeFrom(
-                com.google.protobuf.CodedInputStream input,
-                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-                throws java.io.IOException {
-            UserCustomerGetTransactionsRequest parsedMessage = null;
-            try {
-                parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-                parsedMessage = (UserCustomerGetTransactionsRequest) e.getUnfinishedMessage();
-                throw e.unwrapIOException();
-            } finally {
-                if (parsedMessage != null) {
-                    mergeFrom(parsedMessage);
-                }
-            }
-            return this;
-        }
-
-        /**
-         * <code>int64 user_id = 1;</code>
-         */
-        public long getUserId() {
-            return userId_;
-        }
-
-        /**
-         * <code>int64 user_id = 1;</code>
-         */
-        public Builder setUserId(long value) {
-
-            userId_ = value;
-            onChanged();
-            return this;
-        }
-
-        /**
-         * <code>int64 user_id = 1;</code>
-         */
-        public Builder clearUserId() {
-
-            userId_ = 0L;
-            onChanged();
-            return this;
-        }
-
-        /**
-         * <code>int32 filter_by_account = 2;</code>
-         */
-        public int getFilterByAccount() {
-            return filterByAccount_;
-        }
-
-        /**
-         * <code>int32 filter_by_account = 2;</code>
-         */
-        public Builder setFilterByAccount(int value) {
-
-            filterByAccount_ = value;
-            onChanged();
-            return this;
-        }
-
-        /**
-         * <code>int32 filter_by_account = 2;</code>
-         */
-        public Builder clearFilterByAccount() {
-
-            filterByAccount_ = 0;
-            onChanged();
-            return this;
-        }
-
-        /**
-         * <code>int32 filter_by_date = 3;</code>
-         */
-        public int getFilterByDate() {
-            return filterByDate_;
-        }
-
-        /**
-         * <code>int32 filter_by_date = 3;</code>
-         */
-        public Builder setFilterByDate(int value) {
-
-            filterByDate_ = value;
-            onChanged();
-            return this;
-        }
-
-        /**
-         * <code>int32 filter_by_date = 3;</code>
-         */
-        public Builder clearFilterByDate() {
-
-            filterByDate_ = 0;
-            onChanged();
-            return this;
-        }
-
-        public final Builder setUnknownFields(
-                final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return super.setUnknownFieldsProto3(unknownFields);
-        }
-
-        public final Builder mergeUnknownFields(
-                final com.google.protobuf.UnknownFieldSet unknownFields) {
-            return super.mergeUnknownFields(unknownFields);
-        }
-
-
-        // @@protoc_insertion_point(builder_scope:rpc.UserCustomerGetTransactionsRequest)
+      filterByDate_ = value;
+      onChanged();
+      return this;
     }
+    /**
+     * <code>int32 filter_by_date = 3;</code>
+     */
+    public Builder clearFilterByDate() {
+
+      filterByDate_ = 0;
+      onChanged();
+      return this;
+    }
+    public final Builder setUnknownFields(
+        final com.google.protobuf.UnknownFieldSet unknownFields) {
+      return super.setUnknownFieldsProto3(unknownFields);
+    }
+
+    public final Builder mergeUnknownFields(
+        final com.google.protobuf.UnknownFieldSet unknownFields) {
+      return super.mergeUnknownFields(unknownFields);
+    }
+
+
+    // @@protoc_insertion_point(builder_scope:rpc.UserCustomerGetTransactionsRequest)
+  }
+
+  // @@protoc_insertion_point(class_scope:rpc.UserCustomerGetTransactionsRequest)
+  private static final UserCustomerGetTransactionsRequest DEFAULT_INSTANCE;
+  static {
+    DEFAULT_INSTANCE = new UserCustomerGetTransactionsRequest();
+  }
+
+  public static UserCustomerGetTransactionsRequest getDefaultInstance() {
+    return DEFAULT_INSTANCE;
+  }
+
+  private static final com.google.protobuf.Parser<UserCustomerGetTransactionsRequest>
+      PARSER = new com.google.protobuf.AbstractParser<UserCustomerGetTransactionsRequest>() {
+    public UserCustomerGetTransactionsRequest parsePartialFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return new UserCustomerGetTransactionsRequest(input, extensionRegistry);
+    }
+  };
+
+  public static com.google.protobuf.Parser<UserCustomerGetTransactionsRequest> parser() {
+    return PARSER;
+  }
+
+  @Override
+  public com.google.protobuf.Parser<UserCustomerGetTransactionsRequest> getParserForType() {
+    return PARSER;
+  }
+
+  public UserCustomerGetTransactionsRequest getDefaultInstanceForType() {
+    return DEFAULT_INSTANCE;
+  }
 
 }
 
