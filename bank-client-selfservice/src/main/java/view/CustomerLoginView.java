@@ -47,9 +47,10 @@ public class CustomerLoginView extends JFrame {
     private int randomCheck() {
         return RandomUtil.RandomNum(1, 2);
     }
+
     private void securityVerification(int switcher) {
 
-        if(switcher == 1) {
+        if (switcher == 1) {
             lbl_dob.setVisible(false);
             tf_year.setVisible(false);
             tf_month.setVisible(false);
@@ -140,23 +141,23 @@ public class CustomerLoginView extends JFrame {
         setMinimumSize(new Dimension(27, 35));
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[30:n,grow,fill]" +
-            "[28,fill]0" +
-            "[fill]" +
-            "[92,grow,fill]" +
-            "[30:n,grow,fill]",
-            // rows
-            "[50:n]" +
-            "[]" +
-            "[fill]" +
-            "[]" +
-            "[fill]" +
-            "[15:n,grow,fill]" +
-            "[]" +
-            "[]" +
-            "[30:n,grow]"));
+                "hidemode 3",
+                // columns
+                "[30:n,grow,fill]" +
+                        "[28,fill]0" +
+                        "[fill]" +
+                        "[92,grow,fill]" +
+                        "[30:n,grow,fill]",
+                // rows
+                "[50:n]" +
+                        "[]" +
+                        "[fill]" +
+                        "[]" +
+                        "[fill]" +
+                        "[15:n,grow,fill]" +
+                        "[]" +
+                        "[]" +
+                        "[30:n,grow]"));
 
         //---- lbl_title ----
         lbl_title.setText("Customer Bank System Login");

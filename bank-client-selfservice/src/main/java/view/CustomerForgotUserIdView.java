@@ -4,16 +4,36 @@
 
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import net.miginfocom.swing.*;
+import net.miginfocom.swing.MigLayout;
 import util.JTextFieldLimit;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  * @author xiangkai22
  */
 public class CustomerForgotUserIdView extends JFrame {
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel lbl_IBAN;
+    private JTextField tf_IBAN;
+    private JLabel lbl_dob;
+    private JTextField tf_day;
+    private JLabel lbl_dob_mark1;
+    private JTextField tf_month;
+    private JLabel lbl_dob_mark2;
+    private JTextField tf_year;
+    private JLabel lbl_contactNum;
+    private JTextField tf_contactNum;
+    private JLabel lbl_email;
+    private JTextField tf_email;
+    private JButton btn_confirm;
+    private JButton btn_back;
+
     public CustomerForgotUserIdView() {
         initComponents();
         initTextFields();
@@ -62,19 +82,19 @@ public class CustomerForgotUserIdView extends JFrame {
         setTitle("Customer Forgot UserId View");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[50:n,fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[50:n,fill]",
-            // rows
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]"));
+                "hidemode 3",
+                // columns
+                "[50:n,fill]" +
+                        "[fill]" +
+                        "[fill]" +
+                        "[50:n,fill]",
+                // rows
+                "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]"));
 
         //---- lbl_IBAN ----
         lbl_IBAN.setText("IBAN");
@@ -176,21 +196,5 @@ public class CustomerForgotUserIdView extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel lbl_IBAN;
-    private JTextField tf_IBAN;
-    private JLabel lbl_dob;
-    private JTextField tf_day;
-    private JLabel lbl_dob_mark1;
-    private JTextField tf_month;
-    private JLabel lbl_dob_mark2;
-    private JTextField tf_year;
-    private JLabel lbl_contactNum;
-    private JTextField tf_contactNum;
-    private JLabel lbl_email;
-    private JTextField tf_email;
-    private JButton btn_confirm;
-    private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

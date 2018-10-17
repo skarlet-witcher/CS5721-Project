@@ -4,16 +4,54 @@
 
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import net.miginfocom.swing.*;
+import net.miginfocom.swing.MigLayout;
 import util.JTextFieldLimit;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  * @author xiangkai22
  */
 public class CustomerApplyView extends JFrame {
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel lbl_firstname;
+    private JTextField tf_firstName;
+    private JLabel lbl_lastName;
+    private JTextField tf_lastName;
+    private JLabel lbl_gender;
+    private JComboBox cb_genderList;
+    private JLabel lbl_identityType;
+    private JComboBox cb_identityTypeList;
+    private JLabel lbl_identityNum;
+    private JTextField tf_identityNum;
+    private JLabel lbl_accountType;
+    private JComboBox cb_accountTypeList;
+    private JLabel lbl_cardType;
+    private JComboBox cb_cardTypeList;
+    private JLabel lbl_graduateDate;
+    private JTextField tf_graduate_month;
+    private JLabel label8;
+    private JTextField tf_graduate_year;
+    private JLabel lbl_dob;
+    private JTextField tf_dob_day;
+    private JLabel label10;
+    private JTextField tf_dob_month;
+    private JLabel label11;
+    private JTextField tf_dob_year;
+    private JLabel lbl_address;
+    private JTextField tf_address;
+    private JLabel lbl_email;
+    private JTextField tf_email;
+    private JLabel lbl_contactNum;
+    private JTextField tf_contactNum;
+    private JButton btn_apply;
+    private JButton btn_back;
+
     public CustomerApplyView() {
         initComponents();
         initTextFields();
@@ -49,7 +87,7 @@ public class CustomerApplyView extends JFrame {
     }
 
     private void cb_accountTypeListActionPerformed(ActionEvent e) {
-        if(cb_accountTypeList.getSelectedIndex() == 1) {
+        if (cb_accountTypeList.getSelectedIndex() == 1) {
             initStudentAccountField();
             pack();
         }
@@ -103,28 +141,28 @@ public class CustomerApplyView extends JFrame {
         setTitle("Customer Apply View");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[30:n,fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[30:n,fill]",
-            // rows
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]0" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]"));
+                "hidemode 3",
+                // columns
+                "[30:n,fill]" +
+                        "[fill]" +
+                        "[fill]" +
+                        "[30:n,fill]",
+                // rows
+                "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]0" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]"));
 
         //---- lbl_firstname ----
         lbl_firstname.setText("First Name");
@@ -141,10 +179,10 @@ public class CustomerApplyView extends JFrame {
         contentPane.add(lbl_gender, "cell 1 2");
 
         //---- cb_genderList ----
-        cb_genderList.setModel(new DefaultComboBoxModel(new String[] {
-            "Select Your Gender",
-            "Male",
-            "Female"
+        cb_genderList.setModel(new DefaultComboBoxModel(new String[]{
+                "Select Your Gender",
+                "Male",
+                "Female"
         }));
         contentPane.add(cb_genderList, "cell 2 2");
 
@@ -153,10 +191,10 @@ public class CustomerApplyView extends JFrame {
         contentPane.add(lbl_identityType, "cell 1 3");
 
         //---- cb_identityTypeList ----
-        cb_identityTypeList.setModel(new DefaultComboBoxModel(new String[] {
-            "Select Yout Identity Type",
-            "Driving License",
-            "Passport"
+        cb_identityTypeList.setModel(new DefaultComboBoxModel(new String[]{
+                "Select Yout Identity Type",
+                "Driving License",
+                "Passport"
         }));
         contentPane.add(cb_identityTypeList, "cell 2 3");
 
@@ -170,11 +208,11 @@ public class CustomerApplyView extends JFrame {
         contentPane.add(lbl_accountType, "cell 1 5");
 
         //---- cb_accountTypeList ----
-        cb_accountTypeList.setModel(new DefaultComboBoxModel(new String[] {
-            "Personal Current Account",
-            "Student Current Account",
-            "Young Saver Account",
-            "Golden Account"
+        cb_accountTypeList.setModel(new DefaultComboBoxModel(new String[]{
+                "Personal Current Account",
+                "Student Current Account",
+                "Young Saver Account",
+                "Golden Account"
         }));
         cb_accountTypeList.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -189,10 +227,10 @@ public class CustomerApplyView extends JFrame {
         contentPane.add(lbl_cardType, "cell 1 7");
 
         //---- cb_cardTypeList ----
-        cb_cardTypeList.setModel(new DefaultComboBoxModel(new String[] {
-            "Select Your Card Type",
-            "Debit Card",
-            "Credit Card"
+        cb_cardTypeList.setModel(new DefaultComboBoxModel(new String[]{
+                "Select Your Card Type",
+                "Debit Card",
+                "Credit Card"
         }));
         contentPane.add(cb_cardTypeList, "cell 2 7");
 
@@ -319,40 +357,6 @@ public class CustomerApplyView extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel lbl_firstname;
-    private JTextField tf_firstName;
-    private JLabel lbl_lastName;
-    private JTextField tf_lastName;
-    private JLabel lbl_gender;
-    private JComboBox cb_genderList;
-    private JLabel lbl_identityType;
-    private JComboBox cb_identityTypeList;
-    private JLabel lbl_identityNum;
-    private JTextField tf_identityNum;
-    private JLabel lbl_accountType;
-    private JComboBox cb_accountTypeList;
-    private JLabel lbl_cardType;
-    private JComboBox cb_cardTypeList;
-    private JLabel lbl_graduateDate;
-    private JTextField tf_graduate_month;
-    private JLabel label8;
-    private JTextField tf_graduate_year;
-    private JLabel lbl_dob;
-    private JTextField tf_dob_day;
-    private JLabel label10;
-    private JTextField tf_dob_month;
-    private JLabel label11;
-    private JTextField tf_dob_year;
-    private JLabel lbl_address;
-    private JTextField tf_address;
-    private JLabel lbl_email;
-    private JTextField tf_email;
-    private JLabel lbl_contactNum;
-    private JTextField tf_contactNum;
-    private JButton btn_apply;
-    private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 }

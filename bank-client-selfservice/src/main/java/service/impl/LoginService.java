@@ -22,7 +22,7 @@ public class LoginService implements ILoginService {
         }
     }
 
-    public UserEntity LoginByUsername(String username, String password, Integer role) throws Exception {
+    public UserEntity LoginByUsername(String username, String password, Integer role) {
         return LoginRpc.getInstance().login(username, password, role);
     }
 }

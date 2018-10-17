@@ -4,15 +4,25 @@
 
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
-import net.miginfocom.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author xiangkai22
  */
 public class CustomerAddPayeeView extends JFrame {
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel lbl_payeeName;
+    private JTextField tf_payeeName;
+    private JLabel lbl_IBAN;
+    private JTextField tf_IBAN;
+    private JButton btn_add;
+    private JButton btn_back;
+
     public CustomerAddPayeeView() {
         initComponents();
     }
@@ -40,19 +50,19 @@ public class CustomerAddPayeeView extends JFrame {
         setTitle("Customer Add Payee View");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[100:n,fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[100:n,fill]",
-            // rows
-            "[50:n]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[100:n]"));
+                "hidemode 3",
+                // columns
+                "[100:n,fill]" +
+                        "[fill]" +
+                        "[fill]" +
+                        "[100:n,fill]",
+                // rows
+                "[50:n]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[100:n]"));
 
         //---- lbl_payeeName ----
         lbl_payeeName.setText("Payee name");
@@ -96,13 +106,5 @@ public class CustomerAddPayeeView extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel lbl_payeeName;
-    private JTextField tf_payeeName;
-    private JLabel lbl_IBAN;
-    private JTextField tf_IBAN;
-    private JButton btn_add;
-    private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

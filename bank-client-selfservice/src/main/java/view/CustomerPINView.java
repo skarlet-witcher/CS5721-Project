@@ -4,17 +4,19 @@
 
 package view;
 
-import java.beans.*;
-import javax.swing.event.*;
 import net.miginfocom.swing.MigLayout;
 import util.JTextFieldLimit;
 import util.KeyPadGenerator;
 import util.PINFieldSetter;
 
 import javax.swing.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,31 @@ import java.util.List;
  * @author xiangkai22
  */
 public class CustomerPINView extends JFrame {
+    List<JPasswordField> passwordFieldsList = new ArrayList<JPasswordField>();
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel lbl_PIN;
+    private JPasswordField pf_PIN_1;
+    private JPasswordField pf_PIN_2;
+    private JPasswordField pf_PIN_3;
+    private JPasswordField pf_PIN_4;
+    private JPasswordField pf_PIN_5;
+    private JPasswordField pf_PIN_6;
+    private JButton btn_1;
+    private JButton btn_2;
+    private JButton btn_3;
+    private JButton btn_4;
+    private JButton btn_5;
+    private JButton btn_6;
+    private JButton btn_7;
+    private JButton btn_8;
+    private JButton btn_9;
+    private JButton btn_10;
+    private JButton btn_backSpace;
+    private JButton btn_confirm;
+    private JButton btn_back;
+    private List<Integer> keyPadList;
+    private String windowType;
+
     public CustomerPINView(String type) {
         initComponents();
         generateKeyPad();
@@ -31,13 +58,12 @@ public class CustomerPINView extends JFrame {
 
     }
 
-
     private void btn_backActionPerformed(ActionEvent e) {
-        if(windowType == "Payee") {
+        if (windowType == "Payee") {
             this.dispose();
             new CustomerMainView().run();
         }
-        if(windowType == "CustomerLogin") {
+        if (windowType == "CustomerLogin") {
             this.dispose();
             new CustomerLoginView().run();
         }
@@ -83,9 +109,8 @@ public class CustomerPINView extends JFrame {
         inputPIN(keyPadList.get(9).toString());
     }
 
-
     private void btn_backSpaceActionPerformed(ActionEvent e) {
-        if(passwordFieldCheckerForRemove()==null) return;
+        if (passwordFieldCheckerForRemove() == null) return;
         passwordFieldCheckerForRemove().setText("");
     }
 
@@ -122,27 +147,26 @@ public class CustomerPINView extends JFrame {
     }
 
     private void inputPIN(String str) {
-        if(emptyPasswordFieldCheckerForInput()==null) return;
+        if (emptyPasswordFieldCheckerForInput() == null) return;
         emptyPasswordFieldCheckerForInput().setText(str);
     }
 
-
     private void initPasswordField() {
-       pf_PIN_1.setDocument(new JTextFieldLimit(1));
-       pf_PIN_2.setDocument(new JTextFieldLimit(1));
-       pf_PIN_3.setDocument(new JTextFieldLimit(1));
-       pf_PIN_4.setDocument(new JTextFieldLimit(1));
-       pf_PIN_5.setDocument(new JTextFieldLimit(1));
-       pf_PIN_6.setDocument(new JTextFieldLimit(1));
+        pf_PIN_1.setDocument(new JTextFieldLimit(1));
+        pf_PIN_2.setDocument(new JTextFieldLimit(1));
+        pf_PIN_3.setDocument(new JTextFieldLimit(1));
+        pf_PIN_4.setDocument(new JTextFieldLimit(1));
+        pf_PIN_5.setDocument(new JTextFieldLimit(1));
+        pf_PIN_6.setDocument(new JTextFieldLimit(1));
 
-       List<Integer> accessList = PINFieldSetter.getInstance().setPINField();
+        List<Integer> accessList = PINFieldSetter.getInstance().setPINField();
 
-       for(int i = 0; i < 6; i++) {
-           if(accessList.get(i) == 1) {
-               passwordFieldsList.get(i).setText("*");
-               passwordFieldsList.get(i).setEnabled(false);
-           }
-       }
+        for (int i = 0; i < 6; i++) {
+            if (accessList.get(i) == 1) {
+                passwordFieldsList.get(i).setText("*");
+                passwordFieldsList.get(i).setEnabled(false);
+            }
+        }
     }
 
     private void generateKeyPad() {
@@ -169,12 +193,13 @@ public class CustomerPINView extends JFrame {
         passwordFieldsList.add(pf_PIN_6);
 
     }
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private JPasswordField emptyPasswordFieldCheckerForInput() {
         JPasswordField result = null;
-        for(int i = 0; i < 6; i++) {
-            if(passwordFieldsList.get(i).isEnabled() == true &&
-                    passwordFieldsList.get(i).getPassword().length <=0) {
+        for (int i = 0; i < 6; i++) {
+            if (passwordFieldsList.get(i).isEnabled() == true &&
+                    passwordFieldsList.get(i).getPassword().length <= 0) {
                 result = passwordFieldsList.get(i);
                 break;
             }
@@ -184,9 +209,9 @@ public class CustomerPINView extends JFrame {
 
     private JPasswordField passwordFieldCheckerForRemove() {
         JPasswordField result = null;
-        for(int i = 5; i >= 0; i--) {
-            if(passwordFieldsList.get(i).isEnabled() == true &&
-                    passwordFieldsList.get(i).getPassword().length >0) {
+        for (int i = 5; i >= 0; i--) {
+            if (passwordFieldsList.get(i).isEnabled() == true &&
+                    passwordFieldsList.get(i).getPassword().length > 0) {
                 result = passwordFieldsList.get(i);
                 break;
             }
@@ -198,33 +223,6 @@ public class CustomerPINView extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
-
-
-
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel lbl_PIN;
-    private JPasswordField pf_PIN_1;
-    private JPasswordField pf_PIN_2;
-    private JPasswordField pf_PIN_3;
-    private JPasswordField pf_PIN_4;
-    private JPasswordField pf_PIN_5;
-    private JPasswordField pf_PIN_6;
-    private JButton btn_1;
-    private JButton btn_2;
-    private JButton btn_3;
-    private JButton btn_4;
-    private JButton btn_5;
-    private JButton btn_6;
-    private JButton btn_7;
-    private JButton btn_8;
-    private JButton btn_9;
-    private JButton btn_10;
-    private JButton btn_backSpace;
-    private JButton btn_confirm;
-    private JButton btn_back;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -253,23 +251,23 @@ public class CustomerPINView extends JFrame {
         setTitle("Customer PIN View");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[5:n,grow,fill]" +
-            "[fill]" +
-            "[40:n,fill]" +
-            "[40:n,fill]" +
-            "[40:n,fill]" +
-            "[5:n,grow,fill]",
-            // rows
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[5:n,grow,fill]"));
+                "hidemode 3",
+                // columns
+                "[5:n,grow,fill]" +
+                        "[fill]" +
+                        "[40:n,fill]" +
+                        "[40:n,fill]" +
+                        "[40:n,fill]" +
+                        "[5:n,grow,fill]",
+                // rows
+                "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[5:n,grow,fill]"));
 
         //---- lbl_PIN ----
         lbl_PIN.setText("PIN: ");
@@ -460,8 +458,4 @@ public class CustomerPINView extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
-    private List<Integer> keyPadList;
-    List<JPasswordField> passwordFieldsList = new ArrayList<JPasswordField>();
-    private String windowType;
 }

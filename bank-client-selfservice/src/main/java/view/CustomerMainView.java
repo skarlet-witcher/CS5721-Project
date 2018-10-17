@@ -9,9 +9,6 @@ import util.JTextFieldLimit;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,32 +17,7 @@ import java.awt.event.ActionListener;
  * @author xiangkai22
  */
 public class CustomerMainView extends JFrame {
-    public CustomerMainView() {
-        initComponents();
-        initTextArea();
-    }
-
-    private void button1ActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerLoginView().run();
-    }
-
     private JButton btn_profile_revert;
-
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-
-    private void btn_payee_addActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerAddPayeeView().run();
-    }
-
-    private void initTextArea() {
-        ta_postScript.setDocument(new JTextFieldLimit(200));
-    }
-
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_welcome;
     private JLabel lbl_nameField;
@@ -99,6 +71,30 @@ public class CustomerMainView extends JFrame {
     private JTextArea ta_postScript;
     private JButton btn_transfer_transfer;
     private JButton btn_signout;
+
+    public CustomerMainView() {
+        initComponents();
+        initTextArea();
+    }
+
+    private void button1ActionPerformed(ActionEvent e) {
+        this.dispose();
+        new CustomerLoginView().run();
+    }
+
+    public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
+
+    private void btn_payee_addActionPerformed(ActionEvent e) {
+        this.dispose();
+        new CustomerAddPayeeView().run();
+    }
+
+    private void initTextArea() {
+        ta_postScript.setDocument(new JTextFieldLimit(200));
+    }
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void initComponents() {
@@ -161,27 +157,27 @@ public class CustomerMainView extends JFrame {
         setTitle("Customer Main View");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[fill]0" +
-            "[fill]0" +
-            "[200:n,center]0" +
-            "[fill]0" +
-            "[fill]0" +
-            "[fill]",
-            // rows
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]"));
+                "hidemode 3",
+                // columns
+                "[fill]0" +
+                        "[fill]0" +
+                        "[200:n,center]0" +
+                        "[fill]0" +
+                        "[fill]0" +
+                        "[fill]",
+                // rows
+                "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]"));
 
         //---- lbl_welcome ----
         lbl_welcome.setText("Welcome");
@@ -210,29 +206,29 @@ public class CustomerMainView extends JFrame {
             //======== homePanel ========
             {
                 homePanel.setLayout(new MigLayout(
-                    "hidemode 3",
-                    // columns
-                    "[fill]" +
-                    "[fill]" +
-                    "[fill]",
-                    // rows
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]"));
+                        "hidemode 3",
+                        // columns
+                        "[fill]" +
+                                "[fill]" +
+                                "[fill]",
+                        // rows
+                        "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]"));
 
                 //======== scrollPane1 ========
                 {
 
                     //---- table_home_accountTable ----
                     table_home_accountTable.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null, null, null, null},
-                        },
-                        new String[] {
-                            "AccountNumber", "AccountType", "CurrencyType", "Balance", "Status"
-                        }
+                            new Object[][]{
+                                    {null, null, null, null, null},
+                            },
+                            new String[]{
+                                    "AccountNumber", "AccountType", "CurrencyType", "Balance", "Status"
+                            }
                     ));
                     table_home_accountTable.setMinimumSize(new Dimension(75, 200));
                     table_home_accountTable.setMaximumSize(new Dimension(2147483647, 2147483647));
@@ -246,24 +242,24 @@ public class CustomerMainView extends JFrame {
             //======== profilePanel ========
             {
                 profilePanel.setLayout(new MigLayout(
-                    "hidemode 3",
-                    // columns
-                    "[56:n,fill]" +
-                    "[fill]" +
-                    "[fill]" +
-                    "[110:n,fill]",
-                    // rows
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]"));
+                        "hidemode 3",
+                        // columns
+                        "[56:n,fill]" +
+                                "[fill]" +
+                                "[fill]" +
+                                "[110:n,fill]",
+                        // rows
+                        "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]"));
 
                 //---- lbl_profile_userId ----
                 lbl_profile_userId.setText("User Id");
@@ -339,38 +335,38 @@ public class CustomerMainView extends JFrame {
             //======== transactionPanel ========
             {
                 transactionPanel.setLayout(new MigLayout(
-                    "hidemode 3",
-                    // columns
-                    "[fill]" +
-                    "[fill]",
-                    // rows
-                    "[]" +
-                    "[]0" +
-                    "[]0" +
-                    "[]0" +
-                    "[]0" +
-                    "[]0" +
-                    "[]0" +
-                    "[]0" +
-                    "[20:n]0" +
-                    "[]" +
-                    "[]"));
+                        "hidemode 3",
+                        // columns
+                        "[fill]" +
+                                "[fill]",
+                        // rows
+                        "[]" +
+                                "[]0" +
+                                "[]0" +
+                                "[]0" +
+                                "[]0" +
+                                "[]0" +
+                                "[]0" +
+                                "[]0" +
+                                "[20:n]0" +
+                                "[]" +
+                                "[]"));
 
                 //---- cb_accountList ----
-                cb_accountList.setModel(new DefaultComboBoxModel(new String[] {
-                    "Select Your Account"
+                cb_accountList.setModel(new DefaultComboBoxModel(new String[]{
+                        "Select Your Account"
                 }));
                 cb_accountList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                 transactionPanel.add(cb_accountList, "cell 0 0");
 
                 //---- cb_transaction_filter ----
                 cb_transaction_filter.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                cb_transaction_filter.setModel(new DefaultComboBoxModel(new String[] {
-                    "Select the time",
-                    "Recent 7 days",
-                    "Recent 1 month",
-                    "Recent 6 months",
-                    "Recent 1 year"
+                cb_transaction_filter.setModel(new DefaultComboBoxModel(new String[]{
+                        "Select the time",
+                        "Recent 7 days",
+                        "Recent 1 month",
+                        "Recent 6 months",
+                        "Recent 1 year"
                 }));
                 transactionPanel.add(cb_transaction_filter, "cell 0 0");
 
@@ -379,13 +375,13 @@ public class CustomerMainView extends JFrame {
 
                     //---- table_transaction_accountTable ----
                     table_transaction_accountTable.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                        },
-                        new String[] {
-                            "Date", "Details", "Debit", "Credit", "Balance"
-                        }
+                            new Object[][]{
+                                    {null, null, null, null, null},
+                                    {null, null, null, null, null},
+                            },
+                            new String[]{
+                                    "Date", "Details", "Debit", "Credit", "Balance"
+                            }
                     ));
                     table_transaction_accountTable.setMinimumSize(new Dimension(75, 200));
                     table_transaction_accountTable.setMaximumSize(new Dimension(2147483647, 2147483647));
@@ -404,16 +400,16 @@ public class CustomerMainView extends JFrame {
             //======== payeePanel ========
             {
                 payeePanel.setLayout(new MigLayout(
-                    "hidemode 3",
-                    // columns
-                    "[fill]0" +
-                    "[fill]0" +
-                    "[fill]0" +
-                    "[fill]",
-                    // rows
-                    "[]" +
-                    "[]" +
-                    "[]"));
+                        "hidemode 3",
+                        // columns
+                        "[fill]0" +
+                                "[fill]0" +
+                                "[fill]0" +
+                                "[fill]",
+                        // rows
+                        "[]" +
+                                "[]" +
+                                "[]"));
 
                 //---- btn_payee_add ----
                 btn_payee_add.setText("Add");
@@ -435,13 +431,13 @@ public class CustomerMainView extends JFrame {
 
                     //---- table_payee_payeeList ----
                     table_payee_payeeList.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {"", null, null},
-                            {null, null, null},
-                        },
-                        new String[] {
-                            "IBAN", "firstName", "lastName"
-                        }
+                            new Object[][]{
+                                    {"", null, null},
+                                    {null, null, null},
+                            },
+                            new String[]{
+                                    "IBAN", "firstName", "lastName"
+                            }
                     ));
                     table_payee_payeeList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                     scrollPane3.setViewportView(table_payee_payeeList);
@@ -454,21 +450,21 @@ public class CustomerMainView extends JFrame {
             {
                 transferPanel.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                 transferPanel.setLayout(new MigLayout(
-                    "hidemode 3",
-                    // columns
-                    "[50:n,center]" +
-                    "[fill]" +
-                    "[fill]",
-                    // rows
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]"));
+                        "hidemode 3",
+                        // columns
+                        "[50:n,center]" +
+                                "[fill]" +
+                                "[fill]",
+                        // rows
+                        "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]"));
 
                 //---- label7 ----
                 label7.setText("Payee:");
@@ -476,8 +472,8 @@ public class CustomerMainView extends JFrame {
                 transferPanel.add(label7, "cell 1 0");
 
                 //---- cb_payee_payeeList ----
-                cb_payee_payeeList.setModel(new DefaultComboBoxModel(new String[] {
-                    "Choose Your Payee"
+                cb_payee_payeeList.setModel(new DefaultComboBoxModel(new String[]{
+                        "Choose Your Payee"
                 }));
                 transferPanel.add(cb_payee_payeeList, "cell 2 0");
 
@@ -487,8 +483,8 @@ public class CustomerMainView extends JFrame {
                 transferPanel.add(label8, "cell 1 1");
 
                 //---- cb_transfer_accountList ----
-                cb_transfer_accountList.setModel(new DefaultComboBoxModel(new String[] {
-                    "Select Your Account"
+                cb_transfer_accountList.setModel(new DefaultComboBoxModel(new String[]{
+                        "Select Your Account"
                 }));
                 transferPanel.add(cb_transfer_accountList, "cell 2 1");
 
@@ -554,7 +550,6 @@ public class CustomerMainView extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
 
 
 }

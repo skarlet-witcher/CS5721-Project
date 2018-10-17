@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>bank-client</module>
+        <module>bank-client-selfservice</module>
         <module>bank-server</module>
         <module>bank-core</module>
         <module>bank-client-atm</module>

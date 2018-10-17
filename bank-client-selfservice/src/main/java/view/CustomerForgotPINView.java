@@ -4,16 +4,35 @@
 
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import net.miginfocom.swing.*;
+import net.miginfocom.swing.MigLayout;
 import util.JTextFieldLimit;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 /**
  * @author xiangkai22
  */
-public class CustomerForgotPINView extends JFrame  {
+public class CustomerForgotPINView extends JFrame {
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JFrame rootPanel;
+    private JLabel lbl_userId;
+    private JTextField tf_userId;
+    private JLabel lbl_email;
+    private JTextField tf_email;
+    private JLabel lbl_dob;
+    private JTextField tf_day;
+    private JLabel lbl_dob_mark1;
+    private JTextField tf_month;
+    private JLabel lbl_dob_mark2;
+    private JTextField tf_year;
+    private JButton btn_confirm;
+    private JButton btn_back;
+
     public CustomerForgotPINView() {
         initComponents();
         initTextFields();
@@ -40,7 +59,6 @@ public class CustomerForgotPINView extends JFrame  {
         new CustomerLoginView().run();
     }
 
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         rootPanel = new JFrame();
@@ -62,16 +80,16 @@ public class CustomerForgotPINView extends JFrame  {
             rootPanel.setTitle("Customer Forgot PIN View");
             Container rootPanelContentPane = rootPanel.getContentPane();
             rootPanelContentPane.setLayout(new MigLayout(
-                "hidemode 3",
-                // columns
-                "[fill]" +
-                "[fill]",
-                // rows
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]"));
+                    "hidemode 3",
+                    // columns
+                    "[fill]" +
+                            "[fill]",
+                    // rows
+                    "[]" +
+                            "[]" +
+                            "[]" +
+                            "[]" +
+                            "[]"));
 
             //---- lbl_userId ----
             lbl_userId.setText("UserId");
@@ -160,20 +178,5 @@ public class CustomerForgotPINView extends JFrame  {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JFrame rootPanel;
-    private JLabel lbl_userId;
-    private JTextField tf_userId;
-    private JLabel lbl_email;
-    private JTextField tf_email;
-    private JLabel lbl_dob;
-    private JTextField tf_day;
-    private JLabel lbl_dob_mark1;
-    private JTextField tf_month;
-    private JLabel lbl_dob_mark2;
-    private JTextField tf_year;
-    private JButton btn_confirm;
-    private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
