@@ -33,8 +33,14 @@ public class CustomerPINView extends JFrame {
 
 
     private void btn_backActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerLoginView().run();
+        if(windowType == "Payee") {
+            this.dispose();
+            new CustomerMainView().run();
+        }
+        if(windowType == "CustomerLogin") {
+            this.dispose();
+            new CustomerLoginView().run();
+        }
     }
 
     private void btn_1ActionPerformed(ActionEvent e) {
