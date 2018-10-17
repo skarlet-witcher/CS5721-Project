@@ -11,6 +11,14 @@ new FormModel {
 			name: "this"
 			"title": "Staff Login View"
 			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Welcome Staff Login Portal"
+				"font": new java.awt.Font( "Segoe UI", 0, 18 )
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 0 2 1"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_staffId"
 				"text": "Staff ID"
 				"font": &Font0 new java.awt.Font( "Segoe UI", 0, 16 )
@@ -45,7 +53,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 490, 300 )
 		} )
 	}
 }

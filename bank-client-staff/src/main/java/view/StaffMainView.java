@@ -31,12 +31,15 @@ public class StaffMainView extends JFrame {
         requestPanel = new JPanel();
         scrollPane1 = new JScrollPane();
         table_requestTable = new JTable();
-        btn_accept = new JButton();
-        btn_decline = new JButton();
+        btn_moreInfo = new JButton();
         removePanel = new JPanel();
-        lbl_accountNum = new JLabel();
-        tf_accountNum = new JTextField();
+        scrollPane3 = new JScrollPane();
+        table_removeAccounts = new JTable();
         btn_remove = new JButton();
+        frozenPanel = new JPanel();
+        scrollPane2 = new JScrollPane();
+        table_frozenAccountsTable = new JTable();
+        button1 = new JButton();
         btn_signout = new JButton();
 
         //======== this ========
@@ -68,6 +71,7 @@ public class StaffMainView extends JFrame {
                     "[]" +
                     "[]" +
                     "[]" +
+                    "[]" +
                     "[]"));
 
                 //======== scrollPane1 ========
@@ -76,12 +80,12 @@ public class StaffMainView extends JFrame {
                     //---- table_requestTable ----
                     table_requestTable.setModel(new DefaultTableModel(
                         new Object[][] {
-                            {null, null, null, null, null, null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null, null, null, null, null, null},
-                            {null, null, null, null, null, null, null, null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
+                            {null, null, null, null, null},
                         },
                         new String[] {
-                            "First Name", "Last Name", "Gender", "Identity Type", "Identity Number", "Account Type", "Card Type", "Graduate Date", "Date of Birth", "Address", "Email", "Contact Number"
+                            "First Name", "Last Name", "Account Type", "Email", "Contact Number"
                         }
                     ));
                     table_requestTable.setMinimumSize(new Dimension(500, 48));
@@ -90,49 +94,83 @@ public class StaffMainView extends JFrame {
                 }
                 requestPanel.add(scrollPane1, "cell 0 0,wmin 800");
 
-                //---- btn_accept ----
-                btn_accept.setText("Accept");
-                btn_accept.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                requestPanel.add(btn_accept, "cell 0 1");
-
-                //---- btn_decline ----
-                btn_decline.setText("Decline");
-                btn_decline.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                requestPanel.add(btn_decline, "cell 0 2");
+                //---- btn_moreInfo ----
+                btn_moreInfo.setText("More Info");
+                requestPanel.add(btn_moreInfo, "cell 0 1");
             }
-            tab_staffTab.addTab("New Customer Request", requestPanel);
+            tab_staffTab.addTab("Customer Requests", requestPanel);
 
             //======== removePanel ========
             {
+                removePanel.setMinimumSize(new Dimension(800, 71));
                 removePanel.setLayout(new MigLayout(
                     "hidemode 3",
                     // columns
                     "[300:n,fill]" +
-                    "[fill]" +
-                    "[fill]" +
                     "[100:n,fill]",
                     // rows
-                    "[150:n]" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
                     "[]" +
-                    "[]" +
-                    "[]" +
-                    "[100:n]"));
+                    "[]"));
 
-                //---- lbl_accountNum ----
-                lbl_accountNum.setText("Account Number");
-                lbl_accountNum.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                removePanel.add(lbl_accountNum, "cell 1 1");
+                //======== scrollPane3 ========
+                {
+                    scrollPane3.setMinimumSize(new Dimension(800, 20));
 
-                //---- tf_accountNum ----
-                tf_accountNum.setMinimumSize(new Dimension(100, 30));
-                removePanel.add(tf_accountNum, "cell 2 1");
+                    //---- table_removeAccounts ----
+                    table_removeAccounts.setMinimumSize(new Dimension(500, 32));
+                    table_removeAccounts.setModel(new DefaultTableModel(
+                        new Object[][] {
+                            {null, null},
+                            {null, null},
+                        },
+                        new String[] {
+                            "A", "B"
+                        }
+                    ));
+                    scrollPane3.setViewportView(table_removeAccounts);
+                }
+                removePanel.add(scrollPane3, "cell 0 0");
 
                 //---- btn_remove ----
                 btn_remove.setText("Remove");
-                btn_remove.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                removePanel.add(btn_remove, "cell 1 3 2 1");
+                removePanel.add(btn_remove, "cell 0 5");
             }
-            tab_staffTab.addTab("Remove a customer account", removePanel);
+            tab_staffTab.addTab("Remove a customer account requests", removePanel);
+
+            //======== frozenPanel ========
+            {
+                frozenPanel.setMinimumSize(new Dimension(800, 48));
+                frozenPanel.setLayout(new MigLayout(
+                    "hidemode 3",
+                    // columns
+                    "[fill]" +
+                    "[fill]",
+                    // rows
+                    "[]" +
+                    "[]" +
+                    "[]" +
+                    "[]"));
+
+                //======== scrollPane2 ========
+                {
+                    scrollPane2.setMinimumSize(new Dimension(700, 20));
+
+                    //---- table_frozenAccountsTable ----
+                    table_frozenAccountsTable.setMinimumSize(new Dimension(500, 32));
+                    scrollPane2.setViewportView(table_frozenAccountsTable);
+                }
+                frozenPanel.add(scrollPane2, "cell 0 0");
+
+                //---- button1 ----
+                button1.setText("Reactivate");
+                button1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+                frozenPanel.add(button1, "cell 0 1");
+            }
+            tab_staffTab.addTab("Frozen customer accounts", frozenPanel);
         }
         contentPane.add(tab_staffTab, "cell 0 0,wmin 800");
 
@@ -160,12 +198,15 @@ public class StaffMainView extends JFrame {
     private JPanel requestPanel;
     private JScrollPane scrollPane1;
     private JTable table_requestTable;
-    private JButton btn_accept;
-    private JButton btn_decline;
+    private JButton btn_moreInfo;
     private JPanel removePanel;
-    private JLabel lbl_accountNum;
-    private JTextField tf_accountNum;
+    private JScrollPane scrollPane3;
+    private JTable table_removeAccounts;
     private JButton btn_remove;
+    private JPanel frozenPanel;
+    private JScrollPane scrollPane2;
+    private JTable table_frozenAccountsTable;
+    private JButton button1;
     private JButton btn_signout;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -26,6 +26,7 @@ public class StaffLoginView extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        label1 = new JLabel();
         lbl_staffId = new JLabel();
         tf_staffId = new JTextField();
         lbl_pwd = new JLabel();
@@ -48,6 +49,12 @@ public class StaffLoginView extends JFrame {
             "[]" +
             "[]" +
             "[100:n]"));
+
+        //---- label1 ----
+        label1.setText("Welcome Staff Login Portal");
+        label1.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        label1.setHorizontalAlignment(SwingConstants.CENTER);
+        contentPane.add(label1, "cell 1 0 2 1");
 
         //---- lbl_staffId ----
         lbl_staffId.setText("Staff ID");
@@ -84,6 +91,7 @@ public class StaffLoginView extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel label1;
     private JLabel lbl_staffId;
     private JTextField tf_staffId;
     private JLabel lbl_pwd;

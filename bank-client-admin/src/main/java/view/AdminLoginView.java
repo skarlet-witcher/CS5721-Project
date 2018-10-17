@@ -31,6 +31,7 @@ public class AdminLoginView extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        label1 = new JLabel();
         lbl_adminId = new JLabel();
         tf_adminId = new JTextField();
         lbl_pwd = new JLabel();
@@ -43,16 +44,22 @@ public class AdminLoginView extends JFrame {
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
             // columns
-                "[50:n,fill]" +
+            "[50:n,fill]" +
             "[fill]" +
             "[fill]" +
-                        "[50:n,fill]",
+            "[50:n,fill]",
             // rows
             "[50:n]" +
             "[]" +
             "[]" +
             "[]" +
             "[100:n]"));
+
+        //---- label1 ----
+        label1.setText("Welocome to Admin Login Portal");
+        label1.setHorizontalAlignment(SwingConstants.CENTER);
+        label1.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        contentPane.add(label1, "cell 1 0 2 1");
 
         //---- lbl_adminId ----
         lbl_adminId.setText("Username");
@@ -87,6 +94,7 @@ public class AdminLoginView extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel label1;
     private JLabel lbl_adminId;
     private JTextField tf_adminId;
     private JLabel lbl_pwd;
