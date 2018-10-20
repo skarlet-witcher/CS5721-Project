@@ -22,8 +22,19 @@ public class ATMMainView extends JFrame {
         new ATMLoginView().run();
     }
 
+    private void btn_withdrawActionPerformed(ActionEvent e) {
+        this.dispose();
+        new ATMWithdrawView().run();
+    }
+
+    private void btn_depositActionPerformed(ActionEvent e) {
+        this.dispose();
+        new ATMDepositView().run();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        llbl_title = new JLabel();
         btn_withdraw = new JButton();
         btn_deposit = new JButton();
         btn_exit = new JButton();
@@ -46,16 +57,31 @@ public class ATMMainView extends JFrame {
             "[]" +
             "[50:n]"));
 
+        //---- llbl_title ----
+        llbl_title.setText("Welcome to ATM System");
+        llbl_title.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        contentPane.add(llbl_title, "cell 1 0");
+
         //---- btn_withdraw ----
         btn_withdraw.setText("Withdraw");
         btn_withdraw.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         btn_withdraw.setMinimumSize(new Dimension(120, 40));
+        btn_withdraw.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btn_withdrawActionPerformed(e);
+            }
+        });
         contentPane.add(btn_withdraw, "cell 1 1");
 
         //---- btn_deposit ----
         btn_deposit.setText("Deposit");
         btn_deposit.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         btn_deposit.setMinimumSize(new Dimension(200, 40));
+        btn_deposit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                btn_depositActionPerformed(e);
+            }
+        });
         contentPane.add(btn_deposit, "cell 1 3");
 
         //---- btn_exit ----
@@ -79,6 +105,7 @@ public class ATMMainView extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel llbl_title;
     private JButton btn_withdraw;
     private JButton btn_deposit;
     private JButton btn_exit;

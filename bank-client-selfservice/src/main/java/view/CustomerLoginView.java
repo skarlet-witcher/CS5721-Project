@@ -93,7 +93,7 @@ public class CustomerLoginView extends JFrame {
 
     private void btn_loginActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerPINView("CustomerLogin").run();
+        new CustomerPINView().run();
     }
 
     private void btn_forgotUserIdActionPerformed(ActionEvent e) {
