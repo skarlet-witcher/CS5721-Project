@@ -96,6 +96,7 @@ public class CustomerLoginView extends JFrame {
             JOptionPane.showMessageDialog(null,
                     "Please input your User ID",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
         }
         if(lbl_dob.isVisible()) {
             // login in with date of birth
