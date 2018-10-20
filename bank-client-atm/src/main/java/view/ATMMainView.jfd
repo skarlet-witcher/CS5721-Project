@@ -10,11 +10,19 @@ new FormModel {
 		} ) {
 			name: "this"
 			"title": "ATM Main View"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "llbl_title"
+				"text": "Welcome to ATM System"
+				"font": new java.awt.Font( "Segoe UI", 0, 18 )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 0"
+			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_withdraw"
 				"text": "Withdraw"
 				"font": &Font0 new java.awt.Font( "Segoe UI", 0, 18 )
 				"minimumSize": new java.awt.Dimension( 120, 40 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_withdrawActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 1 1"
 			} )
@@ -23,6 +31,7 @@ new FormModel {
 				"text": "Deposit"
 				"font": #Font0
 				"minimumSize": new java.awt.Dimension( 200, 40 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_depositActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 1 3"
 			} )

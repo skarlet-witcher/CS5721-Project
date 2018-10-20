@@ -25,21 +25,36 @@ public class StaffMainView extends JFrame {
         new StaffLoginView().run();
     }
 
+    private void btn_add_moreInfoActionPerformed(ActionEvent e) {
+        this.dispose();
+        new StaffAddAccountInfoView().run();
+    }
+
+    private void btn_remove_moreInfoActionPerformed(ActionEvent e) {
+        this.dispose();
+        new StaffRemoveAccountInfoView().run();
+    }
+
+    private void btn_frozen_moreInfoActionPerformed(ActionEvent e) {
+        this.dispose();
+        new StaffFrozenAccountInfoView().run();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         tab_staffTab = new JTabbedPane();
         requestPanel = new JPanel();
         scrollPane1 = new JScrollPane();
         table_requestTable = new JTable();
-        btn_moreInfo = new JButton();
+        btn_add_moreInfo = new JButton();
         removePanel = new JPanel();
         scrollPane3 = new JScrollPane();
         table_removeAccounts = new JTable();
-        btn_remove = new JButton();
+        btn_remove_moreInfo = new JButton();
         frozenPanel = new JPanel();
         scrollPane2 = new JScrollPane();
         table_frozenAccountsTable = new JTable();
-        button1 = new JButton();
+        btn_frozen_moreInfo = new JButton();
         btn_signout = new JButton();
 
         //======== this ========
@@ -94,11 +109,16 @@ public class StaffMainView extends JFrame {
                 }
                 requestPanel.add(scrollPane1, "cell 0 0,wmin 800");
 
-                //---- btn_moreInfo ----
-                btn_moreInfo.setText("More Info");
-                requestPanel.add(btn_moreInfo, "cell 0 1");
+                //---- btn_add_moreInfo ----
+                btn_add_moreInfo.setText("More Info");
+                btn_add_moreInfo.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        btn_add_moreInfoActionPerformed(e);
+                    }
+                });
+                requestPanel.add(btn_add_moreInfo, "cell 0 1");
             }
-            tab_staffTab.addTab("Customer Requests", requestPanel);
+            tab_staffTab.addTab("Add a Customer account Requests", requestPanel);
 
             //======== removePanel ========
             {
@@ -135,9 +155,14 @@ public class StaffMainView extends JFrame {
                 }
                 removePanel.add(scrollPane3, "cell 0 0");
 
-                //---- btn_remove ----
-                btn_remove.setText("Remove");
-                removePanel.add(btn_remove, "cell 0 5");
+                //---- btn_remove_moreInfo ----
+                btn_remove_moreInfo.setText("More Info");
+                btn_remove_moreInfo.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        btn_remove_moreInfoActionPerformed(e);
+                    }
+                });
+                removePanel.add(btn_remove_moreInfo, "cell 0 5");
             }
             tab_staffTab.addTab("Remove a customer account requests", removePanel);
 
@@ -165,10 +190,15 @@ public class StaffMainView extends JFrame {
                 }
                 frozenPanel.add(scrollPane2, "cell 0 0");
 
-                //---- button1 ----
-                button1.setText("Reactivate");
-                button1.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                frozenPanel.add(button1, "cell 0 1");
+                //---- btn_frozen_moreInfo ----
+                btn_frozen_moreInfo.setText("More Info");
+                btn_frozen_moreInfo.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+                btn_frozen_moreInfo.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        btn_frozen_moreInfoActionPerformed(e);
+                    }
+                });
+                frozenPanel.add(btn_frozen_moreInfo, "cell 0 1");
             }
             tab_staffTab.addTab("Frozen customer accounts", frozenPanel);
         }
@@ -198,15 +228,15 @@ public class StaffMainView extends JFrame {
     private JPanel requestPanel;
     private JScrollPane scrollPane1;
     private JTable table_requestTable;
-    private JButton btn_moreInfo;
+    private JButton btn_add_moreInfo;
     private JPanel removePanel;
     private JScrollPane scrollPane3;
     private JTable table_removeAccounts;
-    private JButton btn_remove;
+    private JButton btn_remove_moreInfo;
     private JPanel frozenPanel;
     private JScrollPane scrollPane2;
     private JTable table_frozenAccountsTable;
-    private JButton button1;
+    private JButton btn_frozen_moreInfo;
     private JButton btn_signout;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

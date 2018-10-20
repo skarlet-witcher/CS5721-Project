@@ -16,69 +16,6 @@ new FormModel {
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 1 0"
 			} )
-			add( new FormComponent( "javax.swing.JPasswordField" ) {
-				name: "pf_PIN_1"
-				"editable": false
-				"focusable": false
-				"requestFocusEnabled": false
-				"verifyInputWhenFocusTarget": false
-				"opaque": false
-				addEvent( new FormEvent( "java.beans.PropertyChangeListener", "propertyChange", "pf_PIN_1PropertyChange", true ) )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "pf_PIN_1ActionPerformed", true ) )
-				addEvent( new FormEvent( "javax.swing.event.CaretListener", "caretUpdate", "pf_PIN_1CaretUpdate", true ) )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 0"
-			} )
-			add( new FormComponent( "javax.swing.JPasswordField" ) {
-				name: "pf_PIN_2"
-				"editable": false
-				"focusable": false
-				"requestFocusEnabled": false
-				"verifyInputWhenFocusTarget": false
-				"opaque": false
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 0"
-			} )
-			add( new FormComponent( "javax.swing.JPasswordField" ) {
-				name: "pf_PIN_3"
-				"editable": false
-				"focusable": false
-				"requestFocusEnabled": false
-				"verifyInputWhenFocusTarget": false
-				"opaque": false
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 0"
-			} )
-			add( new FormComponent( "javax.swing.JPasswordField" ) {
-				name: "pf_PIN_4"
-				"editable": false
-				"focusable": false
-				"requestFocusEnabled": false
-				"verifyInputWhenFocusTarget": false
-				"opaque": false
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 0"
-			} )
-			add( new FormComponent( "javax.swing.JPasswordField" ) {
-				name: "pf_PIN_5"
-				"editable": false
-				"focusable": false
-				"requestFocusEnabled": false
-				"verifyInputWhenFocusTarget": false
-				"opaque": false
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 4 0"
-			} )
-			add( new FormComponent( "javax.swing.JPasswordField" ) {
-				name: "pf_PIN_6"
-				"editable": false
-				"focusable": false
-				"requestFocusEnabled": false
-				"verifyInputWhenFocusTarget": false
-				"opaque": false
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 4 0"
-			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_1"
 				"text": "text"
@@ -89,7 +26,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_2"
 				"text": "text"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_2ActionPerformed", true ) )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_2ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 3 1"
@@ -174,7 +110,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 440, 270 )
+			"size": new java.awt.Dimension( 460, 360 )
 		} )
 	}
 }

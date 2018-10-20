@@ -17,9 +17,10 @@ new FormModel {
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 					"$layoutConstraints": "hidemode 3"
 					"$columnConstraints": "[100:n,fill][fill][fill][100:n,fill]"
-					"$rowConstraints": "[][][50:n][][][][][][][][50:n]"
+					"$rowConstraints": "[][][50:n][][][][]0[]0[]0[]0[]0[]0[]0[]0[]0[]0[50:n]"
 				} ) {
 					name: "addStaffPanel"
+					"minimumSize": new java.awt.Dimension( 1005, 230 )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "tf_search"
 						"text": "filtered by id, first name, last name"
@@ -37,11 +38,74 @@ new FormModel {
 					} )
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 						name: "scrollPane1"
+						"minimumSize": new java.awt.Dimension( 500, 21 )
 						add( new FormComponent( "javax.swing.JTable" ) {
 							name: "table1"
+							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+							}, new java.util.Vector {
+								add( "Staff Id" )
+								add( "First name" )
+								add( "Last name" )
+								add( "Password" )
+								add( "Email" )
+								add( "Status" )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							}, new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							} )
+							"minimumSize": new java.awt.Dimension( 500, 32 )
 						} )
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 0 2"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btn_addStaff"
+						"text": "Add a staff"
+						"font": &Font0 new java.awt.Font( "Segoe UI", 0, 16 )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_addStaffActionPerformed", true ) )
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 0 4"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btn_removeStaff"
+						"text": "Remove a staff"
+						"font": #Font0
+					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+						"value": "cell 0 6"
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "Bank Staff List"
@@ -55,7 +119,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "lbl_emailHost"
 						"text": "Email host"
-						"font": &Font0 new java.awt.Font( "Segoe UI", 0, 16 )
+						"font": &Font1 new java.awt.Font( "Segoe UI", 0, 16 )
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 1 1"
 					} )
@@ -68,7 +132,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "lbl_emailPort"
 						"text": "Email port"
-						"font": #Font0
+						"font": #Font1
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 1 2"
 					} )
@@ -81,7 +145,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "lbl_email"
 						"text": "Email "
-						"font": #Font0
+						"font": #Font1
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 1 3"
 					} )
@@ -94,7 +158,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "lbl_emailPwd"
 						"text": "Password"
-						"font": #Font0
+						"font": #Font1
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 1 4"
 					} )
@@ -118,14 +182,14 @@ new FormModel {
 						"value": "cell 2 5"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button1"
-						"text": "Check Availablity"
+						name: "btn_checkAvailability"
+						"text": "Check Availability"
 						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 1 10"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "button4"
+						name: "btn_modify"
 						"text": "Modify"
 						"font": new java.awt.Font( "Segoe UI", 0, 16 )
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {

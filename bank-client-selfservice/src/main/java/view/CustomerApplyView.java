@@ -31,12 +31,22 @@ public class CustomerApplyView extends JFrame {
     private JTextField tf_identityNum;
     private JLabel lbl_accountType;
     private JComboBox cb_accountTypeList;
+    private JPanel studentAccountPanel;
+    private JLabel lbl_graduateDate;
+    private JTextField tf_graduateMonth;
+    private JLabel lbl_mark;
+    private JTextField tf_graduateYear;
+    private JLabel lbl_studentID;
+    private JTextField tf_studentID;
+    private JLabel label5;
+    private JTextField textField5;
+    private JPanel youngSaverAccountPanel;
+    private JLabel lbl_parentUserID;
+    private JTextField tf_parentUserID;
+    private JLabel lbl_parentUserName;
+    private JTextField tf_parentUserName;
     private JLabel lbl_cardType;
     private JComboBox cb_cardTypeList;
-    private JLabel lbl_graduateDate;
-    private JTextField tf_graduate_month;
-    private JLabel label8;
-    private JTextField tf_graduate_year;
     private JLabel lbl_dob;
     private JTextField tf_dob_day;
     private JLabel label10;
@@ -51,18 +61,20 @@ public class CustomerApplyView extends JFrame {
     private JTextField tf_contactNum;
     private JButton btn_apply;
     private JButton btn_back;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public CustomerApplyView() {
         initComponents();
         initTextFields();
+        initAccountPanel();
     }
 
     private void tf_graduate_monthFocusGained(FocusEvent e) {
-        tf_graduate_month.selectAll();
+
     }
 
     private void tf_graduate_yearFocusGained(FocusEvent e) {
-        tf_graduate_year.selectAll();
+
     }
 
     private void tf_dob_dayFocusGained(FocusEvent e) {
@@ -87,19 +99,26 @@ public class CustomerApplyView extends JFrame {
     }
 
     private void cb_accountTypeListActionPerformed(ActionEvent e) {
+        if(cb_accountTypeList.getSelectedIndex() == 0 ||
+                cb_accountTypeList.getSelectedIndex() == 3) {
+            resetAccountField();
+            pack();
+        }
         if (cb_accountTypeList.getSelectedIndex() == 1) {
+            resetAccountField();
             initStudentAccountField();
             pack();
         }
+        if (cb_accountTypeList.getSelectedIndex() == 2) {
+            resetAccountField();
+            initYoungSaverAccountField();
+            pack();
+        }
+
     }
-
-    private void initStudentAccountField() {
-        JLabel lbl_studentId = new JLabel("Student ID");
-        JTextField tf_studentId = new JTextField();
-
-
-        this.add(lbl_studentId, "cell 1 6");
-        this.add(tf_studentId, "cell 2 6");
+    private void initAccountPanel() {
+        studentAccountPanel.setVisible(false);
+        youngSaverAccountPanel.setVisible(false);
     }
 
     private void initComponents() {
@@ -116,12 +135,22 @@ public class CustomerApplyView extends JFrame {
         tf_identityNum = new JTextField();
         lbl_accountType = new JLabel();
         cb_accountTypeList = new JComboBox();
+        studentAccountPanel = new JPanel();
+        lbl_graduateDate = new JLabel();
+        tf_graduateMonth = new JTextField();
+        lbl_mark = new JLabel();
+        tf_graduateYear = new JTextField();
+        lbl_studentID = new JLabel();
+        tf_studentID = new JTextField();
+        label5 = new JLabel();
+        textField5 = new JTextField();
+        youngSaverAccountPanel = new JPanel();
+        lbl_parentUserID = new JLabel();
+        tf_parentUserID = new JTextField();
+        lbl_parentUserName = new JLabel();
+        tf_parentUserName = new JTextField();
         lbl_cardType = new JLabel();
         cb_cardTypeList = new JComboBox();
-        lbl_graduateDate = new JLabel();
-        tf_graduate_month = new JTextField();
-        label8 = new JLabel();
-        tf_graduate_year = new JTextField();
         lbl_dob = new JLabel();
         tf_dob_day = new JTextField();
         label10 = new JLabel();
@@ -141,28 +170,28 @@ public class CustomerApplyView extends JFrame {
         setTitle("Customer Apply View");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-                "hidemode 3",
-                // columns
-                "[30:n,fill]" +
-                        "[fill]" +
-                        "[fill]" +
-                        "[30:n,fill]",
-                // rows
-                "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]0" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]"));
+            "hidemode 3",
+            // columns
+            "[30:n,fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[30:n,fill]",
+            // rows
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]0" +
+            "[]0" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]"));
 
         //---- lbl_firstname ----
         lbl_firstname.setText("First Name");
@@ -179,10 +208,10 @@ public class CustomerApplyView extends JFrame {
         contentPane.add(lbl_gender, "cell 1 2");
 
         //---- cb_genderList ----
-        cb_genderList.setModel(new DefaultComboBoxModel(new String[]{
-                "Select Your Gender",
-                "Male",
-                "Female"
+        cb_genderList.setModel(new DefaultComboBoxModel(new String[] {
+            "Select Your Gender",
+            "Male",
+            "Female"
         }));
         contentPane.add(cb_genderList, "cell 2 2");
 
@@ -191,10 +220,10 @@ public class CustomerApplyView extends JFrame {
         contentPane.add(lbl_identityType, "cell 1 3");
 
         //---- cb_identityTypeList ----
-        cb_identityTypeList.setModel(new DefaultComboBoxModel(new String[]{
-                "Select Yout Identity Type",
-                "Driving License",
-                "Passport"
+        cb_identityTypeList.setModel(new DefaultComboBoxModel(new String[] {
+            "Select Yout Identity Type",
+            "Driving License",
+            "Passport"
         }));
         contentPane.add(cb_identityTypeList, "cell 2 3");
 
@@ -208,11 +237,11 @@ public class CustomerApplyView extends JFrame {
         contentPane.add(lbl_accountType, "cell 1 5");
 
         //---- cb_accountTypeList ----
-        cb_accountTypeList.setModel(new DefaultComboBoxModel(new String[]{
-                "Personal Current Account",
-                "Student Current Account",
-                "Young Saver Account",
-                "Golden Account"
+        cb_accountTypeList.setModel(new DefaultComboBoxModel(new String[] {
+            "Personal Current Account",
+            "Student Current Account",
+            "Young Saver Account",
+            "Golden Account"
         }));
         cb_accountTypeList.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -222,46 +251,95 @@ public class CustomerApplyView extends JFrame {
         });
         contentPane.add(cb_accountTypeList, "cell 2 5");
 
+        //======== studentAccountPanel ========
+        {
+            studentAccountPanel.setLayout(new MigLayout(
+                "hidemode 3",
+                // columns
+                "[fill]" +
+                "[sizegroup 1,fill]" +
+                "[sizegroup 1,fill]",
+                // rows
+                "[]" +
+                "[]" +
+                "[]" +
+                "[]"));
+
+            //---- lbl_graduateDate ----
+            lbl_graduateDate.setText("Graduate Date: ");
+            studentAccountPanel.add(lbl_graduateDate, "cell 0 0");
+
+            //---- tf_graduateMonth ----
+            tf_graduateMonth.setMinimumSize(new Dimension(60, 24));
+            studentAccountPanel.add(tf_graduateMonth, "cell 1 0");
+
+            //---- lbl_mark ----
+            lbl_mark.setText("/");
+            studentAccountPanel.add(lbl_mark, "cell 1 0");
+
+            //---- tf_graduateYear ----
+            tf_graduateYear.setMinimumSize(new Dimension(60, 24));
+            studentAccountPanel.add(tf_graduateYear, "cell 2 0");
+
+            //---- lbl_studentID ----
+            lbl_studentID.setText("Stuent ID: ");
+            studentAccountPanel.add(lbl_studentID, "cell 0 1");
+
+            //---- tf_studentID ----
+            tf_studentID.setMinimumSize(new Dimension(172, 24));
+            studentAccountPanel.add(tf_studentID, "cell 1 1 2 1");
+
+            //---- label5 ----
+            label5.setText("School Name");
+            studentAccountPanel.add(label5, "cell 0 2");
+            studentAccountPanel.add(textField5, "cell 1 2 2 1");
+        }
+        contentPane.add(studentAccountPanel, "cell 1 6 2 1");
+
+        //======== youngSaverAccountPanel ========
+        {
+            youngSaverAccountPanel.setLayout(new MigLayout(
+                "hidemode 3",
+                // columns
+                "[fill]" +
+                "[fill]" +
+                "[fill]",
+                // rows
+                "[]" +
+                "[]" +
+                "[]" +
+                "[]" +
+                "[]"));
+
+            //---- lbl_parentUserID ----
+            lbl_parentUserID.setText("Parent's user ID");
+            youngSaverAccountPanel.add(lbl_parentUserID, "cell 1 1");
+
+            //---- tf_parentUserID ----
+            tf_parentUserID.setMinimumSize(new Dimension(172, 24));
+            youngSaverAccountPanel.add(tf_parentUserID, "cell 2 1");
+
+            //---- lbl_parentUserName ----
+            lbl_parentUserName.setText("Parent's user name");
+            youngSaverAccountPanel.add(lbl_parentUserName, "cell 1 2");
+
+            //---- tf_parentUserName ----
+            tf_parentUserName.setMinimumSize(new Dimension(172, 24));
+            youngSaverAccountPanel.add(tf_parentUserName, "cell 2 2");
+        }
+        contentPane.add(youngSaverAccountPanel, "cell 1 7 2 1");
+
         //---- lbl_cardType ----
         lbl_cardType.setText("Card Type");
-        contentPane.add(lbl_cardType, "cell 1 7");
+        contentPane.add(lbl_cardType, "cell 1 8");
 
         //---- cb_cardTypeList ----
-        cb_cardTypeList.setModel(new DefaultComboBoxModel(new String[]{
-                "Select Your Card Type",
-                "Debit Card",
-                "Credit Card"
+        cb_cardTypeList.setModel(new DefaultComboBoxModel(new String[] {
+            "Select Your Card Type",
+            "Debit Card",
+            "Credit Card"
         }));
-        contentPane.add(cb_cardTypeList, "cell 2 7");
-
-        //---- lbl_graduateDate ----
-        lbl_graduateDate.setText("Graduate Date");
-        contentPane.add(lbl_graduateDate, "cell 1 8");
-
-        //---- tf_graduate_month ----
-        tf_graduate_month.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                tf_graduate_monthFocusGained(e);
-            }
-        });
-        contentPane.add(tf_graduate_month, "cell 2 8");
-
-        //---- label8 ----
-        label8.setText("/");
-        label8.setPreferredSize(new Dimension(2, 10));
-        label8.setHorizontalTextPosition(SwingConstants.CENTER);
-        label8.setMinimumSize(new Dimension(1, 16));
-        contentPane.add(label8, "cell 2 8");
-
-        //---- tf_graduate_year ----
-        tf_graduate_year.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                tf_graduate_yearFocusGained(e);
-            }
-        });
-        contentPane.add(tf_graduate_year, "cell 2 8");
+        contentPane.add(cb_cardTypeList, "cell 2 8");
 
         //---- lbl_dob ----
         lbl_dob.setText("Date of Birth");
@@ -343,20 +421,32 @@ public class CustomerApplyView extends JFrame {
         tf_dob_day.setDocument(new JTextFieldLimit(2));
         tf_dob_month.setDocument(new JTextFieldLimit(2));
         tf_dob_year.setDocument(new JTextFieldLimit(4));
-        tf_graduate_month.setDocument(new JTextFieldLimit(2));
-        tf_graduate_year.setDocument(new JTextFieldLimit(4));
+        tf_graduateMonth.setDocument(new JTextFieldLimit(2));
+        tf_graduateYear.setDocument(new JTextFieldLimit(4));
+        tf_studentID.setDocument(new JTextFieldLimit(8));
+        tf_parentUserID.setDocument(new JTextFieldLimit(13));
 
         tf_dob_year.setText("YYYY");
         tf_dob_month.setText("MM");
         tf_dob_day.setText("DD");
-        tf_graduate_month.setText("MM");
-        tf_graduate_year.setText("YYYY");
+        tf_graduateYear.setText("YYYY");
+        tf_graduateMonth.setText("MM");
+    }
+    private void initStudentAccountField() {
+        studentAccountPanel.setVisible(true);
+    }
+    private void initYoungSaverAccountField() {
+        youngSaverAccountPanel.setVisible(true);
+    }
+    private void resetAccountField() {
+        studentAccountPanel.setVisible(false);
+        youngSaverAccountPanel.setVisible(false);
     }
 
     public void run() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
 
 }
