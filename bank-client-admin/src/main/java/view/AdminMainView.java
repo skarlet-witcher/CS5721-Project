@@ -4,6 +4,7 @@
 
 package view;
 
+import javax.swing.table.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -39,26 +40,10 @@ public class AdminMainView extends JFrame {
 
     }
 
-    private JButton button1;
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JTabbedPane tabbedPane1;
-    private JPanel addStaffPanel;
-    private JTextField tf_search;
-    private JButton btn_search;
-    private JScrollPane scrollPane1;
-    private JTable table1;
-    private JPanel modifyEmailPanel;
-    private JLabel lbl_emailHost;
-    private JTextField tf_emailHost;
-    private JLabel lbl_emailPort;
-    private JTextField tf_emailPort;
-    private JLabel lbl_email;
-    private JTextField tf_email;
-    private JLabel lbl_emailPwd;
-    private JPasswordField pf_emailPwd;
-    private JLabel lbl_emailConfirmPwd;
-    private JPasswordField pf_emailConfirmPwd;
+    private void btn_addStaffActionPerformed(ActionEvent e) {
+        this.dispose();
+        new AdminAddStaffView().run();
+    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -68,6 +53,8 @@ public class AdminMainView extends JFrame {
         btn_search = new JButton();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
+        btn_addStaff = new JButton();
+        btn_removeStaff = new JButton();
         modifyEmailPanel = new JPanel();
         lbl_emailHost = new JLabel();
         tf_emailHost = new JTextField();
@@ -79,8 +66,8 @@ public class AdminMainView extends JFrame {
         pf_emailPwd = new JPasswordField();
         lbl_emailConfirmPwd = new JLabel();
         pf_emailConfirmPwd = new JPasswordField();
-        button1 = new JButton();
-        button4 = new JButton();
+        btn_checkAvailability = new JButton();
+        btn_modify = new JButton();
         btn_signout = new JButton();
 
         //======== this ========
@@ -105,6 +92,7 @@ public class AdminMainView extends JFrame {
 
             //======== addStaffPanel ========
             {
+                addStaffPanel.setMinimumSize(new Dimension(1005, 230));
                 addStaffPanel.setLayout(new MigLayout(
                     "hidemode 3",
                     // columns
@@ -119,10 +107,16 @@ public class AdminMainView extends JFrame {
                     "[]" +
                     "[]" +
                     "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
                     "[50:n]"));
 
                 //---- tf_search ----
@@ -146,9 +140,37 @@ public class AdminMainView extends JFrame {
 
                 //======== scrollPane1 ========
                 {
+                    scrollPane1.setMinimumSize(new Dimension(500, 21));
+
+                    //---- table1 ----
+                    table1.setModel(new DefaultTableModel(
+                        new Object[][] {
+                            {null, null, null, null, null, null},
+                            {null, null, null, null, null, null},
+                        },
+                        new String[] {
+                            "Staff Id", "First name", "Last name", "Password", "Email", "Status"
+                        }
+                    ));
+                    table1.setMinimumSize(new Dimension(500, 32));
                     scrollPane1.setViewportView(table1);
                 }
                 addStaffPanel.add(scrollPane1, "cell 0 2");
+
+                //---- btn_addStaff ----
+                btn_addStaff.setText("Add a staff");
+                btn_addStaff.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+                btn_addStaff.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        btn_addStaffActionPerformed(e);
+                    }
+                });
+                addStaffPanel.add(btn_addStaff, "cell 0 4");
+
+                //---- btn_removeStaff ----
+                btn_removeStaff.setText("Remove a staff");
+                btn_removeStaff.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+                addStaffPanel.add(btn_removeStaff, "cell 0 6");
             }
             tabbedPane1.addTab("Bank Staff List", addStaffPanel);
 
@@ -168,16 +190,16 @@ public class AdminMainView extends JFrame {
                     "[]" +
                     "[]" +
                     "[]" +
-                            "[]0" +
-                            "[]0" +
-                            "[]0" +
-                            "[]0" +
-                            "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
+                    "[]0" +
                     "[]" +
-                            "[]0" +
-                            "[]0" +
-                            "[100:n]" +
-                            "[]"));
+                    "[]0" +
+                    "[]0" +
+                    "[100:n]" +
+                    "[]"));
 
                 //---- lbl_emailHost ----
                 lbl_emailHost.setText("Email host");
@@ -224,15 +246,15 @@ public class AdminMainView extends JFrame {
                 pf_emailConfirmPwd.setMinimumSize(new Dimension(100, 30));
                 modifyEmailPanel.add(pf_emailConfirmPwd, "cell 2 5");
 
-                //---- button1 ----
-                button1.setText("Check Availablity");
-                button1.setFont(button1.getFont().deriveFont(button1.getFont().getSize() + 4f));
-                modifyEmailPanel.add(button1, "cell 1 10");
+                //---- btn_checkAvailability ----
+                btn_checkAvailability.setText("Check Availability");
+                btn_checkAvailability.setFont(btn_checkAvailability.getFont().deriveFont(btn_checkAvailability.getFont().getSize() + 4f));
+                modifyEmailPanel.add(btn_checkAvailability, "cell 1 10");
 
-                //---- button4 ----
-                button4.setText("Modify");
-                button4.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                modifyEmailPanel.add(button4, "cell 2 10");
+                //---- btn_modify ----
+                btn_modify.setText("Modify");
+                btn_modify.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+                modifyEmailPanel.add(btn_modify, "cell 2 10");
             }
             tabbedPane1.addTab("Modify System Email", modifyEmailPanel);
         }
@@ -251,7 +273,31 @@ public class AdminMainView extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-    private JButton button4;
+
+
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JTabbedPane tabbedPane1;
+    private JPanel addStaffPanel;
+    private JTextField tf_search;
+    private JButton btn_search;
+    private JScrollPane scrollPane1;
+    private JTable table1;
+    private JButton btn_addStaff;
+    private JButton btn_removeStaff;
+    private JPanel modifyEmailPanel;
+    private JLabel lbl_emailHost;
+    private JTextField tf_emailHost;
+    private JLabel lbl_emailPort;
+    private JTextField tf_emailPort;
+    private JLabel lbl_email;
+    private JTextField tf_email;
+    private JLabel lbl_emailPwd;
+    private JPasswordField pf_emailPwd;
+    private JLabel lbl_emailConfirmPwd;
+    private JPasswordField pf_emailConfirmPwd;
+    private JButton btn_checkAvailability;
+    private JButton btn_modify;
     private JButton btn_signout;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
