@@ -46,7 +46,7 @@ public class CustomerPINView extends JFrame {
     public CustomerPINView() {
         initComponents();
         generateKeyPad();
-        generatePINField(2,3,6);
+        generatePINField(1,3,6);
     }
 
     public void run() {

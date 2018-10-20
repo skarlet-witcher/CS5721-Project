@@ -92,6 +92,17 @@ public class CustomerLoginView extends JFrame {
     }
 
     private void btn_loginActionPerformed(ActionEvent e) {
+        if(tf_userId == null) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your User ID",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+        }
+        if(lbl_dob.isVisible()) {
+            // login in with date of birth
+        }
+        if(lbl_contactNum.isVisible()) {
+            // login in with contactNum
+        }
         this.dispose();
         new CustomerPINView().run();
     }
