@@ -8,8 +8,6 @@
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/bank_manage</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">root</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">10</property>
@@ -23,11 +21,14 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
 
-        <mapping class="model.CardEntity"/>
-        <mapping class="model.CardTransactionEntity"/>
-        <mapping class="model.UserEntity"/>
-        <mapping class="model.UserLogEntity"/>
-        <mapping class="model.UserStaffEntity"/>
+        <mapping class="entity.BankAdminEntity"/>
+        <mapping class="entity.BankApplyEntity"/>
+        <mapping class="entity.BankStaffEntity"/>
+        <mapping class="entity.UserEntity"/>
+        <mapping class="entity.UserAccountEntity"/>
+        <mapping class="entity.UserCardEntity"/>
+        <mapping class="entity.UserOperationHistoryEntity"/>
+        <mapping class="entity.UserPayeeEntity"/>
 
     </session-factory>
 

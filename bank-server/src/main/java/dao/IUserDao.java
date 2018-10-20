@@ -1,8 +1,17 @@
 package dao;
 
-import model.UserEntity;
+import entity.UserEntity;
+
+import java.util.Map;
 
 public interface IUserDao {
-    UserEntity LoginCustomerByUsername(String username, String password);
+    UserEntity LoginByUserIdAndPin(Long userId, Map<Integer, Integer> pin);
 
+    UserEntity selectUserByUserId(Long userId);
+
+    UserEntity selectUserById(Long id);
+
+    Integer updateUserPinDigitById(Long id, String loginPinDigit);
+
+    Integer updateUserStatusById(Long id, Integer status);
 }

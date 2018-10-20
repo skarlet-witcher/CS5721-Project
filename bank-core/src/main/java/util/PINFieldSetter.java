@@ -2,7 +2,6 @@ package util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class PINFieldSetter {
     private static PINFieldSetter pinFieldSetter = null;
@@ -21,7 +20,7 @@ public class PINFieldSetter {
     public List<Integer> setPINField() {
         List<Integer> pinField = new ArrayList<Integer>();
         for(int i = 0; i < 6; i++) {
-            pinField.add(RandomUtil.RandomNum(0, 3));
+            pinField.add(RandomUtil.generateOneNum(0, 3));
         }
         return pinField;
     }

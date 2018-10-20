@@ -1,7 +1,6 @@
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import rpc.impl.LoginRpcImpl;
-
+import rpc.impl.UserCustomerLoginImpl;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -26,7 +25,7 @@ public class BankServer {
     private void start() throws IOException {
 
         server = ServerBuilder.forPort(SERVER_PORT)
-                .addService(new LoginRpcImpl())
+                .addService(new UserCustomerLoginImpl())
                 .build()
                 .start();
         logger.info("Server started, listening on " + SERVER_PORT);

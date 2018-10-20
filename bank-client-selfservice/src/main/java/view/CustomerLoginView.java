@@ -45,7 +45,7 @@ public class CustomerLoginView extends JFrame {
     }
 
     private int randomCheck() {
-        return RandomUtil.RandomNum(1, 2);
+        return RandomUtil.generateOneNum(1, 2);
     }
 
     private void securityVerification(int switcher) {

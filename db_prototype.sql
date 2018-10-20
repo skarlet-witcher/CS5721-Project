@@ -2,9 +2,9 @@ CREATE TABLE user (
   id              BIGINT                 AUTO_INCREMENT PRIMARY KEY,
   user_id         bigint UNIQUE not null
   comment 'user visible, for login. get by auto-generated',
-  pin             int           not null
+  pin             varchar(6)    not null
   comment 'get by auto-generated 6 digit',
-  login_pin_digit int comment '3 digit, represent which 3 of 6 digit user has to input. get by auto-generated',
+  login_pin_digit varchar(3) comment '3 digit, represent which 3 of 6 digit user has to input. get by auto-generated',
   first_name      varchar(255)  not null,
   last_name       varchar(255)  not null,
   gender          int           not null
@@ -35,12 +35,12 @@ create table user_account (
 CREATE TABLE user_card (
   id            BIGINT AUTO_INCREMENT PRIMARY KEY,
   card_number   bigint   NOT NULL,
-  card_type     int      not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 1
+  card_type     int        not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 1
   comment '1.debit card 2.credit card(Not supported yet)',
-  pin           int      not null
+  pin           varchar(6) not null
   comment 'get by auto-generated 6 digit',
   balance       double,
-  currency_type int      not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 0
+  currency_type int        not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 0
   comment '0.euro 1.....',
   expired_date  datetime not null,
   account_id    BIGINT   not null,
@@ -126,9 +126,9 @@ CREATE TABLE user_operation_history (
   operate_time   datetime not null,
   operate_source int comment '1.self-service 2.ATM 3.other',
   amount         double,
-  currency_type  int      not null default 0
+  currency_type  int
   comment '0.euro 1......',
-  balance        double   not null,
+  balance        double,
   description    varchar(500),
   status         int      not null
   comment '0.pending 1.fail 2.success',

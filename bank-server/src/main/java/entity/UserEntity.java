@@ -8,8 +8,8 @@ import java.sql.Timestamp;
 public class UserEntity {
     private long id;
     private long userId;
-    private int pin;
-    private Integer loginPinDigit;
+    private String pin;
+    private String loginPinDigit;
     private String firstName;
     private String lastName;
     private int gender;
@@ -40,22 +40,22 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "pin", nullable = false)
-    public int getPin() {
+    @Column(name = "pin", nullable = false, length = 6)
+    public String getPin() {
         return pin;
     }
 
-    public void setPin(int pin) {
+    public void setPin(String pin) {
         this.pin = pin;
     }
 
     @Basic
-    @Column(name = "login_pin_digit", nullable = true)
-    public Integer getLoginPinDigit() {
+    @Column(name = "login_pin_digit", nullable = true, length = 3)
+    public String getLoginPinDigit() {
         return loginPinDigit;
     }
 
-    public void setLoginPinDigit(Integer loginPinDigit) {
+    public void setLoginPinDigit(String loginPinDigit) {
         this.loginPinDigit = loginPinDigit;
     }
 
@@ -148,9 +148,9 @@ public class UserEntity {
 
         if (id != that.id) return false;
         if (userId != that.userId) return false;
-        if (pin != that.pin) return false;
         if (gender != that.gender) return false;
         if (status != that.status) return false;
+        if (pin != null ? !pin.equals(that.pin) : that.pin != null) return false;
         if (loginPinDigit != null ? !loginPinDigit.equals(that.loginPinDigit) : that.loginPinDigit != null)
             return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
@@ -165,7 +165,7 @@ public class UserEntity {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) (userId ^ (userId >>> 32));
-        result = 31 * result + pin;
+        result = 31 * result + (pin != null ? pin.hashCode() : 0);
         result = 31 * result + (loginPinDigit != null ? loginPinDigit.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);

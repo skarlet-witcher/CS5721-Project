@@ -9,7 +9,7 @@ public class UserCardEntity {
     private long id;
     private long cardNumber;
     private int cardType;
-    private int pin;
+    private String pin;
     private Double balance;
     private int currencyType;
     private Timestamp expiredDate;
@@ -47,12 +47,12 @@ public class UserCardEntity {
     }
 
     @Basic
-    @Column(name = "pin", nullable = false)
-    public int getPin() {
+    @Column(name = "pin", nullable = false, length = 6)
+    public String getPin() {
         return pin;
     }
 
-    public void setPin(int pin) {
+    public void setPin(String pin) {
         this.pin = pin;
     }
 
@@ -116,10 +116,10 @@ public class UserCardEntity {
         if (id != that.id) return false;
         if (cardNumber != that.cardNumber) return false;
         if (cardType != that.cardType) return false;
-        if (pin != that.pin) return false;
         if (currencyType != that.currencyType) return false;
         if (accountId != that.accountId) return false;
         if (status != that.status) return false;
+        if (pin != null ? !pin.equals(that.pin) : that.pin != null) return false;
         if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
         return expiredDate != null ? expiredDate.equals(that.expiredDate) : that.expiredDate == null;
     }
@@ -129,7 +129,7 @@ public class UserCardEntity {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) (cardNumber ^ (cardNumber >>> 32));
         result = 31 * result + cardType;
-        result = 31 * result + pin;
+        result = 31 * result + (pin != null ? pin.hashCode() : 0);
         result = 31 * result + (balance != null ? balance.hashCode() : 0);
         result = 31 * result + currencyType;
         result = 31 * result + (expiredDate != null ? expiredDate.hashCode() : 0);

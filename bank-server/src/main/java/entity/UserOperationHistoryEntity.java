@@ -12,8 +12,8 @@ public class UserOperationHistoryEntity {
     private Timestamp operateTime;
     private Integer operateSource;
     private Double amount;
-    private int currencyType;
-    private double balance;
+    private Integer currencyType;
+    private Double balance;
     private String description;
     private int status;
     private Long userId;
@@ -81,22 +81,22 @@ public class UserOperationHistoryEntity {
     }
 
     @Basic
-    @Column(name = "currency_type", nullable = false)
-    public int getCurrencyType() {
+    @Column(name = "currency_type", nullable = true)
+    public Integer getCurrencyType() {
         return currencyType;
     }
 
-    public void setCurrencyType(int currencyType) {
+    public void setCurrencyType(Integer currencyType) {
         this.currencyType = currencyType;
     }
 
     @Basic
-    @Column(name = "balance", nullable = false, precision = 0)
-    public double getBalance() {
+    @Column(name = "balance", nullable = true, precision = 0)
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
@@ -159,14 +159,14 @@ public class UserOperationHistoryEntity {
 
         if (id != that.id) return false;
         if (operateNo != that.operateNo) return false;
-        if (currencyType != that.currencyType) return false;
-        if (Double.compare(that.balance, balance) != 0) return false;
         if (status != that.status) return false;
         if (operateType != null ? !operateType.equals(that.operateType) : that.operateType != null) return false;
         if (operateTime != null ? !operateTime.equals(that.operateTime) : that.operateTime != null) return false;
         if (operateSource != null ? !operateSource.equals(that.operateSource) : that.operateSource != null)
             return false;
         if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
+        if (currencyType != null ? !currencyType.equals(that.currencyType) : that.currencyType != null) return false;
+        if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
         if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
         if (toPayeeId != null ? !toPayeeId.equals(that.toPayeeId) : that.toPayeeId != null) return false;
@@ -175,17 +175,14 @@ public class UserOperationHistoryEntity {
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = (int) (id ^ (id >>> 32));
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) (operateNo ^ (operateNo >>> 32));
         result = 31 * result + (operateType != null ? operateType.hashCode() : 0);
         result = 31 * result + (operateTime != null ? operateTime.hashCode() : 0);
         result = 31 * result + (operateSource != null ? operateSource.hashCode() : 0);
         result = 31 * result + (amount != null ? amount.hashCode() : 0);
-        result = 31 * result + currencyType;
-        temp = Double.doubleToLongBits(balance);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (currencyType != null ? currencyType.hashCode() : 0);
+        result = 31 * result + (balance != null ? balance.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + status;
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
