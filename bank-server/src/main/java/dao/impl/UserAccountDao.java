@@ -1,37 +1,30 @@
 package dao.impl;
 
-import dao.IUserDao;
-import entity.UserEntity;
-import model.UserStaffEntity;
+import dao.IUserAccountDao;
+import entity.UserAccountEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtils;
 
 import java.util.List;
 
-public class UserDao implements IUserDao {
-    private static UserDao instance = null;
+public class UserAccountDao implements IUserAccountDao {
+    private static UserAccountDao userAccountDao = null;
     Session session = HibernateUtils.getSessionFactory().openSession();
 
-    public static UserDao getInstance() {
-        if (instance == null) {
-            return new UserDao();
-        }
-        return instance;
-    }
-    /*
-    public UserEntity LoginCustomerByUsername(String username, String password) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("from UserEntity where username=? and password=?");
-        query.setParameter(0, username).setParameter(1, password);
-        query.setMaxResults(1);
-        UserEntity result = (UserEntity) query.uniqueResult();
-        return result;
-    }
-    */
+    private UserAccountDao() {
 
-    public List<UserEntity> getUser() {
+    }
+
+    public static UserAccountDao getInstance() {
+        if(userAccountDao == null) {
+            userAccountDao = new UserAccountDao();
+        }
+        return userAccountDao;
+    }
+
+
+    public List<UserAccountEntity> getUserAccountList() {
         try {
 
             // All the action with DB via Hibernate
@@ -41,7 +34,7 @@ public class UserDao implements IUserDao {
 
             // Create an HQL statement, query the object.
             // Equivalent to the SQL statement:
-            String hql ="from UserEntity u ";
+            String hql ="from UserAccountEntity u ";
 
             // Create Query object.
             Query query = session.createQuery(hql);
@@ -59,9 +52,5 @@ public class UserDao implements IUserDao {
             session.getTransaction().rollback();
             return null;
         }
-    }
-
-    public model.UserEntity LoginCustomerByUsername(String username, String password) {
-        return null;
     }
 }
