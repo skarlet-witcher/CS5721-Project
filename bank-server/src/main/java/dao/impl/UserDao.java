@@ -9,6 +9,8 @@ import util.HibernateUtils;
 
 import java.util.Map;
 
+import java.util.List;
+
 public class UserDao implements IUserDao {
     private static UserDao instance = null;
 
@@ -56,6 +58,19 @@ public class UserDao implements IUserDao {
         UserEntity result = (UserEntity) query.uniqueResult();
         return result;
     }
+    */
+
+    public List<UserEntity> getUser() {
+        try {
+
+            // All the action with DB via Hibernate
+            // must be located in one transaction.
+            // Start Transaction.
+            session.getTransaction().begin();
+
+            // Create an HQL statement, query the object.
+            // Equivalent to the SQL statement:
+            String hql ="from UserEntity u ";
 
     public UserEntity selectUserById(Long id) {
         Session session = HibernateUtils.getSessionFactory().openSession();
