@@ -14,6 +14,7 @@ import service.IUserCustomerLoginService;
 import service.IUserCustomerOperationHistoryService;
 import util.RandomUtil;
 
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -59,11 +60,15 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
             throw new Exception("Sorry, your user account has been removed from our bank system.");
         }
 
+        Calendar birthDate = Calendar.getInstance();
+        birthDate.setTimeInMillis(user.getBirthDate().getTime());
+
         if (user.getPhone().endsWith(phoneLast4.toString())
-                || (birthDay == user.getBirthDate().getDay() &&
-                birthMon == user.getBirthDate().getMonth() &&
-                birthYear == user.getBirthDate().getYear())) {
+                || (birthDay == birthDate.get(Calendar.DAY_OF_MONTH) &&
+                (birthMon == birthDate.get(Calendar.MONTH) + 1) &&
+                birthYear == birthDate.get(Calendar.YEAR))) {
             // validate pass
+
             try {
                 List<Integer> digits = RandomUtil.generateNumbsNoDuplicatedASC(1, 6, 3);
                 UserLoginReqReply.Builder userLoginReqBuilder = UserLoginReqReply.newBuilder();

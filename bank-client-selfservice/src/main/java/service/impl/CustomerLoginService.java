@@ -19,7 +19,12 @@ public class CustomerLoginService implements ICustomerLoginService {
                         setUserId(userId).build()
         );
     }
-    public void requestLoginUsingDOB() {
-
+    public void requestLoginUsingDOB(int day, int month, int year, long userId) throws Exception {
+        CustomerLoginRpc.getInstance().loginReq(
+                UserLoginReqRequest.newBuilder().setUserId(userId).
+                        setBirthDay(day).
+                        setBirthMon(month).
+                        setBirthYear(year).build()
+        );
     }
 }

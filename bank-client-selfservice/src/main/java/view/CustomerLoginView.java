@@ -102,7 +102,12 @@ public class CustomerLoginView extends JFrame {
         }
         if(lbl_dob.isVisible()) {
             // login in with date of birth
-            CustomerLoginService.getInstance().requestLoginUsingDOB();
+            CustomerLoginService.getInstance().requestLoginUsingDOB(
+                    Integer.parseInt(tf_day.getText()),
+                    Integer.parseInt(tf_month.getText()),
+                    Integer.parseInt(tf_year.getText()),
+                    Integer.parseInt(tf_userId.getText())
+            );
         }
         if(lbl_contactNum.isVisible()) {
             // login in with contactNum
