@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UserOperationHistoryDao implements IUserOperationHistoryDao {
     private static UserOperationHistoryDao instance = null;
-    Session session = HibernateUtils.getSessionFactory().openSession();
+    private Session session = HibernateUtils.getSessionFactory().openSession();
 
     public static UserOperationHistoryDao getInstance() {
         if (instance == null) {
@@ -24,7 +24,6 @@ public class UserOperationHistoryDao implements IUserOperationHistoryDao {
     }
 
     public void addOperationHistory(UserOperationHistoryEntity operationHistory) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
         session.save(operationHistory);
@@ -33,8 +32,7 @@ public class UserOperationHistoryDao implements IUserOperationHistoryDao {
     }
 
     public List<UserOperationHistoryEntity> getOperationHistoriesTodayByUserId(Long userId) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
+        session.beginTransaction();
 
         Query query = session.createQuery("from UserOperationHistoryEntity " +
                 "where userId = ? and " +
@@ -50,8 +48,7 @@ public class UserOperationHistoryDao implements IUserOperationHistoryDao {
     }
 
     public UserOperationHistoryEntity getLastLoginRecordByUserId(Long userId) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
+        session.beginTransaction();
 
         Query query = session.createQuery("from UserOperationHistoryEntity " +
                 "where userId = ? and " +
