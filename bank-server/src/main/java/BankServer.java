@@ -1,10 +1,7 @@
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import rpc.impl.UserCustomerLoginImpl;
-import util.CardNumberGenerator;
-import util.IBANGenerator;
-import util.IdGenerator;
-import util.OperationNoGenerator;
+import util.*;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -16,7 +13,7 @@ public class BankServer {
     private Server server;
 
     public static void main(String[] args) {
-
+        System.out.println(PINGenerator.getInstance().generatePIN());
         /*
         final BankServer server = new BankServer();
         try {
