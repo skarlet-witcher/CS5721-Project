@@ -1,13 +1,9 @@
 package dao.impl;
 
 import dao.IBankStaffDao;
-import entity.BankStaffEntity;
-import model.UserStaffEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtils;
-
-import java.util.List;
 
 public class BankStaffDao implements IBankStaffDao {
     private static BankStaffDao instance = null;
@@ -20,41 +16,17 @@ public class BankStaffDao implements IBankStaffDao {
         return instance;
     }
 
-    public BankStaffEntity LoginStaffByUsername(String username, String password) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("from UserStaffEntity where username=? and password=?");
-        query.setParameter(0, username).setParameter(1, password);
-        query.setMaxResults(1);
-        BankStaffEntity result = (BankStaffEntity) query.uniqueResult();
-        return result;
-    }
-
-    public List<BankStaffEntity> getBankStaff() {
+    public Long selectTheBiggestId() {
         try {
-
-            // All the action with DB via Hibernate
-            // must be located in one transaction.
-            // Start Transaction.
             session.getTransaction().begin();
+            Query query = session.createQuery("select id from BankStaffEntity order by id desc ");
 
-            // Create an HQL statement, query the object.
-            // Equivalent to the SQL statement:
-            String hql ="from BankStaffEntity b ";
+            Long id = (Long) query.setMaxResults(1).uniqueResult();
 
-            // Create Query object.
-            Query query = session.createQuery(hql);
-
-
-            // Execute query.
-            List list = query.getResultList();
-
-            // Commit data.
             session.getTransaction().commit();
-            return list;
+            return id;
         } catch (Exception e) {
             e.printStackTrace();
-            // Rollback in case of an error occurred.
             session.getTransaction().rollback();
             return null;
         }

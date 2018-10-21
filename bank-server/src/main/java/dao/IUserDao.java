@@ -14,4 +14,6 @@ public interface IUserDao {
     Integer updateUserPinDigitById(Long id, String loginPinDigit);
 
     Integer updateUserStatusById(Long id, Integer status);
+
+    Long selectTheBiggestId();
 }

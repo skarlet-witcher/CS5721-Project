@@ -9,10 +9,10 @@ import util.HibernateUtils;
 
 import java.util.Map;
 
-import java.util.List;
 
 public class UserDao implements IUserDao {
     private static UserDao instance = null;
+    private Session session = HibernateUtils.getSessionFactory().openSession();
 
     public static UserDao getInstance() {
         if (instance == null) {
@@ -22,7 +22,6 @@ public class UserDao implements IUserDao {
     }
 
     public UserEntity LoginByUserIdAndPin(Long userId, Map<Integer, Integer> pin) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
 
         //get digits
@@ -46,11 +45,9 @@ public class UserDao implements IUserDao {
         } else {
             return null;
         }
-
     }
 
     public UserEntity selectUserByUserId(Long userId) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("from UserEntity where userId=?");
         query.setParameter(0, userId);
@@ -58,22 +55,24 @@ public class UserDao implements IUserDao {
         UserEntity result = (UserEntity) query.uniqueResult();
         return result;
     }
-    */
 
-    public List<UserEntity> getUser() {
+    public Long selectTheBiggestId() {
         try {
-
-            // All the action with DB via Hibernate
-            // must be located in one transaction.
-            // Start Transaction.
             session.getTransaction().begin();
+            Query query = session.createQuery("select id from UserEntity order by id desc ");
 
-            // Create an HQL statement, query the object.
-            // Equivalent to the SQL statement:
-            String hql ="from UserEntity u ";
+            Long id = (Long) query.setMaxResults(1).uniqueResult();
+
+            session.getTransaction().commit();
+            return id;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
 
     public UserEntity selectUserById(Long id) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
         session.beginTransaction();
         Query query = session.createQuery("from UserEntity where id=?");
         query.setParameter(0, id);
@@ -83,7 +82,6 @@ public class UserDao implements IUserDao {
     }
 
     public Integer updateUserPinDigitById(Long id, String loginPinDigit) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("update UserEntity set loginPinDigit = ? where id=?");
         query.setParameter(0, loginPinDigit).setParameter(1, id);
@@ -93,7 +91,6 @@ public class UserDao implements IUserDao {
     }
 
     public Integer updateUserStatusById(Long id, Integer status) {
-        Session session = HibernateUtils.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("update UserEntity set status = ? where id=?");
         query.setParameter(0, status).setParameter(1, id);
