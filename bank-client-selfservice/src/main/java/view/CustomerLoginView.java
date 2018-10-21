@@ -5,6 +5,8 @@
 package view;
 
 import net.miginfocom.swing.MigLayout;
+import rpc.client.CustomerLoginRpc;
+import service.impl.CustomerLoginService;
 import util.JTextFieldLimit;
 import util.RandomUtil;
 
@@ -91,7 +93,7 @@ public class CustomerLoginView extends JFrame {
         tf_year.selectAll();
     }
 
-    private void btn_loginActionPerformed(ActionEvent e) {
+    private void btn_loginActionPerformed(ActionEvent e) throws Exception {
         if(tf_userId == null) {
             JOptionPane.showMessageDialog(null,
                     "Please input your User ID",
@@ -100,11 +102,15 @@ public class CustomerLoginView extends JFrame {
         }
         if(lbl_dob.isVisible()) {
             // login in with date of birth
+            CustomerLoginService.getInstance().requestLoginUsingDOB();
         }
         if(lbl_contactNum.isVisible()) {
             // login in with contactNum
+            CustomerLoginService.getInstance().requestLoginUsingPhoneNum(tf_contactNum.getText(),
+                    Long.parseLong(tf_userId.getText()));
         }
         this.dispose();
+
         new CustomerPINView().run();
     }
 
@@ -242,7 +248,11 @@ public class CustomerLoginView extends JFrame {
         btn_login.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         btn_login.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                btn_loginActionPerformed(e);
+                try {
+                    btn_loginActionPerformed(e);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
             }
         });
         contentPane.add(btn_login, "cell 2 6 2 1");

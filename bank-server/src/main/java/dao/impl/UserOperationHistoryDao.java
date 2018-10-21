@@ -24,42 +24,62 @@ public class UserOperationHistoryDao implements IUserOperationHistoryDao {
     }
 
     public void addOperationHistory(UserOperationHistoryEntity operationHistory) {
-        Transaction transaction = session.beginTransaction();
+        try {
+            session.getTransaction().begin();
 
-        session.save(operationHistory);
+            session.save(operationHistory);
 
-        transaction.commit();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
     }
 
     public List<UserOperationHistoryEntity> getOperationHistoriesTodayByUserId(Long userId) {
-        session.beginTransaction();
+        try {
+            session.getTransaction().begin();
 
-        Query query = session.createQuery("from UserOperationHistoryEntity " +
-                "where userId = ? and " +
-                "year(operateTime) = ? and " +
-                "month(operateTime) = ? and " +
-                "day(operateTime) = ? order by operateTime desc");
-        query.setParameter(0, userId);
-        query.setParameter(1, new Date().getYear());
-        query.setParameter(2, new Date().getMonth());
-        query.setParameter(3, new Date().getDay());
+            Query query = session.createQuery("from UserOperationHistoryEntity " +
+                    "where userId = ? and " +
+                    "year(operateTime) = ? and " +
+                    "month(operateTime) = ? and " +
+                    "day(operateTime) = ? order by operateTime desc");
+            query.setParameter(0, userId);
+            query.setParameter(1, new Date().getYear());
+            query.setParameter(2, new Date().getMonth());
+            query.setParameter(3, new Date().getDay());
 
-        return query.getResultList();
+            session.getTransaction().commit();
+
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
     }
 
     public UserOperationHistoryEntity getLastLoginRecordByUserId(Long userId) {
-        session.beginTransaction();
+        try {
 
-        Query query = session.createQuery("from UserOperationHistoryEntity " +
-                "where userId = ? and " +
-                "operateType = ? and " +
-                "status = ? " +
-                "order by operateTime desc");
-        query.setParameter(0, userId);
-        query.setParameter(1, UserOperateType.LOGIN);
-        query.setParameter(2, UserOperateStatusType.SUCCESS);
-        query.setMaxResults(1);
-        return (UserOperationHistoryEntity) query.uniqueResult();
+            session.getTransaction().begin();
+            Query query = session.createQuery("from UserOperationHistoryEntity " +
+                    "where userId = ? and " +
+                    "operateType = ? and " +
+                    "status = ? " +
+                    "order by operateTime desc");
+            query.setParameter(0, userId);
+            query.setParameter(1, UserOperateType.LOGIN);
+            query.setParameter(2, UserOperateStatusType.SUCCESS);
+            query.setMaxResults(1);
+            session.getTransaction().commit();
+            return (UserOperationHistoryEntity) query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
     }
 
     public Long getBiggestOperationNo() {

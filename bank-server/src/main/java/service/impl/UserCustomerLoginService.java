@@ -14,6 +14,7 @@ import service.IUserCustomerLoginService;
 import service.IUserCustomerOperationHistoryService;
 import util.RandomUtil;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -67,8 +68,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
                 List<Integer> digits = RandomUtil.generateNumbsNoDuplicatedASC(1, 6, 3);
                 UserLoginReqReply.Builder userLoginReqBuilder = UserLoginReqReply.newBuilder();
                 StringBuilder digitsInInteger = new StringBuilder();
-                while (digits.iterator().hasNext()) {
-                    Integer digit = digits.iterator().next();
+                for (Integer digit : digits) {
                     digitsInInteger.append(digit);
                     if (digit == 1) {
                         userLoginReqBuilder.setPin1(1);
@@ -85,7 +85,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
                     }
                 }
                 Integer executeResult = userDao.updateUserPinDigitById(user.getId(), digitsInInteger.toString());
-                if (executeResult > 1) {
+                if (executeResult >= 1) {
                     return userLoginReqBuilder.build();
                 }
                 throw new Exception();
