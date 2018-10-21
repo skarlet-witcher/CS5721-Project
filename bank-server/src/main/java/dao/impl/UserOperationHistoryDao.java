@@ -14,6 +14,7 @@ import java.util.List;
 
 public class UserOperationHistoryDao implements IUserOperationHistoryDao {
     private static UserOperationHistoryDao instance = null;
+    Session session = HibernateUtils.getSessionFactory().openSession();
 
     public static UserOperationHistoryDao getInstance() {
         if (instance == null) {
@@ -62,6 +63,22 @@ public class UserOperationHistoryDao implements IUserOperationHistoryDao {
         query.setParameter(2, UserOperateStatusType.SUCCESS);
         query.setMaxResults(1);
         return (UserOperationHistoryEntity) query.uniqueResult();
+    }
+
+    public Long getBiggestOperationNo() {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("select operateNo from UserOperationHistoryEntity order by operateNo desc ");
+
+            Long id = (Long) query.setMaxResults(1).uniqueResult();
+
+            session.getTransaction().commit();
+            return id;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
     }
 
 //    public int selectUserOperationHistoriesByUserId(Long userId) {

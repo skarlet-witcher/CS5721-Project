@@ -1,6 +1,7 @@
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import rpc.impl.UserCustomerLoginImpl;
+import util.*;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -12,6 +13,8 @@ public class BankServer {
     private Server server;
 
     public static void main(String[] args) {
+
+        /*
         final BankServer server = new BankServer();
         try {
             server.start();
@@ -20,7 +23,16 @@ public class BankServer {
             e.printStackTrace();
             logger.severe(e.getLocalizedMessage());
         }
+        */
     }
+
+    /*
+        auto-generator test
+        System.out.println(PINGenerator.getInstance().generatePIN());
+        System.out.println(IBANGenerator.getInstance().generateIBAN(1000000000));
+        System.out.println(CardNumberGenerator.getInstance().getCardNumber());
+        System.out.println(OperationNoGenerator.getInstance().generateOperationNo());
+     */
 
     private void start() throws IOException {
 
