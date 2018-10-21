@@ -53,4 +53,34 @@ public class UserAccountDao implements IUserAccountDao {
             return null;
         }
     }
+
+    public List<UserAccountEntity> getUserAccountByAccountNumber(long accountNumber) {
+        try {
+
+            // All the action with DB via Hibernate
+            // must be located in one transaction.
+            // Start Transaction.
+            session.getTransaction().begin();
+
+            // Create an HQL statement, query the object.
+            // Equivalent to the SQL statement:
+            String hql ="from UserAccountEntity u where u.accountNumber = "+ accountNumber;
+
+            // Create Query object.
+            Query query = session.createQuery(hql);
+
+
+            // Execute query.
+            List list = query.getResultList();
+
+            // Commit data.
+            session.getTransaction().commit();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Rollback in case of an error occurred.
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
 }
