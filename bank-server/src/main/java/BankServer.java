@@ -13,7 +13,7 @@ public class BankServer {
     private Server server;
 
     public static void main(String[] args) {
-        System.out.println(PINGenerator.getInstance().generatePIN());
+
         /*
         final BankServer server = new BankServer();
         try {
@@ -28,6 +28,7 @@ public class BankServer {
 
     /*
         auto-generator test
+        System.out.println(PINGenerator.getInstance().generatePIN());
         System.out.println(IBANGenerator.getInstance().generateIBAN(1000000000));
         System.out.println(CardNumberGenerator.getInstance().getCardNumber());
         System.out.println(OperationNoGenerator.getInstance().generateOperationNo());
