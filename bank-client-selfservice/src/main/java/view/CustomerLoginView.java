@@ -137,7 +137,7 @@ public class CustomerLoginView extends JFrame {
 
         }
         this.dispose();
-        new CustomerPINView().run();
+        new CustomerPINView(Long.parseLong(tf_userId.getText().trim())).run();
     }
 
     private void btn_forgotUserIdActionPerformed(ActionEvent e) {
