@@ -94,25 +94,47 @@ public class CustomerLoginView extends JFrame {
     }
 
     private void btn_loginActionPerformed(ActionEvent e) throws Exception {
-        if(tf_userId == null) {
-            JOptionPane.showMessageDialog(null,
-                    "Please input your User ID",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
+        if(tf_userId.getText().length() <= 0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your User ID",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid User ID",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
         if(lbl_dob.isVisible()) {
-            // login in with date of birth
-            CustomerLoginService.getInstance().requestLoginUsingDOB(
-                    Integer.parseInt(tf_day.getText()),
-                    Integer.parseInt(tf_month.getText()),
-                    Integer.parseInt(tf_year.getText()),
-                    Integer.parseInt(tf_userId.getText())
-            );
+            try {
+                // login in with date of birth
+                CustomerLoginService.getInstance().requestLoginUsingDOB(
+                        Integer.parseInt(tf_day.getText()),
+                        Integer.parseInt(tf_month.getText()),
+                        Integer.parseInt(tf_year.getText()),
+                        Integer.parseInt(tf_userId.getText())
+                );
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid date of birth",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
         if(lbl_contactNum.isVisible()) {
-            // login in with contactNum
-            CustomerLoginService.getInstance().requestLoginUsingPhoneNum(tf_contactNum.getText(),
-                    Long.parseLong(tf_userId.getText()));
+            try {
+                // login in with contactNum
+                CustomerLoginService.getInstance().requestLoginUsingPhoneNum(tf_contactNum.getText(),
+                        Long.parseLong(tf_userId.getText()));
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid contact number",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
         }
         this.dispose();
 

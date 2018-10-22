@@ -107,7 +107,8 @@ public class CustomerPINView extends JFrame {
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        this.dispose();
+        new CustomerLoginView().run();
     }
 
     private JPasswordField emptyPasswordFieldCheckerForInput() {
