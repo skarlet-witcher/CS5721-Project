@@ -22,12 +22,12 @@ public class IBANGenerator {
     }
 
     public String generateIBAN(long accountNumber) {
-        List<UserAccountEntity> userAccount = UserAccountDao.getInstance().getUserAccountByAccountNumber(accountNumber);
+        UserAccountEntity userAccount = UserAccountDao.getInstance().getUserAccountByAccountNumber(accountNumber);
         Iban iban = new Iban.Builder()
                 .countryCode(CountryCode.IE)
                 .bankCode("BOFI")
                 .branchCode("2334")
-                .accountNumber(String.valueOf(userAccount.get(0).getAccountNumber()))
+                .accountNumber(String.valueOf(userAccount.getAccountNumber()))
                 .build();
         return iban.toString();
     }

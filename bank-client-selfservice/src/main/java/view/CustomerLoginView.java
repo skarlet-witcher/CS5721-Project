@@ -137,7 +137,6 @@ public class CustomerLoginView extends JFrame {
 
         }
         this.dispose();
-
         new CustomerPINView().run();
     }
 

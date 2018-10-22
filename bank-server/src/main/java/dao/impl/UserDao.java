@@ -75,9 +75,7 @@ public class UserDao implements IUserDao {
         try {
             session.getTransaction().begin();
             Query query = session.createQuery("select id from UserEntity order by id desc ");
-
             Long id = (Long) query.setMaxResults(1).uniqueResult();
-
             session.getTransaction().commit();
             return id;
         } catch (Exception e) {

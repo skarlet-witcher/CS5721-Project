@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class CustomerPINView extends JFrame {
     List<JPasswordField> passwordFieldsList = new ArrayList<JPasswordField>();
-
+    private long userId;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_PIN;
     private JButton btn_1;
@@ -43,10 +43,11 @@ public class CustomerPINView extends JFrame {
     private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public CustomerPINView() {
+    public CustomerPINView(long userId) {
         initComponents();
+        setUserId(userId);
         generateKeyPad();
-        generatePINField(1,3,6);
+        generatePINField(1,3,6); // the number should be acquired from the db
     }
 
     public void run() {
@@ -109,6 +110,10 @@ public class CustomerPINView extends JFrame {
     private void btn_backActionPerformed(ActionEvent e) {
         this.dispose();
         new CustomerLoginView().run();
+    }
+
+    private void setUserId(long userId) {
+        this.userId = userId;
     }
 
     private JPasswordField emptyPasswordFieldCheckerForInput() {

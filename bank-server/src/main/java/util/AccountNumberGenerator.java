@@ -20,15 +20,10 @@ public class AccountNumberGenerator {
     }
 
     public long generateAccountNumber() {
-        long currentAccountNumber = 1000000000;
-        List<UserAccountEntity> userAccountList = UserAccountDao.getInstance().getUserAccountList();
-        for(int i = 0; i < userAccountList.size(); i++) {
-            if(userAccountList.size() <= 0) {
-                break;
-            }
-            if(userAccountList.get(i).getAccountNumber() == currentAccountNumber) {
-                currentAccountNumber++;
-            }
+        long currentAccountNumber = 1000000001L;
+        Long accountNumber = UserAccountDao.getInstance().getBiggestUserAccountNumber();
+        if(accountNumber != null) {
+            currentAccountNumber = accountNumber + 1L;
         }
         return currentAccountNumber;
     }

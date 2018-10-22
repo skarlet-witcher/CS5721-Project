@@ -24,58 +24,30 @@ public class UserAccountDao implements IUserAccountDao {
     }
 
 
-    public List<UserAccountEntity> getUserAccountList() {
+    public Long getBiggestUserAccountNumber() {
         try {
-
-            // All the action with DB via Hibernate
-            // must be located in one transaction.
-            // Start Transaction.
             session.getTransaction().begin();
-
-            // Create an HQL statement, query the object.
-            // Equivalent to the SQL statement:
-            String hql ="from UserAccountEntity u ";
-
-            // Create Query object.
+            String hql ="select accountNumber from UserAccountEntity order by accountNumber desc ";
             Query query = session.createQuery(hql);
-
-
-            // Execute query.
-            List list = query.getResultList();
-
-            // Commit data.
+            Long accountNumber = (Long) query.setMaxResults(1).uniqueResult();
             session.getTransaction().commit();
-            return list;
+            return accountNumber;
         } catch (Exception e) {
             e.printStackTrace();
-            // Rollback in case of an error occurred.
             session.getTransaction().rollback();
             return null;
         }
     }
 
-    public List<UserAccountEntity> getUserAccountByAccountNumber(long accountNumber) {
+    public UserAccountEntity getUserAccountByAccountNumber(long accountNumber) {
         try {
-
-            // All the action with DB via Hibernate
-            // must be located in one transaction.
-            // Start Transaction.
             session.getTransaction().begin();
-
-            // Create an HQL statement, query the object.
-            // Equivalent to the SQL statement:
-            String hql ="from UserAccountEntity u where u.accountNumber = "+ accountNumber;
-
-            // Create Query object.
+            String hql ="from UserAccountEntity where accountNumber=?";
             Query query = session.createQuery(hql);
-
-
-            // Execute query.
-            List list = query.getResultList();
-
-            // Commit data.
+            query.setParameter(0, accountNumber);
+            UserAccountEntity result = (UserAccountEntity)query.uniqueResult();
             session.getTransaction().commit();
-            return list;
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
             // Rollback in case of an error occurred.
