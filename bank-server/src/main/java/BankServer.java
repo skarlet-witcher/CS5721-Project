@@ -1,12 +1,8 @@
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import rpc.impl.UserCustomerLoginImpl;
-import util.OperationNoGenerator;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoField;
-import java.util.Calendar;
 import java.util.logging.Logger;
 
 import static Const.Server.SERVER_PORT;
@@ -17,6 +13,7 @@ public class BankServer {
 
     public static void main(String[] args) {
 
+
         final BankServer server = new BankServer();
         try {
             server.start();
@@ -25,8 +22,6 @@ public class BankServer {
             e.printStackTrace();
             logger.severe(e.getLocalizedMessage());
         }
-
-
     }
 
 

@@ -100,7 +100,8 @@ public class CustomerPINView extends JFrame {
     }
 
     private void btn_confirmActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        this.dispose();
+        new CustomerMainView(userId).run();
     }
 
     private void button13ActionPerformed(ActionEvent e) {

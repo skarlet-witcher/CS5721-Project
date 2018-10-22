@@ -22,19 +22,27 @@ public class CustomerAddPayeeView extends JFrame {
     private JTextField tf_IBAN;
     private JButton btn_add;
     private JButton btn_back;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
+    private long userId;
 
-    public CustomerAddPayeeView() {
+    public CustomerAddPayeeView(long userId) {
         initComponents();
+        setUserId(userId);
     }
+
+    private void setUserId(long userId) {
+        this.userId = userId;
+    }
+
 
     private void btn_backActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerMainView().run();
+        new CustomerMainView(userId).run();
     }
 
     private void btn_addActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerPINView().run();
+        new CustomerPINView(userId).run();
     }
 
     private void initComponents() {
@@ -106,5 +114,5 @@ public class CustomerAddPayeeView extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
 }
