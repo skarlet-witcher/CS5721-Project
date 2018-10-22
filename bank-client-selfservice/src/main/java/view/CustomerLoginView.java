@@ -130,7 +130,7 @@ public class CustomerLoginView extends JFrame {
                         Long.parseLong(tf_userId.getText()));
             } catch (Exception E) {
                 JOptionPane.showMessageDialog(null,
-                        "Please input valid contact number",
+                        "Please input valid contact number or User ID",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
             }
