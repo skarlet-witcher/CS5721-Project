@@ -13,18 +13,23 @@ import net.miginfocom.swing.*;
  * @author xiangkai22
  */
 public class StaffFrozenAccountInfoView extends JFrame {
-    public StaffFrozenAccountInfoView() {
+    public StaffFrozenAccountInfoView(long staffId) {
         initComponents();
+        setStaffId(staffId);
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
         this.dispose();
-        new StaffMainView().run();
+        new StaffMainView(staffId).run();
     }
 
     public void run() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+    }
+
+    private void setStaffId(long staffId) {
+        this.staffId = staffId;
     }
 
     private void initComponents() {
@@ -73,6 +78,7 @@ public class StaffFrozenAccountInfoView extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
+    private long staffId;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JButton btn_accept;
     private JButton btn_decline;

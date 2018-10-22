@@ -16,8 +16,9 @@ import java.awt.event.ActionListener;
  * @author xiangkai22
  */
 public class StaffMainView extends JFrame {
-    public StaffMainView() {
+    public StaffMainView(long staffId) {
         initComponents();
+        setStaffId(staffId);
     }
 
     private void btn_signoutActionPerformed(ActionEvent e) {
@@ -27,17 +28,17 @@ public class StaffMainView extends JFrame {
 
     private void btn_add_moreInfoActionPerformed(ActionEvent e) {
         this.dispose();
-        new StaffAddAccountInfoView().run();
+        new StaffAddAccountInfoView(staffId).run();
     }
 
     private void btn_remove_moreInfoActionPerformed(ActionEvent e) {
         this.dispose();
-        new StaffRemoveAccountInfoView().run();
+        new StaffRemoveAccountInfoView(staffId).run();
     }
 
     private void btn_frozen_moreInfoActionPerformed(ActionEvent e) {
         this.dispose();
-        new StaffFrozenAccountInfoView().run();
+        new StaffFrozenAccountInfoView(staffId).run();
     }
 
     private void initComponents() {
@@ -111,11 +112,7 @@ public class StaffMainView extends JFrame {
 
                 //---- btn_add_moreInfo ----
                 btn_add_moreInfo.setText("More Info");
-                btn_add_moreInfo.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        btn_add_moreInfoActionPerformed(e);
-                    }
-                });
+                btn_add_moreInfo.addActionListener(e -> btn_add_moreInfoActionPerformed(e));
                 requestPanel.add(btn_add_moreInfo, "cell 0 1");
             }
             tab_staffTab.addTab("Add a Customer account Requests", requestPanel);
@@ -157,11 +154,7 @@ public class StaffMainView extends JFrame {
 
                 //---- btn_remove_moreInfo ----
                 btn_remove_moreInfo.setText("More Info");
-                btn_remove_moreInfo.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        btn_remove_moreInfoActionPerformed(e);
-                    }
-                });
+                btn_remove_moreInfo.addActionListener(e -> btn_remove_moreInfoActionPerformed(e));
                 removePanel.add(btn_remove_moreInfo, "cell 0 5");
             }
             tab_staffTab.addTab("Remove a customer account requests", removePanel);
@@ -193,11 +186,7 @@ public class StaffMainView extends JFrame {
                 //---- btn_frozen_moreInfo ----
                 btn_frozen_moreInfo.setText("More Info");
                 btn_frozen_moreInfo.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                btn_frozen_moreInfo.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        btn_frozen_moreInfoActionPerformed(e);
-                    }
-                });
+                btn_frozen_moreInfo.addActionListener(e -> btn_frozen_moreInfoActionPerformed(e));
                 frozenPanel.add(btn_frozen_moreInfo, "cell 0 1");
             }
             tab_staffTab.addTab("Frozen customer accounts", frozenPanel);
@@ -207,22 +196,22 @@ public class StaffMainView extends JFrame {
         //---- btn_signout ----
         btn_signout.setText("Sign out");
         btn_signout.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        btn_signout.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_signoutActionPerformed(e);
-            }
-        });
+        btn_signout.addActionListener(e -> btn_signoutActionPerformed(e));
         contentPane.add(btn_signout, "cell 0 2");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
+    private void setStaffId(long staffId) {
+        this.staffId = staffId;
+    }
+
     public void run() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
+    private long staffId;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JTabbedPane tab_staffTab;
     private JPanel requestPanel;

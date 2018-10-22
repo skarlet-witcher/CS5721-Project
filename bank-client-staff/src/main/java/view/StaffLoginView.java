@@ -21,7 +21,7 @@ public class StaffLoginView extends JFrame {
 
     private void btn_loginActionPerformed(ActionEvent e) {
         this.dispose();
-        new StaffMainView().run();
+        new StaffMainView(Long.parseLong(tf_staffId.getText().trim())).run();
     }
 
     private void initComponents() {
