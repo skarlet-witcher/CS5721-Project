@@ -13,8 +13,9 @@ import net.miginfocom.swing.*;
  * @author xiangkai22
  */
 public class ATMMainView extends JFrame {
-    public ATMMainView() {
+    public ATMMainView(long cardNum) {
         initComponents();
+        setCardNum(cardNum);
     }
 
     private void btn_exitActionPerformed(ActionEvent e) {
@@ -24,12 +25,16 @@ public class ATMMainView extends JFrame {
 
     private void btn_withdrawActionPerformed(ActionEvent e) {
         this.dispose();
-        new ATMWithdrawView().run();
+        new ATMWithdrawView(cardNum).run();
     }
 
     private void btn_depositActionPerformed(ActionEvent e) {
         this.dispose();
-        new ATMDepositView().run();
+        new ATMDepositView(cardNum).run();
+    }
+
+    private void setCardNum(long cardNum) {
+        this.cardNum = cardNum;
     }
 
     private void initComponents() {
@@ -104,6 +109,7 @@ public class ATMMainView extends JFrame {
         this.setVisible(true);
     }
 
+    private long cardNum;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel llbl_title;
     private JButton btn_withdraw;

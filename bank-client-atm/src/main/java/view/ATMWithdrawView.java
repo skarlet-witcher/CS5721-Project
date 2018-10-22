@@ -13,13 +13,14 @@ import net.miginfocom.swing.*;
  * @author xiangkai22
  */
 public class ATMWithdrawView extends JFrame {
-    public ATMWithdrawView() {
+    public ATMWithdrawView(long cardNum) {
         initComponents();
+        setCardNum(cardNum);
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
         this.dispose();
-        new ATMMainView().run();
+        new ATMMainView(cardNum).run();
     }
 
     private void initComponents() {
@@ -87,11 +88,15 @@ public class ATMWithdrawView extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
+    private void setCardNum(long cardNum) {
+        this.cardNum = cardNum;
+    }
+
     public void run() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
+    private long cardNum;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_balance;
     private JTextField tf_balance;
