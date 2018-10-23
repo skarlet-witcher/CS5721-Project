@@ -230,7 +230,7 @@ public class BankApplyEntity {
     }
 
     @Basic
-    @Column(name = "remark", nullable = false, length = 255)
+    @Column(name = "remark", length = 255)
     public String getRemark() {
         return remark;
     }

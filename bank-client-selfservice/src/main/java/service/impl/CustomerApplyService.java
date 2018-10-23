@@ -3,6 +3,7 @@ package service.impl;
 import rpc.UserApplyNewAccountRequest;
 import rpc.client.CustomerApplyRpc;
 import service.ICustomerApplyService;
+import util.TimestampConvertHelper;
 
 import java.sql.Timestamp;
 
@@ -34,7 +35,7 @@ public class CustomerApplyService implements ICustomerApplyService {
                         .setCardType(cardType)
                         .setAddress(address)
                         .setEmail(email)
-                        .setBirthDate(birthDate)
+                        .setBirthDate(TimestampConvertHelper.mysqlToRpc(birthDate))
                         .setPhone(phone).build());
     }
 }

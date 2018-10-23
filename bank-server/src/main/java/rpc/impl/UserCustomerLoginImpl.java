@@ -3,9 +3,12 @@ package rpc.impl;
 import io.grpc.stub.StreamObserver;
 import rpc.*;
 import service.IUserCustomerLoginService;
+import service.impl.UserCustomerApplyService;
 import service.impl.UserCustomerLoginService;
 import util.ResponseBuilder;
+import util.TimestampConvertHelper;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,7 +62,33 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
 
     @Override
     public void applyNewAccount(UserApplyNewAccountRequest request, StreamObserver<Response> responseObserver) {
-        super.applyNewAccount(request, responseObserver);
+        String firstName = request.getFirstName();
+        String lastName = request.getLastName();
+        String identityNum = request.getIdentityId();
+        int identityType = request.getIdentityIdType();
+        int accountType = request.getAccountType();
+        int cardType = request.getCardType();
+        Timestamp birthDate = TimestampConvertHelper.rpcToMysql(request.getBirthDate());
+        int gender = request.getGender();
+        String address = request.getAddress();
+        String email = request.getEmail();
+        String phone = request.getPhone();
+
+
+
+        try {
+            UserCustomerApplyService.getInstance().requestPersonalAccountApply(
+                    firstName, lastName, identityNum, identityType, accountType, cardType,
+                    birthDate, gender, address, email, phone);
+            responseObserver.onNext(ResponseBuilder.ResponseSuccessBuilder()
+                    .build());
+
+
+        } catch (Exception E) {
+            responseObserver.onNext(ResponseBuilder.ResponseFailBuilder(E.getMessage())
+                    .build());
+        }
+        responseObserver.onCompleted();
     }
 
     @Override

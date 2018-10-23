@@ -5,7 +5,6 @@ import java.util.Date;
 
 import dao.impl.UserApplyDao;
 import entity.BankApplyEntity;
-import rpc.UserApplyNewAccountRequestOrBuilder;
 import service.IUserCustomerApplyService;
 
 public class UserCustomerApplyService implements IUserCustomerApplyService {
@@ -23,7 +22,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
     }
 
     public void requestPersonalAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType,
-                                           Timestamp birthDate, int gender, String address, String email, String phone) throws Exception {
+                                            Timestamp birthDate, int gender, String address, String email, String phone) throws Exception {
         try {
             BankApplyEntity bankApplyEntity = new BankApplyEntity();
             bankApplyEntity.setFirstName(firstName);
@@ -38,12 +37,8 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             bankApplyEntity.setEmail(email);
             bankApplyEntity.setPhone(phone);
             bankApplyEntity.setApplyTime(new Timestamp(new Date().getTime()));
-            int result = UserApplyDao.getInstance().requestPersonalAccountApply(bankApplyEntity);
-            if(result >= 1) {
-                // apply complete
-            } else {
-                throw new Exception("Fail to apply an account");
-            }
+            bankApplyEntity.setRemark("pending"); // change the attributes of this in the db
+            UserApplyDao.getInstance().requestPersonalAccountApply(bankApplyEntity);
         } catch (Exception e) {
             throw new Exception("Fail to apply an account");
         }

@@ -104,7 +104,11 @@ public class CustomerApplyView extends JFrame {
         emailFieldValidator();
         contactNumFieldValidator();
 
-
+        try {
+            applyPersonalAccount();
+        } catch (Exception E) {
+            E.printStackTrace();
+        }
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
@@ -704,8 +708,10 @@ public class CustomerApplyView extends JFrame {
         int identityType = cb_identityTypeList.getSelectedIndex();
         int accountType = cb_accountTypeList.getSelectedIndex() + 1;
         int cardType = cb_cardTypeList.getSelectedIndex() + 1;
-        Timestamp birthDate = Timestamp.valueOf(tf_dob_year.getText().trim()+"-"+
-                tf_dob_month.getText().trim()+"-"+tf_dob_day.getText().trim());
+        String birthDateText = tf_dob_year.getText().trim()+"-"+
+                tf_dob_month.getText().trim()+"-"+tf_dob_day.getText().trim()+" 00:00:00";
+        //month and day with one digit
+        Timestamp birthDate = Timestamp.valueOf(birthDateText);
         int gender = cb_genderList.getSelectedIndex();
         String address = tf_address.getText().trim();
         String email = tf_email.getText().trim();
