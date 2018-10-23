@@ -2,6 +2,7 @@ package service.impl;
 
 import Const.UserOperateStatusType;
 import Const.UserStatusType;
+import com.google.protobuf.Timestamp;
 import dao.IUserDao;
 import dao.IUserOperationHistoryDao;
 import dao.impl.UserDao;
@@ -15,7 +16,6 @@ import service.IUserCustomerOperationHistoryService;
 import util.RandomUtil;
 
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -113,6 +113,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
             loginReplyBuilder.setUserId(userEntity.getUserId());
             loginReplyBuilder.setLastName(userEntity.getLastName());
             loginReplyBuilder.setFirstName(userEntity.getFirstName());
+            com.google.protobuf.Timestamp timestamp = Timestamp.newBuilder().build();
 
             UserOperationHistoryEntity record = operationHistoryDao.getLastLoginRecordByUserId(userEntity.getId());
             loginReplyBuilder.setLastLoginTime(com.google.protobuf.Timestamp.newBuilder()
