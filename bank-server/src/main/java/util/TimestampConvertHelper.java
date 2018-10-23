@@ -2,7 +2,7 @@ package util;
 
 import java.sql.Timestamp;
 
-public class TimestampConvert {
+public class TimestampConvertHelper {
 
     public static Timestamp RpcToMysql(com.google.protobuf.Timestamp rpcTime) {
         Timestamp timestamp = new Timestamp(0);
