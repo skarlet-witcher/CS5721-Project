@@ -11,6 +11,7 @@ import dao.impl.UserDao;
 import dao.impl.UserOperationHistoryDao;
 import entity.UserOperationHistoryEntity;
 import service.IUserCustomerOperationHistoryService;
+import util.OperationNoGenerator;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -21,6 +22,7 @@ public class UserCustomerOperationHistoryService implements IUserCustomerOperati
     private static UserCustomerOperationHistoryService instance = null;
     private IUserDao userDao = UserDao.getInstance();
     private IUserOperationHistoryDao operationHistoryDao = UserOperationHistoryDao.getInstance();
+    private OperationNoGenerator operationNoGenerator = OperationNoGenerator.getInstance();
 
     public static UserCustomerOperationHistoryService getInstance() {
         if (instance == null) {
@@ -39,7 +41,7 @@ public class UserCustomerOperationHistoryService implements IUserCustomerOperati
     public void addNewUserLoginReqHistory(Long userId, Integer status) {
         UserOperationHistoryEntity historyEntity = new UserOperationHistoryEntity();
         historyEntity.setUserId(userId);
-// TODO       historyEntity.setOperateNo();
+        historyEntity.setOperateNo(operationNoGenerator.generateOperationNo());
         historyEntity.setOperateTime(new Timestamp(new Date().getTime()));
         historyEntity.setOperateType(UserOperateType.LOGIN_REQ);
         historyEntity.setOperateSource(UserOperateSourceType.SELF_SERVICE);
@@ -52,7 +54,7 @@ public class UserCustomerOperationHistoryService implements IUserCustomerOperati
     public void addNewUserLoginHistory(Long userId, Integer operateSource, Integer status) {
         UserOperationHistoryEntity historyEntity = new UserOperationHistoryEntity();
         historyEntity.setUserId(userId);
-// TODO       historyEntity.setOperateNo();
+        historyEntity.setOperateNo(operationNoGenerator.generateOperationNo());
         historyEntity.setOperateTime(new Timestamp(new Date().getTime()));
         historyEntity.setOperateType(UserOperateType.LOGIN);
         historyEntity.setOperateSource(operateSource);

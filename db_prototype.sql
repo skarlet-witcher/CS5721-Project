@@ -121,7 +121,7 @@ create table bank_admin (
 CREATE TABLE user_operation_history (
   id             BIGINT            AUTO_INCREMENT PRIMARY KEY,
   operate_no     varchar(255)   not null
-  comment 'long int. get by auto-generated',
+  comment 'string. get by auto-generated',
   operate_type   int comment '0.charge 1.deposit 2.withdraw 3.transfer sent 4.transfer received 5.change_profile 6.login 7.create 8.remove',
   operate_time   datetime not null,
   operate_source int comment '1.self-service 2.ATM 3.other',

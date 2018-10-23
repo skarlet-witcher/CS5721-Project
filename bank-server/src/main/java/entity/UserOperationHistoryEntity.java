@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 @Table(name = "user_operation_history", schema = "bank_manage", catalog = "")
 public class UserOperationHistoryEntity {
     private long id;
-    private long operateNo;
+    private String operateNo;
     private Integer operateType;
     private Timestamp operateTime;
     private Integer operateSource;
@@ -32,11 +32,11 @@ public class UserOperationHistoryEntity {
 
     @Basic
     @Column(name = "operate_no", nullable = false)
-    public long getOperateNo() {
+    public String getOperateNo() {
         return operateNo;
     }
 
-    public void setOperateNo(long operateNo) {
+    public void setOperateNo(String operateNo) {
         this.operateNo = operateNo;
     }
 
@@ -176,7 +176,7 @@ public class UserOperationHistoryEntity {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (operateNo ^ (operateNo >>> 32));
+        result = 31 * result + (operateNo != null ? operateNo.hashCode() : 0);
         result = 31 * result + (operateType != null ? operateType.hashCode() : 0);
         result = 31 * result + (operateTime != null ? operateTime.hashCode() : 0);
         result = 31 * result + (operateSource != null ? operateSource.hashCode() : 0);
