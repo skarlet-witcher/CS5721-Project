@@ -5,6 +5,8 @@
 package view;
 
 import net.miginfocom.swing.MigLayout;
+import rpc.client.CustomerApplyRpc;
+import service.impl.CustomerApplyService;
 import util.JTextFieldLimit;
 
 import javax.swing.*;
@@ -13,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.sql.Timestamp;
 
 /**
  * @author xiangkai22
@@ -24,13 +27,13 @@ public class CustomerApplyView extends JFrame {
     private JLabel lbl_lastName;
     private JTextField tf_lastName;
     private JLabel lbl_gender;
-    private JComboBox cb_genderList;
+    private JComboBox<String> cb_genderList;
     private JLabel lbl_identityType;
-    private JComboBox cb_identityTypeList;
+    private JComboBox<String> cb_identityTypeList;
     private JLabel lbl_identityNum;
     private JTextField tf_identityNum;
     private JLabel lbl_accountType;
-    private JComboBox cb_accountTypeList;
+    private JComboBox<String> cb_accountTypeList;
     private JPanel studentAccountPanel;
     private JLabel lbl_graduateDate;
     private JTextField tf_graduateMonth;
@@ -38,15 +41,15 @@ public class CustomerApplyView extends JFrame {
     private JTextField tf_graduateYear;
     private JLabel lbl_studentID;
     private JTextField tf_studentID;
-    private JLabel label5;
-    private JTextField textField5;
+    private JLabel lbl_schoolName;
+    private JTextField tf_schoolName;
     private JPanel youngSaverAccountPanel;
     private JLabel lbl_parentUserID;
     private JTextField tf_parentUserID;
     private JLabel lbl_parentUserName;
     private JTextField tf_parentUserName;
     private JLabel lbl_cardType;
-    private JComboBox cb_cardTypeList;
+    private JComboBox<String> cb_cardTypeList;
     private JLabel lbl_dob;
     private JTextField tf_dob_day;
     private JLabel label10;
@@ -90,7 +93,18 @@ public class CustomerApplyView extends JFrame {
     }
 
     private void btn_applyActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        firstNameFieldValidator();
+        lastNameFieldValidator();
+        genderFieldValidator();
+        identityFieldValidator();
+        accountTypeValidator();
+        cardTypeFieldValidator();
+        dateOfBirthFieldValidator();
+        addressFieldValidator();
+        emailFieldValidator();
+        contactNumFieldValidator();
+
+
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
@@ -116,6 +130,7 @@ public class CustomerApplyView extends JFrame {
         }
 
     }
+
     private void initAccountPanel() {
         studentAccountPanel.setVisible(false);
         youngSaverAccountPanel.setVisible(false);
@@ -128,13 +143,13 @@ public class CustomerApplyView extends JFrame {
         lbl_lastName = new JLabel();
         tf_lastName = new JTextField();
         lbl_gender = new JLabel();
-        cb_genderList = new JComboBox();
+        cb_genderList = new JComboBox<>();
         lbl_identityType = new JLabel();
-        cb_identityTypeList = new JComboBox();
+        cb_identityTypeList = new JComboBox<>();
         lbl_identityNum = new JLabel();
         tf_identityNum = new JTextField();
         lbl_accountType = new JLabel();
-        cb_accountTypeList = new JComboBox();
+        cb_accountTypeList = new JComboBox<>();
         studentAccountPanel = new JPanel();
         lbl_graduateDate = new JLabel();
         tf_graduateMonth = new JTextField();
@@ -142,15 +157,15 @@ public class CustomerApplyView extends JFrame {
         tf_graduateYear = new JTextField();
         lbl_studentID = new JLabel();
         tf_studentID = new JTextField();
-        label5 = new JLabel();
-        textField5 = new JTextField();
+        lbl_schoolName = new JLabel();
+        tf_schoolName = new JTextField();
         youngSaverAccountPanel = new JPanel();
         lbl_parentUserID = new JLabel();
         tf_parentUserID = new JTextField();
         lbl_parentUserName = new JLabel();
         tf_parentUserName = new JTextField();
         lbl_cardType = new JLabel();
-        cb_cardTypeList = new JComboBox();
+        cb_cardTypeList = new JComboBox<>();
         lbl_dob = new JLabel();
         tf_dob_day = new JTextField();
         label10 = new JLabel();
@@ -208,7 +223,7 @@ public class CustomerApplyView extends JFrame {
         contentPane.add(lbl_gender, "cell 1 2");
 
         //---- cb_genderList ----
-        cb_genderList.setModel(new DefaultComboBoxModel(new String[] {
+        cb_genderList.setModel(new DefaultComboBoxModel<>(new String[] {
             "Select Your Gender",
             "Male",
             "Female"
@@ -220,7 +235,7 @@ public class CustomerApplyView extends JFrame {
         contentPane.add(lbl_identityType, "cell 1 3");
 
         //---- cb_identityTypeList ----
-        cb_identityTypeList.setModel(new DefaultComboBoxModel(new String[] {
+        cb_identityTypeList.setModel(new DefaultComboBoxModel<>(new String[] {
             "Select Yout Identity Type",
             "Driving License",
             "Passport"
@@ -237,18 +252,16 @@ public class CustomerApplyView extends JFrame {
         contentPane.add(lbl_accountType, "cell 1 5");
 
         //---- cb_accountTypeList ----
-        cb_accountTypeList.setModel(new DefaultComboBoxModel(new String[] {
+        cb_accountTypeList.setModel(new DefaultComboBoxModel<>(new String[] {
             "Personal Current Account",
             "Student Current Account",
             "Young Saver Account",
             "Golden Account"
         }));
-        cb_accountTypeList.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cb_accountTypeListActionPerformed(e);
-                cb_accountTypeListActionPerformed(e);
-            }
-        });
+        cb_accountTypeList.addActionListener(e -> {
+			cb_accountTypeListActionPerformed(e);
+			cb_accountTypeListActionPerformed(e);
+		});
         contentPane.add(cb_accountTypeList, "cell 2 5");
 
         //======== studentAccountPanel ========
@@ -289,10 +302,10 @@ public class CustomerApplyView extends JFrame {
             tf_studentID.setMinimumSize(new Dimension(172, 24));
             studentAccountPanel.add(tf_studentID, "cell 1 1 2 1");
 
-            //---- label5 ----
-            label5.setText("School Name");
-            studentAccountPanel.add(label5, "cell 0 2");
-            studentAccountPanel.add(textField5, "cell 1 2 2 1");
+            //---- lbl_schoolName ----
+            lbl_schoolName.setText("School Name");
+            studentAccountPanel.add(lbl_schoolName, "cell 0 2");
+            studentAccountPanel.add(tf_schoolName, "cell 1 2 2 1");
         }
         contentPane.add(studentAccountPanel, "cell 1 6 2 1");
 
@@ -334,7 +347,7 @@ public class CustomerApplyView extends JFrame {
         contentPane.add(lbl_cardType, "cell 1 8");
 
         //---- cb_cardTypeList ----
-        cb_cardTypeList.setModel(new DefaultComboBoxModel(new String[] {
+        cb_cardTypeList.setModel(new DefaultComboBoxModel<>(new String[] {
             "Select Your Card Type",
             "Debit Card",
             "Credit Card"
@@ -397,20 +410,12 @@ public class CustomerApplyView extends JFrame {
 
         //---- btn_apply ----
         btn_apply.setText("Apply");
-        btn_apply.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_applyActionPerformed(e);
-            }
-        });
+        btn_apply.addActionListener(e -> btn_applyActionPerformed(e));
         contentPane.add(btn_apply, "cell 2 13");
 
         //---- btn_back ----
         btn_back.setText("Back");
-        btn_back.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_backActionPerformed(e);
-            }
-        });
+        btn_back.addActionListener(e -> btn_backActionPerformed(e));
         contentPane.add(btn_back, "cell 2 14");
         pack();
         setLocationRelativeTo(getOwner());
@@ -425,6 +430,11 @@ public class CustomerApplyView extends JFrame {
         tf_graduateYear.setDocument(new JTextFieldLimit(4));
         tf_studentID.setDocument(new JTextFieldLimit(8));
         tf_parentUserID.setDocument(new JTextFieldLimit(13));
+        tf_firstName.setDocument(new JTextFieldLimit(20));
+        tf_lastName.setDocument(new JTextFieldLimit(20));
+        tf_identityNum.setDocument(new JTextFieldLimit(25));
+        tf_schoolName.setDocument(new JTextFieldLimit(50));
+
 
         tf_dob_year.setText("YYYY");
         tf_dob_month.setText("MM");
@@ -432,15 +442,278 @@ public class CustomerApplyView extends JFrame {
         tf_graduateYear.setText("YYYY");
         tf_graduateMonth.setText("MM");
     }
+
     private void initStudentAccountField() {
         studentAccountPanel.setVisible(true);
     }
+
     private void initYoungSaverAccountField() {
         youngSaverAccountPanel.setVisible(true);
     }
+
     private void resetAccountField() {
         studentAccountPanel.setVisible(false);
         youngSaverAccountPanel.setVisible(false);
+    }
+
+    private void firstNameFieldValidator() {
+        if(tf_firstName.getText().trim().length() <= 0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your first name",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch(Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid first name",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void lastNameFieldValidator() {
+        if(tf_lastName.getText().trim().length() <= 0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your last name",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid last name",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void identityFieldValidator() {
+        if(cb_identityTypeList.getSelectedIndex() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please select your identity type",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(tf_identityNum.getText().trim().length() <= 0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your identity number",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid identity number",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void dateOfBirthFieldValidator() {
+        if(tf_dob_day.getText().trim().length() <= 0 ||
+                tf_dob_month.getText().trim().length() <= 0 ||
+                tf_dob_year.getText().trim().length() <= 0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your date or birth",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid date or birth",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void addressFieldValidator() {
+        if(tf_address.getText().trim().length() <=0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your address",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid address",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void emailFieldValidator() {
+        if(tf_email.getText().trim().length() <= 0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your email address",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid email address",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void contactNumFieldValidator() {
+        if(tf_contactNum.getText().trim().length() <= 0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your contact number",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid contact number",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void genderFieldValidator() {
+        if(cb_genderList.getSelectedIndex() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your gender",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+        }
+    }
+
+    private void cardTypeFieldValidator() {
+        if(cb_cardTypeList.getSelectedIndex() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please select your card type",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+        }
+    }
+
+    private void accountTypeValidator() {
+        if(cb_accountTypeList.getSelectedIndex() == 1){
+            studentAccountValidator();
+        }
+        if(cb_accountTypeList.getSelectedIndex() == 2) {
+            youngSaverAccountValidator();
+        }
+    }
+
+    private void studentAccountValidator() {
+        graduateDateFieldValidator();
+        studentIdFieldValidator();
+        schoolNameFieldValidator();
+    }
+
+    private void graduateDateFieldValidator() {
+        if(tf_graduateMonth.getText().trim().length() <= 0 ||
+                tf_graduateYear.getText().trim().length() <= 0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your graduate date",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch(Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid graduate date",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void studentIdFieldValidator() {
+        if(tf_studentID.getText().trim().length() <= 0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your student ID",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid student ID",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void schoolNameFieldValidator() {
+        if(tf_schoolName.getText().trim().length() <= 0) {
+            try{
+                JOptionPane.showMessageDialog(null,
+                        "Please input your schoolName",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch(Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid schoolName",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void youngSaverAccountValidator() {
+        parentUserIdFieldValidator();
+        parentUserNameFieldValidator();
+    }
+
+    private void parentUserIdFieldValidator() {
+        if(tf_parentUserID.getText().length() <= 0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your parent's user ID",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid parent's user ID",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void parentUserNameFieldValidator() {
+        if(tf_parentUserName.getText().length() <= 0) {
+            try {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your parent's userName",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input valid parent's userName",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    }
+
+    private void applyPersonalAccount() throws Exception {
+        String firstName = tf_firstName.getText().trim();
+        String lastName = tf_lastName.getText().trim();
+        String identityNum = tf_identityNum.getText().trim();
+        int identityType = cb_identityTypeList.getSelectedIndex();
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        Timestamp birthDate = Timestamp.valueOf(tf_dob_year.getText().trim()+"-"+
+                tf_dob_month.getText().trim()+"-"+tf_dob_day.getText().trim());
+        int gender = cb_genderList.getSelectedIndex();
+        String address = tf_address.getText().trim();
+        String email = tf_email.getText().trim();
+        String contactNum = tf_contactNum.getText().trim();
+
+        CustomerApplyService.getInstance().applyPersonalAccount(firstName, lastName, gender, identityType, identityNum, accountType,
+                cardType, birthDate, address, email, contactNum);
+
     }
 
     public void run() {

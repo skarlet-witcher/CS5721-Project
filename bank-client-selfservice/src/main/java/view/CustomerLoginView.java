@@ -118,7 +118,7 @@ public class CustomerLoginView extends JFrame {
                 );
             } catch (Exception E) {
                 JOptionPane.showMessageDialog(null,
-                        "Please input valid date of birth",
+                        "Please input valid date of birth or user ID",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
             }
