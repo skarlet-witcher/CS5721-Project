@@ -98,14 +98,18 @@ public class CustomerApplyView extends JFrame {
         genderFieldValidator();
         identityFieldValidator();
         accountTypeValidator();
-        cardTypeFieldValidator();
         dateOfBirthFieldValidator();
         addressFieldValidator();
         emailFieldValidator();
         contactNumFieldValidator();
 
         try {
-            applyPersonalAccount();
+            if(cb_accountTypeList.getSelectedIndex() == 0){
+                applyPersonalAccount();
+            }
+            if(cb_accountTypeList.getSelectedIndex() == 1) {
+                applyStudentAccount();
+            }
         } catch (Exception E) {
             E.printStackTrace();
         }
@@ -352,10 +356,10 @@ public class CustomerApplyView extends JFrame {
 
         //---- cb_cardTypeList ----
         cb_cardTypeList.setModel(new DefaultComboBoxModel<>(new String[] {
-            "Select Your Card Type",
             "Debit Card",
             "Credit Card"
         }));
+        cb_cardTypeList.setSelectedIndex(1);
         contentPane.add(cb_cardTypeList, "cell 2 8");
 
         //---- lbl_dob ----
@@ -590,15 +594,6 @@ public class CustomerApplyView extends JFrame {
         }
     }
 
-    private void cardTypeFieldValidator() {
-        if(cb_cardTypeList.getSelectedIndex() <= 0) {
-                JOptionPane.showMessageDialog(null,
-                        "Please select your card type",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-        }
-    }
-
     private void accountTypeValidator() {
         if(cb_accountTypeList.getSelectedIndex() == 1){
             studentAccountValidator();
@@ -702,6 +697,7 @@ public class CustomerApplyView extends JFrame {
     }
 
     private void applyPersonalAccount() throws Exception {
+        // basic info
         String firstName = tf_firstName.getText().trim();
         String lastName = tf_lastName.getText().trim();
         String identityNum = tf_identityNum.getText().trim();
@@ -722,6 +718,33 @@ public class CustomerApplyView extends JFrame {
 
     }
 
+    private void applyStudentAccount() throws Exception {
+        // basic info
+        String firstName = tf_firstName.getText().trim();
+        String lastName = tf_lastName.getText().trim();
+        String identityNum = tf_identityNum.getText().trim();
+        int identityType = cb_identityTypeList.getSelectedIndex();
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        String birthDateText = tf_dob_year.getText().trim()+"-"+
+                tf_dob_month.getText().trim()+"-"+tf_dob_day.getText().trim()+" 00:00:00";
+        // TO-DO month and day with one digit ????
+        Timestamp birthDate = Timestamp.valueOf(birthDateText);
+        int gender = cb_genderList.getSelectedIndex();
+        String address = tf_address.getText().trim();
+        String email = tf_email.getText().trim();
+        String contactNum = tf_contactNum.getText().trim();
+
+        // student account Info
+        // TO-DO month and day with one digit ????
+        String graduateDateText = tf_graduateYear.getText().trim() + "-" + tf_graduateMonth.getText().trim() +"-01 " +"00:00:00";
+        Timestamp graduateDate = Timestamp.valueOf(graduateDateText);
+        String studentId = tf_studentID.getText().trim();
+        String schoolName = tf_schoolName.getText().trim();
+
+        CustomerApplyService.getInstance().applyStudentAccount(firstName, lastName, gender, identityType, identityNum, accountType,
+                cardType, birthDate, address, email, contactNum, graduateDate, studentId, schoolName);
+    }
     public void run() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);

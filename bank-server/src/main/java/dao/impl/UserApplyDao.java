@@ -20,7 +20,7 @@ public class UserApplyDao implements IUserApplyDao {
         return userApplyDao;
     }
 
-    public void requestPersonalAccountApply(UserApplyArchiveEntity UserApplyArchiveEntity) {
+    public void requestAccountApply(UserApplyArchiveEntity UserApplyArchiveEntity) {
         try {
             session.getTransaction().begin();
 

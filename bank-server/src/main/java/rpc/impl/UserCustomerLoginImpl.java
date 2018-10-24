@@ -2,6 +2,7 @@ package rpc.impl;
 
 import io.grpc.stub.StreamObserver;
 import rpc.*;
+import service.IUserCustomerApplyService;
 import service.IUserCustomerLoginService;
 import service.impl.UserCustomerApplyService;
 import service.impl.UserCustomerLoginService;
@@ -15,6 +16,7 @@ import java.util.Map;
 public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLoginImplBase {
 
     private IUserCustomerLoginService customerLoginService = UserCustomerLoginService.getInstance();
+    private IUserCustomerApplyService customerApplyService = UserCustomerApplyService.getInstance();
 
     @Override
     public void loginReq(UserLoginReqRequest request, StreamObserver<Response> responseObserver) {
@@ -73,13 +75,25 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         String address = request.getAddress();
         String email = request.getEmail();
         String phone = request.getPhone();
+        Timestamp graduateDate = TimestampConvertHelper.rpcToMysql(request.getGraduateDate());
+        String studentId = request.getStudentId();
+        String university = request.getUniversityName();
+
 
 
 
         try {
-            UserCustomerApplyService.getInstance().requestPersonalAccountApply(
-                    firstName, lastName, identityNum, identityType, accountType, cardType,
-                    birthDate, gender, address, email, phone);
+            if(accountType == 1) {
+                customerApplyService.requestPersonalAccountApply(
+                        firstName, lastName, identityNum, identityType, accountType, cardType,
+                        birthDate, gender, address, email, phone);
+            }
+            if(accountType == 2) {
+                customerApplyService.requestStudentAccountApply(
+                        firstName, lastName, identityNum, identityType, accountType, cardType,
+                        birthDate, gender, address, email, phone,
+                        graduateDate,studentId,university);
+            }
             responseObserver.onNext(ResponseBuilder.ResponseSuccessBuilder()
                     .build());
 
