@@ -17,24 +17,7 @@ CREATE TABLE user (
   comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.'
 );
 
-create table user_account (
-  id             bigint                AUTO_INCREMENT PRIMARY KEY,
-  account_number bigint       not null
-  comment 'account number, the last 8 digit of iban',
-  account_type   bigint       not null
-  comment '1.current account 2.student current account',
-  bic            varchar(255) not null default 'BOFIIE2DXXX',
-  iban           varchar(255) not null
-  comment 'iban, get by auto-generated.',
-  user_id        bigint,
-  status         int          not null default 1
-  comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.',
-  FOREIGN KEY (user_id) REFERENCES user (id),
-  FOREIGN KEY (account_type) REFERENCES user_account_type (id)
-);
-
 CREATE INDEX fk_user_id ON user(id);
-CREATE INDEX fk_account_type ON user_account_type(id);
 
 create table user_account_type (
   id                                  bigint                 AUTO_INCREMENT PRIMARY KEY,
@@ -61,6 +44,28 @@ create table user_account_type (
   charge_card_issue                   double        not null default 0
 );
 
+CREATE INDEX fk_account_type ON user_account_type(id);
+
+create table user_account (
+  id             bigint                AUTO_INCREMENT PRIMARY KEY,
+  account_number bigint       not null
+  comment 'account number, the last 8 digit of iban',
+  account_type   bigint       not null
+  comment '1.current account 2.student current account',
+  bic            varchar(255) not null default 'BOFIIE2DXXX',
+  iban           varchar(255) not null
+  comment 'iban, get by auto-generated.',
+  user_id        bigint,
+  status         int          not null default 1
+  comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.',
+  FOREIGN KEY (user_id) REFERENCES user (id),
+  FOREIGN KEY (account_type) REFERENCES user_account_type (id)
+);
+
+CREATE INDEX fk_account_id ON user_account(id);
+
+
+
 CREATE TABLE user_card (
   id            BIGINT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AUTO_INCREMENT PRIMARY KEY,
   card_number   bigint     NOT NULL,
@@ -78,7 +83,7 @@ CREATE TABLE user_card (
   FOREIGN KEY (account_id) REFERENCES user_account (id)
 );
 
-CREATE INDEX fk_account_id ON user_account(id);
+
 
 create table user_payee (
   id      bigint AUTO_INCREMENT PRIMARY KEY,
@@ -87,6 +92,8 @@ create table user_payee (
   user_id bigint comment 'whose payee',
   FOREIGN KEY (user_id) REFERENCES user (id)
 );
+
+CREATE INDEX fk_user_payee ON user_payee(id);
 
 create table user_apply_archive (
   id                bigint                        AUTO_INCREMENT PRIMARY KEY,
@@ -180,4 +187,4 @@ CREATE TABLE user_history (
   FOREIGN KEY (account_id) REFERENCES user_account (id)
 );
 
-CREATE INDEX fk_user_payee ON user_payee(id);
+
