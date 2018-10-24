@@ -33,6 +33,9 @@ create table user_account (
   FOREIGN KEY (account_type) REFERENCES user_account_type (id)
 );
 
+CREATE INDEX fk_user_id ON user(id);
+CREATE INDEX fk_account_type ON user_account_type(id);
+
 create table user_account_type (
   id                                  bigint                 AUTO_INCREMENT PRIMARY KEY,
   name                                varchar(255)  not null
@@ -74,6 +77,8 @@ CREATE TABLE user_card (
   comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.',
   FOREIGN KEY (account_id) REFERENCES user_account (id)
 );
+
+CREATE INDEX fk_account_id ON user_account(id);
 
 create table user_payee (
   id      bigint AUTO_INCREMENT PRIMARY KEY,
@@ -171,6 +176,8 @@ CREATE TABLE user_history (
   to_payee_id    BIGINT,
   account_id     BIGINT,
   FOREIGN KEY (user_id) REFERENCES user (id),
-  foreign key (to_payee_id) references user_payee (id),
+  FOREIGN KEY (to_payee_id) REFERENCES user_payee (id),
   FOREIGN KEY (account_id) REFERENCES user_account (id)
 );
+
+CREATE INDEX fk_user_payee ON user_payee(id);
