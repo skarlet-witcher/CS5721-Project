@@ -9,7 +9,7 @@ import dao.IUserDao;
 import dao.IUserOperationHistoryDao;
 import dao.impl.UserDao;
 import dao.impl.UserOperationHistoryDao;
-import entity.UserOperationHistoryEntity;
+import entity.UserHistoryEntity;
 import service.IUserCustomerOperationHistoryService;
 import util.OperationNoGenerator;
 
@@ -39,7 +39,7 @@ public class UserCustomerOperationHistoryService implements IUserCustomerOperati
      * @param status
      */
     public void addNewUserLoginReqHistory(Long userId, Integer status) {
-        UserOperationHistoryEntity historyEntity = new UserOperationHistoryEntity();
+        UserHistoryEntity historyEntity = new UserHistoryEntity();
         historyEntity.setUserId(userId);
         historyEntity.setOperateNo(operationNoGenerator.generateOperationNo());
         historyEntity.setOperateTime(new Timestamp(new Date().getTime()));
@@ -52,7 +52,7 @@ public class UserCustomerOperationHistoryService implements IUserCustomerOperati
     }
 
     public void addNewUserLoginHistory(Long userId, Integer operateSource, Integer status) {
-        UserOperationHistoryEntity historyEntity = new UserOperationHistoryEntity();
+        UserHistoryEntity historyEntity = new UserHistoryEntity();
         historyEntity.setUserId(userId);
         historyEntity.setOperateNo(operationNoGenerator.generateOperationNo());
         historyEntity.setOperateTime(new Timestamp(new Date().getTime()));
@@ -67,9 +67,9 @@ public class UserCustomerOperationHistoryService implements IUserCustomerOperati
     public void refreshUserLoginStatus(Long userId) {
         // check if its 3 times for login failure.
 
-        List<UserOperationHistoryEntity> histories = operationHistoryDao.getOperationHistoriesTodayByUserId(userId);
+        List<UserHistoryEntity> histories = operationHistoryDao.getOperationHistoriesTodayByUserId(userId);
         Integer count = 0;
-        for (UserOperationHistoryEntity history : histories) {
+        for (UserHistoryEntity history : histories) {
             if ((history.getOperateType() == UserOperateType.LOGIN_REQ ||
                     history.getOperateType() == UserOperateType.LOGIN) &&
                     history.getStatus() == UserOperateStatusType.FAILURE) {

@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class UserAccountEntity {
     private long id;
     private long accountNumber;
-    private int accountType;
+    private long accountType;
     private String bic;
     private String iban;
     private Long userId;
@@ -35,11 +35,11 @@ public class UserAccountEntity {
 
     @Basic
     @Column(name = "account_type", nullable = false)
-    public int getAccountType() {
+    public long getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(int accountType) {
+    public void setAccountType(long accountType) {
         this.accountType = accountType;
     }
 
@@ -103,7 +103,7 @@ public class UserAccountEntity {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) (accountNumber ^ (accountNumber >>> 32));
-        result = 31 * result + accountType;
+        result = 31 * result + (int) (accountType ^ (accountType >>> 32));
         result = 31 * result + (bic != null ? bic.hashCode() : 0);
         result = 31 * result + (iban != null ? iban.hashCode() : 0);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);

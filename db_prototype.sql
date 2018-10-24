@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE user (
   id              BIGINT                 AUTO_INCREMENT PRIMARY KEY,
   user_id         bigint UNIQUE not null
@@ -17,8 +18,29 @@ CREATE TABLE user (
   comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.'
 );
 
-CREATE INDEX fk_user_id ON user(id);
+DROP TABLE IF EXISTS `user_account`;
+create table user_account (
+  id             bigint                AUTO_INCREMENT,
+  account_number bigint       not null
+  comment 'account number, the last 8 digit of iban',
+  account_type   bigint       not null,
+  bic            varchar(255) not null default 'BOFIIE2DXXX',
+  iban           varchar(255) not null
+  comment 'iban, get by auto-generated.',
+  user_id        bigint,
+  status         int          not null default 1
+  comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.',
+  primary key (id),
+  FOREIGN KEY (user_id) REFERENCES user (id),
+  FOREIGN KEY (account_type) REFERENCES user_account_type (id)
+);
 
+CREATE INDEX fk_user_id
+  ON user (id);
+CREATE INDEX fk_account_type
+  ON user_account_type (id);
+
+DROP TABLE IF EXISTS `user_account_type`;
 create table user_account_type (
   id                                  bigint                 AUTO_INCREMENT PRIMARY KEY,
   name                                varchar(255)  not null
@@ -33,9 +55,9 @@ create table user_account_type (
   student_info_require                int           not null
   comment '0.no 1.yes',
   charge_selfservice_trans            double        not null default 0
-  comment 'charge percentage per transaction',
+  comment 'charge amount per transaction',
   charge_atm_deposit_withdraw         double        not null default 0
-  comment 'charge percentage per d/w',
+  comment 'charge amount per d/w',
   charge_per_quarter                  int           not null default 0
   comment '0.no 1.yes',
   charge_per_quarter_minimum_banlance double        not null default 0,
@@ -44,32 +66,11 @@ create table user_account_type (
   charge_card_issue                   double        not null default 0
 );
 
-CREATE INDEX fk_account_type ON user_account_type(id);
-
-create table user_account (
-  id             bigint                AUTO_INCREMENT PRIMARY KEY,
-  account_number bigint       not null
-  comment 'account number, the last 8 digit of iban',
-  account_type   bigint       not null
-  comment '1.current account 2.student current account',
-  bic            varchar(255) not null default 'BOFIIE2DXXX',
-  iban           varchar(255) not null
-  comment 'iban, get by auto-generated.',
-  user_id        bigint,
-  status         int          not null default 1
-  comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.',
-  FOREIGN KEY (user_id) REFERENCES user (id),
-  FOREIGN KEY (account_type) REFERENCES user_account_type (id)
-);
-
-CREATE INDEX fk_account_id ON user_account(id);
-
-
-
+DROP TABLE IF EXISTS `user_card`;
 CREATE TABLE user_card (
-  id            BIGINT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AUTO_INCREMENT PRIMARY KEY,
+  id            BIGINT AUTO_INCREMENT PRIMARY KEY,
   card_number   bigint     NOT NULL,
-  card_type     int        not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 1
+  card_type     int        not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         default 1
   comment '1.debit card 2.credit card',
   pin           varchar(6) not null
   comment 'get by auto-generated 6 digit',
@@ -83,8 +84,10 @@ CREATE TABLE user_card (
   FOREIGN KEY (account_id) REFERENCES user_account (id)
 );
 
+CREATE INDEX fk_account_id
+  ON user_account (id);
 
-
+DROP TABLE IF EXISTS `user_payee`;
 create table user_payee (
   id      bigint AUTO_INCREMENT PRIMARY KEY,
   name    varchar(255) not null,
@@ -93,8 +96,7 @@ create table user_payee (
   FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
-CREATE INDEX fk_user_payee ON user_payee(id);
-
+DROP TABLE IF EXISTS `user_apply_archive`;
 create table user_apply_archive (
   id                bigint                        AUTO_INCREMENT PRIMARY KEY,
   first_name        varchar(255) not null,
@@ -134,6 +136,7 @@ create table user_apply_archive (
   comment 'after being approved, get connected to user id'
 );
 
+DROP TABLE IF EXISTS `bank_staff`;
 CREATE TABLE bank_staff (
   id         BIGINT AUTO_INCREMENT PRIMARY KEY,
   staff_id   bigint UNIQUE not null
@@ -146,12 +149,14 @@ CREATE TABLE bank_staff (
   comment '0.invalid 1.valid'
 );
 
+DROP TABLE IF EXISTS `bank_admin`;
 create table bank_admin (
-  id       bigint                AUTO_INCREMENT PRIMARY KEY,
+  id       bigint AUTO_INCREMENT PRIMARY KEY,
   username varchar(255) not null,
   password varchar(255) not null
 );
 
+DROP TABLE IF EXISTS `sys_config`;
 create table sys_config (
   id       bigint AUTO_INCREMENT PRIMARY KEY,
   conf_key varchar(255) not null,
@@ -164,12 +169,13 @@ create table sys_config (
 #   "email-password":"2",
 # }
 
+DROP TABLE IF EXISTS `user_history`;
 CREATE TABLE user_history (
-  id             BIGINT            AUTO_INCREMENT PRIMARY KEY,
-  operate_no     varchar(255)   not null
+  id             BIGINT AUTO_INCREMENT PRIMARY KEY,
+  operate_no     varchar(255) not null
   comment 'string. get by auto-generated',
   operate_type   int comment '0.charge 1.deposit 2.withdraw 3.transfer sent 4.transfer received 5.change_profile 6.login 7.create 8.remove',
-  operate_time   datetime not null,
+  operate_time   datetime     not null,
   operate_source int comment '1.self-service 2.ATM 3.others',
   amount         double,
   currency_type  int
@@ -177,7 +183,7 @@ CREATE TABLE user_history (
   balance        double
   comment 'balance after operation',
   description    varchar(500),
-  status         int      not null
+  status         int          not null
   comment '0.pending 1.fail 2.success',
   user_id        BIGINT,
   to_payee_id    BIGINT,
@@ -187,4 +193,5 @@ CREATE TABLE user_history (
   FOREIGN KEY (account_id) REFERENCES user_account (id)
 );
 
-
+CREATE INDEX fk_user_payee
+  ON user_payee (id);
