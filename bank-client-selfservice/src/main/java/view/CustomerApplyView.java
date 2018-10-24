@@ -103,13 +103,20 @@ public class CustomerApplyView extends JFrame {
 
         try {
             if(cb_accountTypeList.getSelectedIndex() == 0){
+                System.out.println("ready to apply personal account");
                 applyPersonalAccount();
             }
             if(cb_accountTypeList.getSelectedIndex() == 1) {
+                System.out.println("ready to apply student account");
                 applyStudentAccount();
             }
             if(cb_accountTypeList.getSelectedIndex() == 2) {
+                System.out.println("ready to apply young saver account");
                 applyYoungSaverAccount();
+            }
+            if(cb_accountTypeList.getSelectedIndex() == 3) {
+                System.out.println("ready to apply golden account");
+                applyGoldenAccount();
             }
         } catch (Exception E) {
             E.printStackTrace();
@@ -721,6 +728,27 @@ public class CustomerApplyView extends JFrame {
         CustomerApplyService.getInstance().applyPersonalAccount(firstName, lastName, gender, identityType, identityNum, accountType,
                 cardType, birthDate, address, email, contactNum);
 
+    }
+
+    private void applyGoldenAccount() throws Exception {
+        // basic info
+        String firstName = tf_firstName.getText().trim();
+        String lastName = tf_lastName.getText().trim();
+        String identityNum = tf_identityNum.getText().trim();
+        int identityType = cb_identityTypeList.getSelectedIndex();
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        String birthDateText = tf_dob_year.getText().trim()+"-"+
+                tf_dob_month.getText().trim()+"-"+tf_dob_day.getText().trim()+" 00:00:00";
+        //month and day with one digit
+        Timestamp birthDate = Timestamp.valueOf(birthDateText);
+        int gender = cb_genderList.getSelectedIndex();
+        String address = tf_address.getText().trim();
+        String email = tf_email.getText().trim();
+        String contactNum = tf_contactNum.getText().trim();
+
+        CustomerApplyService.getInstance().applyGoldenAccount(firstName, lastName, gender, identityType, identityNum, accountType,
+                cardType, birthDate, address, email, contactNum);
     }
 
     private void applyStudentAccount() throws Exception {

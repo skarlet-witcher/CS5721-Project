@@ -147,7 +147,7 @@ public class CustomerLoginView extends JFrame {
 
     private void btn_registerActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerApplyView().run();
+        new CustomerApplyAuthView().run();
     }
 
     private void initTextFields() {

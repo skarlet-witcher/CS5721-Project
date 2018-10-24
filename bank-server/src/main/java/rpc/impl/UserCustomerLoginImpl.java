@@ -12,9 +12,10 @@ import util.TimestampConvertHelper;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLoginImplBase {
-
+    private static final Logger logger = Logger.getLogger(UserCustomerLoginImpl.class.getName());
     private IUserCustomerLoginService customerLoginService = UserCustomerLoginService.getInstance();
     private IUserCustomerApplyService customerApplyService = UserCustomerApplyService.getInstance();
 
@@ -82,24 +83,38 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         String parentFirstName = request.getParentFirstName();
         String parentLastName = request.getParentLastName();
 
+        Long userId = request.getUserId();
+
 
 
 
         try {
             if(accountType == 1) {
+                logger.info("ready to apply personal account");
                 customerApplyService.requestPersonalAccountApply(
                         firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone);
             }
             if(accountType == 2) {
+                logger.info("ready to apply student account");
                 customerApplyService.requestStudentAccountApply(
                         firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone,
                         graduateDate,studentId,university);
             }
             if(accountType == 3) {
+                logger.info("ready to apply young saver account");
                 customerApplyService.requestYoungSaverAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone, parentUserId, parentFirstName, parentLastName);
+            }
+            if(accountType == 4) {
+                logger.info("ready to apply golden account");
+                customerApplyService.requestGoldenAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
+                        birthDate, gender, address, email, phone);
+            }
+            // check existing user before apply
+            if(userId != null) {
+                customerApplyService.checkExistingUserBeforeApply(userId, firstName, lastName);
             }
             responseObserver.onNext(ResponseBuilder.ResponseSuccessBuilder()
                     .build());

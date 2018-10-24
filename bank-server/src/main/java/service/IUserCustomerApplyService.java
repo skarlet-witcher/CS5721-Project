@@ -13,4 +13,7 @@ public interface IUserCustomerApplyService {
     void requestYoungSaverAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType,
                                        Timestamp birthDate, int gender, String address, String email, String phone,
                                        long parentUserId, String parentFirstName, String parentLastName) throws Exception;
+    void requestGoldenAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType,
+                                   Timestamp birthDate, int gender, String address, String email, String phone) throws Exception;
+    void checkExistingUserBeforeApply(long userId, String firstName, String lastName) throws Exception;
 }
