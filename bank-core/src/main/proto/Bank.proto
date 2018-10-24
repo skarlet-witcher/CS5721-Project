@@ -183,21 +183,21 @@ message Response {
     UserLoginReply user_login_reply = 7;
     // apply new account
     // forget user id/pin
-    repeated UserAccounts user_accounts = 8;
-    UserProfile user_profile = 9;
+    repeated UserAccountsReply user_accounts = 8;
+    UserProfileReply user_profile = 9;
     // edit profile
-    repeated UserTransactions user_transactions = 10;
-    repeated UserPayees user_payees = 11;
+    repeated UserTransactionsReply user_transactions = 10;
+    repeated UserPayeesReply user_payees = 11;
     // add payee
     // remove payee
     // transfer
     // staff login
-    repeated UserNewApplys user_new_applys = 12;
-    repeated UserAccountDeleteApplys user_delete_applys = 13;
-    repeated UserBlocks user_block_lists = 14;
+    repeated UserNewApplysReply user_new_applys = 12;
+    repeated UserAccountDeleteApplysReply user_delete_applys = 13;
+    repeated UserBlocksReply user_block_lists = 14;
     // respond apply
     // admin login
-    repeated Staffs staffs = 15;
+    repeated StaffsReply staffs = 15;
     // add staff
     // remove staff
     // config email
@@ -207,7 +207,7 @@ message Response {
     //    UserCustomerLogsReply user_customer_logs = 8;
 }
 
-message UserBlocks {
+message UserBlocksReply {
     int64 user_pk = 6;
     string first_name = 1;
     string last_name = 2;
@@ -224,7 +224,7 @@ message UserBlocks {
     int32 status = 16;
 }
 
-message Staffs {
+message StaffsReply {
     int64 staff_pk = 1;
     int64 staff_id = 2;
     string password = 3;
@@ -233,7 +233,7 @@ message Staffs {
     string email = 6;
 }
 
-message UserProfile {
+message UserProfileReply {
     int64 user_pk = 1;
     int64 user_id = 9;
     string first_name = 2;
@@ -245,7 +245,7 @@ message UserProfile {
     string phone = 8;
 }
 
-message UserTransactions {
+message UserTransactionsReply {
     int64 user_pk = 1;
     google.protobuf.Timestamp date = 2;
     string description = 3;
@@ -255,13 +255,13 @@ message UserTransactions {
     string transaction_no = 7;
 }
 
-message UserPayees {
+message UserPayeesReply {
     int64 payee_pk = 1;
     string name = 2;
     string iban = 3;
 }
 
-message UserNewApplys {
+message UserNewApplysReply {
     int64 apply_pk = 18;
     string first_name = 1;
     string last_name = 2;
@@ -283,7 +283,7 @@ message UserNewApplys {
     int32 status = 19;
 }
 
-message UserAccountDeleteApplys {
+message UserAccountDeleteApplysReply {
     int64 user_pk = 6;
     string first_name = 1;
     string last_name = 2;
@@ -314,7 +314,7 @@ message UserLoginReply {
     google.protobuf.Timestamp last_login_time = 5;
 }
 
-message UserAccounts {
+message UserAccountsReply {
     int64 account_pk = 1;
     int64 account_number = 2;
     int32 account_type = 3;
