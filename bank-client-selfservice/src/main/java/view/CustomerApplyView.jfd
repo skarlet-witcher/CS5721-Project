@@ -58,8 +58,8 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "cb_identityTypeList"
 				"model": new javax.swing.DefaultComboBoxModel {
-					selectedItem: "Select Yout Identity Type"
-					addElement( "Select Yout Identity Type" )
+					selectedItem: "Select Your Identity Type"
+					addElement( "Select Your Identity Type" )
 					addElement( "Driving License" )
 					addElement( "Passport" )
 				}
@@ -172,16 +172,26 @@ new FormModel {
 					"value": "cell 2 1"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "lbl_parentUserName"
-					"text": "Parent's user name"
+					name: "lbl_parentFirstName"
+					"text": "Parent's First name"
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 1 2"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "tf_parentUserName"
-					"minimumSize": new java.awt.Dimension( 172, 24 )
+					name: "tf_parentFirstName"
 				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 					"value": "cell 2 2"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lbl_parentLastName"
+					"text": "Parent's Last name"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 1 3"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "tf_parentLastName"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 2 3"
 				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 1 7 2 1"
@@ -195,11 +205,11 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "cb_cardTypeList"
 				"model": new javax.swing.DefaultComboBoxModel {
-					selectedItem: "Select Your Card Type"
-					addElement( "Select Your Card Type" )
+					selectedItem: "Debit Card"
 					addElement( "Debit Card" )
 					addElement( "Credit Card" )
 				}
+				"selectedIndex": 0
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 2 8"
 			} )
