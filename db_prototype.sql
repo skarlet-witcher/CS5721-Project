@@ -21,8 +21,7 @@ create table user_account (
   id             bigint                AUTO_INCREMENT PRIMARY KEY,
   account_number bigint       not null
   comment 'account number, the last 8 digit of iban',
-  account_type   bigint       not null
-  comment '1.current account 2.student current account',
+  account_type   bigint       not null,
   bic            varchar(255) not null default 'BOFIIE2DXXX',
   iban           varchar(255) not null
   comment 'iban, get by auto-generated.',
@@ -33,8 +32,10 @@ create table user_account (
   FOREIGN KEY (account_type) REFERENCES user_account_type (id)
 );
 
-CREATE INDEX fk_user_id ON user(id);
-CREATE INDEX fk_account_type ON user_account_type(id);
+CREATE INDEX fk_user_id
+  ON user (id);
+CREATE INDEX fk_account_type
+  ON user_account_type (id);
 
 create table user_account_type (
   id                                  bigint                 AUTO_INCREMENT PRIMARY KEY,
@@ -62,9 +63,9 @@ create table user_account_type (
 );
 
 CREATE TABLE user_card (
-  id            BIGINT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              AUTO_INCREMENT PRIMARY KEY,
+  id            BIGINT AUTO_INCREMENT PRIMARY KEY,
   card_number   bigint     NOT NULL,
-  card_type     int        not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 1
+  card_type     int        not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         default 1
   comment '1.debit card 2.credit card',
   pin           varchar(6) not null
   comment 'get by auto-generated 6 digit',
@@ -78,7 +79,8 @@ CREATE TABLE user_card (
   FOREIGN KEY (account_id) REFERENCES user_account (id)
 );
 
-CREATE INDEX fk_account_id ON user_account(id);
+CREATE INDEX fk_account_id
+  ON user_account (id);
 
 create table user_payee (
   id      bigint AUTO_INCREMENT PRIMARY KEY,
@@ -140,7 +142,7 @@ CREATE TABLE bank_staff (
 );
 
 create table bank_admin (
-  id       bigint                AUTO_INCREMENT PRIMARY KEY,
+  id       bigint AUTO_INCREMENT PRIMARY KEY,
   username varchar(255) not null,
   password varchar(255) not null
 );
@@ -158,11 +160,11 @@ create table sys_config (
 # }
 
 CREATE TABLE user_history (
-  id             BIGINT            AUTO_INCREMENT PRIMARY KEY,
-  operate_no     varchar(255)   not null
+  id             BIGINT AUTO_INCREMENT PRIMARY KEY,
+  operate_no     varchar(255) not null
   comment 'string. get by auto-generated',
   operate_type   int comment '0.charge 1.deposit 2.withdraw 3.transfer sent 4.transfer received 5.change_profile 6.login 7.create 8.remove',
-  operate_time   datetime not null,
+  operate_time   datetime     not null,
   operate_source int comment '1.self-service 2.ATM 3.others',
   amount         double,
   currency_type  int
@@ -170,7 +172,7 @@ CREATE TABLE user_history (
   balance        double
   comment 'balance after operation',
   description    varchar(500),
-  status         int      not null
+  status         int          not null
   comment '0.pending 1.fail 2.success',
   user_id        BIGINT,
   to_payee_id    BIGINT,
@@ -180,4 +182,5 @@ CREATE TABLE user_history (
   FOREIGN KEY (account_id) REFERENCES user_account (id)
 );
 
-CREATE INDEX fk_user_payee ON user_payee(id);
+CREATE INDEX fk_user_payee
+  ON user_payee (id);
