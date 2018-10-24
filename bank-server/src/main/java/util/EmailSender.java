@@ -62,7 +62,7 @@ public class EmailSender {
             message.setSubject(subject);
             message.setText(body);
             Transport transport = session.getTransport("smtp");
-            transport.connect(host, from, pass);
+            transport.connect(host, USER_NAME, PASSWORD);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
         }
