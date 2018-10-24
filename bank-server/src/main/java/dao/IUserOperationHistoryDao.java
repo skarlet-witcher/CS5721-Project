@@ -1,14 +1,14 @@
 package dao;
 
-import entity.UserOperationHistoryEntity;
+import entity.UserHistoryEntity;
 
 import java.util.List;
 
 public interface IUserOperationHistoryDao {
 
-    void addOperationHistory(UserOperationHistoryEntity operationHistory);
+    void addOperationHistory(UserHistoryEntity operationHistory);
 
-    List<UserOperationHistoryEntity> getOperationHistoriesTodayByUserId(Long userId);
+    List<UserHistoryEntity> getOperationHistoriesTodayByUserId(Long userId);
 
-    UserOperationHistoryEntity getLastLoginRecordByUserId(Long userId);
+    UserHistoryEntity getLastLoginRecordByUserId(Long userId);
 }

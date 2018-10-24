@@ -2,18 +2,18 @@ package service.impl;
 
 import Const.UserOperateStatusType;
 import Const.UserStatusType;
-import com.google.protobuf.Timestamp;
 import dao.IUserDao;
 import dao.IUserOperationHistoryDao;
 import dao.impl.UserDao;
 import dao.impl.UserOperationHistoryDao;
 import entity.UserEntity;
-import entity.UserOperationHistoryEntity;
+import entity.UserHistoryEntity;
 import rpc.UserLoginReply;
 import rpc.UserLoginReqReply;
 import service.IUserCustomerLoginService;
 import service.IUserCustomerOperationHistoryService;
 import util.RandomUtil;
+import util.TimestampConvertHelper;
 
 import java.util.Calendar;
 import java.util.List;
@@ -37,14 +37,6 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
      * notice
      * add validation for if accounts blocking
      * add operation record.
-     *
-     * @param userId
-     * @param phoneLast4
-     * @param birthDay
-     * @param birthMon
-     * @param birthYear
-     * @return
-     * @throws Exception
      */
     public UserLoginReqReply LoginReq(Long userId, Integer phoneLast4, Integer birthDay, Integer birthMon, Integer birthYear) throws Exception {
         UserEntity user = userDao.selectUserByUserId(userId);
@@ -113,11 +105,9 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
             loginReplyBuilder.setUserId(userEntity.getUserId());
             loginReplyBuilder.setLastName(userEntity.getLastName());
             loginReplyBuilder.setFirstName(userEntity.getFirstName());
-            com.google.protobuf.Timestamp timestamp = Timestamp.newBuilder().build();
 
-            UserOperationHistoryEntity record = operationHistoryDao.getLastLoginRecordByUserId(userEntity.getId());
-            loginReplyBuilder.setLastLoginTime(com.google.protobuf.Timestamp.newBuilder()
-                    .setNanos(record.getOperateTime().getNanos()).build());
+            UserHistoryEntity record = operationHistoryDao.getLastLoginRecordByUserId(userEntity.getId());
+            loginReplyBuilder.setLastLoginTime(TimestampConvertHelper.mysqlToRpc(record.getOperateTime()));
 
             return loginReplyBuilder.build();
         } else {

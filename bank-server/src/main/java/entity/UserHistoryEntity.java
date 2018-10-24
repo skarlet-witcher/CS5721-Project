@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "user_operation_history", schema = "bank_manage", catalog = "")
-public class UserOperationHistoryEntity {
+@Table(name = "user_history", schema = "bank_manage", catalog = "")
+public class UserHistoryEntity {
     private long id;
     private String operateNo;
     private Integer operateType;
@@ -31,7 +31,7 @@ public class UserOperationHistoryEntity {
     }
 
     @Basic
-    @Column(name = "operate_no", nullable = false)
+    @Column(name = "operate_no", nullable = false, length = 255)
     public String getOperateNo() {
         return operateNo;
     }
@@ -155,11 +155,11 @@ public class UserOperationHistoryEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserOperationHistoryEntity that = (UserOperationHistoryEntity) o;
+        UserHistoryEntity that = (UserHistoryEntity) o;
 
         if (id != that.id) return false;
-        if (operateNo != that.operateNo) return false;
         if (status != that.status) return false;
+        if (operateNo != null ? !operateNo.equals(that.operateNo) : that.operateNo != null) return false;
         if (operateType != null ? !operateType.equals(that.operateType) : that.operateType != null) return false;
         if (operateTime != null ? !operateTime.equals(that.operateTime) : that.operateTime != null) return false;
         if (operateSource != null ? !operateSource.equals(that.operateSource) : that.operateSource != null)

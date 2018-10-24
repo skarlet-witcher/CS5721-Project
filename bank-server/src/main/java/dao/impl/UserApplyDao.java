@@ -1,10 +1,8 @@
 package dao.impl;
 
-import com.google.protobuf.Timestamp;
 import dao.IUserApplyDao;
-import entity.BankApplyEntity;
+import entity.UserApplyArchiveEntity;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 import util.HibernateUtils;
 
 public class UserApplyDao implements IUserApplyDao {
@@ -22,11 +20,11 @@ public class UserApplyDao implements IUserApplyDao {
         return userApplyDao;
     }
 
-    public void requestPersonalAccountApply(BankApplyEntity bankApplyEntity) {
+    public void requestPersonalAccountApply(UserApplyArchiveEntity UserApplyArchiveEntity) {
         try {
             session.getTransaction().begin();
 
-            session.save(bankApplyEntity);
+            session.save(UserApplyArchiveEntity);
 
             session.getTransaction().commit();
 

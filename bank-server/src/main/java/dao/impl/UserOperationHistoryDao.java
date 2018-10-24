@@ -3,9 +3,8 @@ package dao.impl;
 import Const.UserOperateStatusType;
 import Const.UserOperateType;
 import dao.IUserOperationHistoryDao;
-import entity.UserOperationHistoryEntity;
+import entity.UserHistoryEntity;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import util.HibernateUtils;
 
@@ -23,7 +22,7 @@ public class UserOperationHistoryDao implements IUserOperationHistoryDao {
         return instance;
     }
 
-    public void addOperationHistory(UserOperationHistoryEntity operationHistory) {
+    public void addOperationHistory(UserHistoryEntity operationHistory) {
         try {
             session.getTransaction().begin();
 
@@ -36,11 +35,11 @@ public class UserOperationHistoryDao implements IUserOperationHistoryDao {
         }
     }
 
-    public List<UserOperationHistoryEntity> getOperationHistoriesTodayByUserId(Long userId) {
+    public List<UserHistoryEntity> getOperationHistoriesTodayByUserId(Long userId) {
         try {
             session.getTransaction().begin();
 
-            Query query = session.createQuery("from UserOperationHistoryEntity " +
+            Query query = session.createQuery("from UserHistoryEntity " +
                     "where userId = ? and " +
                     "year(operateTime) = ? and " +
                     "month(operateTime) = ? and " +
@@ -60,11 +59,11 @@ public class UserOperationHistoryDao implements IUserOperationHistoryDao {
         }
     }
 
-    public UserOperationHistoryEntity getLastLoginRecordByUserId(Long userId) {
+    public UserHistoryEntity getLastLoginRecordByUserId(Long userId) {
         try {
 
             session.getTransaction().begin();
-            Query query = session.createQuery("from UserOperationHistoryEntity " +
+            Query query = session.createQuery("from UserHistoryEntity " +
                     "where userId = ? and " +
                     "operateType = ? and " +
                     "status = ? " +
@@ -74,7 +73,7 @@ public class UserOperationHistoryDao implements IUserOperationHistoryDao {
             query.setParameter(2, UserOperateStatusType.SUCCESS);
             query.setMaxResults(1);
             session.getTransaction().commit();
-            return (UserOperationHistoryEntity) query.uniqueResult();
+            return (UserHistoryEntity) query.uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
@@ -85,7 +84,7 @@ public class UserOperationHistoryDao implements IUserOperationHistoryDao {
     public Long getBiggestOperationNo() {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("select operateNo from UserOperationHistoryEntity order by operateNo desc ");
+            Query query = session.createQuery("select operateNo from UserHistoryEntity order by operateNo desc ");
 
             Long id = (Long) query.setMaxResults(1).uniqueResult();
 

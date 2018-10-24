@@ -4,14 +4,14 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "bank_apply", schema = "bank_manage", catalog = "")
-public class BankApplyEntity {
+@Table(name = "user_apply_archive", schema = "bank_manage", catalog = "")
+public class UserApplyArchiveEntity {
     private long id;
     private String firstName;
     private String lastName;
     private String identityId;
     private int identityIdType;
-    private int accountType;
+    private long accountType;
     private int cardType;
     private Timestamp graduateDate;
     private String university;
@@ -81,11 +81,11 @@ public class BankApplyEntity {
 
     @Basic
     @Column(name = "account_type", nullable = false)
-    public int getAccountType() {
+    public long getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(int accountType) {
+    public void setAccountType(long accountType) {
         this.accountType = accountType;
     }
 
@@ -230,7 +230,7 @@ public class BankApplyEntity {
     }
 
     @Basic
-    @Column(name = "remark", length = 255)
+    @Column(name = "remark", nullable = true, length = 255)
     public String getRemark() {
         return remark;
     }
@@ -254,7 +254,7 @@ public class BankApplyEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BankApplyEntity that = (BankApplyEntity) o;
+        UserApplyArchiveEntity that = (UserApplyArchiveEntity) o;
 
         if (id != that.id) return false;
         if (identityIdType != that.identityIdType) return false;
@@ -289,7 +289,7 @@ public class BankApplyEntity {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (identityId != null ? identityId.hashCode() : 0);
         result = 31 * result + identityIdType;
-        result = 31 * result + accountType;
+        result = 31 * result + (int) (accountType ^ (accountType >>> 32));
         result = 31 * result + cardType;
         result = 31 * result + (graduateDate != null ? graduateDate.hashCode() : 0);
         result = 31 * result + (university != null ? university.hashCode() : 0);

@@ -1,11 +1,11 @@
 package service.impl;
 
+import dao.impl.UserApplyDao;
+import entity.UserApplyArchiveEntity;
+import service.IUserCustomerApplyService;
+
 import java.sql.Timestamp;
 import java.util.Date;
-
-import dao.impl.UserApplyDao;
-import entity.BankApplyEntity;
-import service.IUserCustomerApplyService;
 
 public class UserCustomerApplyService implements IUserCustomerApplyService {
     private static UserCustomerApplyService userCustomerApplyService = null;
@@ -24,21 +24,21 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
     public void requestPersonalAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType,
                                             Timestamp birthDate, int gender, String address, String email, String phone) throws Exception {
         try {
-            BankApplyEntity bankApplyEntity = new BankApplyEntity();
-            bankApplyEntity.setFirstName(firstName);
-            bankApplyEntity.setLastName(lastName);
-            bankApplyEntity.setIdentityId(identityNum);
-            bankApplyEntity.setIdentityIdType(identityType);
-            bankApplyEntity.setAccountType(accountType);
-            bankApplyEntity.setCardType(cardType);
-            bankApplyEntity.setBirthDate(birthDate);
-            bankApplyEntity.setGender(gender);
-            bankApplyEntity.setAddress(address);
-            bankApplyEntity.setEmail(email);
-            bankApplyEntity.setPhone(phone);
-            bankApplyEntity.setApplyTime(new Timestamp(new Date().getTime()));
-            bankApplyEntity.setRemark("pending"); // change the attributes of this in the db
-            UserApplyDao.getInstance().requestPersonalAccountApply(bankApplyEntity);
+            UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
+            UserApplyArchiveEntity.setFirstName(firstName);
+            UserApplyArchiveEntity.setLastName(lastName);
+            UserApplyArchiveEntity.setIdentityId(identityNum);
+            UserApplyArchiveEntity.setIdentityIdType(identityType);
+            UserApplyArchiveEntity.setAccountType(accountType);
+            UserApplyArchiveEntity.setCardType(cardType);
+            UserApplyArchiveEntity.setBirthDate(birthDate);
+            UserApplyArchiveEntity.setGender(gender);
+            UserApplyArchiveEntity.setAddress(address);
+            UserApplyArchiveEntity.setEmail(email);
+            UserApplyArchiveEntity.setPhone(phone);
+            UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
+            UserApplyArchiveEntity.setRemark("pending"); // change the attributes of this in the db
+            UserApplyDao.getInstance().requestPersonalAccountApply(UserApplyArchiveEntity);
         } catch (Exception e) {
             throw new Exception("Fail to apply an account");
         }

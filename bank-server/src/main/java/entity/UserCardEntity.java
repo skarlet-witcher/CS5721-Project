@@ -10,7 +10,7 @@ public class UserCardEntity {
     private long cardNumber;
     private int cardType;
     private String pin;
-    private Double balance;
+    private double balance;
     private int currencyType;
     private Timestamp expiredDate;
     private long accountId;
@@ -57,12 +57,12 @@ public class UserCardEntity {
     }
 
     @Basic
-    @Column(name = "balance", nullable = true, precision = 0)
-    public Double getBalance() {
+    @Column(name = "balance", nullable = false, precision = 0)
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -116,21 +116,24 @@ public class UserCardEntity {
         if (id != that.id) return false;
         if (cardNumber != that.cardNumber) return false;
         if (cardType != that.cardType) return false;
+        if (Double.compare(that.balance, balance) != 0) return false;
         if (currencyType != that.currencyType) return false;
         if (accountId != that.accountId) return false;
         if (status != that.status) return false;
         if (pin != null ? !pin.equals(that.pin) : that.pin != null) return false;
-        if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
         return expiredDate != null ? expiredDate.equals(that.expiredDate) : that.expiredDate == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result;
+        long temp;
+        result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) (cardNumber ^ (cardNumber >>> 32));
         result = 31 * result + cardType;
         result = 31 * result + (pin != null ? pin.hashCode() : 0);
-        result = 31 * result + (balance != null ? balance.hashCode() : 0);
+        temp = Double.doubleToLongBits(balance);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + currencyType;
         result = 31 * result + (expiredDate != null ? expiredDate.hashCode() : 0);
         result = 31 * result + (int) (accountId ^ (accountId >>> 32));
