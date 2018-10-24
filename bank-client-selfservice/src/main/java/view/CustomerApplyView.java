@@ -46,8 +46,10 @@ public class CustomerApplyView extends JFrame {
     private JPanel youngSaverAccountPanel;
     private JLabel lbl_parentUserID;
     private JTextField tf_parentUserID;
-    private JLabel lbl_parentUserName;
-    private JTextField tf_parentUserName;
+    private JLabel lbl_parentFirstName;
+    private JTextField tf_parentFirstName;
+    private JLabel lbl_parentLastName;
+    private JTextField tf_parentLastName;
     private JLabel lbl_cardType;
     private JComboBox<String> cb_cardTypeList;
     private JLabel lbl_dob;
@@ -72,13 +74,9 @@ public class CustomerApplyView extends JFrame {
         initAccountPanel();
     }
 
-    private void tf_graduate_monthFocusGained(FocusEvent e) {
+    private void tf_graduate_monthFocusGained(FocusEvent e) { tf_graduateMonth.selectAll(); }
 
-    }
-
-    private void tf_graduate_yearFocusGained(FocusEvent e) {
-
-    }
+    private void tf_graduate_yearFocusGained(FocusEvent e) { tf_graduateYear.selectAll(); }
 
     private void tf_dob_dayFocusGained(FocusEvent e) {
         tf_dob_day.selectAll();
@@ -109,6 +107,9 @@ public class CustomerApplyView extends JFrame {
             }
             if(cb_accountTypeList.getSelectedIndex() == 1) {
                 applyStudentAccount();
+            }
+            if(cb_accountTypeList.getSelectedIndex() == 2) {
+                applyYoungSaverAccount();
             }
         } catch (Exception E) {
             E.printStackTrace();
@@ -170,8 +171,10 @@ public class CustomerApplyView extends JFrame {
         youngSaverAccountPanel = new JPanel();
         lbl_parentUserID = new JLabel();
         tf_parentUserID = new JTextField();
-        lbl_parentUserName = new JLabel();
-        tf_parentUserName = new JTextField();
+        lbl_parentFirstName = new JLabel();
+        tf_parentFirstName = new JTextField();
+        lbl_parentLastName = new JLabel();
+        tf_parentLastName = new JTextField();
         lbl_cardType = new JLabel();
         cb_cardTypeList = new JComboBox<>();
         lbl_dob = new JLabel();
@@ -244,7 +247,7 @@ public class CustomerApplyView extends JFrame {
 
         //---- cb_identityTypeList ----
         cb_identityTypeList.setModel(new DefaultComboBoxModel<>(new String[] {
-            "Select Yout Identity Type",
+            "Select Your Identity Type",
             "Driving License",
             "Passport"
         }));
@@ -340,13 +343,15 @@ public class CustomerApplyView extends JFrame {
             tf_parentUserID.setMinimumSize(new Dimension(172, 24));
             youngSaverAccountPanel.add(tf_parentUserID, "cell 2 1");
 
-            //---- lbl_parentUserName ----
-            lbl_parentUserName.setText("Parent's user name");
-            youngSaverAccountPanel.add(lbl_parentUserName, "cell 1 2");
+            //---- lbl_parentFirstName ----
+            lbl_parentFirstName.setText("Parent's First name");
+            youngSaverAccountPanel.add(lbl_parentFirstName, "cell 1 2");
+            youngSaverAccountPanel.add(tf_parentFirstName, "cell 2 2");
 
-            //---- tf_parentUserName ----
-            tf_parentUserName.setMinimumSize(new Dimension(172, 24));
-            youngSaverAccountPanel.add(tf_parentUserName, "cell 2 2");
+            //---- lbl_parentLastName ----
+            lbl_parentLastName.setText("Parent's Last name");
+            youngSaverAccountPanel.add(lbl_parentLastName, "cell 1 3");
+            youngSaverAccountPanel.add(tf_parentLastName, "cell 2 3");
         }
         contentPane.add(youngSaverAccountPanel, "cell 1 7 2 1");
 
@@ -359,7 +364,7 @@ public class CustomerApplyView extends JFrame {
             "Debit Card",
             "Credit Card"
         }));
-        cb_cardTypeList.setSelectedIndex(1);
+        cb_cardTypeList.setSelectedIndex(0);
         contentPane.add(cb_cardTypeList, "cell 2 8");
 
         //---- lbl_dob ----
@@ -660,7 +665,7 @@ public class CustomerApplyView extends JFrame {
 
     private void youngSaverAccountValidator() {
         parentUserIdFieldValidator();
-        parentUserNameFieldValidator();
+        parentNameFieldValidator();
     }
 
     private void parentUserIdFieldValidator() {
@@ -680,19 +685,19 @@ public class CustomerApplyView extends JFrame {
         }
     }
 
-    private void parentUserNameFieldValidator() {
-        if(tf_parentUserName.getText().length() <= 0) {
-            try {
+    private void parentNameFieldValidator() {
+        try {
+            if(tf_parentFirstName.getText().length() <= 0 ||
+            tf_parentLastName.getText().length() <= 0) {
                 JOptionPane.showMessageDialog(null,
-                        "Please input your parent's userName",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid parent's userName",
+                        "Please input your parent's first name and last name",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
             }
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input valid parent's first name or last name",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -745,6 +750,34 @@ public class CustomerApplyView extends JFrame {
         CustomerApplyService.getInstance().applyStudentAccount(firstName, lastName, gender, identityType, identityNum, accountType,
                 cardType, birthDate, address, email, contactNum, graduateDate, studentId, schoolName);
     }
+
+    private void applyYoungSaverAccount() throws Exception {
+        // basic info
+        String firstName = tf_firstName.getText().trim();
+        String lastName = tf_lastName.getText().trim();
+        String identityNum = tf_identityNum.getText().trim();
+        int identityType = cb_identityTypeList.getSelectedIndex();
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        String birthDateText = tf_dob_year.getText().trim()+"-"+
+                tf_dob_month.getText().trim()+"-"+tf_dob_day.getText().trim()+" 00:00:00";
+        // TO-DO month and day with one digit ????
+        Timestamp birthDate = Timestamp.valueOf(birthDateText);
+        int gender = cb_genderList.getSelectedIndex();
+        String address = tf_address.getText().trim();
+        String email = tf_email.getText().trim();
+        String contactNum = tf_contactNum.getText().trim();
+
+        // young saver info
+        long parentUserId = Long.parseLong(tf_parentUserID.getText().trim());
+        String parentFirstName = tf_parentFirstName.getText().trim();
+        String parentLastName = tf_parentLastName.getText().trim();
+
+        CustomerApplyService.getInstance().applyYoungSaverAccount(firstName, lastName, gender, identityType, identityNum, accountType,
+                cardType, birthDate, address, email, contactNum, parentUserId, parentFirstName, parentLastName);
+
+    }
+
     public void run() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);

@@ -78,6 +78,9 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         Timestamp graduateDate = TimestampConvertHelper.rpcToMysql(request.getGraduateDate());
         String studentId = request.getStudentId();
         String university = request.getUniversityName();
+        long parentUserId = request.getParentUserId();
+        String parentFirstName = request.getParentFirstName();
+        String parentLastName = request.getParentLastName();
 
 
 
@@ -93,6 +96,10 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
                         firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone,
                         graduateDate,studentId,university);
+            }
+            if(accountType == 3) {
+                customerApplyService.requestYoungSaverAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
+                        birthDate, gender, address, email, phone, parentUserId, parentFirstName, parentLastName);
             }
             responseObserver.onNext(ResponseBuilder.ResponseSuccessBuilder()
                     .build());

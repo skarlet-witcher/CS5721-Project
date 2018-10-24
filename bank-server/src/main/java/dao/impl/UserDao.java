@@ -101,6 +101,23 @@ public class UserDao implements IUserDao {
         }
     }
 
+    public UserEntity selectUserByIdAndName(long userId, String firstName, String lastName) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("from UserEntity where userId=? and firstName=? and lastName=?");
+            query.setParameter(0, userId);
+            query.setParameter(1, firstName);
+            query.setParameter(2, lastName);
+            session.getTransaction().commit();
+            UserEntity result = (UserEntity) query.uniqueResult();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
     public Integer updateUserPinDigitById(Long id, String loginPinDigit) {
         try {
             session.getTransaction().begin();

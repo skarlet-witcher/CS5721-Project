@@ -10,10 +10,6 @@ import java.sql.Timestamp;
 public class CustomerApplyService implements ICustomerApplyService {
     private static CustomerApplyService customerApplyService = null;
 
-    private CustomerApplyService() {
-
-    }
-
     public static CustomerApplyService getInstance() {
         if(customerApplyService == null) {
             customerApplyService = new CustomerApplyService();
@@ -58,5 +54,27 @@ public class CustomerApplyService implements ICustomerApplyService {
                 .setGraduateDate(TimestampConvertHelper.mysqlToRpc(graduateDate))
                 .setStudentId(studentId)
                 .setUniversityName(schoolName).build());
+    }
+
+    public void applyYoungSaverAccount(String firstName, String lastName, int gender, int identityType,
+                                       String identityNum, int accountType, int cardType, Timestamp birthDate,
+                                       String address, String email, String phone, long parentUserId, String parentFirstName, String parentLastName) throws Exception {
+        CustomerApplyRpc.getInstance().applyReq(
+                UserApplyNewAccountRequest.newBuilder()
+                        .setFirstName(firstName)
+                        .setLastName(lastName)
+                        .setGender(gender)
+                        .setIdentityIdType(identityType)
+                        .setIdentityId(identityNum)
+                        .setAccountType(accountType)
+                        .setCardType(cardType)
+                        .setAddress(address)
+                        .setEmail(email)
+                        .setBirthDate(TimestampConvertHelper.mysqlToRpc(birthDate))
+                        .setPhone(phone)
+                        .setParentUserId(parentUserId)
+                        .setParentFirstName(parentFirstName)
+                        .setParentLastName(parentLastName)
+                        .build());
     }
 }
