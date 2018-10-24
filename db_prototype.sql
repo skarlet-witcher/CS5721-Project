@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE user (
   id              BIGINT                 AUTO_INCREMENT PRIMARY KEY,
   user_id         bigint UNIQUE not null
@@ -17,8 +18,9 @@ CREATE TABLE user (
   comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.'
 );
 
+DROP TABLE IF EXISTS `user_account`;
 create table user_account (
-  id             bigint                AUTO_INCREMENT PRIMARY KEY,
+  id             bigint                AUTO_INCREMENT,
   account_number bigint       not null
   comment 'account number, the last 8 digit of iban',
   account_type   bigint       not null,
@@ -28,6 +30,7 @@ create table user_account (
   user_id        bigint,
   status         int          not null default 1
   comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.',
+  primary key (id),
   FOREIGN KEY (user_id) REFERENCES user (id),
   FOREIGN KEY (account_type) REFERENCES user_account_type (id)
 );
@@ -37,6 +40,7 @@ CREATE INDEX fk_user_id
 CREATE INDEX fk_account_type
   ON user_account_type (id);
 
+DROP TABLE IF EXISTS `user_account_type`;
 create table user_account_type (
   id                                  bigint                 AUTO_INCREMENT PRIMARY KEY,
   name                                varchar(255)  not null
@@ -62,6 +66,7 @@ create table user_account_type (
   charge_card_issue                   double        not null default 0
 );
 
+DROP TABLE IF EXISTS `user_card`;
 CREATE TABLE user_card (
   id            BIGINT AUTO_INCREMENT PRIMARY KEY,
   card_number   bigint     NOT NULL,
@@ -82,6 +87,7 @@ CREATE TABLE user_card (
 CREATE INDEX fk_account_id
   ON user_account (id);
 
+DROP TABLE IF EXISTS `user_payee`;
 create table user_payee (
   id      bigint AUTO_INCREMENT PRIMARY KEY,
   name    varchar(255) not null,
@@ -90,6 +96,7 @@ create table user_payee (
   FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
+DROP TABLE IF EXISTS `user_apply_archive`;
 create table user_apply_archive (
   id                bigint                        AUTO_INCREMENT PRIMARY KEY,
   first_name        varchar(255) not null,
@@ -129,6 +136,7 @@ create table user_apply_archive (
   comment 'after being approved, get connected to user id'
 );
 
+DROP TABLE IF EXISTS `bank_staff`;
 CREATE TABLE bank_staff (
   id         BIGINT AUTO_INCREMENT PRIMARY KEY,
   staff_id   bigint UNIQUE not null
@@ -141,12 +149,14 @@ CREATE TABLE bank_staff (
   comment '0.invalid 1.valid'
 );
 
+DROP TABLE IF EXISTS `bank_admin`;
 create table bank_admin (
   id       bigint AUTO_INCREMENT PRIMARY KEY,
   username varchar(255) not null,
   password varchar(255) not null
 );
 
+DROP TABLE IF EXISTS `sys_config`;
 create table sys_config (
   id       bigint AUTO_INCREMENT PRIMARY KEY,
   conf_key varchar(255) not null,
@@ -159,6 +169,7 @@ create table sys_config (
 #   "email-password":"2",
 # }
 
+DROP TABLE IF EXISTS `user_history`;
 CREATE TABLE user_history (
   id             BIGINT AUTO_INCREMENT PRIMARY KEY,
   operate_no     varchar(255) not null
