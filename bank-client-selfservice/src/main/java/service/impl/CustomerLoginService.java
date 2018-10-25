@@ -1,6 +1,7 @@
 package service.impl;
 
 import rpc.UserLoginReqRequest;
+import rpc.UserLoginRequest;
 import rpc.client.CustomerLoginRpc;
 import service.ICustomerLoginService;
 
@@ -27,4 +28,5 @@ public class CustomerLoginService implements ICustomerLoginService {
                         setBirthYear(year).build()
         );
     }
+
 }

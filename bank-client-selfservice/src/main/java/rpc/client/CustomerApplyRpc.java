@@ -16,7 +16,7 @@ public class CustomerApplyRpc {
     private static CustomerApplyRpc customerApplyRpc = null;
 
     public static CustomerApplyRpc getInstance() {
-        if(customerApplyRpc == null) {
+        if (customerApplyRpc == null) {
             customerApplyRpc = new CustomerApplyRpc();
         }
         return customerApplyRpc;
@@ -41,5 +41,28 @@ public class CustomerApplyRpc {
             logger.info(applyAccountRequest.getFirstName() + " apply request fail due to " + response.getDescription());
             throw new Exception(response.getDescription());
         }
+
     }
+    public Response checkExistingUserBeforeApply(UserApplyNewAccountRequest applyAccountRequest) throws Exception {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
+                .usePlaintext().build();
+        UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
+
+
+        logger.info(applyAccountRequest.getUserId() +" is requesting to validate.");
+
+        Response response = blockingStub.applyNewAccount(applyAccountRequest);
+
+        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+
+        if (response.getStatusCode() == 200) {
+            logger.info(applyAccountRequest.getUserId() + " validation request successful.");
+            return response;
+        } else {
+            logger.info(applyAccountRequest.getUserId() + " validation request failure due to " + response.getDescription());
+            throw new Exception(response.getDescription());
+        }
+
+    }
+
 }

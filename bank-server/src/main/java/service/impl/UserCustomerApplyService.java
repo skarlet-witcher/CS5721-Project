@@ -20,7 +20,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
         }
         return userCustomerApplyService;
     }
-
+    @Override
     public void requestPersonalAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType,
                                             Timestamp birthDate, int gender, String address, String email, String phone) throws Exception {
         try {
@@ -113,6 +113,50 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
 
         } catch (Exception e) {
             throw new Exception("Fail to apply a young saver account");
+        }
+    }
+
+    @Override
+    public void requestGoldenAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType,
+                                            Timestamp birthDate, int gender, String address, String email, String phone) throws Exception {
+        try {
+            // basic info
+            UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
+            UserApplyArchiveEntity.setFirstName(firstName);
+            UserApplyArchiveEntity.setLastName(lastName);
+            UserApplyArchiveEntity.setIdentityId(identityNum);
+            UserApplyArchiveEntity.setIdentityIdType(identityType);
+            UserApplyArchiveEntity.setAccountType(accountType);
+            UserApplyArchiveEntity.setCardType(cardType);
+            UserApplyArchiveEntity.setBirthDate(birthDate);
+            UserApplyArchiveEntity.setGender(gender);
+            UserApplyArchiveEntity.setAddress(address);
+            UserApplyArchiveEntity.setEmail(email);
+            UserApplyArchiveEntity.setPhone(phone);
+            UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
+            UserApplyArchiveEntity.setRemark("pending"); // change the attributes of this in the db
+            userApplyDao.requestAccountApply(UserApplyArchiveEntity);
+        } catch (Exception e) {
+            throw new Exception("Fail to apply a golden current account");
+        }
+    }
+
+    @Override
+    public void checkExistingUserBeforeApply(long userId, String firstName, String lastName) throws Exception {
+        try {
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUserId(userId);
+            userEntity.setFirstName(firstName);
+            userEntity.setLastName(lastName);
+
+            UserEntity result = userDao.selectUserByIdAndName(userId, firstName, lastName);
+
+            if(result == null) {
+                throw new Exception("User Info not exist");
+            }
+
+        } catch (Exception E) {
+            throw new Exception("Fail to validate the user info");
         }
     }
 }

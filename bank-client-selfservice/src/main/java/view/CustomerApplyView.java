@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 /**
  * @author xiangkai22
@@ -74,10 +75,6 @@ public class CustomerApplyView extends JFrame {
         initAccountPanel();
     }
 
-    private void tf_graduate_monthFocusGained(FocusEvent e) { tf_graduateMonth.selectAll(); }
-
-    private void tf_graduate_yearFocusGained(FocusEvent e) { tf_graduateYear.selectAll(); }
-
     private void tf_dob_dayFocusGained(FocusEvent e) {
         tf_dob_day.selectAll();
     }
@@ -91,25 +88,346 @@ public class CustomerApplyView extends JFrame {
     }
 
     private void btn_applyActionPerformed(ActionEvent e) {
-        firstNameFieldValidator();
-        lastNameFieldValidator();
-        genderFieldValidator();
-        identityFieldValidator();
-        accountTypeValidator();
-        dateOfBirthFieldValidator();
-        addressFieldValidator();
-        emailFieldValidator();
-        contactNumFieldValidator();
+        // First Name validator
+        if(tf_firstName.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your first name",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_firstName.grabFocus();
+            return;
+        } if(!tf_firstName.getText().trim().matches("^[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "First name should only contain characters",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_firstName.grabFocus();
+            return;
+        }
 
+        // Last name validator
+        if(tf_lastName.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your last name",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_lastName.grabFocus();
+            return;
+        } if(!tf_lastName.getText().trim().matches("^[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "First name should only contain characters",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_lastName.grabFocus();
+            return;
+        }
+
+        // gender field validator
+        if(cb_genderList.getSelectedIndex() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your gender",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // identity type validator
+        if(cb_identityTypeList.getSelectedIndex() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please select your identity type",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Identity number validator
+        if(tf_identityNum.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your identity number",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_identityNum.grabFocus();
+            return;
+        }
+        if(!tf_identityNum.getText().trim().matches("^[a-zA-Z0-9]*$")) {
+            JOptionPane.showMessageDialog(null,
+                    "Identity number should only contain numbers and letters",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_identityNum.grabFocus();
+            return;
+        }
+
+        // account type validator
+        if(cb_accountTypeList.getSelectedIndex() == 1){
+            // student account validator
+
+            // graduate month validator
+            if(tf_graduateMonth.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your graduate month",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_graduateMonth.grabFocus();
+                return;
+            }
+            if(!tf_graduateMonth.getText().trim().matches("^[0-9]*$")) {
+                JOptionPane.showMessageDialog(null,
+                        "The graduate month should be numeric",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_graduateMonth.grabFocus();
+                return;
+            }
+            if(Integer.parseInt(tf_graduateMonth.getText().trim()) > 12 || Integer.parseInt(tf_graduateMonth.getText().trim()) < 1) {
+                JOptionPane.showMessageDialog(null,
+                        "The ranage of graduate month should be 1 to 12",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_graduateMonth.grabFocus();
+                return;
+            }
+
+            // graduate year validator
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            if(tf_graduateYear.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your graduate month",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_graduateYear.grabFocus();
+                return;
+            } if(!tf_graduateYear.getText().trim().matches("^[0-9]*$")) {
+                JOptionPane.showMessageDialog(null,
+                        "Graduate year should only contain numbers",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_graduateYear.grabFocus();
+                return;
+            }
+            if(tf_graduateYear.getText().length() < 4) {
+                JOptionPane.showMessageDialog(null,
+                        "Graduate year should be four digits",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_graduateYear.grabFocus();
+                return;
+            }
+            if(Integer.parseInt(tf_graduateYear.getText().trim()) < currentYear) {
+                JOptionPane.showMessageDialog(null,
+                        "Graduate year should longer or equal to current year",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_graduateYear.grabFocus();
+                return;
+            }
+
+            // student Id validator
+            if(tf_studentID.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your student Id",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_studentID.grabFocus();
+                return;
+            }
+            if(!tf_studentID.getText().trim().matches("^[0-9]*$")) {
+                JOptionPane.showMessageDialog(null,
+                        "The student Id should only contain number",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_studentID.grabFocus();
+                return;
+            }
+
+            // school name validator
+            if(tf_schoolName.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your school name.",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_schoolName.grabFocus();
+                return;
+            }
+
+        }
+        if(cb_accountTypeList.getSelectedIndex() == 2) {
+            // Young Saver account validator
+
+            // parent UserId validator
+            if(tf_parentUserID.getText().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your school name.",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_parentUserID.grabFocus();
+                return;
+            }
+            if(!tf_parentUserID.getText().trim().matches("^[0-9]*$")) {
+                JOptionPane.showMessageDialog(null,
+                        "Parent user id should only contain numbers",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_parentUserID.grabFocus();
+                return;
+            }
+
+            // parent first name validator
+            if(tf_parentFirstName.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input first name of one of your parents.",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_parentFirstName.grabFocus();
+                return;
+            }
+            if(!tf_parentFirstName.getText().trim().matches("^[a-zA-Z]+$")) {
+                JOptionPane.showMessageDialog(null,
+                        "The parent's first name should only contain characters",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_parentFirstName.grabFocus();
+                return;
+            }
+
+            // parent last name validator
+            if(tf_parentLastName.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input last name of one of your parents.",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_parentLastName.grabFocus();
+                return;
+            }
+            if(!tf_parentLastName.getText().trim().matches("^[a-zA-Z]+$")) {
+                JOptionPane.showMessageDialog(null,
+                        "The parent's last name should only contain characters",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_parentLastName.grabFocus();
+                return;
+            }
+        }
+
+        // date of birth validator
+
+        // day of dob validator
+        if(tf_dob_day.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your day of your date of birth",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_dob_day.grabFocus();
+            return;
+        }
+        if(!tf_dob_day.getText().trim().matches("^[1-9]*$")) {
+            JOptionPane.showMessageDialog(null,
+                    "The day of the date of birth should be numeric",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_dob_day.grabFocus();
+            return;
+        }
+        if(Integer.parseInt(tf_dob_day.getText().trim()) > 31 || Integer.parseInt(tf_dob_day.getText().trim()) < 1) {
+            JOptionPane.showMessageDialog(null,
+                    "The ranage of day of the date of birth should be 1 to 31",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_dob_day.grabFocus();
+            return;
+        }
+        if(tf_dob_day.getText().trim().length() == 1) {
+            tf_dob_day.setText("0" + tf_dob_day.getText());
+        }
+
+        // month of dob validator
+        if(tf_dob_month.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your month of your date of birth",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_dob_month.grabFocus();
+            return;
+        }
+        if(!tf_dob_month.getText().trim().matches("^[0-9]*$")) {
+            JOptionPane.showMessageDialog(null,
+                    "The month of your date of birth should be numeric",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_dob_month.grabFocus();
+            return;
+        }
+        if(Integer.parseInt(tf_dob_month.getText().trim()) > 12 || Integer.parseInt(tf_dob_month.getText().trim()) < 1) {
+            JOptionPane.showMessageDialog(null,
+                    "The ranage of month of the date of birth should be 1 to 12",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_dob_month.grabFocus();
+            return;
+        }
+        if(tf_dob_month.getText().trim().length() == 1) {
+            tf_dob_month.setText("0" + tf_dob_month.getText());
+        }
+
+        //  year of the date or birth validator
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        if(tf_dob_year.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your year of the date of birth",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_dob_year.grabFocus();
+            return;
+        } if(!tf_dob_year.getText().trim().matches("^[0-9]*$")) {
+            JOptionPane.showMessageDialog(null,
+                    "year of the date of brith should only contain numbers",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_dob_year.grabFocus();
+            return;
+        }
+        if(tf_dob_year.getText().length() < 4) {
+            JOptionPane.showMessageDialog(null,
+                    "The year of date of birth should be four digits",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_dob_year.grabFocus();
+            return;
+        }
+        if(Integer.parseInt(tf_dob_year.getText().trim()) > currentYear) {
+            JOptionPane.showMessageDialog(null,
+                    "The year of date of birth should be less or equal to current year",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_dob_year.grabFocus();
+            return;
+        }
+
+        // address validator
+        if(tf_address.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your address",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_address.grabFocus();
+            return;
+        }
+
+
+        // email field validator
+        if(tf_email.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your email address",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_email.grabFocus();
+            return;
+        }
+        if(!tf_email.getText().trim().matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input valid email address",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_email.grabFocus();
+            return;
+        }
+
+        // contact number validator
+        if(tf_contactNum.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your contact number",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_contactNum.grabFocus();
+            return;
+        }
+        if(!tf_contactNum.getText().trim().matches("^[0-9]*$")) {
+            JOptionPane.showMessageDialog(null,
+                    "The contact number must be numeric.",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_contactNum.grabFocus();
+            return;
+        }
+
+        // ready to apply an account
         try {
             if(cb_accountTypeList.getSelectedIndex() == 0){
+                System.out.println("ready to apply personal account");
                 applyPersonalAccount();
             }
             if(cb_accountTypeList.getSelectedIndex() == 1) {
+                System.out.println("ready to apply student account");
                 applyStudentAccount();
             }
             if(cb_accountTypeList.getSelectedIndex() == 2) {
+                System.out.println("ready to apply young saver account");
                 applyYoungSaverAccount();
+            }
+            if(cb_accountTypeList.getSelectedIndex() == 3) {
+                System.out.println("ready to apply golden account");
+                applyGoldenAccount();
             }
         } catch (Exception E) {
             E.printStackTrace();
@@ -144,6 +462,32 @@ public class CustomerApplyView extends JFrame {
         studentAccountPanel.setVisible(false);
         youngSaverAccountPanel.setVisible(false);
     }
+
+
+    private void tf_graduateMonthFocusLost(FocusEvent e) {
+        // if input one digit of a month, add 0 before that
+        if(tf_graduateMonth.getText().trim().length() == 1) {
+            tf_graduateMonth.setText("0" + tf_graduateMonth.getText());
+        }
+    }
+
+
+    private void tf_graduateMonthFocusGained(FocusEvent e) {
+        tf_graduateMonth.selectAll();
+    }
+
+    private void tf_graduateYearFocusGained(FocusEvent e) {
+        tf_graduateYear.selectAll();
+    }
+
+
+    private void tf_dob_monthFocusLost(FocusEvent e) {
+        // if input one digit of a month, add 0 before that
+        if(tf_dob_month.getText().trim().length() == 1) {
+            tf_dob_month.setText("0" + tf_dob_month.getText());
+        }
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -295,6 +639,16 @@ public class CustomerApplyView extends JFrame {
 
             //---- tf_graduateMonth ----
             tf_graduateMonth.setMinimumSize(new Dimension(60, 24));
+            tf_graduateMonth.addFocusListener(new FocusAdapter() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    tf_graduateMonthFocusGained(e);
+                }
+                @Override
+                public void focusLost(FocusEvent e) {
+                    tf_graduateMonthFocusLost(e);
+                }
+            });
             studentAccountPanel.add(tf_graduateMonth, "cell 1 0");
 
             //---- lbl_mark ----
@@ -303,6 +657,12 @@ public class CustomerApplyView extends JFrame {
 
             //---- tf_graduateYear ----
             tf_graduateYear.setMinimumSize(new Dimension(60, 24));
+            tf_graduateYear.addFocusListener(new FocusAdapter() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    tf_graduateYearFocusGained(e);
+                }
+            });
             studentAccountPanel.add(tf_graduateYear, "cell 2 0");
 
             //---- lbl_studentID ----
@@ -390,6 +750,10 @@ public class CustomerApplyView extends JFrame {
             public void focusGained(FocusEvent e) {
                 tf_dob_monthFocusGained(e);
             }
+            @Override
+            public void focusLost(FocusEvent e) {
+                tf_dob_monthFocusLost(e);
+            }
         });
         contentPane.add(tf_dob_month, "cell 2 9");
 
@@ -469,78 +833,8 @@ public class CustomerApplyView extends JFrame {
         youngSaverAccountPanel.setVisible(false);
     }
 
-    private void firstNameFieldValidator() {
-        if(tf_firstName.getText().trim().length() <= 0) {
-            try {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your first name",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            } catch(Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid first name",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
 
-    private void lastNameFieldValidator() {
-        if(tf_lastName.getText().trim().length() <= 0) {
-            try {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your last name",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid last name",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
 
-    private void identityFieldValidator() {
-        if(cb_identityTypeList.getSelectedIndex() <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Please select your identity type",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if(tf_identityNum.getText().trim().length() <= 0) {
-            try {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your identity number",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid identity number",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
-
-    private void dateOfBirthFieldValidator() {
-        if(tf_dob_day.getText().trim().length() <= 0 ||
-                tf_dob_month.getText().trim().length() <= 0 ||
-                tf_dob_year.getText().trim().length() <= 0) {
-            try {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your date or birth",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid date or birth",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
 
     private void addressFieldValidator() {
         if(tf_address.getText().trim().length() <=0) {
@@ -590,23 +884,6 @@ public class CustomerApplyView extends JFrame {
         }
     }
 
-    private void genderFieldValidator() {
-        if(cb_genderList.getSelectedIndex() <= 0) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your gender",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-        }
-    }
-
-    private void accountTypeValidator() {
-        if(cb_accountTypeList.getSelectedIndex() == 1){
-            studentAccountValidator();
-        }
-        if(cb_accountTypeList.getSelectedIndex() == 2) {
-            youngSaverAccountValidator();
-        }
-    }
 
     private void studentAccountValidator() {
         graduateDateFieldValidator();
@@ -632,19 +909,7 @@ public class CustomerApplyView extends JFrame {
     }
 
     private void studentIdFieldValidator() {
-        if(tf_studentID.getText().trim().length() <= 0) {
-            try {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your student ID",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid student ID",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
+
     }
 
     private void schoolNameFieldValidator() {
@@ -701,6 +966,7 @@ public class CustomerApplyView extends JFrame {
         }
     }
 
+
     private void applyPersonalAccount() throws Exception {
         // basic info
         String firstName = tf_firstName.getText().trim();
@@ -721,6 +987,27 @@ public class CustomerApplyView extends JFrame {
         CustomerApplyService.getInstance().applyPersonalAccount(firstName, lastName, gender, identityType, identityNum, accountType,
                 cardType, birthDate, address, email, contactNum);
 
+    }
+
+    private void applyGoldenAccount() throws Exception {
+        // basic info
+        String firstName = tf_firstName.getText().trim();
+        String lastName = tf_lastName.getText().trim();
+        String identityNum = tf_identityNum.getText().trim();
+        int identityType = cb_identityTypeList.getSelectedIndex();
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        String birthDateText = tf_dob_year.getText().trim()+"-"+
+                tf_dob_month.getText().trim()+"-"+tf_dob_day.getText().trim()+" 00:00:00";
+        //month and day with one digit
+        Timestamp birthDate = Timestamp.valueOf(birthDateText);
+        int gender = cb_genderList.getSelectedIndex();
+        String address = tf_address.getText().trim();
+        String email = tf_email.getText().trim();
+        String contactNum = tf_contactNum.getText().trim();
+
+        CustomerApplyService.getInstance().applyGoldenAccount(firstName, lastName, gender, identityType, identityNum, accountType,
+                cardType, birthDate, address, email, contactNum);
     }
 
     private void applyStudentAccount() throws Exception {
