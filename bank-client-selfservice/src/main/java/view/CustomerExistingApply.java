@@ -256,8 +256,17 @@ public class CustomerExistingApply extends JFrame {
         int accountType = cb_accountTypeList.getSelectedIndex() + 1;
         int cardType = cb_cardTypeList.getSelectedIndex() + 1;
         int isNewUser = 0;
-
-        CustomerApplyService.getInstance().applyPersonalAccount(userId, accountType, cardType, isNewUser);
+        try {
+            CustomerApplyService.getInstance().applyPersonalAccount(userId, accountType, cardType, isNewUser);
+            JOptionPane.showMessageDialog(null,
+                    "Personal Account apply requested successful",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
     }
 
@@ -274,8 +283,17 @@ public class CustomerExistingApply extends JFrame {
         String studentId = tf_studentID.getText().trim();
         String schoolName = tf_schoolName.getText().trim();
 
-        CustomerApplyService.getInstance().applyStudentAccount(userId, accountType, cardType, isNewUser, graduateDate, studentId, schoolName);
-
+        try {
+            CustomerApplyService.getInstance().applyStudentAccount(userId, accountType, cardType, isNewUser, graduateDate, studentId, schoolName);
+            JOptionPane.showMessageDialog(null,
+                    "Student Account apply requested successful",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }
 
     private void applyYoungSaverAccount() throws Exception {
@@ -290,8 +308,17 @@ public class CustomerExistingApply extends JFrame {
         String parentFirstName = tf_parentFirstName.getText().trim();
         String parentLastName = tf_parentLastName.getText().trim();
 
-        CustomerApplyService.getInstance().applyYoungSaverAccount(userId, accountType, cardType, isNewUser, parentUserId, parentFirstName, parentLastName);
-
+        try {
+            CustomerApplyService.getInstance().applyYoungSaverAccount(userId, accountType, cardType, isNewUser, parentUserId, parentFirstName, parentLastName);
+            JOptionPane.showMessageDialog(null,
+                    "Young saver Account apply requested successful",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }
 
     private void applyGoldenAccount() throws Exception {
@@ -301,8 +328,17 @@ public class CustomerExistingApply extends JFrame {
         int cardType = cb_cardTypeList.getSelectedIndex() + 1;
         int isNewUser = 0;
 
-        CustomerApplyService.getInstance().applyGoldenAccount(userId, accountType, cardType, isNewUser);
-
+        try {
+            CustomerApplyService.getInstance().applyGoldenAccount(userId, accountType, cardType, isNewUser);
+            JOptionPane.showMessageDialog(null,
+                    "Golden Account apply requested successful",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }
 
     private void initComponents() {

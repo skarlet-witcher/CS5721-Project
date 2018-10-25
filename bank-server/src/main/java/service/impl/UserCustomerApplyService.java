@@ -82,8 +82,9 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
 
     @Override
     public void requestYoungSaverAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType, Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser, long parentUserId, String parentFirstName, String parentLastName, long userId) throws Exception {
-        try{
+
             UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
+            UserEntity result;
             UserEntity UserEntity = new UserEntity();
             UserApplyArchiveEntity.setFirstName(firstName);
             UserApplyArchiveEntity.setLastName(lastName);
@@ -109,17 +110,15 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserEntity.setUserId(parentUserId);
             UserEntity.setFirstName(parentFirstName);
             UserEntity.setLastName(parentLastName);
-            UserEntity result = userDao.selectUserByIdAndName(parentUserId, parentFirstName, parentLastName);
-            if(result == null) {
-                throw new Exception("parent info does not exist!");
-            }
-
-            userApplyDao.requestAccountApply(UserApplyArchiveEntity);
-
-
+        try {
+             result = userDao.selectUserByIdAndName(parentUserId, parentFirstName, parentLastName);
         } catch (Exception e) {
             throw new Exception("Fail to apply a young saver account");
         }
+        if(result == null) {
+            throw new Exception("parent info does not exist!");
+        }
+        userApplyDao.requestAccountApply(UserApplyArchiveEntity);
     }
 
     @Override
@@ -169,19 +168,19 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
 
     @Override
     public void checkDuplicateApply(long userId, int accountType, int cardType) throws Exception {
-        try {
+            UserApplyArchiveEntity result;
             UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
             UserApplyArchiveEntity.setUserId(userId);
             UserApplyArchiveEntity.setAccountType(accountType);
             UserApplyArchiveEntity.setCardType(cardType);
-
-            UserApplyArchiveEntity result = userApplyDao.selectApplyByUserId(UserApplyArchiveEntity);
-            if(result != null) {
-                throw new Exception("duplicate apply detected");
-            }
+        try {
+             result = userApplyDao.selectApplyByUserId(UserApplyArchiveEntity);
 
         } catch (Exception E) {
             throw new Exception("duplicate apply operation fail");
+        }
+        if(result != null) {
+            throw new Exception("duplicate apply detected");
         }
     }
 }
