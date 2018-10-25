@@ -10,6 +10,7 @@ package rpc;
 service UserCustomerLogin {
     rpc LoginReq (UserLoginReqRequest) returns (Response);
     rpc Login (UserLoginRequest) returns (Response);
+    rpc ValidateExistingUser (UserValidateExistingUserRequest) returns (Response);
     rpc ApplyNewAccount (UserApplyNewAccountRequest) returns (Response);
     rpc ForgetUserId (UserForgetUserIdRequest) returns (Response);
     rpc ForgetPin (UserForgetPinRequest) returns (Response);
@@ -42,6 +43,14 @@ service UserAdmin {
     rpc RemoveStaff (UserAdminRequest) returns (Response);
     rpc ConfigEmail (UserAdminRequest) returns (Response);
     rpc CheckEmailAvailability (UserAdminRequest) returns (Response);
+}
+
+message UserValidateExistingUserRequest {
+    int64 user_id = 1;
+    int64 first_name = 2;
+    int64 last_name = 3;
+    int32 identity_id_type = 4;
+    string identity_id = 5;
 }
 
 message UserStaffRequest {
@@ -106,6 +115,7 @@ message UserApplyNewAccountRequest {
     int64 parent_user_id = 15;
     string parent_first_name = 16;
     string parent_last_name = 17;
+    int32 new_user_apply = 19;
 }
 
 message UserForgetUserIdRequest {
