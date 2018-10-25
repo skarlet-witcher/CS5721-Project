@@ -22,7 +22,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
     }
     @Override
     public void requestPersonalAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType,
-                                            Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser) throws Exception {
+                                            Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser, long userId) throws Exception {
         try {
             // basic info
             UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
@@ -40,6 +40,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
             UserApplyArchiveEntity.setRemark("pending"); // change the attributes of this in the db
             UserApplyArchiveEntity.setNew_user_apply(isNewUser);
+            UserApplyArchiveEntity.setUserId(userId);
             userApplyDao.requestAccountApply(UserApplyArchiveEntity);
         } catch (Exception e) {
             throw new Exception("Fail to apply a personal current account");
@@ -49,7 +50,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
     @Override
     public void requestStudentAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType, Timestamp birthDate, int gender,
                                            String address, String email, String phone, int isNewUser,
-                                           Timestamp graduateDate, String studentId, String university) throws Exception {
+                                           Timestamp graduateDate, String studentId, String university, long userId) throws Exception {
         try{
             UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
             UserApplyArchiveEntity.setFirstName(firstName);
@@ -65,6 +66,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setPhone(phone);
             UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
             UserApplyArchiveEntity.setNew_user_apply(isNewUser);
+            UserApplyArchiveEntity.setUserId(userId);
             UserApplyArchiveEntity.setRemark("pending"); // change the attributes of this in the db
             // student info
             UserApplyArchiveEntity.setGraduateDate(graduateDate);
@@ -79,7 +81,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
     }
 
     @Override
-    public void requestYoungSaverAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType, Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser, long parentUserId, String parentFirstName, String parentLastName) throws Exception {
+    public void requestYoungSaverAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType, Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser, long parentUserId, String parentFirstName, String parentLastName, long userId) throws Exception {
         try{
             UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
             UserEntity UserEntity = new UserEntity();
@@ -96,6 +98,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setPhone(phone);
             UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
             UserApplyArchiveEntity.setNew_user_apply(isNewUser);
+            UserApplyArchiveEntity.setUserId(userId);
             UserApplyArchiveEntity.setRemark("pending"); // change the attributes of this in the db
             // young saver info
             UserApplyArchiveEntity.setParentUserId(parentUserId);
@@ -121,7 +124,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
 
     @Override
     public void requestGoldenAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType,
-                                            Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser) throws Exception {
+                                            Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser, long userId) throws Exception {
         try {
             // basic info
             UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
@@ -139,6 +142,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
             UserApplyArchiveEntity.setNew_user_apply(isNewUser);
             UserApplyArchiveEntity.setRemark("pending"); // change the attributes of this in the db
+            UserApplyArchiveEntity.setUserId(userId);
             userApplyDao.requestAccountApply(UserApplyArchiveEntity);
         } catch (Exception e) {
             throw new Exception("Fail to apply a golden current account");

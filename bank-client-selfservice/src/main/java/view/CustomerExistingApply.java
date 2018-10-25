@@ -6,9 +6,11 @@ package view;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import javax.swing.*;
 import net.miginfocom.swing.*;
+import service.impl.CustomerApplyService;
 import util.JTextFieldLimit;
 
 /**
@@ -227,23 +229,78 @@ public class CustomerExistingApply extends JFrame {
             }
         }
 
-        if(cb_accountTypeList.getSelectedIndex() == 0) {
-
-        }
-        if(cb_accountTypeList.getSelectedIndex() == 1) {
-
-        }
-        if(cb_accountTypeList.getSelectedIndex() == 2) {
-
-        }
-        if(cb_accountTypeList.getSelectedIndex() == 3) {
-
+        try {
+            if(cb_accountTypeList.getSelectedIndex() == 0) {
+                System.out.println("Front-end: ready to apply personal account");
+                applyPersonalAccount();
+            }
+            if(cb_accountTypeList.getSelectedIndex() == 1) {
+                System.out.println("Front-end: ready to apply student account");
+                applyStudentAccount();
+            }
+            if(cb_accountTypeList.getSelectedIndex() == 2) {
+                System.out.println("Front-end: ready to apply young saver account");
+                applyYoungSaverAccount();
+            }
+            if(cb_accountTypeList.getSelectedIndex() == 3) {
+                System.out.println("Front-end: ready to apply golden account");
+                applyGoldenAccount();
+            }
+        } catch (Exception E) {
+            E.printStackTrace();
         }
     }
 
-    private void applyPersonalAccount() {
+    private void applyPersonalAccount() throws Exception {
         long userId = Long.parseLong(tf_userId.getText().trim());
-        
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        int isNewUser = 0;
+
+        CustomerApplyService.getInstance().applyPersonalAccount(userId, accountType, cardType, isNewUser);
+
+    }
+
+    private void applyStudentAccount() throws Exception {
+        // basic info
+        long userId = Long.parseLong(tf_userId.getText().trim());
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        int isNewUser = 0;
+
+        // student account info
+        String graduateDateText = tf_graduateYear.getText().trim() + "-" + tf_graduateMonth.getText().trim() +"-01 " +"00:00:00";
+        Timestamp graduateDate = Timestamp.valueOf(graduateDateText);
+        String studentId = tf_studentID.getText().trim();
+        String schoolName = tf_schoolName.getText().trim();
+
+        CustomerApplyService.getInstance().applyStudentAccount(userId, accountType, cardType, isNewUser, graduateDate, studentId, schoolName);
+    }
+
+    private void applyYoungSaverAccount() throws Exception {
+        // basic info
+        long userId = Long.parseLong(tf_userId.getText().trim());
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        int isNewUser = 0;
+
+        // young saver info
+        long parentUserId = Long.parseLong(tf_parentUserID.getText().trim());
+        String parentFirstName = tf_parentFirstName.getText().trim();
+        String parentLastName = tf_parentLastName.getText().trim();
+
+        CustomerApplyService.getInstance().applyYoungSaverAccount(userId, accountType, cardType, isNewUser, parentUserId, parentFirstName, parentLastName);
+    }
+
+    private void applyGoldenAccount() throws Exception {
+        // basic info
+        long userId = Long.parseLong(tf_userId.getText().trim());
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        int isNewUser = 0;
+
+        CustomerApplyService.getInstance().applyGoldenAccount(userId, accountType, cardType, isNewUser);
+
     }
 
     private void initComponents() {
@@ -268,6 +325,8 @@ public class CustomerExistingApply extends JFrame {
         tf_parentFirstName = new JTextField();
         lbl_parentLastName = new JLabel();
         tf_parentLastName = new JTextField();
+        lbl_cardType = new JLabel();
+        cb_cardTypeList = new JComboBox<>();
         btn_apply = new JButton();
         btn_back = new JButton();
 
@@ -280,6 +339,8 @@ public class CustomerExistingApply extends JFrame {
             "[fill]" +
             "[fill]",
             // rows
+            "[]" +
+            "[]" +
             "[]" +
             "[]" +
             "[]" +
@@ -408,15 +469,27 @@ public class CustomerExistingApply extends JFrame {
         }
         contentPane.add(youngSaverAccountPanel, "cell 2 3");
 
+        //---- lbl_cardType ----
+        lbl_cardType.setText("Card Type");
+        contentPane.add(lbl_cardType, "cell 1 4");
+
+        //---- cb_cardTypeList ----
+        cb_cardTypeList.setModel(new DefaultComboBoxModel<>(new String[] {
+            "Debit Card",
+            "Credit Card"
+        }));
+        cb_cardTypeList.setSelectedIndex(0);
+        contentPane.add(cb_cardTypeList, "cell 2 4");
+
         //---- btn_apply ----
         btn_apply.setText("Apply");
         btn_apply.addActionListener(e -> btn_applyActionPerformed(e));
-        contentPane.add(btn_apply, "cell 2 4");
+        contentPane.add(btn_apply, "cell 2 5");
 
         //---- btn_back ----
         btn_back.setText("Back");
         btn_back.addActionListener(e -> btn_backActionPerformed(e));
-        contentPane.add(btn_back, "cell 2 5");
+        contentPane.add(btn_back, "cell 2 6");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -443,6 +516,8 @@ public class CustomerExistingApply extends JFrame {
     private JTextField tf_parentFirstName;
     private JLabel lbl_parentLastName;
     private JTextField tf_parentLastName;
+    private JLabel lbl_cardType;
+    private JComboBox<String> cb_cardTypeList;
     private JButton btn_apply;
     private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

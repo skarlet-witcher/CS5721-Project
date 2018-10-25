@@ -1,6 +1,7 @@
 package service.impl;
 
 import rpc.UserApplyNewAccountRequest;
+import rpc.UserValidateExistingUserRequest;
 import rpc.client.CustomerApplyRpc;
 import service.ICustomerApplyService;
 import util.TimestampConvertHelper;
@@ -99,11 +100,59 @@ public class CustomerApplyService implements ICustomerApplyService {
                         .setNewUserApply(isNewUser)
                         .build());
     }
+
     public void checkExistingUserBeforeApply(long userId, String firstName, String lastName) throws Exception {
         CustomerApplyRpc.getInstance().checkExistingUserBeforeApply(
-                UserApplyNewAccountRequest.newBuilder().setUserId(userId)
+                UserValidateExistingUserRequest.newBuilder().setUserId(userId)
                 .setFirstName(firstName)
                 .setLastName(lastName).build());
+    }
+
+    public void applyPersonalAccount(long userId, int accountType, int cardType, int isNewUser) throws Exception {
+        CustomerApplyRpc.getInstance().applyReq(
+                UserApplyNewAccountRequest.newBuilder().setUserId(userId)
+                .setAccountType(accountType)
+                .setCardType(cardType)
+                .setNewUserApply(isNewUser)
+                .build()
+        );
+    }
+
+    public void applyStudentAccount(long userId, int accountType, int cardType, int isNewUser,
+                                    Timestamp graduateDate, String studentId, String schoolName) throws Exception {
+        CustomerApplyRpc.getInstance().applyReq(
+                UserApplyNewAccountRequest.newBuilder().setUserId(userId)
+                .setAccountType(accountType)
+                .setCardType(cardType)
+                .setGraduateDate(TimestampConvertHelper.mysqlToRpc(graduateDate))
+                .setStudentId(studentId)
+                .setUniversityName(schoolName)
+                .setNewUserApply(isNewUser).build()
+        );
+    }
+
+    public void applyYoungSaverAccount(long userId, int accountType, int cardType, int isNewUser,
+                                       long parentUserId, String parentFirstName, String parentLastName) throws Exception {
+        CustomerApplyRpc.getInstance().applyReq(
+                UserApplyNewAccountRequest.newBuilder().setUserId(userId)
+                .setAccountType(accountType)
+                .setCardType(cardType)
+                .setNewUserApply(isNewUser)
+                .setParentUserId(parentUserId)
+                .setParentFirstName(parentFirstName)
+                .setParentLastName(parentLastName)
+                .build()
+        );
+    }
+
+    public void applyGoldenAccount(long userId, int accountType, int cardType, int isNewUser) throws Exception {
+        CustomerApplyRpc.getInstance().applyReq(
+                UserApplyNewAccountRequest.newBuilder().setUserId(userId)
+                        .setAccountType(accountType)
+                        .setCardType(cardType)
+                        .setNewUserApply(isNewUser)
+                        .build()
+        );
     }
 
 }

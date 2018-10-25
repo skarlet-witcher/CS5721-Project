@@ -97,30 +97,26 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
                 logger.info("ready to apply personal account (ready to invoke customerApplySerivce)");
                 customerApplyService.requestPersonalAccountApply(
                         firstName, lastName, identityNum, identityType, accountType, cardType,
-                        birthDate, gender, address, email, phone, isNewUser);
+                        birthDate, gender, address, email, phone, isNewUser, userId);
             }
             if(accountType == 2) {
                 logger.info("ready to apply student account");
                 customerApplyService.requestStudentAccountApply(
                         firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone, isNewUser,
-                        graduateDate,studentId,university);
+                        graduateDate,studentId,university, userId);
             }
             if(accountType == 3) {
                 logger.info("ready to apply young saver account");
                 customerApplyService.requestYoungSaverAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
-                        birthDate, gender, address, email, phone, isNewUser, parentUserId, parentFirstName, parentLastName);
+                        birthDate, gender, address, email, phone, isNewUser, parentUserId, parentFirstName, parentLastName, userId);
             }
             if(accountType == 4) {
                 logger.info("ready to apply golden account");
                 customerApplyService.requestGoldenAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
-                        birthDate, gender, address, email, phone, isNewUser);
+                        birthDate, gender, address, email, phone, isNewUser, userId);
             }
-            // check existing user before apply
-            if(userId.toString().length() == 10) {
-                logger.info("ready to checkExistingUserBeforeApply");
-                customerApplyService.checkExistingUserBeforeApply(userId, firstName, lastName);
-            }
+
             responseObserver.onNext(ResponseBuilder.ResponseSuccessBuilder()
                     .build());
 
@@ -135,6 +131,20 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
     public void validateExistingUser(UserValidateExistingUserRequest request,
                                      StreamObserver<Response> responseObserver) {
        long userId = request.getUserId();
+       String firstName = request.getFirstName();
+       String lastName = request.getLastName();
+
+
+        try {
+            logger.info("ready to checkExistingUserBeforeApply");
+            customerApplyService.checkExistingUserBeforeApply(userId, firstName, lastName);
+            responseObserver.onNext(ResponseBuilder.ResponseSuccessBuilder()
+                    .build());
+        } catch (Exception e) {
+            responseObserver.onNext(ResponseBuilder.ResponseFailBuilder(e.getMessage())
+                    .build());
+        }
+        responseObserver.onCompleted();
     }
 
     @Override

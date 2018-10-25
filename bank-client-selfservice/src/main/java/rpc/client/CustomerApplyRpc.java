@@ -43,23 +43,23 @@ public class CustomerApplyRpc {
         }
 
     }
-    public Response checkExistingUserBeforeApply(UserApplyNewAccountRequest applyAccountRequest) throws Exception {
+    public Response checkExistingUserBeforeApply(UserValidateExistingUserRequest userValidateExistingUserRequest) throws Exception {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
                 .usePlaintext().build();
         UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
 
 
-        logger.info(applyAccountRequest.getUserId() +" is requesting to validate.");
+        logger.info(userValidateExistingUserRequest.getUserId() +" is requesting to validate.");
 
-        Response response = blockingStub.applyNewAccount(applyAccountRequest);
+        Response response = blockingStub.validateExistingUser(userValidateExistingUserRequest);
 
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == 200) {
-            logger.info(applyAccountRequest.getUserId() + " validation request successful.");
+            logger.info(userValidateExistingUserRequest.getUserId() + " validation request successful.");
             return response;
         } else {
-            logger.info(applyAccountRequest.getUserId() + " validation request failure due to " + response.getDescription());
+            logger.info(userValidateExistingUserRequest.getUserId() + " validation request failure due to " + response.getDescription());
             throw new Exception(response.getDescription());
         }
 

@@ -6,7 +6,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
 			"$columnConstraints": "[fill][fill][fill]"
-			"$rowConstraints": "[][][][][][]"
+			"$rowConstraints": "[][][][][][][][]"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -143,19 +143,36 @@ new FormModel {
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 2 3"
 			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lbl_cardType"
+				"text": "Card Type"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 4"
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "cb_cardTypeList"
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "Debit Card"
+					addElement( "Debit Card" )
+					addElement( "Credit Card" )
+				}
+				"selectedIndex": 0
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 4"
+			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_apply"
 				"text": "Apply"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_applyActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 4"
+				"value": "cell 2 5"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_back"
 				"text": "Back"
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_backActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 5"
+				"value": "cell 2 6"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
