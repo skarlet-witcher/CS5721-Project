@@ -93,6 +93,11 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
 
 
         try {
+            if(userId.toString().length() == 10) {
+                logger.info("check whether the existing user have duplicated apply");
+                customerApplyService.checkDuplicateApply(userId,accountType,cardType);
+            }
+
             if(accountType == 1) {
                 logger.info("ready to apply personal account (ready to invoke customerApplySerivce)");
                 customerApplyService.requestPersonalAccountApply(

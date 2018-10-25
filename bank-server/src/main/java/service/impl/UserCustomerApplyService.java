@@ -159,12 +159,23 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
 
             UserEntity result = userDao.selectUserByIdAndName(userId, firstName, lastName);
 
-            if(result == null) {
-                throw new Exception("User Info not exist");
-            }
+        } catch (Exception E) {
+            throw new Exception("Existing User detected");
+        }
+    }
+
+    @Override
+    public void checkDuplicateApply(long userId, int accountType, int cardType) throws Exception {
+        try {
+            UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
+            UserApplyArchiveEntity.setUserId(userId);
+            UserApplyArchiveEntity.setAccountType(accountType);
+            UserApplyArchiveEntity.setCardType(cardType);
+
+            UserApplyArchiveEntity result = userApplyDao.selectApplyByUserId(UserApplyArchiveEntity);
 
         } catch (Exception E) {
-            throw new Exception("Fail to validate the user info");
+            throw new Exception("duplicate apply record detected");
         }
     }
 }
