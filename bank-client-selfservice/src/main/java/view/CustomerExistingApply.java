@@ -275,6 +275,7 @@ public class CustomerExistingApply extends JFrame {
         String schoolName = tf_schoolName.getText().trim();
 
         CustomerApplyService.getInstance().applyStudentAccount(userId, accountType, cardType, isNewUser, graduateDate, studentId, schoolName);
+
     }
 
     private void applyYoungSaverAccount() throws Exception {
@@ -290,6 +291,7 @@ public class CustomerExistingApply extends JFrame {
         String parentLastName = tf_parentLastName.getText().trim();
 
         CustomerApplyService.getInstance().applyYoungSaverAccount(userId, accountType, cardType, isNewUser, parentUserId, parentFirstName, parentLastName);
+
     }
 
     private void applyGoldenAccount() throws Exception {

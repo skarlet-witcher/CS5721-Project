@@ -151,16 +151,19 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
 
     @Override
     public void checkExistingUserBeforeApply(long userId, String firstName, String lastName) throws Exception {
+        UserEntity result;
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUserId(userId);
+        userEntity.setFirstName(firstName);
+        userEntity.setLastName(lastName);
         try {
-            UserEntity userEntity = new UserEntity();
-            userEntity.setUserId(userId);
-            userEntity.setFirstName(firstName);
-            userEntity.setLastName(lastName);
-
-            UserEntity result = userDao.selectUserByIdAndName(userId, firstName, lastName);
+             result = userDao.selectUserByIdAndName(userId, firstName, lastName);
 
         } catch (Exception E) {
-            throw new Exception("Existing User detected");
+            throw new Exception("check existing user fail");
+        }
+        if(result == null){
+            throw new Exception("no existing user found");
         }
     }
 
@@ -173,9 +176,12 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setCardType(cardType);
 
             UserApplyArchiveEntity result = userApplyDao.selectApplyByUserId(UserApplyArchiveEntity);
+            if(result != null) {
+                throw new Exception("duplicate apply detected");
+            }
 
         } catch (Exception E) {
-            throw new Exception("duplicate apply record detected");
+            throw new Exception("duplicate apply operation fail");
         }
     }
 }

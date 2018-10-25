@@ -18,6 +18,7 @@ public class CustomerApplyAuthView extends JFrame {
     public CustomerApplyAuthView() {
         initComponents();
         clearAllPanel();
+        initTextField();
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
@@ -30,11 +31,6 @@ public class CustomerApplyAuthView extends JFrame {
         this.setVisible(true);
     }
 
-    private void initTextfield() {
-        tf_firstName.setDocument(new JTextFieldLimit(20));
-        tf_lastName.setDocument(new JTextFieldLimit(20));
-        tf_userId.setDocument(new JTextFieldLimit(10));
-    }
 
 
     private void cb_isExistingActionPerformed(ActionEvent e) {
@@ -64,26 +60,68 @@ public class CustomerApplyAuthView extends JFrame {
         new CustomerApplyView().run();
     }
 
-    private void textFieldChecker() {
-        try {
-            if(tf_userId.getText().trim().length()<=0||
-                    tf_firstName.getText().trim().length() <=0 ||
-                    tf_lastName.getText().trim().length() <= 0) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input all the information",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    "Please input valid information",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+    private void initTextField() {
+        tf_userId.setDocument(new JTextFieldLimit(10));
+        tf_firstName.setDocument(new JTextFieldLimit(20));
+        tf_lastName.setDocument(new JTextFieldLimit(20));
     }
 
+
     private void btn_customer_nextActionPerformed(ActionEvent e) {
-        textFieldChecker();
+        if(cb_isExisting.getSelectedIndex() == 1) {
+            // user id validator
+            if(tf_userId.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input user id",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+                tf_userId.grabFocus();
+                return;
+            }
+            if(tf_userId.getText().trim().length() != 10) {
+                JOptionPane.showMessageDialog(null,
+                        "User id must be 10 digits",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+                tf_userId.grabFocus();
+                return;
+            }
+            if(!tf_userId.getText().trim().matches("^[0-9]*$")) {
+                JOptionPane.showMessageDialog(null,
+                        "User id should be numeric",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_userId.grabFocus();
+                return;
+            }
+
+            // First Name validator
+            if(tf_firstName.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your first name",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+                tf_firstName.grabFocus();
+                return;
+            } if(!tf_firstName.getText().trim().matches("^[a-zA-Z]+$")) {
+                JOptionPane.showMessageDialog(null,
+                        "First name should only contain characters",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+                tf_firstName.grabFocus();
+                return;
+            }
+
+            // Last name validator
+            if(tf_lastName.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your last name",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+                tf_lastName.grabFocus();
+                return;
+            } if(!tf_lastName.getText().trim().matches("^[a-zA-Z]+$")) {
+                JOptionPane.showMessageDialog(null,
+                        "First name should only contain characters",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+                tf_lastName.grabFocus();
+                return;
+            }
+        }
 
         long userId = Long.parseLong(tf_userId.getText().trim());
         String firstName = tf_firstName.getText().trim();
@@ -91,8 +129,13 @@ public class CustomerApplyAuthView extends JFrame {
 
         try {
             CustomerApplyService.getInstance().checkExistingUserBeforeApply(userId, firstName, lastName);
+
         } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
             E.printStackTrace();
+            return;
         }
         this.dispose();
         new CustomerExistingApply(tf_userId.getText().trim()).run();

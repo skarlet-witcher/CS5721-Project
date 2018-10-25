@@ -847,7 +847,7 @@ public class CustomerApplyView extends JFrame {
         String contactNum = tf_contactNum.getText().trim();
         int isNewUser = 1;
 
-        CustomerApplyService.getInstance().applyPersonalAccount(firstName, lastName, gender, identityType, identityNum, accountType,
+       CustomerApplyService.getInstance().applyPersonalAccount(firstName, lastName, gender, identityType, identityNum, accountType,
                 cardType, birthDate, address, email, contactNum, isNewUser);
 
     }
@@ -872,6 +872,7 @@ public class CustomerApplyView extends JFrame {
 
         CustomerApplyService.getInstance().applyGoldenAccount(firstName, lastName, gender, identityType, identityNum, accountType,
                 cardType, birthDate, address, email, contactNum, isNewUser);
+
     }
 
     private void applyStudentAccount() throws Exception {
@@ -901,6 +902,7 @@ public class CustomerApplyView extends JFrame {
 
         CustomerApplyService.getInstance().applyStudentAccount(firstName, lastName, gender, identityType, identityNum, accountType,
                 cardType, birthDate, address, email, contactNum, isNewUser, graduateDate, studentId, schoolName);
+
     }
 
     private void applyYoungSaverAccount() throws Exception {

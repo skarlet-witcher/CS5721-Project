@@ -1,5 +1,6 @@
 package service.impl;
 
+import rpc.Response;
 import rpc.UserApplyNewAccountRequest;
 import rpc.UserValidateExistingUserRequest;
 import rpc.client.CustomerApplyRpc;
@@ -21,7 +22,7 @@ public class CustomerApplyService implements ICustomerApplyService {
     public void applyPersonalAccount(String firstName, String lastName, int gender, int identityType,
                                      String identityNum, int accountType, int cardType, Timestamp birthDate,
                                      String address, String email, String phone, int isNewUser) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        Response response = CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder()
                         .setFirstName(firstName)
                         .setLastName(lastName)
@@ -35,6 +36,7 @@ public class CustomerApplyService implements ICustomerApplyService {
                         .setBirthDate(TimestampConvertHelper.mysqlToRpc(birthDate))
                         .setPhone(phone)
                         .setNewUserApply(isNewUser).build());
+
     }
 
     public void applyStudentAccount(String firstName, String lastName, int gender, int identityType,
@@ -56,6 +58,7 @@ public class CustomerApplyService implements ICustomerApplyService {
                 .setGraduateDate(TimestampConvertHelper.mysqlToRpc(graduateDate))
                 .setStudentId(studentId)
                 .setUniversityName(schoolName).build());
+
     }
 
     public void applyYoungSaverAccount(String firstName, String lastName, int gender, int identityType,
@@ -79,6 +82,7 @@ public class CustomerApplyService implements ICustomerApplyService {
                         .setParentLastName(parentLastName)
                         .setNewUserApply(isNewUser)
                         .build());
+
     }
 
     public void applyGoldenAccount(String firstName, String lastName, int gender, int identityType,
@@ -109,7 +113,7 @@ public class CustomerApplyService implements ICustomerApplyService {
     }
 
     public void applyPersonalAccount(long userId, int accountType, int cardType, int isNewUser) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        Response response = CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder().setUserId(userId)
                 .setAccountType(accountType)
                 .setCardType(cardType)
@@ -120,7 +124,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     public void applyStudentAccount(long userId, int accountType, int cardType, int isNewUser,
                                     Timestamp graduateDate, String studentId, String schoolName) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+      CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder().setUserId(userId)
                 .setAccountType(accountType)
                 .setCardType(cardType)
@@ -133,7 +137,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     public void applyYoungSaverAccount(long userId, int accountType, int cardType, int isNewUser,
                                        long parentUserId, String parentFirstName, String parentLastName) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        Response response = CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder().setUserId(userId)
                 .setAccountType(accountType)
                 .setCardType(cardType)
@@ -143,10 +147,11 @@ public class CustomerApplyService implements ICustomerApplyService {
                 .setParentLastName(parentLastName)
                 .build()
         );
+
     }
 
     public void applyGoldenAccount(long userId, int accountType, int cardType, int isNewUser) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        Response response = CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder().setUserId(userId)
                         .setAccountType(accountType)
                         .setCardType(cardType)
