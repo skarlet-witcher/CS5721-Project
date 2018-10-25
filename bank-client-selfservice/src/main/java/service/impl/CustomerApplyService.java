@@ -19,7 +19,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     public void applyPersonalAccount(String firstName, String lastName, int gender, int identityType,
                                      String identityNum, int accountType, int cardType, Timestamp birthDate,
-                                     String address, String email, String phone) throws Exception {
+                                     String address, String email, String phone, int isNewUser) throws Exception {
         CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder()
                         .setFirstName(firstName)
@@ -32,12 +32,13 @@ public class CustomerApplyService implements ICustomerApplyService {
                         .setAddress(address)
                         .setEmail(email)
                         .setBirthDate(TimestampConvertHelper.mysqlToRpc(birthDate))
-                        .setPhone(phone).build());
+                        .setPhone(phone)
+                        .setNewUserApply(isNewUser).build());
     }
 
     public void applyStudentAccount(String firstName, String lastName, int gender, int identityType,
                                     String identityNum, int accountType, int cardType, Timestamp birthDate,
-                                    String address, String email, String phone, Timestamp graduateDate, String studentId, String schoolName) throws Exception {
+                                    String address, String email, String phone, int isNewUser, Timestamp graduateDate, String studentId, String schoolName) throws Exception {
         CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder()
                 .setFirstName(firstName)
@@ -58,7 +59,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     public void applyYoungSaverAccount(String firstName, String lastName, int gender, int identityType,
                                        String identityNum, int accountType, int cardType, Timestamp birthDate,
-                                       String address, String email, String phone, long parentUserId, String parentFirstName, String parentLastName) throws Exception {
+                                       String address, String email, String phone, int isNewUser, long parentUserId, String parentFirstName, String parentLastName) throws Exception {
         CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder()
                         .setFirstName(firstName)
@@ -75,12 +76,13 @@ public class CustomerApplyService implements ICustomerApplyService {
                         .setParentUserId(parentUserId)
                         .setParentFirstName(parentFirstName)
                         .setParentLastName(parentLastName)
+                        .setNewUserApply(isNewUser)
                         .build());
     }
 
     public void applyGoldenAccount(String firstName, String lastName, int gender, int identityType,
                                    String identityNum, int accountType, int cardType, Timestamp birthDate,
-                                   String address, String email, String phone) throws Exception {
+                                   String address, String email, String phone, int isNewUser) throws Exception {
         CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder()
                         .setFirstName(firstName)
@@ -93,7 +95,9 @@ public class CustomerApplyService implements ICustomerApplyService {
                         .setAddress(address)
                         .setEmail(email)
                         .setBirthDate(TimestampConvertHelper.mysqlToRpc(birthDate))
-                        .setPhone(phone).build());
+                        .setPhone(phone)
+                        .setNewUserApply(isNewUser)
+                        .build());
     }
     public void checkExistingUserBeforeApply(long userId, String firstName, String lastName) throws Exception {
         CustomerApplyRpc.getInstance().checkExistingUserBeforeApply(

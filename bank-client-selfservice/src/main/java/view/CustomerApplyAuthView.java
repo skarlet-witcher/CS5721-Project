@@ -95,7 +95,7 @@ public class CustomerApplyAuthView extends JFrame {
             E.printStackTrace();
         }
         this.dispose();
-        new CustomerApplyView().run();
+        new CustomerExistingApply(tf_userId.getText().trim()).run();
     }
 
 

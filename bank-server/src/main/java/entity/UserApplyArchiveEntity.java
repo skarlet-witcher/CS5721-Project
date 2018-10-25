@@ -27,6 +27,7 @@ public class UserApplyArchiveEntity {
     private Timestamp applyTime;
     private int status;
     private String remark;
+    private int new_user_apply;
     private Long userId;
 
     @Id
@@ -240,6 +241,12 @@ public class UserApplyArchiveEntity {
     }
 
     @Basic
+    @Column(name = "new_user_apply", nullable = false)
+    public int getNew_user_apply() { return new_user_apply; }
+
+    public void setNew_user_apply(int new_user_apply) {this.new_user_apply = new_user_apply; }
+
+    @Basic
     @Column(name = "user_id", nullable = true)
     public Long getUserId() {
         return userId;
@@ -279,6 +286,7 @@ public class UserApplyArchiveEntity {
         if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
         if (applyTime != null ? !applyTime.equals(that.applyTime) : that.applyTime != null) return false;
         if (remark != null ? !remark.equals(that.remark) : that.remark != null) return false;
+        if (new_user_apply != that.new_user_apply) return false;
         return userId != null ? userId.equals(that.userId) : that.userId == null;
     }
 
@@ -305,6 +313,7 @@ public class UserApplyArchiveEntity {
         result = 31 * result + (applyTime != null ? applyTime.hashCode() : 0);
         result = 31 * result + status;
         result = 31 * result + (remark != null ? remark.hashCode() : 0);
+        result = 31 * result + (new_user_apply);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
         return result;
     }

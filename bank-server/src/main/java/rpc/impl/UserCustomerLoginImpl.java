@@ -82,6 +82,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         long parentUserId = request.getParentUserId();
         String parentFirstName = request.getParentFirstName();
         String parentLastName = request.getParentLastName();
+        int isNewUser = request.getNewUserApply();
 
         Long userId = request.getUserId();
 
@@ -94,24 +95,24 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
                 logger.info("ready to apply personal account (ready to invoke customerApplySerivce)");
                 customerApplyService.requestPersonalAccountApply(
                         firstName, lastName, identityNum, identityType, accountType, cardType,
-                        birthDate, gender, address, email, phone);
+                        birthDate, gender, address, email, phone, isNewUser);
             }
             if(accountType == 2) {
                 logger.info("ready to apply student account");
                 customerApplyService.requestStudentAccountApply(
                         firstName, lastName, identityNum, identityType, accountType, cardType,
-                        birthDate, gender, address, email, phone,
+                        birthDate, gender, address, email, phone, isNewUser,
                         graduateDate,studentId,university);
             }
             if(accountType == 3) {
                 logger.info("ready to apply young saver account");
                 customerApplyService.requestYoungSaverAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
-                        birthDate, gender, address, email, phone, parentUserId, parentFirstName, parentLastName);
+                        birthDate, gender, address, email, phone, isNewUser, parentUserId, parentFirstName, parentLastName);
             }
             if(accountType == 4) {
                 logger.info("ready to apply golden account");
                 customerApplyService.requestGoldenAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
-                        birthDate, gender, address, email, phone);
+                        birthDate, gender, address, email, phone, isNewUser);
             }
             // check existing user before apply
             if(userId.toString().length() == 10) {

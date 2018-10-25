@@ -463,14 +463,12 @@ public class CustomerApplyView extends JFrame {
         youngSaverAccountPanel.setVisible(false);
     }
 
-
     private void tf_graduateMonthFocusLost(FocusEvent e) {
         // if input one digit of a month, add 0 before that
         if(tf_graduateMonth.getText().trim().length() == 1) {
             tf_graduateMonth.setText("0" + tf_graduateMonth.getText());
         }
     }
-
 
     private void tf_graduateMonthFocusGained(FocusEvent e) {
         tf_graduateMonth.selectAll();
@@ -480,14 +478,12 @@ public class CustomerApplyView extends JFrame {
         tf_graduateYear.selectAll();
     }
 
-
     private void tf_dob_monthFocusLost(FocusEvent e) {
         // if input one digit of a month, add 0 before that
         if(tf_dob_month.getText().trim().length() == 1) {
             tf_dob_month.setText("0" + tf_dob_month.getText());
         }
     }
-
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -836,119 +832,14 @@ public class CustomerApplyView extends JFrame {
 
 
 
-    private void addressFieldValidator() {
-        if(tf_address.getText().trim().length() <=0) {
-            try {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your address",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid address",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
-
-    private void emailFieldValidator() {
-        if(tf_email.getText().trim().length() <= 0) {
-            try {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your email address",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid email address",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
-
-    private void contactNumFieldValidator() {
-        if(tf_contactNum.getText().trim().length() <= 0) {
-            try {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your contact number",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid contact number",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
 
 
-    private void studentAccountValidator() {
-        graduateDateFieldValidator();
-        studentIdFieldValidator();
-        schoolNameFieldValidator();
-    }
 
-    private void graduateDateFieldValidator() {
-        if(tf_graduateMonth.getText().trim().length() <= 0 ||
-                tf_graduateYear.getText().trim().length() <= 0) {
-            try {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your graduate date",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            } catch(Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid graduate date",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
 
-    private void studentIdFieldValidator() {
 
-    }
 
-    private void schoolNameFieldValidator() {
-        if(tf_schoolName.getText().trim().length() <= 0) {
-            try{
-                JOptionPane.showMessageDialog(null,
-                        "Please input your schoolName",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            } catch(Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid schoolName",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
 
-    private void youngSaverAccountValidator() {
-        parentUserIdFieldValidator();
-        parentNameFieldValidator();
-    }
 
-    private void parentUserIdFieldValidator() {
-        if(tf_parentUserID.getText().length() <= 0) {
-            try {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your parent's user ID",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input valid parent's user ID",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
 
     private void parentNameFieldValidator() {
         try {
@@ -983,9 +874,10 @@ public class CustomerApplyView extends JFrame {
         String address = tf_address.getText().trim();
         String email = tf_email.getText().trim();
         String contactNum = tf_contactNum.getText().trim();
+        int isNewUser = 1;
 
         CustomerApplyService.getInstance().applyPersonalAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                cardType, birthDate, address, email, contactNum);
+                cardType, birthDate, address, email, contactNum, isNewUser);
 
     }
 
@@ -1005,9 +897,10 @@ public class CustomerApplyView extends JFrame {
         String address = tf_address.getText().trim();
         String email = tf_email.getText().trim();
         String contactNum = tf_contactNum.getText().trim();
+        int isNewUser = 1;
 
         CustomerApplyService.getInstance().applyGoldenAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                cardType, birthDate, address, email, contactNum);
+                cardType, birthDate, address, email, contactNum, isNewUser);
     }
 
     private void applyStudentAccount() throws Exception {
@@ -1026,6 +919,7 @@ public class CustomerApplyView extends JFrame {
         String address = tf_address.getText().trim();
         String email = tf_email.getText().trim();
         String contactNum = tf_contactNum.getText().trim();
+        int isNewUser = 1;
 
         // student account Info
         // TO-DO month and day with one digit ????
@@ -1035,7 +929,7 @@ public class CustomerApplyView extends JFrame {
         String schoolName = tf_schoolName.getText().trim();
 
         CustomerApplyService.getInstance().applyStudentAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                cardType, birthDate, address, email, contactNum, graduateDate, studentId, schoolName);
+                cardType, birthDate, address, email, contactNum, isNewUser, graduateDate, studentId, schoolName);
     }
 
     private void applyYoungSaverAccount() throws Exception {
@@ -1054,6 +948,7 @@ public class CustomerApplyView extends JFrame {
         String address = tf_address.getText().trim();
         String email = tf_email.getText().trim();
         String contactNum = tf_contactNum.getText().trim();
+        int isNewUser = 1;
 
         // young saver info
         long parentUserId = Long.parseLong(tf_parentUserID.getText().trim());
@@ -1061,7 +956,7 @@ public class CustomerApplyView extends JFrame {
         String parentLastName = tf_parentLastName.getText().trim();
 
         CustomerApplyService.getInstance().applyYoungSaverAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                cardType, birthDate, address, email, contactNum, parentUserId, parentFirstName, parentLastName);
+                cardType, birthDate, address, email, contactNum, isNewUser, parentUserId, parentFirstName, parentLastName);
 
     }
 
