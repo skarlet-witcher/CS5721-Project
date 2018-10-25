@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLoginImplBase {
-    private static final Logger logger = Logger.getLogger(UserCustomerLoginImpl.class.getName());
+    private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
     private IUserCustomerLoginService customerLoginService = UserCustomerLoginService.getInstance();
     private IUserCustomerApplyService customerApplyService = UserCustomerApplyService.getInstance();
 
@@ -85,12 +85,13 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
 
         Long userId = request.getUserId();
 
+        logger.info("User Id is: " + userId);
 
 
 
         try {
             if(accountType == 1) {
-                logger.info("ready to apply personal account");
+                logger.info("ready to apply personal account (ready to invoke customerApplySerivce)");
                 customerApplyService.requestPersonalAccountApply(
                         firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone);
@@ -113,7 +114,8 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
                         birthDate, gender, address, email, phone);
             }
             // check existing user before apply
-            if(userId != null) {
+            if(userId.toString().length() == 10) {
+                logger.info("ready to checkExistingUserBeforeApply");
                 customerApplyService.checkExistingUserBeforeApply(userId, firstName, lastName);
             }
             responseObserver.onNext(ResponseBuilder.ResponseSuccessBuilder()

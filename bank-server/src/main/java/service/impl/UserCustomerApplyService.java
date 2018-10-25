@@ -137,7 +137,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setRemark("pending"); // change the attributes of this in the db
             userApplyDao.requestAccountApply(UserApplyArchiveEntity);
         } catch (Exception e) {
-            throw new Exception("Fail to apply a personal current account");
+            throw new Exception("Fail to apply a golden current account");
         }
     }
 
