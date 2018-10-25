@@ -847,8 +847,18 @@ public class CustomerApplyView extends JFrame {
         String contactNum = tf_contactNum.getText().trim();
         int isNewUser = 1;
 
-       CustomerApplyService.getInstance().applyPersonalAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                cardType, birthDate, address, email, contactNum, isNewUser);
+        try {
+            CustomerApplyService.getInstance().applyPersonalAccount(firstName, lastName, gender, identityType, identityNum, accountType,
+                    cardType, birthDate, address, email, contactNum, isNewUser);
+            JOptionPane.showMessageDialog(null,
+                    "Personal Account apply requested successful",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
     }
 
@@ -870,8 +880,18 @@ public class CustomerApplyView extends JFrame {
         String contactNum = tf_contactNum.getText().trim();
         int isNewUser = 1;
 
-        CustomerApplyService.getInstance().applyGoldenAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                cardType, birthDate, address, email, contactNum, isNewUser);
+        try {
+            CustomerApplyService.getInstance().applyGoldenAccount(firstName, lastName, gender, identityType, identityNum, accountType,
+                    cardType, birthDate, address, email, contactNum, isNewUser);
+            JOptionPane.showMessageDialog(null,
+                    "Golden Account apply requested successful",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
     }
 
@@ -900,8 +920,19 @@ public class CustomerApplyView extends JFrame {
         String studentId = tf_studentID.getText().trim();
         String schoolName = tf_schoolName.getText().trim();
 
-        CustomerApplyService.getInstance().applyStudentAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                cardType, birthDate, address, email, contactNum, isNewUser, graduateDate, studentId, schoolName);
+        try {
+            CustomerApplyService.getInstance().applyStudentAccount(firstName, lastName, gender, identityType, identityNum, accountType,
+                    cardType, birthDate, address, email, contactNum, isNewUser, graduateDate, studentId, schoolName);
+            JOptionPane.showMessageDialog(null,
+                    "Student Account apply requested successful",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
 
     }
 
@@ -928,8 +959,19 @@ public class CustomerApplyView extends JFrame {
         String parentFirstName = tf_parentFirstName.getText().trim();
         String parentLastName = tf_parentLastName.getText().trim();
 
-        CustomerApplyService.getInstance().applyYoungSaverAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                cardType, birthDate, address, email, contactNum, isNewUser, parentUserId, parentFirstName, parentLastName);
+        try {
+            CustomerApplyService.getInstance().applyYoungSaverAccount(firstName, lastName, gender, identityType, identityNum, accountType,
+                    cardType, birthDate, address, email, contactNum, isNewUser, parentUserId, parentFirstName, parentLastName);
+            JOptionPane.showMessageDialog(null,
+                    "Young saver Account apply requested successful",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
 
     }
 
