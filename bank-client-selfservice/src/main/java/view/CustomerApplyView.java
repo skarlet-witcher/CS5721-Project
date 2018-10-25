@@ -829,35 +829,6 @@ public class CustomerApplyView extends JFrame {
         youngSaverAccountPanel.setVisible(false);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    private void parentNameFieldValidator() {
-        try {
-            if(tf_parentFirstName.getText().length() <= 0 ||
-            tf_parentLastName.getText().length() <= 0) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your parent's first name and last name",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    "Please input valid parent's first name or last name",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-
     private void applyPersonalAccount() throws Exception {
         // basic info
         String firstName = tf_firstName.getText().trim();

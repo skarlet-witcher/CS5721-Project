@@ -226,6 +226,24 @@ public class CustomerExistingApply extends JFrame {
                 return;
             }
         }
+
+        if(cb_accountTypeList.getSelectedIndex() == 0) {
+
+        }
+        if(cb_accountTypeList.getSelectedIndex() == 1) {
+
+        }
+        if(cb_accountTypeList.getSelectedIndex() == 2) {
+
+        }
+        if(cb_accountTypeList.getSelectedIndex() == 3) {
+
+        }
+    }
+
+    private void applyPersonalAccount() {
+        long userId = Long.parseLong(tf_userId.getText().trim());
+        
     }
 
     private void initComponents() {

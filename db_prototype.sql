@@ -99,11 +99,11 @@ create table user_payee (
 DROP TABLE IF EXISTS `user_apply_archive`;
 create table user_apply_archive (
   id                bigint                        AUTO_INCREMENT PRIMARY KEY,
-  first_name        varchar(255) not null,
-  last_name         varchar(255) not null,
-  identity_id       varchar(50)  not null
+  first_name        varchar(255) ,
+  last_name         varchar(255) ,
+  identity_id       varchar(50)  
   comment 'passport/license id number',
-  identity_id_type  int          not null
+  identity_id_type  int          
   comment '1.passport 2.driver license',
   account_type      bigint       not null
   comment '1.current account 2.student current account 3.young saver account 4.golden older account',
@@ -121,12 +121,12 @@ create table user_apply_archive (
   comment 'if the account type is young savers account',
   parent_last_name  varchar(255)
   comment 'if the account type is young savers account',
-  birth_date        datetime     not null,
-  gender            int          not null
+  birth_date        datetime ,    
+  gender            int          
   comment '0.woman 1.man',
-  address           varchar(255) not null,
-  email             varchar(255) not null,
-  phone             varchar(20)  not null,
+  address           varchar(255) ,
+  email             varchar(255) ,
+  phone             varchar(20)  ,
   apply_time        datetime     not null,
   status            int          not null         default 0
   comment '0.pending for being approved 1.pass 2.deny',

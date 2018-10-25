@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
+
 public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLoginImplBase {
     private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
     private IUserCustomerLoginService customerLoginService = UserCustomerLoginService.getInstance();
@@ -128,6 +130,11 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
                     .build());
         }
         responseObserver.onCompleted();
+    }
+    @Override
+    public void validateExistingUser(UserValidateExistingUserRequest request,
+                                     StreamObserver<Response> responseObserver) {
+       long userId = request.getUserId();
     }
 
     @Override
