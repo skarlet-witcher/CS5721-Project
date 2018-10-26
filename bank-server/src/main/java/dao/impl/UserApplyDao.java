@@ -1,21 +1,22 @@
 package dao.impl;
 
+import dao.IUserApplyDao;
 import entity.UserApplyArchiveEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtils;
 
-public class IUserApplyDao implements dao.IUserApplyDao {
-    private static IUserApplyDao userApplyDao = null;
+public class UserApplyDao implements IUserApplyDao {
+    private static UserApplyDao userApplyDao = null;
     private Session session = HibernateUtils.getSessionFactory().openSession();
 
-    private IUserApplyDao() {
+    private UserApplyDao() {
 
     }
 
-    public static IUserApplyDao getInstance() {
+    public static UserApplyDao getInstance() {
         if(userApplyDao == null) {
-            userApplyDao = new IUserApplyDao();
+            userApplyDao = new UserApplyDao();
         }
         return userApplyDao;
     }

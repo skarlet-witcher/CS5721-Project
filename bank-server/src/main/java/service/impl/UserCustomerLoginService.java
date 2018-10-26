@@ -50,7 +50,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
         if (user.getStatus() == UserStatusType.BLOCKED) {
             throw FaultFactory.throwFaultException("Sorry, you have been blocked in case of security problems, please ask bank staff for farther assistance.");
         } else if (user.getStatus() == UserStatusType.DELETED || user.getStatus() == UserStatusType.PENDING_FOR_BEING_DELETED) {
-            throw FaultFactory.throwFaultException("Sorry, your user account has been removed from our bank system.");
+            throw FaultFactory.throwFaultException("Sorry, your model account has been removed from our bank system.");
         }
 
         Calendar birthDate = Calendar.getInstance();

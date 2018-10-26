@@ -69,10 +69,10 @@ public class CustomerApplyAuthView extends JFrame {
 
     private void btn_customer_nextActionPerformed(ActionEvent e) {
         if(cb_isExisting.getSelectedIndex() == 1) {
-            // user id validator
+            // model id validator
             if(tf_userId.getText().trim().length() <= 0) {
                 JOptionPane.showMessageDialog(null,
-                        "Please input user id",
+                        "Please input model id",
                         "Error Message", JOptionPane.ERROR_MESSAGE);
                 tf_userId.grabFocus();
                 return;

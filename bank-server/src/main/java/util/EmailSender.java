@@ -5,7 +5,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 public class EmailSender {
-    private String USER_NAME = "USERNAME";  // GMail user name (just the part before "@gmail.com")
+    private String USER_NAME = "USERNAME";  // GMail model name (just the part before "@gmail.com")
     private String PASSWORD = "PASSWORD"; // GMail password
     private String RECIPIENT = "";
     private static EmailSender emailSender = null;
@@ -38,7 +38,7 @@ public class EmailSender {
         String host = "smtp.gmail.com";
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", host);
-        props.put("mail.smtp.user", USER_NAME);
+        props.put("mail.smtp.model", USER_NAME);
         props.put("mail.smtp.password", PASSWORD);
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.auth", "true");

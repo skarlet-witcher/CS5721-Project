@@ -2,7 +2,7 @@ package model;
 
 public class UserAccountModel {
     private Long accountNum;
-    private Integer acountType;
+    private Integer accountType;
     private String bic;
     private String iban;
     private UserAccountCardModel userCard;
@@ -15,12 +15,12 @@ public class UserAccountModel {
         this.accountNum = accountNum;
     }
 
-    public Integer getAcountType() {
-        return acountType;
+    public Integer getAccountType() {
+        return accountType;
     }
 
-    public void setAcountType(Integer acountType) {
-        this.acountType = acountType;
+    public void setAccountType(Integer accountType) {
+        this.accountType = accountType;
     }
 
     public String getBic() {

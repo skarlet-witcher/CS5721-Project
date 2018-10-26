@@ -1,6 +1,6 @@
 package service.impl;
 
-import dao.impl.IUserApplyDao;
+import dao.impl.UserApplyDao;
 import dao.impl.UserDao;
 import entity.UserApplyArchiveEntity;
 import entity.UserEntity;
@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class UserCustomerApplyService implements IUserCustomerApplyService {
     private static UserCustomerApplyService userCustomerApplyService = null;
-    private IUserApplyDao userApplyDao = IUserApplyDao.getInstance();
+    private UserApplyDao userApplyDao = UserApplyDao.getInstance();
     private UserDao userDao = UserDao.getInstance();
 
     public static UserCustomerApplyService getInstance() {
@@ -159,10 +159,10 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
              result = userDao.selectUserByIdAndName(userId, firstName, lastName);
 
         } catch (Exception E) {
-            throw new Exception("check existing user fail");
+            throw new Exception("check existing model fail");
         }
         if(result == null){
-            throw new Exception("no existing user found");
+            throw new Exception("no existing model found");
         }
     }
 

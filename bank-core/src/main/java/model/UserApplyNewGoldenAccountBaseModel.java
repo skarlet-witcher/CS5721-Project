@@ -1,8 +1,6 @@
 package model;
 
-import java.sql.Timestamp;
-
-public class UserApplyNewGoldenAccountModel extends UserApplyNewRequestModel {
+public class UserApplyNewGoldenAccountBaseModel extends UserApplyNewRequestBaseModel {
     private Integer cardType;
 
     public Integer getCardType() {

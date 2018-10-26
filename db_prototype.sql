@@ -1,11 +1,11 @@
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `model`;
 CREATE TABLE user (
   id              BIGINT                 AUTO_INCREMENT PRIMARY KEY,
   user_id         bigint UNIQUE not null
-  comment 'user visible, for login. get by auto-generated',
+  comment 'model visible, for login. get by auto-generated',
   pin             varchar(6)    not null
   comment 'get by auto-generated 6 digit',
-  login_pin_digit varchar(3) comment '3 digit, represent which 3 of 6 digit user has to input. get by auto-generated',
+  login_pin_digit varchar(3) comment '3 digit, represent which 3 of 6 digit model has to input. get by auto-generated',
   first_name      varchar(255)  not null,
   last_name       varchar(255)  not null,
   gender          int           not null
@@ -36,7 +36,7 @@ create table user_account (
 );
 
 CREATE INDEX fk_user_id
-  ON user (id);
+  ON model (id);
 CREATE INDEX fk_account_type
   ON user_account_type (id);
 
@@ -133,7 +133,7 @@ create table user_apply_archive (
   remark            varchar(255) null             default ''
   comment 'Approved / reason for being denied.',
   user_id           bigint
-  comment 'after being approved, get connected to user id',
+  comment 'after being approved, get connected to model id',
   new_user_apply    int          not null
   comment '0.no 1.yes'
 );

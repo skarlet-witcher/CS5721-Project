@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class UserModel {
+    private Long id;
     private Long userId;
     private String firstName;
     private String lastName;
@@ -14,6 +15,15 @@ public class UserModel {
     private String contactNum;
     private List<UserAccountModel> userAccountList;
     private List<UserPayeeModel> userPayeeList;
+    private Timestamp lastLoginTime;
+
+    public Timestamp getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Timestamp lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
 
     public Long getUserId() {
         return userId;
@@ -93,5 +103,13 @@ public class UserModel {
 
     public void setUserPayeeList(List<UserPayeeModel> userPayeeList) {
         this.userPayeeList = userPayeeList;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -2,7 +2,8 @@ package model;
 
 import java.sql.Timestamp;
 
-public abstract class UserApplyNewRequestModel {
+public abstract class UserApplyNewRequestBaseModel {
+    private Long id;
     private String firstName;
     private String lastName;
     private Integer gender;
@@ -12,6 +13,59 @@ public abstract class UserApplyNewRequestModel {
     private String address;
     private String email;
     private String contactNum;
+    private Integer newUserApply;
+    private Long userId;
+    private Integer status;
+    private String remark;
+    private Timestamp applyTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getNewUserApply() {
+        return newUserApply;
+    }
+
+    public void setNewUserApply(Integer newUserApply) {
+        this.newUserApply = newUserApply;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Timestamp getApplyTime() {
+        return applyTime;
+    }
+
+    public void setApplyTime(Timestamp applyTime) {
+        this.applyTime = applyTime;
+    }
 
     public String getFirstName() {
         return firstName;

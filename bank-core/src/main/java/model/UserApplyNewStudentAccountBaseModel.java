@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Timestamp;
 
-public class UserApplyNewStudentAccountModel extends UserApplyNewRequestModel {
+public class UserApplyNewStudentAccountBaseModel extends UserApplyNewRequestBaseModel {
     private Integer cardType;
     private Timestamp graduateDate;
     private String studentId;

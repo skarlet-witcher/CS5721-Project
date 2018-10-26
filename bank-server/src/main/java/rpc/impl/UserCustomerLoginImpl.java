@@ -92,7 +92,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
 
         try {
             if(userId.toString().length() == 10) {
-                logger.info("check whether the existing user have duplicated apply");
+                logger.info("check whether the existing model have duplicated apply");
                 customerApplyService.checkDuplicateApply(userId,accountType,cardType);
             }
 

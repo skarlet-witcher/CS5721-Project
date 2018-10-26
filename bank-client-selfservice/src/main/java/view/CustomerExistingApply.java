@@ -190,7 +190,7 @@ public class CustomerExistingApply extends JFrame {
             }
             if(!tf_parentUserID.getText().trim().matches("^[0-9]*$")) {
                 JOptionPane.showMessageDialog(null,
-                        "Parent user id should only contain numbers",
+                        "Parent model id should only contain numbers",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 tf_parentUserID.grabFocus();
                 return;
@@ -488,7 +488,7 @@ public class CustomerExistingApply extends JFrame {
                 "[]"));
 
             //---- lbl_parentUserID ----
-            lbl_parentUserID.setText("Parent's user ID");
+            lbl_parentUserID.setText("Parent's model ID");
             youngSaverAccountPanel.add(lbl_parentUserID, "cell 1 1");
 
             //---- tf_parentUserID ----

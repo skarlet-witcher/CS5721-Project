@@ -1,6 +1,6 @@
 package model;
 
-public class UserApplyExistingYoungSaverAccountModel extends UserApplyExistingRequestModel {
+public class UserApplyNewYoungSaverAccountBaseModel extends UserApplyNewRequestBaseModel {
     private Integer cardType;
     private Long parentUserId;
     private String parentFirstName;
