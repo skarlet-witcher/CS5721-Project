@@ -22,7 +22,7 @@ public class CustomerApplyService implements ICustomerApplyService {
     public void applyPersonalAccount(String firstName, String lastName, int gender, int identityType,
                                      String identityNum, int accountType, int cardType, Timestamp birthDate,
                                      String address, String email, String phone, int isNewUser) throws Exception {
-        Response response = CustomerApplyRpc.getInstance().applyReq(
+        CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder()
                         .setFirstName(firstName)
                         .setLastName(lastName)
