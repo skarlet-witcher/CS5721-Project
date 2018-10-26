@@ -1,161 +1,154 @@
 package service.impl;
 
-import rpc.Response;
+import model.*;
 import rpc.UserApplyNewAccountRequest;
 import rpc.UserValidateExistingUserRequest;
 import rpc.client.CustomerApplyRpc;
 import service.ICustomerApplyService;
 import util.TimestampConvertHelper;
 
-import java.sql.Timestamp;
 
 public class CustomerApplyService implements ICustomerApplyService {
-    private static CustomerApplyService customerApplyService = null;
+    private static ICustomerApplyService customerApplyService = null;
 
-    public static CustomerApplyService getInstance() {
+    public static ICustomerApplyService getInstance() {
         if(customerApplyService == null) {
             customerApplyService = new CustomerApplyService();
         }
         return customerApplyService;
     }
-
-    public void applyPersonalAccount(String firstName, String lastName, int gender, int identityType,
-                                     String identityNum, int accountType, int cardType, Timestamp birthDate,
-                                     String address, String email, String phone, int isNewUser) throws Exception {
+    @Override
+    public void applyPersonalAccountForNewUser(UserApplyNewPersonalAccountBaseModel userApplyNewPersonalAccountBaseModel) throws Exception {
         CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder()
-                        .setFirstName(firstName)
-                        .setLastName(lastName)
-                        .setGender(gender)
-                        .setIdentityIdType(identityType)
-                        .setIdentityId(identityNum)
-                        .setAccountType(accountType)
-                        .setCardType(cardType)
-                        .setAddress(address)
-                        .setEmail(email)
-                        .setBirthDate(TimestampConvertHelper.mysqlToRpc(birthDate))
-                        .setPhone(phone)
-                        .setNewUserApply(isNewUser).build());
+                        .setFirstName(userApplyNewPersonalAccountBaseModel.getFirstName())
+                        .setLastName(userApplyNewPersonalAccountBaseModel.getLastName())
+                        .setGender(userApplyNewPersonalAccountBaseModel.getGender())
+                        .setIdentityIdType(userApplyNewPersonalAccountBaseModel.getIdentityType())
+                        .setIdentityId(userApplyNewPersonalAccountBaseModel.getIdentityNum())
+                        .setAccountType(userApplyNewPersonalAccountBaseModel.getAccountType())
+                        .setCardType(userApplyNewPersonalAccountBaseModel.getCardType())
+                        .setAddress(userApplyNewPersonalAccountBaseModel.getAddress())
+                        .setEmail(userApplyNewPersonalAccountBaseModel.getEmail())
+                        .setBirthDate(TimestampConvertHelper.mysqlToRpc(userApplyNewPersonalAccountBaseModel.getBirthDate()))
+                        .setPhone(userApplyNewPersonalAccountBaseModel.getContactNum())
+                        .setNewUserApply(userApplyNewPersonalAccountBaseModel.getNewUserApply()).build());
+
+    }
+    @Override
+    public void applyStudentAccountForNewUser(UserApplyNewStudentAccountBaseModel userApplyNewStudentAccountBaseModel) throws Exception {
+        CustomerApplyRpc.getInstance().applyReq(
+                UserApplyNewAccountRequest.newBuilder()
+                .setFirstName(userApplyNewStudentAccountBaseModel.getFirstName())
+                .setLastName(userApplyNewStudentAccountBaseModel.getLastName())
+                .setGender(userApplyNewStudentAccountBaseModel.getGender())
+                .setIdentityIdType(userApplyNewStudentAccountBaseModel.getIdentityType())
+                .setIdentityId(userApplyNewStudentAccountBaseModel.getIdentityNum())
+                .setAccountType(userApplyNewStudentAccountBaseModel.getAccountType())
+                .setCardType(userApplyNewStudentAccountBaseModel.getCardType())
+                .setAddress(userApplyNewStudentAccountBaseModel.getAddress())
+                .setEmail(userApplyNewStudentAccountBaseModel.getEmail())
+                .setBirthDate(TimestampConvertHelper.mysqlToRpc(userApplyNewStudentAccountBaseModel.getBirthDate()))
+                .setPhone(userApplyNewStudentAccountBaseModel.getContactNum())
+                .setGraduateDate(TimestampConvertHelper.mysqlToRpc(userApplyNewStudentAccountBaseModel.getGraduateDate()))
+                .setStudentId(userApplyNewStudentAccountBaseModel.getStudentId())
+                .setUniversityName(userApplyNewStudentAccountBaseModel.getSchoolName()).build());
 
     }
 
-    public void applyStudentAccount(String firstName, String lastName, int gender, int identityType,
-                                    String identityNum, int accountType, int cardType, Timestamp birthDate,
-                                    String address, String email, String phone, int isNewUser, Timestamp graduateDate, String studentId, String schoolName) throws Exception {
+    @Override
+    public void applyYoungSaverAccountForNewUser(UserApplyNewYoungSaverAccountBaseModel userApplyNewYoungSaverAccountBaseModel) throws Exception {
         CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setGender(gender)
-                .setIdentityIdType(identityType)
-                .setIdentityId(identityNum)
-                .setAccountType(accountType)
-                .setCardType(cardType)
-                .setAddress(address)
-                .setEmail(email)
-                .setBirthDate(TimestampConvertHelper.mysqlToRpc(birthDate))
-                .setPhone(phone)
-                .setGraduateDate(TimestampConvertHelper.mysqlToRpc(graduateDate))
-                .setStudentId(studentId)
-                .setUniversityName(schoolName).build());
-
-    }
-
-    public void applyYoungSaverAccount(String firstName, String lastName, int gender, int identityType,
-                                       String identityNum, int accountType, int cardType, Timestamp birthDate,
-                                       String address, String email, String phone, int isNewUser, long parentUserId, String parentFirstName, String parentLastName) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
-                UserApplyNewAccountRequest.newBuilder()
-                        .setFirstName(firstName)
-                        .setLastName(lastName)
-                        .setGender(gender)
-                        .setIdentityIdType(identityType)
-                        .setIdentityId(identityNum)
-                        .setAccountType(accountType)
-                        .setCardType(cardType)
-                        .setAddress(address)
-                        .setEmail(email)
-                        .setBirthDate(TimestampConvertHelper.mysqlToRpc(birthDate))
-                        .setPhone(phone)
-                        .setParentUserId(parentUserId)
-                        .setParentFirstName(parentFirstName)
-                        .setParentLastName(parentLastName)
-                        .setNewUserApply(isNewUser)
+                        .setFirstName(userApplyNewYoungSaverAccountBaseModel.getFirstName())
+                        .setLastName(userApplyNewYoungSaverAccountBaseModel.getLastName())
+                        .setGender(userApplyNewYoungSaverAccountBaseModel.getGender())
+                        .setIdentityIdType(userApplyNewYoungSaverAccountBaseModel.getIdentityType())
+                        .setIdentityId(userApplyNewYoungSaverAccountBaseModel.getIdentityNum())
+                        .setAccountType(userApplyNewYoungSaverAccountBaseModel.getAccountType())
+                        .setCardType(userApplyNewYoungSaverAccountBaseModel.getCardType())
+                        .setAddress(userApplyNewYoungSaverAccountBaseModel.getAddress())
+                        .setEmail(userApplyNewYoungSaverAccountBaseModel.getEmail())
+                        .setBirthDate(TimestampConvertHelper.mysqlToRpc(userApplyNewYoungSaverAccountBaseModel.getBirthDate()))
+                        .setPhone(userApplyNewYoungSaverAccountBaseModel.getContactNum())
+                        .setParentUserId(userApplyNewYoungSaverAccountBaseModel.getParentUserId())
+                        .setParentFirstName(userApplyNewYoungSaverAccountBaseModel.getParentFirstName())
+                        .setParentLastName(userApplyNewYoungSaverAccountBaseModel.getParentLastName())
+                        .setNewUserApply(userApplyNewYoungSaverAccountBaseModel.getNewUserApply())
                         .build());
 
     }
-
-    public void applyGoldenAccount(String firstName, String lastName, int gender, int identityType,
-                                   String identityNum, int accountType, int cardType, Timestamp birthDate,
-                                   String address, String email, String phone, int isNewUser) throws Exception {
+    @Override
+    public void applyGoldenAccountForNewUser(UserApplyNewGoldenAccountBaseModel userApplyNewGoldenAccountBaseModel) throws Exception {
         CustomerApplyRpc.getInstance().applyReq(
                 UserApplyNewAccountRequest.newBuilder()
-                        .setFirstName(firstName)
-                        .setLastName(lastName)
-                        .setGender(gender)
-                        .setIdentityIdType(identityType)
-                        .setIdentityId(identityNum)
-                        .setAccountType(accountType)
-                        .setCardType(cardType)
-                        .setAddress(address)
-                        .setEmail(email)
-                        .setBirthDate(TimestampConvertHelper.mysqlToRpc(birthDate))
-                        .setPhone(phone)
-                        .setNewUserApply(isNewUser)
+                        .setFirstName(userApplyNewGoldenAccountBaseModel.getFirstName())
+                        .setLastName(userApplyNewGoldenAccountBaseModel.getLastName())
+                        .setGender(userApplyNewGoldenAccountBaseModel.getGender())
+                        .setIdentityIdType(userApplyNewGoldenAccountBaseModel.getIdentityType())
+                        .setIdentityId(userApplyNewGoldenAccountBaseModel.getIdentityNum())
+                        .setAccountType(userApplyNewGoldenAccountBaseModel.getAccountType())
+                        .setCardType(userApplyNewGoldenAccountBaseModel.getCardType())
+                        .setAddress(userApplyNewGoldenAccountBaseModel.getAddress())
+                        .setEmail(userApplyNewGoldenAccountBaseModel.getEmail())
+                        .setBirthDate(TimestampConvertHelper.mysqlToRpc(userApplyNewGoldenAccountBaseModel.getBirthDate()))
+                        .setPhone(userApplyNewGoldenAccountBaseModel.getContactNum())
+                        .setNewUserApply(userApplyNewGoldenAccountBaseModel.getNewUserApply())
                         .build());
     }
 
-    public void checkExistingUserBeforeApply(long userId, String firstName, String lastName) throws Exception {
+    @Override
+    public void checkExistingUserBeforeApply(UserModel userModel) throws Exception {
         CustomerApplyRpc.getInstance().checkExistingUserBeforeApply(
-                UserValidateExistingUserRequest.newBuilder().setUserId(userId)
-                .setFirstName(firstName)
-                .setLastName(lastName).build());
+                UserValidateExistingUserRequest.newBuilder().setUserId(userModel.getUserId())
+                .setFirstName(userModel.getFirstName())
+                .setLastName(userModel.getLastName()).build());
     }
-
-    public void applyPersonalAccount(long userId, int accountType, int cardType, int isNewUser) throws Exception {
-        Response response = CustomerApplyRpc.getInstance().applyReq(
-                UserApplyNewAccountRequest.newBuilder().setUserId(userId)
-                .setAccountType(accountType)
-                .setCardType(cardType)
-                .setNewUserApply(isNewUser)
+    @Override
+    public void applyPersonalAccountForExistingUser(UserApplyNewPersonalAccountBaseModel userApplyNewPersonalAccountBaseModel) throws Exception {
+        CustomerApplyRpc.getInstance().applyReq(
+                UserApplyNewAccountRequest.newBuilder().setUserId(userApplyNewPersonalAccountBaseModel.getUserId())
+                .setAccountType(userApplyNewPersonalAccountBaseModel.getAccountType())
+                .setCardType(userApplyNewPersonalAccountBaseModel.getCardType())
+                .setNewUserApply(userApplyNewPersonalAccountBaseModel.getNewUserApply())
                 .build()
         );
     }
 
-    public void applyStudentAccount(long userId, int accountType, int cardType, int isNewUser,
-                                    Timestamp graduateDate, String studentId, String schoolName) throws Exception {
+    @Override
+    public void applyStudentAccountForExistingUser(UserApplyNewStudentAccountBaseModel userApplyNewStudentAccountBaseModel) throws Exception {
       CustomerApplyRpc.getInstance().applyReq(
-                UserApplyNewAccountRequest.newBuilder().setUserId(userId)
-                .setAccountType(accountType)
-                .setCardType(cardType)
-                .setGraduateDate(TimestampConvertHelper.mysqlToRpc(graduateDate))
-                .setStudentId(studentId)
-                .setUniversityName(schoolName)
-                .setNewUserApply(isNewUser).build()
+                UserApplyNewAccountRequest.newBuilder().setUserId(userApplyNewStudentAccountBaseModel.getUserId())
+                .setAccountType(userApplyNewStudentAccountBaseModel.getAccountType())
+                .setCardType(userApplyNewStudentAccountBaseModel.getAccountType())
+                .setGraduateDate(TimestampConvertHelper.mysqlToRpc(userApplyNewStudentAccountBaseModel.getGraduateDate()))
+                .setStudentId(userApplyNewStudentAccountBaseModel.getStudentId())
+                .setUniversityName(userApplyNewStudentAccountBaseModel.getSchoolName())
+                .setNewUserApply(userApplyNewStudentAccountBaseModel.getNewUserApply()).build()
         );
     }
 
-    public void applyYoungSaverAccount(long userId, int accountType, int cardType, int isNewUser,
-                                       long parentUserId, String parentFirstName, String parentLastName) throws Exception {
-        Response response = CustomerApplyRpc.getInstance().applyReq(
-                UserApplyNewAccountRequest.newBuilder().setUserId(userId)
-                .setAccountType(accountType)
-                .setCardType(cardType)
-                .setNewUserApply(isNewUser)
-                .setParentUserId(parentUserId)
-                .setParentFirstName(parentFirstName)
-                .setParentLastName(parentLastName)
+    @Override
+    public void applyYoungSaverAccountForExistingUser(UserApplyNewYoungSaverAccountBaseModel userApplyNewYoungSaverAccountBaseModel) throws Exception {
+        CustomerApplyRpc.getInstance().applyReq(
+                UserApplyNewAccountRequest.newBuilder().setUserId(userApplyNewYoungSaverAccountBaseModel.getUserId())
+                .setAccountType(userApplyNewYoungSaverAccountBaseModel.getAccountType())
+                .setCardType(userApplyNewYoungSaverAccountBaseModel.getCardType())
+                .setNewUserApply(userApplyNewYoungSaverAccountBaseModel.getNewUserApply())
+                .setParentUserId(userApplyNewYoungSaverAccountBaseModel.getParentUserId())
+                .setParentFirstName(userApplyNewYoungSaverAccountBaseModel.getParentFirstName())
+                .setParentLastName(userApplyNewYoungSaverAccountBaseModel.getParentLastName())
                 .build()
         );
 
     }
-
-    public void applyGoldenAccount(long userId, int accountType, int cardType, int isNewUser) throws Exception {
-        Response response = CustomerApplyRpc.getInstance().applyReq(
-                UserApplyNewAccountRequest.newBuilder().setUserId(userId)
-                        .setAccountType(accountType)
-                        .setCardType(cardType)
-                        .setNewUserApply(isNewUser)
+    @Override
+    public void applyGoldenAccountForExistingUser(UserApplyNewGoldenAccountBaseModel userApplyNewGoldenAccountBaseModel) throws Exception {
+        CustomerApplyRpc.getInstance().applyReq(
+                UserApplyNewAccountRequest.newBuilder().setUserId(userApplyNewGoldenAccountBaseModel.getUserId())
+                        .setAccountType(userApplyNewGoldenAccountBaseModel.getAccountType())
+                        .setCardType(userApplyNewGoldenAccountBaseModel.getCardType())
+                        .setNewUserApply(userApplyNewGoldenAccountBaseModel.getNewUserApply())
                         .build()
         );
     }

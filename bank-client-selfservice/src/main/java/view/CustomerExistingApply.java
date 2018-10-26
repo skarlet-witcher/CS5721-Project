@@ -9,6 +9,8 @@ import java.awt.event.*;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import javax.swing.*;
+
+import model.*;
 import net.miginfocom.swing.*;
 import service.impl.CustomerApplyService;
 import util.JTextFieldLimit;
@@ -17,9 +19,9 @@ import util.JTextFieldLimit;
  * @author xiangkai22
  */
 public class CustomerExistingApply extends JFrame {
-    public CustomerExistingApply(String userId) {
+    public CustomerExistingApply(Long userId, int identityType, String identityNum) {
         initComponents();
-        initTextField(userId);
+        initTextField(userId, identityType, identityNum);
         resetAccountField();
     }
 
@@ -61,9 +63,12 @@ public class CustomerExistingApply extends JFrame {
         this.setVisible(true);
     }
 
-    private void initTextField(String userId) {
+    private void initTextField(Long userId, int identityType, String identityNum) {
         this.userId = userId;
-        tf_userId.setText(this.userId);
+        this.identityType = identityType;
+        this.identityNum = identityNum;
+
+        tf_userId.setText(this.userId.toString());
 
         tf_graduateMonth.setDocument(new JTextFieldLimit(2));
         tf_graduateYear.setDocument(new JTextFieldLimit(4));
@@ -251,13 +256,19 @@ public class CustomerExistingApply extends JFrame {
         }
     }
 
-    private void applyPersonalAccount() throws Exception {
+    private void applyPersonalAccount() {
         long userId = Long.parseLong(tf_userId.getText().trim());
         int accountType = cb_accountTypeList.getSelectedIndex() + 1;
         int cardType = cb_cardTypeList.getSelectedIndex() + 1;
-        int isNewUser = 0;
+        int newUserApply = 0;
         try {
-            CustomerApplyService.getInstance().applyPersonalAccount(userId, accountType, cardType, isNewUser);
+            UserApplyNewPersonalAccountBaseModel userApplyNewPersonalAccountBaseModel = (UserApplyNewPersonalAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
+            userApplyNewPersonalAccountBaseModel.setUserId(userId);
+            userApplyNewPersonalAccountBaseModel.setAccountType(accountType);
+            userApplyNewPersonalAccountBaseModel.setCardType(cardType);
+            userApplyNewPersonalAccountBaseModel.setNewUserApply(newUserApply);
+
+            CustomerApplyService.getInstance().applyPersonalAccountForExistingUser(userApplyNewPersonalAccountBaseModel);
             JOptionPane.showMessageDialog(null,
                     "Personal Account apply requested successful",
                     "Success Message",JOptionPane.INFORMATION_MESSAGE);
@@ -270,12 +281,12 @@ public class CustomerExistingApply extends JFrame {
 
     }
 
-    private void applyStudentAccount() throws Exception {
+    private void applyStudentAccount() {
         // basic info
         long userId = Long.parseLong(tf_userId.getText().trim());
         int accountType = cb_accountTypeList.getSelectedIndex() + 1;
         int cardType = cb_cardTypeList.getSelectedIndex() + 1;
-        int isNewUser = 0;
+        int newUserApply = 0;
 
         // student account info
         String graduateDateText = tf_graduateYear.getText().trim() + "-" + tf_graduateMonth.getText().trim() +"-01 " +"00:00:00";
@@ -284,7 +295,16 @@ public class CustomerExistingApply extends JFrame {
         String schoolName = tf_schoolName.getText().trim();
 
         try {
-            CustomerApplyService.getInstance().applyStudentAccount(userId, accountType, cardType, isNewUser, graduateDate, studentId, schoolName);
+            UserApplyNewStudentAccountBaseModel userApplyNewStudentAccountBaseModel = (UserApplyNewStudentAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
+            userApplyNewStudentAccountBaseModel.setUserId(userId);
+            userApplyNewStudentAccountBaseModel.setAccountType(accountType);
+            userApplyNewStudentAccountBaseModel.setCardType(cardType);
+            userApplyNewStudentAccountBaseModel.setNewUserApply(newUserApply);
+            userApplyNewStudentAccountBaseModel.setGraduateDate(graduateDate);
+            userApplyNewStudentAccountBaseModel.setStudentId(studentId);
+            userApplyNewStudentAccountBaseModel.setSchoolName(schoolName);
+
+            CustomerApplyService.getInstance().applyStudentAccountForExistingUser(userApplyNewStudentAccountBaseModel);
             JOptionPane.showMessageDialog(null,
                     "Student Account apply requested successful",
                     "Success Message",JOptionPane.INFORMATION_MESSAGE);
@@ -296,12 +316,12 @@ public class CustomerExistingApply extends JFrame {
         }
     }
 
-    private void applyYoungSaverAccount() throws Exception {
+    private void applyYoungSaverAccount() {
         // basic info
         long userId = Long.parseLong(tf_userId.getText().trim());
         int accountType = cb_accountTypeList.getSelectedIndex() + 1;
         int cardType = cb_cardTypeList.getSelectedIndex() + 1;
-        int isNewUser = 0;
+        int newUserApply = 0;
 
         // young saver info
         long parentUserId = Long.parseLong(tf_parentUserID.getText().trim());
@@ -309,7 +329,16 @@ public class CustomerExistingApply extends JFrame {
         String parentLastName = tf_parentLastName.getText().trim();
 
         try {
-            CustomerApplyService.getInstance().applyYoungSaverAccount(userId, accountType, cardType, isNewUser, parentUserId, parentFirstName, parentLastName);
+            UserApplyNewYoungSaverAccountBaseModel userApplyNewYoungSaverAccountBaseModel = (UserApplyNewYoungSaverAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
+            userApplyNewYoungSaverAccountBaseModel.setUserId(userId);
+            userApplyNewYoungSaverAccountBaseModel.setAccountType(accountType);
+            userApplyNewYoungSaverAccountBaseModel.setCardType(cardType);
+            userApplyNewYoungSaverAccountBaseModel.setNewUserApply(newUserApply);
+            userApplyNewYoungSaverAccountBaseModel.setParentUserId(parentUserId);
+            userApplyNewYoungSaverAccountBaseModel.setParentFirstName(parentFirstName);
+            userApplyNewYoungSaverAccountBaseModel.setParentLastName(parentLastName);
+
+            CustomerApplyService.getInstance().applyYoungSaverAccountForExistingUser(userApplyNewYoungSaverAccountBaseModel);
             JOptionPane.showMessageDialog(null,
                     "Young saver Account apply requested successful",
                     "Success Message",JOptionPane.INFORMATION_MESSAGE);
@@ -321,15 +350,21 @@ public class CustomerExistingApply extends JFrame {
         }
     }
 
-    private void applyGoldenAccount() throws Exception {
+    private void applyGoldenAccount() {
         // basic info
         long userId = Long.parseLong(tf_userId.getText().trim());
         int accountType = cb_accountTypeList.getSelectedIndex() + 1;
         int cardType = cb_cardTypeList.getSelectedIndex() + 1;
-        int isNewUser = 0;
+        int newUserApply = 0;
 
         try {
-            CustomerApplyService.getInstance().applyGoldenAccount(userId, accountType, cardType, isNewUser);
+            UserApplyNewGoldenAccountBaseModel userApplyNewGoldenAccountBaseModel = (UserApplyNewGoldenAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
+            userApplyNewGoldenAccountBaseModel.setUserId(userId);
+            userApplyNewGoldenAccountBaseModel.setAccountType(accountType);
+            userApplyNewGoldenAccountBaseModel.setCardType(cardType);
+            userApplyNewGoldenAccountBaseModel.setNewUserApply(newUserApply);
+
+            CustomerApplyService.getInstance().applyGoldenAccountForExistingUser(userApplyNewGoldenAccountBaseModel);
             JOptionPane.showMessageDialog(null,
                     "Golden Account apply requested successful",
                     "Success Message",JOptionPane.INFORMATION_MESSAGE);
@@ -560,5 +595,7 @@ public class CustomerExistingApply extends JFrame {
     private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    private String userId;
+    private Long userId;
+    private int identityType;
+    private String identityNum;
 }

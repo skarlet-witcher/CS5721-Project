@@ -7,6 +7,8 @@ package view;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import model.UserModel;
 import net.miginfocom.swing.*;
 import service.impl.CustomerApplyService;
 import util.JTextFieldLimit;
@@ -147,14 +149,19 @@ public class CustomerApplyAuthView extends JFrame {
             }
         }
 
-        long userId = Long.parseLong(tf_userId.getText().trim());
+        Long userId = Long.parseLong(tf_userId.getText().trim());
         String firstName = tf_firstName.getText().trim();
         String lastName = tf_lastName.getText().trim();
         int identityType = cb_identityTypeList.getSelectedIndex();
         String identityNum = tf_identityNum.getText().trim();
 
+        UserModel userModel = new UserModel();
+        userModel.setUserId(userId);
+        userModel.setFirstName(firstName);
+        userModel.setLastName(lastName);
+
         try {
-            CustomerApplyService.getInstance().checkExistingUserBeforeApply(userId, firstName, lastName);
+            CustomerApplyService.getInstance().checkExistingUserBeforeApply(userModel);
 
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
@@ -164,7 +171,7 @@ public class CustomerApplyAuthView extends JFrame {
             return;
         }
         this.dispose();
-        new CustomerExistingApply(tf_userId.getText().trim()).run();
+        new CustomerExistingApply(userId, identityType, identityNum).run();
     }
 
 

@@ -5,6 +5,7 @@ public class UserApplyNewYoungSaverAccountBaseModel extends UserApplyNewRequestB
     private Long parentUserId;
     private String parentFirstName;
     private String parentLastName;
+    private Integer accountType;
 
     public Integer getCardType() {
         return cardType;
@@ -36,5 +37,13 @@ public class UserApplyNewYoungSaverAccountBaseModel extends UserApplyNewRequestB
 
     public void setParentLastName(String parentLastName) {
         this.parentLastName = parentLastName;
+    }
+
+    public Integer getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(Integer accountType) {
+        this.accountType = accountType;
     }
 }

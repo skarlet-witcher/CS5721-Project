@@ -7,6 +7,7 @@ public class UserApplyNewStudentAccountBaseModel extends UserApplyNewRequestBase
     private Timestamp graduateDate;
     private String studentId;
     private String schoolName;
+    private Integer accountType;
 
     public Integer getCardType() {
         return cardType;
@@ -38,5 +39,13 @@ public class UserApplyNewStudentAccountBaseModel extends UserApplyNewRequestBase
 
     public void setSchoolName(String schoolName) {
         this.schoolName = schoolName;
+    }
+
+    public Integer getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(Integer accountType) {
+        this.accountType = accountType;
     }
 }

@@ -4,6 +4,7 @@
 
 package view;
 
+import model.*;
 import net.miginfocom.swing.MigLayout;
 import rpc.client.CustomerApplyRpc;
 import service.impl.CustomerApplyService;
@@ -802,7 +803,7 @@ public class CustomerApplyView extends JFrame {
         tf_graduateMonth.setDocument(new JTextFieldLimit(2));
         tf_graduateYear.setDocument(new JTextFieldLimit(4));
         tf_studentID.setDocument(new JTextFieldLimit(8));
-        tf_parentUserID.setDocument(new JTextFieldLimit(13));
+        tf_parentUserID.setDocument(new JTextFieldLimit(10));
         tf_firstName.setDocument(new JTextFieldLimit(20));
         tf_lastName.setDocument(new JTextFieldLimit(20));
         tf_identityNum.setDocument(new JTextFieldLimit(25));
@@ -829,7 +830,7 @@ public class CustomerApplyView extends JFrame {
         youngSaverAccountPanel.setVisible(false);
     }
 
-    private void applyPersonalAccount() throws Exception {
+    private void applyPersonalAccount() {
         // basic info
         String firstName = tf_firstName.getText().trim();
         String lastName = tf_lastName.getText().trim();
@@ -845,11 +846,24 @@ public class CustomerApplyView extends JFrame {
         String address = tf_address.getText().trim();
         String email = tf_email.getText().trim();
         String contactNum = tf_contactNum.getText().trim();
-        int isNewUser = 1;
+        int newUserApply = 1;
 
         try {
-            CustomerApplyService.getInstance().applyPersonalAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                    cardType, birthDate, address, email, contactNum, isNewUser);
+            UserApplyNewPersonalAccountBaseModel userApplyNewPersonalAccountBaseModel = (UserApplyNewPersonalAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
+            userApplyNewPersonalAccountBaseModel.setFirstName(firstName);
+            userApplyNewPersonalAccountBaseModel.setLastName(lastName);
+            userApplyNewPersonalAccountBaseModel.setIdentityNum(identityNum);
+            userApplyNewPersonalAccountBaseModel.setIdentityType(identityType);
+            userApplyNewPersonalAccountBaseModel.setCardType(cardType);
+            userApplyNewPersonalAccountBaseModel.setBirthDate(birthDate);
+            userApplyNewPersonalAccountBaseModel.setAccountType(accountType);
+            userApplyNewPersonalAccountBaseModel.setGender(gender);
+            userApplyNewPersonalAccountBaseModel.setAddress(address);
+            userApplyNewPersonalAccountBaseModel.setEmail(email);
+            userApplyNewPersonalAccountBaseModel.setContactNum(contactNum);
+            userApplyNewPersonalAccountBaseModel.setNewUserApply(newUserApply);
+
+            CustomerApplyService.getInstance().applyPersonalAccountForNewUser(userApplyNewPersonalAccountBaseModel);
             JOptionPane.showMessageDialog(null,
                     "Personal Account apply requested successful",
                     "Success Message",JOptionPane.INFORMATION_MESSAGE);
@@ -878,11 +892,25 @@ public class CustomerApplyView extends JFrame {
         String address = tf_address.getText().trim();
         String email = tf_email.getText().trim();
         String contactNum = tf_contactNum.getText().trim();
-        int isNewUser = 1;
+        int newUserApply = 1;
 
         try {
-            CustomerApplyService.getInstance().applyGoldenAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                    cardType, birthDate, address, email, contactNum, isNewUser);
+            UserApplyNewGoldenAccountBaseModel userApplyNewGoldenAccountBaseModel = (UserApplyNewGoldenAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
+            userApplyNewGoldenAccountBaseModel.setFirstName(firstName);
+            userApplyNewGoldenAccountBaseModel.setLastName(lastName);
+            userApplyNewGoldenAccountBaseModel.setIdentityNum(identityNum);
+            userApplyNewGoldenAccountBaseModel.setIdentityType(identityType);
+            userApplyNewGoldenAccountBaseModel.setAccountType(accountType);
+            userApplyNewGoldenAccountBaseModel.setCardType(cardType);
+            userApplyNewGoldenAccountBaseModel.setBirthDate(birthDate);
+            userApplyNewGoldenAccountBaseModel.setGender(gender);
+            userApplyNewGoldenAccountBaseModel.setAddress(address);
+            userApplyNewGoldenAccountBaseModel.setEmail(email);
+            userApplyNewGoldenAccountBaseModel.setContactNum(contactNum);
+            userApplyNewGoldenAccountBaseModel.setNewUserApply(newUserApply);
+
+
+            CustomerApplyService.getInstance().applyGoldenAccountForNewUser(userApplyNewGoldenAccountBaseModel);
             JOptionPane.showMessageDialog(null,
                     "Golden Account apply requested successful",
                     "Success Message",JOptionPane.INFORMATION_MESSAGE);
@@ -911,7 +939,7 @@ public class CustomerApplyView extends JFrame {
         String address = tf_address.getText().trim();
         String email = tf_email.getText().trim();
         String contactNum = tf_contactNum.getText().trim();
-        int isNewUser = 1;
+        int newUserApply = 1;
 
         // student account Info
         // TO-DO month and day with one digit ????
@@ -921,8 +949,25 @@ public class CustomerApplyView extends JFrame {
         String schoolName = tf_schoolName.getText().trim();
 
         try {
-            CustomerApplyService.getInstance().applyStudentAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                    cardType, birthDate, address, email, contactNum, isNewUser, graduateDate, studentId, schoolName);
+            UserApplyNewStudentAccountBaseModel userApplyNewStudentAccountBaseModel = (UserApplyNewStudentAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
+            userApplyNewStudentAccountBaseModel.setFirstName(firstName);
+            userApplyNewStudentAccountBaseModel.setLastName(lastName);
+            userApplyNewStudentAccountBaseModel.setIdentityNum(identityNum);
+            userApplyNewStudentAccountBaseModel.setIdentityType(identityType);
+            userApplyNewStudentAccountBaseModel.setAccountType(accountType);
+            userApplyNewStudentAccountBaseModel.setCardType(cardType);
+            userApplyNewStudentAccountBaseModel.setBirthDate(birthDate);
+            userApplyNewStudentAccountBaseModel.setGender(gender);
+            userApplyNewStudentAccountBaseModel.setAddress(address);
+            userApplyNewStudentAccountBaseModel.setEmail(email);
+            userApplyNewStudentAccountBaseModel.setContactNum(contactNum);
+            userApplyNewStudentAccountBaseModel.setNewUserApply(newUserApply);
+            userApplyNewStudentAccountBaseModel.setGraduateDate(graduateDate);
+            userApplyNewStudentAccountBaseModel.setStudentId(studentId);
+            userApplyNewStudentAccountBaseModel.setSchoolName(schoolName);
+
+
+            CustomerApplyService.getInstance().applyStudentAccountForNewUser(userApplyNewStudentAccountBaseModel);
             JOptionPane.showMessageDialog(null,
                     "Student Account apply requested successful",
                     "Success Message",JOptionPane.INFORMATION_MESSAGE);
@@ -952,7 +997,7 @@ public class CustomerApplyView extends JFrame {
         String address = tf_address.getText().trim();
         String email = tf_email.getText().trim();
         String contactNum = tf_contactNum.getText().trim();
-        int isNewUser = 1;
+        int newUserApply = 1;
 
         // young saver info
         long parentUserId = Long.parseLong(tf_parentUserID.getText().trim());
@@ -960,8 +1005,24 @@ public class CustomerApplyView extends JFrame {
         String parentLastName = tf_parentLastName.getText().trim();
 
         try {
-            CustomerApplyService.getInstance().applyYoungSaverAccount(firstName, lastName, gender, identityType, identityNum, accountType,
-                    cardType, birthDate, address, email, contactNum, isNewUser, parentUserId, parentFirstName, parentLastName);
+            UserApplyNewYoungSaverAccountBaseModel userApplyNewYoungSaverAccountBaseModel = (UserApplyNewYoungSaverAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
+            userApplyNewYoungSaverAccountBaseModel.setFirstName(firstName);
+            userApplyNewYoungSaverAccountBaseModel.setLastName(lastName);
+            userApplyNewYoungSaverAccountBaseModel.setIdentityNum(identityNum);
+            userApplyNewYoungSaverAccountBaseModel.setIdentityType(identityType);
+            userApplyNewYoungSaverAccountBaseModel.setAccountType(accountType);
+            userApplyNewYoungSaverAccountBaseModel.setCardType(cardType);
+            userApplyNewYoungSaverAccountBaseModel.setBirthDate(birthDate);
+            userApplyNewYoungSaverAccountBaseModel.setGender(gender);
+            userApplyNewYoungSaverAccountBaseModel.setAddress(address);
+            userApplyNewYoungSaverAccountBaseModel.setEmail(email);
+            userApplyNewYoungSaverAccountBaseModel.setContactNum(contactNum);
+            userApplyNewYoungSaverAccountBaseModel.setNewUserApply(newUserApply);
+            userApplyNewYoungSaverAccountBaseModel.setParentUserId(parentUserId);
+            userApplyNewYoungSaverAccountBaseModel.setParentFirstName(parentFirstName);
+            userApplyNewYoungSaverAccountBaseModel.setParentLastName(parentLastName);
+
+            CustomerApplyService.getInstance().applyYoungSaverAccountForNewUser(userApplyNewYoungSaverAccountBaseModel);
             JOptionPane.showMessageDialog(null,
                     "Young saver Account apply requested successful",
                     "Success Message",JOptionPane.INFORMATION_MESSAGE);
