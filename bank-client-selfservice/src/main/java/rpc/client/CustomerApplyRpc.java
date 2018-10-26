@@ -1,5 +1,6 @@
 package rpc.client;
 
+import Const.ResponseStatusType;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import rpc.*;
@@ -34,7 +35,7 @@ public class CustomerApplyRpc {
 
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
-        if (response.getStatusCode() == 200) {
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info(applyAccountRequest.getFirstName() + " apply request successful.");
             return response;
         } else {
@@ -55,7 +56,7 @@ public class CustomerApplyRpc {
 
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
-        if (response.getStatusCode() == 200) {
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info(userValidateExistingUserRequest.getUserId() + " validation request successful.");
             return response;
         } else {

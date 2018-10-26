@@ -5,6 +5,7 @@ import dao.impl.UserDao;
 import entity.UserApplyArchiveEntity;
 import entity.UserEntity;
 import service.IUserCustomerApplyService;
+import util.FaultFactory;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -43,7 +44,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setUserId(userId);
             userApplyDao.requestAccountApply(UserApplyArchiveEntity);
         } catch (Exception e) {
-            throw new Exception("Fail to apply a personal current account");
+            FaultFactory.throwFaultException("Fail to apply a personal current account");
         }
     }
 
@@ -76,7 +77,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             userApplyDao.requestAccountApply(UserApplyArchiveEntity);
 
         } catch (Exception e) {
-            throw new Exception("Fail to apply a student current account");
+            FaultFactory.throwFaultException("Fail to apply a student current account");
         }
     }
 
@@ -84,7 +85,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
     public void requestYoungSaverAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType, Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser, long parentUserId, String parentFirstName, String parentLastName, long userId) throws Exception {
 
             UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
-            UserEntity result;
+            UserEntity result = null;
             UserEntity UserEntity = new UserEntity();
             UserApplyArchiveEntity.setFirstName(firstName);
             UserApplyArchiveEntity.setLastName(lastName);
@@ -113,10 +114,10 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
         try {
              result = userDao.selectUserByIdAndName(parentUserId, parentFirstName, parentLastName);
         } catch (Exception e) {
-            throw new Exception("Fail to apply a young saver account");
+            FaultFactory.throwFaultException("Fail to apply a young saver account");
         }
         if(result == null) {
-            throw new Exception("parent info does not exist!");
+            FaultFactory.throwFaultException("parent info does not exist!");
         }
         userApplyDao.requestAccountApply(UserApplyArchiveEntity);
     }
@@ -144,13 +145,13 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setUserId(userId);
             userApplyDao.requestAccountApply(UserApplyArchiveEntity);
         } catch (Exception e) {
-            throw new Exception("Fail to apply a golden current account");
+            FaultFactory.throwFaultException("Fail to apply a golden current account");
         }
     }
 
     @Override
     public void checkExistingUserBeforeApply(long userId, String firstName, String lastName) throws Exception {
-        UserEntity result;
+        UserEntity result = null;
         UserEntity userEntity = new UserEntity();
         userEntity.setUserId(userId);
         userEntity.setFirstName(firstName);
@@ -159,16 +160,16 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
              result = userDao.selectUserByIdAndName(userId, firstName, lastName);
 
         } catch (Exception E) {
-            throw new Exception("check existing model fail");
+            FaultFactory.throwFaultException("check existing model fail");
         }
         if(result == null){
-            throw new Exception("no existing model found");
+            FaultFactory.throwFaultException("no existing model found");
         }
     }
 
     @Override
     public void checkDuplicateApply(long userId, int accountType, int cardType) throws Exception {
-            UserApplyArchiveEntity result;
+            UserApplyArchiveEntity result = null;
             UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
             UserApplyArchiveEntity.setUserId(userId);
             UserApplyArchiveEntity.setAccountType(accountType);
@@ -177,7 +178,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
              result = userApplyDao.selectApplyByUserId(UserApplyArchiveEntity);
 
         } catch (Exception E) {
-            throw new Exception("duplicate apply operation fail");
+            FaultFactory.throwFaultException("duplicate apply operation fail");
         }
         if(result != null) {
             throw new Exception("duplicate apply detected");
