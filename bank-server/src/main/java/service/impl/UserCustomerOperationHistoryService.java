@@ -6,9 +6,9 @@ import Const.UserOperateStatusType;
 import Const.UserOperateType;
 import Const.UserStatusType;
 import dao.IUserDao;
-import dao.IUserOperationHistoryDao;
+import dao.IUserHistoryDao;
 import dao.impl.UserDao;
-import dao.impl.UserOperationHistoryDao;
+import dao.impl.UserHistoryDao;
 import entity.UserHistoryEntity;
 import service.IUserCustomerOperationHistoryService;
 import util.OperationNoGenerator;
@@ -21,7 +21,7 @@ public class UserCustomerOperationHistoryService implements IUserCustomerOperati
 
     private static UserCustomerOperationHistoryService instance = null;
     private IUserDao userDao = UserDao.getInstance();
-    private IUserOperationHistoryDao operationHistoryDao = UserOperationHistoryDao.getInstance();
+    private IUserHistoryDao operationHistoryDao = UserHistoryDao.getInstance();
     private OperationNoGenerator operationNoGenerator = OperationNoGenerator.getInstance();
 
     public static UserCustomerOperationHistoryService getInstance() {

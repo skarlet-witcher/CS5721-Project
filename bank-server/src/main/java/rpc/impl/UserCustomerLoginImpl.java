@@ -6,15 +6,13 @@ import service.IUserCustomerApplyService;
 import service.IUserCustomerLoginService;
 import service.impl.UserCustomerApplyService;
 import service.impl.UserCustomerLoginService;
-import util.ResponseBuilder;
+import util.ResponseBuilderFactory;
 import util.TimestampConvertHelper;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
-
-import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLoginImplBase {
     private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
@@ -32,11 +30,11 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         try {
             UserLoginReqReply userLoginReqReply = customerLoginService.LoginReq(userId, phoneLast4, birthDay, birthMon, birthYear);
 
-            responseObserver.onNext(ResponseBuilder.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .setUserLoginReqReply(userLoginReqReply)
                     .build());
         } catch (Exception e) {
-            responseObserver.onNext(ResponseBuilder.ResponseFailBuilder(e.getMessage())
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getMessage())
                     .build());
         }
         responseObserver.onCompleted();
@@ -55,11 +53,11 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         try {
             UserLoginReply loginReply = customerLoginService.LoginByUserIdAndPin(request.getUserId(), pin);
 
-            responseObserver.onNext(ResponseBuilder.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .setUserLoginReply(loginReply)
                     .build());
         } catch (Exception e) {
-            responseObserver.onNext(ResponseBuilder.ResponseFailBuilder(e.getMessage())
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getMessage())
                     .build());
         }
         responseObserver.onCompleted();
@@ -122,12 +120,12 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
                         birthDate, gender, address, email, phone, isNewUser, userId);
             }
 
-            responseObserver.onNext(ResponseBuilder.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .build());
 
 
         } catch (Exception E) {
-            responseObserver.onNext(ResponseBuilder.ResponseFailBuilder(E.getMessage())
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
                     .build());
         }
         responseObserver.onCompleted();
@@ -143,10 +141,10 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         try {
             logger.info("ready to checkExistingUserBeforeApply");
             customerApplyService.checkExistingUserBeforeApply(userId, firstName, lastName);
-            responseObserver.onNext(ResponseBuilder.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .build());
         } catch (Exception e) {
-            responseObserver.onNext(ResponseBuilder.ResponseFailBuilder(e.getMessage())
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getMessage())
                     .build());
         }
         responseObserver.onCompleted();

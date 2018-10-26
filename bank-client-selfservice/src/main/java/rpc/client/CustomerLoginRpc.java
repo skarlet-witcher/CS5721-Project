@@ -1,5 +1,6 @@
 package rpc.client;
 
+import Const.ResponseStatusType;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import rpc.Response;
@@ -36,7 +37,7 @@ public class CustomerLoginRpc {
 
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
-        if (response.getStatusCode() == 200) {
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info(loginReqRequest.getUserId() + " login request detail check successful.");
             return response.getUserLoginReqReply();
         } else {

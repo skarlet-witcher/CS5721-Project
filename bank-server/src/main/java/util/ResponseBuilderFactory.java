@@ -3,7 +3,7 @@ package util;
 import Const.ResponseStatusType;
 import rpc.Response;
 
-public class ResponseBuilder {
+public class ResponseBuilderFactory {
     public static Response.Builder ResponseSuccessBuilder() {
         return Response.newBuilder().setStatusCode(ResponseStatusType.SUCCESS);
     }

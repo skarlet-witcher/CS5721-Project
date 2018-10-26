@@ -4,7 +4,7 @@ import entity.UserHistoryEntity;
 
 import java.util.List;
 
-public interface IUserOperationHistoryDao {
+public interface IUserHistoryDao {
 
     void addOperationHistory(UserHistoryEntity operationHistory);
 

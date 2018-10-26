@@ -3,15 +3,16 @@ package service.impl;
 import Const.UserOperateStatusType;
 import Const.UserStatusType;
 import dao.IUserDao;
-import dao.IUserOperationHistoryDao;
+import dao.IUserHistoryDao;
 import dao.impl.UserDao;
-import dao.impl.UserOperationHistoryDao;
+import dao.impl.UserHistoryDao;
 import entity.UserEntity;
 import entity.UserHistoryEntity;
 import rpc.UserLoginReply;
 import rpc.UserLoginReqReply;
 import service.IUserCustomerLoginService;
 import service.IUserCustomerOperationHistoryService;
+import util.FaultFactory;
 import util.RandomUtil;
 import util.TimestampConvertHelper;
 
@@ -22,7 +23,7 @@ import java.util.Map;
 public class UserCustomerLoginService implements IUserCustomerLoginService {
     private static UserCustomerLoginService instance = null;
     private IUserDao userDao = UserDao.getInstance();
-    private IUserOperationHistoryDao operationHistoryDao = UserOperationHistoryDao.getInstance();
+    private IUserHistoryDao operationHistoryDao = UserHistoryDao.getInstance();
     private IUserCustomerOperationHistoryService operationHistoryService = UserCustomerOperationHistoryService.getInstance();
 
     public static UserCustomerLoginService getInstance() {
@@ -42,14 +43,14 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
         UserEntity user = userDao.selectUserByUserId(userId);
 
         if (user == null) {
-            throw new Exception("The UserId you typed is not existed.");
+            throw FaultFactory.throwFaultException("The UserId you typed is not existed.");
         }
 
         // validate if accounts blocking now
         if (user.getStatus() == UserStatusType.BLOCKED) {
-            throw new Exception("Sorry, you have been blocked in case of security problems, please ask bank staff for farther assistance.");
+            throw FaultFactory.throwFaultException("Sorry, you have been blocked in case of security problems, please ask bank staff for farther assistance.");
         } else if (user.getStatus() == UserStatusType.DELETED || user.getStatus() == UserStatusType.PENDING_FOR_BEING_DELETED) {
-            throw new Exception("Sorry, your user account has been removed from our bank system.");
+            throw FaultFactory.throwFaultException("Sorry, your user account has been removed from our bank system.");
         }
 
         Calendar birthDate = Calendar.getInstance();
@@ -85,15 +86,15 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
                 if (executeResult >= 1) {
                     return userLoginReqBuilder.build();
                 }
-                throw new Exception();
+                throw FaultFactory.throwFaultException();
             } catch (Exception e) {
-                throw new Exception("Operation Fails.");
+                throw FaultFactory.throwFaultException("Operation Fails.");
             }
         } else {
             // validate fail
             operationHistoryService.addNewUserLoginReqHistory(user.getId(), UserOperateStatusType.FAILURE);
             operationHistoryService.refreshUserLoginStatus(user.getId());
-            throw new Exception("Customer detail validation fails.");
+            throw FaultFactory.throwFaultException("Customer detail validation fails.");
         }
     }
 
@@ -111,7 +112,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
 
             return loginReplyBuilder.build();
         } else {
-            throw new Exception("UserId is not matched with pin, please check again.");
+            throw FaultFactory.throwFaultException("UserId is not matched with pin, please check again.");
         }
 
     }

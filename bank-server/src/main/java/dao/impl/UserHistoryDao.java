@@ -2,7 +2,7 @@ package dao.impl;
 
 import Const.UserOperateStatusType;
 import Const.UserOperateType;
-import dao.IUserOperationHistoryDao;
+import dao.IUserHistoryDao;
 import entity.UserHistoryEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -11,13 +11,13 @@ import util.HibernateUtils;
 import java.util.Date;
 import java.util.List;
 
-public class UserOperationHistoryDao implements IUserOperationHistoryDao {
-    private static UserOperationHistoryDao instance = null;
+public class UserHistoryDao implements IUserHistoryDao {
+    private static UserHistoryDao instance = null;
     private Session session = HibernateUtils.getSessionFactory().openSession();
 
-    public static UserOperationHistoryDao getInstance() {
+    public static UserHistoryDao getInstance() {
         if (instance == null) {
-            return new UserOperationHistoryDao();
+            return new UserHistoryDao();
         }
         return instance;
     }

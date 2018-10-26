@@ -1,6 +1,6 @@
 package service.impl;
 
-import dao.impl.UserApplyDao;
+import dao.impl.IUserApplyDao;
 import dao.impl.UserDao;
 import entity.UserApplyArchiveEntity;
 import entity.UserEntity;
@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class UserCustomerApplyService implements IUserCustomerApplyService {
     private static UserCustomerApplyService userCustomerApplyService = null;
-    private UserApplyDao userApplyDao = UserApplyDao.getInstance();
+    private IUserApplyDao userApplyDao = IUserApplyDao.getInstance();
     private UserDao userDao = UserDao.getInstance();
 
     public static UserCustomerApplyService getInstance() {
