@@ -121,11 +121,37 @@ public class CustomerApplyAuthView extends JFrame {
                 tf_lastName.grabFocus();
                 return;
             }
+
+            // identity type validator
+            if(cb_identityTypeList.getSelectedIndex() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please select your identity type",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Identity number validator
+            if(tf_identityNum.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your identity number",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_identityNum.grabFocus();
+                return;
+            }
+            if(!tf_identityNum.getText().trim().matches("^[a-zA-Z0-9]*$")) {
+                JOptionPane.showMessageDialog(null,
+                        "Identity number should only contain numbers and letters",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_identityNum.grabFocus();
+                return;
+            }
         }
 
         long userId = Long.parseLong(tf_userId.getText().trim());
         String firstName = tf_firstName.getText().trim();
         String lastName = tf_lastName.getText().trim();
+        int identityType = cb_identityTypeList.getSelectedIndex();
+        String identityNum = tf_identityNum.getText().trim();
 
         try {
             CustomerApplyService.getInstance().checkExistingUserBeforeApply(userId, firstName, lastName);
@@ -153,6 +179,10 @@ public class CustomerApplyAuthView extends JFrame {
         lbl_firstName = new JLabel();
         lbl_lastName = new JLabel();
         tf_lastName = new JTextField();
+        lbl_identityType = new JLabel();
+        cb_identityTypeList = new JComboBox<>();
+        lbl_identityNum = new JLabel();
+        tf_identityNum = new JTextField();
         btn_customer_next = new JButton();
         noneCustomerPanel = new JPanel();
         btn_none_next = new JButton();
@@ -197,10 +227,13 @@ public class CustomerApplyAuthView extends JFrame {
                 "hidemode 3",
                 // columns
                 "[fill]" +
+                "[fill]" +
                 "[fill]",
                 // rows
                 "[]" +
                 "[]" +
+                "[]0" +
+                "[]0" +
                 "[]" +
                 "[]" +
                 "[]"));
@@ -232,11 +265,30 @@ public class CustomerApplyAuthView extends JFrame {
             tf_lastName.setMinimumSize(new Dimension(100, 24));
             existingCustomerPanel.add(tf_lastName, "cell 1 2");
 
+            //---- lbl_identityType ----
+            lbl_identityType.setText("Identity Type");
+            lbl_identityType.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            existingCustomerPanel.add(lbl_identityType, "cell 0 4");
+
+            //---- cb_identityTypeList ----
+            cb_identityTypeList.setModel(new DefaultComboBoxModel<>(new String[] {
+                "Select Your Identity Type",
+                "Driving License",
+                "Passport"
+            }));
+            existingCustomerPanel.add(cb_identityTypeList, "cell 1 4");
+
+            //---- lbl_identityNum ----
+            lbl_identityNum.setText("Identity Number");
+            lbl_identityNum.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            existingCustomerPanel.add(lbl_identityNum, "cell 0 5");
+            existingCustomerPanel.add(tf_identityNum, "cell 1 5");
+
             //---- btn_customer_next ----
             btn_customer_next.setText("Next");
             btn_customer_next.setFont(new Font("Segoe UI", Font.PLAIN, 16));
             btn_customer_next.addActionListener(e -> btn_customer_nextActionPerformed(e));
-            existingCustomerPanel.add(btn_customer_next, "cell 0 4 2 1");
+            existingCustomerPanel.add(btn_customer_next, "cell 1 6 2 1");
         }
         contentPane.add(existingCustomerPanel, "cell 1 4 2 1");
 
@@ -245,8 +297,9 @@ public class CustomerApplyAuthView extends JFrame {
             noneCustomerPanel.setLayout(new MigLayout(
                 "hidemode 3",
                 // columns
-                "[fill]",
+                "[center]",
                 // rows
+                "[]" +
                 "[]" +
                 "[]" +
                 "[]"));
@@ -256,7 +309,7 @@ public class CustomerApplyAuthView extends JFrame {
             btn_none_next.setFont(new Font("Segoe UI", Font.PLAIN, 16));
             btn_none_next.setMinimumSize(new Dimension(150, 24));
             btn_none_next.addActionListener(e -> btn_none_nextActionPerformed(e));
-            noneCustomerPanel.add(btn_none_next, "cell 0 1");
+            noneCustomerPanel.add(btn_none_next, "cell 0 1 1 2");
         }
         contentPane.add(noneCustomerPanel, "cell 1 3 2 1");
 
@@ -280,6 +333,10 @@ public class CustomerApplyAuthView extends JFrame {
     private JLabel lbl_firstName;
     private JLabel lbl_lastName;
     private JTextField tf_lastName;
+    private JLabel lbl_identityType;
+    private JComboBox<String> cb_identityTypeList;
+    private JLabel lbl_identityNum;
+    private JTextField tf_identityNum;
     private JButton btn_customer_next;
     private JPanel noneCustomerPanel;
     private JButton btn_none_next;

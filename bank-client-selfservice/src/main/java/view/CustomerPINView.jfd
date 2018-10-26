@@ -6,7 +6,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
 			"$columnConstraints": "[5:n,grow,fill][fill][40:n,fill][40:n,fill][40:n,fill][5:n,grow,fill]"
-			"$rowConstraints": "[][][][][][][][5:n,grow,fill]"
+			"$rowConstraints": "[][][][][][][][][5:n,grow,fill]"
 		} ) {
 			name: "this"
 			"title": "Customer PIN View"
@@ -107,6 +107,13 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_backActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 2 6 3 1"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "btn_forgotPIN"
+				"text": "Forgot PIN ?"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_forgotPINActionPerformed", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 7 3 1"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

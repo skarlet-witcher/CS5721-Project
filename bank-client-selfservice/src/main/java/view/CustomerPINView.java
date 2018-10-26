@@ -41,6 +41,7 @@ public class CustomerPINView extends JFrame {
     private JButton btn_backSpace;
     private JButton btn_confirm;
     private JButton btn_back;
+    private JButton btn_forgotPIN;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public CustomerPINView(long userId) {
@@ -193,6 +194,11 @@ public class CustomerPINView extends JFrame {
         btn_10.setText(keyPadList.get(9).toString());
     }
 
+    private void btn_forgotPINActionPerformed(ActionEvent e) {
+        this.dispose();
+        new CustomerForgotPINView(userId);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         lbl_PIN = new JLabel();
@@ -209,6 +215,7 @@ public class CustomerPINView extends JFrame {
         btn_backSpace = new JButton();
         btn_confirm = new JButton();
         btn_back = new JButton();
+        btn_forgotPIN = new JButton();
 
         //======== this ========
         setTitle("Customer PIN View");
@@ -230,6 +237,7 @@ public class CustomerPINView extends JFrame {
             "[]" +
             "[]" +
             "[]" +
+            "[]" +
             "[5:n,grow,fill]"));
 
         //---- lbl_PIN ----
@@ -238,121 +246,76 @@ public class CustomerPINView extends JFrame {
 
         //---- btn_1 ----
         btn_1.setText("text");
-        btn_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_1ActionPerformed(e);
-            }
-        });
+        btn_1.addActionListener(e -> btn_1ActionPerformed(e));
         contentPane.add(btn_1, "cell 2 1");
 
         //---- btn_2 ----
         btn_2.setText("text");
-        btn_2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_2ActionPerformed(e);
-            }
-        });
+        btn_2.addActionListener(e -> btn_2ActionPerformed(e));
         contentPane.add(btn_2, "cell 3 1");
 
         //---- btn_3 ----
         btn_3.setText("text");
-        btn_3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_3ActionPerformed(e);
-            }
-        });
+        btn_3.addActionListener(e -> btn_3ActionPerformed(e));
         contentPane.add(btn_3, "cell 4 1");
 
         //---- btn_4 ----
         btn_4.setText("text");
-        btn_4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_4ActionPerformed(e);
-            }
-        });
+        btn_4.addActionListener(e -> btn_4ActionPerformed(e));
         contentPane.add(btn_4, "cell 2 2");
 
         //---- btn_5 ----
         btn_5.setText("text");
-        btn_5.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_5ActionPerformed(e);
-            }
-        });
+        btn_5.addActionListener(e -> btn_5ActionPerformed(e));
         contentPane.add(btn_5, "cell 3 2");
 
         //---- btn_6 ----
         btn_6.setText("text");
-        btn_6.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_6ActionPerformed(e);
-            }
-        });
+        btn_6.addActionListener(e -> btn_6ActionPerformed(e));
         contentPane.add(btn_6, "cell 4 2");
 
         //---- btn_7 ----
         btn_7.setText("text");
-        btn_7.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_7ActionPerformed(e);
-            }
-        });
+        btn_7.addActionListener(e -> btn_7ActionPerformed(e));
         contentPane.add(btn_7, "cell 2 3");
 
         //---- btn_8 ----
         btn_8.setText("text");
-        btn_8.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_8ActionPerformed(e);
-            }
-        });
+        btn_8.addActionListener(e -> btn_8ActionPerformed(e));
         contentPane.add(btn_8, "cell 3 3");
 
         //---- btn_9 ----
         btn_9.setText("text");
-        btn_9.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_9ActionPerformed(e);
-            }
-        });
+        btn_9.addActionListener(e -> btn_9ActionPerformed(e));
         contentPane.add(btn_9, "cell 4 3");
 
         //---- btn_10 ----
         btn_10.setText("text");
-        btn_10.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_10ActionPerformed(e);
-            }
-        });
+        btn_10.addActionListener(e -> btn_10ActionPerformed(e));
         contentPane.add(btn_10, "cell 2 4 2 1");
 
         //---- btn_backSpace ----
         btn_backSpace.setText("Backspace");
-        btn_backSpace.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_backSpaceActionPerformed(e);
-            }
-        });
+        btn_backSpace.addActionListener(e -> btn_backSpaceActionPerformed(e));
         contentPane.add(btn_backSpace, "cell 4 4");
 
         //---- btn_confirm ----
         btn_confirm.setText("Confirm");
-        btn_confirm.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_confirmActionPerformed(e);
-            }
-        });
+        btn_confirm.addActionListener(e -> btn_confirmActionPerformed(e));
         contentPane.add(btn_confirm, "cell 2 6 3 1");
 
         //---- btn_back ----
         btn_back.setText("Back");
-        btn_back.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                button13ActionPerformed(e);
-                btn_backActionPerformed(e);
-            }
-        });
+        btn_back.addActionListener(e -> {
+			button13ActionPerformed(e);
+			btn_backActionPerformed(e);
+		});
         contentPane.add(btn_back, "cell 2 6 3 1");
+
+        //---- btn_forgotPIN ----
+        btn_forgotPIN.setText("Forgot PIN ?");
+        btn_forgotPIN.addActionListener(e -> btn_forgotPINActionPerformed(e));
+        contentPane.add(btn_forgotPIN, "cell 2 7 3 1");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
