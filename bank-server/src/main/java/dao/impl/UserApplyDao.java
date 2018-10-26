@@ -7,20 +7,20 @@ import org.hibernate.query.Query;
 import util.HibernateUtils;
 
 public class UserApplyDao implements IUserApplyDao {
-    private static UserApplyDao userApplyDao = null;
+    private static IUserApplyDao userApplyDao = null;
     private Session session = HibernateUtils.getSessionFactory().openSession();
 
     private UserApplyDao() {
 
     }
 
-    public static UserApplyDao getInstance() {
+    public static IUserApplyDao getInstance() {
         if(userApplyDao == null) {
             userApplyDao = new UserApplyDao();
         }
         return userApplyDao;
     }
-
+    @Override
     public void requestAccountApply(UserApplyArchiveEntity UserApplyArchiveEntity) {
         try {
             session.getTransaction().begin();
@@ -35,7 +35,7 @@ public class UserApplyDao implements IUserApplyDao {
 
         }
     }
-
+    @Override
     public UserApplyArchiveEntity selectApplyByUserId(UserApplyArchiveEntity UserApplyArchiveEntity) {
             try {
                 session.getTransaction().begin();

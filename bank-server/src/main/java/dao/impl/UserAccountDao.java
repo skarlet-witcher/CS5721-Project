@@ -9,21 +9,21 @@ import util.HibernateUtils;
 import java.util.List;
 
 public class UserAccountDao implements IUserAccountDao {
-    private static UserAccountDao userAccountDao = null;
+    private static IUserAccountDao userAccountDao = null;
     Session session = HibernateUtils.getSessionFactory().openSession();
 
     private UserAccountDao() {
 
     }
 
-    public static UserAccountDao getInstance() {
+    public static IUserAccountDao getInstance() {
         if(userAccountDao == null) {
             userAccountDao = new UserAccountDao();
         }
         return userAccountDao;
     }
 
-
+    @Override
     public Long getBiggestUserAccountNumber() {
         try {
             session.getTransaction().begin();
@@ -39,6 +39,7 @@ public class UserAccountDao implements IUserAccountDao {
         }
     }
 
+    @Override
     public UserAccountEntity getUserAccountByAccountNumber(long accountNumber) {
         try {
             session.getTransaction().begin();

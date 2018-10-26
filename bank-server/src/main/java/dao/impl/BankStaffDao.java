@@ -6,10 +6,10 @@ import org.hibernate.query.Query;
 import util.HibernateUtils;
 
 public class BankStaffDao implements IBankStaffDao {
-    private static BankStaffDao instance = null;
+    private static IBankStaffDao instance = null;
     Session session = HibernateUtils.getSessionFactory().openSession();
 
-    public static BankStaffDao getInstance() {
+    public static IBankStaffDao getInstance() {
         if (instance == null) {
             return new BankStaffDao();
         }

@@ -12,16 +12,17 @@ import java.util.Date;
 import java.util.List;
 
 public class UserHistoryDao implements IUserHistoryDao {
-    private static UserHistoryDao instance = null;
+    private static IUserHistoryDao instance = null;
     private Session session = HibernateUtils.getSessionFactory().openSession();
 
-    public static UserHistoryDao getInstance() {
+    public static IUserHistoryDao getInstance() {
         if (instance == null) {
             return new UserHistoryDao();
         }
         return instance;
     }
 
+    @Override
     public void addOperationHistory(UserHistoryEntity operationHistory) {
         try {
             session.getTransaction().begin();
@@ -35,6 +36,7 @@ public class UserHistoryDao implements IUserHistoryDao {
         }
     }
 
+    @Override
     public List<UserHistoryEntity> getOperationHistoriesTodayByUserId(Long userId) {
         try {
             session.getTransaction().begin();
@@ -59,6 +61,7 @@ public class UserHistoryDao implements IUserHistoryDao {
         }
     }
 
+    @Override
     public UserHistoryEntity getLastLoginRecordByUserId(Long userId) {
         try {
 
