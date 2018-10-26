@@ -1,5 +1,7 @@
 package util;
 
+import dao.impl.SysConfigDao;
+
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -11,7 +13,8 @@ public class EmailSender {
     private static EmailSender emailSender = null;
 
     private EmailSender() {
-        // TO DO - init USER_NAME and PASSWORD
+        this.USER_NAME = SysConfigDao.getInstance().getValueByKey("email");
+        this.PASSWORD = SysConfigDao.getInstance().getValueByKey("password");
     }
 
     public static EmailSender getInstance() {
@@ -33,7 +36,7 @@ public class EmailSender {
     }
     */
 
-    public void sendFromGMail(String[] to, String subject, String body) {
+    public void sendFromGMail(String to, String subject, String body) {
         Properties props = System.getProperties();
         String host = "smtp.gmail.com";
         props.put("mail.smtp.starttls.enable", "true");
@@ -45,22 +48,15 @@ public class EmailSender {
 
         Session session = Session.getDefaultInstance(props);
         MimeMessage message = new MimeMessage(session);
-
+        String htmlMessage = "<html><p>Dear customer</p><p>" + body + "</p><p>Kind Regards</p><p>Nuclear bank team</p></html>";
         try {
             message.setFrom(new InternetAddress(USER_NAME));
-            InternetAddress[] toAddress = new InternetAddress[to.length];
+            InternetAddress toAddress = new InternetAddress(to);
 
-            // To get the array of addresses
-            for( int i = 0; i < to.length; i++ ) {
-                toAddress[i] = new InternetAddress(to[i]);
-            }
-
-            for( int i = 0; i < toAddress.length; i++) {
-                message.addRecipient(Message.RecipientType.TO, toAddress[i]);
-            }
+            message.addRecipient(Message.RecipientType.TO, toAddress);
 
             message.setSubject(subject);
-            message.setText(body);
+            message.setContent(htmlMessage, "text/html; charset=utf-8");
             Transport transport = session.getTransport("smtp");
             transport.connect(host, USER_NAME, PASSWORD);
             transport.sendMessage(message, message.getAllRecipients());
