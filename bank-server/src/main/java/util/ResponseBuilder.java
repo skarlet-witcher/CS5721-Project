@@ -1,15 +1,22 @@
 package util;
 
+import Const.ResponseStatusType;
 import rpc.Response;
 
 public class ResponseBuilder {
     public static Response.Builder ResponseSuccessBuilder() {
-        return Response.newBuilder().setStatusCode(200);
+        return Response.newBuilder().setStatusCode(ResponseStatusType.SUCCESS);
     }
 
     public static Response.Builder ResponseFailBuilder(String description) {
         return Response.newBuilder()
-                .setStatusCode(400)
+                .setStatusCode(ResponseStatusType.OPERATION_FAIL)
+                .setDescription(description);
+    }
+
+    public static Response.Builder ResponseFailBuilder(Integer statusType, String description) {
+        return Response.newBuilder()
+                .setStatusCode(statusType)
                 .setDescription(description);
     }
 }
