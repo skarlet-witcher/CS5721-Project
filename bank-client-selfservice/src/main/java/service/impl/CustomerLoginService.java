@@ -1,31 +1,34 @@
 package service.impl;
 
+import model.UserLoginRequestModel;
 import rpc.UserLoginReqRequest;
 import rpc.UserLoginRequest;
 import rpc.client.CustomerLoginRpc;
 import service.ICustomerLoginService;
 
 public class CustomerLoginService implements ICustomerLoginService {
-    private static CustomerLoginService instance = null;
+    private static ICustomerLoginService instance = null;
 
-    public static CustomerLoginService getInstance() {
+    public static ICustomerLoginService getInstance() {
         if (instance == null) {
             return new CustomerLoginService();
         }
         return instance;
     }
-    public void requestLoginUsingPhoneNum(String phoneLast4, long userId) throws Exception {
+    @Override
+    public void requestLoginUsingPhoneNum(UserLoginRequestModel userLoginRequestModel) throws Exception {
         CustomerLoginRpc.getInstance().loginReq(
-                UserLoginReqRequest.newBuilder().setPhoneLast4(Integer.parseInt(phoneLast4)).
-                        setUserId(userId).build()
+                UserLoginReqRequest.newBuilder().setPhoneLast4(Integer.parseInt(userLoginRequestModel.getPhoneNumLast4())).
+                        setUserId(userLoginRequestModel.getUserId()).build()
         );
     }
-    public void requestLoginUsingDOB(int day, int month, int year, long userId) throws Exception {
+    @Override
+    public void requestLoginUsingDOB(UserLoginRequestModel userLoginRequestModel) throws Exception {
         CustomerLoginRpc.getInstance().loginReq(
-                UserLoginReqRequest.newBuilder().setUserId(userId).
-                        setBirthDay(day).
-                        setBirthMon(month).
-                        setBirthYear(year).build()
+                UserLoginReqRequest.newBuilder().setUserId(userLoginRequestModel.getUserId()).
+                        setBirthDay(userLoginRequestModel.getDay()).
+                        setBirthMon(userLoginRequestModel.getMonth()).
+                        setBirthYear(userLoginRequestModel.getYear()).build()
         );
     }
 

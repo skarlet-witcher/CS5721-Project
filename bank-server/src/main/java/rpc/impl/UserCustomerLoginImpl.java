@@ -21,7 +21,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
 
     @Override
     public void loginReq(UserLoginReqRequest request, StreamObserver<Response> responseObserver) {
-        long userId = request.getUserId();
+        Long userId = request.getUserId();
         int phoneLast4 = request.getPhoneLast4();
         int birthDay = request.getBirthDay();
         int birthMon = request.getBirthMon();

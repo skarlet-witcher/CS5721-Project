@@ -196,7 +196,7 @@ public class CustomerPINView extends JFrame {
 
     private void btn_forgotPINActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerForgotPINView(userId);
+        new CustomerForgotPINView(userId).run();
     }
 
     private void initComponents() {

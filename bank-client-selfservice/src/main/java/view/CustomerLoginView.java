@@ -4,8 +4,10 @@
 
 package view;
 
+import model.UserLoginRequestModel;
 import net.miginfocom.swing.MigLayout;
 import rpc.client.CustomerLoginRpc;
+import service.impl.CustomerApplyService;
 import service.impl.CustomerLoginService;
 import util.JTextFieldLimit;
 import util.RandomUtil;
@@ -109,13 +111,15 @@ public class CustomerLoginView extends JFrame {
         }
         if(lbl_dob.isVisible()) {
             try {
+                Long userId = Long.parseLong(tf_userId.getText().trim());
+                int day = Integer.parseInt(tf_day.getText());
+                int month = Integer.parseInt(tf_month.getText());
+                int year = Integer.parseInt(tf_year.getText());
+
                 // login in with date of birth
-                CustomerLoginService.getInstance().requestLoginUsingDOB(
-                        Integer.parseInt(tf_day.getText()),
-                        Integer.parseInt(tf_month.getText()),
-                        Integer.parseInt(tf_year.getText()),
-                        Integer.parseInt(tf_userId.getText())
-                );
+                UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel(userId, day, month, year);
+                CustomerLoginService.getInstance().requestLoginUsingDOB(userLoginRequestModel);
+
             } catch (Exception E) {
                 JOptionPane.showMessageDialog(null,
                         "Please input valid date of birth or model ID",
@@ -126,8 +130,10 @@ public class CustomerLoginView extends JFrame {
         if(lbl_contactNum.isVisible()) {
             try {
                 // login in with contactNum
-                CustomerLoginService.getInstance().requestLoginUsingPhoneNum(tf_contactNum.getText(),
-                        Long.parseLong(tf_userId.getText()));
+                Long userId = Long.parseLong(tf_userId.getText().trim());
+                String phoneNumLast4 = tf_contactNum.getText().trim();
+                UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel(userId, phoneNumLast4);
+                CustomerLoginService.getInstance().requestLoginUsingPhoneNum(userLoginRequestModel);
             } catch (Exception E) {
                 JOptionPane.showMessageDialog(null,
                         "Please input valid contact number or User ID",

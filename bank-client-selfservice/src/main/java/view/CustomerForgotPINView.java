@@ -20,7 +20,6 @@ import java.util.Calendar;
  */
 public class CustomerForgotPINView extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JFrame rootPanel;
     private JLabel lbl_userId;
     private JTextField tf_userId;
     private JLabel lbl_email;
@@ -163,7 +162,6 @@ public class CustomerForgotPINView extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        rootPanel = new JFrame();
         lbl_userId = new JLabel();
         tf_userId = new JTextField();
         lbl_email = new JLabel();
@@ -177,91 +175,81 @@ public class CustomerForgotPINView extends JFrame {
         btn_confirm = new JButton();
         btn_back = new JButton();
 
-        //======== rootPanel ========
-        {
-            rootPanel.setTitle("Customer Forgot PIN View");
-            Container rootPanelContentPane = rootPanel.getContentPane();
-            rootPanelContentPane.setLayout(new MigLayout(
-                    "hidemode 3",
-                    // columns
-                    "[fill]" +
-                            "[fill]",
-                    // rows
-                    "[]" +
-                            "[]" +
-                            "[]" +
-                            "[]" +
-                            "[]"));
+        //======== this ========
+        setTitle("Customer Forgot PIN View");
+        Container contentPane = getContentPane();
+        contentPane.setLayout(new MigLayout(
+            "hidemode 3",
+            // columns
+            "[fill]" +
+            "[fill]",
+            // rows
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]"));
 
-            //---- lbl_userId ----
-            lbl_userId.setText("UserId");
-            lbl_userId.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-            rootPanelContentPane.add(lbl_userId, "cell 0 0");
-            rootPanelContentPane.add(tf_userId, "cell 1 0");
+        //---- lbl_userId ----
+        lbl_userId.setText("UserId");
+        lbl_userId.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        contentPane.add(lbl_userId, "cell 0 0");
+        contentPane.add(tf_userId, "cell 1 0");
 
-            //---- lbl_email ----
-            lbl_email.setText("Email");
-            lbl_email.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-            rootPanelContentPane.add(lbl_email, "cell 0 1");
-            rootPanelContentPane.add(tf_email, "cell 1 1");
+        //---- lbl_email ----
+        lbl_email.setText("Email");
+        lbl_email.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        contentPane.add(lbl_email, "cell 0 1");
+        contentPane.add(tf_email, "cell 1 1");
 
-            //---- lbl_dob ----
-            lbl_dob.setText("Date of Birth");
-            lbl_dob.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-            rootPanelContentPane.add(lbl_dob, "cell 0 2");
+        //---- lbl_dob ----
+        lbl_dob.setText("Date of Birth");
+        lbl_dob.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        contentPane.add(lbl_dob, "cell 0 2");
 
-            //---- tf_day ----
-            tf_day.setMinimumSize(new Dimension(80, 24));
-            tf_day.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    tf_dayFocusGained(e);
-                }
-            });
-            rootPanelContentPane.add(tf_day, "cell 1 2");
+        //---- tf_day ----
+        tf_day.setMinimumSize(new Dimension(80, 24));
+        tf_day.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                tf_dayFocusGained(e);
+            }
+        });
+        contentPane.add(tf_day, "cell 1 2");
 
-            //---- lbl_dob_mark1 ----
-            lbl_dob_mark1.setText("/");
-            rootPanelContentPane.add(lbl_dob_mark1, "cell 1 2");
+        //---- lbl_dob_mark1 ----
+        lbl_dob_mark1.setText("/");
+        contentPane.add(lbl_dob_mark1, "cell 1 2");
 
-            //---- tf_month ----
-            tf_month.setMinimumSize(new Dimension(80, 24));
-            tf_month.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    tf_monthFocusGained(e);
-                }
-            });
-            rootPanelContentPane.add(tf_month, "cell 1 2");
+        //---- tf_month ----
+        tf_month.setMinimumSize(new Dimension(80, 24));
+        tf_month.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                tf_monthFocusGained(e);
+            }
+        });
+        contentPane.add(tf_month, "cell 1 2");
 
-            //---- lbl_dob_mark2 ----
-            lbl_dob_mark2.setText("/");
-            rootPanelContentPane.add(lbl_dob_mark2, "cell 1 2");
+        //---- lbl_dob_mark2 ----
+        lbl_dob_mark2.setText("/");
+        contentPane.add(lbl_dob_mark2, "cell 1 2");
 
-            //---- tf_year ----
-            tf_year.setMinimumSize(new Dimension(80, 24));
-            rootPanelContentPane.add(tf_year, "cell 1 2");
+        //---- tf_year ----
+        tf_year.setMinimumSize(new Dimension(80, 24));
+        contentPane.add(tf_year, "cell 1 2");
 
-            //---- btn_confirm ----
-            btn_confirm.setText("Confirm");
-            btn_confirm.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    btn_confirmActionPerformed(e);
-                }
-            });
-            rootPanelContentPane.add(btn_confirm, "cell 1 3");
+        //---- btn_confirm ----
+        btn_confirm.setText("Confirm");
+        btn_confirm.addActionListener(e -> btn_confirmActionPerformed(e));
+        contentPane.add(btn_confirm, "cell 1 3");
 
-            //---- btn_back ----
-            btn_back.setText("Back");
-            btn_back.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    btn_backActionPerformed(e);
-                }
-            });
-            rootPanelContentPane.add(btn_back, "cell 1 4");
-            rootPanel.pack();
-            rootPanel.setLocationRelativeTo(rootPanel.getOwner());
-        }
+        //---- btn_back ----
+        btn_back.setText("Back");
+        btn_back.addActionListener(e -> btn_backActionPerformed(e));
+        contentPane.add(btn_back, "cell 1 4");
+        pack();
+        setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

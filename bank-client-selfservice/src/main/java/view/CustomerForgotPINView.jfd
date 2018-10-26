@@ -8,7 +8,7 @@ new FormModel {
 			"$columnConstraints": "[fill][fill]"
 			"$rowConstraints": "[][][][][]"
 		} ) {
-			name: "rootPanel"
+			name: "this"
 			"title": "Customer Forgot PIN View"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_userId"

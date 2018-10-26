@@ -1,11 +1,27 @@
 package model;
 
+import rpc.UserLoginRequest;
+
 public class UserLoginRequestModel {
     private Long userId;
     private String phoneNumLast4;
     private int day;
     private int month;
     private int year;
+
+    // login with last 4 digit of phone number
+    public UserLoginRequestModel(Long userId, String phoneNumLast4) {
+        this.userId = userId;
+        this.phoneNumLast4 = phoneNumLast4;
+    }
+
+    // login with date of birth
+    public UserLoginRequestModel(Long userId, int day, int month, int year) {
+        this.userId = userId;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
 
     public Long getUserId() {
         return userId;
