@@ -56,4 +56,10 @@ public class UserAccountDao implements IUserAccountDao {
             return null;
         }
     }
+
+    @Override
+    public UserAccountEntity getUserIdByIBAN(String iban) {
+        return null;
+    }
+
 }
