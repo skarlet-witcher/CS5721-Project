@@ -16,7 +16,7 @@ public class BankServer {
     public static void main(String[] args) {
 
         // System.out.println(IBANGenerator.getInstance().generateIBAN(1000000000));
-        //EmailSender.getInstance().sendFromGMail("empathytxk@hotmail.com", "hello", "hi");
+        EmailSender.getInstance().sendFromGMail("empathytxk@hotmail.com", "hello", "hi");
         final BankServer server = new BankServer();
         try {
             server.start();
