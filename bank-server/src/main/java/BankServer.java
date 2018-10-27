@@ -2,6 +2,7 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import rpc.impl.UserCustomerLoginImpl;
 import util.EmailSender;
+import util.IBANGenerator;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -14,7 +15,8 @@ public class BankServer {
 
     public static void main(String[] args) {
 
-        EmailSender.getInstance().sendFromGMail("empathytxk@hotmail.com", "hello", "hi");
+        System.out.println(IBANGenerator.getInstance().generateIBAN(1000000000));
+        //EmailSender.getInstance().sendFromGMail("empathytxk@hotmail.com", "hello", "hi");
         final BankServer server = new BankServer();
         try {
             server.start();

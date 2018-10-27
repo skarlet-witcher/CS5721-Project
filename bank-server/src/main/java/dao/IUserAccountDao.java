@@ -8,4 +8,6 @@ public interface IUserAccountDao {
     Long getBiggestUserAccountNumber();
 
     UserAccountEntity getUserAccountByAccountNumber(long accountNumber);
+
+    UserAccountEntity getUserIdByIBAN(String iban);
 }

@@ -152,7 +152,8 @@ public class CustomerForgotPINView extends JFrame {
             tf_email.grabFocus();
             return;
         }
-        // TO-DO forgot PIN view implementation
+
+        // TO-DO forgot PIN view implementation using model and service
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
