@@ -10,8 +10,8 @@ import entity.UserEntity;
 import entity.UserHistoryEntity;
 import rpc.UserLoginReply;
 import rpc.UserLoginReqReply;
+import service.IUserCustomerHistoryService;
 import service.IUserCustomerLoginService;
-import service.IUserCustomerOperationHistoryService;
 import util.FaultFactory;
 import util.RandomUtil;
 import util.TimestampConvertHelper;
@@ -24,7 +24,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
     private static UserCustomerLoginService instance = null;
     private IUserDao userDao = UserDao.getInstance();
     private IUserHistoryDao operationHistoryDao = UserHistoryDao.getInstance();
-    private IUserCustomerOperationHistoryService operationHistoryService = UserCustomerOperationHistoryService.getInstance();
+    private IUserCustomerHistoryService operationHistoryService = UserCustomerHistoryService.getInstance();
 
     public static UserCustomerLoginService getInstance() {
         if (instance == null) {

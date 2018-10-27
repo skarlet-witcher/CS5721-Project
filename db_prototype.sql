@@ -48,22 +48,22 @@ create table user_account_type (
   description                         varchar(1000) null     default '',
   minimum_age                         int           not null default 0,
   maximum_age                         int           not null default 100,
-  card_type                           int           not null
+  card_type                          int    not null
   comment '1.debit card 2.credit card',
-  physical_card                       int           not null
+  physical_card                      int    not null
   comment '0.no 1.yes',
-  student_info_require                int           not null
+  student_info_require               int    not null
   comment '0.no 1.yes',
-  charge_selfservice_trans            double        not null default 0
+  charge_selfservice_trans           double not null default 0
   comment 'charge amount per transaction',
-  charge_atm_deposit_withdraw         double        not null default 0
+  charge_atm_deposit_withdraw        double not null default 0
   comment 'charge amount per d/w',
-  charge_per_quarter                  int           not null default 0
+  charge_per_quarter                 int    not null default 0
   comment '0.no 1.yes',
-  charge_per_quarter_minimum_banlance double        not null default 0,
-  charge_per_quarter_amount           double        not null default 0,
-  charge_per_year                     double        not null default 0,
-  charge_card_issue                   double        not null default 0
+  charge_per_quarter_minimum_balance double not null default 0,
+  charge_per_quarter_amount          double not null default 0,
+  charge_per_year                    double not null default 0,
+  charge_card_issue                  double not null default 0
 );
 
 DROP TABLE IF EXISTS `user_card`;
@@ -98,24 +98,24 @@ create table user_payee (
 
 DROP TABLE IF EXISTS `user_apply_archive`;
 create table user_apply_archive (
-  id                bigint                        AUTO_INCREMENT PRIMARY KEY,
-  first_name        varchar(255) ,
-  last_name         varchar(255) ,
-  identity_id       varchar(50)  
+  id               bigint                        AUTO_INCREMENT PRIMARY KEY,
+  first_name       varchar(255) ,
+  last_name        varchar(255) ,
+  identity_id      varchar(50)
   comment 'passport/license id number',
-  identity_id_type  int          
+  identity_id_type int
   comment '1.passport 2.driver license',
-  account_type      bigint       not null
+  account_type     int not null
   comment '1.current account 2.student current account 3.young saver account 4.golden older account',
-  card_type         int          not null
+  card_type        int not null
   comment '1.debit card 2.credit card(Not supported yet)',
-  graduate_date     datetime
+  graduate_date    datetime
   comment 'if the account type is student current account',
-  university        varchar(255)
+  university       varchar(255)
   comment 'if the account type is student current account',
-  student_id        varchar(50)
+  student_id       varchar(50)
   comment 'if the account type is student current account',
-  parent_user_id    bigint
+  parent_user_id   bigint
   comment 'if the account type is young savers account',
   parent_first_name varchar(255)
   comment 'if the account type is young savers account',

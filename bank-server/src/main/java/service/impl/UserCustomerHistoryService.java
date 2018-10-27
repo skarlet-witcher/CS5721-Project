@@ -10,23 +10,23 @@ import dao.IUserHistoryDao;
 import dao.impl.UserDao;
 import dao.impl.UserHistoryDao;
 import entity.UserHistoryEntity;
-import service.IUserCustomerOperationHistoryService;
+import service.IUserCustomerHistoryService;
 import util.OperationNoGenerator;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-public class UserCustomerOperationHistoryService implements IUserCustomerOperationHistoryService {
+public class UserCustomerHistoryService implements IUserCustomerHistoryService {
 
-    private static UserCustomerOperationHistoryService instance = null;
+    private static UserCustomerHistoryService instance = null;
     private IUserDao userDao = UserDao.getInstance();
     private IUserHistoryDao operationHistoryDao = UserHistoryDao.getInstance();
     private OperationNoGenerator operationNoGenerator = OperationNoGenerator.getInstance();
 
-    public static UserCustomerOperationHistoryService getInstance() {
+    public static UserCustomerHistoryService getInstance() {
         if (instance == null) {
-            return new UserCustomerOperationHistoryService();
+            return new UserCustomerHistoryService();
         }
         return instance;
     }
@@ -35,8 +35,6 @@ public class UserCustomerOperationHistoryService implements IUserCustomerOperati
      * add new login record.
      * if login failure, check if it is equals 3 times one day.
      *
-     * @param userId
-     * @param status
      */
     public void addNewUserLoginReqHistory(Long userId, Integer status) {
         UserHistoryEntity historyEntity = new UserHistoryEntity();

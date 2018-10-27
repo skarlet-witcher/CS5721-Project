@@ -1,6 +1,6 @@
 package service;
 
-public interface IUserCustomerOperationHistoryService {
+public interface IUserCustomerHistoryService {
 
     void addNewUserLoginReqHistory(Long userId, Integer status);
 

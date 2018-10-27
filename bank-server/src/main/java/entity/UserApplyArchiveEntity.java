@@ -6,13 +6,13 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "user_apply_archive", schema = "bank_manage", catalog = "")
 public class UserApplyArchiveEntity {
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String identityId;
-    private int identityIdType;
-    private long accountType;
-    private int cardType;
+    private Integer identityIdType;
+    private Integer accountType;
+    private Integer cardType;
     private Timestamp graduateDate;
     private String university;
     private String studentId;
@@ -20,28 +20,29 @@ public class UserApplyArchiveEntity {
     private String parentFirstName;
     private String parentLastName;
     private Timestamp birthDate;
-    private int gender;
+    private Integer gender;
     private String address;
     private String email;
     private String phone;
     private Timestamp applyTime;
-    private int status;
+    private Integer status;
     private String remark;
-    private int new_user_apply;
     private Long userId;
+    private Integer newUserApply;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
-    @Column(name = "first_name", nullable = false, length = 255)
+    @Column(name = "first_name", nullable = true, length = 255)
     public String getFirstName() {
         return firstName;
     }
@@ -51,7 +52,7 @@ public class UserApplyArchiveEntity {
     }
 
     @Basic
-    @Column(name = "last_name", nullable = false, length = 255)
+    @Column(name = "last_name", nullable = true, length = 255)
     public String getLastName() {
         return lastName;
     }
@@ -61,7 +62,7 @@ public class UserApplyArchiveEntity {
     }
 
     @Basic
-    @Column(name = "identity_id", nullable = false, length = 50)
+    @Column(name = "identity_id", nullable = true, length = 50)
     public String getIdentityId() {
         return identityId;
     }
@@ -71,32 +72,32 @@ public class UserApplyArchiveEntity {
     }
 
     @Basic
-    @Column(name = "identity_id_type", nullable = false)
-    public int getIdentityIdType() {
+    @Column(name = "identity_id_type", nullable = true)
+    public Integer getIdentityIdType() {
         return identityIdType;
     }
 
-    public void setIdentityIdType(int identityIdType) {
+    public void setIdentityIdType(Integer identityIdType) {
         this.identityIdType = identityIdType;
     }
 
     @Basic
     @Column(name = "account_type", nullable = false)
-    public long getAccountType() {
+    public Integer getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(long accountType) {
+    public void setAccountType(Integer accountType) {
         this.accountType = accountType;
     }
 
     @Basic
     @Column(name = "card_type", nullable = false)
-    public int getCardType() {
+    public Integer getCardType() {
         return cardType;
     }
 
-    public void setCardType(int cardType) {
+    public void setCardType(Integer cardType) {
         this.cardType = cardType;
     }
 
@@ -161,7 +162,7 @@ public class UserApplyArchiveEntity {
     }
 
     @Basic
-    @Column(name = "birth_date", nullable = false)
+    @Column(name = "birth_date", nullable = true)
     public Timestamp getBirthDate() {
         return birthDate;
     }
@@ -171,17 +172,17 @@ public class UserApplyArchiveEntity {
     }
 
     @Basic
-    @Column(name = "gender", nullable = false)
-    public int getGender() {
+    @Column(name = "gender", nullable = true)
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 
     @Basic
-    @Column(name = "address", nullable = false, length = 255)
+    @Column(name = "address", nullable = true, length = 255)
     public String getAddress() {
         return address;
     }
@@ -191,7 +192,7 @@ public class UserApplyArchiveEntity {
     }
 
     @Basic
-    @Column(name = "email", nullable = false, length = 255)
+    @Column(name = "email", nullable = true, length = 255)
     public String getEmail() {
         return email;
     }
@@ -201,7 +202,7 @@ public class UserApplyArchiveEntity {
     }
 
     @Basic
-    @Column(name = "phone", nullable = false, length = 20)
+    @Column(name = "phone", nullable = true, length = 20)
     public String getPhone() {
         return phone;
     }
@@ -222,11 +223,11 @@ public class UserApplyArchiveEntity {
 
     @Basic
     @Column(name = "status", nullable = false)
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -241,12 +242,6 @@ public class UserApplyArchiveEntity {
     }
 
     @Basic
-    @Column(name = "new_user_apply", nullable = false)
-    public int getNew_user_apply() { return new_user_apply; }
-
-    public void setNew_user_apply(int new_user_apply) {this.new_user_apply = new_user_apply; }
-
-    @Basic
     @Column(name = "user_id", nullable = true)
     public Long getUserId() {
         return userId;
@@ -256,6 +251,16 @@ public class UserApplyArchiveEntity {
         this.userId = userId;
     }
 
+    @Basic
+    @Column(name = "new_user_apply", nullable = false)
+    public Integer getNewUserApply() {
+        return newUserApply;
+    }
+
+    public void setNewUserApply(Integer newUserApply) {
+        this.newUserApply = newUserApply;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -263,15 +268,14 @@ public class UserApplyArchiveEntity {
 
         UserApplyArchiveEntity that = (UserApplyArchiveEntity) o;
 
-        if (id != that.id) return false;
-        if (identityIdType != that.identityIdType) return false;
-        if (accountType != that.accountType) return false;
-        if (cardType != that.cardType) return false;
-        if (gender != that.gender) return false;
-        if (status != that.status) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
         if (identityId != null ? !identityId.equals(that.identityId) : that.identityId != null) return false;
+        if (identityIdType != null ? !identityIdType.equals(that.identityIdType) : that.identityIdType != null)
+            return false;
+        if (accountType != null ? !accountType.equals(that.accountType) : that.accountType != null) return false;
+        if (cardType != null ? !cardType.equals(that.cardType) : that.cardType != null) return false;
         if (graduateDate != null ? !graduateDate.equals(that.graduateDate) : that.graduateDate != null) return false;
         if (university != null ? !university.equals(that.university) : that.university != null) return false;
         if (studentId != null ? !studentId.equals(that.studentId) : that.studentId != null) return false;
@@ -281,24 +285,26 @@ public class UserApplyArchiveEntity {
         if (parentLastName != null ? !parentLastName.equals(that.parentLastName) : that.parentLastName != null)
             return false;
         if (birthDate != null ? !birthDate.equals(that.birthDate) : that.birthDate != null) return false;
+        if (gender != null ? !gender.equals(that.gender) : that.gender != null) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
         if (applyTime != null ? !applyTime.equals(that.applyTime) : that.applyTime != null) return false;
+        if (status != null ? !status.equals(that.status) : that.status != null) return false;
         if (remark != null ? !remark.equals(that.remark) : that.remark != null) return false;
-        if (new_user_apply != that.new_user_apply) return false;
-        return userId != null ? userId.equals(that.userId) : that.userId == null;
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        return newUserApply != null ? newUserApply.equals(that.newUserApply) : that.newUserApply == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (identityId != null ? identityId.hashCode() : 0);
-        result = 31 * result + identityIdType;
-        result = 31 * result + (int) (accountType ^ (accountType >>> 32));
-        result = 31 * result + cardType;
+        result = 31 * result + (identityIdType != null ? identityIdType.hashCode() : 0);
+        result = 31 * result + (accountType != null ? accountType.hashCode() : 0);
+        result = 31 * result + (cardType != null ? cardType.hashCode() : 0);
         result = 31 * result + (graduateDate != null ? graduateDate.hashCode() : 0);
         result = 31 * result + (university != null ? university.hashCode() : 0);
         result = 31 * result + (studentId != null ? studentId.hashCode() : 0);
@@ -306,15 +312,15 @@ public class UserApplyArchiveEntity {
         result = 31 * result + (parentFirstName != null ? parentFirstName.hashCode() : 0);
         result = 31 * result + (parentLastName != null ? parentLastName.hashCode() : 0);
         result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
-        result = 31 * result + gender;
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (applyTime != null ? applyTime.hashCode() : 0);
-        result = 31 * result + status;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (remark != null ? remark.hashCode() : 0);
-        result = 31 * result + (new_user_apply);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (newUserApply != null ? newUserApply.hashCode() : 0);
         return result;
     }
 }

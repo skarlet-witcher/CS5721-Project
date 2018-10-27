@@ -1,8 +1,9 @@
 package service.impl;
 
+import model.UserAccountModel;
 import model.UserLoginRequestModel;
+import model.UserModel;
 import rpc.UserLoginReqRequest;
-import rpc.UserLoginRequest;
 import rpc.client.CustomerLoginRpc;
 import service.ICustomerLoginService;
 
@@ -30,6 +31,16 @@ public class CustomerLoginService implements ICustomerLoginService {
                         setBirthMon(userLoginRequestModel.getMonth()).
                         setBirthYear(userLoginRequestModel.getYear()).build()
         );
+    }
+
+    @Override
+    public void requestForgotUserId(UserAccountModel userAccountModel) {
+
+    }
+
+    @Override
+    public void requestForgotUserPIN(UserModel userModel) {
+
     }
 
 }

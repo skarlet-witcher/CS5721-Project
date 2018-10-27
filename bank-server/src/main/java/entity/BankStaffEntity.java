@@ -5,31 +5,31 @@ import javax.persistence.*;
 @Entity
 @Table(name = "bank_staff", schema = "bank_manage", catalog = "")
 public class BankStaffEntity {
-    private long id;
-    private long staffId;
+    private Long id;
+    private Long staffId;
     private String password;
     private String firstName;
     private String lastName;
     private String email;
-    private int status;
+    private Integer status;
 
     @Id
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "staff_id", nullable = false)
-    public long getStaffId() {
+    public Long getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(long staffId) {
+    public void setStaffId(Long staffId) {
         this.staffId = staffId;
     }
 
@@ -75,11 +75,11 @@ public class BankStaffEntity {
 
     @Basic
     @Column(name = "status", nullable = false)
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -90,24 +90,24 @@ public class BankStaffEntity {
 
         BankStaffEntity that = (BankStaffEntity) o;
 
-        if (id != that.id) return false;
-        if (staffId != that.staffId) return false;
-        if (status != that.status) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (staffId != null ? !staffId.equals(that.staffId) : that.staffId != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-        return email != null ? email.equals(that.email) : that.email == null;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        return status != null ? status.equals(that.status) : that.status == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (staffId ^ (staffId >>> 32));
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (staffId != null ? staffId.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + status;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 }

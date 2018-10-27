@@ -5,41 +5,41 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_account", schema = "bank_manage", catalog = "")
 public class UserAccountEntity {
-    private long id;
-    private long accountNumber;
-    private long accountType;
+    private Long id;
+    private Long accountNumber;
+    private Long accountType;
     private String bic;
     private String iban;
     private Long userId;
-    private int status;
+    private Integer status;
 
     @Id
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "account_number", nullable = false)
-    public long getAccountNumber() {
+    public Long getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(long accountNumber) {
+    public void setAccountNumber(Long accountNumber) {
         this.accountNumber = accountNumber;
     }
 
     @Basic
     @Column(name = "account_type", nullable = false)
-    public long getAccountType() {
+    public Long getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(long accountType) {
+    public void setAccountType(Long accountType) {
         this.accountType = accountType;
     }
 
@@ -75,11 +75,11 @@ public class UserAccountEntity {
 
     @Basic
     @Column(name = "status", nullable = false)
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -90,24 +90,25 @@ public class UserAccountEntity {
 
         UserAccountEntity that = (UserAccountEntity) o;
 
-        if (id != that.id) return false;
-        if (accountNumber != that.accountNumber) return false;
-        if (accountType != that.accountType) return false;
-        if (status != that.status) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (accountNumber != null ? !accountNumber.equals(that.accountNumber) : that.accountNumber != null)
+            return false;
+        if (accountType != null ? !accountType.equals(that.accountType) : that.accountType != null) return false;
         if (bic != null ? !bic.equals(that.bic) : that.bic != null) return false;
         if (iban != null ? !iban.equals(that.iban) : that.iban != null) return false;
-        return userId != null ? userId.equals(that.userId) : that.userId == null;
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        return status != null ? status.equals(that.status) : that.status == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (accountNumber ^ (accountNumber >>> 32));
-        result = 31 * result + (int) (accountType ^ (accountType >>> 32));
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (accountNumber != null ? accountNumber.hashCode() : 0);
+        result = 31 * result + (accountType != null ? accountType.hashCode() : 0);
         result = 31 * result + (bic != null ? bic.hashCode() : 0);
         result = 31 * result + (iban != null ? iban.hashCode() : 0);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + status;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 }

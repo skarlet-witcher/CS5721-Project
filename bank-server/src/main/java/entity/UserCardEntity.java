@@ -6,43 +6,44 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "user_card", schema = "bank_manage", catalog = "")
 public class UserCardEntity {
-    private long id;
-    private long cardNumber;
-    private int cardType;
+    private Long id;
+    private Long cardNumber;
+    private Integer cardType;
     private String pin;
-    private double balance;
-    private int currencyType;
+    private Double balance;
+    private Integer currencyType;
     private Timestamp expiredDate;
-    private long accountId;
-    private int status;
+    private Long accountId;
+    private Integer status;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "card_number", nullable = false)
-    public long getCardNumber() {
+    public Long getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(long cardNumber) {
+    public void setCardNumber(Long cardNumber) {
         this.cardNumber = cardNumber;
     }
 
     @Basic
     @Column(name = "card_type", nullable = false)
-    public int getCardType() {
+    public Integer getCardType() {
         return cardType;
     }
 
-    public void setCardType(int cardType) {
+    public void setCardType(Integer cardType) {
         this.cardType = cardType;
     }
 
@@ -58,21 +59,21 @@ public class UserCardEntity {
 
     @Basic
     @Column(name = "balance", nullable = false, precision = 0)
-    public double getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
     @Basic
     @Column(name = "currency_type", nullable = false)
-    public int getCurrencyType() {
+    public Integer getCurrencyType() {
         return currencyType;
     }
 
-    public void setCurrencyType(int currencyType) {
+    public void setCurrencyType(Integer currencyType) {
         this.currencyType = currencyType;
     }
 
@@ -88,21 +89,21 @@ public class UserCardEntity {
 
     @Basic
     @Column(name = "account_id", nullable = false)
-    public long getAccountId() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(long accountId) {
+    public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
 
     @Basic
     @Column(name = "status", nullable = false)
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -113,31 +114,28 @@ public class UserCardEntity {
 
         UserCardEntity that = (UserCardEntity) o;
 
-        if (id != that.id) return false;
-        if (cardNumber != that.cardNumber) return false;
-        if (cardType != that.cardType) return false;
-        if (Double.compare(that.balance, balance) != 0) return false;
-        if (currencyType != that.currencyType) return false;
-        if (accountId != that.accountId) return false;
-        if (status != that.status) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (cardNumber != null ? !cardNumber.equals(that.cardNumber) : that.cardNumber != null) return false;
+        if (cardType != null ? !cardType.equals(that.cardType) : that.cardType != null) return false;
         if (pin != null ? !pin.equals(that.pin) : that.pin != null) return false;
-        return expiredDate != null ? expiredDate.equals(that.expiredDate) : that.expiredDate == null;
+        if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
+        if (currencyType != null ? !currencyType.equals(that.currencyType) : that.currencyType != null) return false;
+        if (expiredDate != null ? !expiredDate.equals(that.expiredDate) : that.expiredDate != null) return false;
+        if (accountId != null ? !accountId.equals(that.accountId) : that.accountId != null) return false;
+        return status != null ? status.equals(that.status) : that.status == null;
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (cardNumber ^ (cardNumber >>> 32));
-        result = 31 * result + cardType;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (cardNumber != null ? cardNumber.hashCode() : 0);
+        result = 31 * result + (cardType != null ? cardType.hashCode() : 0);
         result = 31 * result + (pin != null ? pin.hashCode() : 0);
-        temp = Double.doubleToLongBits(balance);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + currencyType;
+        result = 31 * result + (balance != null ? balance.hashCode() : 0);
+        result = 31 * result + (currencyType != null ? currencyType.hashCode() : 0);
         result = 31 * result + (expiredDate != null ? expiredDate.hashCode() : 0);
-        result = 31 * result + (int) (accountId ^ (accountId >>> 32));
-        result = 31 * result + status;
+        result = 31 * result + (accountId != null ? accountId.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
 }

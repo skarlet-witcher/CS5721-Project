@@ -5,17 +5,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "sys_config", schema = "bank_manage", catalog = "")
 public class SysConfigEntity {
-    private long id;
+    private Long id;
     private String confKey;
     private String value;
 
     @Id
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,14 +46,14 @@ public class SysConfigEntity {
 
         SysConfigEntity that = (SysConfigEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (confKey != null ? !confKey.equals(that.confKey) : that.confKey != null) return false;
         return value != null ? value.equals(that.value) : that.value == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (confKey != null ? confKey.hashCode() : 0);
         result = 31 * result + (value != null ? value.hashCode() : 0);
         return result;

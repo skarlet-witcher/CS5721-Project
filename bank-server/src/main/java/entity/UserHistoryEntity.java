@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "user_history", schema = "bank_manage", catalog = "")
 public class UserHistoryEntity {
-    private long id;
+    private Long id;
     private String operateNo;
     private Integer operateType;
     private Timestamp operateTime;
@@ -15,18 +15,19 @@ public class UserHistoryEntity {
     private Integer currencyType;
     private Double balance;
     private String description;
-    private int status;
+    private Integer status;
     private Long userId;
     private Long toPayeeId;
     private Long accountId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -112,11 +113,11 @@ public class UserHistoryEntity {
 
     @Basic
     @Column(name = "status", nullable = false)
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -157,8 +158,7 @@ public class UserHistoryEntity {
 
         UserHistoryEntity that = (UserHistoryEntity) o;
 
-        if (id != that.id) return false;
-        if (status != that.status) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (operateNo != null ? !operateNo.equals(that.operateNo) : that.operateNo != null) return false;
         if (operateType != null ? !operateType.equals(that.operateType) : that.operateType != null) return false;
         if (operateTime != null ? !operateTime.equals(that.operateTime) : that.operateTime != null) return false;
@@ -168,6 +168,7 @@ public class UserHistoryEntity {
         if (currencyType != null ? !currencyType.equals(that.currencyType) : that.currencyType != null) return false;
         if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (status != null ? !status.equals(that.status) : that.status != null) return false;
         if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
         if (toPayeeId != null ? !toPayeeId.equals(that.toPayeeId) : that.toPayeeId != null) return false;
         return accountId != null ? accountId.equals(that.accountId) : that.accountId == null;
@@ -175,7 +176,7 @@ public class UserHistoryEntity {
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (operateNo != null ? operateNo.hashCode() : 0);
         result = 31 * result + (operateType != null ? operateType.hashCode() : 0);
         result = 31 * result + (operateTime != null ? operateTime.hashCode() : 0);
@@ -184,7 +185,7 @@ public class UserHistoryEntity {
         result = 31 * result + (currencyType != null ? currencyType.hashCode() : 0);
         result = 31 * result + (balance != null ? balance.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + status;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (toPayeeId != null ? toPayeeId.hashCode() : 0);
         result = 31 * result + (accountId != null ? accountId.hashCode() : 0);

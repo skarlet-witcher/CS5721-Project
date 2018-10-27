@@ -5,18 +5,19 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_payee", schema = "bank_manage", catalog = "")
 public class UserPayeeEntity {
-    private long id;
+    private Long id;
     private String name;
     private String iban;
     private Long userId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -57,7 +58,7 @@ public class UserPayeeEntity {
 
         UserPayeeEntity that = (UserPayeeEntity) o;
 
-        if (id != that.id) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (iban != null ? !iban.equals(that.iban) : that.iban != null) return false;
         return userId != null ? userId.equals(that.userId) : that.userId == null;
@@ -65,7 +66,7 @@ public class UserPayeeEntity {
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (iban != null ? iban.hashCode() : 0);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
