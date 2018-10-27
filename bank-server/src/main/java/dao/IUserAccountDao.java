@@ -9,5 +9,4 @@ public interface IUserAccountDao {
 
     UserAccountEntity getUserAccountByAccountNumber(long accountNumber);
 
-    UserAccountEntity getUserIdByIBAN(String iban);
 }

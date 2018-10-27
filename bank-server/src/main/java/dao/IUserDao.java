@@ -2,6 +2,7 @@ package dao;
 
 import entity.UserEntity;
 
+import java.sql.Timestamp;
 import java.util.Map;
 
 public interface IUserDao {
@@ -10,6 +11,8 @@ public interface IUserDao {
     UserEntity selectUserByUserId(Long userId);
 
     UserEntity selectUserById(Long id);
+
+    UserEntity selectUserByNameDOBPhoneEmail(String firstName, String lastName, Timestamp birthDate, String phone, String email);
 
     Integer updateUserPinDigitById(Long id, String loginPinDigit);
 

@@ -20,8 +20,10 @@ import java.util.Calendar;
  */
 public class CustomerForgotUserIdView extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel lbl_IBAN;
-    private JTextField tf_IBAN;
+    private JLabel lbl_firstname;
+    private JTextField tf_firstName;
+    private JLabel lbl_lastName;
+    private JTextField tf_lastName;
     private JLabel lbl_dob;
     private JTextField tf_day;
     private JLabel lbl_dob_mark1;
@@ -55,26 +57,33 @@ public class CustomerForgotUserIdView extends JFrame {
     }
 
     private void btn_confirmActionPerformed(ActionEvent e) {
-        // IBAN validator
-        if(tf_IBAN.getText().trim().length() <= 0) {
+        // First Name validator
+        if(tf_firstName.getText().trim().length() <= 0) {
             JOptionPane.showMessageDialog(null,
-                    "Please input the IBAN",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            tf_IBAN.grabFocus();
+                    "Please input your first name",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_firstName.grabFocus();
+            return;
+        } if(!tf_firstName.getText().trim().matches("^[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "First name should only contain characters",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_firstName.grabFocus();
             return;
         }
-        if(tf_IBAN.getText().trim().length() < 22) {
+
+        // Last name validator
+        if(tf_lastName.getText().trim().length() <= 0) {
             JOptionPane.showMessageDialog(null,
-                    "the length of IBAN should be 22",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            tf_IBAN.grabFocus();
+                    "Please input your last name",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_lastName.grabFocus();
             return;
-        }
-        if(!tf_IBAN.getText().trim().matches("^[0-9A-Z]+$")) {
+        } if(!tf_lastName.getText().trim().matches("^[a-zA-Z]+$")) {
             JOptionPane.showMessageDialog(null,
-                    "The IBAN should only contain numbers and capital letters",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            tf_IBAN.grabFocus();
+                    "First name should only contain characters",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_lastName.grabFocus();
             return;
         }
 
@@ -204,8 +213,10 @@ public class CustomerForgotUserIdView extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        lbl_IBAN = new JLabel();
-        tf_IBAN = new JTextField();
+        lbl_firstname = new JLabel();
+        tf_firstName = new JTextField();
+        lbl_lastName = new JLabel();
+        tf_lastName = new JTextField();
         lbl_dob = new JLabel();
         tf_day = new JTextField();
         lbl_dob_mark1 = new JLabel();
@@ -223,30 +234,40 @@ public class CustomerForgotUserIdView extends JFrame {
         setTitle("Customer Forgot UserId View");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-                "hidemode 3",
-                // columns
-                "[50:n,fill]" +
-                        "[fill]" +
-                        "[fill]" +
-                        "[50:n,fill]",
-                // rows
-                "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]"));
+            "hidemode 3",
+            // columns
+            "[50:n,fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[50:n,fill]",
+            // rows
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]" +
+            "[]"));
 
-        //---- lbl_IBAN ----
-        lbl_IBAN.setText("IBAN");
-        lbl_IBAN.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        contentPane.add(lbl_IBAN, "cell 1 0");
-        contentPane.add(tf_IBAN, "cell 2 0");
+        //---- lbl_firstname ----
+        lbl_firstname.setText("First Name");
+        lbl_firstname.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        contentPane.add(lbl_firstname, "cell 1 1");
+        contentPane.add(tf_firstName, "cell 2 1");
+
+        //---- lbl_lastName ----
+        lbl_lastName.setText("Last Name");
+        lbl_lastName.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        contentPane.add(lbl_lastName, "cell 1 2");
+        contentPane.add(tf_lastName, "cell 2 2");
 
         //---- lbl_dob ----
         lbl_dob.setText("Date of Birth");
         lbl_dob.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        contentPane.add(lbl_dob, "cell 1 1");
+        contentPane.add(lbl_dob, "cell 1 3");
 
         //---- tf_day ----
         tf_day.setMinimumSize(new Dimension(50, 24));
@@ -256,11 +277,11 @@ public class CustomerForgotUserIdView extends JFrame {
                 tf_dayFocusGained(e);
             }
         });
-        contentPane.add(tf_day, "cell 2 1");
+        contentPane.add(tf_day, "cell 2 3");
 
         //---- lbl_dob_mark1 ----
         lbl_dob_mark1.setText("/");
-        contentPane.add(lbl_dob_mark1, "cell 2 1");
+        contentPane.add(lbl_dob_mark1, "cell 2 3");
 
         //---- tf_month ----
         tf_month.setMinimumSize(new Dimension(50, 24));
@@ -270,11 +291,11 @@ public class CustomerForgotUserIdView extends JFrame {
                 tf_monthFocusGained(e);
             }
         });
-        contentPane.add(tf_month, "cell 2 1");
+        contentPane.add(tf_month, "cell 2 3");
 
         //---- lbl_dob_mark2 ----
         lbl_dob_mark2.setText("/");
-        contentPane.add(lbl_dob_mark2, "cell 2 1");
+        contentPane.add(lbl_dob_mark2, "cell 2 3");
 
         //---- tf_year ----
         tf_year.setMinimumSize(new Dimension(50, 24));
@@ -284,39 +305,31 @@ public class CustomerForgotUserIdView extends JFrame {
                 tf_yearFocusGained(e);
             }
         });
-        contentPane.add(tf_year, "cell 2 1");
+        contentPane.add(tf_year, "cell 2 3");
 
         //---- lbl_contactNum ----
         lbl_contactNum.setText("Contact Number");
         lbl_contactNum.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        contentPane.add(lbl_contactNum, "cell 1 2");
-        contentPane.add(tf_contactNum, "cell 2 2");
+        contentPane.add(lbl_contactNum, "cell 1 4");
+        contentPane.add(tf_contactNum, "cell 2 4");
 
         //---- lbl_email ----
         lbl_email.setText("Email");
         lbl_email.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        contentPane.add(lbl_email, "cell 1 3");
-        contentPane.add(tf_email, "cell 2 3");
+        contentPane.add(lbl_email, "cell 1 5");
+        contentPane.add(tf_email, "cell 2 5");
 
         //---- btn_confirm ----
         btn_confirm.setText("Confirm");
         btn_confirm.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        btn_confirm.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_confirmActionPerformed(e);
-            }
-        });
-        contentPane.add(btn_confirm, "cell 2 4");
+        btn_confirm.addActionListener(e -> btn_confirmActionPerformed(e));
+        contentPane.add(btn_confirm, "cell 2 6");
 
         //---- btn_back ----
         btn_back.setText("Back");
         btn_back.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        btn_back.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_backActionPerformed(e);
-            }
-        });
-        contentPane.add(btn_back, "cell 2 5");
+        btn_back.addActionListener(e -> btn_backActionPerformed(e));
+        contentPane.add(btn_back, "cell 2 7");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -327,7 +340,6 @@ public class CustomerForgotUserIdView extends JFrame {
         tf_day.setDocument(new JTextFieldLimit(2));
         tf_month.setDocument(new JTextFieldLimit(2));
         tf_year.setDocument(new JTextFieldLimit(4));
-        tf_IBAN.setDocument(new JTextFieldLimit(22));
 
         tf_year.setText("YYYY");
         tf_month.setText("MM");
