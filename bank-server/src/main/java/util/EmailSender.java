@@ -7,14 +7,17 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 public class EmailSender {
-    private String USER_NAME = "USERNAME";  // GMail model name (just the part before "@gmail.com")
-    private String PASSWORD = "PASSWORD"; // GMail password
-    private String RECIPIENT = "";
+    private String USER_NAME;  // GMail model name (just the part before "@gmail.com")
+    private String PASSWORD; // GMail password
+    private String HOST;
+    private String PORT;
     private static EmailSender emailSender = null;
 
     private EmailSender() {
         this.USER_NAME = SysConfigDao.getInstance().getValueByKey("email");
         this.PASSWORD = SysConfigDao.getInstance().getValueByKey("password");
+        this.HOST = SysConfigDao.getInstance().getValueByKey("host");
+        this.PORT = SysConfigDao.getInstance().getValueByKey("port");
     }
 
     public static EmailSender getInstance() {
@@ -24,26 +27,14 @@ public class EmailSender {
         return emailSender;
     }
 
-    /*
-    public static void main(String[] args) {
-        String from = USER_NAME;
-        String pass = PASSWORD;
-        String[] to = { RECIPIENT }; // list of recipient email addresses
-        String subject = "Java send mail example";
-        String body = "Welcome to JavaMail!";
-
-        sendFromGMail(from, pass, to, subject, body);
-    }
-    */
 
     public void sendFromGMail(String to, String subject, String body) {
         Properties props = System.getProperties();
-        String host = "smtp.gmail.com";
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.host", HOST);
         props.put("mail.smtp.model", USER_NAME);
         props.put("mail.smtp.password", PASSWORD);
-        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.port", PORT);
         props.put("mail.smtp.auth", "true");
 
         Session session = Session.getDefaultInstance(props);
@@ -58,7 +49,7 @@ public class EmailSender {
             message.setSubject(subject);
             message.setContent(htmlMessage, "text/html; charset=utf-8");
             Transport transport = session.getTransport("smtp");
-            transport.connect(host, USER_NAME, PASSWORD);
+            transport.connect(HOST, USER_NAME, PASSWORD);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
         }
