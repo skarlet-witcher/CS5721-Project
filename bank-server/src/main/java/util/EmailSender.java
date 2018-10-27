@@ -7,11 +7,10 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 public class EmailSender {
-    private String USER_NAME = "USERNAME";  // GMail model name (just the part before "@gmail.com")
-    private String PASSWORD = "PASSWORD"; // GMail password
+    private String USER_NAME;  // GMail model name (just the part before "@gmail.com")
+    private String PASSWORD; // GMail password
     private String HOST;
     private String PORT;
-    private String RECIPIENT = "";
     private static EmailSender emailSender = null;
 
     private EmailSender() {
