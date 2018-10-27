@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import util.HibernateUtils;
 
+import java.sql.Timestamp;
 import java.util.Map;
 
 
@@ -101,7 +102,13 @@ public class UserDao implements IUserDao {
                 return null;
             }
         }
-        @Override
+
+    @Override
+    public UserEntity selectUserByNameDOBPhoneEmail(String firstName, String lastName, Timestamp birthDate, String phone, String email) {
+        return null;
+    }
+
+    @Override
         public UserEntity selectUserByIdAndName(Long userId, String firstName, String lastName) {
             try {
                 session.getTransaction().begin();
