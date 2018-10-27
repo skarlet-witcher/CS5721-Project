@@ -1,6 +1,6 @@
 package Const;
 
-public class GenderType {
+public class UserGenderType {
     public static final int WOMAN = 0;
     public static final int MAN = 1;
 }
