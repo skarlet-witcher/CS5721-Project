@@ -3,7 +3,10 @@ package service.impl;
 import model.UserAccountModel;
 import model.UserLoginRequestModel;
 import model.UserModel;
+import rpc.UserLoginReply;
+import rpc.UserLoginReqReply;
 import rpc.UserLoginReqRequest;
+import rpc.UserLoginRequest;
 import rpc.client.CustomerLoginRpc;
 import service.ICustomerLoginService;
 
@@ -18,7 +21,7 @@ public class CustomerLoginService implements ICustomerLoginService {
     }
     @Override
     public void requestLoginUsingPhoneNum(UserLoginRequestModel userLoginRequestModel) throws Exception {
-        CustomerLoginRpc.getInstance().loginReq(
+        UserLoginReqReply userLoginReqReply = CustomerLoginRpc.getInstance().loginReq(
                 UserLoginReqRequest.newBuilder().setPhoneLast4(Integer.parseInt(userLoginRequestModel.getPhoneNumLast4())).
                         setUserId(userLoginRequestModel.getUserId()).build()
         );

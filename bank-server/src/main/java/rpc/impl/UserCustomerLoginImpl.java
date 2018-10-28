@@ -29,7 +29,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
 
         try {
             UserLoginReqReply userLoginReqReply = customerLoginService.LoginReq(userId, phoneLast4, birthDay, birthMon, birthYear);
-
+            logger.info("Input those digits of PIN:" + userLoginReqReply.getAllFields());
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .setUserLoginReqReply(userLoginReqReply)
                     .build());
