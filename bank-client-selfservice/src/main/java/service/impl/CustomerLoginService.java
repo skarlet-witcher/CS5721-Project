@@ -48,7 +48,7 @@ public class CustomerLoginService implements ICustomerLoginService {
 
     @Override
     public void requestLoginUsingPIN(UserLoginPINModel userLoginPINModel) throws Exception {
-        CustomerLoginRpc.getInstance().loginReq(
+        CustomerLoginRpc.getInstance().login(
                 UserLoginRequest.newBuilder().setUserId(userLoginPINModel.getUserId())
                         .setPin1(userLoginPINModel.getPin1())
                 .setPin2(userLoginPINModel.getPin2())

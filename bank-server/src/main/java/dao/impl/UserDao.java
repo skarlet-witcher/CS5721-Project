@@ -65,6 +65,7 @@ public class UserDao implements IUserDao {
                 int inputPin1 = pin.get(d1);
                 int inputPin2 = pin.get(d2);
                 int inputPin3 = pin.get(d3);
+
                 logger.info("true pin in db: " + truePin1 + " " + truePin2 + " " + truePin3);
                 logger.info("input pin: " + inputPin1 + " " + inputPin2 + " " + inputPin3);
 

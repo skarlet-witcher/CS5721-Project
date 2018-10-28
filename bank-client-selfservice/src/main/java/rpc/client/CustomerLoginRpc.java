@@ -44,7 +44,7 @@ public class CustomerLoginRpc {
 
     }
 
-    public Response loginReq(UserLoginRequest userLoginRequest) throws Exception {
+    public Response login(UserLoginRequest userLoginRequest) throws Exception {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
                 .usePlaintext().build();
         UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
