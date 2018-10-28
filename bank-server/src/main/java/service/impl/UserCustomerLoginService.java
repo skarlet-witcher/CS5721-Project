@@ -16,6 +16,7 @@ import util.FaultFactory;
 import util.RandomUtil;
 import util.TimestampConvertHelper;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +115,16 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
         } else {
             throw FaultFactory.throwFaultException("UserId is not matched with pin, please check again.");
         }
+
+    }
+
+    @Override
+    public void forgotUserId(String firstName, String lastName, Timestamp birthDate, String contactNum, String email) {
+
+    }
+
+    @Override
+    public void forgotPIN(Long userId, String email, Timestamp birthDate) {
 
     }
 }

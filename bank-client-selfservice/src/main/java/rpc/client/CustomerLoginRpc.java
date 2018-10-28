@@ -3,10 +3,7 @@ package rpc.client;
 import Const.ResponseStatusType;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import rpc.Response;
-import rpc.UserCustomerLoginGrpc;
-import rpc.UserLoginReqReply;
-import rpc.UserLoginReqRequest;
+import rpc.*;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -46,6 +43,5 @@ public class CustomerLoginRpc {
         }
 
     }
-
 
 }

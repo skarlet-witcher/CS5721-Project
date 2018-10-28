@@ -21,7 +21,7 @@ public class CustomerLoginService implements ICustomerLoginService {
     }
     @Override
     public void requestLoginUsingPhoneNum(UserLoginRequestModel userLoginRequestModel) throws Exception {
-        UserLoginReqReply userLoginReqReply = CustomerLoginRpc.getInstance().loginReq(
+        CustomerLoginRpc.getInstance().loginReq(
                 UserLoginReqRequest.newBuilder().setPhoneLast4(Integer.parseInt(userLoginRequestModel.getPhoneNumLast4())).
                         setUserId(userLoginRequestModel.getUserId()).build()
         );
