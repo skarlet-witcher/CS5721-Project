@@ -4,19 +4,16 @@
 
 package view;
 
+
+import model.UserLoginPINModel;
 import net.miginfocom.swing.MigLayout;
+import rpc.client.CustomerLoginRpc;
+import service.impl.CustomerLoginService;
 import util.JTextFieldLimit;
 import util.KeyPadGenerator;
-import util.PINFieldSetter;
-
 import javax.swing.*;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +22,7 @@ import java.util.List;
  */
 public class CustomerPINView extends JFrame {
     List<JPasswordField> passwordFieldsList = new ArrayList<JPasswordField>();
+    List<Integer> pinDigitList = new ArrayList<>();
     private long userId;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_PIN;
@@ -101,6 +99,26 @@ public class CustomerPINView extends JFrame {
     }
 
     private void btn_confirmActionPerformed(ActionEvent e) {
+        for(JPasswordField pwdField: passwordFieldsList) {
+            if(pwdField.getPassword().length <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your PIN",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        UserLoginPINModel userLoginPINModel = initUserLoginPINModel(pinDigitList);
+        try {
+            CustomerLoginService.getInstance().requestLoginUsingPIN(userLoginPINModel);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            E.printStackTrace();
+            return;
+        }
+
         this.dispose();
         new CustomerMainView(userId).run();
     }
@@ -176,6 +194,9 @@ public class CustomerPINView extends JFrame {
                 generateLabel();
             }
         }
+        pinDigitList.add(digit_1);
+        pinDigitList.add(digit_2);
+        pinDigitList.add(digit_3);
         pack();
     }
 
@@ -192,6 +213,28 @@ public class CustomerPINView extends JFrame {
         btn_8.setText(keyPadList.get(7).toString());
         btn_9.setText(keyPadList.get(8).toString());
         btn_10.setText(keyPadList.get(9).toString());
+    }
+
+    private UserLoginPINModel initUserLoginPINModel(List<Integer> digitList) {
+        UserLoginPINModel userLoginPINModel = new UserLoginPINModel();
+        int i = 0;
+        for(int digit : digitList) {
+
+                JPasswordField temp = passwordFieldsList.get(i);
+                int pwd = Integer.parseInt(new String(temp.getPassword()));
+                System.out.println(pwd);
+                switch (digit) {
+                    case 1: userLoginPINModel.setPin1(pwd); break;
+                    case 2: userLoginPINModel.setPin2(pwd); break;
+                    case 3: userLoginPINModel.setPin3(pwd); break;
+                    case 4: userLoginPINModel.setPin4(pwd); break;
+                    case 5: userLoginPINModel.setPin5(pwd); break;
+                    case 6: userLoginPINModel.setPin6(pwd); break;
+                }
+            i++;
+        }
+        userLoginPINModel.setUserId(userId);
+        return userLoginPINModel;
     }
 
     private void btn_forgotPINActionPerformed(ActionEvent e) {

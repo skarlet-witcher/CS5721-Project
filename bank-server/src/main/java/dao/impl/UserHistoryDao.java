@@ -67,13 +67,13 @@ public class UserHistoryDao implements IUserHistoryDao {
 
             session.getTransaction().begin();
             Query query = session.createQuery("from UserHistoryEntity " +
-                    "where userId = ? and " +
-                    "operateType = ? and " +
-                    "status = ? " +
+                    "where userId=:userId and " +
+                    "operateType=:operateType and " +
+                    "status=:status " +
                     "order by operateTime desc");
-            query.setParameter(0, userId);
-            query.setParameter(1, UserOperateType.LOGIN);
-            query.setParameter(2, UserOperateStatusType.SUCCESS);
+            query.setParameter("userId", userId);
+            query.setParameter("operateType", UserOperateType.LOGIN);
+            query.setParameter("status", UserOperateStatusType.SUCCESS);
             query.setMaxResults(1);
             session.getTransaction().commit();
             return (UserHistoryEntity) query.uniqueResult();

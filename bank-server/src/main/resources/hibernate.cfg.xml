@@ -9,6 +9,7 @@
         <property name="hibernate.connection.provider_class">
             com.alibaba.druid.support.hibernate.DruidConnectionProvider
         </property>
+        <property name="hibernate.connection.isolation">1</property>
 
         <!-- Database connection settings -->
         <property name="driverClassName">com.mysql.jdbc.Driver</property>

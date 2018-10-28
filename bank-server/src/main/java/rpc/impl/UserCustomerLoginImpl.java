@@ -50,7 +50,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         pin.put(4, request.getPin4());
         pin.put(5, request.getPin5());
         pin.put(6, request.getPin6());
-
+        logger.info("User " + request.getUserId() + " ready to match with the PIN");
         try {
             UserLoginReply loginReply = customerLoginService.LoginByUserIdAndPin(request.getUserId(), pin);
 

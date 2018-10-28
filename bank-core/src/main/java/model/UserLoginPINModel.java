@@ -1,12 +1,22 @@
 package model;
 
 public class UserLoginPINModel {
+    private Long userId;
     private Integer pin1;
     private Integer pin2;
     private Integer pin3;
     private Integer pin4;
     private Integer pin5;
     private Integer pin6;
+
+    public UserLoginPINModel() {
+        this.pin1 = -1;
+        this.pin2 = -1;
+        this.pin3 = -1;
+        this.pin4 = -1;
+        this.pin5 = -1;
+        this.pin6 = -1;
+    }
 
     public Integer getPin1() {
         return pin1;
@@ -54,5 +64,13 @@ public class UserLoginPINModel {
 
     public void setPin6(Integer pin6) {
         this.pin6 = pin6;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

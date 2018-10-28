@@ -1,6 +1,7 @@
 package service.impl;
 
 import model.UserAccountModel;
+import model.UserLoginPINModel;
 import model.UserLoginRequestModel;
 import model.UserModel;
 import rpc.UserLoginReply;
@@ -43,6 +44,20 @@ public class CustomerLoginService implements ICustomerLoginService {
         List<Integer> PinDigits = new ArrayList<>();
         initPinDigits(PinDigits, userLoginReqReply);
         return PinDigits;
+    }
+
+    @Override
+    public void requestLoginUsingPIN(UserLoginPINModel userLoginPINModel) throws Exception {
+        CustomerLoginRpc.getInstance().loginReq(
+                UserLoginRequest.newBuilder().setUserId(userLoginPINModel.getUserId())
+                        .setPin1(userLoginPINModel.getPin1())
+                .setPin2(userLoginPINModel.getPin2())
+                .setPin3(userLoginPINModel.getPin3())
+                .setPin4(userLoginPINModel.getPin4())
+                .setPin5(userLoginPINModel.getPin5())
+                .setPin6(userLoginPINModel.getPin6())
+                .build()
+        );
     }
 
     @Override

@@ -8,6 +8,7 @@ import dao.impl.UserDao;
 import dao.impl.UserHistoryDao;
 import entity.UserEntity;
 import entity.UserHistoryEntity;
+import rpc.UserCustomerLoginGrpc;
 import rpc.UserLoginReply;
 import rpc.UserLoginReqReply;
 import service.IUserCustomerHistoryService;
@@ -20,12 +21,15 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class UserCustomerLoginService implements IUserCustomerLoginService {
     private static UserCustomerLoginService instance = null;
     private IUserDao userDao = UserDao.getInstance();
     private IUserHistoryDao operationHistoryDao = UserHistoryDao.getInstance();
     private IUserCustomerHistoryService operationHistoryService = UserCustomerHistoryService.getInstance();
+    private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
+
 
     public static UserCustomerLoginService getInstance() {
         if (instance == null) {
@@ -110,6 +114,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
 
             UserHistoryEntity record = operationHistoryDao.getLastLoginRecordByUserId(userEntity.getId());
             loginReplyBuilder.setLastLoginTime(TimestampConvertHelper.mysqlToRpc(record.getOperateTime()));
+            logger.info("ready to response");
 
             return loginReplyBuilder.build();
         } else {

@@ -1,6 +1,7 @@
 package service;
 
 import model.UserAccountModel;
+import model.UserLoginPINModel;
 import model.UserLoginRequestModel;
 import model.UserModel;
 
@@ -10,6 +11,8 @@ public interface ICustomerLoginService {
     List<Integer> requestLoginUsingPhoneNum(UserLoginRequestModel userLoginRequestModel) throws Exception;
 
     List<Integer> requestLoginUsingDOB(UserLoginRequestModel userLoginRequestModel) throws Exception;
+
+    void requestLoginUsingPIN(UserLoginPINModel userLoginPINModel) throws Exception;
 
     void requestForgotUserId(UserAccountModel userAccountModel) throws Exception;
 
