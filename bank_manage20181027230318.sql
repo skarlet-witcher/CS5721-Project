@@ -113,16 +113,16 @@ VALUES (1, 'mail-host', 'smtp-mail.outlook.com'),
        (4, 'mail-password', ''),
        (5,
         'mail-template-forgotUserId',
-        '<html>\r\n    <p>Dear {0},</p>\r\n    <p>Your UserId is: <bold>{1}</bold></p>\r\n    <p>Please keep it safe.</p>\r\n    </br></br>\r\n    <p>Kind Regards,</p>\r\n    <p>Nuclear Bank team</p>\r\n</html>'),
+        '<html>\r\n    <p>Dear {0},</p>\r\n    <p>Your UserId is: <strong>{1}</strong></p>\r\n    <p>Please keep it safe.</p>\r\n    </br></br>\r\n    <p>Kind Regards,</p>\r\n    <p>Nuclear Bank team</p>\r\n</html>'),
        (6,
         'mail-template-forgotPin',
-        '<html>\r\n    <p>Dear {0},</p>\r\n    <p>Your New Pin is: <bold>{1}</bold></p>\r\n    <p>Please keep it safe.</p>\r\n    </br></br>\r\n    <p>Kind Regards,</p>\r\n    <p>Nuclear Bank team</p>\r\n</html>'),
+        '<html>\r\n    <p>Dear {0},</p>\r\n    <p>Your New Pin is: <strong>{1}</strong></p>\r\n    <p>Please keep it safe.</p>\r\n    </br></br>\r\n    <p>Kind Regards,</p>\r\n    <p>Nuclear Bank team</p>\r\n</html>'),
        (7,
         'mail-template-newAccount',
         '<html>\r\n    <p>Dear {0},</p>\r\n    <p>Your apply for a new account has been approved.</p>\r\n    <p>Login to bank self service to check detail.</p>\r\n    </br></br>\r\n    <p>Kind Regards,</p>\r\n    <p>Nuclear Bank team</p>\r\n</html>'),
        (8,
         'mail-template-newUser',
-        '<html>\r\n    <p>Dear {0},</p>\r\n    <p>Welcome to become one of our big NuclearBank family!</p>\r\n    <p>Your UserId is: <bold>{1}</bold></p>\r\n    <p>Your Pin is: <bold>{2}</bold></p>\r\n    <p>Your accountId is: <bold>{3}</bold></p>\r\n    <p>Your card number is: <bold>{4}</bold></p>\r\n    <p>Please keep it safe.</p>\r\n    </br></br>\r\n    <p>Kind Regards,</p>\r\n    <p>Nuclear Bank team</p>\r\n</html>');
+        '<html>\r\n    <p>Dear {0},</p>\r\n    <p>Welcome to become one of our big NuclearBank family!</p>\r\n    <p>Your UserId is: <strong>{1}</strong></p>\r\n    <p>Your Pin is: <strong>{2}</strong></p>\r\n    <p>Your accountId is: <strong>{3}</strong></p>\r\n    <p>Your card number is: <strong>{4}</strong></p>\r\n    <p>Please keep it safe.</p>\r\n    </br></br>\r\n    <p>Kind Regards,</p>\r\n    <p>Nuclear Bank team</p>\r\n</html>');
 /*!40000 ALTER TABLE `sys_config`
   ENABLE KEYS */;
 UNLOCK TABLES;

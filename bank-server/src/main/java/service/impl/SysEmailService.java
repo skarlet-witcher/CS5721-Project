@@ -45,7 +45,6 @@ public class SysEmailService implements ISysEmailService {
 
         Session session = Session.getDefaultInstance(props);
         MimeMessage message = new MimeMessage(session);
-        String htmlMessage = "<html><p>Dear customer</p><p>" + body + "</p><p>Kind Regards</p><p>Nuclear bank team</p></html>";
         try {
             message.setFrom(new InternetAddress(userName));
             InternetAddress toAddress = new InternetAddress(to);
@@ -53,7 +52,7 @@ public class SysEmailService implements ISysEmailService {
             message.addRecipient(Message.RecipientType.TO, toAddress);
 
             message.setSubject(subject);
-            message.setContent(htmlMessage, "text/html; charset=utf-8");
+            message.setContent(body, "text/html; charset=utf-8");
             Transport transport = session.getTransport("smtp");
             transport.connect(host, userName, password);
             transport.sendMessage(message, message.getAllRecipients());
