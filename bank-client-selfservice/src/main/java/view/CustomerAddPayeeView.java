@@ -41,8 +41,6 @@ public class CustomerAddPayeeView extends JFrame {
     }
 
     private void btn_addActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerPINView(userId).run();
     }
 
     private void initComponents() {

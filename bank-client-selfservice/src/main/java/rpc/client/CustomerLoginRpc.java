@@ -44,4 +44,24 @@ public class CustomerLoginRpc {
 
     }
 
+    public Response loginReq(UserLoginRequest userLoginRequest) throws Exception {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
+                .usePlaintext().build();
+        UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
+
+        logger.info(userLoginRequest.getUserId() + " is requesting to login.");
+
+        Response response = blockingStub.login(userLoginRequest);
+
+        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
+            logger.info(userLoginRequest.getUserId() + " login request detail check successful.");
+            return response;
+        } else {
+            logger.info(userLoginRequest.getUserId() + " login request fail due to " + response.getDescription());
+            throw new Exception(response.getDescription());
+        }
+    }
+
 }

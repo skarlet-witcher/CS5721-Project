@@ -44,11 +44,11 @@ public class CustomerPINView extends JFrame {
     private JButton btn_forgotPIN;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public CustomerPINView(long userId) {
+    public CustomerPINView(long userId,int pin1, int pin2, int pin3) {
         initComponents();
         setUserId(userId);
         generateKeyPad();
-        generatePINField(1,3,6); // the number should be acquired from the db
+        generatePINField(pin1, pin2, pin3); // the number should be acquired from the db
     }
 
     public void run() {

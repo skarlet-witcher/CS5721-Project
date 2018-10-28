@@ -10,6 +10,9 @@ import rpc.UserLoginRequest;
 import rpc.client.CustomerLoginRpc;
 import service.ICustomerLoginService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomerLoginService implements ICustomerLoginService {
     private static ICustomerLoginService instance = null;
 
@@ -20,20 +23,26 @@ public class CustomerLoginService implements ICustomerLoginService {
         return instance;
     }
     @Override
-    public void requestLoginUsingPhoneNum(UserLoginRequestModel userLoginRequestModel) throws Exception {
-        CustomerLoginRpc.getInstance().loginReq(
+    public List<Integer> requestLoginUsingPhoneNum(UserLoginRequestModel userLoginRequestModel) throws Exception {
+        UserLoginReqReply userLoginReqReply = CustomerLoginRpc.getInstance().loginReq(
                 UserLoginReqRequest.newBuilder().setPhoneLast4(Integer.parseInt(userLoginRequestModel.getPhoneNumLast4())).
                         setUserId(userLoginRequestModel.getUserId()).build()
         );
+        List<Integer> PinDigits = new ArrayList<>();
+        initPinDigits(PinDigits, userLoginReqReply);
+        return PinDigits;
     }
     @Override
-    public void requestLoginUsingDOB(UserLoginRequestModel userLoginRequestModel) throws Exception {
-        CustomerLoginRpc.getInstance().loginReq(
+    public List<Integer> requestLoginUsingDOB(UserLoginRequestModel userLoginRequestModel) throws Exception {
+        UserLoginReqReply userLoginReqReply = CustomerLoginRpc.getInstance().loginReq(
                 UserLoginReqRequest.newBuilder().setUserId(userLoginRequestModel.getUserId()).
                         setBirthDay(userLoginRequestModel.getDay()).
                         setBirthMon(userLoginRequestModel.getMonth()).
                         setBirthYear(userLoginRequestModel.getYear()).build()
         );
+        List<Integer> PinDigits = new ArrayList<>();
+        initPinDigits(PinDigits, userLoginReqReply);
+        return PinDigits;
     }
 
     @Override
@@ -44,6 +53,27 @@ public class CustomerLoginService implements ICustomerLoginService {
     @Override
     public void requestForgotUserPIN(UserModel userModel) {
 
+    }
+
+    private void initPinDigits(List<Integer> PinDigits, UserLoginReqReply userLoginReqReply){
+        if(userLoginReqReply.getPin1() == 1) {
+            PinDigits.add(1);
+        }
+        if(userLoginReqReply.getPin2() == 1) {
+            PinDigits.add(2);
+        }
+        if(userLoginReqReply.getPin3() == 1) {
+            PinDigits.add(3);
+        }
+        if(userLoginReqReply.getPin4() == 1) {
+            PinDigits.add(4);
+        }
+        if(userLoginReqReply.getPin5() == 1) {
+            PinDigits.add(5);
+        }
+        if(userLoginReqReply.getPin6() == 1) {
+            PinDigits.add(6);
+        }
     }
 
 }

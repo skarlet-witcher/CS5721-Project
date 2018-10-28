@@ -4,10 +4,12 @@ import model.UserAccountModel;
 import model.UserLoginRequestModel;
 import model.UserModel;
 
-public interface ICustomerLoginService {
-    void requestLoginUsingPhoneNum(UserLoginRequestModel userLoginRequestModel) throws Exception;
+import java.util.List;
 
-    void requestLoginUsingDOB(UserLoginRequestModel userLoginRequestModel) throws Exception;
+public interface ICustomerLoginService {
+    List<Integer> requestLoginUsingPhoneNum(UserLoginRequestModel userLoginRequestModel) throws Exception;
+
+    List<Integer> requestLoginUsingDOB(UserLoginRequestModel userLoginRequestModel) throws Exception;
 
     void requestForgotUserId(UserAccountModel userAccountModel) throws Exception;
 

@@ -1,5 +1,6 @@
 package rpc.impl;
 
+import Const.UserAccountType;
 import io.grpc.stub.StreamObserver;
 import rpc.*;
 import service.IUserCustomerApplyService;
@@ -96,25 +97,25 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
                 customerApplyService.checkDuplicateApply(userId,accountType,cardType);
             }
 
-            if(accountType == 1) {
+            if(accountType == UserAccountType.PERSONAL_ACCOUNT) {
                 logger.info("ready to apply personal account (ready to invoke customerApplySerivce)");
                 customerApplyService.requestPersonalAccountApply(
                         firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone, isNewUser, userId);
             }
-            if(accountType == 2) {
+            if(accountType == UserAccountType.STUDENT_ACCOUNT) {
                 logger.info("ready to apply student account");
                 customerApplyService.requestStudentAccountApply(
                         firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone, isNewUser,
                         graduateDate,studentId,university, userId);
             }
-            if(accountType == 3) {
+            if(accountType == UserAccountType.YOUNG_SAVER_ACCOUNT) {
                 logger.info("ready to apply young saver account");
                 customerApplyService.requestYoungSaverAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone, isNewUser, parentUserId, parentFirstName, parentLastName, userId);
             }
-            if(accountType == 4) {
+            if(accountType == UserAccountType.GOLDEN_ACCOUNT) {
                 logger.info("ready to apply golden account");
                 customerApplyService.requestGoldenAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone, isNewUser, userId);

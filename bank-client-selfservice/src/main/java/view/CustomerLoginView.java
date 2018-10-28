@@ -18,6 +18,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author xiangkai22
@@ -113,40 +115,55 @@ public class CustomerLoginView extends JFrame {
             }
         }
         if(panel_dob.isVisible()) {
+            Long userId = Long.parseLong(tf_userId.getText().trim());
+            int day = Integer.parseInt(tf_day.getText());
+            int month = Integer.parseInt(tf_month.getText());
+            int year = Integer.parseInt(tf_year.getText());
+            int pin1;
+            int pin2;
+            int pin3;
+            List<Integer> PinDigits = new ArrayList<>();
             try {
-                Long userId = Long.parseLong(tf_userId.getText().trim());
-                int day = Integer.parseInt(tf_day.getText());
-                int month = Integer.parseInt(tf_month.getText());
-                int year = Integer.parseInt(tf_year.getText());
-
                 // login in with date of birth
                 UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel(userId, day, month, year);
-                CustomerLoginService.getInstance().requestLoginUsingDOB(userLoginRequestModel);
-
+                PinDigits = CustomerLoginService.getInstance().requestLoginUsingDOB(userLoginRequestModel);
+                pin1 = PinDigits.get(0);
+                pin2 = PinDigits.get(1);
+                pin3 = PinDigits.get(2);
             } catch (Exception E) {
                 JOptionPane.showMessageDialog(null,
                         "Please input valid date of birth or model ID",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            this.dispose();
+            new CustomerPINView(userId, pin1, pin2, pin3).run();
         }
         if(panel_contactNum.isVisible()) {
+            Long userId = Long.parseLong(tf_userId.getText().trim());
+            String phoneNumLast4 = tf_contactNum.getText().trim();
+            int pin1;
+            int pin2;
+            int pin3;
+            List<Integer> PinDigits = new ArrayList<>();
             try {
                 // login in with contactNum
-                Long userId = Long.parseLong(tf_userId.getText().trim());
-                String phoneNumLast4 = tf_contactNum.getText().trim();
                 UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel(userId, phoneNumLast4);
-                CustomerLoginService.getInstance().requestLoginUsingPhoneNum(userLoginRequestModel);
+                PinDigits = CustomerLoginService.getInstance().requestLoginUsingPhoneNum(userLoginRequestModel);
+                pin1 = PinDigits.get(0);
+                pin2 = PinDigits.get(1);
+                pin3 = PinDigits.get(2);
             } catch (Exception E) {
                 JOptionPane.showMessageDialog(null,
                         "Please input valid contact number or User ID",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
+            this.dispose();
+            new CustomerPINView(userId, pin1, pin2, pin3).run();
         }
-        this.dispose();
-        new CustomerPINView(Long.parseLong(tf_userId.getText().trim())).run();
+
+
     }
 
     private void btn_forgotUserIdActionPerformed(ActionEvent e) {
