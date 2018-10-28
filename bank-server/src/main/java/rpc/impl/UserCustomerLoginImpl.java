@@ -58,7 +58,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
                     .setUserLoginReply(loginReply)
                     .build());
         } catch (Exception e) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getMessage())
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getLocalizedMessage())
                     .build());
         }
         responseObserver.onCompleted();

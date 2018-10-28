@@ -113,7 +113,9 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
             loginReplyBuilder.setFirstName(userEntity.getFirstName());
 
             UserHistoryEntity record = operationHistoryDao.getLastLoginRecordByUserId(userEntity.getId());
-            loginReplyBuilder.setLastLoginTime(TimestampConvertHelper.mysqlToRpc(record.getOperateTime()));
+            if (record != null) {
+                loginReplyBuilder.setLastLoginTime(TimestampConvertHelper.mysqlToRpc(record.getOperateTime()));
+            }
             logger.info("ready to response");
 
             return loginReplyBuilder.build();
