@@ -142,7 +142,7 @@ class CustomerApplyServiceTest {
         userApplyNewStudentAccountBaseModel.setSchoolName("ul");
 
         assertDoesNotThrow(() -> {
-            customerApplyService.applyStudentAccountForNewUser(userApplyNewStudentAccountBaseModel);
+            customerApplyService.applyStudentAccountForExistingUser(userApplyNewStudentAccountBaseModel);
         });
     }
 
