@@ -1,9 +1,6 @@
 package service;
 
-import model.UserAccountModel;
-import model.UserLoginPINModel;
-import model.UserLoginRequestModel;
-import model.UserModel;
+import model.*;
 
 import java.util.List;
 
@@ -14,7 +11,7 @@ public interface ICustomerLoginService {
 
     void requestLoginUsingPIN(UserLoginPINModel userLoginPINModel) throws Exception;
 
-    void requestForgotUserId(UserAccountModel userAccountModel) throws Exception;
+    void requestForgotUserId(UserForgotUserIdModel userForgotUserIdModel) throws Exception;
 
     void requestForgotUserPIN(UserModel userModel) throws Exception;
 }

@@ -1,9 +1,6 @@
 package service.impl;
 
-import model.UserAccountModel;
-import model.UserLoginPINModel;
-import model.UserLoginRequestModel;
-import model.UserModel;
+import model.*;
 import rpc.UserLoginReply;
 import rpc.UserLoginReqReply;
 import rpc.UserLoginReqRequest;
@@ -61,7 +58,7 @@ public class CustomerLoginService implements ICustomerLoginService {
     }
 
     @Override
-    public void requestForgotUserId(UserAccountModel userAccountModel) {
+    public void requestForgotUserId(UserForgotUserIdModel userForgotUserIdModel) {
 
     }
 
