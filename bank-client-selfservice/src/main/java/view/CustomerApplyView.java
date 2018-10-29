@@ -6,14 +6,12 @@ package view;
 
 import model.*;
 import net.miginfocom.swing.MigLayout;
-import rpc.client.CustomerApplyRpc;
 import service.impl.CustomerApplyService;
 import util.JTextFieldLimit;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Timestamp;
@@ -247,7 +245,7 @@ public class CustomerApplyView extends JFrame {
             }
             if(!tf_parentUserID.getText().trim().matches("^[0-9]*$")) {
                 JOptionPane.showMessageDialog(null,
-                        "Parent model id should only contain numbers",
+                        "Parent UserId should only contain numbers",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 tf_parentUserID.grabFocus();
                 return;
@@ -693,7 +691,7 @@ public class CustomerApplyView extends JFrame {
                 "[]"));
 
             //---- lbl_parentUserID ----
-            lbl_parentUserID.setText("Parent's model ID");
+            lbl_parentUserID.setText("Parent's UserId");
             youngSaverAccountPanel.add(lbl_parentUserID, "cell 1 1");
 
             //---- tf_parentUserID ----
@@ -876,7 +874,7 @@ public class CustomerApplyView extends JFrame {
 
     }
 
-    private void applyGoldenAccount() throws Exception {
+    private void applyGoldenAccount() {
         // basic info
         String firstName = tf_firstName.getText().trim();
         String lastName = tf_lastName.getText().trim();
@@ -923,7 +921,7 @@ public class CustomerApplyView extends JFrame {
 
     }
 
-    private void applyStudentAccount() throws Exception {
+    private void applyStudentAccount() {
         // basic info
         String firstName = tf_firstName.getText().trim();
         String lastName = tf_lastName.getText().trim();
@@ -981,7 +979,7 @@ public class CustomerApplyView extends JFrame {
 
     }
 
-    private void applyYoungSaverAccount() throws Exception {
+    private void applyYoungSaverAccount() {
         // basic info
         String firstName = tf_firstName.getText().trim();
         String lastName = tf_lastName.getText().trim();

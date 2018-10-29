@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IUserHistoryDao {
 
-    void addOperationHistory(UserHistoryEntity operationHistory);
+    int addOperationHistory(UserHistoryEntity operationHistory);
 
     List<UserHistoryEntity> getOperationHistoriesTodayByUserId(Long userId);
 

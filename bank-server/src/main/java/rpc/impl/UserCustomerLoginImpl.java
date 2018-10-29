@@ -90,32 +90,31 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         logger.info("User Id is: " + userId);
 
 
-
         try {
-            if(userId.toString().length() == 10) {
+            if (userId.toString().length() == 10) {
                 logger.info("check whether the existing model have duplicated apply");
-                customerApplyService.checkDuplicateApply(userId,accountType,cardType);
+                customerApplyService.checkDuplicateApply(userId, accountType, cardType);
             }
 
-            if(accountType == UserAccountType.PERSONAL_ACCOUNT) {
+            if (accountType == UserAccountType.PERSONAL_ACCOUNT) {
                 logger.info("ready to apply personal account (ready to invoke customerApplySerivce)");
                 customerApplyService.requestPersonalAccountApply(
                         firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone, isNewUser, userId);
             }
-            if(accountType == UserAccountType.STUDENT_ACCOUNT) {
+            if (accountType == UserAccountType.STUDENT_ACCOUNT) {
                 logger.info("ready to apply student account");
                 customerApplyService.requestStudentAccountApply(
                         firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone, isNewUser,
-                        graduateDate,studentId,university, userId);
+                        graduateDate, studentId, university, userId);
             }
-            if(accountType == UserAccountType.YOUNG_SAVER_ACCOUNT) {
+            if (accountType == UserAccountType.YOUNG_SAVER_ACCOUNT) {
                 logger.info("ready to apply young saver account");
                 customerApplyService.requestYoungSaverAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone, isNewUser, parentUserId, parentFirstName, parentLastName, userId);
             }
-            if(accountType == UserAccountType.GOLDEN_ACCOUNT) {
+            if (accountType == UserAccountType.GOLDEN_ACCOUNT) {
                 logger.info("ready to apply golden account");
                 customerApplyService.requestGoldenAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
                         birthDate, gender, address, email, phone, isNewUser, userId);
@@ -125,19 +124,19 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
                     .build());
 
 
-        } catch (Exception E) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+        } catch (Exception e) {
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getLocalizedMessage())
                     .build());
         }
         responseObserver.onCompleted();
     }
+
     @Override
     public void validateExistingUser(UserValidateExistingUserRequest request,
                                      StreamObserver<Response> responseObserver) {
-       long userId = request.getUserId();
-       String firstName = request.getFirstName();
-       String lastName = request.getLastName();
-
+        long userId = request.getUserId();
+        String firstName = request.getFirstName();
+        String lastName = request.getLastName();
 
         try {
             logger.info("ready to checkExistingUserBeforeApply");
@@ -145,7 +144,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .build());
         } catch (Exception e) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getMessage())
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getLocalizedMessage())
                     .build());
         }
         responseObserver.onCompleted();

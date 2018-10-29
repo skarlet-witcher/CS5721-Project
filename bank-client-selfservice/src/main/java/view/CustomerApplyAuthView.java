@@ -4,14 +4,14 @@
 
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
 import model.UserModel;
-import net.miginfocom.swing.*;
+import net.miginfocom.swing.MigLayout;
 import service.impl.CustomerApplyService;
 import util.JTextFieldLimit;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * @author xiangkai22
@@ -71,10 +71,10 @@ public class CustomerApplyAuthView extends JFrame {
 
     private void btn_customer_nextActionPerformed(ActionEvent e) {
         if(cb_isExisting.getSelectedIndex() == 1) {
-            // model id validator
+            // UserId validator
             if(tf_userId.getText().trim().length() <= 0) {
                 JOptionPane.showMessageDialog(null,
-                        "Please input model id",
+                        "Please input UserId",
                         "Error Message", JOptionPane.ERROR_MESSAGE);
                 tf_userId.grabFocus();
                 return;

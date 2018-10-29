@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtils;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 public class UserHistoryDao implements IUserHistoryDao {
@@ -23,16 +23,16 @@ public class UserHistoryDao implements IUserHistoryDao {
     }
 
     @Override
-    public void addOperationHistory(UserHistoryEntity operationHistory) {
+    public int addOperationHistory(UserHistoryEntity operationHistory) {
         try {
             session.getTransaction().begin();
-
             session.save(operationHistory);
-
             session.getTransaction().commit();
+            return 1;
         } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
+            return 0;
         }
     }
 
@@ -41,15 +41,17 @@ public class UserHistoryDao implements IUserHistoryDao {
         try {
             session.getTransaction().begin();
 
+            Calendar calendar = Calendar.getInstance();
+
             Query query = session.createQuery("from UserHistoryEntity " +
                     "where userId = ? and " +
                     "year(operateTime) = ? and " +
                     "month(operateTime) = ? and " +
                     "day(operateTime) = ? order by operateTime desc");
             query.setParameter(0, userId);
-            query.setParameter(1, new Date().getYear());
-            query.setParameter(2, new Date().getMonth());
-            query.setParameter(3, new Date().getDay());
+            query.setParameter(1, calendar.get(Calendar.YEAR));
+            query.setParameter(2, calendar.get(Calendar.MONTH) + 1);
+            query.setParameter(3, calendar.get(Calendar.DAY_OF_MONTH));
 
             session.getTransaction().commit();
 
@@ -83,30 +85,4 @@ public class UserHistoryDao implements IUserHistoryDao {
             return null;
         }
     }
-
-    public Long getBiggestOperationNo() {
-        try {
-            session.getTransaction().begin();
-            Query query = session.createQuery("select operateNo from UserHistoryEntity order by operateNo desc ");
-
-            Long id = (Long) query.setMaxResults(1).uniqueResult();
-
-            session.getTransaction().commit();
-            return id;
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-            return null;
-        }
-    }
-
-//    public int selectUserOperationHistoriesByUserId(Long userId) {
-//        Session session = HibernateUtils.getSessionFactory().openSession();
-//        session.beginTransaction();
-//        Query query = session.createQuery("from UserEntity where userId=?");
-//        query.setParameter(0, userId);
-//        query.setMaxResults(1);
-//
-//        return result;
-//    }
 }

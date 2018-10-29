@@ -222,16 +222,17 @@ CREATE TABLE `user_apply_archive` (
   `student_id` varchar(50) DEFAULT NULL COMMENT 'if the account type is student current account',
   `parent_user_id` bigint(20) DEFAULT NULL COMMENT 'if the account type is young savers account',
   `parent_first_name` varchar(255) DEFAULT NULL COMMENT 'if the account type is young savers account',
-  `parent_last_name` varchar(255) DEFAULT NULL COMMENT 'if the account type is young savers account',
-  `birth_date` datetime NOT NULL,
-  `gender` int(11) NOT NULL COMMENT '0.woman 1.man',
-  `address` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `apply_time` datetime NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0.pending for being approved 1.pass 2.deny',
-  `remark` varchar(255) DEFAULT '' COMMENT 'Approved / reason for being denied.',
-  `user_id` bigint(20) DEFAULT NULL COMMENT 'after being approved, get connected to model id',
+  `parent_last_name` varchar(255)     DEFAULT NULL COMMENT 'if the account type is young savers account',
+  `birth_date`       datetime NOT NULL,
+  `gender`           int(11) NOT NULL COMMENT '0.woman 1.man',
+  `address`          varchar(255) NOT NULL,
+  `email`            varchar(255) NOT NULL,
+  `phone`            varchar(20) NOT NULL,
+  `apply_time`       datetime NOT NULL,
+  `status`           int(11) NOT NULL DEFAULT '0' COMMENT '0.pending for being approved 1.pass 2.deny',
+  `remark`           varchar(255)     DEFAULT '' COMMENT 'Approved / reason for being denied.',
+  `user_id`          bigint(20)       DEFAULT NULL
+  COMMENT 'after being approved, get connected to UserId',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

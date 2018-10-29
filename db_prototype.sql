@@ -133,7 +133,7 @@ create table user_apply_archive (
   remark            varchar(255) null             default ''
   comment 'Approved / reason for being denied.',
   user_id           bigint
-  comment 'after being approved, get connected to model id',
+  comment 'after being approved, get connected to UserId',
   new_user_apply    int          not null
   comment '0.no 1.yes'
 );
