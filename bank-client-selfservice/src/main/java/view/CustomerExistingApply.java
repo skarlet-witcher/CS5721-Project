@@ -4,16 +4,18 @@
 
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import javax.swing.*;
-
 import model.*;
-import net.miginfocom.swing.*;
+import net.miginfocom.swing.MigLayout;
 import service.impl.CustomerApplyService;
 import util.JTextFieldLimit;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.sql.Timestamp;
+import java.util.Calendar;
 
 /**
  * @author xiangkai22
@@ -195,7 +197,7 @@ public class CustomerExistingApply extends JFrame {
             }
             if(!tf_parentUserID.getText().trim().matches("^[0-9]*$")) {
                 JOptionPane.showMessageDialog(null,
-                        "Parent model id should only contain numbers",
+                        "Parent UserId should only contain numbers",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 tf_parentUserID.grabFocus();
                 return;
@@ -523,7 +525,7 @@ public class CustomerExistingApply extends JFrame {
                 "[]"));
 
             //---- lbl_parentUserID ----
-            lbl_parentUserID.setText("Parent's model ID");
+            lbl_parentUserID.setText("Parent's UserId");
             youngSaverAccountPanel.add(lbl_parentUserID, "cell 1 1");
 
             //---- tf_parentUserID ----

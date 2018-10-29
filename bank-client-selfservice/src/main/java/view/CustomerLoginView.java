@@ -6,8 +6,6 @@ package view;
 
 import model.UserLoginRequestModel;
 import net.miginfocom.swing.MigLayout;
-import rpc.client.CustomerLoginRpc;
-import service.impl.CustomerApplyService;
 import service.impl.CustomerLoginService;
 import util.JTextFieldLimit;
 import util.RandomUtil;
@@ -15,7 +13,6 @@ import util.RandomUtil;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
@@ -132,7 +129,7 @@ public class CustomerLoginView extends JFrame {
                 pin3 = PinDigits.get(2);
             } catch (Exception E) {
                 JOptionPane.showMessageDialog(null,
-                        "Please input valid date of birth or model ID",
+                        "Please input valid date of birth or UserId",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
             }

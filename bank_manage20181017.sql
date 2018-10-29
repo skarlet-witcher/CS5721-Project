@@ -81,7 +81,7 @@ CREATE TABLE `bank_apply` (
   `remark`            varchar(255) NOT NULL DEFAULT ''
   COMMENT 'Approved / reason for being denied.',
   `user_id`           bigint(20)            DEFAULT NULL
-  COMMENT 'after being approved, get connected to model id',
+  COMMENT 'after being approved, get connected to UserId',
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB

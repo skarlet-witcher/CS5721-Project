@@ -82,7 +82,7 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
             }
         }
 
-        // block the model
+        // block the user
         if (count >= 3) {
             userDao.updateUserStatusById(userId, UserStatusType.BLOCKED);
         }
