@@ -77,7 +77,7 @@ public class CustomerMainView extends JFrame {
 
     public CustomerMainView(long userId) {
         initComponents();
-        setUserId(userId );
+        setUserId(userId);
         initTextArea();
     }
 
@@ -178,14 +178,8 @@ public class CustomerMainView extends JFrame {
             "[]" +
             "[]" +
             "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]"));
+            "[]0" +
+            "[30:n]"));
 
         //---- lbl_welcome ----
         lbl_welcome.setText("Welcome");
@@ -210,6 +204,7 @@ public class CustomerMainView extends JFrame {
         //======== customerTabPane ========
         {
             customerTabPane.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+            customerTabPane.setPreferredSize(new Dimension(527, 400));
 
             //======== homePanel ========
             {
@@ -238,7 +233,7 @@ public class CustomerMainView extends JFrame {
                             "AccountNumber", "AccountType", "CurrencyType", "Balance", "Status"
                         }
                     ));
-                    table_home_accountTable.setMinimumSize(new Dimension(75, 200));
+                    table_home_accountTable.setMinimumSize(new Dimension(75, 100));
                     table_home_accountTable.setMaximumSize(new Dimension(2147483647, 2147483647));
                     table_home_accountTable.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                     scrollPane1.setViewportView(table_home_accountTable);
@@ -545,7 +540,7 @@ public class CustomerMainView extends JFrame {
         btn_signout.setMaximumSize(new Dimension(600, 30));
         btn_signout.setMinimumSize(new Dimension(450, 30));
         btn_signout.addActionListener(e -> button1ActionPerformed(e));
-        contentPane.add(btn_signout, "cell 2 5");
+        contentPane.add(btn_signout, "cell 2 4");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

@@ -6,7 +6,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
 			"$columnConstraints": "[fill]0[fill]0[200:n,center]0[fill]0[fill]0[fill]"
-			"$rowConstraints": "[][][][][][][][][][][][]"
+			"$rowConstraints": "[][][][][]0[30:n]"
 		} ) {
 			name: "this"
 			"title": "Customer Main View"
@@ -41,6 +41,7 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 				name: "customerTabPane"
 				"font": new java.awt.Font( "Segoe UI", 0, 20 )
+				"preferredSize": new java.awt.Dimension( 527, 400 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 					"$layoutConstraints": "hidemode 3"
 					"$columnConstraints": "[fill][fill][fill]"
@@ -84,7 +85,7 @@ new FormModel {
 								add( null )
 								add( null )
 							} )
-							"minimumSize": new java.awt.Dimension( 75, 200 )
+							"minimumSize": new java.awt.Dimension( 75, 100 )
 							"maximumSize": new java.awt.Dimension( 2147483647, 2147483647 )
 							"font": new java.awt.Font( "Segoe UI", 0, 18 )
 						} )
@@ -478,7 +479,7 @@ new FormModel {
 				"minimumSize": new java.awt.Dimension( 450, 30 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 5"
+				"value": "cell 2 4"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
