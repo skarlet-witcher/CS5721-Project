@@ -7,6 +7,8 @@ import java.util.List;
 public interface IUserAccountDao {
     Long getBiggestUserAccountNumber();
 
-    UserAccountEntity getUserAccountByAccountNumber(long accountNumber);
+    UserAccountEntity getUserAccountByAccountNumber(Long accountNumber);
+
+    List<UserAccountEntity> getUserAccountByUserId(Long userId);
 
 }

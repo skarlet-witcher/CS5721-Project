@@ -44,8 +44,8 @@ public class CustomerLoginService implements ICustomerLoginService {
     }
 
     @Override
-    public void requestLoginUsingPIN(UserLoginPINModel userLoginPINModel) throws Exception {
-        CustomerLoginRpc.getInstance().login(
+    public UserLoginReply requestLoginUsingPIN(UserLoginPINModel userLoginPINModel) throws Exception {
+        UserLoginReply userLoginReply = CustomerLoginRpc.getInstance().login(
                 UserLoginRequest.newBuilder().setUserId(userLoginPINModel.getUserId())
                         .setPin1(userLoginPINModel.getPin1())
                 .setPin2(userLoginPINModel.getPin2())
@@ -55,6 +55,7 @@ public class CustomerLoginService implements ICustomerLoginService {
                 .setPin6(userLoginPINModel.getPin6())
                 .build()
         );
+        return userLoginReply;
     }
 
     @Override

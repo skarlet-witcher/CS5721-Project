@@ -44,7 +44,7 @@ public class CustomerLoginRpc {
 
     }
 
-    public Response login(UserLoginRequest userLoginRequest) throws Exception {
+    public UserLoginReply login(UserLoginRequest userLoginRequest) throws Exception {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
                 .usePlaintext().build();
         UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
@@ -57,7 +57,7 @@ public class CustomerLoginRpc {
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info(userLoginRequest.getUserId() + " login request detail check successful.");
-            return response;
+            return response.getUserLoginReply();
         } else {
             logger.info(userLoginRequest.getUserId() + " login request fail due to " + response.getDescription());
             throw new Exception(response.getDescription());

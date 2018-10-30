@@ -5,6 +5,7 @@
 package view;
 
 import net.miginfocom.swing.MigLayout;
+import rpc.UserAccountsReply;
 import util.JTextFieldLimit;
 
 import javax.swing.*;
@@ -12,12 +13,17 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author xiangkai22
  */
 public class CustomerMainView extends JFrame {
     private long userId;
+    private long user_pk;
+    private List<UserAccountsReply> accountList = new ArrayList<>();
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_welcome;
     private JLabel lbl_nameField;
@@ -77,12 +83,22 @@ public class CustomerMainView extends JFrame {
 
     public CustomerMainView(long userId) {
         initComponents();
-        setUserId(userId);
+        setDefaultVariables(userId, user_pk, accountList);
         initTextArea();
+        initAccountTable();
     }
 
-    private void setUserId(long userId) {
+    private void setDefaultVariables(long userId, long user_pk, List<UserAccountsReply> accountList) {
         this.userId = userId;
+        this.user_pk = user_pk;
+        this.accountList = accountList;
+    }
+
+    private void initAccountTable() {
+        DefaultTableModel accountListModel = (DefaultTableModel)table_home_accountTable.getModel();
+        for(UserAccountsReply Account: this.accountList) {
+            accountListModel.addRow(new Object[]{Account.getAccountNumber(), Account.getAccountType(), Account.getCurrencyType(), Account.getBalance(), Account.getStatus()});
+        }
     }
 
     private void button1ActionPerformed(ActionEvent e) {

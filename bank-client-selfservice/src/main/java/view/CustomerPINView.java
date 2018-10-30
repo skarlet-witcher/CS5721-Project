@@ -7,7 +7,10 @@ package view;
 
 import model.UserLoginPINModel;
 import net.miginfocom.swing.MigLayout;
+import rpc.UserAccountsReply;
+import rpc.UserLoginReply;
 import rpc.client.CustomerLoginRpc;
+import service.impl.CustomerHomeService;
 import service.impl.CustomerLoginService;
 import util.JTextFieldLimit;
 import util.KeyPadGenerator;
@@ -107,10 +110,11 @@ public class CustomerPINView extends JFrame {
                 return;
             }
         }
-
+        UserLoginReply userLoginReply;
+        List<UserAccountsReply> userAccountsReply;
         UserLoginPINModel userLoginPINModel = initUserLoginPINModel(pinDigitList);
         try {
-            CustomerLoginService.getInstance().requestLoginUsingPIN(userLoginPINModel);
+            userLoginReply = CustomerLoginService.getInstance().requestLoginUsingPIN(userLoginPINModel);
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
                     E.getMessage(),
@@ -118,7 +122,15 @@ public class CustomerPINView extends JFrame {
             E.printStackTrace();
             return;
         }
-
+        try {
+            userAccountsReply = CustomerHomeService.getInstance().getAccounts(userLoginReply.getUserPk());
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            E.printStackTrace();
+            return;
+        }
         this.dispose();
         new CustomerMainView(userId).run();
     }

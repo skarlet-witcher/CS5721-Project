@@ -40,7 +40,7 @@ public class UserAccountDao implements IUserAccountDao {
     }
 
     @Override
-    public UserAccountEntity getUserAccountByAccountNumber(long accountNumber) {
+    public UserAccountEntity getUserAccountByAccountNumber(Long accountNumber) {
         try {
             session.getTransaction().begin();
             String hql ="from UserAccountEntity where accountNumber=?";
@@ -51,6 +51,25 @@ public class UserAccountDao implements IUserAccountDao {
             return result;
         } catch (Exception e) {
             e.printStackTrace();
+            // Rollback in case of an error occurred.
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
+    public List<UserAccountEntity> getUserAccountByUserId(Long userId) {
+        try {
+            session.getTransaction().begin();
+            String hql = "from UserAccountEntity where userId=?";
+            Query query = session.createQuery(hql);
+            query.setParameter(0, userId);
+            List<UserAccountEntity> result = (List<UserAccountEntity>)query.getResultList();
+            session.getTransaction().commit();
+            return result;
+
+        } catch (Exception E) {
+            E.printStackTrace();
             // Rollback in case of an error occurred.
             session.getTransaction().rollback();
             return null;
