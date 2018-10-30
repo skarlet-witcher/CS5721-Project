@@ -53,7 +53,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
 
         // validate if accounts blocking now
         if (user.getStatus() == UserStatusType.BLOCKED) {
-            throw FaultFactory.throwFaultException("Sorry, you have been blocked in case of security problems, please ask bank staff for farther assistance.");
+            throw FaultFactory.throwFaultException("Sorry, you have been blocked in case of security problems, please ask the bank staff for further assistance.");
         } else if (user.getStatus() == UserStatusType.DELETED || user.getStatus() == UserStatusType.PENDING_FOR_BEING_DELETED) {
             throw FaultFactory.throwFaultException("Sorry, your model account has been removed from our bank system.");
         }

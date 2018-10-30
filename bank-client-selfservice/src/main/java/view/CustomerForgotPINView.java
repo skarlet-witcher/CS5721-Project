@@ -72,7 +72,7 @@ public class CustomerForgotPINView extends JFrame {
         }
         if(Integer.parseInt(tf_day.getText().trim()) > 31 || Integer.parseInt(tf_day.getText().trim()) < 1) {
             JOptionPane.showMessageDialog(null,
-                    "The ranage of day of the date of birth should be 1 to 31",
+                    "The range of day of the date of birth should be 1 to 31",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             tf_day.grabFocus();
             return;

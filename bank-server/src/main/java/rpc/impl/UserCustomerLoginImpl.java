@@ -29,8 +29,10 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         int birthYear = request.getBirthYear();
 
         try {
+            //1 create result of service, which contains pin and some other attr
             UserLoginReqReply userLoginReqReply = customerLoginService.LoginReq(userId, phoneLast4, birthDay, birthMon, birthYear);
             logger.info("Input those digits of PIN:" + userLoginReqReply.getAllFields());
+            //2 set the above result to responseObserver
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .setUserLoginReqReply(userLoginReqReply)
                     .build());
@@ -38,6 +40,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
             responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getMessage())
                     .build());
         }
+            //3 Send all above to client
         responseObserver.onCompleted();
     }
 
