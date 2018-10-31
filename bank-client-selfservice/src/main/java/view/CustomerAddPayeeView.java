@@ -37,7 +37,7 @@ public class CustomerAddPayeeView extends JFrame {
 
     private void btn_backActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerMainView(userId).run();
+        // new CustomerMainView(userId).run();
     }
 
     private void btn_addActionPerformed(ActionEvent e) {

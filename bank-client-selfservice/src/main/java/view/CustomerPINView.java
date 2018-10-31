@@ -132,7 +132,7 @@ public class CustomerPINView extends JFrame {
             return;
         }
         this.dispose();
-        new CustomerMainView(userId).run();
+        new CustomerMainView(userId, userAccountsReply).run();
     }
 
     private void button13ActionPerformed(ActionEvent e) {

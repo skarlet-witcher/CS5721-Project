@@ -81,7 +81,7 @@ public class CustomerMainView extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
-    public CustomerMainView(long userId) {
+    public CustomerMainView(long userId, List<UserAccountsReply> accountList) {
         initComponents();
         setDefaultVariables(userId, user_pk, accountList);
         initTextArea();
@@ -95,7 +95,7 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initAccountTable() {
-        System.out.println("front-end: check the result: balance: " + accountList.get(0).getBalance());
+        System.out.println("front-end: check the size of result: " + accountList.size());
         DefaultTableModel accountListModel = (DefaultTableModel)table_home_accountTable.getModel();
         for(UserAccountsReply Account: this.accountList) {
             accountListModel.addRow(new Object[]{Account.getAccountNumber(), Account.getAccountType(), Account.getCurrencyType(), Account.getBalance(), Account.getStatus()});
@@ -244,7 +244,6 @@ public class CustomerMainView extends JFrame {
                     //---- table_home_accountTable ----
                     table_home_accountTable.setModel(new DefaultTableModel(
                         new Object[][] {
-                            {null, null, null, null, null},
                         },
                         new String[] {
                             "AccountNumber", "AccountType", "CurrencyType", "Balance", "Status"
@@ -252,7 +251,7 @@ public class CustomerMainView extends JFrame {
                     ));
                     table_home_accountTable.setMinimumSize(new Dimension(75, 100));
                     table_home_accountTable.setMaximumSize(new Dimension(2147483647, 2147483647));
-                    table_home_accountTable.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                    table_home_accountTable.setFont(new Font("Segoe UI", Font.PLAIN, 12));
                     scrollPane1.setViewportView(table_home_accountTable);
                 }
                 homePanel.add(scrollPane1, "cell 1 1");
