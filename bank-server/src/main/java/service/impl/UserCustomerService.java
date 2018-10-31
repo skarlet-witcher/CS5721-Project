@@ -34,17 +34,16 @@ public class UserCustomerService implements IUserCustomerService {
         List<UserAccountEntity> userAccountList = userAccountDao.getUserAccountByUserId(id);
         logger.info("UserCustomerService: How many result: " + userAccountList.size());
 
-
+        logger.info("UserCustomerService: ready to set up user accounts reply");
         for (UserAccountEntity userAccount : userAccountList) {
-            UserCardEntity userCardEntity = userCardDao.getCardByAccountId(userAccount.getId());
 
-            logger.info("UserCustomerService: Card Number is:" + userCardEntity.getCardNumber());
+
             UserAccountsReply userAccountsReply = UserAccountsReply.newBuilder()
                     .setAccountPk(userAccount.getId())
                     .setAccountNumber(userAccount.getAccountNumber())
                     .setAccountType(userAccount.getAccountType().intValue())
-                    .setCurrencyType(userCardEntity.getCurrencyType())
-                    .setBalance(userCardEntity.getBalance().intValue())
+                    .setCurrencyType(userAccount.getCurrencyType())
+                    .setBalance(userAccount.getBalance().intValue())
                     .setStatus(userAccount.getStatus()).build();
 
             userAccountsReplies.add(userAccountsReply);
