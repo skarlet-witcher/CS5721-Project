@@ -27,11 +27,9 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
             logger.info("Server.rpc: Ready to add results into response");
             logger.info("Server.rpc: one of the value in the UserAccountReply: " + userAccountsReply.get(0).getBalance());
 
-            Response.Builder builder = ResponseBuilderFactory.ResponseSuccessBuilder();
-            for (int i = 0; i < userAccountsReply.size(); i++) {
-                builder.setUserAccounts(i, userAccountsReply.get(i));
-            }
-            responseObserver.onNext(builder.build());
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+                    .addAllUserAccounts(userAccountsReply)
+                    .build());
             logger.info("UserCustomerService: pack response success.");
 
         } catch (Exception e) {

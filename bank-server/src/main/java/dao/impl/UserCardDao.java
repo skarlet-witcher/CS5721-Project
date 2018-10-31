@@ -26,9 +26,9 @@ public class UserCardDao implements IUserCardDao {
         try {
             session.getTransaction().begin();
 
-            String hql = "from UserCardEntity where accountId=?";
+            String hql = "from UserCardEntity where accountId=?1";
             Query query = session.createQuery(hql);
-            query.setParameter(0, accountId);
+            query.setParameter(1, accountId);
             UserCardEntity result = (UserCardEntity) query.uniqueResult();
             session.getTransaction().commit();
             return result;
