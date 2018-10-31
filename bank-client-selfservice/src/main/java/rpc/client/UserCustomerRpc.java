@@ -45,4 +45,25 @@ public class UserCustomerRpc {
             throw new Exception(response.getDescription());
         }
     }
+    public UserProfileReply getUserProfile(UserCustomerGetProfileRequest userCustomerGetProfileRequest) throws Exception {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
+                .usePlaintext().build();
+        UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
+
+        logger.info(userCustomerGetProfileRequest.getUserPk() + " is requesting to get accounts.");
+
+        Response response = blockingStub.getProfile(userCustomerGetProfileRequest);
+
+        logger.info("check the response: " + response.getUserAccountsList().size());
+
+        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
+            logger.info(userCustomerGetProfileRequest.getUserPk() + " get accounts successful.");
+            return response.getUserProfile();
+        } else {
+            logger.info(userCustomerGetProfileRequest.getUserPk() + " fail to get accounts due to " + response.getDescription());
+            throw new Exception(response.getDescription());
+        }
+    }
 }

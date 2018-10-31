@@ -1,10 +1,7 @@
 package rpc.impl;
 
 import io.grpc.stub.StreamObserver;
-import rpc.Response;
-import rpc.UserAccountsReply;
-import rpc.UserCustomerGetAccountsRequest;
-import rpc.UserCustomerGrpc;
+import rpc.*;
 import service.IUserCustomerService;
 import service.impl.UserCustomerService;
 import util.ResponseBuilderFactory;
@@ -34,6 +31,24 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
 
         } catch (Exception e) {
             responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getMessage())
+                    .build());
+        }
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getProfile(UserCustomerGetProfileRequest request, StreamObserver<Response> responseObserver) {
+        Long id = request.getUserPk();
+
+        try {
+            UserProfileReply userProfileReply = customerService.getUserProfile(id);
+
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+                    .setUserProfile(userProfileReply)
+                    .build());
+
+        } catch (Exception E) {
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
                     .build());
         }
         responseObserver.onCompleted();

@@ -141,7 +141,7 @@ new FormModel {
 						"value": "cell 2 3"
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "tf_profileGender"
+						name: "tf_profile_gender"
 						"enabled": false
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 3 3"

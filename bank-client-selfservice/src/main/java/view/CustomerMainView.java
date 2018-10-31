@@ -7,9 +7,12 @@ package view;
 import javax.swing.event.*;
 import Const.CardCurrencyType;
 import Const.UserAccountType;
+import Const.UserGenderType;
 import Const.UserStatusType;
 import net.miginfocom.swing.MigLayout;
 import rpc.UserAccountsReply;
+import rpc.UserProfileReply;
+import service.impl.CustomerProfileService;
 import util.JTextFieldLimit;
 
 import javax.swing.*;
@@ -47,7 +50,7 @@ public class CustomerMainView extends JFrame {
     private JLabel lbl_profile_lastName;
     private JTextField tf_profile_lastName;
     private JLabel lbl_gender;
-    private JTextField tf_profileGender;
+    private JTextField tf_profile_gender;
     private JLabel lbl_address;
     private JTextField tf_profile_address;
     private JLabel lbl_email;
@@ -87,7 +90,7 @@ public class CustomerMainView extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
-    public CustomerMainView(long userId, String firstName, Timestamp lastLoginTime, List<UserAccountsReply> accountList) {
+    public CustomerMainView(long userId, Long user_pk, String firstName, Timestamp lastLoginTime, List<UserAccountsReply> accountList) {
         initComponents();
         setDefaultVariables(userId, user_pk, firstName, lastLoginTime, accountList);
         initTextArea();
@@ -136,7 +139,16 @@ public class CustomerMainView extends JFrame {
 
     private void customerTabPaneStateChanged(ChangeEvent e) {
         if(customerTabPane.getSelectedIndex() == 1) {
-            // come to the profile page
+            try {
+                UserProfileReply userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.user_pk);
+                initProfileTab(userProfileReply);
+
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Fail to acquire user profile, please contact admin",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             return;
         }
         if(customerTabPane.getSelectedIndex() == 2) {
@@ -151,6 +163,15 @@ public class CustomerMainView extends JFrame {
             // come to transfer page
             return;
         }
+    }
+
+    private void initProfileTab(UserProfileReply userProfileReply) {
+        tf_profile_userId.setText(String.valueOf(userProfileReply.getUserId()));
+        tf_profile_firstName.setText(userProfileReply.getFirstName());
+        tf_profile_lastName.setText(userProfileReply.getLastName());
+        tf_profile_address.setText(userProfileReply.getAddress());
+        tf_profile_contactNumber.setText(userProfileReply.getPhone());
+        tf_profile_gender.setText(UserGenderType.getGenderType(userProfileReply.getGender()));
     }
 
 
@@ -172,7 +193,7 @@ public class CustomerMainView extends JFrame {
         lbl_profile_lastName = new JLabel();
         tf_profile_lastName = new JTextField();
         lbl_gender = new JLabel();
-        tf_profileGender = new JTextField();
+        tf_profile_gender = new JTextField();
         lbl_address = new JLabel();
         tf_profile_address = new JTextField();
         lbl_email = new JLabel();
@@ -345,9 +366,9 @@ public class CustomerMainView extends JFrame {
                 lbl_gender.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                 profilePanel.add(lbl_gender, "cell 2 3");
 
-                //---- tf_profileGender ----
-                tf_profileGender.setEnabled(false);
-                profilePanel.add(tf_profileGender, "cell 3 3");
+                //---- tf_profile_gender ----
+                tf_profile_gender.setEnabled(false);
+                profilePanel.add(tf_profile_gender, "cell 3 3");
 
                 //---- lbl_address ----
                 lbl_address.setText("Address");

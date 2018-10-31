@@ -2,13 +2,19 @@ package service.impl;
 
 import dao.IUserAccountDao;
 import dao.IUserCardDao;
+import dao.IUserDao;
 import dao.impl.UserAccountDao;
 import dao.impl.UserCardDao;
+import dao.impl.UserDao;
 import entity.UserAccountEntity;
 import entity.UserCardEntity;
+import entity.UserEntity;
 import rpc.UserAccountsReply;
 import rpc.UserCustomerGrpc;
+import rpc.UserProfileReply;
 import service.IUserCustomerService;
+import util.FaultFactory;
+import util.TimestampConvertHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +23,7 @@ import java.util.logging.Logger;
 public class UserCustomerService implements IUserCustomerService {
     private static UserCustomerService instance = null;
     private IUserAccountDao userAccountDao = UserAccountDao.getInstance();
-    private IUserCardDao userCardDao = UserCardDao.getInstance();
+    private IUserDao userdao = UserDao.getInstance();
     private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
 
     public static UserCustomerService getInstance() {
@@ -50,5 +56,28 @@ public class UserCustomerService implements IUserCustomerService {
         }
         logger.info("UserCustomerService: How many result: " + userAccountsReplies.size());
         return userAccountsReplies;
+    }
+
+    @Override
+    public UserProfileReply getUserProfile(Long Id) throws Exception {
+        try {
+            UserEntity userEntity = userdao.selectUserById(Id);
+            UserProfileReply userProfileReply =UserProfileReply.newBuilder()
+                    .setUserPk(userEntity.getId())
+                    .setUserId(userEntity.getUserId())
+                    .setFirstName(userEntity.getFirstName())
+                    .setLastName(userEntity.getLastName())
+                    .setGender(userEntity.getGender())
+                    .setBirthDate(TimestampConvertHelper.mysqlToRpc(userEntity.getBirthDate()))
+                    .setAddress(userEntity.getAddress())
+                    .setEmail(userEntity.getEmail())
+                    .setPhone(userEntity.getPhone()).build();
+            return userProfileReply;
+
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException(E.getMessage());
+        }
+
+
     }
 }
