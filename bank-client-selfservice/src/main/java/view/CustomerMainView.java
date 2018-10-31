@@ -4,8 +4,19 @@
 
 package view;
 
+import javax.swing.event.*;
+import Const.CardCurrencyType;
+import Const.UserAccountType;
+import Const.UserGenderType;
+import Const.UserStatusType;
+import model.UserModel;
+import model.UserPayeeModel;
 import net.miginfocom.swing.MigLayout;
 import rpc.UserAccountsReply;
+import rpc.UserPayeesReply;
+import rpc.UserProfileReply;
+import service.impl.CustomerPayeeService;
+import service.impl.CustomerProfileService;
 import util.JTextFieldLimit;
 
 import javax.swing.*;
@@ -13,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +36,8 @@ public class CustomerMainView extends JFrame {
     private long userId;
     private long user_pk;
     private List<UserAccountsReply> accountList = new ArrayList<>();
+    private List<UserPayeesReply> userPayeesReplies = new ArrayList<>();
+    private UserProfileReply userProfileReply;
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_welcome;
@@ -41,7 +56,7 @@ public class CustomerMainView extends JFrame {
     private JLabel lbl_profile_lastName;
     private JTextField tf_profile_lastName;
     private JLabel lbl_gender;
-    private JTextField tf_profileGender;
+    private JTextField tf_profile_gender;
     private JLabel lbl_address;
     private JTextField tf_profile_address;
     private JLabel lbl_email;
@@ -81,24 +96,31 @@ public class CustomerMainView extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
-    public CustomerMainView(long userId, List<UserAccountsReply> accountList) {
+    public CustomerMainView(long userId, Long user_pk, String firstName, Timestamp lastLoginTime, List<UserAccountsReply> accountList) {
         initComponents();
-        setDefaultVariables(userId, user_pk, accountList);
+        setDefaultVariables(userId, user_pk, firstName, lastLoginTime, accountList);
         initTextArea();
         initAccountTable();
     }
 
-    private void setDefaultVariables(long userId, long user_pk, List<UserAccountsReply> accountList) {
+    private void setDefaultVariables(long userId, long user_pk, String firstName, Timestamp lastLoginTime, List<UserAccountsReply> accountList) {
         this.userId = userId;
         this.user_pk = user_pk;
         this.accountList = accountList;
+        this.lbl_nameField.setText(firstName);
+        this.lbl_lastLoginTime.setText(lastLoginTime.toString());
     }
 
     private void initAccountTable() {
         System.out.println("front-end: check the size of result: " + accountList.size());
         DefaultTableModel accountListModel = (DefaultTableModel)table_home_accountTable.getModel();
         for(UserAccountsReply Account: this.accountList) {
-            accountListModel.addRow(new Object[]{Account.getAccountNumber(), Account.getAccountType(), Account.getCurrencyType(), Account.getBalance(), Account.getStatus()});
+            accountListModel.addRow(new Object[]{
+                    Account.getAccountNumber(),
+                    UserAccountType.getTypeName(Account.getAccountType()),
+                    CardCurrencyType.getCurrencyType(Account.getCurrencyType()),
+                    Account.getBalance(),
+                    UserStatusType.getStatusType(Account.getStatus())});
         }
     }
 
@@ -113,12 +135,151 @@ public class CustomerMainView extends JFrame {
     }
 
     private void btn_payee_addActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerAddPayeeView(userId).run();
+        this.setVisible(false);
+        new CustomerAddPayeeView(userId, this).run();
     }
 
     private void initTextArea() {
         ta_postScript.setDocument(new JTextFieldLimit(200));
+    }
+
+    private void customerTabPaneStateChanged(ChangeEvent e) {
+        if(customerTabPane.getSelectedIndex() == 1) {
+            try {
+                userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.user_pk);
+                initProfileTab(userProfileReply);
+
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Fail to acquire user profile, please contact admin",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            return;
+        }
+        if(customerTabPane.getSelectedIndex() == 2) {
+            // come to the transaction page
+            return;
+        }
+        if(customerTabPane.getSelectedIndex() == 3) {
+            // come to the payee page
+            UserPayeeModel userPayeeModel = new UserPayeeModel();
+            userPayeeModel.setUserId(this.user_pk);
+            try {
+                userPayeesReplies = CustomerPayeeService.getInstance().getPayeeList(userPayeeModel);
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Fail to acquire user payee, please contact admin",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            initPayeeTable(userPayeesReplies);
+            return;
+        }
+        if(customerTabPane.getSelectedIndex() == 4) {
+            // come to transfer page
+            return;
+        }
+    }
+
+    private void initPayeeTable(List<UserPayeesReply> userPayeesReplies) {
+        DefaultTableModel payeeTableModel = (DefaultTableModel)table_payee_payeeList.getModel();
+        clearPayeeTable(payeeTableModel);
+        for(UserPayeesReply userPayeesReply: userPayeesReplies) {
+            payeeTableModel.addRow(new Object[]{
+                    userPayeesReply.getIban(),
+                    userPayeesReply.getName()
+            });
+        }
+    }
+
+    private void clearPayeeTable(DefaultTableModel payeeTableModel) {
+        int rowCount = payeeTableModel.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            payeeTableModel.removeRow(i);
+        }
+    }
+
+    private void initProfileTab(UserProfileReply userProfileReply) {
+        tf_profile_userId.setText(String.valueOf(userProfileReply.getUserId()));
+        tf_profile_firstName.setText(userProfileReply.getFirstName());
+        tf_profile_lastName.setText(userProfileReply.getLastName());
+        tf_profile_address.setText(userProfileReply.getAddress());
+        tf_profile_contactNumber.setText(userProfileReply.getPhone());
+        tf_profile_email.setText(userProfileReply.getEmail());
+        tf_profile_gender.setText(UserGenderType.getGenderType(userProfileReply.getGender()));
+    }
+
+    private void btn_profile_revertActionPerformed(ActionEvent e) {
+        initProfileTab(userProfileReply);
+    }
+
+    private void btn_profile_modifyActionPerformed(ActionEvent e) {
+        // address validator
+        if(tf_profile_address.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your address",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_profile_address.grabFocus();
+            return;
+        }
+
+
+        // email field validator
+        if(tf_profile_email.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your email address",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_profile_email.grabFocus();
+            return;
+        }
+        if(!tf_profile_email.getText().trim().matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input valid email address",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_profile_email.grabFocus();
+            return;
+        }
+
+        // contact number validator
+        if(tf_profile_contactNumber.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your contact number",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_profile_contactNumber.grabFocus();
+            return;
+        }
+        if(!tf_profile_contactNumber.getText().trim().matches("^[0-9]*$")) {
+            JOptionPane.showMessageDialog(null,
+                    "The contact number must be numeric.",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_profile_contactNumber.grabFocus();
+            return;
+        }
+
+
+        String address = tf_profile_address.getText().trim();
+        String email = tf_profile_email.getText().trim();
+        String contactNum = tf_profile_contactNumber.getText().trim();
+        UserModel userModel = new UserModel();
+        userModel.setId(this.user_pk);
+        userModel.setUserId(this.userId);
+        userModel.setAddress(address);
+        userModel.setEmail(email);
+        userModel.setContactNum(contactNum);
+        try {
+            CustomerProfileService.getInstance().modifyUserProfile(userModel);
+            JOptionPane.showMessageDialog(null,
+                    "Modify User profile complete",
+                    "Info Message",JOptionPane.INFORMATION_MESSAGE);
+            userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.user_pk);
+            initProfileTab(userProfileReply);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to acquire user profile, please contact admin",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }
 
 
@@ -140,7 +301,7 @@ public class CustomerMainView extends JFrame {
         lbl_profile_lastName = new JLabel();
         tf_profile_lastName = new JTextField();
         lbl_gender = new JLabel();
-        tf_profileGender = new JTextField();
+        tf_profile_gender = new JTextField();
         lbl_address = new JLabel();
         tf_profile_address = new JTextField();
         lbl_email = new JLabel();
@@ -222,6 +383,7 @@ public class CustomerMainView extends JFrame {
         {
             customerTabPane.setFont(new Font("Segoe UI", Font.PLAIN, 20));
             customerTabPane.setPreferredSize(new Dimension(527, 400));
+            customerTabPane.addChangeListener(e -> customerTabPaneStateChanged(e));
 
             //======== homePanel ========
             {
@@ -312,9 +474,9 @@ public class CustomerMainView extends JFrame {
                 lbl_gender.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                 profilePanel.add(lbl_gender, "cell 2 3");
 
-                //---- tf_profileGender ----
-                tf_profileGender.setEnabled(false);
-                profilePanel.add(tf_profileGender, "cell 3 3");
+                //---- tf_profile_gender ----
+                tf_profile_gender.setEnabled(false);
+                profilePanel.add(tf_profile_gender, "cell 3 3");
 
                 //---- lbl_address ----
                 lbl_address.setText("Address");
@@ -337,11 +499,13 @@ public class CustomerMainView extends JFrame {
                 //---- btn_profile_modify ----
                 btn_profile_modify.setText("Modify");
                 btn_profile_modify.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                btn_profile_modify.addActionListener(e -> btn_profile_modifyActionPerformed(e));
                 profilePanel.add(btn_profile_modify, "cell 2 8");
 
                 //---- btn_profile_revert ----
                 btn_profile_revert.setText("Revert");
                 btn_profile_revert.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                btn_profile_revert.addActionListener(e -> btn_profile_revertActionPerformed(e));
                 profilePanel.add(btn_profile_revert, "cell 3 8");
 
                 //---- btn_profile_deleteAccount ----
@@ -447,14 +611,12 @@ public class CustomerMainView extends JFrame {
                     //---- table_payee_payeeList ----
                     table_payee_payeeList.setModel(new DefaultTableModel(
                         new Object[][] {
-                            {"", null, null},
-                            {null, null, null},
                         },
                         new String[] {
-                            "IBAN", "firstName", "lastName"
+                            "IBAN", "Payee name"
                         }
                     ));
-                    table_payee_payeeList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                    table_payee_payeeList.setFont(new Font("Segoe UI", Font.PLAIN, 14));
                     scrollPane3.setViewportView(table_payee_payeeList);
                 }
                 payeePanel.add(scrollPane3, "cell 0 1");

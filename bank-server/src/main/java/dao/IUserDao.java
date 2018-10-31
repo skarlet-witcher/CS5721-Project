@@ -22,6 +22,8 @@ public interface IUserDao {
 
     Integer updateUserStatusById(Long id, Integer status);
 
+    Integer updateUserProfileById(Long id, String address, String email, String contactNum);
+
     Long selectTheBiggestId();
 
     UserEntity selectUserByIdAndName(Long parentUserId, String parentFirstName, String parentLastName);

@@ -3,6 +3,7 @@ package model;
 public class UserPayeeModel {
     private String name;
     private String iban;
+    private Long userId;
 
     public String getName() {
         return name;
@@ -18,5 +19,13 @@ public class UserPayeeModel {
 
     public void setIban(String iban) {
         this.iban = iban;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

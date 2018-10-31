@@ -24,23 +24,55 @@ public class CustomerAddPayeeView extends JFrame {
     private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     private long userId;
+    private CustomerMainView customerMainView;
 
-    public CustomerAddPayeeView(long userId) {
+    public CustomerAddPayeeView(long userId, CustomerMainView customerMainView) {
         initComponents();
-        setUserId(userId);
+        setFields(userId, customerMainView);
     }
 
-    private void setUserId(long userId) {
+    private void setFields(long userId, CustomerMainView customerMainView) {
         this.userId = userId;
+        this.customerMainView = customerMainView;
     }
 
 
     private void btn_backActionPerformed(ActionEvent e) {
         this.dispose();
-        // new CustomerMainView(userId).run();
+        customerMainView.setVisible(true);
     }
 
     private void btn_addActionPerformed(ActionEvent e) {
+        // payee name validator
+        if(tf_payeeName.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your payee name",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_payeeName.grabFocus();
+            return;
+        } if(!tf_payeeName.getText().trim().matches("^[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "Payee name should only contain letters",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_payeeName.grabFocus();
+            return;
+        }
+        // IBAN validator
+        if(tf_payeeName.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your payee's IBAN",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_payeeName.grabFocus();
+            return;
+        } if(!tf_payeeName.getText().trim().matches("^[0-9A-Z]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "IBAN should only contain capital letters and digits",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_payeeName.grabFocus();
+            return;
+        }
+        // add payee service
+
     }
 
     private void initComponents() {

@@ -42,6 +42,7 @@ new FormModel {
 				name: "customerTabPane"
 				"font": new java.awt.Font( "Segoe UI", 0, 20 )
 				"preferredSize": new java.awt.Dimension( 527, 400 )
+				addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "customerTabPaneStateChanged", true ) )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 					"$layoutConstraints": "hidemode 3"
 					"$columnConstraints": "[fill][fill][fill]"
@@ -140,7 +141,7 @@ new FormModel {
 						"value": "cell 2 3"
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "tf_profileGender"
+						name: "tf_profile_gender"
 						"enabled": false
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 3 3"
@@ -185,6 +186,7 @@ new FormModel {
 						name: "btn_profile_modify"
 						"text": "Modify"
 						"font": #Font0
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_profile_modifyActionPerformed", true ) )
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 2 8"
 					} )
@@ -192,6 +194,7 @@ new FormModel {
 						name: "btn_profile_revert"
 						"text": "Revert"
 						"font": #Font0
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_profile_revertActionPerformed", true ) )
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 3 8"
 					} )
@@ -321,35 +324,20 @@ new FormModel {
 						name: "scrollPane3"
 						add( new FormComponent( "javax.swing.JTable" ) {
 							name: "table_payee_payeeList"
-							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
-								add( new java.util.Vector {
-									add( "" )
-									add( null )
-									add( null )
-								} )
-								add( new java.util.Vector {
-									add( null )
-									add( null )
-									add( null )
-								} )
-							}, new java.util.Vector {
+							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
 								add( "IBAN" )
-								add( "firstName" )
-								add( "lastName" )
+								add( "Payee name" )
 							}, new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-							}, new java.util.Vector {
-								add( null )
 								add( null )
 								add( null )
 							}, new java.util.Vector {
 								add( null )
+								add( null )
+							}, new java.util.Vector {
 								add( null )
 								add( null )
 							} )
-							"font": new java.awt.Font( "Segoe UI", 0, 18 )
+							"font": new java.awt.Font( "Segoe UI", 0, 14 )
 						} )
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 0 1"
