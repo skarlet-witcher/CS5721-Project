@@ -9,6 +9,18 @@ public class UserForgotPINModel {
     private Integer identityType;
     private Integer identityNum;
 
+    /**
+     * Constructor without identityType and Number
+     * @param userId ID of the requesting user
+     * @param birthDate birth date of the requesting user
+     * @param email email of the requesting user
+     */
+    public UserForgotPINModel(Long userId, Timestamp birthDate, String email) {
+        this.userId = userId;
+        this.birthDate = birthDate;
+        this.email = email;
+    }
+
     public Long getUserId() {
         return userId;
     }

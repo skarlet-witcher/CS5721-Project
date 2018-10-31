@@ -14,5 +14,5 @@ public interface ICustomerLoginService {
 
     void requestForgotUserId(UserForgotUserIdModel userForgotUserIdModel) throws Exception;
 
-    void requestForgotUserPIN(UserModel userModel) throws Exception;
+    void requestForgotUserPIN(UserForgotPINModel UserForgotPINModel) throws Exception;
 }

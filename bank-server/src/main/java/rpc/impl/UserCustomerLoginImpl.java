@@ -158,8 +158,25 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         super.forgetUserId(request, responseObserver);
     }
 
+    /**
+     * The method is called by RPC in server-side when receiving a request of forgetting PIN
+     * @param request A request of forgeting PIN which contains information of requester
+     * @param responseObserver Response observer to dispatch the response to client-side
+     */
     @Override
     public void forgetPin(UserForgetPinRequest request, StreamObserver<Response> responseObserver) {
-        super.forgetPin(request, responseObserver);
+        Timestamp birthdate = Timestamp.valueOf(request.getBirthDate());
+        String email = request.getEmail();
+        long userId = request.getUserId();
+        try {
+            logger.info("ready to check user's supplied information to get PIN");
+            customerLoginService.forgotPIN(userId,email,birthdate);
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+                    .build());
+        } catch (Exception e) {
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getLocalizedMessage())
+                    .build());
+        }
+        responseObserver.onCompleted();
     }
 }
