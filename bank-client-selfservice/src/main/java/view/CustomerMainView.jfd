@@ -324,35 +324,20 @@ new FormModel {
 						name: "scrollPane3"
 						add( new FormComponent( "javax.swing.JTable" ) {
 							name: "table_payee_payeeList"
-							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
-								add( new java.util.Vector {
-									add( "" )
-									add( null )
-									add( null )
-								} )
-								add( new java.util.Vector {
-									add( null )
-									add( null )
-									add( null )
-								} )
-							}, new java.util.Vector {
+							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
 								add( "IBAN" )
-								add( "firstName" )
-								add( "lastName" )
+								add( "Payee name" )
 							}, new java.util.Vector {
-								add( null )
-								add( null )
-								add( null )
-							}, new java.util.Vector {
-								add( null )
 								add( null )
 								add( null )
 							}, new java.util.Vector {
 								add( null )
+								add( null )
+							}, new java.util.Vector {
 								add( null )
 								add( null )
 							} )
-							"font": new java.awt.Font( "Segoe UI", 0, 18 )
+							"font": new java.awt.Font( "Segoe UI", 0, 14 )
 						} )
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 0 1"

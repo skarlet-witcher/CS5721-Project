@@ -9,9 +9,12 @@ import Const.CardCurrencyType;
 import Const.UserAccountType;
 import Const.UserGenderType;
 import Const.UserStatusType;
+import model.UserPayeeModel;
 import net.miginfocom.swing.MigLayout;
 import rpc.UserAccountsReply;
+import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
+import service.impl.CustomerPayeeService;
 import service.impl.CustomerProfileService;
 import util.JTextFieldLimit;
 
@@ -32,6 +35,7 @@ public class CustomerMainView extends JFrame {
     private long userId;
     private long user_pk;
     private List<UserAccountsReply> accountList = new ArrayList<>();
+    private List<UserPayeesReply> userPayeesReplies = new ArrayList<>();
     private UserProfileReply userProfileReply;
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -130,8 +134,8 @@ public class CustomerMainView extends JFrame {
     }
 
     private void btn_payee_addActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerAddPayeeView(userId).run();
+        this.setVisible(false);
+        new CustomerAddPayeeView(userId, this).run();
     }
 
     private void initTextArea() {
@@ -158,11 +162,32 @@ public class CustomerMainView extends JFrame {
         }
         if(customerTabPane.getSelectedIndex() == 3) {
             // come to the payee page
+            UserPayeeModel userPayeeModel = new UserPayeeModel();
+            userPayeeModel.setUserId(this.user_pk);
+            try {
+                userPayeesReplies = CustomerPayeeService.getInstance().getPayeeList(userPayeeModel);
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Fail to acquire user payee, please contact admin",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            initPayeeTable(userPayeesReplies);
             return;
         }
         if(customerTabPane.getSelectedIndex() == 4) {
             // come to transfer page
             return;
+        }
+    }
+
+    private void initPayeeTable(List<UserPayeesReply> userPayeesReplies) {
+        DefaultTableModel payeeTableModel = (DefaultTableModel)table_payee_payeeList.getModel();
+        for(UserPayeesReply userPayeesReply: userPayeesReplies) {
+            payeeTableModel.addRow(new Object[]{
+                    userPayeesReply.getIban(),
+                    userPayeesReply.getName()
+            });
         }
     }
 
@@ -571,14 +596,12 @@ public class CustomerMainView extends JFrame {
                     //---- table_payee_payeeList ----
                     table_payee_payeeList.setModel(new DefaultTableModel(
                         new Object[][] {
-                            {"", null, null},
-                            {null, null, null},
                         },
                         new String[] {
-                            "IBAN", "firstName", "lastName"
+                            "IBAN", "Payee name"
                         }
                     ));
-                    table_payee_payeeList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                    table_payee_payeeList.setFont(new Font("Segoe UI", Font.PLAIN, 14));
                     scrollPane3.setViewportView(table_payee_payeeList);
                 }
                 payeePanel.add(scrollPane3, "cell 0 1");

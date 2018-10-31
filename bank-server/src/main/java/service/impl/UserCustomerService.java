@@ -3,14 +3,18 @@ package service.impl;
 import dao.IUserAccountDao;
 import dao.IUserCardDao;
 import dao.IUserDao;
+import dao.IUserPayeeDao;
 import dao.impl.UserAccountDao;
 import dao.impl.UserCardDao;
 import dao.impl.UserDao;
+import dao.impl.UserPayeeDao;
 import entity.UserAccountEntity;
 import entity.UserCardEntity;
 import entity.UserEntity;
+import entity.UserPayeeEntity;
 import rpc.UserAccountsReply;
 import rpc.UserCustomerGrpc;
+import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
 import service.IUserCustomerService;
 import util.FaultFactory;
@@ -24,6 +28,7 @@ public class UserCustomerService implements IUserCustomerService {
     private static UserCustomerService instance = null;
     private IUserAccountDao userAccountDao = UserAccountDao.getInstance();
     private IUserDao userdao = UserDao.getInstance();
+    private IUserPayeeDao userPayeeDao = UserPayeeDao.getInstance();
     private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
 
     public static UserCustomerService getInstance() {
@@ -95,5 +100,35 @@ public class UserCustomerService implements IUserCustomerService {
         } catch (Exception E) {
             throw FaultFactory.throwFaultException(E.getMessage());
         }
+    }
+
+    @Override
+    public List<UserPayeesReply> getPayeeList(Long Id) throws Exception {
+        try {
+            List<UserPayeesReply> userPayeesReplies = new ArrayList<>();
+            List<UserPayeeEntity> userPayeeEntityList = userPayeeDao.getPayeeListById(Id);
+
+            for(UserPayeeEntity userPayeeEntity: userPayeeEntityList) {
+                UserPayeesReply userPayeesReply = UserPayeesReply.newBuilder()
+                        .setPayeePk(userPayeeEntity.getId())
+                        .setName(userPayeeEntity.getName())
+                        .setIban(userPayeeEntity.getIban()).build();
+                userPayeesReplies.add(userPayeesReply);
+            }
+            return userPayeesReplies;
+
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException(E.getMessage());
+        }
+    }
+
+    @Override
+    public UserPayeesReply addPayee(Long Id, String payeeName, String iban) {
+        return null;
+    }
+
+    @Override
+    public void removePayee(Long Id, String payeeName, String iban) {
+
     }
 }

@@ -96,7 +96,7 @@ public class CustomerApplyView extends JFrame {
             return;
         } if(!tf_firstName.getText().trim().matches("^[a-zA-Z]+$")) {
             JOptionPane.showMessageDialog(null,
-                    "First name should only contain characters",
+                    "First name should only contain letters",
                     "Error Message", JOptionPane.ERROR_MESSAGE);
             tf_firstName.grabFocus();
             return;
@@ -111,7 +111,7 @@ public class CustomerApplyView extends JFrame {
             return;
         } if(!tf_lastName.getText().trim().matches("^[a-zA-Z]+$")) {
             JOptionPane.showMessageDialog(null,
-                    "First name should only contain characters",
+                    "First name should only contain letters",
                     "Error Message", JOptionPane.ERROR_MESSAGE);
             tf_lastName.grabFocus();
             return;

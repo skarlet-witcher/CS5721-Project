@@ -74,5 +74,21 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void getPayees(UserCustomerGetPayeesRequest request, StreamObserver<rpc.Response> responseObserver) {
+        Long id = request.getUserPk();
+
+        try {
+            List<UserPayeesReply> userPayeesReplies = UserCustomerService.getInstance().getPayeeList(id);
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+                    .addAllUserPayees(userPayeesReplies)
+                    .build());
+
+        } catch (Exception E) {
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+                    .build());
+        }
+        responseObserver.onCompleted();
+    }
 
 }
