@@ -14,9 +14,12 @@ import service.impl.CustomerHomeService;
 import service.impl.CustomerLoginService;
 import util.JTextFieldLimit;
 import util.KeyPadGenerator;
+import util.TimestampConvertHelper;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,8 +134,10 @@ public class CustomerPINView extends JFrame {
             E.printStackTrace();
             return;
         }
+        String firstName = userLoginReply.getFirstName().trim();
+        Timestamp lastLoginTime = TimestampConvertHelper.rpcToMysql(userLoginReply.getLastLoginTime());
         this.dispose();
-        new CustomerMainView(userId, userAccountsReply).run();
+        new CustomerMainView(userId, firstName, lastLoginTime, userAccountsReply).run();
     }
 
     private void button13ActionPerformed(ActionEvent e) {

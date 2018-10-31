@@ -4,6 +4,7 @@
 
 package view;
 
+import javax.swing.event.*;
 import Const.CardCurrencyType;
 import Const.UserAccountType;
 import Const.UserStatusType;
@@ -16,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,17 +87,19 @@ public class CustomerMainView extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
-    public CustomerMainView(long userId, List<UserAccountsReply> accountList) {
+    public CustomerMainView(long userId, String firstName, Timestamp lastLoginTime, List<UserAccountsReply> accountList) {
         initComponents();
-        setDefaultVariables(userId, user_pk, accountList);
+        setDefaultVariables(userId, user_pk, firstName, lastLoginTime, accountList);
         initTextArea();
         initAccountTable();
     }
 
-    private void setDefaultVariables(long userId, long user_pk, List<UserAccountsReply> accountList) {
+    private void setDefaultVariables(long userId, long user_pk, String firstName, Timestamp lastLoginTime, List<UserAccountsReply> accountList) {
         this.userId = userId;
         this.user_pk = user_pk;
         this.accountList = accountList;
+        this.lbl_nameField.setText(firstName);
+        this.lbl_lastLoginTime.setText(lastLoginTime.toString());
     }
 
     private void initAccountTable() {
@@ -127,6 +132,25 @@ public class CustomerMainView extends JFrame {
 
     private void initTextArea() {
         ta_postScript.setDocument(new JTextFieldLimit(200));
+    }
+
+    private void customerTabPaneStateChanged(ChangeEvent e) {
+        if(customerTabPane.getSelectedIndex() == 1) {
+            // come to the profile page
+            return;
+        }
+        if(customerTabPane.getSelectedIndex() == 2) {
+            // come to the transaction page
+            return;
+        }
+        if(customerTabPane.getSelectedIndex() == 3) {
+            // come to the payee page
+            return;
+        }
+        if(customerTabPane.getSelectedIndex() == 4) {
+            // come to transfer page
+            return;
+        }
     }
 
 
@@ -230,6 +254,7 @@ public class CustomerMainView extends JFrame {
         {
             customerTabPane.setFont(new Font("Segoe UI", Font.PLAIN, 20));
             customerTabPane.setPreferredSize(new Dimension(527, 400));
+            customerTabPane.addChangeListener(e -> customerTabPaneStateChanged(e));
 
             //======== homePanel ========
             {
