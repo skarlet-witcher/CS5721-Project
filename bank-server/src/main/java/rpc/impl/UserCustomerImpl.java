@@ -53,4 +53,26 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
         }
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void editProfile(UserCustomerEditProfileRequest request, StreamObserver<Response> responseObserver) {
+        Long id = request.getUserPk();
+        String address = request.getAddress();
+        String contactNum = request.getPhone();
+        String email = request.getEmail();
+
+        try {
+            UserCustomerService.getInstance().editUserProfile(id, address, email, contactNum);
+
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+                    .build());
+
+        } catch (Exception E) {
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+                    .build());
+        }
+        responseObserver.onCompleted();
+    }
+
+
 }

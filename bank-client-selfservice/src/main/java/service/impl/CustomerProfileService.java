@@ -1,5 +1,6 @@
 package service.impl;
 
+import rpc.UserCustomerEditProfileRequest;
 import rpc.UserCustomerGetAccountsRequest;
 import rpc.UserCustomerGetProfileRequest;
 import rpc.UserProfileReply;
@@ -22,5 +23,16 @@ public class CustomerProfileService implements ICustomerProfileService {
                 UserCustomerGetProfileRequest.newBuilder().setUserPk(Id).build()
         );
         return userProfileReply;
+    }
+
+    @Override
+    public void modifyUserProfile(Long user_pk, String address, String email, String contactNum) throws Exception {
+        UserCustomerRpc.getInstance().editUserProfile(
+                UserCustomerEditProfileRequest.newBuilder()
+                .setUserPk(user_pk)
+                .setEmail(email)
+                .setAddress(address)
+                .setPhone(contactNum).build()
+        );
     }
 }

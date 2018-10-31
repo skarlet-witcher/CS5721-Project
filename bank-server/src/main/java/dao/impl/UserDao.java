@@ -117,8 +117,8 @@ public class UserDao implements IUserDao {
             session.getTransaction().begin();
             Query query = session.createQuery("from UserEntity where id=?");
             query.setParameter(0, id);
-            query.setMaxResults(1);
             UserEntity result = (UserEntity) query.uniqueResult();
+            session.refresh(result);
             session.getTransaction().commit();
             return result;
         } catch (Exception e) {
@@ -206,6 +206,36 @@ public class UserDao implements IUserDao {
             int updateRows = query.executeUpdate();
 
             session.getTransaction().commit();
+            return updateRows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
+    public Integer updateUserProfileById(Long id, String address, String email, String contactNum) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("update UserEntity set address=?, email=?, phone=? where id=?");
+            query.setParameter(0, address);
+            query.setParameter(1, email);
+            query.setParameter(2, contactNum);
+            query.setParameter(3, id);
+
+            int updateRows = query.executeUpdate();
+
+            // refresh entity for updating the data in the session
+            Query query2 = session.createQuery("from UserEntity where id=?");
+            query2.setParameter(0, id);
+            UserEntity result = (UserEntity) query2.uniqueResult();
+            session.refresh(result);
+
+            session.getTransaction().commit();
+
+
+
             return updateRows;
         } catch (Exception e) {
             e.printStackTrace();

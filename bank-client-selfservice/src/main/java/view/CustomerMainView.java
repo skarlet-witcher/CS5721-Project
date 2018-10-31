@@ -32,6 +32,7 @@ public class CustomerMainView extends JFrame {
     private long userId;
     private long user_pk;
     private List<UserAccountsReply> accountList = new ArrayList<>();
+    private UserProfileReply userProfileReply;
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_welcome;
@@ -140,7 +141,7 @@ public class CustomerMainView extends JFrame {
     private void customerTabPaneStateChanged(ChangeEvent e) {
         if(customerTabPane.getSelectedIndex() == 1) {
             try {
-                UserProfileReply userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.user_pk);
+                userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.user_pk);
                 initProfileTab(userProfileReply);
 
             } catch (Exception E) {
@@ -171,7 +172,74 @@ public class CustomerMainView extends JFrame {
         tf_profile_lastName.setText(userProfileReply.getLastName());
         tf_profile_address.setText(userProfileReply.getAddress());
         tf_profile_contactNumber.setText(userProfileReply.getPhone());
+        tf_profile_email.setText(userProfileReply.getEmail());
         tf_profile_gender.setText(UserGenderType.getGenderType(userProfileReply.getGender()));
+    }
+
+    private void btn_profile_revertActionPerformed(ActionEvent e) {
+        initProfileTab(userProfileReply);
+    }
+
+    private void btn_profile_modifyActionPerformed(ActionEvent e) {
+        // address validator
+        if(tf_profile_address.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your address",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_profile_address.grabFocus();
+            return;
+        }
+
+
+        // email field validator
+        if(tf_profile_email.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your email address",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_profile_email.grabFocus();
+            return;
+        }
+        if(!tf_profile_email.getText().trim().matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input valid email address",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_profile_email.grabFocus();
+            return;
+        }
+
+        // contact number validator
+        if(tf_profile_contactNumber.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your contact number",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_profile_contactNumber.grabFocus();
+            return;
+        }
+        if(!tf_profile_contactNumber.getText().trim().matches("^[0-9]*$")) {
+            JOptionPane.showMessageDialog(null,
+                    "The contact number must be numeric.",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_profile_contactNumber.grabFocus();
+            return;
+        }
+
+
+        String address = tf_profile_address.getText().trim();
+        String email = tf_profile_email.getText().trim();
+        String contactNum = tf_profile_contactNumber.getText().trim();
+        try {
+            CustomerProfileService.getInstance().modifyUserProfile(user_pk, address, email, contactNum);
+            JOptionPane.showMessageDialog(null,
+                    "Modify User profile complete",
+                    "Info Message",JOptionPane.INFORMATION_MESSAGE);
+            userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.user_pk);
+            initProfileTab(userProfileReply);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to acquire user profile, please contact admin",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }
 
 
@@ -391,11 +459,13 @@ public class CustomerMainView extends JFrame {
                 //---- btn_profile_modify ----
                 btn_profile_modify.setText("Modify");
                 btn_profile_modify.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                btn_profile_modify.addActionListener(e -> btn_profile_modifyActionPerformed(e));
                 profilePanel.add(btn_profile_modify, "cell 2 8");
 
                 //---- btn_profile_revert ----
                 btn_profile_revert.setText("Revert");
                 btn_profile_revert.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                btn_profile_revert.addActionListener(e -> btn_profile_revertActionPerformed(e));
                 profilePanel.add(btn_profile_revert, "cell 3 8");
 
                 //---- btn_profile_deleteAccount ----

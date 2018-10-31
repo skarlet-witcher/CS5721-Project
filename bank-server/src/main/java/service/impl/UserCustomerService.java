@@ -34,28 +34,32 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public List<UserAccountsReply> getAccounts(Long id) {
-        List<UserAccountsReply> userAccountsReplies = new ArrayList<>();
-        logger.info("UserCustomerService: Ready to get user account list");
-        List<UserAccountEntity> userAccountList = userAccountDao.getUserAccountByUserId(id);
-        logger.info("UserCustomerService: How many result: " + userAccountList.size());
+    public List<UserAccountsReply> getAccounts(Long id) throws Exception {
+        try {
+            List<UserAccountsReply> userAccountsReplies = new ArrayList<>();
+            logger.info("UserCustomerService: Ready to get user account list");
+            List<UserAccountEntity> userAccountList = userAccountDao.getUserAccountByUserId(id);
+            logger.info("UserCustomerService: How many result: " + userAccountList.size());
 
-        logger.info("UserCustomerService: ready to set up user accounts reply");
-        for (UserAccountEntity userAccount : userAccountList) {
+            logger.info("UserCustomerService: ready to set up user accounts reply");
+            for (UserAccountEntity userAccount : userAccountList) {
 
 
-            UserAccountsReply userAccountsReply = UserAccountsReply.newBuilder()
-                    .setAccountPk(userAccount.getId())
-                    .setAccountNumber(userAccount.getAccountNumber())
-                    .setAccountType(userAccount.getAccountType().intValue())
-                    .setCurrencyType(userAccount.getCurrencyType())
-                    .setBalance(userAccount.getBalance().intValue())
-                    .setStatus(userAccount.getStatus()).build();
+                UserAccountsReply userAccountsReply = UserAccountsReply.newBuilder()
+                        .setAccountPk(userAccount.getId())
+                        .setAccountNumber(userAccount.getAccountNumber())
+                        .setAccountType(userAccount.getAccountType().intValue())
+                        .setCurrencyType(userAccount.getCurrencyType())
+                        .setBalance(userAccount.getBalance().intValue())
+                        .setStatus(userAccount.getStatus()).build();
 
-            userAccountsReplies.add(userAccountsReply);
+                userAccountsReplies.add(userAccountsReply);
+            }
+            logger.info("UserCustomerService: How many result: " + userAccountsReplies.size());
+            return userAccountsReplies;
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException(E.getMessage());
         }
-        logger.info("UserCustomerService: How many result: " + userAccountsReplies.size());
-        return userAccountsReplies;
     }
 
     @Override
@@ -79,5 +83,17 @@ public class UserCustomerService implements IUserCustomerService {
         }
 
 
+    }
+
+    @Override
+    public void editUserProfile(Long id, String address, String email, String contactNum) throws Exception {
+        try {
+            int updateRows = userdao.updateUserProfileById(id, address, email, contactNum);
+            if(updateRows <= 0) {
+                throw FaultFactory.throwFaultException("fail to update user profile");
+            }
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException(E.getMessage());
+        }
     }
 }
