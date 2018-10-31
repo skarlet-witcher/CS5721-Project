@@ -10,8 +10,6 @@ public class UserCardEntity {
     private Long cardNumber;
     private Integer cardType;
     private String pin;
-    private Double balance;
-    private Integer currencyType;
     private Timestamp expiredDate;
     private Long accountId;
     private Integer status;
@@ -58,26 +56,6 @@ public class UserCardEntity {
     }
 
     @Basic
-    @Column(name = "balance", nullable = false, precision = 0)
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
-
-    @Basic
-    @Column(name = "currency_type", nullable = false)
-    public Integer getCurrencyType() {
-        return currencyType;
-    }
-
-    public void setCurrencyType(Integer currencyType) {
-        this.currencyType = currencyType;
-    }
-
-    @Basic
     @Column(name = "expired_date", nullable = false)
     public Timestamp getExpiredDate() {
         return expiredDate;
@@ -118,8 +96,6 @@ public class UserCardEntity {
         if (cardNumber != null ? !cardNumber.equals(that.cardNumber) : that.cardNumber != null) return false;
         if (cardType != null ? !cardType.equals(that.cardType) : that.cardType != null) return false;
         if (pin != null ? !pin.equals(that.pin) : that.pin != null) return false;
-        if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
-        if (currencyType != null ? !currencyType.equals(that.currencyType) : that.currencyType != null) return false;
         if (expiredDate != null ? !expiredDate.equals(that.expiredDate) : that.expiredDate != null) return false;
         if (accountId != null ? !accountId.equals(that.accountId) : that.accountId != null) return false;
         return status != null ? status.equals(that.status) : that.status == null;
@@ -131,8 +107,6 @@ public class UserCardEntity {
         result = 31 * result + (cardNumber != null ? cardNumber.hashCode() : 0);
         result = 31 * result + (cardType != null ? cardType.hashCode() : 0);
         result = 31 * result + (pin != null ? pin.hashCode() : 0);
-        result = 31 * result + (balance != null ? balance.hashCode() : 0);
-        result = 31 * result + (currencyType != null ? currencyType.hashCode() : 0);
         result = 31 * result + (expiredDate != null ? expiredDate.hashCode() : 0);
         result = 31 * result + (accountId != null ? accountId.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);

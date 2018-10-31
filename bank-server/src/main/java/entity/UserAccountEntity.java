@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "user_account", schema = "bank_manage", catalog = "")
@@ -10,10 +11,14 @@ public class UserAccountEntity {
     private Long accountType;
     private String bic;
     private String iban;
+    private Double balance;
+    private Integer currencyType;
+    private Timestamp expiredDate;
     private Long userId;
     private Integer status;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public Long getId() {
         return id;
@@ -64,6 +69,36 @@ public class UserAccountEntity {
     }
 
     @Basic
+    @Column(name = "balance", nullable = false, precision = 0)
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    @Basic
+    @Column(name = "currency_type", nullable = false)
+    public Integer getCurrencyType() {
+        return currencyType;
+    }
+
+    public void setCurrencyType(Integer currencyType) {
+        this.currencyType = currencyType;
+    }
+
+    @Basic
+    @Column(name = "expired_date", nullable = false)
+    public Timestamp getExpiredDate() {
+        return expiredDate;
+    }
+
+    public void setExpiredDate(Timestamp expiredDate) {
+        this.expiredDate = expiredDate;
+    }
+
+    @Basic
     @Column(name = "user_id", nullable = true)
     public Long getUserId() {
         return userId;
@@ -96,6 +131,9 @@ public class UserAccountEntity {
         if (accountType != null ? !accountType.equals(that.accountType) : that.accountType != null) return false;
         if (bic != null ? !bic.equals(that.bic) : that.bic != null) return false;
         if (iban != null ? !iban.equals(that.iban) : that.iban != null) return false;
+        if (balance != null ? !balance.equals(that.balance) : that.balance != null) return false;
+        if (currencyType != null ? !currencyType.equals(that.currencyType) : that.currencyType != null) return false;
+        if (expiredDate != null ? !expiredDate.equals(that.expiredDate) : that.expiredDate != null) return false;
         if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
         return status != null ? status.equals(that.status) : that.status == null;
     }
@@ -107,6 +145,9 @@ public class UserAccountEntity {
         result = 31 * result + (accountType != null ? accountType.hashCode() : 0);
         result = 31 * result + (bic != null ? bic.hashCode() : 0);
         result = 31 * result + (iban != null ? iban.hashCode() : 0);
+        result = 31 * result + (balance != null ? balance.hashCode() : 0);
+        result = 31 * result + (currencyType != null ? currencyType.hashCode() : 0);
+        result = 31 * result + (expiredDate != null ? expiredDate.hashCode() : 0);
         result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
