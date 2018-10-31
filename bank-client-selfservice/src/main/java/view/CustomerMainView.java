@@ -9,6 +9,7 @@ import Const.CardCurrencyType;
 import Const.UserAccountType;
 import Const.UserGenderType;
 import Const.UserStatusType;
+import model.UserModel;
 import model.UserPayeeModel;
 import net.miginfocom.swing.MigLayout;
 import rpc.UserAccountsReply;
@@ -183,11 +184,19 @@ public class CustomerMainView extends JFrame {
 
     private void initPayeeTable(List<UserPayeesReply> userPayeesReplies) {
         DefaultTableModel payeeTableModel = (DefaultTableModel)table_payee_payeeList.getModel();
+        clearPayeeTable(payeeTableModel);
         for(UserPayeesReply userPayeesReply: userPayeesReplies) {
             payeeTableModel.addRow(new Object[]{
                     userPayeesReply.getIban(),
                     userPayeesReply.getName()
             });
+        }
+    }
+
+    private void clearPayeeTable(DefaultTableModel payeeTableModel) {
+        int rowCount = payeeTableModel.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            payeeTableModel.removeRow(i);
         }
     }
 
@@ -252,8 +261,14 @@ public class CustomerMainView extends JFrame {
         String address = tf_profile_address.getText().trim();
         String email = tf_profile_email.getText().trim();
         String contactNum = tf_profile_contactNumber.getText().trim();
+        UserModel userModel = new UserModel();
+        userModel.setId(this.user_pk);
+        userModel.setUserId(this.userId);
+        userModel.setAddress(address);
+        userModel.setEmail(email);
+        userModel.setContactNum(contactNum);
         try {
-            CustomerProfileService.getInstance().modifyUserProfile(user_pk, address, email, contactNum);
+            CustomerProfileService.getInstance().modifyUserProfile(userModel);
             JOptionPane.showMessageDialog(null,
                     "Modify User profile complete",
                     "Info Message",JOptionPane.INFORMATION_MESSAGE);
