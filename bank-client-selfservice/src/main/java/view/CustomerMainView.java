@@ -95,6 +95,7 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initAccountTable() {
+        System.out.println("front-end: check the result: balance: " + accountList.get(0).getBalance());
         DefaultTableModel accountListModel = (DefaultTableModel)table_home_accountTable.getModel();
         for(UserAccountsReply Account: this.accountList) {
             accountListModel.addRow(new Object[]{Account.getAccountNumber(), Account.getAccountType(), Account.getCurrencyType(), Account.getBalance(), Account.getStatus()});
