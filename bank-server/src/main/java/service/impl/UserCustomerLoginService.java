@@ -1,5 +1,6 @@
 package service.impl;
 
+import Const.SysMailTemplateType;
 import Const.UserOperateStatusType;
 import Const.UserStatusType;
 import dao.IUserDao;
@@ -18,6 +19,7 @@ import util.RandomUtil;
 import util.TimestampConvertHelper;
 
 import java.sql.Timestamp;
+import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -126,8 +128,21 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
     }
 
     @Override
-    public void forgotUserId(String firstName, String lastName, Timestamp birthDate, String contactNum, String email) {
+    public void forgotUserId(String firstName, String lastName, Timestamp birthDate, String contactNum, String email) throws Exception {
 
+        logger.info("ready to interact with db");
+        UserEntity userEntity = userDao.selectUserByNameDOBPhoneEmail(firstName,lastName,birthDate,contactNum,email);
+        logger.info("get data complete!!!");
+        logger.info("result: " + userEntity.getEmail());
+        if(userEntity == null) {
+            throw FaultFactory.throwFaultException("No user record found with these details!!!");
+        }
+        logger.info("ready to send an email");
+        // send email
+        String mailTemplate = SysEmailService.getInstance().getMailTemplate(SysMailTemplateType.FORGET_USER_ID);
+        String formatEmail = MessageFormat.format(mailTemplate, firstName, userEntity.getUserId());
+        SysEmailService.getInstance().send("empathytxk@hotmail.com", "Nuclear Bank - Your User ID", formatEmail);
+        logger.info("an email has been sent");
     }
 
     @Override
