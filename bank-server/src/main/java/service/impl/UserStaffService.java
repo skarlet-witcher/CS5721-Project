@@ -11,4 +11,9 @@ public class UserStaffService implements IUserStaffService {
         }
         return services;
     }
+
+    @Override
+    public void staffLogin(Long staffId, String password) {
+
+    }
 }

@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.IBankStaffDao;
+import entity.BankStaffEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtils;
@@ -30,5 +31,10 @@ public class BankStaffDao implements IBankStaffDao {
             session.getTransaction().rollback();
             return null;
         }
+    }
+
+    @Override
+    public BankStaffEntity selectStaffByIdAndPassword(Long staffId, String password) {
+        return null;
     }
 }

@@ -1,9 +1,10 @@
 package service;
 
-import model.UserAccountModel;
-import model.UserModel;
+import rpc.UserAccountsReply;
+
+import java.util.List;
 
 public interface ICustomerHomeService {
-    UserAccountModel getAccounts(UserModel userModel);
+    List<UserAccountsReply> getAccounts(Long id) throws Exception;
 
 }

@@ -41,7 +41,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setEmail(email);
             UserApplyArchiveEntity.setPhone(phone);
             UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
-            UserApplyArchiveEntity.setRemark("pending"); // change the attributes of this in the db
+            UserApplyArchiveEntity.setStatus(0);
             UserApplyArchiveEntity.setNewUserApply(isNewUser);
             UserApplyArchiveEntity.setUserId(userId);
             userApplyDao.requestAccountApply(UserApplyArchiveEntity);
@@ -70,7 +70,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
             UserApplyArchiveEntity.setNewUserApply(isNewUser);
             UserApplyArchiveEntity.setUserId(userId);
-            UserApplyArchiveEntity.setRemark("pending"); // change the attributes of this in the db
+            UserApplyArchiveEntity.setStatus(0);
             // student info
             UserApplyArchiveEntity.setGraduateDate(graduateDate);
             UserApplyArchiveEntity.setStudentId(studentId);
@@ -103,7 +103,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
         UserApplyArchiveEntity.setNewUserApply(isNewUser);
             UserApplyArchiveEntity.setUserId(userId);
-            UserApplyArchiveEntity.setRemark("pending"); // change the attributes of this in the db
+            UserApplyArchiveEntity.setStatus(0);
             // young saver info
             UserApplyArchiveEntity.setParentUserId(parentUserId);
             UserApplyArchiveEntity.setParentFirstName(parentFirstName);
@@ -143,7 +143,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setPhone(phone);
             UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
             UserApplyArchiveEntity.setNewUserApply(isNewUser);
-            UserApplyArchiveEntity.setRemark("pending"); // change the attributes of this in the db
+            UserApplyArchiveEntity.setStatus(0);
             UserApplyArchiveEntity.setUserId(userId);
             userApplyDao.requestAccountApply(UserApplyArchiveEntity);
         } catch (Exception e) {
