@@ -1,6 +1,7 @@
 package service.impl;
 
 import dao.IUserAccountDao;
+import dao.IUserCardDao;
 import dao.impl.UserAccountDao;
 import dao.impl.UserCardDao;
 import entity.UserAccountEntity;
@@ -15,7 +16,8 @@ import java.util.logging.Logger;
 
 public class UserCustomerService implements IUserCustomerService {
     private static UserCustomerService instance = null;
-    private static IUserAccountDao userAccountDao = UserAccountDao.getInstance();
+    private IUserAccountDao userAccountDao = UserAccountDao.getInstance();
+    private IUserCardDao userCardDao = UserCardDao.getInstance();
     private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
 
     public static UserCustomerService getInstance() {
@@ -33,12 +35,9 @@ public class UserCustomerService implements IUserCustomerService {
         logger.info("UserCustomerService: How many result: " + userAccountList.size());
 
 
-        for(int i = 0; i < userAccountList.size(); i++) {
-            UserAccountEntity userAccount = userAccountList.get(i);
+        for (UserAccountEntity userAccount : userAccountList) {
+            UserCardEntity userCardEntity = userCardDao.getCardByAccountId(userAccount.getId());
 
-            UserCardEntity userCardEntity = UserCardDao.getInstance().getCardByAccountId(
-                    userAccount.getId()
-            );
             logger.info("UserCustomerService: Card Number is:" + userCardEntity.getCardNumber());
             UserAccountsReply userAccountsReply = UserAccountsReply.newBuilder()
                     .setAccountPk(userAccount.getId())
