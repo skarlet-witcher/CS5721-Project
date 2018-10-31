@@ -10,6 +10,7 @@ public class SysConfigEntity {
     private String value;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public Long getId() {
         return id;
@@ -30,7 +31,7 @@ public class SysConfigEntity {
     }
 
     @Basic
-    @Column(name = "value", nullable = false, length = 255)
+    @Column(name = "value", nullable = false, length = 1000)
     public String getValue() {
         return value;
     }

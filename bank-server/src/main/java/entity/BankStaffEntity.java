@@ -14,6 +14,7 @@ public class BankStaffEntity {
     private Integer status;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     public Long getId() {
         return id;
