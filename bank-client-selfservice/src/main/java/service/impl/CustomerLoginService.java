@@ -1,10 +1,7 @@
 package service.impl;
 
 import model.*;
-import rpc.UserLoginReply;
-import rpc.UserLoginReqReply;
-import rpc.UserLoginReqRequest;
-import rpc.UserLoginRequest;
+import rpc.*;
 import rpc.client.CustomerLoginRpc;
 import service.ICustomerLoginService;
 
@@ -59,11 +56,22 @@ public class CustomerLoginService implements ICustomerLoginService {
 
     @Override
     public void requestForgotUserId(UserForgotUserIdModel userForgotUserIdModel) {
-
     }
 
+    /**
+     * Client-side build a forgetting PIN request and dispatch it by the client RPC
+     * @param userForgotPINModel object contains requester's information
+     * @throws Exception if system fails to send this request
+     */
     @Override
-    public void requestForgotUserPIN(UserModel userModel) {
+    public void requestForgotUserPIN(UserForgotPINModel userForgotPINModel) throws Exception {
+        CustomerLoginRpc.getInstance().forgetPinReq(
+                UserForgetPinRequest.newBuilder()
+                    .setUserId(userForgotPINModel.getUserId())
+                    .setBirthDate(userForgotPINModel.getBirthDate().toString())
+                    .setEmail(userForgotPINModel.getEmail())
+                    .build()
+        );
 
     }
 

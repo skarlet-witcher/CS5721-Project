@@ -10,11 +10,15 @@ public interface IUserDao {
 
     UserEntity selectUserByUserId(Long userId);
 
+    UserEntity selectUserByUserIdEmailDOB(Long userId, String email, Timestamp timestamp);
+
     UserEntity selectUserById(Long id);
 
     UserEntity selectUserByNameDOBPhoneEmail(String firstName, String lastName, Timestamp birthDate, String phone, String email);
 
     Integer updateUserPinDigitById(Long id, String loginPinDigit);
+
+    Integer updateUserPINByUserId(Long userId, String newPin);
 
     Integer updateUserStatusById(Long id, Integer status);
 

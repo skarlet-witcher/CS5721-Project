@@ -4,15 +4,17 @@
 
 package view;
 
+import model.UserForgotPINModel;
 import net.miginfocom.swing.MigLayout;
+import service.impl.CustomerLoginService;
 import util.JTextFieldLimit;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 /**
@@ -52,7 +54,7 @@ public class CustomerForgotPINView extends JFrame {
         tf_year.selectAll();
     }
 
-    private void btn_confirmActionPerformed(ActionEvent e) {
+    private void btn_confirmActionPerformed(ActionEvent e)  {
         // date of birth validator
 
         // day of dob validator
@@ -151,6 +153,22 @@ public class CustomerForgotPINView extends JFrame {
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             tf_email.grabFocus();
             return;
+        }
+        String birthDateText = tf_year.getText().trim()+"-"+
+                tf_month.getText().trim()+"-"+tf_day.getText().trim()+" 00:00:00";
+        //month and day with one digit
+        Timestamp birthDate = Timestamp.valueOf(birthDateText);
+        UserForgotPINModel userForgetPinModel = new UserForgotPINModel(userId,birthDate,tf_email.getText().trim());
+        try {
+            CustomerLoginService.getInstance().requestForgotUserPIN(userForgetPinModel);
+            JOptionPane.showMessageDialog(null,
+                    "A new PIN is sent to your private email. If you can not find the PIN email, please contact the bank staff.",
+                    "Information",JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e1) {
+            JOptionPane.showMessageDialog(null,
+                    "Sorry, we can not provide you a new PIN. Please contact thee bank staff for further information.",
+                    "Information",JOptionPane.INFORMATION_MESSAGE);
         }
 
         // TO-DO forgot PIN view implementation using model and service

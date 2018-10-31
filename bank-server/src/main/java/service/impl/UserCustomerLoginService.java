@@ -1,5 +1,6 @@
 package service.impl;
 
+import Const.SysMailTemplateType;
 import Const.UserOperateStatusType;
 import Const.UserStatusType;
 import dao.IUserDao;
@@ -13,11 +14,10 @@ import rpc.UserLoginReply;
 import rpc.UserLoginReqReply;
 import service.IUserCustomerHistoryService;
 import service.IUserCustomerLoginService;
-import util.FaultFactory;
-import util.RandomUtil;
-import util.TimestampConvertHelper;
+import util.*;
 
 import java.sql.Timestamp;
+import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -130,8 +130,35 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
 
     }
 
+    /**
+     * The method is responsibility for checking the information of requester, generate a new pin, and send the new PIN
+     * to requester's email
+     * @param userId User ID of requester
+     * @param email Email of requester
+     * @param birthDate Birth date of requester
+     * @throws Exception if UserId is not matched with email and birthdate
+     */
     @Override
-    public void forgotPIN(Long userId, String email, Timestamp birthDate) {
+    public void forgotPIN(Long userId, String email, Timestamp birthDate) throws Exception {
+        UserEntity userEntity = userDao.selectUserByUserIdEmailDOB(userId,email,birthDate);
+        if(userEntity!= null){
+            //Generate new PIN and save it
+            PINGenerator pinGenerator = PINGenerator.getInstance();
+            String PIN = String.valueOf(pinGenerator.generatePIN());
+            userDao.updateUserPINByUserId(userEntity.getUserId(), PIN);
 
+
+            //Send Email
+            String mailTemplate = SysEmailService.getInstance().getMailTemplate(SysMailTemplateType.FORGET_PIN);
+            String formatMail = MessageFormat.format(mailTemplate, userEntity.getFirstName(), PIN);
+            System.out.print(formatMail);
+            SysEmailService.getInstance().send("thelongdt@gmail.com",
+                    "Nuclear Bank - Requesting new PIN",
+                    formatMail);
+        }
+        else {
+            throw FaultFactory.throwFaultException("UserId is not matched with email and birthdate, please check again.");
+
+        }
     }
 }

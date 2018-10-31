@@ -15,5 +15,5 @@ public interface IUserCustomerLoginService {
 
     void forgotUserId(String firstName, String lastName, Timestamp birthDate, String contactNum, String email);
 
-    void forgotPIN(Long userId, String email, Timestamp birthDate);
+    void forgotPIN(Long userId, String email, Timestamp birthDate) throws Exception;
 }

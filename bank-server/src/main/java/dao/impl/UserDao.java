@@ -79,6 +79,24 @@ public class UserDao implements IUserDao {
     }
 
     @Override
+    public UserEntity selectUserByUserIdEmailDOB(Long userId, String email, Timestamp birthDate) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("from UserEntity where userId=? and email=? and birthDate=?");
+            query.setParameter(0, userId);
+            query.setParameter(1, email);
+            query.setParameter(2, birthDate);
+
+            UserEntity result = (UserEntity) query.uniqueResult();
+            session.getTransaction().commit();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }    }
+
+    @Override
     public Long selectTheBiggestId() {
         try {
             session.getTransaction().begin();
@@ -146,6 +164,28 @@ public class UserDao implements IUserDao {
             // refresh entity for updating the data in the session
             Query query2 = session.createQuery("from UserEntity where id=?");
             query2.setParameter(0, id);
+            UserEntity result = (UserEntity) query2.uniqueResult();
+            session.refresh(result);
+            return updateRows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
+    public Integer updateUserPINByUserId(Long userId, String newPin) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("update UserEntity set pin = ? where userId=?");
+            query.setParameter(0, newPin).setParameter(1, userId);
+            int updateRows = query.executeUpdate();
+            session.getTransaction().commit();
+
+            // refresh entity for updating the data in the session
+            Query query2 = session.createQuery("from UserEntity where userId=?");
+            query2.setParameter(0, userId);
             UserEntity result = (UserEntity) query2.uniqueResult();
             session.refresh(result);
 
