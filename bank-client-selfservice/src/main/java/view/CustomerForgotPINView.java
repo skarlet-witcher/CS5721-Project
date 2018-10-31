@@ -238,6 +238,12 @@ public class CustomerForgotPINView extends JFrame {
 
         //---- tf_year ----
         tf_year.setMinimumSize(new Dimension(80, 24));
+        tf_year.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                tf_yearFocusGained(e);
+            }
+        });
         contentPane.add(tf_year, "cell 1 2");
 
         //---- btn_confirm ----

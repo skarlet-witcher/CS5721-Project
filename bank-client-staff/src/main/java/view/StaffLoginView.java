@@ -74,11 +74,7 @@ public class StaffLoginView extends JFrame {
         //---- btn_login ----
         btn_login.setText("Login");
         btn_login.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        btn_login.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_loginActionPerformed(e);
-            }
-        });
+        btn_login.addActionListener(e -> btn_loginActionPerformed(e));
         contentPane.add(btn_login, "cell 2 3");
         pack();
         setLocationRelativeTo(getOwner());
