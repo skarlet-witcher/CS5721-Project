@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bank-client-selfserivce</artifactId>
+    <artifactId>bank-client-selfservice</artifactId>
 
     <dependencies>
         <dependency>
