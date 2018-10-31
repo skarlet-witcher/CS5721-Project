@@ -4,6 +4,9 @@
 
 package view;
 
+import Const.CardCurrencyType;
+import Const.UserAccountType;
+import Const.UserStatusType;
 import net.miginfocom.swing.MigLayout;
 import rpc.UserAccountsReply;
 import util.JTextFieldLimit;
@@ -98,7 +101,12 @@ public class CustomerMainView extends JFrame {
         System.out.println("front-end: check the size of result: " + accountList.size());
         DefaultTableModel accountListModel = (DefaultTableModel)table_home_accountTable.getModel();
         for(UserAccountsReply Account: this.accountList) {
-            accountListModel.addRow(new Object[]{Account.getAccountNumber(), Account.getAccountType(), Account.getCurrencyType(), Account.getBalance(), Account.getStatus()});
+            accountListModel.addRow(new Object[]{
+                    Account.getAccountNumber(),
+                    UserAccountType.getTypeName(Account.getAccountType()),
+                    CardCurrencyType.getCurrencyType(Account.getCurrencyType()),
+                    Account.getBalance(),
+                    UserStatusType.getStatusType(Account.getStatus())});
         }
     }
 
