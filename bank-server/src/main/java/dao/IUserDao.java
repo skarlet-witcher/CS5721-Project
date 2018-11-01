@@ -8,6 +8,8 @@ import java.util.Map;
 public interface IUserDao {
     UserEntity LoginByUserIdAndPin(Long userId, Map<Integer, Integer> pin);
 
+    UserEntity selectUserByIdAndPin(Long id, String pin);
+
     UserEntity selectUserByUserId(Long userId);
 
     UserEntity selectUserByUserIdEmailDOB(Long userId, String email, Timestamp timestamp);

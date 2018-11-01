@@ -32,11 +32,12 @@ public class CustomerPayeeService implements ICustomerPayeeService {
     }
 
     @Override
-    public void addPayee(UserPayeeModel userPayeeModel) throws Exception {
+    public void addPayee(UserPayeeModel userPayeeModel, String pin) throws Exception {
         CustomerPayeeRpc.getInstance().addPayee(
                 UserCustomerAddPayeeRequest.newBuilder()
                 .setUserPk(userPayeeModel.getUserId())
                 .setIban(userPayeeModel.getIban())
+                .setPin(pin)
                 .setName(userPayeeModel.getName()).build()
         );
     }

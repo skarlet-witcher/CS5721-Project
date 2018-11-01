@@ -98,9 +98,10 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
        Long user_pk = request.getUserPk();
        String name = request.getName();
        String iban = request.getIban();
+       String pin = request.getPin();
 
        try {
-            UserCustomerService.getInstance().addPayee(user_pk, name, iban);
+            UserCustomerService.getInstance().addPayee(user_pk, name, iban, pin);
            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                    .build());
 

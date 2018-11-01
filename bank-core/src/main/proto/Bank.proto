@@ -167,7 +167,7 @@ message UserCustomerAddPayeeRequest {
     int64 user_pk = 1;
     string name = 2;
     string iban = 3;
-    int32 pin = 4;
+    string pin = 4;
 }
 
 message UserCustomerRemovePayeeRequest {

@@ -15,7 +15,7 @@ public interface IUserCustomerService {
 
     List<UserPayeesReply> getPayeeList(Long user_pk) throws Exception;
 
-    void addPayee(Long user_pk, String payeeName, String iban) throws Exception;
+    void addPayee(Long user_pk, String payeeName, String iban, String pin) throws Exception;
 
     void removePayee(Long user_pk, Long userId) throws Exception;
 }

@@ -62,6 +62,23 @@ public class UserDao implements IUserDao {
     }
 
     @Override
+    public UserEntity selectUserByIdAndPin(Long id, String pin) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("from UserEntity where id=? and pin=?");
+            query.setParameter(0, id);
+            query.setParameter(1, pin);
+            UserEntity result = (UserEntity) query.uniqueResult();
+            session.getTransaction().commit();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
     public UserEntity selectUserByUserId(Long userId) {
         try {
             session.getTransaction().begin();

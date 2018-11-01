@@ -122,11 +122,23 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public void addPayee(Long user_pk, String payeeName, String iban) throws Exception {
+    public void addPayee(Long user_pk, String payeeName, String iban, String pin) throws Exception {
         UserPayeeEntity userPayeeEntity = new UserPayeeEntity();
         userPayeeEntity.setIban(iban);
         userPayeeEntity.setUserId(user_pk);
         userPayeeEntity.setName(payeeName);
+
+        // validate pin
+        UserEntity pinResult;
+        logger.info("ready to valdiate pin");
+        try {
+            pinResult  = userdao.selectUserByIdAndPin(user_pk, pin);
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException("fail to validate pin");
+        }
+        if(pinResult == null) {
+            throw FaultFactory.throwFaultException("pin is not correct.");
+        }
 
         // validate iban
         try {
