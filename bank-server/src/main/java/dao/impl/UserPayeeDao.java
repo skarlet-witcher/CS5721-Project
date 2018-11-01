@@ -57,8 +57,18 @@ public class UserPayeeDao implements IUserPayeeDao {
     }
 
     @Override
-    public Integer removePayee(UserPayeeEntity userPayeeEntity) {
-        return null;
+    public void removePayee(Long payee_pk, Long user_id) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("delete from UserPayeeEntity where id=? and userId=?");
+            query.setParameter(0, payee_pk);
+            query.setParameter(1, user_id);
+            session.getTransaction().commit();
+        } catch (Exception E) {
+            E.printStackTrace();
+            // Rollback in case of an error occurred.
+            session.getTransaction().rollback();
+        }
     }
 
     @Override

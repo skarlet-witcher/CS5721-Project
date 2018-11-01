@@ -3,6 +3,7 @@ package service.impl;
 import model.UserPayeeModel;
 import rpc.UserCustomerAddPayeeRequest;
 import rpc.UserCustomerGetPayeesRequest;
+import rpc.UserCustomerRemovePayeeRequest;
 import rpc.UserPayeesReply;
 import rpc.client.CustomerPayeeRpc;
 import rpc.client.UserCustomerRpc;
@@ -42,6 +43,9 @@ public class CustomerPayeeService implements ICustomerPayeeService {
 
     @Override
     public void removePayee(UserPayeeModel userPayeeModel) throws Exception {
-
+        CustomerPayeeRpc.getInstance().removePayee(
+                UserCustomerRemovePayeeRequest.newBuilder().setPayeePk(userPayeeModel.getPayee_pk())
+                .setUserPk(userPayeeModel.getUserId()).build()
+        );
     }
 }

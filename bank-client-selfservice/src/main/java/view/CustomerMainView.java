@@ -99,6 +99,10 @@ public class CustomerMainView extends JFrame {
         initComponents();
         setDefaultVariables(userId, user_pk, firstName, lastLoginTime, accountList);
         initTextArea();
+        initAccountTable();
+        initProfileInfo();
+        initPayeeInfo();
+        initPayeeTable();
     }
 
     private void setDefaultVariables(long userId, long user_pk, String firstName, Timestamp lastLoginTime, List<UserAccountsReply> accountList) {
@@ -272,6 +276,40 @@ public class CustomerMainView extends JFrame {
     public void run() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+    }
+
+    private void btn_payee_removeActionPerformed(ActionEvent e) {
+        if(table_payee_payeeList.getSelectedRow() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please click a payee on the table to remove",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int index = table_payee_payeeList.getSelectedRow();
+        UserPayeesReply payee = userPayeesReplies.get(index);
+        UserPayeeModel userPayeeModel = new UserPayeeModel();
+        userPayeeModel.setPayee_pk(payee.getPayeePk());
+        userPayeeModel.setName(payee.getName());
+        userPayeeModel.setIban(payee.getIban());
+        int selection = JOptionPane.showConfirmDialog(
+                new JFrame(),"Are you sure to delete " + payee.getName() + " from your payee list?",
+                "Deletion Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        if(selection == JOptionPane.YES_OPTION) {
+            try {
+                CustomerPayeeService.getInstance().removePayee(userPayeeModel);
+                JOptionPane.showMessageDialog(null,
+                        "Payee deletion complete",
+                        "Info Message",JOptionPane.INFORMATION_MESSAGE);
+                initPayeeInfo();
+                initPayeeTable();
+            } catch (Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Fail to delete payee, please contact admin",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
     }
 
     private void initComponents() {
@@ -599,6 +637,7 @@ public class CustomerMainView extends JFrame {
                 //---- btn_payee_remove ----
                 btn_payee_remove.setText("Remove");
                 btn_payee_remove.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                btn_payee_remove.addActionListener(e -> btn_payee_removeActionPerformed(e));
                 payeePanel.add(btn_payee_remove, "cell 0 0");
 
                 //======== scrollPane3 ========

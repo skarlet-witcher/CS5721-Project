@@ -9,6 +9,8 @@ import util.ResponseBuilderFactory;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
+
 public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
     private IUserCustomerService customerService = UserCustomerService.getInstance();
@@ -109,6 +111,21 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void removePayee(UserCustomerRemovePayeeRequest request, StreamObserver<Response> responseObserver) {
+        Long payee_pk = request.getPayeePk();
+        Long user_id = request.getUserPk();
+
+        try {
+            UserCustomerService.getInstance().removePayee(payee_pk, user_id);
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+                    .build());
+        } catch (Exception E) {
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+                    .build());
+        }
+        responseObserver.onCompleted();
+    }
 
 
 }

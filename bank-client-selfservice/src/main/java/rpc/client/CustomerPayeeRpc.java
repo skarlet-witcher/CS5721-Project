@@ -59,4 +59,21 @@ public class CustomerPayeeRpc {
         }
     }
 
+    public Response removePayee(UserCustomerRemovePayeeRequest userCustomerRemovePayeeRequest) throws Exception {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
+                .usePlaintext().build();
+        UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
+        logger.info(userCustomerRemovePayeeRequest.getUserPk() + " is requesting to remove.");
+
+        Response response = blockingStub.removePayee(userCustomerRemovePayeeRequest);
+        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
+            logger.info(userCustomerRemovePayeeRequest.getUserPk() + " requesting to remove payee is successful");
+            return response;
+        } else {
+            logger.info(userCustomerRemovePayeeRequest.getUserPk() + " requesting to remove payee is failed due to " + response.getDescription());
+            throw new Exception(response.getDescription());
+        }
+    }
+
 }

@@ -317,6 +317,7 @@ new FormModel {
 						name: "btn_payee_remove"
 						"text": "Remove"
 						"font": #Font1
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_payee_removeActionPerformed", true ) )
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 0 0"
 					} )

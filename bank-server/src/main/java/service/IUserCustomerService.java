@@ -17,5 +17,5 @@ public interface IUserCustomerService {
 
     void addPayee(Long user_pk, String payeeName, String iban) throws Exception;
 
-    void removePayee(Long user_pk, String payeeName, String iban) throws Exception;
+    void removePayee(Long user_pk, Long userId) throws Exception;
 }

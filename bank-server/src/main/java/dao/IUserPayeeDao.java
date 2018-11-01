@@ -9,7 +9,7 @@ public interface IUserPayeeDao {
 
     void addPayee(UserPayeeEntity userPayeeEntity);
 
-    Integer removePayee(UserPayeeEntity userPayeeEntity);
+    void removePayee(Long payee_pk, Long use_pk);
 
     UserPayeeEntity checkDuplicatePayee(UserPayeeEntity userPayeeEntity);
 }

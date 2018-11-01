@@ -160,7 +160,14 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public void removePayee(Long Id, String payeeName, String iban) {
+    public void removePayee(Long payee_pk, Long userId) {
+        try {
+            logger.info("Ready to remove payee");
+            userPayeeDao.removePayee(payee_pk, userId);
+        } catch (Exception E) {
+            FaultFactory.throwFaultException("Fail to remove payee! ");
+        }
+
 
     }
 }
