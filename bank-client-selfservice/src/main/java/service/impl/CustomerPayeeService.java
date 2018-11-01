@@ -1,6 +1,7 @@
 package service.impl;
 
 import model.UserPayeeModel;
+import rpc.UserCustomerAddPayeeRequest;
 import rpc.UserCustomerGetPayeesRequest;
 import rpc.UserPayeesReply;
 import rpc.client.CustomerPayeeRpc;
@@ -30,8 +31,13 @@ public class CustomerPayeeService implements ICustomerPayeeService {
     }
 
     @Override
-    public UserPayeesReply addPayee(UserPayeeModel userPayeeModel) throws Exception {
-        return null;
+    public void addPayee(UserPayeeModel userPayeeModel) throws Exception {
+        CustomerPayeeRpc.getInstance().addPayee(
+                UserCustomerAddPayeeRequest.newBuilder()
+                .setUserPk(userPayeeModel.getUserId())
+                .setIban(userPayeeModel.getIban())
+                .setName(userPayeeModel.getName()).build()
+        );
     }
 
     @Override

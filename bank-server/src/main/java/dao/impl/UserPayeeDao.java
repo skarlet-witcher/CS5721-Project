@@ -4,6 +4,7 @@ import dao.IUserPayeeDao;
 import entity.UserPayeeEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import rpc.UserPayeesReply;
 import util.HibernateUtils;
 
 import java.util.List;
@@ -41,12 +42,41 @@ public class UserPayeeDao implements IUserPayeeDao {
     }
 
     @Override
-    public UserPayeeEntity addPayee(Long userId, String payeeName, String iban) {
+    public void addPayee(UserPayeeEntity userPayeeEntity) {
+        try {
+            session.getTransaction().begin();
+
+            session.save(userPayeeEntity);
+
+            session.getTransaction().commit();
+        } catch (Exception E) {
+            E.printStackTrace();
+            session.getTransaction().rollback();
+
+        }
+    }
+
+    @Override
+    public Integer removePayee(UserPayeeEntity userPayeeEntity) {
         return null;
     }
 
     @Override
-    public Integer removePayee(Long userId, String payeeName, String iban) {
-        return null;
+    public UserPayeeEntity checkDuplicatePayee(UserPayeeEntity userPayeeEntity) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("From UserPayeeEntity where name=? or iban=?");
+            query.setParameter(0, userPayeeEntity.getName());
+            query.setParameter(1, userPayeeEntity.getIban());
+
+            UserPayeeEntity result = (UserPayeeEntity)query.uniqueResult();
+            session.getTransaction().commit();
+            return result;
+        } catch (Exception E) {
+            E.printStackTrace();
+            // Rollback in case of an error occurred.
+            session.getTransaction().rollback();
+            return null;
+        }
     }
 }

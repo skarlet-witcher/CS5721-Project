@@ -165,10 +165,9 @@ message UserCustomerGetPayeesRequest {
 
 message UserCustomerAddPayeeRequest {
     int64 user_pk = 1;
-    string first_name = 2;
-    string last_name = 3;
-    string iban = 4;
-    int32 pin = 5;
+    string name = 2;
+    string iban = 3;
+    int32 pin = 4;
 }
 
 message UserCustomerRemovePayeeRequest {

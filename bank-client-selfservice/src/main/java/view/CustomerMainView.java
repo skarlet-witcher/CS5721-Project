@@ -4,7 +4,8 @@
 
 package view;
 
-import javax.swing.event.*;
+import java.awt.event.*;
+
 import Const.CardCurrencyType;
 import Const.UserAccountType;
 import Const.UserGenderType;
@@ -23,8 +24,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +99,6 @@ public class CustomerMainView extends JFrame {
         initComponents();
         setDefaultVariables(userId, user_pk, firstName, lastLoginTime, accountList);
         initTextArea();
-        initAccountTable();
     }
 
     private void setDefaultVariables(long userId, long user_pk, String firstName, Timestamp lastLoginTime, List<UserAccountsReply> accountList) {
@@ -124,65 +122,38 @@ public class CustomerMainView extends JFrame {
         }
     }
 
-    private void button1ActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerLoginView().run();
-    }
-
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-
-    private void btn_payee_addActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        new CustomerAddPayeeView(userId, this).run();
-    }
-
     private void initTextArea() {
         ta_postScript.setDocument(new JTextFieldLimit(200));
     }
 
-    private void customerTabPaneStateChanged(ChangeEvent e) {
-        if(customerTabPane.getSelectedIndex() == 1) {
-            try {
-                userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.user_pk);
-                initProfileTab(userProfileReply);
+    private void initProfileInfo() {
+        try {
+            userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.user_pk);
+            updateProfileFields(userProfileReply);
 
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Fail to acquire user profile, please contact admin",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            return;
-        }
-        if(customerTabPane.getSelectedIndex() == 2) {
-            // come to the transaction page
-            return;
-        }
-        if(customerTabPane.getSelectedIndex() == 3) {
-            // come to the payee page
-            UserPayeeModel userPayeeModel = new UserPayeeModel();
-            userPayeeModel.setUserId(this.user_pk);
-            try {
-                userPayeesReplies = CustomerPayeeService.getInstance().getPayeeList(userPayeeModel);
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Fail to acquire user payee, please contact admin",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            initPayeeTable(userPayeesReplies);
-            return;
-        }
-        if(customerTabPane.getSelectedIndex() == 4) {
-            // come to transfer page
-            return;
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to acquire user profile, please contact admin",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void initPayeeTable(List<UserPayeesReply> userPayeesReplies) {
+    private void initPayeeInfo() {
+        // init payee info
+        UserPayeeModel userPayeeModel = new UserPayeeModel();
+        userPayeeModel.setUserId(this.user_pk);
+        try {
+            userPayeesReplies = CustomerPayeeService.getInstance().getPayeeList(userPayeeModel);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to acquire user payee, please contact admin",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void initPayeeTable() {
+        initPayeeInfo();
+        // init payee table
         DefaultTableModel payeeTableModel = (DefaultTableModel)table_payee_payeeList.getModel();
         clearPayeeTable(payeeTableModel);
         for(UserPayeesReply userPayeesReply: userPayeesReplies) {
@@ -191,6 +162,7 @@ public class CustomerMainView extends JFrame {
                     userPayeesReply.getName()
             });
         }
+        return;
     }
 
     private void clearPayeeTable(DefaultTableModel payeeTableModel) {
@@ -200,7 +172,7 @@ public class CustomerMainView extends JFrame {
         }
     }
 
-    private void initProfileTab(UserProfileReply userProfileReply) {
+    private void updateProfileFields(UserProfileReply userProfileReply) {
         tf_profile_userId.setText(String.valueOf(userProfileReply.getUserId()));
         tf_profile_firstName.setText(userProfileReply.getFirstName());
         tf_profile_lastName.setText(userProfileReply.getLastName());
@@ -210,8 +182,18 @@ public class CustomerMainView extends JFrame {
         tf_profile_gender.setText(UserGenderType.getGenderType(userProfileReply.getGender()));
     }
 
+    private void button1ActionPerformed(ActionEvent e) {
+        this.dispose();
+        new CustomerLoginView().run();
+    }
+
+    private void btn_payee_addActionPerformed(ActionEvent e) {
+        this.setVisible(false);
+        new CustomerAddPayeeView(user_pk, this).run();
+    }
+
     private void btn_profile_revertActionPerformed(ActionEvent e) {
-        initProfileTab(userProfileReply);
+        updateProfileFields(userProfileReply);
     }
 
     private void btn_profile_modifyActionPerformed(ActionEvent e) {
@@ -223,7 +205,6 @@ public class CustomerMainView extends JFrame {
             tf_profile_address.grabFocus();
             return;
         }
-
 
         // email field validator
         if(tf_profile_email.getText().trim().length() <= 0) {
@@ -273,7 +254,7 @@ public class CustomerMainView extends JFrame {
                     "Modify User profile complete",
                     "Info Message",JOptionPane.INFORMATION_MESSAGE);
             userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.user_pk);
-            initProfileTab(userProfileReply);
+            updateProfileFields(userProfileReply);
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
                     "Fail to acquire user profile, please contact admin",
@@ -282,6 +263,16 @@ public class CustomerMainView extends JFrame {
         }
     }
 
+    private void thisComponentShown(ComponentEvent e) {
+        initAccountTable();
+        initProfileInfo();
+        initPayeeTable();
+    }
+
+    public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -341,6 +332,12 @@ public class CustomerMainView extends JFrame {
 
         //======== this ========
         setTitle("Customer Main View");
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                thisComponentShown(e);
+            }
+        });
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
             "hidemode 3",
@@ -383,7 +380,6 @@ public class CustomerMainView extends JFrame {
         {
             customerTabPane.setFont(new Font("Segoe UI", Font.PLAIN, 20));
             customerTabPane.setPreferredSize(new Dimension(527, 400));
-            customerTabPane.addChangeListener(e -> customerTabPaneStateChanged(e));
 
             //======== homePanel ========
             {
@@ -723,6 +719,5 @@ public class CustomerMainView extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
 
 }

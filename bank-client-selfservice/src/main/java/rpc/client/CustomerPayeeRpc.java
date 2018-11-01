@@ -42,4 +42,21 @@ public class CustomerPayeeRpc {
         }
     }
 
+    public Response addPayee(UserCustomerAddPayeeRequest userCustomerAddPayeeRequest) throws Exception {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
+                .usePlaintext().build();
+        UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
+        logger.info(userCustomerAddPayeeRequest.getUserPk() + " is requesting to add payee.");
+
+        Response response = blockingStub.addPayee(userCustomerAddPayeeRequest);
+        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
+            logger.info(userCustomerAddPayeeRequest.getUserPk() + " requesting to add payee is successful");
+            return response;
+        } else {
+            logger.info(userCustomerAddPayeeRequest.getUserPk() + " requesting to add payee is failed due to " + response.getDescription());
+            throw new Exception(response.getDescription());
+        }
+    }
+
 }

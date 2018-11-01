@@ -1,23 +1,22 @@
 package service.impl;
 
 import dao.IUserAccountDao;
-import dao.IUserCardDao;
 import dao.IUserDao;
 import dao.IUserPayeeDao;
 import dao.impl.UserAccountDao;
-import dao.impl.UserCardDao;
 import dao.impl.UserDao;
 import dao.impl.UserPayeeDao;
 import entity.UserAccountEntity;
-import entity.UserCardEntity;
 import entity.UserEntity;
 import entity.UserPayeeEntity;
+import org.iban4j.*;
 import rpc.UserAccountsReply;
 import rpc.UserCustomerGrpc;
 import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
 import service.IUserCustomerService;
 import util.FaultFactory;
+import util.IBANValidator;
 import util.TimestampConvertHelper;
 
 import java.util.ArrayList;
@@ -39,11 +38,11 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public List<UserAccountsReply> getAccounts(Long id) throws Exception {
+    public List<UserAccountsReply> getAccounts(Long user_pk) throws Exception {
         try {
             List<UserAccountsReply> userAccountsReplies = new ArrayList<>();
             logger.info("UserCustomerService: Ready to get user account list");
-            List<UserAccountEntity> userAccountList = userAccountDao.getUserAccountByUserId(id);
+            List<UserAccountEntity> userAccountList = userAccountDao.getUserAccountByUserId(user_pk);
             logger.info("UserCustomerService: How many result: " + userAccountList.size());
 
             logger.info("UserCustomerService: ready to set up user accounts reply");
@@ -68,9 +67,9 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public UserProfileReply getUserProfile(Long Id) throws Exception {
+    public UserProfileReply getUserProfile(Long user_pk) throws Exception {
         try {
-            UserEntity userEntity = userdao.selectUserById(Id);
+            UserEntity userEntity = userdao.selectUserById(user_pk);
             UserProfileReply userProfileReply =UserProfileReply.newBuilder()
                     .setUserPk(userEntity.getId())
                     .setUserId(userEntity.getUserId())
@@ -91,9 +90,9 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public void editUserProfile(Long id, String address, String email, String contactNum) throws Exception {
+    public void editUserProfile(Long user_pk, String address, String email, String contactNum) throws Exception {
         try {
-            int updateRows = userdao.updateUserProfileById(id, address, email, contactNum);
+            int updateRows = userdao.updateUserProfileById(user_pk, address, email, contactNum);
             if(updateRows <= 0) {
                 throw FaultFactory.throwFaultException("fail to update user profile");
             }
@@ -103,10 +102,10 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public List<UserPayeesReply> getPayeeList(Long Id) throws Exception {
+    public List<UserPayeesReply> getPayeeList(Long user_pk) throws Exception {
         try {
             List<UserPayeesReply> userPayeesReplies = new ArrayList<>();
-            List<UserPayeeEntity> userPayeeEntityList = userPayeeDao.getPayeeListById(Id);
+            List<UserPayeeEntity> userPayeeEntityList = userPayeeDao.getPayeeListById(user_pk);
 
             for(UserPayeeEntity userPayeeEntity: userPayeeEntityList) {
                 UserPayeesReply userPayeesReply = UserPayeesReply.newBuilder()
@@ -123,8 +122,41 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public UserPayeesReply addPayee(Long Id, String payeeName, String iban) {
-        return null;
+    public void addPayee(Long user_pk, String payeeName, String iban) throws Exception {
+        UserPayeeEntity userPayeeEntity = new UserPayeeEntity();
+        userPayeeEntity.setIban(iban);
+        userPayeeEntity.setUserId(user_pk);
+        userPayeeEntity.setName(payeeName);
+
+        // validate iban
+        try {
+            logger.info("ready to validate iban");
+            IBANValidator.getInstance().validateIban(iban);
+            // valid
+        } catch (IbanFormatException |
+                InvalidCheckDigitException |
+                UnsupportedCountryException e) {
+            throw FaultFactory.throwFaultException("Iban is not valid!");
+            // invalid
+        }
+
+        // validate duplicate payee in db
+        logger.info("ready to validate duplicate payee");
+        UserPayeeEntity result = userPayeeDao.checkDuplicatePayee(userPayeeEntity);
+        logger.info("do we have duplicate result? " + result.getName());
+        if(result != null) {
+            throw FaultFactory.throwFaultException("duplicate payee detected! ");
+        }
+
+        // add payee to db
+        try {
+            logger.info("ready to add payee to db");
+            userPayeeDao.addPayee(userPayeeEntity);
+
+        } catch (Exception E) {
+            FaultFactory.throwFaultException("Fail to add payee to db");
+        }
+
     }
 
     @Override

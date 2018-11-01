@@ -75,7 +75,7 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     }
 
     @Override
-    public void getPayees(UserCustomerGetPayeesRequest request, StreamObserver<rpc.Response> responseObserver) {
+    public void getPayees(UserCustomerGetPayeesRequest request, StreamObserver<Response> responseObserver) {
         Long id = request.getUserPk();
 
         try {
@@ -90,5 +90,25 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
         }
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void addPayee(UserCustomerAddPayeeRequest request, StreamObserver<Response> responseObserver) {
+       Long user_pk = request.getUserPk();
+       String name = request.getName();
+       String iban = request.getIban();
+
+       try {
+            UserCustomerService.getInstance().addPayee(user_pk, name, iban);
+           responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+                   .build());
+
+       } catch (Exception E) {
+           responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+                   .build());
+       }
+        responseObserver.onCompleted();
+    }
+
+
 
 }

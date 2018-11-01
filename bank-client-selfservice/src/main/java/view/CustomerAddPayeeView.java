@@ -4,7 +4,9 @@
 
 package view;
 
+import model.UserPayeeModel;
 import net.miginfocom.swing.MigLayout;
+import service.impl.CustomerPayeeService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,21 +60,37 @@ public class CustomerAddPayeeView extends JFrame {
             return;
         }
         // IBAN validator
-        if(tf_payeeName.getText().trim().length() <= 0) {
+        if(tf_IBAN.getText().trim().length() <= 0) {
             JOptionPane.showMessageDialog(null,
                     "Please input your payee's IBAN",
                     "Error Message", JOptionPane.ERROR_MESSAGE);
-            tf_payeeName.grabFocus();
+            tf_IBAN.grabFocus();
             return;
-        } if(!tf_payeeName.getText().trim().matches("^[0-9A-Z]+$")) {
+        } if(!tf_IBAN.getText().trim().matches("^[0-9A-Z]+$")) {
             JOptionPane.showMessageDialog(null,
                     "IBAN should only contain capital letters and digits",
                     "Error Message", JOptionPane.ERROR_MESSAGE);
-            tf_payeeName.grabFocus();
+            tf_IBAN.grabFocus();
             return;
         }
         // add payee service
-
+        UserPayeeModel userPayeeModel = new UserPayeeModel();
+        userPayeeModel.setUserId(this.userId);
+        userPayeeModel.setIban(tf_IBAN.getText().trim());
+        userPayeeModel.setName(tf_payeeName.getText().trim());
+        try {
+            CustomerPayeeService.getInstance().addPayee(userPayeeModel);
+            JOptionPane.showMessageDialog(null,
+                    "add payee successful",
+                    "Info Message", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to add payee, due to " + E.getMessage() + "please contact with admin",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        this.dispose();
+        customerMainView.setVisible(true);
     }
 
     private void initComponents() {

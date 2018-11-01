@@ -7,7 +7,9 @@ import java.util.List;
 public interface IUserPayeeDao {
     List<UserPayeeEntity> getPayeeListById(Long userId);
 
-    UserPayeeEntity addPayee(Long userId, String payeeName, String iban);
+    void addPayee(UserPayeeEntity userPayeeEntity);
 
-    Integer removePayee(Long userId, String payeeName, String iban);
+    Integer removePayee(UserPayeeEntity userPayeeEntity);
+
+    UserPayeeEntity checkDuplicatePayee(UserPayeeEntity userPayeeEntity);
 }
