@@ -29,15 +29,15 @@ public class CustomerPayeeRpc {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
                 .usePlaintext().build();
         UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
-        logger.info(userCustomerGetPayeesRequest.getUserPk() + " is requesting to get PIN.");
+        logger.info(userCustomerGetPayeesRequest.getUserPk() + " is requesting to get payee list.");
 
         Response response = blockingStub.getPayees(userCustomerGetPayeesRequest);
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
-            logger.info(userCustomerGetPayeesRequest.getUserPk() + " requesting to get PIN is successful");
+            logger.info(userCustomerGetPayeesRequest.getUserPk() + " requesting to get payee list is successful");
             return response.getUserPayeesList();
         } else {
-            logger.info(userCustomerGetPayeesRequest.getUserPk() + " requesting to get PIN is failed due to " + response.getDescription());
+            logger.info(userCustomerGetPayeesRequest.getUserPk() + " requesting to get payee list is failed due to " + response.getDescription());
             throw new Exception(response.getDescription());
         }
     }

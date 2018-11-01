@@ -291,6 +291,7 @@ public class CustomerMainView extends JFrame {
         userPayeeModel.setPayee_pk(payee.getPayeePk());
         userPayeeModel.setName(payee.getName());
         userPayeeModel.setIban(payee.getIban());
+        userPayeeModel.setUserId(this.user_pk);
         int selection = JOptionPane.showConfirmDialog(
                 new JFrame(),"Are you sure to delete " + payee.getName() + " from your payee list?",
                 "Deletion Confirmation",
@@ -305,7 +306,7 @@ public class CustomerMainView extends JFrame {
                 initPayeeTable();
             } catch (Exception E) {
                 JOptionPane.showMessageDialog(null,
-                        "Fail to delete payee, please contact admin",
+                        "Fail to delete payee," + E.getMessage() + " please contact admin",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
             }

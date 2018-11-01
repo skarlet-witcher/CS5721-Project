@@ -63,6 +63,11 @@ public class UserPayeeDao implements IUserPayeeDao {
             Query query = session.createQuery("delete from UserPayeeEntity where id=? and userId=?");
             query.setParameter(0, payee_pk);
             query.setParameter(1, user_id);
+            query.executeUpdate();
+
+            Query query2 = session.createQuery("from UserPayeeEntity ");
+            UserPayeeEntity userPayeeEntity = (UserPayeeEntity) query2.uniqueResult();
+            session.refresh(userPayeeEntity);
             session.getTransaction().commit();
         } catch (Exception E) {
             E.printStackTrace();
@@ -75,7 +80,7 @@ public class UserPayeeDao implements IUserPayeeDao {
     public UserPayeeEntity checkDuplicatePayee(UserPayeeEntity userPayeeEntity) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("From UserPayeeEntity where name=? or iban=?");
+            Query query = session.createQuery("From UserPayeeEntity where name=? and iban=?");
             query.setParameter(0, userPayeeEntity.getName());
             query.setParameter(1, userPayeeEntity.getIban());
 

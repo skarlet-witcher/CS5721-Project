@@ -115,7 +115,7 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     public void removePayee(UserCustomerRemovePayeeRequest request, StreamObserver<Response> responseObserver) {
         Long payee_pk = request.getPayeePk();
         Long user_id = request.getUserPk();
-
+        logger.info("arrive at customer rpc");
         try {
             UserCustomerService.getInstance().removePayee(payee_pk, user_id);
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()

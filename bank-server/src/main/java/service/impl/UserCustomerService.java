@@ -141,9 +141,13 @@ public class UserCustomerService implements IUserCustomerService {
         }
 
         // validate duplicate payee in db
+        UserPayeeEntity result;
         logger.info("ready to validate duplicate payee");
-        UserPayeeEntity result = userPayeeDao.checkDuplicatePayee(userPayeeEntity);
-        logger.info("do we have duplicate result? " + result.getName());
+        try {
+             result = userPayeeDao.checkDuplicatePayee(userPayeeEntity);
+        } catch(Exception E) {
+            throw FaultFactory.throwFaultException("fail to check duplicate payee");
+        }
         if(result != null) {
             throw FaultFactory.throwFaultException("duplicate payee detected! ");
         }
