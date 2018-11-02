@@ -95,7 +95,7 @@ public class CustomerMainView extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
-    public CustomerMainView(long userId, Long user_pk, String firstName, Timestamp lastLoginTime, List<UserAccountsReply> accountList) {
+    public CustomerMainView(long userId, Long user_pk, String firstName, String lastLoginTime, List<UserAccountsReply> accountList) {
         initComponents();
         setDefaultVariables(userId, user_pk, firstName, lastLoginTime, accountList);
         initTextArea();
@@ -105,12 +105,12 @@ public class CustomerMainView extends JFrame {
         initPayeeTable();
     }
 
-    private void setDefaultVariables(long userId, long user_pk, String firstName, Timestamp lastLoginTime, List<UserAccountsReply> accountList) {
+    private void setDefaultVariables(long userId, long user_pk, String firstName, String lastLoginTime, List<UserAccountsReply> accountList) {
         this.userId = userId;
         this.user_pk = user_pk;
         this.accountList = accountList;
         this.lbl_nameField.setText(firstName);
-        this.lbl_lastLoginTime.setText(lastLoginTime.toString());
+        this.lbl_lastLoginTime.setText(lastLoginTime);
     }
 
     private void initAccountTable() {
