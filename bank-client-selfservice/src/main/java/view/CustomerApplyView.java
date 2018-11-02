@@ -691,7 +691,7 @@ public class CustomerApplyView extends JFrame {
                 "[]"));
 
             //---- lbl_parentUserID ----
-            lbl_parentUserID.setText("Parent's UserId");
+            lbl_parentUserID.setText("Parent's user ID");
             youngSaverAccountPanel.add(lbl_parentUserID, "cell 1 1");
 
             //---- tf_parentUserID ----
@@ -716,8 +716,7 @@ public class CustomerApplyView extends JFrame {
 
         //---- cb_cardTypeList ----
         cb_cardTypeList.setModel(new DefaultComboBoxModel<>(new String[] {
-            "Debit Card",
-            "Credit Card"
+            "Debit Card"
         }));
         cb_cardTypeList.setSelectedIndex(0);
         contentPane.add(cb_cardTypeList, "cell 2 8");

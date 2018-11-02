@@ -210,7 +210,6 @@ new FormModel {
 				"model": new javax.swing.DefaultComboBoxModel {
 					selectedItem: "Debit Card"
 					addElement( "Debit Card" )
-					addElement( "Credit Card" )
 				}
 				"selectedIndex": 0
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {

@@ -128,5 +128,23 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void transfer(UserCustomerTransferRequest request, StreamObserver<Response> responseObserver) {
+        Long payee_pk = request.getPayeePk();
+        Long user_pk = request.getUserPk();
+        Long account_pk = request.getAccountPk();
+        Double amount = request.getAmount();
+        Integer pin = request.getPin();
+
+        try {
+            // TODO transfer service
+
+        } catch (Exception E) {
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+                    .build());
+        }
+        responseObserver.onCompleted();
+    }
+
 
 }

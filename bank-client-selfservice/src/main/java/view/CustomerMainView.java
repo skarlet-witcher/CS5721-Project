@@ -13,6 +13,7 @@ import Const.UserStatusType;
 import model.UserModel;
 import model.UserPayeeModel;
 import net.miginfocom.swing.MigLayout;
+import org.hibernate.type.CurrencyType;
 import rpc.UserAccountsReply;
 import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
@@ -24,7 +25,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +34,8 @@ import java.util.List;
 public class CustomerMainView extends JFrame {
     private long userId;
     private long user_pk;
-    private List<UserAccountsReply> accountList = new ArrayList<>();
-    private List<UserPayeesReply> userPayeesReplies = new ArrayList<>();
+    private List<UserAccountsReply> accountList;
+    private List<UserPayeesReply> payeeList;
     private UserProfileReply userProfileReply;
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -78,18 +78,20 @@ public class CustomerMainView extends JFrame {
     private JTable table_payee_payeeList;
     private JPanel transferPanel;
     private JLabel label7;
-    private JComboBox<String> cb_payee_payeeList;
+    private JComboBox cb_payee_payeeList;
     private JLabel label8;
-    private JComboBox<String> cb_transfer_accountList;
+    private JComboBox cb_transfer_accountList;
     private JLabel label11;
-    private JTextField btn_transfer_balance2;
+    private JTextField tf_transfer_currency;
     private JLabel label10;
-    private JTextField btn_transfer_balance;
+    private JTextField tf_transfer_balance;
     private JLabel label9;
     private JTextField tf_transfer_amounts;
     private JLabel lbl_postScript;
     private JScrollPane scrollPane4;
     private JTextArea ta_postScript;
+    private JLabel lbl_transfer_PIN;
+    private JPasswordField pf_transfer_PIN;
     private JButton btn_transfer_transfer;
     private JButton btn_signout;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
@@ -97,15 +99,75 @@ public class CustomerMainView extends JFrame {
 
     public CustomerMainView(long userId, Long user_pk, String firstName, String lastLoginTime, List<UserAccountsReply> accountList) {
         initComponents();
-        setDefaultVariables(userId, user_pk, firstName, lastLoginTime, accountList);
-        initTextArea();
+        initVariables(userId, user_pk, firstName, lastLoginTime, accountList);
+        initHomePage();
+        initProfilePage();
+        initPayeePage();
+        initTransferPage();
+    }
+
+    private void initHomePage() {
         initAccountTable();
+    }
+
+    private void initProfilePage() {
         initProfileInfo();
+    }
+
+    private void initPayeePage() {
         initPayeeInfo();
         initPayeeTable();
     }
 
-    private void setDefaultVariables(long userId, long user_pk, String firstName, String lastLoginTime, List<UserAccountsReply> accountList) {
+    private void initTransactionPage() {
+        // To-Do
+    }
+
+    private void initTransferPage() {
+        initPayeeComboBox();
+        initAccountComboBox();
+        initCurrency();
+        initBalance();
+        initPostscriptTextField();
+    }
+
+    private void initCurrency() {
+        int accountIndex = cb_transfer_accountList.getSelectedIndex();
+        int currencyType = accountList.get(accountIndex).getCurrencyType();
+        String currency = CardCurrencyType.getCurrencyType(currencyType);
+        tf_transfer_currency.setText(currency);
+    }
+
+    private void initBalance() {
+        int accountIndex = cb_transfer_accountList.getSelectedIndex();
+        String balance = String.valueOf(accountList.get(accountIndex).getBalance());
+        tf_transfer_balance.setText(balance);
+    }
+
+    private void initAccountComboBox() {
+        cb_transfer_accountList.removeAllItems();
+        if(accountList.size() <= 0) {
+            cb_transfer_accountList.addItem("No account found.");
+            return;
+        }
+        for(UserAccountsReply userAccountsReply : accountList) {
+            String accountNum = String.valueOf(userAccountsReply.getAccountNumber());
+            cb_transfer_accountList.addItem(accountNum);
+        }
+    }
+
+    private void initPayeeComboBox() {
+        cb_payee_payeeList.removeAllItems();
+        if(payeeList.size() <= 0) {
+            cb_payee_payeeList.addItem("No payee found");
+            return;
+        }
+        for(UserPayeesReply userPayeesReply: payeeList) {
+            cb_payee_payeeList.addItem(userPayeesReply.getName());
+        }
+    }
+
+    private void initVariables(long userId, long user_pk, String firstName, String lastLoginTime, List<UserAccountsReply> accountList) {
         this.userId = userId;
         this.user_pk = user_pk;
         this.accountList = accountList;
@@ -127,7 +189,7 @@ public class CustomerMainView extends JFrame {
         }
     }
 
-    private void initTextArea() {
+    private void initPostscriptTextField() {
         ta_postScript.setDocument(new JTextFieldLimit(200));
     }
 
@@ -148,7 +210,7 @@ public class CustomerMainView extends JFrame {
         UserPayeeModel userPayeeModel = new UserPayeeModel();
         userPayeeModel.setUserId(this.user_pk);
         try {
-            userPayeesReplies = CustomerPayeeService.getInstance().getPayeeList(userPayeeModel);
+            payeeList = CustomerPayeeService.getInstance().getPayeeList(userPayeeModel);
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
                     "Fail to acquire user payee, please contact admin",
@@ -161,7 +223,7 @@ public class CustomerMainView extends JFrame {
         // init payee table
         DefaultTableModel payeeTableModel = (DefaultTableModel)table_payee_payeeList.getModel();
         clearTable(payeeTableModel);
-        for(UserPayeesReply userPayeesReply: userPayeesReplies) {
+        for(UserPayeesReply userPayeesReply: payeeList) {
             payeeTableModel.addRow(new Object[]{
                     userPayeesReply.getIban(),
                     userPayeesReply.getName()
@@ -274,11 +336,6 @@ public class CustomerMainView extends JFrame {
         initPayeeTable();
     }
 
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-
     private void btn_payee_removeActionPerformed(ActionEvent e) {
         if(table_payee_payeeList.getSelectedRow() <= 0) {
             JOptionPane.showMessageDialog(null,
@@ -287,7 +344,7 @@ public class CustomerMainView extends JFrame {
             return;
         }
         int index = table_payee_payeeList.getSelectedRow();
-        UserPayeesReply payee = userPayeesReplies.get(index);
+        UserPayeesReply payee = payeeList.get(index);
         UserPayeeModel userPayeeModel = new UserPayeeModel();
         userPayeeModel.setPayee_pk(payee.getPayeePk());
         userPayeeModel.setName(payee.getName());
@@ -311,6 +368,34 @@ public class CustomerMainView extends JFrame {
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
             }
+        }
+    }
+
+    private void cb_transfer_accountListActionPerformed(ActionEvent e) {
+        initCurrency();
+        initBalance();
+    }
+
+    public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
+
+    private void btn_transfer_transferActionPerformed(ActionEvent e) {
+        // amounts validator
+        int balance = Integer.parseInt(tf_transfer_balance.getText().trim());
+        Double amounts = Double.parseDouble(tf_transfer_amounts.getText().trim());
+        if(balance <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Not enough balance to be transferred.",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(amounts > balance) {
+            JOptionPane.showMessageDialog(null,
+                    "The amounts should be less or equal to the balance",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
         }
     }
 
@@ -355,18 +440,20 @@ public class CustomerMainView extends JFrame {
         table_payee_payeeList = new JTable();
         transferPanel = new JPanel();
         label7 = new JLabel();
-        cb_payee_payeeList = new JComboBox<>();
+        cb_payee_payeeList = new JComboBox();
         label8 = new JLabel();
-        cb_transfer_accountList = new JComboBox<>();
+        cb_transfer_accountList = new JComboBox();
         label11 = new JLabel();
-        btn_transfer_balance2 = new JTextField();
+        tf_transfer_currency = new JTextField();
         label10 = new JLabel();
-        btn_transfer_balance = new JTextField();
+        tf_transfer_balance = new JTextField();
         label9 = new JLabel();
         tf_transfer_amounts = new JTextField();
         lbl_postScript = new JLabel();
         scrollPane4 = new JScrollPane();
         ta_postScript = new JTextArea();
+        lbl_transfer_PIN = new JLabel();
+        pf_transfer_PIN = new JPasswordField();
         btn_transfer_transfer = new JButton();
         btn_signout = new JButton();
 
@@ -682,11 +769,6 @@ public class CustomerMainView extends JFrame {
                 label7.setText("Payee:");
                 label7.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                 transferPanel.add(label7, "cell 1 0");
-
-                //---- cb_payee_payeeList ----
-                cb_payee_payeeList.setModel(new DefaultComboBoxModel<>(new String[] {
-                    "Choose Your Payee"
-                }));
                 transferPanel.add(cb_payee_payeeList, "cell 2 0");
 
                 //---- label8 ----
@@ -695,9 +777,7 @@ public class CustomerMainView extends JFrame {
                 transferPanel.add(label8, "cell 1 1");
 
                 //---- cb_transfer_accountList ----
-                cb_transfer_accountList.setModel(new DefaultComboBoxModel<>(new String[] {
-                    "Select Your Account"
-                }));
+                cb_transfer_accountList.addActionListener(e -> cb_transfer_accountListActionPerformed(e));
                 transferPanel.add(cb_transfer_accountList, "cell 2 1");
 
                 //---- label11 ----
@@ -705,18 +785,18 @@ public class CustomerMainView extends JFrame {
                 label11.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                 transferPanel.add(label11, "cell 1 2");
 
-                //---- btn_transfer_balance2 ----
-                btn_transfer_balance2.setEditable(false);
-                transferPanel.add(btn_transfer_balance2, "cell 2 2");
+                //---- tf_transfer_currency ----
+                tf_transfer_currency.setEditable(false);
+                transferPanel.add(tf_transfer_currency, "cell 2 2");
 
                 //---- label10 ----
                 label10.setText("Balance");
                 label10.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                 transferPanel.add(label10, "cell 1 3");
 
-                //---- btn_transfer_balance ----
-                btn_transfer_balance.setEditable(false);
-                transferPanel.add(btn_transfer_balance, "cell 2 3");
+                //---- tf_transfer_balance ----
+                tf_transfer_balance.setEditable(false);
+                transferPanel.add(tf_transfer_balance, "cell 2 3");
 
                 //---- label9 ----
                 label9.setText("Amounts");
@@ -739,9 +819,16 @@ public class CustomerMainView extends JFrame {
                 }
                 transferPanel.add(scrollPane4, "cell 2 5");
 
+                //---- lbl_transfer_PIN ----
+                lbl_transfer_PIN.setText("PIN");
+                lbl_transfer_PIN.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                transferPanel.add(lbl_transfer_PIN, "cell 1 6");
+                transferPanel.add(pf_transfer_PIN, "cell 2 6");
+
                 //---- btn_transfer_transfer ----
                 btn_transfer_transfer.setText("Transfer");
                 btn_transfer_transfer.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                btn_transfer_transfer.addActionListener(e -> btn_transfer_transferActionPerformed(e));
                 transferPanel.add(btn_transfer_transfer, "cell 2 7");
             }
             customerTabPane.addTab("Transfer", transferPanel);

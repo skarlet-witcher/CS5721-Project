@@ -59,10 +59,10 @@ public class UserCustomerRpc {
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
-            logger.info(userCustomerGetProfileRequest.getUserPk() + " get accounts successful.");
+            logger.info(userCustomerGetProfileRequest.getUserPk() + " get user profile successful.");
             return response.getUserProfile();
         } else {
-            logger.info(userCustomerGetProfileRequest.getUserPk() + " fail to get accounts due to " + response.getDescription());
+            logger.info(userCustomerGetProfileRequest.getUserPk() + " fail to get user profile due to " + response.getDescription());
             throw new Exception(response.getDescription());
         }
     }
@@ -80,10 +80,32 @@ public class UserCustomerRpc {
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
-            logger.info(userCustomerEditProfileRequest.getUserPk() + " get accounts successful.");
+            logger.info(userCustomerEditProfileRequest.getUserPk() + " edit profile successful.");
             return response;
         } else {
-            logger.info(userCustomerEditProfileRequest.getUserPk() + " fail to get accounts due to " + response.getDescription());
+            logger.info(userCustomerEditProfileRequest.getUserPk() + " fail to edit profile due to " + response.getDescription());
+            throw new Exception(response.getDescription());
+        }
+    }
+
+    public Response transfer(UserCustomerTransferRequest userCustomerTransferRequest) throws Exception {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
+                .usePlaintext().build();
+        UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
+
+        logger.info(userCustomerTransferRequest.getUserPk() + " is requesting to transfer.");
+
+        Response response = blockingStub.transfer(userCustomerTransferRequest);
+
+        logger.info("check the response: " + response.getUserAccountsList().size());
+
+        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
+            logger.info(userCustomerTransferRequest.getUserPk() + " transfer successful.");
+            return response;
+        } else {
+            logger.info(userCustomerTransferRequest.getUserPk() + " fail to transfer due to " + response.getDescription());
             throw new Exception(response.getDescription());
         }
     }
