@@ -116,6 +116,7 @@ public class CustomerMainView extends JFrame {
     private void initAccountTable() {
         System.out.println("front-end: check the size of result: " + accountList.size());
         DefaultTableModel accountListModel = (DefaultTableModel)table_home_accountTable.getModel();
+        clearTable(accountListModel);
         for(UserAccountsReply Account: this.accountList) {
             accountListModel.addRow(new Object[]{
                     Account.getAccountNumber(),
@@ -159,7 +160,7 @@ public class CustomerMainView extends JFrame {
         initPayeeInfo();
         // init payee table
         DefaultTableModel payeeTableModel = (DefaultTableModel)table_payee_payeeList.getModel();
-        clearPayeeTable(payeeTableModel);
+        clearTable(payeeTableModel);
         for(UserPayeesReply userPayeesReply: userPayeesReplies) {
             payeeTableModel.addRow(new Object[]{
                     userPayeesReply.getIban(),
@@ -169,7 +170,7 @@ public class CustomerMainView extends JFrame {
         return;
     }
 
-    private void clearPayeeTable(DefaultTableModel payeeTableModel) {
+    private void clearTable(DefaultTableModel payeeTableModel) {
         int rowCount = payeeTableModel.getRowCount();
         for (int i = rowCount - 1; i >= 0; i--) {
             payeeTableModel.removeRow(i);
@@ -594,8 +595,6 @@ public class CustomerMainView extends JFrame {
                     //---- table_transaction_accountTable ----
                     table_transaction_accountTable.setModel(new DefaultTableModel(
                         new Object[][] {
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
                         },
                         new String[] {
                             "Date", "Details", "Debit", "Credit", "Balance"

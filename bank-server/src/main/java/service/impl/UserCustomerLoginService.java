@@ -2,6 +2,7 @@ package service.impl;
 
 import Const.SysMailTemplateType;
 import Const.UserOperateStatusType;
+import Const.UserOperateType;
 import Const.UserStatusType;
 import dao.IUserDao;
 import dao.IUserHistoryDao;
@@ -89,6 +90,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
                 }
                 Integer executeResult = userDao.updateUserPinDigitById(user.getId(), digitsInInteger.toString());
                 if (executeResult >= 1) {
+                    operationHistoryService.addNewUserLoginReqHistory(user.getId(), UserOperateStatusType.SUCCESS);
                     return userLoginReqBuilder.build();
                 }
                 throw FaultFactory.throwFaultException();
@@ -106,6 +108,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
     public UserLoginReply LoginByUserIdAndPin(Long userId, Map<Integer, Integer> pin) throws Exception {
         UserEntity userEntity = userDao.LoginByUserIdAndPin(userId, pin);
         if (userEntity != null) {
+            operationHistoryService.addNewUserLoginHistory(userEntity.getId(), UserOperateType.LOGIN, UserOperateStatusType.SUCCESS);
             UserLoginReply.Builder loginReplyBuilder = UserLoginReply.newBuilder();
             loginReplyBuilder.setUserPk(userEntity.getId());
             loginReplyBuilder.setUserId(userEntity.getUserId());
