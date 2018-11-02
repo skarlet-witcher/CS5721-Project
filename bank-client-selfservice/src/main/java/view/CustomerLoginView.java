@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -98,20 +99,107 @@ public class CustomerLoginView extends JFrame {
     }
 
     private void btn_loginActionPerformed(ActionEvent e) {
+        // useId validator
         if(tf_userId.getText().length() <= 0) {
-            try {
                 JOptionPane.showMessageDialog(null,
                         "Please input your User ID",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
-            } catch (Exception E) {
+
+        }
+        if(!tf_userId.getText().trim().matches("^[0-9]*$")) {
+            JOptionPane.showMessageDialog(null,
+                    "The user id should be numeric",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            tf_userId.grabFocus();
+            return;
+        }
+
+        if(panel_dob.isVisible()) {
+            // date of birth validator
+
+            // day of dob validator
+            if(tf_day.getText().trim().length() <= 0) {
                 JOptionPane.showMessageDialog(null,
-                        "Please input valid User ID",
+                        "Please input your day of your date of birth",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_day.grabFocus();
                 return;
             }
-        }
-        if(panel_dob.isVisible()) {
+            if(!tf_day.getText().trim().matches("^[1-9]*$")) {
+                JOptionPane.showMessageDialog(null,
+                        "The day of the date of birth should be numeric",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_day.grabFocus();
+                return;
+            }
+            if(Integer.parseInt(tf_day.getText().trim()) > 31 || Integer.parseInt(tf_day.getText().trim()) < 1) {
+                JOptionPane.showMessageDialog(null,
+                        "The ranage of day of the date of birth should be 1 to 31",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_day.grabFocus();
+                return;
+            }
+            if(tf_day.getText().trim().length() == 1) {
+                tf_day.setText("0" + tf_day.getText());
+            }
+
+            // month of dob validator
+            if(tf_month.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your month of your date of birth",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_month.grabFocus();
+                return;
+            }
+            if(!tf_month.getText().trim().matches("^[0-9]*$")) {
+                JOptionPane.showMessageDialog(null,
+                        "The month of your date of birth should be numeric",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_month.grabFocus();
+                return;
+            }
+            if(Integer.parseInt(tf_month.getText().trim()) > 12 || Integer.parseInt(tf_month.getText().trim()) < 1) {
+                JOptionPane.showMessageDialog(null,
+                        "The ranage of month of the date of birth should be 1 to 12",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_month.grabFocus();
+                return;
+            }
+            if(tf_month.getText().trim().length() == 1) {
+                tf_month.setText("0" + tf_month.getText());
+            }
+
+            //  year of the date or birth validator
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            if(tf_year.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your year of the date of birth",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_year.grabFocus();
+                return;
+            } if(!tf_year.getText().trim().matches("^[0-9]*$")) {
+                JOptionPane.showMessageDialog(null,
+                        "year of the date of brith should only contain numbers",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_year.grabFocus();
+                return;
+            }
+            if(tf_year.getText().length() < 4) {
+                JOptionPane.showMessageDialog(null,
+                        "The year of date of birth should be four digits",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_year.grabFocus();
+                return;
+            }
+            if(Integer.parseInt(tf_year.getText().trim()) > currentYear) {
+                JOptionPane.showMessageDialog(null,
+                        "The year of date of birth should be less or equal to current year",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_year.grabFocus();
+                return;
+            }
+
             Long userId = Long.parseLong(tf_userId.getText().trim());
             int day = Integer.parseInt(tf_day.getText());
             int month = Integer.parseInt(tf_month.getText());
@@ -137,6 +225,22 @@ public class CustomerLoginView extends JFrame {
             new CustomerPINView(userId, pin1, pin2, pin3).run();
         }
         if(panel_contactNum.isVisible()) {
+            // contact number validator
+            if(tf_contactNum.getText().trim().length() <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your contact number",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_contactNum.grabFocus();
+                return;
+            }
+            if(!tf_contactNum.getText().trim().matches("^[0-9]*$")) {
+                JOptionPane.showMessageDialog(null,
+                        "The contact number must be numeric.",
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                tf_contactNum.grabFocus();
+                return;
+            }
+
             Long userId = Long.parseLong(tf_userId.getText().trim());
             String phoneNumLast4 = tf_contactNum.getText().trim();
             int pin1;
