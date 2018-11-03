@@ -11,4 +11,10 @@ public interface IUserAccountDao {
 
     List<UserAccountEntity> getUserAccountByUserId(Long userId);
 
+    UserAccountEntity getUserAccountByIBAN(String iban);
+
+    UserAccountEntity getUserAccountByPK(Long id);
+
+    Integer updateUserAccountByBalanceAndPk(Double balance, Long account_pk);
+
 }

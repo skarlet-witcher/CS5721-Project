@@ -76,4 +76,62 @@ public class UserAccountDao implements IUserAccountDao {
         }
     }
 
+    @Override
+    public UserAccountEntity getUserAccountByIBAN(String iban) {
+        try {
+            session.getTransaction().begin();
+            String hql ="from UserAccountEntity where iban=?";
+            Query query = session.createQuery(hql);
+            query.setParameter(0, iban);
+            UserAccountEntity result = (UserAccountEntity)query.uniqueResult();
+            session.getTransaction().commit();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Rollback in case of an error occurred.
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
+    public UserAccountEntity getUserAccountByPK(Long id) {
+        try {
+            session.getTransaction().begin();
+            String hql ="from UserAccountEntity where id=?";
+            Query query = session.createQuery(hql);
+            query.setParameter(0, id);
+            UserAccountEntity result = (UserAccountEntity)query.uniqueResult();
+            session.getTransaction().commit();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Rollback in case of an error occurred.
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
+    public Integer updateUserAccountByBalanceAndPk(Double balance, Long account_pk) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("update UserAccountEntity set balance = ? where id=?");
+            query.setParameter(0, balance).setParameter(1, account_pk);
+            int updateRows = query.executeUpdate();
+            session.getTransaction().commit();
+
+            // refresh entity for updating the data in the session
+            Query query2 = session.createQuery("from UserAccountEntity where id=?");
+            query2.setParameter(0, account_pk);
+            UserAccountEntity result = (UserAccountEntity) query2.uniqueResult();
+            session.refresh(result);
+            return updateRows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
 }

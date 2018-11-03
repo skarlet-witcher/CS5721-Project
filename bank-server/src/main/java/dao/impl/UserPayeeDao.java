@@ -42,6 +42,24 @@ public class UserPayeeDao implements IUserPayeeDao {
     }
 
     @Override
+    public UserPayeeEntity getPayeeByPK(Long payee_pk) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("From UserPayeeEntity where id=?");
+            query.setParameter(0, payee_pk);
+
+            UserPayeeEntity result = (UserPayeeEntity)query.uniqueResult();
+            session.getTransaction().commit();
+            return result;
+        } catch (Exception E) {
+            E.printStackTrace();
+            // Rollback in case of an error occurred.
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
     public void addPayee(UserPayeeEntity userPayeeEntity) {
         try {
             session.getTransaction().begin();

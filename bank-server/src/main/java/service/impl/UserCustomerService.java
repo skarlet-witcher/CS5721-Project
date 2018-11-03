@@ -9,6 +9,7 @@ import dao.impl.UserPayeeDao;
 import entity.UserAccountEntity;
 import entity.UserEntity;
 import entity.UserPayeeEntity;
+import jdk.javadoc.internal.doclets.toolkit.util.JavaScriptScanner;
 import org.iban4j.*;
 import rpc.UserAccountsReply;
 import rpc.UserCustomerGrpc;
@@ -186,4 +187,46 @@ public class UserCustomerService implements IUserCustomerService {
 
 
     }
+
+    @Override
+    public void transfer(Long payee_pk, Long user_pk, Long account_pk, Double amount, String pin) throws Exception {
+        UserEntity result_pin = new UserEntity();
+        try {
+            // validate pin
+            result_pin = userdao.selectUserByIdAndPin(user_pk, pin);
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException("Fail to check pin before transfer");
+        }
+        if(result_pin == null) {
+            throw FaultFactory.throwFaultException("Pin is not correct before transfer");
+        }
+        UserAccountEntity userAccountEntity;
+        int updateRows = 0;
+        try {
+            userAccountEntity = userAccountDao.getUserAccountByPK(user_pk);
+            Double currentBalance = userAccountEntity.getBalance() - amount;
+            updateRows = userAccountDao.updateUserAccountByBalanceAndPk(currentBalance, account_pk);
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException("fail to update balance in your account");
+        }
+        if(updateRows <= 0) {
+            throw FaultFactory.throwFaultException("fail to update balance in your account");
+        }
+
+        UserPayeeEntity result_payee;
+        try {
+            // validate type of iban (created from out bank or other bank)
+            result_payee = userPayeeDao.getPayeeByPK(payee_pk);
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException("fail to check type of iban before transfer");
+        }
+
+        if(result_payee != null) {
+            // local iban
+
+        } else {
+            // external iban
+        }
+    }
+
 }
