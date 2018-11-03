@@ -4,7 +4,10 @@
 
 package view;
 
+import model.StaffLoginModel;
 import net.miginfocom.swing.MigLayout;
+import service.IStaffLoginService;
+import service.impl.StaffLoginService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +23,21 @@ public class StaffLoginView extends JFrame {
     }
 
     private void btn_loginActionPerformed(ActionEvent e) {
-        this.dispose();
-        new StaffMainView(Long.parseLong(tf_staffId.getText().trim())).run();
+        try {
+            long staffId = Long.parseLong(tf_staffId.getText().trim());
+            String password = String.valueOf(pf_pwd.getPassword());
+            StaffLoginModel staffLoginModel = new StaffLoginModel(staffId, password);
+            boolean isValidStaff = StaffLoginService.getInstance().staffLogin(staffLoginModel);
+            if(isValidStaff){
+                new StaffMainView(staffId).run();
+                this.dispose();
+            }
+
+        }catch (Exception e1){
+            JOptionPane.showMessageDialog(null,
+                    "Please input a valid combination of Staff ID and password.",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void initComponents() {

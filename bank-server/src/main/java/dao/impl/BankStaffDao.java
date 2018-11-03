@@ -35,6 +35,19 @@ public class BankStaffDao implements IBankStaffDao {
 
     @Override
     public BankStaffEntity selectStaffByIdAndPassword(Long staffId, String password) {
-        return null;
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("from BankStaffEntity where staffId = ? and password = ? ");
+            query.setParameter(0, staffId).setParameter(1,password);
+
+            BankStaffEntity bankStaffEntity = (BankStaffEntity) query.setMaxResults(1).uniqueResult();
+
+            session.getTransaction().commit();
+            return bankStaffEntity;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
     }
 }
