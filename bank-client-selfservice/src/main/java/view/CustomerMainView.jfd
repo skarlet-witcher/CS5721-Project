@@ -408,13 +408,8 @@ new FormModel {
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 1 5"
 					} )
-					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-						name: "scrollPane4"
-						"minimumSize": new java.awt.Dimension( 16, 80 )
-						add( new FormComponent( "javax.swing.JTextArea" ) {
-							name: "ta_postScript"
-							"minimumSize": new java.awt.Dimension( 0, 30 )
-						} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "tf_transfer_postScript"
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 2 5"
 					} )

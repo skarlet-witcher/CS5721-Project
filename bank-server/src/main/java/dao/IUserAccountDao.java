@@ -17,4 +17,6 @@ public interface IUserAccountDao {
 
     Integer updateUserAccountByBalanceAndPk(Double balance, Long account_pk);
 
+    Integer updateUserAccountByBalanceAndIban(Double balance, String iban);
+
 }

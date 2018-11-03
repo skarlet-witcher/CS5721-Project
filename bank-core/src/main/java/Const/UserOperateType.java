@@ -10,4 +10,6 @@ public class UserOperateType {
     public static final int LOGIN = 6;
     public static final int CREATE_ACCOUNT = 7;
     public static final int REMOVE_ACCOUNT = 8;
+
+
 }

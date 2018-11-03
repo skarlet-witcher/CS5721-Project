@@ -181,6 +181,9 @@ message UserCustomerTransferRequest {
     int64 payee_pk = 3;
     double amount = 4;
     int32 pin = 5;
+    string postScript = 6;
+    int32 currencyType = 7;
+    int32 operateSource = 8;
 }
 
 message Response {

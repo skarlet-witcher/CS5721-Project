@@ -1,20 +1,26 @@
 package service.impl;
 
+import Const.UserOperateSourceType;
+import Const.UserOperateStatusType;
+import Const.UserOperateType;
 import dao.IUserAccountDao;
 import dao.IUserDao;
+import dao.IUserHistoryDao;
 import dao.IUserPayeeDao;
 import dao.impl.UserAccountDao;
 import dao.impl.UserDao;
+import dao.impl.UserHistoryDao;
 import dao.impl.UserPayeeDao;
 import entity.UserAccountEntity;
 import entity.UserEntity;
+import entity.UserHistoryEntity;
 import entity.UserPayeeEntity;
-import jdk.javadoc.internal.doclets.toolkit.util.JavaScriptScanner;
 import org.iban4j.*;
 import rpc.UserAccountsReply;
 import rpc.UserCustomerGrpc;
 import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
+import service.IUserCustomerHistoryService;
 import service.IUserCustomerService;
 import util.FaultFactory;
 import util.IBANValidator;
@@ -29,6 +35,7 @@ public class UserCustomerService implements IUserCustomerService {
     private IUserAccountDao userAccountDao = UserAccountDao.getInstance();
     private IUserDao userdao = UserDao.getInstance();
     private IUserPayeeDao userPayeeDao = UserPayeeDao.getInstance();
+    private IUserCustomerHistoryService userCustomerHistoryService = UserCustomerHistoryService.getInstance();
     private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
 
     public static UserCustomerService getInstance() {
@@ -189,7 +196,7 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public void transfer(Long payee_pk, Long user_pk, Long account_pk, Double amount, String pin) throws Exception {
+    public void transfer(Long payee_pk, Long user_pk, Long account_pk, Double amount, String pin, String postScript, int currencyType, int operateSource) throws Exception {
         UserEntity result_pin = new UserEntity();
         try {
             // validate pin
@@ -223,10 +230,18 @@ public class UserCustomerService implements IUserCustomerService {
 
         if(result_payee != null) {
             // local iban
+            try {
+                userAccountDao.updateUserAccountByBalanceAndIban(amount, result_payee.getIban());
+            } catch (Exception E) {
+                throw FaultFactory.throwFaultException("Fail to update balance of local account");
+            }
 
-        } else {
-            // external iban
+
         }
+        // update in user history
+        Double balance = userAccountEntity.getBalance();
+        userCustomerHistoryService.addNewTransferHistory(user_pk, account_pk, payee_pk, postScript,
+                balance, amount, currencyType, UserOperateType.TRANSFER , operateSource, UserOperateStatusType.SUCCESS);
     }
 
 }

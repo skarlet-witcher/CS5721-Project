@@ -6,10 +6,7 @@ package view;
 
 import java.awt.event.*;
 
-import Const.CardCurrencyType;
-import Const.UserAccountType;
-import Const.UserGenderType;
-import Const.UserStatusType;
+import Const.*;
 import model.UserModel;
 import model.UserPayeeModel;
 import net.miginfocom.swing.MigLayout;
@@ -19,6 +16,7 @@ import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
 import service.impl.CustomerPayeeService;
 import service.impl.CustomerProfileService;
+import service.impl.CustomerTransferService;
 import util.JTextFieldLimit;
 
 import javax.swing.*;
@@ -88,8 +86,7 @@ public class CustomerMainView extends JFrame {
     private JLabel label9;
     private JTextField tf_transfer_amounts;
     private JLabel lbl_postScript;
-    private JScrollPane scrollPane4;
-    private JTextArea ta_postScript;
+    private JTextField tf_transfer_postScript;
     private JLabel lbl_transfer_PIN;
     private JPasswordField pf_transfer_PIN;
     private JButton btn_transfer_transfer;
@@ -190,7 +187,7 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initPostscriptTextField() {
-        ta_postScript.setDocument(new JTextFieldLimit(200));
+        tf_transfer_postScript.setDocument(new JTextFieldLimit(200));
     }
 
     private void initProfileInfo() {
@@ -385,6 +382,12 @@ public class CustomerMainView extends JFrame {
         // amounts validator
         int balance = Integer.parseInt(tf_transfer_balance.getText().trim());
         Double amounts = Double.parseDouble(tf_transfer_amounts.getText().trim());
+        String postScript = tf_transfer_postScript.getText();
+        Long account_pk = accountList.get(cb_accountList.getSelectedIndex()).getAccountPk();
+        Long payee_pk = payeeList.get(cb_payee_payeeList.getSelectedIndex()).getPayeePk();
+        int pin = Integer.parseInt(new String(pf_transfer_PIN.getPassword()));
+        int currencyType = accountList.get(cb_accountList.getSelectedIndex()).getCurrencyType();
+        int operateSource = UserOperateSourceType.SELF_SERVICE;
         if(balance <= 0) {
             JOptionPane.showMessageDialog(null,
                     "Not enough balance to be transferred.",
@@ -394,6 +397,17 @@ public class CustomerMainView extends JFrame {
         if(amounts > balance) {
             JOptionPane.showMessageDialog(null,
                     "The amounts should be less or equal to the balance",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            CustomerTransferService.getInstance().transfer(user_pk, account_pk, payee_pk, amounts, pin, postScript, currencyType, operateSource);
+            JOptionPane.showMessageDialog(null,
+                    "Transfer Successful",
+                    "Info Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch( Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to transfer due to " + E.getMessage(),
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -450,8 +464,7 @@ public class CustomerMainView extends JFrame {
         label9 = new JLabel();
         tf_transfer_amounts = new JTextField();
         lbl_postScript = new JLabel();
-        scrollPane4 = new JScrollPane();
-        ta_postScript = new JTextArea();
+        tf_transfer_postScript = new JTextField();
         lbl_transfer_PIN = new JLabel();
         pf_transfer_PIN = new JPasswordField();
         btn_transfer_transfer = new JButton();
@@ -808,16 +821,7 @@ public class CustomerMainView extends JFrame {
                 lbl_postScript.setText("Postscript");
                 lbl_postScript.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                 transferPanel.add(lbl_postScript, "cell 1 5");
-
-                //======== scrollPane4 ========
-                {
-                    scrollPane4.setMinimumSize(new Dimension(16, 80));
-
-                    //---- ta_postScript ----
-                    ta_postScript.setMinimumSize(new Dimension(0, 30));
-                    scrollPane4.setViewportView(ta_postScript);
-                }
-                transferPanel.add(scrollPane4, "cell 2 5");
+                transferPanel.add(tf_transfer_postScript, "cell 2 5");
 
                 //---- lbl_transfer_PIN ----
                 lbl_transfer_PIN.setText("PIN");

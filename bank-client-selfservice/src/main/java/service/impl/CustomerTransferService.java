@@ -17,13 +17,16 @@ public class CustomerTransferService implements ICustomerTransferService {
     }
 
     @Override
-    public void transfer(Long user_pk, Long account_pk, Long payee_pk, Double amount, int pin) throws Exception {
+    public void transfer(Long user_pk, Long account_pk, Long payee_pk, Double amount,
+                         int pin, String postScript, int currencyType, int operateSource) throws Exception {
         UserCustomerRpc.getInstance().transfer(
                 UserCustomerTransferRequest.newBuilder().setUserPk(user_pk)
                 .setAccountPk(account_pk)
                 .setAmount(amount)
                 .setPayeePk(payee_pk)
-                .setPin(pin).build()
+                .setOperateSource(operateSource)
+                        .setPostScript(postScript)
+                .setPin(pin).setCurrencyType(currencyType).build()
         );
     }
 }

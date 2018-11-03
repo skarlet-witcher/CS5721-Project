@@ -134,4 +134,26 @@ public class UserAccountDao implements IUserAccountDao {
         }
     }
 
+    @Override
+    public Integer updateUserAccountByBalanceAndIban(Double balance, String iban) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("update UserAccountEntity set balance = ? + balance where iban=?");
+            query.setParameter(0, balance).setParameter(1, iban);
+            int updateRows = query.executeUpdate();
+            session.getTransaction().commit();
+
+            // refresh entity for updating the data in the session
+            Query query2 = session.createQuery("from UserAccountEntity where iban=?");
+            query2.setParameter(0, iban);
+            UserAccountEntity result = (UserAccountEntity) query2.uniqueResult();
+            session.refresh(result);
+            return updateRows;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
 }

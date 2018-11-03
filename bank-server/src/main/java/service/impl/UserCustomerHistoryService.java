@@ -36,6 +36,7 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
      * if login failure, check if it is equals 3 times one day.
      *
      */
+    @Override
     public void addNewUserLoginReqHistory(Long userId, Integer status) {
         UserHistoryEntity historyEntity = new UserHistoryEntity();
         historyEntity.setUserId(userId);
@@ -48,7 +49,7 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
         operationHistoryDao.addOperationHistory(historyEntity);
         refreshUserLoginStatus(userId);
     }
-
+    @Override
     public void addNewUserLoginHistory(Long userId, Integer operateSource, Integer status) {
         UserHistoryEntity historyEntity = new UserHistoryEntity();
         historyEntity.setUserId(userId);
@@ -62,6 +63,7 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
         refreshUserLoginStatus(userId);
     }
 
+    @Override
     public void refreshUserLoginStatus(Long userId) {
         // check if its 3 times for login failure.
 
@@ -86,5 +88,24 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
         if (count >= 3) {
             userDao.updateUserStatusById(userId, UserStatusType.BLOCKED);
         }
+    }
+
+    @Override
+    public void addNewTransferHistory(Long user_pk, Long account_pk, Long payee_pk, String postScript, Double balance, Double amounts,
+                                      int currencyType, int operationType, int operateSource, int operateStatus) {
+        UserHistoryEntity userHistoryEntity = new UserHistoryEntity();
+        userHistoryEntity.setOperateNo(operationNoGenerator.generateOperationNo());
+        userHistoryEntity.setOperateType(operationType);
+        userHistoryEntity.setOperateTime(new Timestamp(new Date().getTime()));
+        userHistoryEntity.setOperateSource(operateSource);
+        userHistoryEntity.setAmount(amounts);
+        userHistoryEntity.setCurrencyType(currencyType);
+        userHistoryEntity.setBalance(balance);
+        userHistoryEntity.setDescription(postScript);
+        userHistoryEntity.setStatus(operateStatus);
+        userHistoryEntity.setUserId(user_pk);
+        userHistoryEntity.setToPayeeId(payee_pk);
+        userHistoryEntity.setAccountId(account_pk);
+        operationHistoryDao.addOperationHistory(userHistoryEntity);
     }
 }
