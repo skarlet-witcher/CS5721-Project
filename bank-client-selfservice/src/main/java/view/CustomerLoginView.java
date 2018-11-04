@@ -126,7 +126,7 @@ public class CustomerLoginView extends JFrame {
                 tf_day.grabFocus();
                 return;
             }
-            if(!tf_day.getText().trim().matches("^[1-9]*$")) {
+            if(!tf_day.getText().trim().matches("^[0-9]*$")) {
                 JOptionPane.showMessageDialog(null,
                         "The day of the date of birth should be numeric",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
