@@ -149,7 +149,7 @@ message UserCustomerEditProfileRequest {
 
 message UserCustomerGetTransactionsRequest {
     int64 user_pk = 1;
-    int32 filter_by_account = 2;
+    int64 filter_by_account = 2;
     int32 filter_by_date = 3;
 }
 
@@ -263,10 +263,10 @@ message UserTransactionsReply {
     int64 user_pk = 1;
     google.protobuf.Timestamp date = 2;
     string description = 3;
-    string debit = 4;
-    string credit = 5;
-    double balance = 6;
-    string transaction_no = 7;
+    double amount = 4;
+    double balance = 5;
+    string transaction_no = 6;
+    int32 operate_type = 7;
 }
 
 message UserPayeesReply {

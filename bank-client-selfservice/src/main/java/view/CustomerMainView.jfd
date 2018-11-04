@@ -215,11 +215,7 @@ new FormModel {
 				} ) {
 					name: "transactionPanel"
 					add( new FormComponent( "javax.swing.JComboBox" ) {
-						name: "cb_accountList"
-						"model": new javax.swing.DefaultComboBoxModel {
-							selectedItem: "Select Your Account"
-							addElement( "Select Your Account" )
-						}
+						name: "cb_transaction_accountList"
 						"font": new java.awt.Font( "Segoe UI", 0, 18 )
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 0 0"
@@ -228,8 +224,7 @@ new FormModel {
 						name: "cb_transaction_filter"
 						"font": new java.awt.Font( "Segoe UI", 0, 18 )
 						"model": new javax.swing.DefaultComboBoxModel {
-							selectedItem: "Select the time"
-							addElement( "Select the time" )
+							selectedItem: "Recent 7 days"
 							addElement( "Recent 7 days" )
 							addElement( "Recent 1 month" )
 							addElement( "Recent 6 months" )
@@ -242,11 +237,19 @@ new FormModel {
 						name: "scrollPane2"
 						add( new FormComponent( "javax.swing.JTable" ) {
 							name: "table_transaction_accountTable"
-							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+							"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+								add( new java.util.Vector {
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+									add( null )
+								} )
+							}, new java.util.Vector {
 								add( "Date" )
+								add( "Operation Type" )
 								add( "Details" )
-								add( "Debit" )
-								add( "Credit" )
+								add( "Amount" )
 								add( "Balance" )
 							}, new java.util.Vector {
 								add( null )

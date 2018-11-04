@@ -1,5 +1,9 @@
 package service;
 
+import entity.UserHistoryEntity;
+
+import java.util.List;
+
 public interface IUserCustomerHistoryService {
 
     void addNewUserLoginReqHistory(Long userId, Integer status);
@@ -9,4 +13,5 @@ public interface IUserCustomerHistoryService {
     void refreshUserLoginStatus(Long userId);
 
     void addNewTransferHistory(Long user_pk, Long account_pk, Long payee_pk, String postScript, Double balance, Double amounts, int currencyType, int operationType, int operateSource, int operateStatus);
+
 }

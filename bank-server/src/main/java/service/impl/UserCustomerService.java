@@ -3,6 +3,8 @@ package service.impl;
 import Const.UserOperateSourceType;
 import Const.UserOperateStatusType;
 import Const.UserOperateType;
+import Const.UserTransactionTimeFilter;
+import com.mysql.jdbc.BalanceStrategy;
 import dao.IUserAccountDao;
 import dao.IUserDao;
 import dao.IUserHistoryDao;
@@ -16,10 +18,7 @@ import entity.UserEntity;
 import entity.UserHistoryEntity;
 import entity.UserPayeeEntity;
 import org.iban4j.*;
-import rpc.UserAccountsReply;
-import rpc.UserCustomerGrpc;
-import rpc.UserPayeesReply;
-import rpc.UserProfileReply;
+import rpc.*;
 import service.IUserCustomerHistoryService;
 import service.IUserCustomerService;
 import util.FaultFactory;
@@ -35,6 +34,7 @@ public class UserCustomerService implements IUserCustomerService {
     private IUserAccountDao userAccountDao = UserAccountDao.getInstance();
     private IUserDao userdao = UserDao.getInstance();
     private IUserPayeeDao userPayeeDao = UserPayeeDao.getInstance();
+    private IUserHistoryDao userHistoryDao = UserHistoryDao.getInstance();
     private IUserCustomerHistoryService userCustomerHistoryService = UserCustomerHistoryService.getInstance();
     private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
 
@@ -242,6 +242,40 @@ public class UserCustomerService implements IUserCustomerService {
         Double balance = userAccountEntity.getBalance();
         userCustomerHistoryService.addNewTransferHistory(user_pk, account_pk, payee_pk, postScript,
                 balance, amount, currencyType, UserOperateType.TRANSFER , operateSource, UserOperateStatusType.SUCCESS);
+    }
+
+    @Override
+    public List<UserTransactionsReply> getTransaction(Long user_pk, Long account_pk, int date) {
+        List<UserTransactionsReply> userTransactionsReplies = new ArrayList<>();
+        List<UserHistoryEntity> userHistoryEntities = new ArrayList<>();
+        try {
+            if(date == UserTransactionTimeFilter.RECENT_7_DAYS) {
+                userHistoryEntities = userHistoryDao.getTransactionHistory7Days(user_pk, account_pk);
+            } else if(date == UserTransactionTimeFilter.RECENT_1_MONTH) {
+                userHistoryEntities = userHistoryDao.getTransactionHistory1Month(user_pk, account_pk);
+            } else if(date == UserTransactionTimeFilter.RECENT_6_MONTHS) {
+                userHistoryEntities = userHistoryDao.getTransactionHistory6Month(user_pk, account_pk);
+            } else if(date == UserTransactionTimeFilter.RECENT_1_YEAR) {
+                userHistoryEntities =
+                        userHistoryDao.getTransactionHistory1Year(user_pk, account_pk);
+            }
+            for(UserHistoryEntity userHistoryEntity: userHistoryEntities) {
+                UserTransactionsReply userTransactionsReply = UserTransactionsReply.newBuilder()
+                        .setUserPk(userHistoryEntity.getUserId())
+                        .setDate(TimestampConvertHelper.mysqlToRpc(userHistoryEntity.getOperateTime()))
+                        .setDescription(userHistoryEntity.getDescription())
+                        .setAmount(userHistoryEntity.getAmount())
+                        .setBalance(userHistoryEntity.getBalance())
+                        .setTransactionNo(userHistoryEntity.getOperateNo())
+                        .setOperateType(userHistoryEntity.getOperateType()).build();
+
+                userTransactionsReplies.add(userTransactionsReply);
+            }
+
+        } catch (Exception E) {
+            FaultFactory.throwFaultException("fail to get transaction");
+        }
+        return userTransactionsReplies;
     }
 
 }

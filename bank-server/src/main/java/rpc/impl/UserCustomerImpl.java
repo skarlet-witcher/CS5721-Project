@@ -140,7 +140,6 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
         int operateSource = request.getOperateSource();
 
         try {
-            // TODO transfer service
             UserCustomerService.getInstance().transfer(payee_pk, user_pk, account_pk, amount, pin, postScript, currencyType, operateSource);
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .build());
@@ -151,6 +150,28 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
         }
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void getTransactions(UserCustomerGetTransactionsRequest request,
+                                StreamObserver<Response> responseObserver) {
+        Long user_pk = request.getUserPk();
+        Long accountPk = request.getFilterByAccount();
+        int date = request.getFilterByDate();
+
+        try {
+            List<UserTransactionsReply> userTransactionsReplies = UserCustomerService.getInstance().getTransaction(user_pk, accountPk, date);
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+                    .addAllUserTransactions(userTransactionsReplies)
+                    .build());
+
+        } catch (Exception E) {
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+                    .build());
+        }
+        responseObserver.onCompleted();
+    }
+
+
 
 
 }

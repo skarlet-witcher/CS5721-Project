@@ -10,20 +10,21 @@ import Const.*;
 import model.UserModel;
 import model.UserPayeeModel;
 import net.miginfocom.swing.MigLayout;
-import org.hibernate.type.CurrencyType;
 import rpc.UserAccountsReply;
 import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
+import rpc.UserTransactionsReply;
 import service.impl.CustomerPayeeService;
 import service.impl.CustomerProfileService;
+import service.impl.CustomerTransactionService;
 import service.impl.CustomerTransferService;
 import util.JTextFieldLimit;
+import util.TimestampConvertHelper;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +35,7 @@ public class CustomerMainView extends JFrame {
     private long user_pk;
     private List<UserAccountsReply> accountList;
     private List<UserPayeesReply> payeeList;
+    private List<UserTransactionsReply> transactionList;
     private UserProfileReply userProfileReply;
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
@@ -64,7 +66,7 @@ public class CustomerMainView extends JFrame {
     private JButton btn_profile_revert;
     private JButton btn_profile_deleteAccount;
     private JPanel transactionPanel;
-    private JComboBox<String> cb_accountList;
+    private JComboBox cb_transaction_accountList;
     private JComboBox<String> cb_transaction_filter;
     private JScrollPane scrollPane2;
     private JTable table_transaction_accountTable;
@@ -99,8 +101,10 @@ public class CustomerMainView extends JFrame {
         initVariables(userId, user_pk, firstName, lastLoginTime, accountList);
         initHomePage();
         initProfilePage();
+        initTransactionPage();
         initPayeePage();
         initTransferPage();
+
     }
 
     private void initHomePage() {
@@ -117,15 +121,44 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initTransactionPage() {
-        // To-Do
+        initAccountComboBox(cb_transaction_accountList);
+        initTransactionInfo(cb_transaction_filter);
     }
 
     private void initTransferPage() {
         initPayeeComboBox();
-        initAccountComboBox();
+        initAccountComboBox(cb_transfer_accountList);
         initCurrency();
         initBalance();
         initPostscriptTextField();
+    }
+
+    private void initTransactionInfo(JComboBox cb_transaction_filter) {
+        Long accountPk = accountList.get(cb_transaction_accountList.getSelectedIndex()).getAccountPk();
+        int filter = cb_transaction_filter.getSelectedIndex();
+        try {
+            this.transactionList = CustomerTransactionService.getInstance().getTransaction(user_pk, accountPk, filter);
+            return;
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to get transaction list due to " + E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+        }
+        initTransactionTable();
+    }
+
+    private void initTransactionTable() {
+        DefaultTableModel transactionListModel = (DefaultTableModel)table_transaction_accountTable.getModel();
+        clearTable(transactionListModel);
+        for(UserTransactionsReply userTransactionsReply: this.transactionList) {
+            transactionListModel.addRow(new Object[]{
+                    TimestampConvertHelper.rpcToMysql(userTransactionsReply.getDate()),
+                    UserOperateType.getType(userTransactionsReply.getOperateType()),
+                    userTransactionsReply.getDescription(),
+                    userTransactionsReply.getAmount(),
+                    userTransactionsReply.getBalance()
+            });
+        }
     }
 
     private void initCurrency() {
@@ -141,15 +174,15 @@ public class CustomerMainView extends JFrame {
         tf_transfer_balance.setText(balance);
     }
 
-    private void initAccountComboBox() {
-        cb_transfer_accountList.removeAllItems();
+    private void initAccountComboBox(JComboBox accountComboBox) {
+        accountComboBox.removeAllItems();
         if(accountList.size() <= 0) {
-            cb_transfer_accountList.addItem("No account found.");
+            accountComboBox.addItem("No account found.");
             return;
         }
         for(UserAccountsReply userAccountsReply : accountList) {
             String accountNum = String.valueOf(userAccountsReply.getAccountNumber());
-            cb_transfer_accountList.addItem(accountNum);
+            accountComboBox.addItem(accountNum);
         }
     }
 
@@ -383,10 +416,10 @@ public class CustomerMainView extends JFrame {
         int balance = Integer.parseInt(tf_transfer_balance.getText().trim());
         Double amounts = Double.parseDouble(tf_transfer_amounts.getText().trim());
         String postScript = tf_transfer_postScript.getText();
-        Long account_pk = accountList.get(cb_accountList.getSelectedIndex()).getAccountPk();
+        Long account_pk = accountList.get(cb_transfer_accountList.getSelectedIndex()).getAccountPk();
         Long payee_pk = payeeList.get(cb_payee_payeeList.getSelectedIndex()).getPayeePk();
         int pin = Integer.parseInt(new String(pf_transfer_PIN.getPassword()));
-        int currencyType = accountList.get(cb_accountList.getSelectedIndex()).getCurrencyType();
+        int currencyType = accountList.get(cb_transfer_accountList.getSelectedIndex()).getCurrencyType();
         int operateSource = UserOperateSourceType.SELF_SERVICE;
         if(balance <= 0) {
             JOptionPane.showMessageDialog(null,
@@ -442,7 +475,7 @@ public class CustomerMainView extends JFrame {
         btn_profile_revert = new JButton();
         btn_profile_deleteAccount = new JButton();
         transactionPanel = new JPanel();
-        cb_accountList = new JComboBox<>();
+        cb_transaction_accountList = new JComboBox();
         cb_transaction_filter = new JComboBox<>();
         scrollPane2 = new JScrollPane();
         table_transaction_accountTable = new JTable();
@@ -671,17 +704,13 @@ public class CustomerMainView extends JFrame {
                     "[]" +
                     "[]"));
 
-                //---- cb_accountList ----
-                cb_accountList.setModel(new DefaultComboBoxModel<>(new String[] {
-                    "Select Your Account"
-                }));
-                cb_accountList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                transactionPanel.add(cb_accountList, "cell 0 0");
+                //---- cb_transaction_accountList ----
+                cb_transaction_accountList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                transactionPanel.add(cb_transaction_accountList, "cell 0 0");
 
                 //---- cb_transaction_filter ----
                 cb_transaction_filter.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                 cb_transaction_filter.setModel(new DefaultComboBoxModel<>(new String[] {
-                    "Select the time",
                     "Recent 7 days",
                     "Recent 1 month",
                     "Recent 6 months",
@@ -695,9 +724,10 @@ public class CustomerMainView extends JFrame {
                     //---- table_transaction_accountTable ----
                     table_transaction_accountTable.setModel(new DefaultTableModel(
                         new Object[][] {
+                            {null, null, null, null, null},
                         },
                         new String[] {
-                            "Date", "Details", "Debit", "Credit", "Balance"
+                            "Date", "Operation Type", "Details", "Amount", "Balance"
                         }
                     ));
                     table_transaction_accountTable.setMinimumSize(new Dimension(75, 200));

@@ -109,4 +109,26 @@ public class UserCustomerRpc {
             throw new Exception(response.getDescription());
         }
     }
+
+    public List<UserTransactionsReply> getTransactions(UserCustomerGetTransactionsRequest userCustomerGetTransactionsRequest) throws Exception {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
+                .usePlaintext().build();
+        UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
+
+        logger.info(userCustomerGetTransactionsRequest.getUserPk() + " is requesting to get transaction list.");
+
+        Response response = blockingStub.getTransactions(userCustomerGetTransactionsRequest);
+
+        logger.info("check the size of transaction list: " + response.getUserAccountsList().size());
+
+        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
+            logger.info(userCustomerGetTransactionsRequest.getUserPk() + " get transaction list successful.");
+            return response.getUserTransactionsList();
+        } else {
+            logger.info(userCustomerGetTransactionsRequest.getUserPk() + " fail to get transaction list due to " + response.getDescription());
+            throw new Exception(response.getDescription());
+        }
+    }
 }

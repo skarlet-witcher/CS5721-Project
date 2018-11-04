@@ -85,4 +85,88 @@ public class UserHistoryDao implements IUserHistoryDao {
             return null;
         }
     }
+
+    @Override
+    public List<UserHistoryEntity> getTransactionHistory7Days(Long user_pk, Long account_pk) {
+        try {
+            session.getTransaction().begin();
+
+            String dateFilter = "DATE_SUB(NOW(), INTERVAL 7 DAY)";
+
+            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and operateTime > ? and operateType >=0 and operateType <= 3");
+            query.setParameter(0, user_pk);
+            query.setParameter(1, account_pk);
+            query.setParameter(2, dateFilter);
+            session.getTransaction().commit();
+
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
+    public List<UserHistoryEntity> getTransactionHistory1Month(Long user_pk, Long account_pk) {
+        try {
+            session.getTransaction().begin();
+
+            String dateFilter = "DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+
+            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and operateTime > ? and operateType >= 0 and operateType <= 3");
+            query.setParameter(0, user_pk);
+            query.setParameter(1, account_pk);
+            query.setParameter(2, dateFilter);
+            session.getTransaction().commit();
+
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
+    public List<UserHistoryEntity> getTransactionHistory6Month(Long user_pk, Long account_pk) {
+        try {
+            session.getTransaction().begin();
+
+            String dateFilter = "DATE_SUB(NOW(), INTERVAL 6 MONTH)";
+
+            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and operateTime > ? and operateType >= 0 and operateType <= 3");
+            query.setParameter(0, user_pk);
+            query.setParameter(1, account_pk);
+            query.setParameter(2, dateFilter);
+            session.getTransaction().commit();
+
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
+    public List<UserHistoryEntity> getTransactionHistory1Year(Long user_pk, Long account_pk) {
+        try {
+            session.getTransaction().begin();
+
+            String dateFilter= "DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+
+            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and operateTime > ?  and operateType >= 0 and operateType <= 3");
+            query.setParameter(0, user_pk);
+            query.setParameter(1, account_pk);
+            query.setParameter(2, dateFilter);
+            session.getTransaction().commit();
+
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
 }

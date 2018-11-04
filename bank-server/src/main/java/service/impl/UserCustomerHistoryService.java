@@ -108,4 +108,5 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
         userHistoryEntity.setAccountId(account_pk);
         operationHistoryDao.addOperationHistory(userHistoryEntity);
     }
+
 }
