@@ -4,18 +4,89 @@
 
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
+import bankStaff_rpc.UserApplyArchiveEntitiesResponse;
+import net.miginfocom.swing.MigLayout;
+import util.TimestampConvertHelper;
+
 import javax.swing.*;
-import net.miginfocom.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * @author xiangkai22
  */
 public class StaffAddAccountInfoView extends JFrame {
-    public StaffAddAccountInfoView(long staffId) {
+    private long staffId;
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel lbl_firstName;
+    private JTextField tf_firstName;
+    private JPanel panel_studentAccount;
+    private JLabel lbl_graduateDate;
+    private JTextField tf_graduateDate;
+    private JLabel lbl_studentId;
+    private JTextField tf_studentId;
+    private JLabel lbl_schoolName;
+    private JTextField tf_schoolName;
+    private JLabel lbl_lastName;
+    private JTextField tf_lastName;
+    private JLabel lbl_gender;
+    private JTextField tf_gender;
+    private JLabel lbl_accountType;
+    private JTextField tf_accountType;
+    private JPanel panel_youngSaverAccount;
+    private JLabel lbl_parentUserId;
+    private JTextField tf_parentUserId;
+    private JLabel lbl_parentFirstName;
+    private JTextField tf_parentFirstName;
+    private JLabel lbl_parentLastName;
+    private JTextField tf_parentLastName;
+    private JLabel lbl_cardType;
+    private JTextField tf_cardType;
+    private JLabel lbl_dob;
+    private JTextField tf_dob;
+    private JLabel lbl_email;
+    private JTextField tf_email;
+    private JLabel lbl_address;
+    private JTextField tf_address;
+    private JLabel lbl_contactNum;
+    private JTextField tf_contactNum;
+    private JLabel lbl_applyTime;
+    private JTextField tf_applyTime;
+    private JLabel lbl_userId;
+    private JTextField tf_userId;
+    private JLabel lbl_status;
+    private JTextField tf_status;
+    private JButton btn_accept;
+    private JButton btn_decline;
+    private JButton btn_back;
+    public StaffAddAccountInfoView(long staffId, UserApplyArchiveEntitiesResponse userApplyArchiveEntitiesResponse) {
         initComponents();
+        fetchValueIntoTextField(userApplyArchiveEntitiesResponse);
         setStaffId(staffId);
+
+    }
+
+    public void fetchValueIntoTextField(UserApplyArchiveEntitiesResponse userApplyArchiveEntitiesResponse) {
+        UserApplyArchiveEntitiesResponse x = userApplyArchiveEntitiesResponse;
+        tf_firstName.setText(x.getFirstName());
+        tf_lastName.setText(x.getLastName());
+        tf_gender.setText(String.valueOf(x.getGender()));
+        tf_accountType.setText(String.valueOf(x.getAccountType()));
+        tf_cardType.setText(String.valueOf(x.getCardType()));
+        tf_dob.setText(TimestampConvertHelper.rpcToMysql(x.getBirthDate()).toString());
+        tf_email.setText(x.getEmail());
+        tf_address.setText(x.getAddress());
+        tf_contactNum.setText(x.getPhone());
+        tf_applyTime.setText(TimestampConvertHelper.rpcToMysql(x.getApplyTime()).toString());
+        tf_userId.setText(String.valueOf(x.getUserId()));
+        tf_graduateDate.setText(TimestampConvertHelper.rpcToMysql(x.getGraduateDate()).toString());
+        tf_studentId.setText(x.getStudentId());
+        tf_schoolName.setText(x.getUniversity());
+        tf_parentUserId.setText(String.valueOf(x.getParentUserId()));
+        tf_parentFirstName.setText(x.getParentFirstName());
+        tf_parentLastName.setText(x.getParentLastName());
+
+
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
@@ -84,31 +155,31 @@ public class StaffAddAccountInfoView extends JFrame {
         setTitle("Add Account Request Info");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[100:n,fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[100:n,fill]" +
-            "[fill]",
-            // rows
-            "[50:n]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[100:n]"));
+                "hidemode 3",
+                // columns
+                "[100:n,fill]" +
+                        "[fill]" +
+                        "[fill]" +
+                        "[100:n,fill]" +
+                        "[fill]",
+                // rows
+                "[50:n]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[100:n]"));
 
         //---- lbl_firstName ----
         lbl_firstName.setText("First name");
@@ -118,16 +189,16 @@ public class StaffAddAccountInfoView extends JFrame {
         //======== panel_studentAccount ========
         {
             panel_studentAccount.setLayout(new MigLayout(
-                "hidemode 3",
-                // columns
-                "[fill]" +
-                "[fill]",
-                // rows
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]"));
+                    "hidemode 3",
+                    // columns
+                    "[fill]" +
+                            "[fill]",
+                    // rows
+                    "[]" +
+                            "[]" +
+                            "[]" +
+                            "[]" +
+                            "[]"));
 
             //---- lbl_graduateDate ----
             lbl_graduateDate.setText("Graduate Date");
@@ -164,17 +235,17 @@ public class StaffAddAccountInfoView extends JFrame {
         //======== panel_youngSaverAccount ========
         {
             panel_youngSaverAccount.setLayout(new MigLayout(
-                "hidemode 3",
-                // columns
-                "[fill]" +
-                "[fill]",
-                // rows
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]" +
-                "[]"));
+                    "hidemode 3",
+                    // columns
+                    "[fill]" +
+                            "[fill]",
+                    // rows
+                    "[]" +
+                            "[]" +
+                            "[]" +
+                            "[]" +
+                            "[]" +
+                            "[]"));
 
             //---- lbl_parentUserId ----
             lbl_parentUserId.setText("Parent User ID");
@@ -255,49 +326,5 @@ public class StaffAddAccountInfoView extends JFrame {
     private void setStaffId(long staffId) {
         this.staffId = staffId;
     }
-
-    private long staffId;
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel lbl_firstName;
-    private JTextField tf_firstName;
-    private JPanel panel_studentAccount;
-    private JLabel lbl_graduateDate;
-    private JTextField tf_graduateDate;
-    private JLabel lbl_studentId;
-    private JTextField tf_studentId;
-    private JLabel lbl_schoolName;
-    private JTextField tf_schoolName;
-    private JLabel lbl_lastName;
-    private JTextField tf_lastName;
-    private JLabel lbl_gender;
-    private JTextField tf_gender;
-    private JLabel lbl_accountType;
-    private JTextField tf_accountType;
-    private JPanel panel_youngSaverAccount;
-    private JLabel lbl_parentUserId;
-    private JTextField tf_parentUserId;
-    private JLabel lbl_parentFirstName;
-    private JTextField tf_parentFirstName;
-    private JLabel lbl_parentLastName;
-    private JTextField tf_parentLastName;
-    private JLabel lbl_cardType;
-    private JTextField tf_cardType;
-    private JLabel lbl_dob;
-    private JTextField tf_dob;
-    private JLabel lbl_email;
-    private JTextField tf_email;
-    private JLabel lbl_address;
-    private JTextField tf_address;
-    private JLabel lbl_contactNum;
-    private JTextField tf_contactNum;
-    private JLabel lbl_applyTime;
-    private JTextField tf_applyTime;
-    private JLabel lbl_userId;
-    private JTextField tf_userId;
-    private JLabel lbl_status;
-    private JTextField tf_status;
-    private JButton btn_accept;
-    private JButton btn_decline;
-    private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

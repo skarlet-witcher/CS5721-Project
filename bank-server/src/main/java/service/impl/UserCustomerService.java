@@ -1,10 +1,5 @@
 package service.impl;
 
-import Const.UserOperateSourceType;
-import Const.UserOperateStatusType;
-import Const.UserOperateType;
-import Const.UserTransactionTimeFilter;
-import com.mysql.jdbc.BalanceStrategy;
 import dao.IUserAccountDao;
 import dao.IUserDao;
 import dao.IUserHistoryDao;
@@ -78,7 +73,7 @@ public class UserCustomerService implements IUserCustomerService {
     public UserProfileReply getUserProfile(Long user_pk) throws Exception {
         try {
             UserEntity userEntity = userdao.selectUserById(user_pk);
-            UserProfileReply userProfileReply =UserProfileReply.newBuilder()
+            UserProfileReply userProfileReply = UserProfileReply.newBuilder()
                     .setUserPk(userEntity.getId())
                     .setUserId(userEntity.getUserId())
                     .setFirstName(userEntity.getFirstName())
@@ -140,7 +135,7 @@ public class UserCustomerService implements IUserCustomerService {
         UserEntity pinResult;
         logger.info("ready to valdiate pin");
         try {
-            pinResult  = userdao.selectUserByIdAndPin(user_pk, pin);
+            pinResult = userdao.selectUserByIdAndPin(user_pk, pin);
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("fail to validate pin");
         }

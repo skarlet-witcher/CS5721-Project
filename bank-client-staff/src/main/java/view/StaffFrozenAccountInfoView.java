@@ -4,21 +4,29 @@
 
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
-import net.miginfocom.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author xiangkai22
  */
 public class StaffFrozenAccountInfoView extends JFrame {
+    private long staffId;
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JButton btn_accept;
+    private JButton btn_decline;
+    private JButton btn_back;
+
     public StaffFrozenAccountInfoView(long staffId) {
         initComponents();
         setStaffId(staffId);
     }
 
-    private void btn_backActionPerformed(ActionEvent e) {
+    private void btn_backActionPerformed(ActionEvent e) throws Exception {
         this.dispose();
         new StaffMainView(staffId).run();
     }
@@ -42,20 +50,20 @@ public class StaffFrozenAccountInfoView extends JFrame {
         setTitle("Fronzen Account Request Info");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[100:n,fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[100:n,fill]",
-            // rows
-            "[50:n]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[100:n]"));
+                "hidemode 3",
+                // columns
+                "[100:n,fill]" +
+                        "[fill]" +
+                        "[fill]" +
+                        "[fill]" +
+                        "[100:n,fill]",
+                // rows
+                "[50:n]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[100:n]"));
 
         //---- btn_accept ----
         btn_accept.setText("Accept");
@@ -69,7 +77,11 @@ public class StaffFrozenAccountInfoView extends JFrame {
         btn_back.setText("Back");
         btn_back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                btn_backActionPerformed(e);
+                try {
+                    btn_backActionPerformed(e);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
             }
         });
         contentPane.add(btn_back, "cell 1 4 3 1");
@@ -77,11 +89,5 @@ public class StaffFrozenAccountInfoView extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
-    private long staffId;
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JButton btn_accept;
-    private JButton btn_decline;
-    private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
