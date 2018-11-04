@@ -4,20 +4,41 @@
 
 package view;
 
+import bankStaff_rpc.ListUserApplyArchiveEntitiesResponse;
+import bankStaff_rpc.UserApplyArchiveEntitiesResponse;
 import net.miginfocom.swing.MigLayout;
+import rpc.client.StaffService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author xiangkai22
  */
 public class StaffMainView extends JFrame {
+    private long staffId;
+    private ListUserApplyArchiveEntitiesResponse newApplysReplyList;
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JTabbedPane tab_staffTab;
+    private JPanel requestPanel;
+    private JScrollPane scrollPane1;
+    private JTable table_requestTable;
+    private JButton btn_add_moreInfo;
+    private JPanel removePanel;
+    private JScrollPane scrollPane3;
+    private JTable table_removeAccounts;
+    private JButton btn_remove_moreInfo;
+    private JPanel frozenPanel;
+    private JScrollPane scrollPane2;
+    private JTable table_frozenAccountsTable;
+    private JButton btn_frozen_moreInfo;
+    private JButton btn_signout;
+
     public StaffMainView(long staffId) {
         initComponents();
+        initAddAccountTable();
         setStaffId(staffId);
     }
 
@@ -28,7 +49,9 @@ public class StaffMainView extends JFrame {
 
     private void btn_add_moreInfoActionPerformed(ActionEvent e) {
         this.dispose();
-        new StaffAddAccountInfoView(staffId).run();
+        int selectedRow = table_requestTable.getSelectedRow();
+
+        new StaffAddAccountInfoView(staffId, newApplysReplyList.getListUserApplyArchiveEntitiesResponseList().get(selectedRow)).run();
     }
 
     private void btn_remove_moreInfoActionPerformed(ActionEvent e) {
@@ -39,6 +62,28 @@ public class StaffMainView extends JFrame {
     private void btn_frozen_moreInfoActionPerformed(ActionEvent e) {
         this.dispose();
         new StaffFrozenAccountInfoView(staffId).run();
+    }
+
+    public void initAddAccountTable() {
+        try {
+            newApplysReplyList = StaffService.getInstance().getNewApplysReplies();
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("First Name");
+            model.addColumn("Last Name");
+            model.addColumn("Account Type");
+            model.addColumn("Email");
+            model.addColumn("Phone");
+            for (UserApplyArchiveEntitiesResponse x : newApplysReplyList.getListUserApplyArchiveEntitiesResponseList()) {
+                model.addRow(new Object[]{x.getFirstName(), x.getLastName(), x.getAccountType(), x.getEmail(), x.getPhone()});
+            }
+            table_requestTable.setModel(model);
+
+            //SHOW ON TABLE
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to get list of applications, please contact admin",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void initComponents() {
@@ -62,15 +107,15 @@ public class StaffMainView extends JFrame {
         setTitle("Staff Main View");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[fill]" +
-            "[fill]",
-            // rows
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]"));
+                "hidemode 3",
+                // columns
+                "[fill]" +
+                        "[fill]",
+                // rows
+                "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]"));
 
         //======== tab_staffTab ========
         {
@@ -79,33 +124,33 @@ public class StaffMainView extends JFrame {
             //======== requestPanel ========
             {
                 requestPanel.setLayout(new MigLayout(
-                    "hidemode 3",
-                    // columns
-                    "[fill]",
-                    // rows
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]"));
+                        "hidemode 3",
+                        // columns
+                        "[fill]",
+                        // rows
+                        "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]"));
 
                 //======== scrollPane1 ========
                 {
 
                     //---- table_requestTable ----
-                    table_requestTable.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                        },
-                        new String[] {
-                            "First Name", "Last Name", "Account Type", "Email", "Contact Number"
-                        }
-                    ));
-                    table_requestTable.setMinimumSize(new Dimension(500, 48));
-                    table_requestTable.setPreferredSize(new Dimension(1000, 48));
+//                    table_requestTable.setModel(new DefaultTableModel(
+//                        new Object[][] {
+//                            {null, null, null, null, null},
+//                            {null, null, null, null, null},
+//                            {null, null, null, null, null},
+//                        },
+//                        new String[] {
+//                            "First Name", "Last Name", "Account Type", "Email", "Contact Number"
+//                        }
+//                    ));
+                    table_requestTable.setMinimumSize(new Dimension(500, 100));
+                    table_requestTable.setPreferredSize(new Dimension(1000, 100));
                     scrollPane1.setViewportView(table_requestTable);
                 }
                 requestPanel.add(scrollPane1, "cell 0 0,wmin 800");
@@ -121,17 +166,17 @@ public class StaffMainView extends JFrame {
             {
                 removePanel.setMinimumSize(new Dimension(800, 71));
                 removePanel.setLayout(new MigLayout(
-                    "hidemode 3",
-                    // columns
-                    "[300:n,fill]" +
-                    "[100:n,fill]",
-                    // rows
-                    "[]0" +
-                    "[]0" +
-                    "[]0" +
-                    "[]0" +
-                    "[]" +
-                    "[]"));
+                        "hidemode 3",
+                        // columns
+                        "[300:n,fill]" +
+                                "[100:n,fill]",
+                        // rows
+                        "[]0" +
+                                "[]0" +
+                                "[]0" +
+                                "[]0" +
+                                "[]" +
+                                "[]"));
 
                 //======== scrollPane3 ========
                 {
@@ -140,13 +185,13 @@ public class StaffMainView extends JFrame {
                     //---- table_removeAccounts ----
                     table_removeAccounts.setMinimumSize(new Dimension(500, 32));
                     table_removeAccounts.setModel(new DefaultTableModel(
-                        new Object[][] {
-                            {null, null},
-                            {null, null},
-                        },
-                        new String[] {
-                            "A", "B"
-                        }
+                            new Object[][]{
+                                    {null, null},
+                                    {null, null},
+                            },
+                            new String[]{
+                                    "A", "B"
+                            }
                     ));
                     scrollPane3.setViewportView(table_removeAccounts);
                 }
@@ -163,15 +208,15 @@ public class StaffMainView extends JFrame {
             {
                 frozenPanel.setMinimumSize(new Dimension(800, 48));
                 frozenPanel.setLayout(new MigLayout(
-                    "hidemode 3",
-                    // columns
-                    "[fill]" +
-                    "[fill]",
-                    // rows
-                    "[]" +
-                    "[]" +
-                    "[]" +
-                    "[]"));
+                        "hidemode 3",
+                        // columns
+                        "[fill]" +
+                                "[fill]",
+                        // rows
+                        "[]" +
+                                "[]" +
+                                "[]" +
+                                "[]"));
 
                 //======== scrollPane2 ========
                 {
@@ -211,21 +256,5 @@ public class StaffMainView extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-    private long staffId;
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JTabbedPane tab_staffTab;
-    private JPanel requestPanel;
-    private JScrollPane scrollPane1;
-    private JTable table_requestTable;
-    private JButton btn_add_moreInfo;
-    private JPanel removePanel;
-    private JScrollPane scrollPane3;
-    private JTable table_removeAccounts;
-    private JButton btn_remove_moreInfo;
-    private JPanel frozenPanel;
-    private JScrollPane scrollPane2;
-    private JTable table_frozenAccountsTable;
-    private JButton btn_frozen_moreInfo;
-    private JButton btn_signout;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

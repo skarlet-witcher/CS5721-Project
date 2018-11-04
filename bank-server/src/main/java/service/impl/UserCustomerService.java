@@ -9,7 +9,9 @@ import dao.impl.UserPayeeDao;
 import entity.UserAccountEntity;
 import entity.UserEntity;
 import entity.UserPayeeEntity;
-import org.iban4j.*;
+import org.iban4j.IbanFormatException;
+import org.iban4j.InvalidCheckDigitException;
+import org.iban4j.UnsupportedCountryException;
 import rpc.UserAccountsReply;
 import rpc.UserCustomerGrpc;
 import rpc.UserPayeesReply;
@@ -24,11 +26,11 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class UserCustomerService implements IUserCustomerService {
+    private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
     private static UserCustomerService instance = null;
     private IUserAccountDao userAccountDao = UserAccountDao.getInstance();
     private IUserDao userdao = UserDao.getInstance();
     private IUserPayeeDao userPayeeDao = UserPayeeDao.getInstance();
-    private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
 
     public static UserCustomerService getInstance() {
         if (instance == null) {
@@ -70,7 +72,7 @@ public class UserCustomerService implements IUserCustomerService {
     public UserProfileReply getUserProfile(Long user_pk) throws Exception {
         try {
             UserEntity userEntity = userdao.selectUserById(user_pk);
-            UserProfileReply userProfileReply =UserProfileReply.newBuilder()
+            UserProfileReply userProfileReply = UserProfileReply.newBuilder()
                     .setUserPk(userEntity.getId())
                     .setUserId(userEntity.getUserId())
                     .setFirstName(userEntity.getFirstName())
@@ -93,7 +95,7 @@ public class UserCustomerService implements IUserCustomerService {
     public void editUserProfile(Long user_pk, String address, String email, String contactNum) throws Exception {
         try {
             int updateRows = userdao.updateUserProfileById(user_pk, address, email, contactNum);
-            if(updateRows <= 0) {
+            if (updateRows <= 0) {
                 throw FaultFactory.throwFaultException("fail to update user profile");
             }
         } catch (Exception E) {
@@ -107,7 +109,7 @@ public class UserCustomerService implements IUserCustomerService {
             List<UserPayeesReply> userPayeesReplies = new ArrayList<>();
             List<UserPayeeEntity> userPayeeEntityList = userPayeeDao.getPayeeListById(user_pk);
 
-            for(UserPayeeEntity userPayeeEntity: userPayeeEntityList) {
+            for (UserPayeeEntity userPayeeEntity : userPayeeEntityList) {
                 UserPayeesReply userPayeesReply = UserPayeesReply.newBuilder()
                         .setPayeePk(userPayeeEntity.getId())
                         .setName(userPayeeEntity.getName())
@@ -132,11 +134,11 @@ public class UserCustomerService implements IUserCustomerService {
         UserEntity pinResult;
         logger.info("ready to valdiate pin");
         try {
-            pinResult  = userdao.selectUserByIdAndPin(user_pk, pin);
+            pinResult = userdao.selectUserByIdAndPin(user_pk, pin);
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("fail to validate pin");
         }
-        if(pinResult == null) {
+        if (pinResult == null) {
             throw FaultFactory.throwFaultException("pin is not correct.");
         }
 
@@ -156,11 +158,11 @@ public class UserCustomerService implements IUserCustomerService {
         UserPayeeEntity result;
         logger.info("ready to validate duplicate payee");
         try {
-             result = userPayeeDao.checkDuplicatePayee(userPayeeEntity);
-        } catch(Exception E) {
+            result = userPayeeDao.checkDuplicatePayee(userPayeeEntity);
+        } catch (Exception E) {
             throw FaultFactory.throwFaultException("fail to check duplicate payee");
         }
-        if(result != null) {
+        if (result != null) {
             throw FaultFactory.throwFaultException("duplicate payee detected! ");
         }
 

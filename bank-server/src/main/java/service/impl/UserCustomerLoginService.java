@@ -15,7 +15,10 @@ import rpc.UserLoginReply;
 import rpc.UserLoginReqReply;
 import service.IUserCustomerHistoryService;
 import service.IUserCustomerLoginService;
-import util.*;
+import util.FaultFactory;
+import util.PINGenerator;
+import util.RandomUtil;
+import util.TimestampConvertHelper;
 
 import java.sql.Timestamp;
 import java.text.MessageFormat;
@@ -25,12 +28,11 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public class UserCustomerLoginService implements IUserCustomerLoginService {
+    private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
     private static UserCustomerLoginService instance = null;
     private IUserDao userDao = UserDao.getInstance();
     private IUserHistoryDao operationHistoryDao = UserHistoryDao.getInstance();
     private IUserCustomerHistoryService operationHistoryService = UserCustomerHistoryService.getInstance();
-    private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
-
 
     public static UserCustomerLoginService getInstance() {
         if (instance == null) {
@@ -136,15 +138,16 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
     /**
      * The method is responsibility for checking the information of requester, generate a new pin, and send the new PIN
      * to requester's email
-     * @param userId User ID of requester
-     * @param email Email of requester
+     *
+     * @param userId    User ID of requester
+     * @param email     Email of requester
      * @param birthDate Birth date of requester
      * @throws Exception if UserId is not matched with email and birthdate
      */
     @Override
     public void forgotPIN(Long userId, String email, Timestamp birthDate) throws Exception {
-        UserEntity userEntity = userDao.selectUserByUserIdEmailDOB(userId,email,birthDate);
-        if(userEntity!= null){
+        UserEntity userEntity = userDao.selectUserByUserIdEmailDOB(userId, email, birthDate);
+        if (userEntity != null) {
             //Generate new PIN and save it
             PINGenerator pinGenerator = PINGenerator.getInstance();
             String PIN = String.valueOf(pinGenerator.generatePIN());
@@ -158,8 +161,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
             SysEmailService.getInstance().send("thelongdt@gmail.com",
                     "Nuclear Bank - Requesting new PIN",
                     formatMail);
-        }
-        else {
+        } else {
             throw FaultFactory.throwFaultException("UserId is not matched with email and birthdate, please check again.");
 
         }

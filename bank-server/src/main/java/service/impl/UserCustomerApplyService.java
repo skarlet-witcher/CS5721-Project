@@ -18,11 +18,12 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
     private IUserDao userDao = UserDao.getInstance();
 
     public static UserCustomerApplyService getInstance() {
-        if(userCustomerApplyService == null) {
+        if (userCustomerApplyService == null) {
             return new UserCustomerApplyService();
         }
         return userCustomerApplyService;
     }
+
     @Override
     public void requestPersonalAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType,
                                             Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser, Long userId) throws Exception {
@@ -54,7 +55,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
     public void requestStudentAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType, Timestamp birthDate, int gender,
                                            String address, String email, String phone, int isNewUser,
                                            Timestamp graduateDate, String studentId, String university, Long userId) throws Exception {
-        try{
+        try {
             UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
             UserApplyArchiveEntity.setFirstName(firstName);
             UserApplyArchiveEntity.setLastName(lastName);
@@ -86,39 +87,39 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
     @Override
     public void requestYoungSaverAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType, Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser, Long parentUserId, String parentFirstName, String parentLastName, long userId) throws Exception {
 
-            UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
-            UserEntity result = null;
-            UserEntity UserEntity = new UserEntity();
-            UserApplyArchiveEntity.setFirstName(firstName);
-            UserApplyArchiveEntity.setLastName(lastName);
-            UserApplyArchiveEntity.setIdentityId(identityNum);
-            UserApplyArchiveEntity.setIdentityIdType(identityType);
-            UserApplyArchiveEntity.setAccountType(accountType);
-            UserApplyArchiveEntity.setCardType(cardType);
-            UserApplyArchiveEntity.setBirthDate(birthDate);
-            UserApplyArchiveEntity.setGender(gender);
-            UserApplyArchiveEntity.setAddress(address);
-            UserApplyArchiveEntity.setEmail(email);
-            UserApplyArchiveEntity.setPhone(phone);
-            UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
+        UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
+        UserEntity result = null;
+        UserEntity UserEntity = new UserEntity();
+        UserApplyArchiveEntity.setFirstName(firstName);
+        UserApplyArchiveEntity.setLastName(lastName);
+        UserApplyArchiveEntity.setIdentityId(identityNum);
+        UserApplyArchiveEntity.setIdentityIdType(identityType);
+        UserApplyArchiveEntity.setAccountType(accountType);
+        UserApplyArchiveEntity.setCardType(cardType);
+        UserApplyArchiveEntity.setBirthDate(birthDate);
+        UserApplyArchiveEntity.setGender(gender);
+        UserApplyArchiveEntity.setAddress(address);
+        UserApplyArchiveEntity.setEmail(email);
+        UserApplyArchiveEntity.setPhone(phone);
+        UserApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
         UserApplyArchiveEntity.setNewUserApply(isNewUser);
-            UserApplyArchiveEntity.setUserId(userId);
-            UserApplyArchiveEntity.setStatus(0);
-            // young saver info
-            UserApplyArchiveEntity.setParentUserId(parentUserId);
-            UserApplyArchiveEntity.setParentFirstName(parentFirstName);
-            UserApplyArchiveEntity.setParentLastName(parentLastName);
+        UserApplyArchiveEntity.setUserId(userId);
+        UserApplyArchiveEntity.setStatus(0);
+        // young saver info
+        UserApplyArchiveEntity.setParentUserId(parentUserId);
+        UserApplyArchiveEntity.setParentFirstName(parentFirstName);
+        UserApplyArchiveEntity.setParentLastName(parentLastName);
 
-            // check parent info
-            UserEntity.setUserId(parentUserId);
-            UserEntity.setFirstName(parentFirstName);
-            UserEntity.setLastName(parentLastName);
+        // check parent info
+        UserEntity.setUserId(parentUserId);
+        UserEntity.setFirstName(parentFirstName);
+        UserEntity.setLastName(parentLastName);
         try {
-             result = userDao.selectUserByIdAndName(parentUserId, parentFirstName, parentLastName);
+            result = userDao.selectUserByIdAndName(parentUserId, parentFirstName, parentLastName);
         } catch (Exception e) {
             throw FaultFactory.throwFaultException("Fail to apply a young saver account");
         }
-        if(result == null) {
+        if (result == null) {
             throw FaultFactory.throwFaultException("parent info does not exist!");
         }
         userApplyDao.requestAccountApply(UserApplyArchiveEntity);
@@ -126,7 +127,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
 
     @Override
     public void requestGoldenAccountApply(String firstName, String lastName, String identityNum, int identityType, int accountType, int cardType,
-                                            Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser, Long userId) throws Exception {
+                                          Timestamp birthDate, int gender, String address, String email, String phone, int isNewUser, Long userId) throws Exception {
         try {
             // basic info
             UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
@@ -159,30 +160,30 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
         userEntity.setFirstName(firstName);
         userEntity.setLastName(lastName);
         try {
-             result = userDao.selectUserByIdAndName(userId, firstName, lastName);
+            result = userDao.selectUserByIdAndName(userId, firstName, lastName);
 
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("check existing model fail");
         }
-        if(result == null){
+        if (result == null) {
             throw FaultFactory.throwFaultException("no existing model found");
         }
     }
 
     @Override
     public void checkDuplicateApply(Long userId, int accountType, int cardType) throws Exception {
-            UserApplyArchiveEntity result = null;
-            UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
-            UserApplyArchiveEntity.setUserId(userId);
-            UserApplyArchiveEntity.setAccountType(accountType);
-            UserApplyArchiveEntity.setCardType(cardType);
+        UserApplyArchiveEntity result = null;
+        UserApplyArchiveEntity UserApplyArchiveEntity = new UserApplyArchiveEntity();
+        UserApplyArchiveEntity.setUserId(userId);
+        UserApplyArchiveEntity.setAccountType(accountType);
+        UserApplyArchiveEntity.setCardType(cardType);
         try {
-             result = userApplyDao.selectApplyByUserId(UserApplyArchiveEntity);
+            result = userApplyDao.selectApplyByUserId(UserApplyArchiveEntity);
 
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("duplicate apply operation fail");
         }
-        if(result != null) {
+        if (result != null) {
             throw FaultFactory.throwFaultException("duplicate apply detected");
         }
     }

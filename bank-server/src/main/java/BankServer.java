@@ -3,6 +3,7 @@ import io.grpc.ServerBuilder;
 import rpc.impl.UserCustomerImpl;
 import rpc.impl.UserCustomerLoginImpl;
 import rpc.impl.bank_staff.BankStaffLoginImpl;
+import rpc.impl.bank_staff.BankStaffServiceImpl;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -31,6 +32,7 @@ public class BankServer {
                 .addService(new UserCustomerLoginImpl())
                 .addService(new UserCustomerImpl())
                 .addService(new BankStaffLoginImpl())
+                .addService(new BankStaffServiceImpl())
                 .build()
                 .start();
         logger.info("Server started, listening on " + SERVER_PORT);

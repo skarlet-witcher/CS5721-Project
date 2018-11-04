@@ -4,15 +4,23 @@
 
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
-import net.miginfocom.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @author xiangkai22
  */
 public class StaffRemoveAccountInfoView extends JFrame {
+    private long staffId;
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JButton btn_accept;
+    private JButton btn_decline;
+    private JButton btn_back;
+
     public StaffRemoveAccountInfoView(long staffId) {
         initComponents();
         setStaffId(staffId);
@@ -38,20 +46,20 @@ public class StaffRemoveAccountInfoView extends JFrame {
         setTitle("Remove Account Request Info");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[100:n,fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[100:n,fill]",
-            // rows
-            "[50:n]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[100:n]"));
+                "hidemode 3",
+                // columns
+                "[100:n,fill]" +
+                        "[fill]" +
+                        "[fill]" +
+                        "[fill]" +
+                        "[100:n,fill]",
+                // rows
+                "[50:n]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[100:n]"));
 
         //---- btn_accept ----
         btn_accept.setText("Accept");
@@ -77,11 +85,5 @@ public class StaffRemoveAccountInfoView extends JFrame {
     private void setStaffId(long staffId) {
         this.staffId = staffId;
     }
-
-    private long staffId;
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JButton btn_accept;
-    private JButton btn_decline;
-    private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

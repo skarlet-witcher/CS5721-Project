@@ -2,11 +2,9 @@ package rpc.impl.bank_staff;
 
 import bankStaff_rpc.StaffLoginGrpc;
 import bankStaff_rpc.StaffLoginResponse;
+import io.grpc.stub.StreamObserver;
 import service.IStaffService;
 import service.impl.StaffService;
-import util.ResponseBuilderFactory;
-import io.grpc.stub.StreamObserver;
-
 
 import java.util.logging.Logger;
 
@@ -14,6 +12,7 @@ import java.util.logging.Logger;
 public class BankStaffLoginImpl extends StaffLoginGrpc.StaffLoginImplBase {
     private static final Logger logger = Logger.getLogger(BankStaffLoginImpl.class.getName());
     private static final IStaffService staffService = StaffService.getInstance();
+
     @Override
     public void staffLogin(bankStaff_rpc.StaffLoginRequest request, StreamObserver<bankStaff_rpc.StaffLoginResponse> responseObserver) {
         Long userId = request.getStaffId();

@@ -6,18 +6,24 @@ package view;
 
 import model.StaffLoginModel;
 import net.miginfocom.swing.MigLayout;
-import service.IStaffLoginService;
 import service.impl.StaffLoginService;
+import util.JTextFieldLimit;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author xiangkai22
  */
 public class StaffLoginView extends JFrame {
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel label1;
+    private JLabel lbl_staffId;
+    private JTextField tf_staffId;
+    private JLabel lbl_pwd;
+    private JPasswordField pf_pwd;
+    private JButton btn_login;
     public StaffLoginView() {
         initComponents();
     }
@@ -28,15 +34,15 @@ public class StaffLoginView extends JFrame {
             String password = String.valueOf(pf_pwd.getPassword());
             StaffLoginModel staffLoginModel = new StaffLoginModel(staffId, password);
             boolean isValidStaff = StaffLoginService.getInstance().staffLogin(staffLoginModel);
-            if(isValidStaff){
+            if (isValidStaff) {
                 new StaffMainView(staffId).run();
                 this.dispose();
             }
 
-        }catch (Exception e1){
+        } catch (Exception e1) {
             JOptionPane.showMessageDialog(null,
                     "Please input a valid combination of Staff ID and password.",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -45,6 +51,7 @@ public class StaffLoginView extends JFrame {
         label1 = new JLabel();
         lbl_staffId = new JLabel();
         tf_staffId = new JTextField();
+        tf_staffId.setDocument(new JTextFieldLimit(10));
         lbl_pwd = new JLabel();
         pf_pwd = new JPasswordField();
         btn_login = new JButton();
@@ -53,18 +60,18 @@ public class StaffLoginView extends JFrame {
         setTitle("Staff Login View");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-            "hidemode 3",
-            // columns
-            "[100:n,fill]" +
-            "[fill]" +
-            "[fill]" +
-            "[100:n,fill]",
-            // rows
-            "[50:n]" +
-            "[]" +
-            "[]" +
-            "[]" +
-            "[100:n]"));
+                "hidemode 3",
+                // columns
+                "[100:n,fill]" +
+                        "[fill]" +
+                        "[fill]" +
+                        "[100:n,fill]",
+                // rows
+                "[50:n]" +
+                        "[]" +
+                        "[]" +
+                        "[]" +
+                        "[100:n]"));
 
         //---- label1 ----
         label1.setText("Welcome Staff Login Portal");
@@ -101,13 +108,5 @@ public class StaffLoginView extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel label1;
-    private JLabel lbl_staffId;
-    private JTextField tf_staffId;
-    private JLabel lbl_pwd;
-    private JPasswordField pf_pwd;
-    private JButton btn_login;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
