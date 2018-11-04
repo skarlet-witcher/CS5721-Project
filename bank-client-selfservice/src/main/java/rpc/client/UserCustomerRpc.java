@@ -119,7 +119,7 @@ public class UserCustomerRpc {
 
         Response response = blockingStub.getTransactions(userCustomerGetTransactionsRequest);
 
-        logger.info("check the size of transaction list: " + response.getUserAccountsList().size());
+        logger.info("check the size of transaction list: " + response.getUserTransactionsList().size());
 
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 

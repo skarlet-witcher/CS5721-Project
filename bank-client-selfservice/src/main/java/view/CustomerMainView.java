@@ -69,7 +69,7 @@ public class CustomerMainView extends JFrame {
     private JComboBox cb_transaction_accountList;
     private JComboBox<String> cb_transaction_filter;
     private JScrollPane scrollPane2;
-    private JTable table_transaction_accountTable;
+    private JTable table_transaction;
     private JButton btn_printStatement;
     private JPanel payeePanel;
     private JButton btn_payee_add;
@@ -122,7 +122,7 @@ public class CustomerMainView extends JFrame {
 
     private void initTransactionPage() {
         initAccountComboBox(cb_transaction_accountList);
-        initTransactionInfo(cb_transaction_filter);
+        initTransactionInfo();
     }
 
     private void initTransferPage() {
@@ -133,12 +133,11 @@ public class CustomerMainView extends JFrame {
         initPostscriptTextField();
     }
 
-    private void initTransactionInfo(JComboBox cb_transaction_filter) {
+    private void initTransactionInfo() {
         Long accountPk = accountList.get(cb_transaction_accountList.getSelectedIndex()).getAccountPk();
-        int filter = cb_transaction_filter.getSelectedIndex();
+        int filter = cb_transaction_filter.getSelectedIndex() + 1;
         try {
             this.transactionList = CustomerTransactionService.getInstance().getTransaction(user_pk, accountPk, filter);
-            return;
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
                     "Fail to get transaction list due to " + E.getMessage(),
@@ -148,7 +147,7 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initTransactionTable() {
-        DefaultTableModel transactionListModel = (DefaultTableModel)table_transaction_accountTable.getModel();
+        DefaultTableModel transactionListModel = (DefaultTableModel)table_transaction.getModel();
         clearTable(transactionListModel);
         for(UserTransactionsReply userTransactionsReply: this.transactionList) {
             transactionListModel.addRow(new Object[]{
@@ -446,6 +445,14 @@ public class CustomerMainView extends JFrame {
         }
     }
 
+    private void cb_transaction_accountListActionPerformed(ActionEvent e) {
+        initTransactionInfo();
+    }
+
+    private void cb_transaction_filterActionPerformed(ActionEvent e) {
+        initTransactionInfo();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         lbl_welcome = new JLabel();
@@ -478,7 +485,7 @@ public class CustomerMainView extends JFrame {
         cb_transaction_accountList = new JComboBox();
         cb_transaction_filter = new JComboBox<>();
         scrollPane2 = new JScrollPane();
-        table_transaction_accountTable = new JTable();
+        table_transaction = new JTable();
         btn_printStatement = new JButton();
         payeePanel = new JPanel();
         btn_payee_add = new JButton();
@@ -706,6 +713,7 @@ public class CustomerMainView extends JFrame {
 
                 //---- cb_transaction_accountList ----
                 cb_transaction_accountList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                cb_transaction_accountList.addActionListener(e -> cb_transaction_accountListActionPerformed(e));
                 transactionPanel.add(cb_transaction_accountList, "cell 0 0");
 
                 //---- cb_transaction_filter ----
@@ -716,13 +724,14 @@ public class CustomerMainView extends JFrame {
                     "Recent 6 months",
                     "Recent 1 year"
                 }));
+                cb_transaction_filter.addActionListener(e -> cb_transaction_filterActionPerformed(e));
                 transactionPanel.add(cb_transaction_filter, "cell 0 0");
 
                 //======== scrollPane2 ========
                 {
 
-                    //---- table_transaction_accountTable ----
-                    table_transaction_accountTable.setModel(new DefaultTableModel(
+                    //---- table_transaction ----
+                    table_transaction.setModel(new DefaultTableModel(
                         new Object[][] {
                             {null, null, null, null, null},
                         },
@@ -730,10 +739,10 @@ public class CustomerMainView extends JFrame {
                             "Date", "Operation Type", "Details", "Amount", "Balance"
                         }
                     ));
-                    table_transaction_accountTable.setMinimumSize(new Dimension(75, 200));
-                    table_transaction_accountTable.setMaximumSize(new Dimension(2147483647, 2147483647));
-                    table_transaction_accountTable.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                    scrollPane2.setViewportView(table_transaction_accountTable);
+                    table_transaction.setMinimumSize(new Dimension(75, 200));
+                    table_transaction.setMaximumSize(new Dimension(2147483647, 2147483647));
+                    table_transaction.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+                    scrollPane2.setViewportView(table_transaction);
                 }
                 transactionPanel.add(scrollPane2, "cell 0 1");
 

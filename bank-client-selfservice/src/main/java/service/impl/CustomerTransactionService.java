@@ -26,7 +26,7 @@ public class CustomerTransactionService implements ICustomerTransactionService {
         List<UserTransactionsReply> userTransactionsReplies = UserCustomerRpc.getInstance().getTransactions(
                 UserCustomerGetTransactionsRequest.newBuilder().setUserPk(user_pk)
                 .setFilterByAccount(accountPk)
-                .setFilterByAccount(filter).build()
+                .setFilterByDate(filter).build()
         );
         return userTransactionsReplies;
     }

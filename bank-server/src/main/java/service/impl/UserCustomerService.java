@@ -250,14 +250,17 @@ public class UserCustomerService implements IUserCustomerService {
         List<UserHistoryEntity> userHistoryEntities = new ArrayList<>();
         try {
             if(date == UserTransactionTimeFilter.RECENT_7_DAYS) {
+                logger.info("ready to go to db with transaction of recent 7 days");
                 userHistoryEntities = userHistoryDao.getTransactionHistory7Days(user_pk, account_pk);
             } else if(date == UserTransactionTimeFilter.RECENT_1_MONTH) {
+                logger.info("ready to go to db with transaction of recent 1 month");
                 userHistoryEntities = userHistoryDao.getTransactionHistory1Month(user_pk, account_pk);
             } else if(date == UserTransactionTimeFilter.RECENT_6_MONTHS) {
+                logger.info("ready to go to db with transaction of recent 6 month");
                 userHistoryEntities = userHistoryDao.getTransactionHistory6Month(user_pk, account_pk);
             } else if(date == UserTransactionTimeFilter.RECENT_1_YEAR) {
-                userHistoryEntities =
-                        userHistoryDao.getTransactionHistory1Year(user_pk, account_pk);
+                logger.info("ready to go to db with transaction of recent 1 year");
+                userHistoryEntities = userHistoryDao.getTransactionHistory1Year(user_pk, account_pk);
             }
             for(UserHistoryEntity userHistoryEntity: userHistoryEntities) {
                 UserTransactionsReply userTransactionsReply = UserTransactionsReply.newBuilder()
@@ -275,6 +278,7 @@ public class UserCustomerService implements IUserCustomerService {
         } catch (Exception E) {
             FaultFactory.throwFaultException("fail to get transaction");
         }
+        logger.info(" success to get transaction.");
         return userTransactionsReplies;
     }
 

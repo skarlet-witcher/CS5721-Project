@@ -9,6 +9,7 @@ import org.hibernate.query.Query;
 import util.HibernateUtils;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class UserHistoryDao implements IUserHistoryDao {
@@ -91,12 +92,16 @@ public class UserHistoryDao implements IUserHistoryDao {
         try {
             session.getTransaction().begin();
 
-            String dateFilter = "DATE_SUB(NOW(), INTERVAL 7 DAY)";
+            Calendar c = Calendar.getInstance();
+            c.add(Calendar.DAY_OF_YEAR, -7);
+            Date d = c.getTime();
 
-            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and operateTime > ? and operateType >=0 and operateType <= 3");
+
+            Query query = session.createQuery(" from UserHistoryEntity " +
+                    "where userId=? and accountId=? and operateTime >= ? and operateType >=0 and operateType <= 3");
             query.setParameter(0, user_pk);
             query.setParameter(1, account_pk);
-            query.setParameter(2, dateFilter);
+            query.setParameter(2, d);
             session.getTransaction().commit();
 
             return query.getResultList();
@@ -112,12 +117,14 @@ public class UserHistoryDao implements IUserHistoryDao {
         try {
             session.getTransaction().begin();
 
-            String dateFilter = "DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+            int month = Calendar.getInstance().get(Calendar.MONTH) - 1;
+            int year = Calendar.getInstance().get(Calendar.YEAR);
 
-            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and operateTime > ? and operateType >= 0 and operateType <= 3");
+            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and month(operateTime) >= ? and year(operateTime) >= ? and operateType >= 0 and operateType <= 3");
             query.setParameter(0, user_pk);
             query.setParameter(1, account_pk);
-            query.setParameter(2, dateFilter);
+            query.setParameter(2, month);
+            query.setParameter(3, year);
             session.getTransaction().commit();
 
             return query.getResultList();
@@ -133,12 +140,14 @@ public class UserHistoryDao implements IUserHistoryDao {
         try {
             session.getTransaction().begin();
 
-            String dateFilter = "DATE_SUB(NOW(), INTERVAL 6 MONTH)";
+            int month = Calendar.getInstance().get(Calendar.MONTH) - 1 - 6;
+            int year = Calendar.getInstance().get(Calendar.YEAR);
 
-            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and operateTime > ? and operateType >= 0 and operateType <= 3");
+            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and month(operateTime) >= ? and year(operateTime) >= ? and operateType >= 0 and operateType <= 3");
             query.setParameter(0, user_pk);
             query.setParameter(1, account_pk);
-            query.setParameter(2, dateFilter);
+            query.setParameter(2, month);
+            query.setParameter(3, year);
             session.getTransaction().commit();
 
             return query.getResultList();
@@ -154,12 +163,12 @@ public class UserHistoryDao implements IUserHistoryDao {
         try {
             session.getTransaction().begin();
 
-            String dateFilter= "DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+            int year = Calendar.getInstance().get(Calendar.YEAR) - 1;
 
-            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and operateTime > ?  and operateType >= 0 and operateType <= 3");
+            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and year(operateTime) >= ?  and operateType >= 0 and operateType <= 3");
             query.setParameter(0, user_pk);
             query.setParameter(1, account_pk);
-            query.setParameter(2, dateFilter);
+            query.setParameter(2, year);
             session.getTransaction().commit();
 
             return query.getResultList();

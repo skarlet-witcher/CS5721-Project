@@ -157,9 +157,10 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
         Long user_pk = request.getUserPk();
         Long accountPk = request.getFilterByAccount();
         int date = request.getFilterByDate();
-
+        logger.info("date = " + date);
         try {
             List<UserTransactionsReply> userTransactionsReplies = UserCustomerService.getInstance().getTransaction(user_pk, accountPk, date);
+            logger.info("transaction reply: " + userTransactionsReplies.size());
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .addAllUserTransactions(userTransactionsReplies)
                     .build());
