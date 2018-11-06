@@ -239,7 +239,7 @@ public class UserCustomerService implements IUserCustomerService {
         // update in user history
         Double balance = userAccountEntity.getBalance();
         userCustomerHistoryService.addNewTransferHistory(user_pk, account_pk, payee_pk, postScript,
-                balance, amount, currencyType, UserOperateType.TRANSFER , UserOperateStatusType.SUCCESS);
+                balance, amount * -1, currencyType, UserOperateType.TRANSFER , UserOperateStatusType.SUCCESS);
     }
 
     @Override

@@ -114,19 +114,9 @@ public class CustomerPINView extends JFrame {
             }
         }
         UserLoginReply userLoginReply;
-        List<UserAccountsReply> userAccountsReply;
         UserLoginPINModel userLoginPINModel = initUserLoginPINModel(pinDigitList);
         try {
             userLoginReply = CustomerLoginService.getInstance().requestLoginUsingPIN(userLoginPINModel);
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            E.printStackTrace();
-            return;
-        }
-        try {
-            userAccountsReply = CustomerHomeService.getInstance().getAccounts(userLoginReply.getUserPk());
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
                     E.getMessage(),
@@ -140,7 +130,7 @@ public class CustomerPINView extends JFrame {
         lastLoginTime = lastLoginTime.substring(0, lastLoginTime.indexOf('.'));
 
         this.dispose();
-        new CustomerMainView(userId, user_pk, firstName, lastLoginTime, userAccountsReply).run();
+        new CustomerMainView(userId, user_pk, firstName, lastLoginTime).run();
     }
 
     private void button13ActionPerformed(ActionEvent e) {

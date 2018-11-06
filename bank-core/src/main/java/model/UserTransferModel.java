@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserTransferModel implements Subject {
@@ -10,6 +11,9 @@ public class UserTransferModel implements Subject {
     private String postScript;
     private List<Observer> observers;
 
+    public UserTransferModel() {
+        observers = new ArrayList<>();
+    }
 
     public UserPayeeModel getPayee() {
         return payee;

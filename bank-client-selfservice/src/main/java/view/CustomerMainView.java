@@ -14,10 +14,7 @@ import rpc.UserAccountsReply;
 import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
 import rpc.UserTransactionsReply;
-import service.impl.CustomerPayeeService;
-import service.impl.CustomerProfileService;
-import service.impl.CustomerTransactionService;
-import service.impl.CustomerTransferService;
+import service.impl.*;
 import util.JTextFieldLimit;
 import util.TimestampConvertHelper;
 
@@ -105,9 +102,10 @@ public class CustomerMainView extends JFrame implements Observer {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
-    public CustomerMainView(long userId, Long user_pk, String firstName, String lastLoginTime, List<UserAccountsReply> accountList) {
+    public CustomerMainView(long userId, Long user_pk, String firstName, String lastLoginTime) {
         initComponents();
-        initVariables(userId, user_pk, firstName, lastLoginTime, accountList);
+        initVariables(userId, user_pk, firstName, lastLoginTime);
+        initAccountReply();
         initHomePage();
         initProfilePage();
         initTransactionPage();
@@ -121,15 +119,28 @@ public class CustomerMainView extends JFrame implements Observer {
         this.userTransferModel.registerObserver(this);
     }
 
-    private void initVariables(long userId, long user_pk, String firstName, String lastLoginTime, List<UserAccountsReply> accountList) {
+    private void initVariables(long userId, long user_pk, String firstName, String lastLoginTime) {
         this.userModel.setUserId(userId);
         this.userModel.setId(user_pk);
-        this.accountsReplyList = accountList;
         this.lbl_nameField.setText(firstName);
         this.lbl_lastLoginTime.setText(lastLoginTime);
+
+    }
+
+    private void initAccountReply() {
+        try {
+            this.accountsReplyList = CustomerHomeService.getInstance().getAccounts(this.userModel.getId());
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            E.printStackTrace();
+            return;
+        }
     }
 
     private void initAccountModel() {
+        this.userAccountModelList.clear();
         for(UserAccountsReply userAccountsReply : this.accountsReplyList) {
             UserAccountModel userAccountModel = new UserAccountModel();
             userAccountModel.setAccount_pk(userAccountsReply.getAccountPk());
@@ -237,7 +248,7 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void initCurrency() {
-        int accountIndex = cb_transfer_accountList.getSelectedIndex();
+        int accountIndex = cb_transaction_accountList.getSelectedIndex();
         int currencyType = userAccountModelList.get(accountIndex).getCurrencyType();
         String currency = CardCurrencyType.getCurrencyType(currencyType);
         tf_transfer_currency.setText(currency);
@@ -250,7 +261,7 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void initAccountComboBox(JComboBox accountComboBox) {
-        accountComboBox.removeAllItems();
+        accountComboBox.removeAll();
         if(accountsReplyList.size() <= 0) {
             accountComboBox.addItem("No account found.");
             return;
@@ -259,6 +270,7 @@ public class CustomerMainView extends JFrame implements Observer {
             String accountNum = String.valueOf(userAccountModel.getAccountNum());
             accountComboBox.addItem(accountNum);
         }
+        accountComboBox.setSelectedIndex(0);
     }
 
     private void initPayeeComboBox() {
@@ -485,7 +497,7 @@ public class CustomerMainView extends JFrame implements Observer {
     private void btn_transfer_transferActionPerformed(ActionEvent e) {
         // amounts validator
         Double balance = Double.parseDouble(tf_transfer_balance.getText().trim());
-        Double amounts = Double.parseDouble(tf_transfer_amounts.getText().trim()) * -1;
+        Double amounts = Double.parseDouble(tf_transfer_amounts.getText().trim());
         String postScript = tf_transfer_postScript.getText();
         int pin = Integer.parseInt(new String(pf_transfer_PIN.getPassword()));
         if(balance <= 0) {
@@ -514,7 +526,12 @@ public class CustomerMainView extends JFrame implements Observer {
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return;
         }
-        initTransactionInfo();
+        initAccountReply();
+        initHomePage();
+        initProfilePage();
+        initTransactionPage();
+        initPayeePage();
+        initTransferPage();
     }
 
     private void cb_transaction_accountListActionPerformed(ActionEvent e) {
@@ -956,18 +973,17 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     @Override
-    public int updateBalance() {
+    public void updateBalance() {
         Double balance = this.userTransferModel.getAccount().getBalance();
         Double amounts = this.userTransferModel.getAmounts();
         Double currentBalance = balance - amounts;
         String payeeName = this.userTransferModel.getPayee().getName();
         String currencyType = CardCurrencyType.getCurrencyType(this.userTransferModel.getCurrencyType());
 
-        int selection = JOptionPane.showConfirmDialog(
-                new JFrame(),"BalanceObserver: Are you sure to transfer to " + payeeName +
-                        " with " + amounts + " " + currencyType + " ? " + "And your balance will be " + currentBalance,
+        JOptionPane.showMessageDialog(
+                new JFrame(),"BalanceObserver: A transaction refers to transfer to " + payeeName +
+                        " with " + amounts + " " + currencyType + " " + "And your balance will be " + currentBalance,
                 "Deletion Confirmation",
-                JOptionPane.YES_NO_OPTION);
-        return selection;
+                JOptionPane.INFORMATION_MESSAGE);
     }
 }
