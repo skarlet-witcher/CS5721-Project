@@ -1,5 +1,7 @@
 package service;
 
+import model.StaffLoginModel;
+
 public interface IStaffLoginService {
-    void staffLogin(Long staffId, String pwd);
+    boolean staffLogin(StaffLoginModel staffLoginModel) throws Exception;
 }

@@ -79,6 +79,18 @@ public class UserDao implements IUserDao {
     }
 
     @Override
+    public void createUser(UserEntity userEntity) {
+        try {
+            session.getTransaction().begin();
+            session.save(userEntity);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+    }
+
+    @Override
     public UserEntity selectUserByUserId(Long userId) {
         try {
             session.getTransaction().begin();

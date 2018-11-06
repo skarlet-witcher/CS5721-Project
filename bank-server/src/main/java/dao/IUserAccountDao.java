@@ -19,4 +19,5 @@ public interface IUserAccountDao {
 
     Integer updateUserAccountByBalanceAndIban(Double balance, String iban);
 
+    void createUserAccount(UserAccountEntity userAccountEntity);
 }

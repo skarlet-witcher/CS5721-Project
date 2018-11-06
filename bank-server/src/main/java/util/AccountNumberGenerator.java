@@ -22,7 +22,7 @@ public class AccountNumberGenerator {
     public long generateAccountNumber() {
         long currentAccountNumber = 1000000001L;
         Long accountNumber = UserAccountDao.getInstance().getBiggestUserAccountNumber();
-        if(accountNumber != null) {
+        if(accountNumber != null && accountNumber != 0) {
             currentAccountNumber = accountNumber + 1L;
         }
         return currentAccountNumber;
