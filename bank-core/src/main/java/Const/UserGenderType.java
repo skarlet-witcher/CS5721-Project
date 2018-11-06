@@ -1,8 +1,8 @@
 package Const;
 
 public class UserGenderType {
-    public static final int WOMAN = 0;
-    public static final int MAN = 1;
+    public static final int FEMALE = 0;
+    public static final int MALE = 1;
 
     public static String getGenderType(int typeNum) {
         switch (typeNum) {

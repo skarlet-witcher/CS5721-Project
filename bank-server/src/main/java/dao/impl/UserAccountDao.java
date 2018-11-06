@@ -156,4 +156,17 @@ public class UserAccountDao implements IUserAccountDao {
         }
     }
 
+    @Override
+    public void createUserAccount(UserAccountEntity userAccountEntity) {
+        try{
+            session.getTransaction().begin();
+            session.save(userAccountEntity);
+            session.getTransaction().commit();
+        }catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return;
+        }
+    }
+
 }

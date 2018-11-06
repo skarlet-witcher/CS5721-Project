@@ -40,4 +40,19 @@ public class UserCardDao implements IUserCardDao {
             return null;
         }
     }
+
+    @Override
+    public void createUserCard(UserCardEntity userCardEntity) {
+        try {
+            session.getTransaction().begin();
+            session.save(userCardEntity);
+
+            session.getTransaction().commit();
+
+        } catch (Exception E) {
+            E.printStackTrace();
+            // Rollback in case of an error occurred.
+            session.getTransaction().rollback();
+        }
+    }
 }

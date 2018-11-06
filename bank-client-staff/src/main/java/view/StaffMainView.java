@@ -7,12 +7,16 @@ package view;
 import bankStaff_rpc.ListUserApplyArchiveEntitiesResponse;
 import bankStaff_rpc.UserApplyArchiveEntitiesResponse;
 import net.miginfocom.swing.MigLayout;
-import rpc.client.StaffService;
+import service.impl.StaffService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+
+import static Const.UserAccountType.*;
+import static Const.UserType.EXISTING_USER;
+import static Const.UserType.NEW_USER;
 
 /**
  * @author xiangkai22
@@ -73,8 +77,23 @@ public class StaffMainView extends JFrame {
             model.addColumn("Account Type");
             model.addColumn("Email");
             model.addColumn("Phone");
+            model.addColumn("Existing user");
             for (UserApplyArchiveEntitiesResponse x : newApplysReplyList.getListUserApplyArchiveEntitiesResponseList()) {
-                model.addRow(new Object[]{x.getFirstName(), x.getLastName(), x.getAccountType(), x.getEmail(), x.getPhone()});
+                String userType = "";
+                String accountType = "";
+                if(x.getNewUserApply()==EXISTING_USER)
+                    userType = "Existing";
+                if(x.getNewUserApply() == NEW_USER)
+                    userType = "New";
+                if(x.getAccountType() == PERSONAL_ACCOUNT)
+                    accountType = "Personal";
+                if(x.getAccountType() == YOUNG_SAVER_ACCOUNT)
+                    accountType = "Young saver";
+                if(x.getAccountType() == GOLDEN_ACCOUNT)
+                    accountType = "Golden age";
+                if(x.getAccountType() == STUDENT_ACCOUNT)
+                    accountType = "Student";
+                model.addRow(new Object[]{x.getFirstName(), x.getLastName(), accountType, x.getEmail(), x.getPhone(), userType});
             }
             table_requestTable.setModel(model);
 
@@ -149,8 +168,8 @@ public class StaffMainView extends JFrame {
 //                            "First Name", "Last Name", "Account Type", "Email", "Contact Number"
 //                        }
 //                    ));
-                    table_requestTable.setMinimumSize(new Dimension(500, 100));
-                    table_requestTable.setPreferredSize(new Dimension(1000, 100));
+                    table_requestTable.setMinimumSize(new Dimension(500, 1000));
+                    table_requestTable.setPreferredSize(new Dimension(1000, 1000));
                     scrollPane1.setViewportView(table_requestTable);
                 }
                 requestPanel.add(scrollPane1, "cell 0 0,wmin 800");

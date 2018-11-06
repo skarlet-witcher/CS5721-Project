@@ -24,9 +24,7 @@ public class UserApplyDao implements IUserApplyDao {
     public void requestAccountApply(UserApplyArchiveEntity UserApplyArchiveEntity) {
         try {
             session.getTransaction().begin();
-
             session.save(UserApplyArchiveEntity);
-
             session.getTransaction().commit();
 
         } catch (Exception E) {

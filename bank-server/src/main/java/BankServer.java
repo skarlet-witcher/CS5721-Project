@@ -2,6 +2,7 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import rpc.impl.UserCustomerImpl;
 import rpc.impl.UserCustomerLoginImpl;
+import rpc.impl.bank_staff.AcceptApplicationImpl;
 import rpc.impl.bank_staff.BankStaffLoginImpl;
 import rpc.impl.bank_staff.BankStaffServiceImpl;
 
@@ -33,6 +34,7 @@ public class BankServer {
                 .addService(new UserCustomerImpl())
                 .addService(new BankStaffLoginImpl())
                 .addService(new BankStaffServiceImpl())
+                .addService(new AcceptApplicationImpl())
                 .build()
                 .start();
         logger.info("Server started, listening on " + SERVER_PORT);

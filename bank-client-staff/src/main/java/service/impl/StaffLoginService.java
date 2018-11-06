@@ -3,7 +3,7 @@ package service.impl;
 import bankStaff_rpc.StaffLoginRequest;
 import bankStaff_rpc.StaffLoginResponse;
 import model.StaffLoginModel;
-import rpc.client.StaffLoginRpc;
+import rpc.client.StaffRpc;
 import service.IStaffLoginService;
 
 public class StaffLoginService implements IStaffLoginService {
@@ -18,7 +18,7 @@ public class StaffLoginService implements IStaffLoginService {
     @Override
     public boolean staffLogin(StaffLoginModel staffLoginModel) throws Exception {
 
-        StaffLoginResponse staffLoginResponse = StaffLoginRpc.getInstance().login(
+        StaffLoginResponse staffLoginResponse = StaffRpc.getInstance().login(
                 StaffLoginRequest.newBuilder().setStaffId(staffLoginModel.getStaffId())
                 .setPassword(staffLoginModel.getPassword())
                 .build());

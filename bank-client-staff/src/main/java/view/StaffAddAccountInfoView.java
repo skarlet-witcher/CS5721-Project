@@ -4,13 +4,25 @@
 
 package view;
 
+import Const.UserGenderType;
+import Const.UserStatusType;
+import bankStaff_rpc.AcceptedResponse;
 import bankStaff_rpc.UserApplyArchiveEntitiesResponse;
 import net.miginfocom.swing.MigLayout;
+import service.impl.StaffService;
 import util.TimestampConvertHelper;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+
+import static Const.CardType.*;
+import static Const.UserAccountType.*;
+import static Const.UserApplyType.DENY;
+import static Const.UserApplyType.PASS;
+import static Const.UserApplyType.PENDING_FOR_BEING_APPROVED;
+import static Const.UserGenderType.*;
+import static Const.UserStatusType.*;
 
 /**
  * @author xiangkai22
@@ -54,13 +66,15 @@ public class StaffAddAccountInfoView extends JFrame {
     private JTextField tf_applyTime;
     private JLabel lbl_userId;
     private JTextField tf_userId;
-    private JLabel lbl_status;
+    private JLabel lbl_accountStatus;
     private JTextField tf_status;
     private JButton btn_accept;
     private JButton btn_decline;
     private JButton btn_back;
+    UserApplyArchiveEntitiesResponse userApplyArchiveEntitiesResponse = null;
     public StaffAddAccountInfoView(long staffId, UserApplyArchiveEntitiesResponse userApplyArchiveEntitiesResponse) {
         initComponents();
+        this.userApplyArchiveEntitiesResponse = userApplyArchiveEntitiesResponse;
         fetchValueIntoTextField(userApplyArchiveEntitiesResponse);
         setStaffId(staffId);
 
@@ -71,8 +85,6 @@ public class StaffAddAccountInfoView extends JFrame {
         tf_firstName.setText(x.getFirstName());
         tf_lastName.setText(x.getLastName());
         tf_gender.setText(String.valueOf(x.getGender()));
-        tf_accountType.setText(String.valueOf(x.getAccountType()));
-        tf_cardType.setText(String.valueOf(x.getCardType()));
         tf_dob.setText(TimestampConvertHelper.rpcToMysql(x.getBirthDate()).toString());
         tf_email.setText(x.getEmail());
         tf_address.setText(x.getAddress());
@@ -86,7 +98,28 @@ public class StaffAddAccountInfoView extends JFrame {
         tf_parentFirstName.setText(x.getParentFirstName());
         tf_parentLastName.setText(x.getParentLastName());
 
+        String accountStatus = "";
+        if(x.getStatus() == PENDING_FOR_BEING_APPROVED) accountStatus = "PENDING_FOR_BEING_APPROVED";
+        if(x.getStatus() == PASS) accountStatus = "PASS";
+        if(x.getStatus() == DENY) accountStatus = "DENY";
+        tf_status.setText(String.valueOf(accountStatus));
 
+        String accountType = "";
+        if(x.getAccountType() == PERSONAL_ACCOUNT) accountType = "PERSONAL_ACCOUNT";
+        if(x.getAccountType() == STUDENT_ACCOUNT ) accountType = "STUDENT_ACCOUNT";
+        if(x.getAccountType() == YOUNG_SAVER_ACCOUNT) accountType = "Deletion YOUNG_SAVER_ACCOUNT";
+        if(x.getAccountType() == GOLDEN_ACCOUNT) accountType = "GOLDEN_ACCOUNT";
+        tf_accountType.setText(String.valueOf(accountType));
+
+        String cardType = "";
+        if(x.getCardType() == DEBIT_CARD) cardType = "DEBIT_CARD";
+        if(x.getCardType() == CREDIT_CARD) cardType = "CREDIT_CARD";
+        tf_cardType.setText(String.valueOf(cardType));
+
+        String gender = "";
+        if(x.getGender() == MALE) gender = "MALE";
+        if(x.getGender() == FEMALE) gender = "FEMALE";
+        tf_gender.setText(String.valueOf(gender));
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
@@ -101,6 +134,19 @@ public class StaffAddAccountInfoView extends JFrame {
 
     private void btn_acceptActionPerformed(ActionEvent e) {
         // TODO add your code here
+        try{
+            AcceptedResponse response = StaffService.getInstance().acceptAplication(userApplyArchiveEntitiesResponse.getId());
+            if(response.getIsAccepted()){
+                JOptionPane.showMessageDialog(null,
+                        "Accept an application successfully",
+                        "Success Message", JOptionPane.PLAIN_MESSAGE);
+            }
+        }catch (Exception ee){
+            JOptionPane.showMessageDialog(null,
+                    "Fail to accept an application. Please contact an administrator",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     private void btn_declineActionPerformed(ActionEvent e) {
@@ -145,7 +191,7 @@ public class StaffAddAccountInfoView extends JFrame {
         tf_applyTime = new JTextField();
         lbl_userId = new JLabel();
         tf_userId = new JTextField();
-        lbl_status = new JLabel();
+        lbl_accountStatus = new JLabel();
         tf_status = new JTextField();
         btn_accept = new JButton();
         btn_decline = new JButton();
@@ -299,9 +345,9 @@ public class StaffAddAccountInfoView extends JFrame {
         contentPane.add(lbl_userId, "cell 1 11");
         contentPane.add(tf_userId, "cell 2 11");
 
-        //---- lbl_status ----
-        lbl_status.setText("Status");
-        contentPane.add(lbl_status, "cell 1 12");
+        //---- lbl_accountStatus ----
+        lbl_accountStatus.setText("Account status");
+        contentPane.add(lbl_accountStatus, "cell 1 12");
         contentPane.add(tf_status, "cell 2 12");
 
         //---- btn_accept ----

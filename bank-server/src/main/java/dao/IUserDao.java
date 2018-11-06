@@ -10,6 +10,8 @@ public interface IUserDao {
 
     UserEntity selectUserByIdAndPin(Long id, String pin);
 
+    void createUser(UserEntity userEntity);
+
     UserEntity selectUserByUserId(Long userId);
 
     UserEntity selectUserByUserIdEmailDOB(Long userId, String email, Timestamp timestamp);

@@ -2,7 +2,6 @@ package service.impl;
 
 import Const.*;
 import model.*;
-import org.hibernate.annotations.common.reflection.java.generics.IdentityTypeEnvironment;
 import org.junit.jupiter.api.Test;
 import service.ICustomerApplyService;
 
@@ -19,7 +18,7 @@ class CustomerApplyServiceTest {
 
         userApplyNewPersonalAccountBaseModel.setFirstName("xiangkai");
         userApplyNewPersonalAccountBaseModel.setLastName("tang");
-        userApplyNewPersonalAccountBaseModel.setGender(UserGenderType.MAN);
+        userApplyNewPersonalAccountBaseModel.setGender(UserGenderType.MALE);
         userApplyNewPersonalAccountBaseModel.setIdentityType(UserIdentityType.PASSPORT);
         userApplyNewPersonalAccountBaseModel.setIdentityNum("12312343");
         userApplyNewPersonalAccountBaseModel.setAccountType(UserAccountType.PERSONAL_ACCOUNT);
@@ -45,7 +44,7 @@ class CustomerApplyServiceTest {
         userApplyNewStudentAccountBaseModel.setAccountType(UserAccountType.STUDENT_ACCOUNT);
         userApplyNewStudentAccountBaseModel.setCardType(CardType.DEBIT_CARD);
         userApplyNewStudentAccountBaseModel.setBirthDate(Timestamp.valueOf("1970-01-01 01:00:00"));
-        userApplyNewStudentAccountBaseModel.setGender(UserGenderType.MAN);
+        userApplyNewStudentAccountBaseModel.setGender(UserGenderType.MALE);
         userApplyNewStudentAccountBaseModel.setAddress("troy village");
         userApplyNewStudentAccountBaseModel.setEmail("empathytx@gmail.com");
         userApplyNewStudentAccountBaseModel.setContactNum("083999232");
@@ -70,7 +69,7 @@ class CustomerApplyServiceTest {
         userApplyNewYoungSaverAccountBaseModel.setAccountType(UserAccountType.YOUNG_SAVER_ACCOUNT);
         userApplyNewYoungSaverAccountBaseModel.setCardType(CardType.DEBIT_CARD);
         userApplyNewYoungSaverAccountBaseModel.setBirthDate(Timestamp.valueOf("1999-01-01 01:00:00"));
-        userApplyNewYoungSaverAccountBaseModel.setGender(UserGenderType.WOMAN);
+        userApplyNewYoungSaverAccountBaseModel.setGender(UserGenderType.FEMALE);
         userApplyNewYoungSaverAccountBaseModel.setAddress("village");
         userApplyNewYoungSaverAccountBaseModel.setEmail("dsaff@qq.com");
         userApplyNewYoungSaverAccountBaseModel.setContactNum("038223334");
@@ -94,7 +93,7 @@ class CustomerApplyServiceTest {
         userApplyNewGoldenAccountBaseModel.setAccountType(UserAccountType.GOLDEN_ACCOUNT);
         userApplyNewGoldenAccountBaseModel.setCardType(CardType.DEBIT_CARD);
         userApplyNewGoldenAccountBaseModel.setBirthDate(Timestamp.valueOf("1970-01-01 01:00:00"));
-        userApplyNewGoldenAccountBaseModel.setGender(UserGenderType.MAN);
+        userApplyNewGoldenAccountBaseModel.setGender(UserGenderType.MALE);
         userApplyNewGoldenAccountBaseModel.setAddress("village");
         userApplyNewGoldenAccountBaseModel.setEmail("emaafwa@hotmail.com");
         userApplyNewGoldenAccountBaseModel.setContactNum("31231232");
