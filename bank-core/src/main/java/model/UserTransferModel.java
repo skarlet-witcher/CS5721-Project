@@ -1,25 +1,27 @@
 package model;
 
+import java.util.List;
+
 public class UserTransferModel {
-    private UserPayeeModel payee;
-    private UserAccountModel account;
+    private List<UserPayeeModel> payee;
+    private List<UserAccountModel> account;
     private Integer currencyType;
     private Double amounts;
     private String postScript;
 
-    public UserPayeeModel getPayee() {
+    public List<UserPayeeModel> getPayee() {
         return payee;
     }
 
-    public void setPayee(UserPayeeModel payee) {
+    public void setPayee(List<UserPayeeModel> payee) {
         this.payee = payee;
     }
 
-    public UserAccountModel getAccount() {
+    public List<UserAccountModel> getAccount() {
         return account;
     }
 
-    public void setAccount(UserAccountModel account) {
+    public void setAccount(List<UserAccountModel> account) {
         this.account = account;
     }
 

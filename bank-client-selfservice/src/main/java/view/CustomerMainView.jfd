@@ -198,13 +198,6 @@ new FormModel {
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 						"value": "cell 3 8"
 					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "btn_profile_deleteAccount"
-						"text": "Delete Account Apply"
-						"font": #Font0
-					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-						"value": "cell 2 10 2 1"
-					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "Profile"
 				} )
