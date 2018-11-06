@@ -73,7 +73,6 @@ public class CustomerMainView extends JFrame {
     private JTextField tf_profile_contactNumber;
     private JButton btn_profile_modify;
     private JButton btn_profile_revert;
-    private JButton btn_profile_deleteAccount;
     private JPanel transactionPanel;
     private JComboBox cb_transaction_accountList;
     private JComboBox<String> cb_transaction_filter;
@@ -149,6 +148,7 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initTransactionModel() {
+        this.userTransactionModelList.clear();
         for(UserTransactionsReply userTransactionsReply: userTransactionsReplyList) {
             UserTransactionModel userTransactionModel = new UserTransactionModel();
             userTransactionModel.setDate(TimestampConvertHelper.rpcToMysql(userTransactionsReply.getDate()));
@@ -169,9 +169,9 @@ public class CustomerMainView extends JFrame {
             userPayeeModel.setPayee_pk(userPayeesReply.getPayeePk());
             userPayeeModel.setIban(userPayeesReply.getIban());
             userPayeeModel.setName(userPayeesReply.getName());
-            userPayeeModel.setUserId(userPayeeModel.getUserId());
+            userPayeeModel.setUserId(userModel.getId());
 
-            userPayeeModelList.add(userPayeeModel);
+            this.userPayeeModelList.add(userPayeeModel);
         }
     }
 
@@ -402,23 +402,15 @@ public class CustomerMainView extends JFrame {
             tf_profile_contactNumber.grabFocus();
             return;
         }
-
-
-        String address = tf_profile_address.getText().trim();
-        String email = tf_profile_email.getText().trim();
-        String contactNum = tf_profile_contactNumber.getText().trim();
-        UserModel userModel = new UserModel();
-        userModel.setId(userModel.getId());
-        userModel.setUserId(userModel.getUserId());
-        userModel.setAddress(address);
-        userModel.setEmail(email);
-        userModel.setContactNum(contactNum);
+        userModel.setAddress(tf_profile_address.getText().trim());
+        userModel.setEmail(tf_profile_email.getText().trim());
+        userModel.setContactNum(tf_profile_contactNumber.getText().trim());
         try {
             CustomerProfileService.getInstance().modifyUserProfile(userModel);
             JOptionPane.showMessageDialog(null,
                     "Modify User profile complete",
                     "Info Message",JOptionPane.INFORMATION_MESSAGE);
-            userProfileReply = CustomerProfileService.getInstance().getUserProfile(userModel.getId());
+            initProfileInfo();
             updateProfileFields(userModel);
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
@@ -432,24 +424,23 @@ public class CustomerMainView extends JFrame {
         initAccountTable();
         initProfileInfo();
         initPayeeTable();
+        initPayeeComboBox();
     }
 
     private void btn_payee_removeActionPerformed(ActionEvent e) {
-        if(table_payee_payeeList.getSelectedRow() <= 0) {
+        if(table_payee_payeeList.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null,
                     "Please click a payee on the table to remove",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return;
         }
         int index = table_payee_payeeList.getSelectedRow();
-        UserPayeesReply payee = userPayeesReplyList.get(index);
-        UserPayeeModel userPayeeModel = new UserPayeeModel();
-        userPayeeModel.setPayee_pk(payee.getPayeePk());
-        userPayeeModel.setName(payee.getName());
-        userPayeeModel.setIban(payee.getIban());
-        userPayeeModel.setUserId(userModel.getId());
+
+        UserPayeeModel userPayeeModel = userPayeeModelList.get(index);
+        System.out.println("pk: " + userPayeeModel.getPayee_pk() + "userId " + userPayeeModel.getUserId() );
+
         int selection = JOptionPane.showConfirmDialog(
-                new JFrame(),"Are you sure to delete " + payee.getName() + " from your payee list?",
+                new JFrame(),"Are you sure to delete " + userPayeeModel.getName() + " from your payee list?",
                 "Deletion Confirmation",
                 JOptionPane.YES_NO_OPTION);
         if(selection == JOptionPane.YES_OPTION) {
@@ -458,14 +449,15 @@ public class CustomerMainView extends JFrame {
                 JOptionPane.showMessageDialog(null,
                         "Payee deletion complete",
                         "Info Message",JOptionPane.INFORMATION_MESSAGE);
-                initPayeeInfo();
-                initPayeeTable();
             } catch (Exception E) {
                 JOptionPane.showMessageDialog(null,
                         "Fail to delete payee," + E.getMessage() + " please contact admin",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            initPayeeInfo();
+            initPayeeTable();
+            initPayeeComboBox();
         }
     }
 
@@ -481,8 +473,8 @@ public class CustomerMainView extends JFrame {
 
     private void btn_transfer_transferActionPerformed(ActionEvent e) {
         // amounts validator
-        int balance = Integer.parseInt(tf_transfer_balance.getText().trim());
-        Double amounts = Double.parseDouble(tf_transfer_amounts.getText().trim());
+        Double balance = Double.parseDouble(tf_transfer_balance.getText().trim());
+        Double amounts = Double.parseDouble(tf_transfer_amounts.getText().trim()) * -1;
         String postScript = tf_transfer_postScript.getText();
         Long account_pk = accountsReplyList.get(cb_transfer_accountList.getSelectedIndex()).getAccountPk();
         Long payee_pk = userPayeesReplyList.get(cb_payee_payeeList.getSelectedIndex()).getPayeePk();
@@ -512,6 +504,7 @@ public class CustomerMainView extends JFrame {
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return;
         }
+        initTransactionInfo();
     }
 
     private void cb_transaction_accountListActionPerformed(ActionEvent e) {
@@ -549,7 +542,6 @@ public class CustomerMainView extends JFrame {
         tf_profile_contactNumber = new JTextField();
         btn_profile_modify = new JButton();
         btn_profile_revert = new JButton();
-        btn_profile_deleteAccount = new JButton();
         transactionPanel = new JPanel();
         cb_transaction_accountList = new JComboBox();
         cb_transaction_filter = new JComboBox<>();
@@ -752,11 +744,6 @@ public class CustomerMainView extends JFrame {
                 btn_profile_revert.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                 btn_profile_revert.addActionListener(e -> btn_profile_revertActionPerformed(e));
                 profilePanel.add(btn_profile_revert, "cell 3 8");
-
-                //---- btn_profile_deleteAccount ----
-                btn_profile_deleteAccount.setText("Delete Account Apply");
-                btn_profile_deleteAccount.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                profilePanel.add(btn_profile_deleteAccount, "cell 2 10 2 1");
             }
             customerTabPane.addTab("Profile", profilePanel);
 
