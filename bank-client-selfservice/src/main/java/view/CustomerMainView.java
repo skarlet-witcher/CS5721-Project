@@ -24,6 +24,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,11 +39,11 @@ public class CustomerMainView extends JFrame {
     private UserProfileReply userProfileReply;
 
     // model for data binding
-    private List<UserAccountModel> userAccountModelList;
-    private List<UserTransactionModel> userTransactionModelList;
-    private List<UserPayeeModel> userPayeeModelList;
-    private UserModel userModel;
-    private UserTransferModel userTransferModel;
+    private List<UserAccountModel> userAccountModelList = new ArrayList<>();
+    private List<UserTransactionModel> userTransactionModelList = new ArrayList<>();
+    private List<UserPayeeModel> userPayeeModelList = new ArrayList<>();
+    private UserModel userModel = new UserModel();
+    private UserTransferModel userTransferModel = new UserTransferModel();
 
 
 
@@ -124,7 +125,7 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initAccountModel() {
-        for(UserAccountsReply userAccountsReply : accountsReplyList) {
+        for(UserAccountsReply userAccountsReply : this.accountsReplyList) {
             UserAccountModel userAccountModel = new UserAccountModel();
             userAccountModel.setAccount_pk(userAccountsReply.getAccountPk());
             userAccountModel.setAccountNum(userAccountsReply.getAccountNumber());
@@ -133,18 +134,18 @@ public class CustomerMainView extends JFrame {
             userAccountModel.setBalance(userAccountsReply.getBalance());
             userAccountModel.setStatus(userAccountsReply.getStatus());
 
-            userAccountModelList.add(userAccountModel);
+            this.userAccountModelList.add(userAccountModel);
         }
     }
 
     private void initUserModel() {
-        userModel.setFirstName(userProfileReply.getFirstName());
-        userModel.setLastName(userProfileReply.getLastName());
-        userModel.setGender(userProfileReply.getGender());
-        userModel.setBirthDate(TimestampConvertHelper.rpcToMysql(userProfileReply.getBirthDate()));
-        userModel.setAddress(userProfileReply.getAddress());
-        userModel.setEmail(userProfileReply.getEmail());
-        userModel.setContactNum(userProfileReply.getPhone());
+        this.userModel.setFirstName(userProfileReply.getFirstName());
+        this.userModel.setLastName(userProfileReply.getLastName());
+        this.userModel.setGender(userProfileReply.getGender());
+        this.userModel.setBirthDate(TimestampConvertHelper.rpcToMysql(userProfileReply.getBirthDate()));
+        this.userModel.setAddress(userProfileReply.getAddress());
+        this.userModel.setEmail(userProfileReply.getEmail());
+        this.userModel.setContactNum(userProfileReply.getPhone());
     }
 
     private void initTransactionModel() {
@@ -157,12 +158,12 @@ public class CustomerMainView extends JFrame {
             userTransactionModel.setTransactionNum(userTransactionsReply.getTransactionNo());
             userTransactionModel.setOperation_type(userTransactionsReply.getOperateType());
 
-            userTransactionModelList.add(userTransactionModel);
+            this.userTransactionModelList.add(userTransactionModel);
         }
     }
 
     private void initPayeeModel() {
-        userPayeeModelList.clear();
+        this.userPayeeModelList.clear();
         for(UserPayeesReply userPayeesReply: userPayeesReplyList) {
             UserPayeeModel userPayeeModel = new UserPayeeModel();
             userPayeeModel.setPayee_pk(userPayeesReply.getPayeePk());
@@ -177,11 +178,11 @@ public class CustomerMainView extends JFrame {
     private void initTransferModel() {
         userTransferModel.setAccount(this.userAccountModelList);
         userTransferModel.setPayee(this.userPayeeModelList);
-        // TODO currency type ??
-        // TODO balance ??
+
     }
 
     private void initHomePage() {
+        initAccountModel();
         initAccountTable();
     }
 
@@ -200,6 +201,7 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initTransferPage() {
+        initTransferModel();
         initPayeeComboBox();
         initAccountComboBox(cb_transfer_accountList);
         initCurrency();
@@ -217,6 +219,7 @@ public class CustomerMainView extends JFrame {
                     "Fail to get transaction list due to " + E.getMessage(),
                     "Error Message",JOptionPane.ERROR_MESSAGE);
         }
+        initTransactionModel();
         initTransactionTable();
     }
 
@@ -271,7 +274,6 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initAccountTable() {
-        System.out.println("front-end: check the size of result: " + accountsReplyList.size());
         DefaultTableModel accountListModel = (DefaultTableModel)table_home_accountTable.getModel();
         clearTable(accountListModel);
         for(UserAccountModel Account: this.userAccountModelList) {
@@ -291,14 +293,14 @@ public class CustomerMainView extends JFrame {
     private void initProfileInfo() {
         try {
             userProfileReply = CustomerProfileService.getInstance().getUserProfile(userModel.getId());
-            initUserModel();
-            updateProfileFields(userModel);
 
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
                     "Fail to acquire user profile, please contact admin",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
         }
+        initUserModel();
+        updateProfileFields(userModel);
     }
 
     private void initPayeeInfo() {
@@ -307,12 +309,12 @@ public class CustomerMainView extends JFrame {
         userPayeeModel.setUserId(userModel.getId());
         try {
             userPayeesReplyList = CustomerPayeeService.getInstance().getPayeeList(userPayeeModel);
-            initPayeeModel();
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
                     "Fail to acquire user payee, please contact admin",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
         }
+        initPayeeModel();
     }
 
     private void initPayeeTable() {
@@ -336,13 +338,13 @@ public class CustomerMainView extends JFrame {
     }
 
     private void updateProfileFields(UserModel userModel) {
-        tf_profile_userId.setText(String.valueOf(userProfileReply.getUserId()));
-        tf_profile_firstName.setText(userProfileReply.getFirstName());
-        tf_profile_lastName.setText(userProfileReply.getLastName());
-        tf_profile_address.setText(userProfileReply.getAddress());
-        tf_profile_contactNumber.setText(userProfileReply.getPhone());
-        tf_profile_email.setText(userProfileReply.getEmail());
-        tf_profile_gender.setText(UserGenderType.getGenderType(userProfileReply.getGender()));
+        tf_profile_userId.setText(String.valueOf(userModel.getUserId()));
+        tf_profile_firstName.setText(userModel.getFirstName());
+        tf_profile_lastName.setText(userModel.getLastName());
+        tf_profile_address.setText(userModel.getAddress());
+        tf_profile_contactNumber.setText(userModel.getContactNum());
+        tf_profile_email.setText(userModel.getEmail());
+        tf_profile_gender.setText(UserGenderType.getGenderType(userModel.getGender()));
     }
 
     private void button1ActionPerformed(ActionEvent e) {
