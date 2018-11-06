@@ -2,27 +2,37 @@ package model;
 
 import java.util.List;
 
-public class UserTransferModel {
-    private List<UserPayeeModel> payee;
-    private List<UserAccountModel> account;
+public class UserTransferModel implements Subject {
+    private UserPayeeModel payee;
+    private UserAccountModel account;
     private Integer currencyType;
     private Double amounts;
     private String postScript;
+    private List<Observer> observers;
 
-    public List<UserPayeeModel> getPayee() {
+
+    public UserPayeeModel getPayee() {
         return payee;
     }
 
-    public void setPayee(List<UserPayeeModel> payee) {
+    public void setPayee(UserPayeeModel payee) {
         this.payee = payee;
     }
 
-    public List<UserAccountModel> getAccount() {
+    public UserAccountModel getAccount() {
         return account;
     }
 
-    public void setAccount(List<UserAccountModel> account) {
+    public void setAccount(UserAccountModel account) {
         this.account = account;
+    }
+
+    public List<Observer> getObservers() {
+        return observers;
+    }
+
+    public void setObservers(List<Observer> observers) {
+        this.observers = observers;
     }
 
     public Integer getCurrencyType() {
@@ -39,6 +49,7 @@ public class UserTransferModel {
 
     public void setAmounts(Double amounts) {
         this.amounts = amounts;
+        balanceChanged();
     }
 
     public String getPostScript() {
@@ -47,5 +58,30 @@ public class UserTransferModel {
 
     public void setPostScript(String postScript) {
         this.postScript = postScript;
+    }
+
+    public void balanceChanged() {
+        notifyObserver();
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        int index = observers.indexOf(o);
+        if(index >= 0) {
+            observers.remove(o);
+        }
+    }
+
+    @Override
+    public void notifyObserver() {
+        for(int i = 0; i < observers.size(); i++) {
+            Observer observer = observers.get(i);
+            observer.updateBalance();
+        }
     }
 }

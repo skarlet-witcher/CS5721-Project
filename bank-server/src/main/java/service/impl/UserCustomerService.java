@@ -194,7 +194,7 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public void transfer(Long payee_pk, Long user_pk, Long account_pk, Double amount, String pin, String postScript, int currencyType, int operateSource) throws Exception {
+    public void transfer(Long payee_pk, Long user_pk, Long account_pk, Double amount, String pin, String postScript, int currencyType) throws Exception {
         UserEntity result_pin = new UserEntity();
         try {
             // validate pin
@@ -239,7 +239,7 @@ public class UserCustomerService implements IUserCustomerService {
         // update in user history
         Double balance = userAccountEntity.getBalance();
         userCustomerHistoryService.addNewTransferHistory(user_pk, account_pk, payee_pk, postScript,
-                balance, amount, currencyType, UserOperateType.TRANSFER , operateSource, UserOperateStatusType.SUCCESS);
+                balance, amount, currencyType, UserOperateType.TRANSFER , UserOperateStatusType.SUCCESS);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package service;
 
+import model.UserTransferModel;
+
 public interface ICustomerTransferService {
-    void transfer(Long user_pk, Long account_pk, Long payee_pk,
-                  Double amount, int pin, String postScript,
-                  int currencyType, int operateSource) throws Exception;
+    void transfer(UserTransferModel userTransferModel, int pin) throws Exception;
 }

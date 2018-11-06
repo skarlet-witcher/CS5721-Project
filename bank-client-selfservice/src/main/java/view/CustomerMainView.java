@@ -9,6 +9,7 @@ import java.awt.event.*;
 import Const.*;
 import model.*;
 import net.miginfocom.swing.MigLayout;
+import org.hibernate.type.CurrencyType;
 import rpc.UserAccountsReply;
 import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
@@ -30,7 +31,7 @@ import java.util.List;
 /**
  * @author xiangkai22
  */
-public class CustomerMainView extends JFrame {
+public class CustomerMainView extends JFrame implements Observer {
 
     // reply from server
     private List<UserAccountsReply> accountsReplyList;
@@ -86,7 +87,7 @@ public class CustomerMainView extends JFrame {
     private JTable table_payee_payeeList;
     private JPanel transferPanel;
     private JLabel label7;
-    private JComboBox cb_payee_payeeList;
+    private JComboBox cb_transfer_payeeList;
     private JLabel label8;
     private JComboBox cb_transfer_accountList;
     private JLabel label11;
@@ -112,7 +113,12 @@ public class CustomerMainView extends JFrame {
         initTransactionPage();
         initPayeePage();
         initTransferPage();
+        registerObserver();
 
+    }
+
+    private void registerObserver() {
+        this.userTransferModel.registerObserver(this);
     }
 
     private void initVariables(long userId, long user_pk, String firstName, String lastLoginTime, List<UserAccountsReply> accountList) {
@@ -175,12 +181,6 @@ public class CustomerMainView extends JFrame {
         }
     }
 
-    private void initTransferModel() {
-        userTransferModel.setAccount(this.userAccountModelList);
-        userTransferModel.setPayee(this.userPayeeModelList);
-
-    }
-
     private void initHomePage() {
         initAccountModel();
         initAccountTable();
@@ -201,7 +201,6 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initTransferPage() {
-        initTransferModel();
         initPayeeComboBox();
         initAccountComboBox(cb_transfer_accountList);
         initCurrency();
@@ -263,13 +262,13 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initPayeeComboBox() {
-        cb_payee_payeeList.removeAllItems();
+        cb_transfer_payeeList.removeAllItems();
         if(userPayeesReplyList.size() <= 0) {
-            cb_payee_payeeList.addItem("No payee found");
+            cb_transfer_payeeList.addItem("No payee found");
             return;
         }
         for(UserPayeeModel userPayeeModel: userPayeeModelList) {
-            cb_payee_payeeList.addItem(userPayeeModel.getName());
+            cb_transfer_payeeList.addItem(userPayeeModel.getName());
         }
     }
 
@@ -328,6 +327,18 @@ public class CustomerMainView extends JFrame {
                     userPayeeModel.getName()
             });
         }
+    }
+
+    private UserTransferModel initTransferModel(Double balance, Double amounts, String postScript) {
+        UserAccountModel userAccountModel = userAccountModelList.get(cb_transfer_accountList.getSelectedIndex());
+        UserPayeeModel userPayeeModel = userPayeeModelList.get(cb_transfer_payeeList.getSelectedIndex());
+        userAccountModel.setBalance(balance);
+        userTransferModel.setPayee(userPayeeModel);
+        userTransferModel.setAccount(userAccountModel);
+        userTransferModel.setCurrencyType(userAccountModel.getCurrencyType());
+        userTransferModel.setPostScript(postScript);
+        userTransferModel.setAmounts(amounts);
+        return userTransferModel;
     }
 
     private void clearTable(DefaultTableModel payeeTableModel) {
@@ -476,11 +487,7 @@ public class CustomerMainView extends JFrame {
         Double balance = Double.parseDouble(tf_transfer_balance.getText().trim());
         Double amounts = Double.parseDouble(tf_transfer_amounts.getText().trim()) * -1;
         String postScript = tf_transfer_postScript.getText();
-        Long account_pk = accountsReplyList.get(cb_transfer_accountList.getSelectedIndex()).getAccountPk();
-        Long payee_pk = userPayeesReplyList.get(cb_payee_payeeList.getSelectedIndex()).getPayeePk();
         int pin = Integer.parseInt(new String(pf_transfer_PIN.getPassword()));
-        int currencyType = accountsReplyList.get(cb_transfer_accountList.getSelectedIndex()).getCurrencyType();
-        int operateSource = UserOperateSourceType.SELF_SERVICE;
         if(balance <= 0) {
             JOptionPane.showMessageDialog(null,
                     "Not enough balance to be transferred.",
@@ -493,8 +500,11 @@ public class CustomerMainView extends JFrame {
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        UserTransferModel userTransferModel = initTransferModel(balance, amounts, postScript);
+
         try {
-            CustomerTransferService.getInstance().transfer(userModel.getId(), account_pk, payee_pk, amounts, pin, postScript, currencyType, operateSource);
+            CustomerTransferService.getInstance().transfer(userTransferModel, pin);
             JOptionPane.showMessageDialog(null,
                     "Transfer Successful",
                     "Info Message",JOptionPane.INFORMATION_MESSAGE);
@@ -555,7 +565,7 @@ public class CustomerMainView extends JFrame {
         table_payee_payeeList = new JTable();
         transferPanel = new JPanel();
         label7 = new JLabel();
-        cb_payee_payeeList = new JComboBox();
+        cb_transfer_payeeList = new JComboBox();
         label8 = new JLabel();
         cb_transfer_accountList = new JComboBox();
         label11 = new JLabel();
@@ -877,7 +887,7 @@ public class CustomerMainView extends JFrame {
                 label7.setText("Payee:");
                 label7.setFont(new Font("Segoe UI", Font.PLAIN, 18));
                 transferPanel.add(label7, "cell 1 0");
-                transferPanel.add(cb_payee_payeeList, "cell 2 0");
+                transferPanel.add(cb_transfer_payeeList, "cell 2 0");
 
                 //---- label8 ----
                 label8.setText("Account Number: ");
@@ -945,4 +955,19 @@ public class CustomerMainView extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
+    @Override
+    public int updateBalance() {
+        Double balance = this.userTransferModel.getAccount().getBalance();
+        Double amounts = this.userTransferModel.getAmounts();
+        Double currentBalance = balance - amounts;
+        String payeeName = this.userTransferModel.getPayee().getName();
+        String currencyType = CardCurrencyType.getCurrencyType(this.userTransferModel.getCurrencyType());
+
+        int selection = JOptionPane.showConfirmDialog(
+                new JFrame(),"BalanceObserver: Are you sure to transfer to " + payeeName +
+                        " with " + amounts + " " + currencyType + " ? " + "And your balance will be " + currentBalance,
+                "Deletion Confirmation",
+                JOptionPane.YES_NO_OPTION);
+        return selection;
+    }
 }

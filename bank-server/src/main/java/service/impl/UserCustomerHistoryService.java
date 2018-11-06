@@ -92,12 +92,12 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
 
     @Override
     public void addNewTransferHistory(Long user_pk, Long account_pk, Long payee_pk, String postScript, Double balance, Double amounts,
-                                      int currencyType, int operationType, int operateSource, int operateStatus) {
+                                      int currencyType, int operationType, int operateStatus) {
         UserHistoryEntity userHistoryEntity = new UserHistoryEntity();
         userHistoryEntity.setOperateNo(operationNoGenerator.generateOperationNo());
         userHistoryEntity.setOperateType(operationType);
         userHistoryEntity.setOperateTime(new Timestamp(new Date().getTime()));
-        userHistoryEntity.setOperateSource(operateSource);
+        userHistoryEntity.setOperateSource(UserOperateSourceType.SELF_SERVICE);
         userHistoryEntity.setAmount(amounts);
         userHistoryEntity.setCurrencyType(currencyType);
         userHistoryEntity.setBalance(balance);

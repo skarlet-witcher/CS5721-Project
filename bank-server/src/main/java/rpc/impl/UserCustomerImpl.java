@@ -137,10 +137,9 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
         String pin = String.valueOf(request.getPin());
         String postScript = request.getPostScript();
         int currencyType = request.getCurrencyType();
-        int operateSource = request.getOperateSource();
 
         try {
-            UserCustomerService.getInstance().transfer(payee_pk, user_pk, account_pk, amount, pin, postScript, currencyType, operateSource);
+            UserCustomerService.getInstance().transfer(payee_pk, user_pk, account_pk, amount, pin, postScript, currencyType);
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .build());
 

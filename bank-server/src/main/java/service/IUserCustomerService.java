@@ -20,7 +20,7 @@ public interface IUserCustomerService {
 
     void removePayee(Long user_pk, Long userId) throws Exception;
 
-    void transfer(Long payee_pk, Long user_pk, Long account_pk, Double amount, String pin, String postScript, int currencyType, int operateSource) throws Exception;
+    void transfer(Long payee_pk, Long user_pk, Long account_pk, Double amount, String pin, String postScript, int currencyType) throws Exception;
 
     List<UserTransactionsReply> getTransaction(Long user_pk, Long account_pk, int date);
 }
