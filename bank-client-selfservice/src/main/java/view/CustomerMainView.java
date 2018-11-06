@@ -7,8 +7,7 @@ package view;
 import java.awt.event.*;
 
 import Const.*;
-import model.UserModel;
-import model.UserPayeeModel;
+import model.*;
 import net.miginfocom.swing.MigLayout;
 import rpc.UserAccountsReply;
 import rpc.UserPayeesReply;
@@ -31,12 +30,21 @@ import java.util.List;
  * @author xiangkai22
  */
 public class CustomerMainView extends JFrame {
-    private long userId;
-    private long user_pk;
-    private List<UserAccountsReply> accountList;
-    private List<UserPayeesReply> payeeList;
-    private List<UserTransactionsReply> transactionList;
+
+    // reply from server
+    private List<UserAccountsReply> accountsReplyList;
+    private List<UserPayeesReply> userPayeesReplyList;
+    private List<UserTransactionsReply> userTransactionsReplyList;
     private UserProfileReply userProfileReply;
+
+    // model for data binding
+    private List<UserAccountModel> userAccountModelList;
+    private List<UserTransactionModel> userTransactionModelList;
+    private List<UserPayeeModel> userPayeeModelList;
+    private UserModel userModel;
+    private UserTransferModel userTransferModel;
+
+
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_welcome;
@@ -107,6 +115,72 @@ public class CustomerMainView extends JFrame {
 
     }
 
+    private void initVariables(long userId, long user_pk, String firstName, String lastLoginTime, List<UserAccountsReply> accountList) {
+        this.userModel.setUserId(userId);
+        this.userModel.setId(user_pk);
+        this.accountsReplyList = accountList;
+        this.lbl_nameField.setText(firstName);
+        this.lbl_lastLoginTime.setText(lastLoginTime);
+    }
+
+    private void initAccountModel() {
+        for(UserAccountsReply userAccountsReply : accountsReplyList) {
+            UserAccountModel userAccountModel = new UserAccountModel();
+            userAccountModel.setAccount_pk(userAccountsReply.getAccountPk());
+            userAccountModel.setAccountNum(userAccountsReply.getAccountNumber());
+            userAccountModel.setAccountType(userAccountsReply.getAccountType());
+            userAccountModel.setCurrencyType(userAccountsReply.getCurrencyType());
+            userAccountModel.setBalance(userAccountsReply.getBalance());
+            userAccountModel.setStatus(userAccountsReply.getStatus());
+
+            userAccountModelList.add(userAccountModel);
+        }
+    }
+
+    private void initUserModel() {
+        userModel.setFirstName(userProfileReply.getFirstName());
+        userModel.setLastName(userProfileReply.getLastName());
+        userModel.setGender(userProfileReply.getGender());
+        userModel.setBirthDate(TimestampConvertHelper.rpcToMysql(userProfileReply.getBirthDate()));
+        userModel.setAddress(userProfileReply.getAddress());
+        userModel.setEmail(userProfileReply.getEmail());
+        userModel.setContactNum(userProfileReply.getPhone());
+    }
+
+    private void initTransactionModel() {
+        for(UserTransactionsReply userTransactionsReply: userTransactionsReplyList) {
+            UserTransactionModel userTransactionModel = new UserTransactionModel();
+            userTransactionModel.setDate(TimestampConvertHelper.rpcToMysql(userTransactionsReply.getDate()));
+            userTransactionModel.setDetails(userTransactionsReply.getDescription());
+            userTransactionModel.setAmounts(userTransactionsReply.getAmount());
+            userTransactionModel.setBalance(userTransactionsReply.getBalance());
+            userTransactionModel.setTransactionNum(userTransactionsReply.getTransactionNo());
+            userTransactionModel.setOperation_type(userTransactionsReply.getOperateType());
+
+            userTransactionModelList.add(userTransactionModel);
+        }
+    }
+
+    private void initPayeeModel() {
+        userPayeeModelList.clear();
+        for(UserPayeesReply userPayeesReply: userPayeesReplyList) {
+            UserPayeeModel userPayeeModel = new UserPayeeModel();
+            userPayeeModel.setPayee_pk(userPayeesReply.getPayeePk());
+            userPayeeModel.setIban(userPayeesReply.getIban());
+            userPayeeModel.setName(userPayeesReply.getName());
+            userPayeeModel.setUserId(userPayeeModel.getUserId());
+
+            userPayeeModelList.add(userPayeeModel);
+        }
+    }
+
+    private void initTransferModel() {
+        userTransferModel.setAccount(this.userAccountModelList);
+        userTransferModel.setPayee(this.userPayeeModelList);
+        // TODO currency type ??
+        // TODO balance ??
+    }
+
     private void initHomePage() {
         initAccountTable();
     }
@@ -134,10 +208,10 @@ public class CustomerMainView extends JFrame {
     }
 
     private void initTransactionInfo() {
-        Long accountPk = accountList.get(cb_transaction_accountList.getSelectedIndex()).getAccountPk();
+        Long accountPk = userAccountModelList.get(cb_transaction_accountList.getSelectedIndex()).getAccount_pk();
         int filter = cb_transaction_filter.getSelectedIndex() + 1;
         try {
-            this.transactionList = CustomerTransactionService.getInstance().getTransaction(user_pk, accountPk, filter);
+            this.userTransactionsReplyList = CustomerTransactionService.getInstance().getTransaction(userModel.getId(), accountPk, filter);
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
                     "Fail to get transaction list due to " + E.getMessage(),
@@ -149,68 +223,60 @@ public class CustomerMainView extends JFrame {
     private void initTransactionTable() {
         DefaultTableModel transactionListModel = (DefaultTableModel)table_transaction.getModel();
         clearTable(transactionListModel);
-        for(UserTransactionsReply userTransactionsReply: this.transactionList) {
+        for(UserTransactionModel userTransactionModel: this.userTransactionModelList) {
             transactionListModel.addRow(new Object[]{
-                    TimestampConvertHelper.rpcToMysql(userTransactionsReply.getDate()),
-                    UserOperateType.getType(userTransactionsReply.getOperateType()),
-                    userTransactionsReply.getDescription(),
-                    userTransactionsReply.getAmount(),
-                    userTransactionsReply.getBalance()
+                    userTransactionModel.getDate(),
+                    UserOperateType.getType(userTransactionModel.getOperation_type()),
+                    userTransactionModel.getDetails(),
+                    userTransactionModel.getAmounts(),
+                    userTransactionModel.getBalance()
             });
         }
     }
 
     private void initCurrency() {
         int accountIndex = cb_transfer_accountList.getSelectedIndex();
-        int currencyType = accountList.get(accountIndex).getCurrencyType();
+        int currencyType = userAccountModelList.get(accountIndex).getCurrencyType();
         String currency = CardCurrencyType.getCurrencyType(currencyType);
         tf_transfer_currency.setText(currency);
     }
 
     private void initBalance() {
         int accountIndex = cb_transfer_accountList.getSelectedIndex();
-        String balance = String.valueOf(accountList.get(accountIndex).getBalance());
+        String balance = String.valueOf(userAccountModelList.get(accountIndex).getBalance());
         tf_transfer_balance.setText(balance);
     }
 
     private void initAccountComboBox(JComboBox accountComboBox) {
         accountComboBox.removeAllItems();
-        if(accountList.size() <= 0) {
+        if(accountsReplyList.size() <= 0) {
             accountComboBox.addItem("No account found.");
             return;
         }
-        for(UserAccountsReply userAccountsReply : accountList) {
-            String accountNum = String.valueOf(userAccountsReply.getAccountNumber());
+        for(UserAccountModel userAccountModel : userAccountModelList) {
+            String accountNum = String.valueOf(userAccountModel.getAccountNum());
             accountComboBox.addItem(accountNum);
         }
     }
 
     private void initPayeeComboBox() {
         cb_payee_payeeList.removeAllItems();
-        if(payeeList.size() <= 0) {
+        if(userPayeesReplyList.size() <= 0) {
             cb_payee_payeeList.addItem("No payee found");
             return;
         }
-        for(UserPayeesReply userPayeesReply: payeeList) {
-            cb_payee_payeeList.addItem(userPayeesReply.getName());
+        for(UserPayeeModel userPayeeModel: userPayeeModelList) {
+            cb_payee_payeeList.addItem(userPayeeModel.getName());
         }
     }
 
-    private void initVariables(long userId, long user_pk, String firstName, String lastLoginTime, List<UserAccountsReply> accountList) {
-        this.userId = userId;
-        this.user_pk = user_pk;
-        this.accountList = accountList;
-        this.lbl_nameField.setText(firstName);
-        this.lbl_lastLoginTime.setText(lastLoginTime);
-    }
-
     private void initAccountTable() {
-        System.out.println("front-end: check the size of result: " + accountList.size());
+        System.out.println("front-end: check the size of result: " + accountsReplyList.size());
         DefaultTableModel accountListModel = (DefaultTableModel)table_home_accountTable.getModel();
         clearTable(accountListModel);
-        for(UserAccountsReply Account: this.accountList) {
+        for(UserAccountModel Account: this.userAccountModelList) {
             accountListModel.addRow(new Object[]{
-                    Account.getAccountNumber(),
+                    Account.getAccountNum(),
                     UserAccountType.getTypeName(Account.getAccountType()),
                     CardCurrencyType.getCurrencyType(Account.getCurrencyType()),
                     Account.getBalance(),
@@ -224,8 +290,9 @@ public class CustomerMainView extends JFrame {
 
     private void initProfileInfo() {
         try {
-            userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.user_pk);
-            updateProfileFields(userProfileReply);
+            userProfileReply = CustomerProfileService.getInstance().getUserProfile(userModel.getId());
+            initUserModel();
+            updateProfileFields(userModel);
 
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
@@ -237,9 +304,10 @@ public class CustomerMainView extends JFrame {
     private void initPayeeInfo() {
         // init payee info
         UserPayeeModel userPayeeModel = new UserPayeeModel();
-        userPayeeModel.setUserId(this.user_pk);
+        userPayeeModel.setUserId(userModel.getId());
         try {
-            payeeList = CustomerPayeeService.getInstance().getPayeeList(userPayeeModel);
+            userPayeesReplyList = CustomerPayeeService.getInstance().getPayeeList(userPayeeModel);
+            initPayeeModel();
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
                     "Fail to acquire user payee, please contact admin",
@@ -252,13 +320,12 @@ public class CustomerMainView extends JFrame {
         // init payee table
         DefaultTableModel payeeTableModel = (DefaultTableModel)table_payee_payeeList.getModel();
         clearTable(payeeTableModel);
-        for(UserPayeesReply userPayeesReply: payeeList) {
+        for(UserPayeeModel userPayeeModel: userPayeeModelList) {
             payeeTableModel.addRow(new Object[]{
-                    userPayeesReply.getIban(),
-                    userPayeesReply.getName()
+                    userPayeeModel.getIban(),
+                    userPayeeModel.getName()
             });
         }
-        return;
     }
 
     private void clearTable(DefaultTableModel payeeTableModel) {
@@ -268,7 +335,7 @@ public class CustomerMainView extends JFrame {
         }
     }
 
-    private void updateProfileFields(UserProfileReply userProfileReply) {
+    private void updateProfileFields(UserModel userModel) {
         tf_profile_userId.setText(String.valueOf(userProfileReply.getUserId()));
         tf_profile_firstName.setText(userProfileReply.getFirstName());
         tf_profile_lastName.setText(userProfileReply.getLastName());
@@ -285,11 +352,11 @@ public class CustomerMainView extends JFrame {
 
     private void btn_payee_addActionPerformed(ActionEvent e) {
         this.setVisible(false);
-        new CustomerAddPayeeView(user_pk, this).run();
+        new CustomerAddPayeeView(userModel.getId(), this).run();
     }
 
     private void btn_profile_revertActionPerformed(ActionEvent e) {
-        updateProfileFields(userProfileReply);
+        updateProfileFields(userModel);
     }
 
     private void btn_profile_modifyActionPerformed(ActionEvent e) {
@@ -339,8 +406,8 @@ public class CustomerMainView extends JFrame {
         String email = tf_profile_email.getText().trim();
         String contactNum = tf_profile_contactNumber.getText().trim();
         UserModel userModel = new UserModel();
-        userModel.setId(this.user_pk);
-        userModel.setUserId(this.userId);
+        userModel.setId(userModel.getId());
+        userModel.setUserId(userModel.getUserId());
         userModel.setAddress(address);
         userModel.setEmail(email);
         userModel.setContactNum(contactNum);
@@ -349,8 +416,8 @@ public class CustomerMainView extends JFrame {
             JOptionPane.showMessageDialog(null,
                     "Modify User profile complete",
                     "Info Message",JOptionPane.INFORMATION_MESSAGE);
-            userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.user_pk);
-            updateProfileFields(userProfileReply);
+            userProfileReply = CustomerProfileService.getInstance().getUserProfile(userModel.getId());
+            updateProfileFields(userModel);
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
                     "Fail to acquire user profile, please contact admin",
@@ -373,12 +440,12 @@ public class CustomerMainView extends JFrame {
             return;
         }
         int index = table_payee_payeeList.getSelectedRow();
-        UserPayeesReply payee = payeeList.get(index);
+        UserPayeesReply payee = userPayeesReplyList.get(index);
         UserPayeeModel userPayeeModel = new UserPayeeModel();
         userPayeeModel.setPayee_pk(payee.getPayeePk());
         userPayeeModel.setName(payee.getName());
         userPayeeModel.setIban(payee.getIban());
-        userPayeeModel.setUserId(this.user_pk);
+        userPayeeModel.setUserId(userModel.getId());
         int selection = JOptionPane.showConfirmDialog(
                 new JFrame(),"Are you sure to delete " + payee.getName() + " from your payee list?",
                 "Deletion Confirmation",
@@ -415,10 +482,10 @@ public class CustomerMainView extends JFrame {
         int balance = Integer.parseInt(tf_transfer_balance.getText().trim());
         Double amounts = Double.parseDouble(tf_transfer_amounts.getText().trim());
         String postScript = tf_transfer_postScript.getText();
-        Long account_pk = accountList.get(cb_transfer_accountList.getSelectedIndex()).getAccountPk();
-        Long payee_pk = payeeList.get(cb_payee_payeeList.getSelectedIndex()).getPayeePk();
+        Long account_pk = accountsReplyList.get(cb_transfer_accountList.getSelectedIndex()).getAccountPk();
+        Long payee_pk = userPayeesReplyList.get(cb_payee_payeeList.getSelectedIndex()).getPayeePk();
         int pin = Integer.parseInt(new String(pf_transfer_PIN.getPassword()));
-        int currencyType = accountList.get(cb_transfer_accountList.getSelectedIndex()).getCurrencyType();
+        int currencyType = accountsReplyList.get(cb_transfer_accountList.getSelectedIndex()).getCurrencyType();
         int operateSource = UserOperateSourceType.SELF_SERVICE;
         if(balance <= 0) {
             JOptionPane.showMessageDialog(null,
@@ -433,7 +500,7 @@ public class CustomerMainView extends JFrame {
             return;
         }
         try {
-            CustomerTransferService.getInstance().transfer(user_pk, account_pk, payee_pk, amounts, pin, postScript, currencyType, operateSource);
+            CustomerTransferService.getInstance().transfer(userModel.getId(), account_pk, payee_pk, amounts, pin, postScript, currencyType, operateSource);
             JOptionPane.showMessageDialog(null,
                     "Transfer Successful",
                     "Info Message",JOptionPane.INFORMATION_MESSAGE);

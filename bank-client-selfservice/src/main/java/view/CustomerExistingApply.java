@@ -525,7 +525,7 @@ public class CustomerExistingApply extends JFrame {
                 "[]"));
 
             //---- lbl_parentUserID ----
-            lbl_parentUserID.setText("Parent's UserId");
+            lbl_parentUserID.setText("Parent's user ID");
             youngSaverAccountPanel.add(lbl_parentUserID, "cell 1 1");
 
             //---- tf_parentUserID ----

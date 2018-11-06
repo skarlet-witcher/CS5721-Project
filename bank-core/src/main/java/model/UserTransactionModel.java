@@ -5,11 +5,12 @@ import java.sql.Timestamp;
 public class UserTransactionModel {
     private Timestamp date;
     private String details;
-    private Long debit;
-    private Long credit;
+    private Double amounts;
     private Double balance;
     private String transactionNum;
+    private Integer operation_type;
     private Integer currencyType;
+
 
     public Timestamp getDate() {
         return date;
@@ -25,22 +26,6 @@ public class UserTransactionModel {
 
     public void setDetails(String details) {
         this.details = details;
-    }
-
-    public Long getDebit() {
-        return debit;
-    }
-
-    public void setDebit(Long debit) {
-        this.debit = debit;
-    }
-
-    public Long getCredit() {
-        return credit;
-    }
-
-    public void setCredit(Long credit) {
-        this.credit = credit;
     }
 
     public Double getBalance() {
@@ -65,5 +50,21 @@ public class UserTransactionModel {
 
     public void setCurrencyType(Integer currencyType) {
         this.currencyType = currencyType;
+    }
+
+    public Double getAmounts() {
+        return amounts;
+    }
+
+    public void setAmounts(Double amounts) {
+        this.amounts = amounts;
+    }
+
+    public Integer getOperation_type() {
+        return operation_type;
+    }
+
+    public void setOperation_type(Integer operation_type) {
+        this.operation_type = operation_type;
     }
 }

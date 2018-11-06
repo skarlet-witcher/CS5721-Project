@@ -333,6 +333,6 @@ message UserAccountsReply {
     int64 account_number = 2;
     int32 account_type = 3;
     int32 currency_type = 4;
-    int32 balance = 5;
+    double balance = 5;
     int32 status = 6;
 }

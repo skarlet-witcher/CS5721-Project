@@ -138,6 +138,7 @@ public class CustomerPINView extends JFrame {
         Long user_pk = userLoginReply.getUserPk();
         String lastLoginTime = TimestampConvertHelper.rpcToMysql(userLoginReply.getLastLoginTime()).toString();
         lastLoginTime = lastLoginTime.substring(0, lastLoginTime.indexOf('.'));
+
         this.dispose();
         new CustomerMainView(userId, user_pk, firstName, lastLoginTime, userAccountsReply).run();
     }
