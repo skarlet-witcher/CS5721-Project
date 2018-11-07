@@ -114,8 +114,7 @@ public class CustomerApplyService implements ICustomerApplyService {
                 UserApplyNewAccountRequest.newBuilder().setUserId(userApplyNewPersonalAccountBaseModel.getUserId())
                 .setAccountType(userApplyNewPersonalAccountBaseModel.getAccountType())
                 .setCardType(userApplyNewPersonalAccountBaseModel.getCardType())
-                .setNewUserApply(userApplyNewPersonalAccountBaseModel.getNewUserApply())
-                .build()
+                .setNewUserApply(userApplyNewPersonalAccountBaseModel.getNewUserApply()).build()
         );
     }
 

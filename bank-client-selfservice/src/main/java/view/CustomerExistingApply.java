@@ -4,6 +4,7 @@
 
 package view;
 
+import Const.UserAccountType;
 import model.*;
 import net.miginfocom.swing.MigLayout;
 import service.impl.CustomerApplyService;
@@ -21,62 +22,55 @@ import java.util.Calendar;
  * @author xiangkai22
  */
 public class CustomerExistingApply extends JFrame {
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel lbl_userId;
+    private JTextField tf_userId;
+    private JLabel lbl_accountType;
+    private JComboBox<String> cb_accountTypeList;
+    private JPanel studentAccountPanel;
+    private JLabel lbl_graduateDate;
+    private JTextField tf_graduateMonth;
+    private JLabel lbl_mark;
+    private JTextField tf_graduateYear;
+    private JLabel lbl_studentID;
+    private JTextField tf_studentID;
+    private JLabel lbl_schoolName;
+    private JTextField tf_schoolName;
+    private JPanel youngSaverAccountPanel;
+    private JLabel lbl_parentUserID;
+    private JTextField tf_parentUserID;
+    private JLabel lbl_parentFirstName;
+    private JTextField tf_parentFirstName;
+    private JLabel lbl_parentLastName;
+    private JTextField tf_parentLastName;
+    private JLabel lbl_cardType;
+    private JComboBox<String> cb_cardTypeList;
+    private JButton btn_apply;
+    private JButton btn_back;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    private Long userId;
+    private int identityType;
+    private String identityNum;
+
     public CustomerExistingApply(Long userId, int identityType, String identityNum) {
         initComponents();
         initTextField(userId, identityType, identityNum);
         resetAccountField();
     }
 
-    private void cb_accountTypeListActionPerformed(ActionEvent e) {
-        if(cb_accountTypeList.getSelectedIndex() == 0 ||
-                cb_accountTypeList.getSelectedIndex() == 3) {
-            resetAccountField();
-            pack();
-        }
-        if (cb_accountTypeList.getSelectedIndex() == 1) {
-            resetAccountField();
-            initStudentAccountField();
-            pack();
-        }
-        if (cb_accountTypeList.getSelectedIndex() == 2) {
-            resetAccountField();
-            initYoungSaverAccountField();
-            pack();
-        }
-    }
-
-    private void tf_graduateMonthFocusLost(FocusEvent e) {
-        // if input one digit of a month, add 0 before that
-        if(tf_graduateMonth.getText().trim().length() == 1) {
-            tf_graduateMonth.setText("0" + tf_graduateMonth.getText());
-        }
-    }
-
-    private void tf_graduateMonthFocusGained(FocusEvent e) {
-        tf_graduateMonth.selectAll();
-    }
-
-    private void tf_graduateYearFocusGained(FocusEvent e) {
-        tf_graduateYear.selectAll();
-    }
-
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-
     private void initTextField(Long userId, int identityType, String identityNum) {
         this.userId = userId;
         this.identityType = identityType;
         this.identityNum = identityNum;
-
         tf_userId.setText(this.userId.toString());
 
         tf_graduateMonth.setDocument(new JTextFieldLimit(2));
         tf_graduateYear.setDocument(new JTextFieldLimit(4));
         tf_studentID.setDocument(new JTextFieldLimit(8));
         tf_schoolName.setDocument(new JTextFieldLimit(50));
-        tf_parentUserID.setDocument(new JTextFieldLimit(13));
+        tf_parentUserID.setDocument(new JTextFieldLimit(10));
         tf_parentFirstName.setDocument(new JTextFieldLimit(20));
         tf_parentLastName.setDocument(new JTextFieldLimit(20));
 
@@ -93,6 +87,174 @@ public class CustomerExistingApply extends JFrame {
 
     private void initYoungSaverAccountField() {
         youngSaverAccountPanel.setVisible(true);
+    }
+
+    private void applyPersonalAccount() {
+        long userId = Long.parseLong(tf_userId.getText().trim());
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        int newUserApply = 0;
+        String accountTypeName = cb_accountTypeList.getSelectedItem().toString();
+        try {
+            UserApplyNewPersonalAccountBaseModel userApplyNewPersonalAccountBaseModel = (UserApplyNewPersonalAccountBaseModel) UserApplyNewAccountFactory.applyAccount(accountTypeName);
+            userApplyNewPersonalAccountBaseModel.setUserId(userId);
+            userApplyNewPersonalAccountBaseModel.setAccountType(accountType);
+            userApplyNewPersonalAccountBaseModel.setCardType(cardType);
+            userApplyNewPersonalAccountBaseModel.setNewUserApply(newUserApply);
+            userApplyNewPersonalAccountBaseModel.setIdentityType(this.identityType);
+            userApplyNewPersonalAccountBaseModel.setIdentityNum(this.identityNum);
+
+            CustomerApplyService.getInstance().applyPersonalAccountForExistingUser(userApplyNewPersonalAccountBaseModel);
+            JOptionPane.showMessageDialog(null,
+                    "Request Personal Account apply successfully",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to request personal account apply due to " + E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+    }
+
+    private void applyStudentAccount() {
+        // basic info
+        long userId = Long.parseLong(tf_userId.getText().trim());
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        int newUserApply = 0;
+        String accountTypeName = cb_accountTypeList.getSelectedItem().toString();
+
+        // student account info
+        String graduateDateText = tf_graduateYear.getText().trim() + "-" + tf_graduateMonth.getText().trim() +"-01 " +"00:00:00";
+        Timestamp graduateDate = Timestamp.valueOf(graduateDateText);
+        String studentId = tf_studentID.getText().trim();
+        String schoolName = tf_schoolName.getText().trim();
+
+        try {
+            UserApplyNewStudentAccountBaseModel userApplyNewStudentAccountBaseModel = (UserApplyNewStudentAccountBaseModel) UserApplyNewAccountFactory.applyAccount(accountTypeName);
+            userApplyNewStudentAccountBaseModel.setUserId(userId);
+            userApplyNewStudentAccountBaseModel.setAccountType(accountType);
+            userApplyNewStudentAccountBaseModel.setCardType(cardType);
+            userApplyNewStudentAccountBaseModel.setNewUserApply(newUserApply);
+            userApplyNewStudentAccountBaseModel.setGraduateDate(graduateDate);
+            userApplyNewStudentAccountBaseModel.setStudentId(studentId);
+            userApplyNewStudentAccountBaseModel.setSchoolName(schoolName);
+            userApplyNewStudentAccountBaseModel.setIdentityType(identityType);
+            userApplyNewStudentAccountBaseModel.setIdentityNum(identityNum);
+
+            CustomerApplyService.getInstance().applyStudentAccountForExistingUser(userApplyNewStudentAccountBaseModel);
+            JOptionPane.showMessageDialog(null,
+                    "Request Student Account apply successfully",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to request student account apply due to " + E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+
+    private void applyYoungSaverAccount() {
+        // basic info
+        long userId = Long.parseLong(tf_userId.getText().trim());
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        String accountTypeName = cb_accountTypeList.getSelectedItem().toString();
+        int newUserApply = 0;
+
+        // young saver info
+        long parentUserId = Long.parseLong(tf_parentUserID.getText().trim());
+        String parentFirstName = tf_parentFirstName.getText().trim();
+        String parentLastName = tf_parentLastName.getText().trim();
+
+        try {
+            UserApplyNewYoungSaverAccountBaseModel userApplyNewYoungSaverAccountBaseModel = (UserApplyNewYoungSaverAccountBaseModel) UserApplyNewAccountFactory.applyAccount(accountTypeName);
+            userApplyNewYoungSaverAccountBaseModel.setUserId(userId);
+            userApplyNewYoungSaverAccountBaseModel.setAccountType(accountType);
+            userApplyNewYoungSaverAccountBaseModel.setCardType(cardType);
+            userApplyNewYoungSaverAccountBaseModel.setNewUserApply(newUserApply);
+            userApplyNewYoungSaverAccountBaseModel.setIdentityType(this.identityType);
+            userApplyNewYoungSaverAccountBaseModel.setIdentityNum(this.identityNum);
+            userApplyNewYoungSaverAccountBaseModel.setParentUserId(parentUserId);
+            userApplyNewYoungSaverAccountBaseModel.setParentFirstName(parentFirstName);
+            userApplyNewYoungSaverAccountBaseModel.setParentLastName(parentLastName);
+
+            CustomerApplyService.getInstance().applyYoungSaverAccountForExistingUser(userApplyNewYoungSaverAccountBaseModel);
+            JOptionPane.showMessageDialog(null,
+                    "Request Young saver Account apply successfully",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to request young saver account apply due to " + E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+
+    private void applyGoldenAccount() {
+        // basic info
+        long userId = Long.parseLong(tf_userId.getText().trim());
+        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
+        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
+        String accountTypeName = cb_accountTypeList.getSelectedItem().toString();
+        int newUserApply = 0;
+
+        try {
+            UserApplyNewGoldenAccountBaseModel userApplyNewGoldenAccountBaseModel = (UserApplyNewGoldenAccountBaseModel) UserApplyNewAccountFactory.applyAccount(accountTypeName);
+            userApplyNewGoldenAccountBaseModel.setUserId(userId);
+            userApplyNewGoldenAccountBaseModel.setAccountType(accountType);
+            userApplyNewGoldenAccountBaseModel.setCardType(cardType);
+            userApplyNewGoldenAccountBaseModel.setNewUserApply(newUserApply);
+            userApplyNewGoldenAccountBaseModel.setIdentityType(this.identityType);
+            userApplyNewGoldenAccountBaseModel.setIdentityNum(this.identityNum);
+
+            CustomerApplyService.getInstance().applyGoldenAccountForExistingUser(userApplyNewGoldenAccountBaseModel);
+            JOptionPane.showMessageDialog(null,
+                    "Request Golden Account apply successfully",
+                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to request golden account due to " + E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+
+    private void cb_accountTypeListActionPerformed(ActionEvent e) {
+        // show the textfield according to the account type
+        if(cb_accountTypeList.getSelectedIndex() == 0 ||
+                cb_accountTypeList.getSelectedIndex() == 3) {
+            resetAccountField();
+            pack();
+        }
+        if (cb_accountTypeList.getSelectedIndex() == 1) {
+            // student account
+            resetAccountField();
+            initStudentAccountField();
+            pack();
+        }
+        if (cb_accountTypeList.getSelectedIndex() == 2) {
+            // young saver account
+            resetAccountField();
+            initYoungSaverAccountField();
+            pack();
+        }
+    }
+
+    private void tf_graduateMonthFocusLost(FocusEvent e) {
+        // if input only one figure of the month, add 0 before that
+        if(tf_graduateMonth.getText().trim().length() == 1) {
+            tf_graduateMonth.setText("0" + tf_graduateMonth.getText());
+        }
+    }
+
+    private void tf_graduateMonthFocusGained(FocusEvent e) {
+        tf_graduateMonth.selectAll();
+    }
+
+    private void tf_graduateYearFocusGained(FocusEvent e) {
+        tf_graduateYear.selectAll();
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
@@ -237,145 +399,30 @@ public class CustomerExistingApply extends JFrame {
         }
 
         try {
-            if(cb_accountTypeList.getSelectedIndex() == 0) {
-                System.out.println("Front-end: ready to apply personal account");
-                applyPersonalAccount();
-            }
-            if(cb_accountTypeList.getSelectedIndex() == 1) {
-                System.out.println("Front-end: ready to apply student account");
-                applyStudentAccount();
-            }
-            if(cb_accountTypeList.getSelectedIndex() == 2) {
-                System.out.println("Front-end: ready to apply young saver account");
-                applyYoungSaverAccount();
-            }
-            if(cb_accountTypeList.getSelectedIndex() == 3) {
-                System.out.println("Front-end: ready to apply golden account");
-                applyGoldenAccount();
+            int selectedAccountType = cb_accountTypeList.getSelectedIndex() + 1;
+
+            switch(selectedAccountType) {
+                case UserAccountType.PERSONAL_ACCOUNT:
+                    applyPersonalAccount();
+                    break;
+                case UserAccountType.STUDENT_ACCOUNT:
+                    applyStudentAccount();
+                    break;
+                case UserAccountType.YOUNG_SAVER_ACCOUNT:
+                    applyYoungSaverAccount();
+                    break;
+                case UserAccountType.GOLDEN_ACCOUNT:
+                    applyGoldenAccount();
+                    break;
             }
         } catch (Exception E) {
             E.printStackTrace();
         }
     }
 
-    private void applyPersonalAccount() {
-        long userId = Long.parseLong(tf_userId.getText().trim());
-        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
-        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
-        int newUserApply = 0;
-        try {
-            UserApplyNewPersonalAccountBaseModel userApplyNewPersonalAccountBaseModel = (UserApplyNewPersonalAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
-            userApplyNewPersonalAccountBaseModel.setUserId(userId);
-            userApplyNewPersonalAccountBaseModel.setAccountType(accountType);
-            userApplyNewPersonalAccountBaseModel.setCardType(cardType);
-            userApplyNewPersonalAccountBaseModel.setNewUserApply(newUserApply);
-
-            CustomerApplyService.getInstance().applyPersonalAccountForExistingUser(userApplyNewPersonalAccountBaseModel);
-            JOptionPane.showMessageDialog(null,
-                    "Personal Account apply requested successful",
-                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-    }
-
-    private void applyStudentAccount() {
-        // basic info
-        long userId = Long.parseLong(tf_userId.getText().trim());
-        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
-        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
-        int newUserApply = 0;
-
-        // student account info
-        String graduateDateText = tf_graduateYear.getText().trim() + "-" + tf_graduateMonth.getText().trim() +"-01 " +"00:00:00";
-        Timestamp graduateDate = Timestamp.valueOf(graduateDateText);
-        String studentId = tf_studentID.getText().trim();
-        String schoolName = tf_schoolName.getText().trim();
-
-        try {
-            UserApplyNewStudentAccountBaseModel userApplyNewStudentAccountBaseModel = (UserApplyNewStudentAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
-            userApplyNewStudentAccountBaseModel.setUserId(userId);
-            userApplyNewStudentAccountBaseModel.setAccountType(accountType);
-            userApplyNewStudentAccountBaseModel.setCardType(cardType);
-            userApplyNewStudentAccountBaseModel.setNewUserApply(newUserApply);
-            userApplyNewStudentAccountBaseModel.setGraduateDate(graduateDate);
-            userApplyNewStudentAccountBaseModel.setStudentId(studentId);
-            userApplyNewStudentAccountBaseModel.setSchoolName(schoolName);
-
-            CustomerApplyService.getInstance().applyStudentAccountForExistingUser(userApplyNewStudentAccountBaseModel);
-            JOptionPane.showMessageDialog(null,
-                    "Student Account apply requested successful",
-                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-    }
-
-    private void applyYoungSaverAccount() {
-        // basic info
-        long userId = Long.parseLong(tf_userId.getText().trim());
-        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
-        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
-        int newUserApply = 0;
-
-        // young saver info
-        long parentUserId = Long.parseLong(tf_parentUserID.getText().trim());
-        String parentFirstName = tf_parentFirstName.getText().trim();
-        String parentLastName = tf_parentLastName.getText().trim();
-
-        try {
-            UserApplyNewYoungSaverAccountBaseModel userApplyNewYoungSaverAccountBaseModel = (UserApplyNewYoungSaverAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
-            userApplyNewYoungSaverAccountBaseModel.setUserId(userId);
-            userApplyNewYoungSaverAccountBaseModel.setAccountType(accountType);
-            userApplyNewYoungSaverAccountBaseModel.setCardType(cardType);
-            userApplyNewYoungSaverAccountBaseModel.setNewUserApply(newUserApply);
-            userApplyNewYoungSaverAccountBaseModel.setParentUserId(parentUserId);
-            userApplyNewYoungSaverAccountBaseModel.setParentFirstName(parentFirstName);
-            userApplyNewYoungSaverAccountBaseModel.setParentLastName(parentLastName);
-
-            CustomerApplyService.getInstance().applyYoungSaverAccountForExistingUser(userApplyNewYoungSaverAccountBaseModel);
-            JOptionPane.showMessageDialog(null,
-                    "Young saver Account apply requested successful",
-                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-    }
-
-    private void applyGoldenAccount() {
-        // basic info
-        long userId = Long.parseLong(tf_userId.getText().trim());
-        int accountType = cb_accountTypeList.getSelectedIndex() + 1;
-        int cardType = cb_cardTypeList.getSelectedIndex() + 1;
-        int newUserApply = 0;
-
-        try {
-            UserApplyNewGoldenAccountBaseModel userApplyNewGoldenAccountBaseModel = (UserApplyNewGoldenAccountBaseModel) UserApplyNewAccountFactory.applyAccount(cb_accountTypeList.getSelectedItem().toString());
-            userApplyNewGoldenAccountBaseModel.setUserId(userId);
-            userApplyNewGoldenAccountBaseModel.setAccountType(accountType);
-            userApplyNewGoldenAccountBaseModel.setCardType(cardType);
-            userApplyNewGoldenAccountBaseModel.setNewUserApply(newUserApply);
-
-            CustomerApplyService.getInstance().applyGoldenAccountForExistingUser(userApplyNewGoldenAccountBaseModel);
-            JOptionPane.showMessageDialog(null,
-                    "Golden Account apply requested successful",
-                    "Success Message",JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+    public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
     private void initComponents() {
@@ -570,34 +617,5 @@ public class CustomerExistingApply extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel lbl_userId;
-    private JTextField tf_userId;
-    private JLabel lbl_accountType;
-    private JComboBox<String> cb_accountTypeList;
-    private JPanel studentAccountPanel;
-    private JLabel lbl_graduateDate;
-    private JTextField tf_graduateMonth;
-    private JLabel lbl_mark;
-    private JTextField tf_graduateYear;
-    private JLabel lbl_studentID;
-    private JTextField tf_studentID;
-    private JLabel lbl_schoolName;
-    private JTextField tf_schoolName;
-    private JPanel youngSaverAccountPanel;
-    private JLabel lbl_parentUserID;
-    private JTextField tf_parentUserID;
-    private JLabel lbl_parentFirstName;
-    private JTextField tf_parentFirstName;
-    private JLabel lbl_parentLastName;
-    private JTextField tf_parentLastName;
-    private JLabel lbl_cardType;
-    private JComboBox<String> cb_cardTypeList;
-    private JButton btn_apply;
-    private JButton btn_back;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    private Long userId;
-    private int identityType;
-    private String identityNum;
 }
