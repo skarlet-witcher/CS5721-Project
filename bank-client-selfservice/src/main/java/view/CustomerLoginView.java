@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * @author xiangkai22
+ * @author xiangkai Tang
  */
 public class CustomerLoginView extends JFrame {
 
@@ -45,45 +45,40 @@ public class CustomerLoginView extends JFrame {
 
     public CustomerLoginView() {
         initComponents();
-        setComponentsNames();
         initTextFields();
         securityVerification(randomCheck());
         pack(); // resize
     }
 
-    private void setComponentsNames() {
-        tf_userId.setName("tf_userId");
-        tf_contactNum.setName("tf_contactNum");
-        btn_login.setName("btn_login");
-        lbl_contactNum.setName("lbl_contactNum");
-        lbl_dob.setName("lbl_dob");
-        tf_day.setName("tf_day");
-        tf_month.setName("tf_month");
-        tf_year.setName("tf_year");
-        panel_contactNum.setName("panel_contactNum");
-        panel_dob.setName("panel_dob");
-
-    }
-
     private int randomCheck() {
+        // randomly generate one of the ways to login
         return RandomUtil.generateOneNum(1, 2);
     }
 
     private void securityVerification(int switcher) {
 
         if (switcher == 1) {
+            // login using contactNum
             this.panel_contactNum.setVisible(true);
             this.panel_dob.setVisible(false);
         } else {
+            // login using Date of birth
             this.panel_contactNum.setVisible(false);
             this.panel_dob.setVisible(true);
         }
 
     }
 
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
+    private void initTextFields() {
+        tf_userId.setDocument(new JTextFieldLimit(10));
+        tf_contactNum.setDocument(new JTextFieldLimit(4));
+        tf_day.setDocument(new JTextFieldLimit(2));
+        tf_month.setDocument(new JTextFieldLimit(2));
+        tf_year.setDocument(new JTextFieldLimit(4));
+
+        tf_year.setText("YYYY");
+        tf_month.setText("MM");
+        tf_day.setText("DD");
     }
 
     private void tf_dayFocusGained(FocusEvent e) {
@@ -121,7 +116,7 @@ public class CustomerLoginView extends JFrame {
             // day of dob validator
             if(tf_day.getText().trim().length() <= 0) {
                 JOptionPane.showMessageDialog(null,
-                        "Please input your day of your date of birth",
+                        "Please input the day of your date of birth",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 tf_day.grabFocus();
                 return;
@@ -135,7 +130,7 @@ public class CustomerLoginView extends JFrame {
             }
             if(Integer.parseInt(tf_day.getText().trim()) > 31 || Integer.parseInt(tf_day.getText().trim()) < 1) {
                 JOptionPane.showMessageDialog(null,
-                        "The ranage of day of the date of birth should be 1 to 31",
+                        "The range of day of the date of birth should be 1 to 31",
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 tf_day.grabFocus();
                 return;
@@ -207,7 +202,7 @@ public class CustomerLoginView extends JFrame {
             int pin1;
             int pin2;
             int pin3;
-            List<Integer> PinDigits = new ArrayList<>();
+            List<Integer> PinDigits;
             try {
                 // login in with date of birth
                 UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel(userId, day, month, year);
@@ -246,7 +241,7 @@ public class CustomerLoginView extends JFrame {
             int pin1;
             int pin2;
             int pin3;
-            List<Integer> PinDigits = new ArrayList<>();
+            List<Integer> PinDigits;
             try {
                 // login in with contactNum
                 UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel(userId, phoneNumLast4);
@@ -277,16 +272,9 @@ public class CustomerLoginView extends JFrame {
         new CustomerApplyAuthView().run();
     }
 
-    private void initTextFields() {
-        tf_userId.setDocument(new JTextFieldLimit(10));
-        tf_contactNum.setDocument(new JTextFieldLimit(4));
-        tf_day.setDocument(new JTextFieldLimit(2));
-        tf_month.setDocument(new JTextFieldLimit(2));
-        tf_year.setDocument(new JTextFieldLimit(4));
-
-        tf_year.setText("YYYY");
-        tf_month.setText("MM");
-        tf_day.setText("DD");
+    public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
     private void initComponents() {
