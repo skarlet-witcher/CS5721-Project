@@ -251,7 +251,7 @@ public class CustomerLoginView extends JFrame {
                 pin3 = PinDigits.get(2);
             } catch (Exception E) {
                 JOptionPane.showMessageDialog(null,
-                        "Please input valid contact number or User ID",
+                        "Please input valid contact number or User ID due to " + E.getMessage(),
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
             }

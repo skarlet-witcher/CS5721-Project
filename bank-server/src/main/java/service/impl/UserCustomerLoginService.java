@@ -95,9 +95,9 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
                     operationHistoryService.addNewUserLoginReqHistory(user.getId(), UserOperateStatusType.SUCCESS);
                     return userLoginReqBuilder.build();
                 }
-                throw FaultFactory.throwFaultException();
+                throw FaultFactory.throwFaultException("Internal Error: fail to update login pin digit");
             } catch (Exception e) {
-                throw FaultFactory.throwFaultException("Operation Fails.");
+                throw FaultFactory.throwFaultException("LoginReq request Operation Fails.");
             }
         } else {
             // validate fail
