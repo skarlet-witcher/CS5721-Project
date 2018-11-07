@@ -4,6 +4,7 @@
 
 package view;
 
+import Const.UserType;
 import model.UserModel;
 import net.miginfocom.swing.MigLayout;
 import service.impl.CustomerApplyService;
@@ -169,7 +170,7 @@ public class CustomerApplyAuthView extends JFrame {
             return;
         }
         this.dispose();
-        new CustomerExistingApply(userId, identityType, identityNum).run();
+        new CustomerApplyView(userId, identityType, identityNum, UserType.EXISTING_USER).run();
     }
 
     public void run() {
