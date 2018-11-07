@@ -11,6 +11,10 @@ import java.util.logging.Logger;
 
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
+/*
+    @author Xiangkai Tang
+ */
+
 public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
     private IUserCustomerService customerService = UserCustomerService.getInstance();

@@ -14,12 +14,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
- * @author xiangkai22
+ * @author xiangkai Tang
  */
 public class CustomerApplyAuthView extends JFrame {
     public CustomerApplyAuthView() {
         initComponents();
-        clearAllPanel();
+        resetAllPanel();
         initTextField();
     }
 
@@ -28,48 +28,46 @@ public class CustomerApplyAuthView extends JFrame {
         new CustomerLoginView().run();
     }
 
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-
-
-
     private void cb_isExistingActionPerformed(ActionEvent e) {
+        // choose the type of user
         if(cb_isExisting.getSelectedIndex() == 0) {
-            clearAllPanel();
+            resetAllPanel();
             pack();
         }
         if(cb_isExisting.getSelectedIndex() == 1) {
-            clearAllPanel();
+            resetAllPanel();
             this.existingCustomerPanel.setVisible(true);
             pack();
         }
         if(cb_isExisting.getSelectedIndex() == 2) {
-            clearAllPanel();
+            resetAllPanel();
             this.noneCustomerPanel.setVisible(true);
             pack();
         }
     }
 
-    private void clearAllPanel() {
+    private void resetAllPanel() {
         this.existingCustomerPanel.setVisible(false);
         this.noneCustomerPanel.setVisible(false);
     }
 
-    private void btn_none_nextActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerApplyView().run();
-    }
 
     private void initTextField() {
         tf_userId.setDocument(new JTextFieldLimit(10));
         tf_firstName.setDocument(new JTextFieldLimit(20));
         tf_lastName.setDocument(new JTextFieldLimit(20));
+        tf_identityNum.setDocument(new JTextFieldLimit(15));
+    }
+
+    private void btn_none_nextActionPerformed(ActionEvent e) {
+        // non-existing user
+        this.dispose();
+        new CustomerApplyView().run();
     }
 
 
     private void btn_customer_nextActionPerformed(ActionEvent e) {
+        // existing user
         if(cb_isExisting.getSelectedIndex() == 1) {
             // UserId validator
             if(tf_userId.getText().trim().length() <= 0) {
@@ -174,6 +172,10 @@ public class CustomerApplyAuthView extends JFrame {
         new CustomerExistingApply(userId, identityType, identityNum).run();
     }
 
+    public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents

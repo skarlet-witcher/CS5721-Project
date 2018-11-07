@@ -12,6 +12,10 @@ import util.FaultFactory;
 import java.sql.Timestamp;
 import java.util.Date;
 
+/*
+    @author Xiangkai Tang
+ */
+
 public class UserCustomerApplyService implements IUserCustomerApplyService {
     private static UserCustomerApplyService userCustomerApplyService = null;
     private IUserApplyDao userApplyDao = UserApplyDao.getInstance();
@@ -45,6 +49,7 @@ public class UserCustomerApplyService implements IUserCustomerApplyService {
             UserApplyArchiveEntity.setStatus(0);
             UserApplyArchiveEntity.setNewUserApply(isNewUser);
             UserApplyArchiveEntity.setUserId(userId);
+
             userApplyDao.requestAccountApply(UserApplyArchiveEntity);
         } catch (Exception e) {
             throw FaultFactory.throwFaultException("Fail to apply a personal current account");

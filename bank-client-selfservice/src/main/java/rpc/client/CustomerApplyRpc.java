@@ -11,6 +11,10 @@ import java.util.logging.Logger;
 import static Const.Server.SERVER_HOST;
 import static Const.Server.SERVER_PORT;
 
+/*
+    @author Xiangkai Tang
+ */
+
 public class CustomerApplyRpc {
     private static final Logger logger = Logger.getLogger(CustomerApplyRpc.class.getName());
 
@@ -47,8 +51,8 @@ public class CustomerApplyRpc {
     public Response checkExistingUserBeforeApply(UserValidateExistingUserRequest userValidateExistingUserRequest) throws Exception {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
                 .usePlaintext().build();
-        UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
 
+        UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
 
         logger.info(userValidateExistingUserRequest.getUserId() +" is requesting to validate.");
 

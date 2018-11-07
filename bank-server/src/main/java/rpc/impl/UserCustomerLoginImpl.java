@@ -15,6 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
+/*
+    @author Xiangkai Tang 80%
+ */
+
 public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLoginImplBase {
     private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
     private IUserCustomerLoginService customerLoginService = UserCustomerLoginService.getInstance();
@@ -69,6 +73,8 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
 
     @Override
     public void applyNewAccount(UserApplyNewAccountRequest request, StreamObserver<Response> responseObserver) {
+
+        // init variables to apply
         String firstName = request.getFirstName();
         String lastName = request.getLastName();
         String identityNum = request.getIdentityId();
@@ -87,46 +93,43 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         String parentFirstName = request.getParentFirstName();
         String parentLastName = request.getParentLastName();
         int isNewUser = request.getNewUserApply();
-
         Long userId = request.getUserId();
-
-        logger.info("User Id is: " + userId);
 
 
         try {
+            // check duplicate apply
             if (userId.toString().length() == 10) {
                 logger.info("check whether the existing model have duplicated apply");
                 customerApplyService.checkDuplicateApply(userId, accountType, cardType);
             }
-
-            if (accountType == UserAccountType.PERSONAL_ACCOUNT) {
-                logger.info("ready to apply personal account (ready to invoke customerApplySerivce)");
-                customerApplyService.requestPersonalAccountApply(
-                        firstName, lastName, identityNum, identityType, accountType, cardType,
-                        birthDate, gender, address, email, phone, isNewUser, userId);
+            // apply an account according to the type
+            switch(accountType) {
+                case UserAccountType.PERSONAL_ACCOUNT:
+                    logger.info("ready to apply personal account (ready to invoke customerApplySerivce)");
+                    customerApplyService.requestPersonalAccountApply(
+                            firstName, lastName, identityNum, identityType, accountType, cardType,
+                            birthDate, gender, address, email, phone, isNewUser, userId);
+                    break;
+                case UserAccountType.STUDENT_ACCOUNT:
+                    logger.info("ready to apply student account");
+                    customerApplyService.requestStudentAccountApply(
+                            firstName, lastName, identityNum, identityType, accountType, cardType,
+                            birthDate, gender, address, email, phone, isNewUser,
+                            graduateDate, studentId, university, userId);
+                    break;
+                case UserAccountType.YOUNG_SAVER_ACCOUNT:
+                    logger.info("ready to apply young saver account");
+                    customerApplyService.requestYoungSaverAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
+                            birthDate, gender, address, email, phone, isNewUser, parentUserId, parentFirstName, parentLastName, userId);
+                    break;
+                case UserAccountType.GOLDEN_ACCOUNT:
+                    logger.info("ready to apply golden account");
+                    customerApplyService.requestGoldenAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
+                            birthDate, gender, address, email, phone, isNewUser, userId);
+                    break;
             }
-            if (accountType == UserAccountType.STUDENT_ACCOUNT) {
-                logger.info("ready to apply student account");
-                customerApplyService.requestStudentAccountApply(
-                        firstName, lastName, identityNum, identityType, accountType, cardType,
-                        birthDate, gender, address, email, phone, isNewUser,
-                        graduateDate, studentId, university, userId);
-            }
-            if (accountType == UserAccountType.YOUNG_SAVER_ACCOUNT) {
-                logger.info("ready to apply young saver account");
-                customerApplyService.requestYoungSaverAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
-                        birthDate, gender, address, email, phone, isNewUser, parentUserId, parentFirstName, parentLastName, userId);
-            }
-            if (accountType == UserAccountType.GOLDEN_ACCOUNT) {
-                logger.info("ready to apply golden account");
-                customerApplyService.requestGoldenAccountApply(firstName, lastName, identityNum, identityType, accountType, cardType,
-                        birthDate, gender, address, email, phone, isNewUser, userId);
-            }
-
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .build());
-
-
         } catch (Exception e) {
             responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getLocalizedMessage())
                     .build());

@@ -8,6 +8,10 @@ import service.ICustomerLoginService;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+    @author Xiangkai Tang
+ */
+
 public class CustomerLoginService implements ICustomerLoginService {
     private static ICustomerLoginService instance = null;
 
