@@ -55,93 +55,6 @@ public class CustomerPINView extends JFrame {
         generatePINField(pin1, pin2, pin3); // the number should be acquired from the db
     }
 
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-
-    private void btn_1ActionPerformed(ActionEvent e) {
-        inputPIN(btn_1.getText());
-    }
-
-    private void btn_2ActionPerformed(ActionEvent e) {
-        inputPIN(btn_2.getText());
-    }
-
-    private void btn_3ActionPerformed(ActionEvent e) {
-        inputPIN(btn_3.getText());
-    }
-
-    private void btn_4ActionPerformed(ActionEvent e) {
-        inputPIN(btn_4.getText());
-    }
-
-    private void btn_5ActionPerformed(ActionEvent e) {
-        inputPIN(btn_5.getText());
-    }
-
-    private void btn_6ActionPerformed(ActionEvent e) {
-        inputPIN(btn_6.getText());
-    }
-
-    private void btn_7ActionPerformed(ActionEvent e) {
-        inputPIN(btn_7.getText());
-    }
-
-    private void btn_8ActionPerformed(ActionEvent e) {
-        inputPIN(btn_8.getText());
-    }
-
-    private void btn_9ActionPerformed(ActionEvent e) {
-        inputPIN(btn_9.getText());
-    }
-
-    private void btn_10ActionPerformed(ActionEvent e) {
-        inputPIN(btn_10.getText());
-    }
-
-    private void btn_backSpaceActionPerformed(ActionEvent e) {
-        backSpacePIN();
-    }
-
-    private void btn_confirmActionPerformed(ActionEvent e) {
-        for(JPasswordField pwdField: passwordFieldsList) {
-            if(pwdField.getPassword().length <= 0) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your PIN",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-        UserLoginReply userLoginReply;
-        UserLoginPINModel userLoginPINModel = initUserLoginPINModel(pinDigitList);
-        try {
-            userLoginReply = CustomerLoginService.getInstance().requestLoginUsingPIN(userLoginPINModel);
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            E.printStackTrace();
-            return;
-        }
-        String firstName = userLoginReply.getFirstName().trim();
-        Long user_pk = userLoginReply.getUserPk();
-        String lastLoginTime = TimestampConvertHelper.rpcToMysql(userLoginReply.getLastLoginTime()).toString();
-        lastLoginTime = lastLoginTime.substring(0, lastLoginTime.indexOf('.'));
-
-        this.dispose();
-        new CustomerMainView(userId, user_pk, firstName, lastLoginTime).run();
-    }
-
-    private void button13ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void btn_backActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerLoginView().run();
-    }
-
     private void setUserId(long userId) {
         this.userId = userId;
     }
@@ -232,7 +145,6 @@ public class CustomerPINView extends JFrame {
 
                 JPasswordField temp = passwordFieldsList.get(i);
                 int pwd = Integer.parseInt(new String(temp.getPassword()));
-                System.out.println(pwd);
                 switch (digit) {
                     case 1: userLoginPINModel.setPin1(pwd); break;
                     case 2: userLoginPINModel.setPin2(pwd); break;
@@ -247,9 +159,92 @@ public class CustomerPINView extends JFrame {
         return userLoginPINModel;
     }
 
+    private void btn_1ActionPerformed(ActionEvent e) {
+        inputPIN(btn_1.getText());
+    }
+
+    private void btn_2ActionPerformed(ActionEvent e) {
+        inputPIN(btn_2.getText());
+    }
+
+    private void btn_3ActionPerformed(ActionEvent e) {
+        inputPIN(btn_3.getText());
+    }
+
+    private void btn_4ActionPerformed(ActionEvent e) {
+        inputPIN(btn_4.getText());
+    }
+
+    private void btn_5ActionPerformed(ActionEvent e) {
+        inputPIN(btn_5.getText());
+    }
+
+    private void btn_6ActionPerformed(ActionEvent e) {
+        inputPIN(btn_6.getText());
+    }
+
+    private void btn_7ActionPerformed(ActionEvent e) {
+        inputPIN(btn_7.getText());
+    }
+
+    private void btn_8ActionPerformed(ActionEvent e) {
+        inputPIN(btn_8.getText());
+    }
+
+    private void btn_9ActionPerformed(ActionEvent e) {
+        inputPIN(btn_9.getText());
+    }
+
+    private void btn_10ActionPerformed(ActionEvent e) {
+        inputPIN(btn_10.getText());
+    }
+
+    private void btn_backSpaceActionPerformed(ActionEvent e) {
+        backSpacePIN();
+    }
+
+    private void btn_confirmActionPerformed(ActionEvent e) {
+        for(JPasswordField pwdField: passwordFieldsList) {
+            if(pwdField.getPassword().length <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your PIN",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        UserLoginReply userLoginReply;
+        UserLoginPINModel userLoginPINModel = initUserLoginPINModel(pinDigitList);
+        try {
+            userLoginReply = CustomerLoginService.getInstance().requestLoginUsingPIN(userLoginPINModel);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            E.printStackTrace();
+            return;
+        }
+        String firstName = userLoginReply.getFirstName().trim();
+        Long user_pk = userLoginReply.getUserPk();
+        String lastLoginTime = TimestampConvertHelper.rpcToMysql(userLoginReply.getLastLoginTime()).toString();
+        lastLoginTime = lastLoginTime.substring(0, lastLoginTime.indexOf('.'));
+
+        this.dispose();
+        new CustomerMainView(userId, user_pk, firstName, lastLoginTime).run();
+    }
+
+    private void btn_backActionPerformed(ActionEvent e) {
+        this.dispose();
+        new CustomerLoginView().run();
+    }
+
     private void btn_forgotPINActionPerformed(ActionEvent e) {
         this.dispose();
         new CustomerForgotPINView(userId).run();
+    }
+
+    public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
     private void initComponents() {
@@ -359,10 +354,7 @@ public class CustomerPINView extends JFrame {
 
         //---- btn_back ----
         btn_back.setText("Back");
-        btn_back.addActionListener(e -> {
-			button13ActionPerformed(e);
-			btn_backActionPerformed(e);
-		});
+        btn_back.addActionListener(e -> btn_backActionPerformed(e));
         contentPane.add(btn_back, "cell 2 6 3 1");
 
         //---- btn_forgotPIN ----

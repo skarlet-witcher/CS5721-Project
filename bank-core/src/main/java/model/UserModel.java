@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserModel {
@@ -16,6 +17,11 @@ public class UserModel {
     private List<UserAccountModel> userAccountList;
     private List<UserPayeeModel> userPayeeList;
     private Timestamp lastLoginTime;
+
+    public UserModel() {
+        userAccountList = new ArrayList<>();
+        userPayeeList = new ArrayList<>();
+    }
 
     public Timestamp getLastLoginTime() {
         return lastLoginTime;

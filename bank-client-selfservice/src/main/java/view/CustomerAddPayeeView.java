@@ -95,7 +95,6 @@ public class CustomerAddPayeeView extends JFrame {
         userPayeeModel.setIban(tf_IBAN.getText().trim());
         userPayeeModel.setName(tf_payeeName.getText().trim());
         String pin = new String(pf_pin.getPassword());
-        System.out.println("pin is :" + pin);
         try {
             CustomerPayeeService.getInstance().addPayee(userPayeeModel, pin);
             JOptionPane.showMessageDialog(null,
