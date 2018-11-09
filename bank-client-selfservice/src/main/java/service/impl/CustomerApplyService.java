@@ -11,7 +11,6 @@ import util.TimestampConvertHelper;
     @author Xiangkai Tang
  */
 
-
 public class CustomerApplyService implements ICustomerApplyService {
     private static ICustomerApplyService customerApplyService = null;
 
