@@ -1,5 +1,5 @@
 package model;
 
 public interface Observer {
-     void updateBalance();
+     void updateTransferPage(UserTransferModel userTransferModel);
 }

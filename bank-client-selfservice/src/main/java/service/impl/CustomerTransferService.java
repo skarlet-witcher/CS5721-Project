@@ -1,14 +1,22 @@
 package service.impl;
 
+import model.Observer;
+import model.Subject;
 import model.UserTransferModel;
 import rpc.UserCustomerTransferRequest;
 import rpc.client.UserCustomerRpc;
 import service.ICustomerTransferService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomerTransferService implements ICustomerTransferService {
     private static ICustomerTransferService customerTransferService = null;
+    private List<Observer> observers;
 
-    private CustomerTransferService() {}
+    private CustomerTransferService() {
+        observers = new ArrayList<>();
+    }
 
     public static ICustomerTransferService getInstance() {
         if(customerTransferService == null) {

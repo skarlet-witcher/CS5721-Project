@@ -13,6 +13,8 @@ import rpc.UserAccountsReply;
 import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
 import rpc.UserTransactionsReply;
+import service.ICustomerTransactionService;
+import service.ICustomerTransferService;
 import service.impl.*;
 import util.JTextFieldLimit;
 import util.TimestampConvertHelper;
@@ -40,6 +42,7 @@ public class CustomerMainView extends JFrame implements Observer {
     private UserModel userModel = new UserModel();
     private List<UserTransactionModel> userTransactionModelList = new ArrayList<>();
     private UserTransferModel userTransferModel = new UserTransferModel();
+
 
 
 
@@ -117,18 +120,30 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     @Override
-    public void updateBalance() {
-        Double balance = this.userTransferModel.getAccount().getBalance();
-        Double amounts = this.userTransferModel.getAmounts();
-        Double currentBalance = balance - amounts;
-        String payeeName = this.userTransferModel.getPayee().getName();
-        String currencyType = CardCurrencyType.getCurrencyType(this.userTransferModel.getCurrencyType());
-
-        JOptionPane.showMessageDialog(
-                new JFrame(),"BalanceObserver: A transaction refers to transfer to " + payeeName +
-                        " with " + amounts + " " + currencyType + " " + "And your balance will be " + currentBalance,
-                "Deletion Confirmation",
-                JOptionPane.INFORMATION_MESSAGE);
+    public void updateTransferPage(UserTransferModel userTransferModel) {
+        int pin = Integer.parseInt(new String(pf_transfer_PIN.getPassword()));
+        try {
+            CustomerTransferService.getInstance().transfer(userTransferModel, pin);
+            JOptionPane.showMessageDialog(null,
+                    "Transfer Successful",
+                    "Info Message",JOptionPane.INFORMATION_MESSAGE);
+        } catch( Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to transfer due to " + E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        System.out.println("------------------");
+        System.out.println("");
+        System.out.println("TransferPageObserver: ready to update the transfer page");
+        System.out.println("");
+        System.out.println("------------------");
+        initAccountReply();
+        initHomePage();
+        initProfilePage();
+        initTransactionPage();
+        initPayeePage();
+        initTransferPage();
     }
 
     private void initUserModel(long userId, long user_pk, String firstName, String lastLoginTime) {
@@ -364,7 +379,7 @@ public class CustomerMainView extends JFrame implements Observer {
         }
     }
 
-    private UserTransferModel initTransferModel(Double balance, Double amounts, String postScript) {
+    private void initTransferModel(Double balance, Double amounts, String postScript) {
         UserAccountModel userAccountModel = this.userModel.getUserAccountList().get(cb_transfer_accountList.getSelectedIndex());
         UserPayeeModel userPayeeModel = this.userModel.getUserPayeeList().get(cb_transfer_payeeList.getSelectedIndex());
         userAccountModel.setBalance(balance);
@@ -373,7 +388,6 @@ public class CustomerMainView extends JFrame implements Observer {
         userTransferModel.setCurrencyType(userAccountModel.getCurrencyType());
         userTransferModel.setPostScript(postScript);
         userTransferModel.setAmounts(amounts);
-        return userTransferModel;
     }
 
     private void clearTable(DefaultTableModel payeeTableModel) {
@@ -511,7 +525,6 @@ public class CustomerMainView extends JFrame implements Observer {
         Double balance = Double.parseDouble(tf_transfer_balance.getText().trim());
         Double amounts = Double.parseDouble(tf_transfer_amounts.getText().trim());
         String postScript = tf_transfer_postScript.getText();
-        int pin = Integer.parseInt(new String(pf_transfer_PIN.getPassword()));
         if(balance <= 0) {
             JOptionPane.showMessageDialog(null,
                     "Not enough balance to be transferred.",
@@ -525,25 +538,10 @@ public class CustomerMainView extends JFrame implements Observer {
             return;
         }
 
-        UserTransferModel userTransferModel = initTransferModel(balance, amounts, postScript);
+        initTransferModel(balance, amounts, postScript);
 
-        try {
-            CustomerTransferService.getInstance().transfer(userTransferModel, pin);
-            JOptionPane.showMessageDialog(null,
-                    "Transfer Successful",
-                    "Info Message",JOptionPane.INFORMATION_MESSAGE);
-        } catch( Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    "Fail to transfer due to " + E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        initAccountReply();
-        initHomePage();
-        initProfilePage();
-        initTransactionPage();
-        initPayeePage();
-        initTransferPage();
+
+
     }
 
     private void cb_transaction_accountListActionPerformed(ActionEvent e) {

@@ -53,7 +53,7 @@ public class UserTransferModel implements Subject {
 
     public void setAmounts(Double amounts) {
         this.amounts = amounts;
-        balanceChanged();
+        updateAmounts();
     }
 
     public String getPostScript() {
@@ -64,7 +64,7 @@ public class UserTransferModel implements Subject {
         this.postScript = postScript;
     }
 
-    public void balanceChanged() {
+    public void updateAmounts() {
         notifyObserver();
     }
 
@@ -85,7 +85,7 @@ public class UserTransferModel implements Subject {
     public void notifyObserver() {
         for(int i = 0; i < observers.size(); i++) {
             Observer observer = observers.get(i);
-            observer.updateBalance();
+            observer.updateTransferPage(this);
         }
     }
 }
