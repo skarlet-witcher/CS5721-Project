@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author xiangkai22
+ * @author Xiangkai Tang
  */
 public class CustomerMainView extends JFrame implements Observer {
 
@@ -39,7 +39,7 @@ public class CustomerMainView extends JFrame implements Observer {
     private UserProfileReply userProfileReply;
 
     // model for data binding
-    private UserModel userModel = new UserModel();
+    private UserModel userModel;
     private List<UserTransactionModel> userTransactionModelList = new ArrayList<>();
     private UserTransferModel userTransferModel = new UserTransferModel();
 
@@ -147,6 +147,7 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void initUserModel(long userId, long user_pk, String firstName, String lastLoginTime) {
+        this.userModel = new UserModel();
         this.userModel.setUserId(userId);
         this.userModel.setId(user_pk);
         this.userModel.setFirstName(firstName);
