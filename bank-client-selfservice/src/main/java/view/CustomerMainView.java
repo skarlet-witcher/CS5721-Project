@@ -256,7 +256,7 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void initTransactionInfo() {
-        int selectedAccountIndex = cb_transaction_accountList.getSelectedIndex();
+        int selectedAccountIndex = 0;
         Long accountPk = this.userModel.getUserAccountList().get(selectedAccountIndex).getAccount_pk();
         int filter = cb_transaction_filter.getSelectedIndex() + 1;
         try {
@@ -291,13 +291,13 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void initBalance() {
-        int accountIndex = cb_transfer_accountList.getSelectedIndex();
+        int accountIndex = 0;
         String balance = String.valueOf(this.userModel.getUserAccountList().get(accountIndex).getBalance());
         tf_transfer_balance.setText(balance);
     }
 
     private void initAccountComboBox(JComboBox accountComboBox) {
-        accountComboBox.removeAll();
+        accountComboBox.removeAllItems();
         if(accountsReplyList.size() <= 0) {
             JOptionPane.showMessageDialog(null,
                     "No Account found.",
