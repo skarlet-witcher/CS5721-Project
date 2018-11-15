@@ -21,20 +21,12 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
 
     @Override
     public void getAccounts(UserCustomerGetAccountsRequest request, StreamObserver<Response> responseObserver) {
-        Long id = request.getUserPk();
 
         try {
-            logger.info("Server.rpc: Ready to getAccounts from customerService.");
-            List<UserAccountsReply> userAccountsReply = customerService.getAccounts(id);
-            logger.info("Server.rpc: How many result: " + userAccountsReply.size());
-            logger.info("Server.rpc: Ready to add results into response");
-            logger.info("Server.rpc: one of the value in the UserAccountReply: " + userAccountsReply.get(0).getBalance());
-
+            List<UserAccountsReply> userAccountsReply = customerService.getAccounts(request.getUserPk());
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .addAllUserAccounts(userAccountsReply)
                     .build());
-            logger.info("UserCustomerService: pack response success.");
-
         } catch (Exception e) {
             responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getMessage())
                     .build());
@@ -44,15 +36,12 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
 
     @Override
     public void getProfile(UserCustomerGetProfileRequest request, StreamObserver<Response> responseObserver) {
-        Long id = request.getUserPk();
 
         try {
-            UserProfileReply userProfileReply = customerService.getUserProfile(id);
-
+            UserProfileReply userProfileReply = customerService.getUserProfile(request.getUserPk());
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .setUserProfile(userProfileReply)
                     .build());
-
         } catch (Exception E) {
             responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
                     .build());
@@ -62,17 +51,15 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
 
     @Override
     public void editProfile(UserCustomerEditProfileRequest request, StreamObserver<Response> responseObserver) {
-        Long id = request.getUserPk();
-        String address = request.getAddress();
-        String contactNum = request.getPhone();
-        String email = request.getEmail();
 
         try {
-            UserCustomerService.getInstance().editUserProfile(id, address, email, contactNum);
-
+            UserCustomerService.getInstance().editUserProfile(
+                    request.getUserPk(),
+                    request.getAddress(),
+                    request.getEmail(),
+                    request.getPhone());
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .build());
-
         } catch (Exception E) {
             responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
                     .build());
@@ -82,14 +69,12 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
 
     @Override
     public void getPayees(UserCustomerGetPayeesRequest request, StreamObserver<Response> responseObserver) {
-        Long id = request.getUserPk();
 
         try {
-            List<UserPayeesReply> userPayeesReplies = UserCustomerService.getInstance().getPayeeList(id);
+            List<UserPayeesReply> userPayeesReplies = UserCustomerService.getInstance().getPayeeList(request.getUserPk());
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .addAllUserPayees(userPayeesReplies)
                     .build());
-
         } catch (Exception E) {
             responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
                     .build());
@@ -99,16 +84,14 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
 
     @Override
     public void addPayee(UserCustomerAddPayeeRequest request, StreamObserver<Response> responseObserver) {
-       Long user_pk = request.getUserPk();
-       String name = request.getName();
-       String iban = request.getIban();
-       String pin = request.getPin();
-
        try {
-            UserCustomerService.getInstance().addPayee(user_pk, name, iban, pin);
+            UserCustomerService.getInstance().addPayee(
+                    request.getUserPk(),
+                    request.getName(),
+                    request.getIban(),
+                    request.getPin());
            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                    .build());
-
        } catch (Exception E) {
            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
                    .build());
@@ -118,11 +101,8 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
 
     @Override
     public void removePayee(UserCustomerRemovePayeeRequest request, StreamObserver<Response> responseObserver) {
-        Long payee_pk = request.getPayeePk();
-        Long user_id = request.getUserPk();
-        logger.info("arrive at customer rpc");
         try {
-            UserCustomerService.getInstance().removePayee(payee_pk, user_id);
+            UserCustomerService.getInstance().removePayee(request.getPayeePk(), request.getUserPk());
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .build());
         } catch (Exception E) {
@@ -134,16 +114,15 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
 
     @Override
     public void transfer(UserCustomerTransferRequest request, StreamObserver<Response> responseObserver) {
-        Long payee_pk = request.getPayeePk();
-        Long user_pk = request.getUserPk();
-        Long account_pk = request.getAccountPk();
-        Double amount = request.getAmount();
-        String pin = String.valueOf(request.getPin());
-        String postScript = request.getPostScript();
-        int currencyType = request.getCurrencyType();
-
         try {
-            UserCustomerService.getInstance().transfer(payee_pk, user_pk, account_pk, amount, pin, postScript, currencyType);
+            UserCustomerService.getInstance().transfer(
+                    request.getPayeePk(),
+                    request.getUserPk(),
+                    request.getAccountPk(),
+                    request.getAmount(),
+                    String.valueOf(request.getPin()),
+                    request.getPostScript(),
+                    request.getCurrencyType());
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .build());
 
@@ -157,17 +136,14 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     @Override
     public void getTransactions(UserCustomerGetTransactionsRequest request,
                                 StreamObserver<Response> responseObserver) {
-        Long user_pk = request.getUserPk();
-        Long accountPk = request.getFilterByAccount();
-        int date = request.getFilterByDate();
-        logger.info("date = " + date);
         try {
-            List<UserTransactionsReply> userTransactionsReplies = UserCustomerService.getInstance().getTransaction(user_pk, accountPk, date);
-            logger.info("transaction reply: " + userTransactionsReplies.size());
+            List<UserTransactionsReply> userTransactionsReplies = UserCustomerService.getInstance().getTransaction(
+                    request.getUserPk(),
+                    request.getFilterByAccount(),
+                    request.getFilterByDate());
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .addAllUserTransactions(userTransactionsReplies)
                     .build());
-
         } catch (Exception E) {
             responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
                     .build());
