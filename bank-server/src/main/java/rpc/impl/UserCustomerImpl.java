@@ -16,7 +16,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  */
 
 public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
-    private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
+    // private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
     private IUserCustomerService customerService = UserCustomerService.getInstance();
 
     @Override
