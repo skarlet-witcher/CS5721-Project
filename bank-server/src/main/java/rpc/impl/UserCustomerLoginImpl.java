@@ -26,16 +26,14 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
 
     @Override
     public void loginReq(UserLoginReqRequest request, StreamObserver<Response> responseObserver) {
-        Long userId = request.getUserId();
-        int phoneLast4 = request.getPhoneLast4();
-        int birthDay = request.getBirthDay();
-        int birthMon = request.getBirthMon();
-        int birthYear = request.getBirthYear();
-
         try {
             //1 create result of service, which contains pin and some other attr
-            UserLoginReqReply userLoginReqReply = customerLoginService.LoginReq(userId, phoneLast4, birthDay, birthMon, birthYear);
-            logger.info("Input those digits of PIN:" + userLoginReqReply.getAllFields());
+            UserLoginReqReply userLoginReqReply = customerLoginService.LoginReq(
+                    request.getUserId(),
+                    request.getPhoneLast4(),
+                    request.getBirthDay(),
+                    request.getBirthMon(),
+                    request.getBirthYear());
             //2 set the above result to responseObserver
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .setUserLoginReqReply(userLoginReqReply)
@@ -57,10 +55,8 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         pin.put(4, request.getPin4());
         pin.put(5, request.getPin5());
         pin.put(6, request.getPin6());
-        logger.info("User " + request.getUserId() + " ready to match with the PIN");
         try {
             UserLoginReply loginReply = customerLoginService.LoginByUserIdAndPin(request.getUserId(), pin);
-
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .setUserLoginReply(loginReply)
                     .build());

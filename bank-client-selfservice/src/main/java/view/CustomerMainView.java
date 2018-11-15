@@ -232,7 +232,17 @@ public class CustomerMainView extends JFrame implements Observer {
 
     private void initProfilePage() {
         initProfileInfo();
+        updateUserModel();
         initProfileFields(this.userModel);
+    }
+
+    private void updateUserModel() {
+        this.userModel.setFirstName(userProfileReply.getFirstName());
+        this.userModel.setLastName(userProfileReply.getLastName());
+        this.userModel.setGender(userProfileReply.getGender());
+        this.userModel.setAddress(userProfileReply.getAddress());
+        this.userModel.setEmail(userProfileReply.getEmail());
+        this.userModel.setContactNum(userProfileReply.getPhone());
     }
 
     private void initPayeePage() {
@@ -566,9 +576,7 @@ public class CustomerMainView extends JFrame implements Observer {
 
     private void thisComponentShown(ComponentEvent e) {
         initAccountTable();
-        initProfileInfo();
-        initPayeeTable();
-        initPayeeComboBox();
+        initPayeePage();
     }
 
     public void run() {

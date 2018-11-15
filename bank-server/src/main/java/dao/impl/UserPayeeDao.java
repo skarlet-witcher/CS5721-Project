@@ -63,9 +63,7 @@ public class UserPayeeDao implements IUserPayeeDao {
     public void addPayee(UserPayeeEntity userPayeeEntity) {
         try {
             session.getTransaction().begin();
-
             session.save(userPayeeEntity);
-
             session.getTransaction().commit();
         } catch (Exception E) {
             E.printStackTrace();
@@ -84,8 +82,9 @@ public class UserPayeeDao implements IUserPayeeDao {
             query.executeUpdate();
 
             Query query2 = session.createQuery("from UserPayeeEntity ");
-            UserPayeeEntity userPayeeEntity = (UserPayeeEntity) query2.uniqueResult();
-            session.refresh(userPayeeEntity);
+            for(UserPayeeEntity userPayeeEntity: (List<UserPayeeEntity>)query2.getResultList()) {
+                session.refresh(userPayeeEntity);
+            }
             session.getTransaction().commit();
         } catch (Exception E) {
             E.printStackTrace();
