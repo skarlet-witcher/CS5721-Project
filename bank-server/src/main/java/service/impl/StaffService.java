@@ -16,12 +16,10 @@ import dao.impl.UserCardDao;
 import dao.impl.UserDao;
 import entity.*;
 import service.IStaffService;
+import service.impl.command_pattern.*;
 import util.*;
 
 import java.sql.Timestamp;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 
 import static Const.CardCurrencyType.EURO;
 import static Const.UserAccountType.*;
@@ -67,6 +65,7 @@ public class StaffService implements IStaffService {
      * First, it applies the application by changing status of record in DB from PENDING to PASS
      * Second, it will create the records of user, user_account, and user_card in DB
      * Third, an email is sent to user for confirmation
+     *
      * @param request An application request from client, which contains Application ID for searching in DB
      * @return
      */
@@ -79,17 +78,17 @@ public class StaffService implements IStaffService {
         //Apply an application request
         UserApplyArchiveEntity userApplyArchiveEntity = bankStaffDao.selectOneApplication(request.getApplicationId());
         AcceptedResponse response = null;
-        if(userApplyArchiveEntity.getNewUserApply() == EXISTING_USER){
+        if (userApplyArchiveEntity.getNewUserApply() == EXISTING_USER) {
             response = applyForExistingUser(request, userApplyArchiveEntity);
         }
-        if(userApplyArchiveEntity.getNewUserApply() == NEW_USER){
+        if (userApplyArchiveEntity.getNewUserApply() == NEW_USER) {
             response = applyForNewUser(request, userApplyArchiveEntity);
         }
         return response;
 
     }
 
-    private AcceptedResponse applyForExistingUser(AcceptedRequest request, UserApplyArchiveEntity userApplyArchiveEntity) {
+    public AcceptedResponse applyForExistingUser(AcceptedRequest request, UserApplyArchiveEntity userApplyArchiveEntity) {
         UserEntity userEntity = userDao.selectUserByUserId(userApplyArchiveEntity.getUserId());
         bankStaffDao.applyAnApplication(request.getApplicationId());
 
@@ -104,7 +103,7 @@ public class StaffService implements IStaffService {
         return response;
     }
 
-    private AcceptedResponse applyForNewUser(AcceptedRequest request, UserApplyArchiveEntity userApplyArchiveEntity) {
+    public AcceptedResponse applyForNewUser(AcceptedRequest request, UserApplyArchiveEntity userApplyArchiveEntity) {
         //1. Create  new UserEntity and save it to DB
         UserEntity userEntity = new UserEntity();
         userEntity.setAddress(userApplyArchiveEntity.getAddress());
@@ -132,7 +131,7 @@ public class StaffService implements IStaffService {
         return response;
     }
 
-    private UserCardEntity createUserCard(UserAccountEntity userAccountEntity, UserApplyArchiveEntity userApplyArchiveEntity) {
+    public UserCardEntity createUserCard(UserAccountEntity userAccountEntity, UserApplyArchiveEntity userApplyArchiveEntity) {
         UserCardEntity userCardEntity = new UserCardEntity();
         userCardEntity.setCardNumber(CardNumberGenerator.getInstance().getCardNumber());
         userCardEntity.setAccountId(userAccountEntity.getId());
@@ -144,7 +143,7 @@ public class StaffService implements IStaffService {
         return userCardEntity;
     }
 
-    private UserAccountEntity createUserAccount(UserEntity userEntity, UserApplyArchiveEntity userApplyArchiveEntity) {
+    public UserAccountEntity createUserAccount(UserEntity userEntity, UserApplyArchiveEntity userApplyArchiveEntity) {
         UserAccountEntity userAccountEntity = new UserAccountEntity();
         userAccountEntity.setAccountNumber(AccountNumberGenerator.getInstance().generateAccountNumber());
         userAccountEntity.setAccountType(Long.valueOf(userApplyArchiveEntity.getAccountType()));
@@ -156,23 +155,25 @@ public class StaffService implements IStaffService {
         userAccountEntity.setUserId(userEntity.getId());
         userAccountEntity.setCurrencyType(EURO);
 
-        if(userApplyArchiveEntity.getAccountType() == STUDENT_ACCOUNT)
-            userAccountEntity.setExpiredDate(userApplyArchiveEntity.getGraduateDate());
-        if(userApplyArchiveEntity.getAccountType() == YOUNG_SAVER_ACCOUNT){
-            ZonedDateTime zonedDateTime = userEntity.getBirthDate().toInstant().atZone(ZoneId.of("UTC"));
-            Timestamp expireTime = Timestamp.from(zonedDateTime.plus(18, ChronoUnit.YEARS).toInstant());
-            userAccountEntity.setExpiredDate(expireTime);
+        Timestamp expireDate = null;
+        Invoker invoker = new Invoker();
+        Receiver receiver = new Receiver(userApplyArchiveEntity);
+        if (userApplyArchiveEntity.getAccountType() == STUDENT_ACCOUNT) {
+            expireDate = invoker.executeCommand(new StudentAccCalculateExpiry(receiver));
+            userAccountEntity.setExpiredDate(expireDate);
+        }
+        if (userApplyArchiveEntity.getAccountType() == YOUNG_SAVER_ACCOUNT) {
+            expireDate = invoker.executeCommand(new YoungSaverAccCalculateExpiry(receiver));
+            userAccountEntity.setExpiredDate(expireDate);
         }
 
-        if(userApplyArchiveEntity.getAccountType() == PERSONAL_ACCOUNT){
-            ZonedDateTime zonedDateTime = userApplyArchiveEntity.getApplyTime().toInstant().atZone(ZoneId.of("UTC"));
-            Timestamp expireTime = Timestamp.from(zonedDateTime.plus(3, ChronoUnit.YEARS).toInstant());
-            userAccountEntity.setExpiredDate(expireTime);
+        if (userApplyArchiveEntity.getAccountType() == PERSONAL_ACCOUNT) {
+            expireDate = invoker.executeCommand(new PersonalAccCalculateExpiry(receiver));
+            userAccountEntity.setExpiredDate(expireDate);
         }
-        if(userApplyArchiveEntity.getAccountType() == GOLDEN_ACCOUNT){
-            ZonedDateTime zonedDateTime = userApplyArchiveEntity.getApplyTime().toInstant().atZone(ZoneId.of("UTC"));
-            Timestamp expireTime = Timestamp.from(zonedDateTime.plus(100, ChronoUnit.YEARS).toInstant());
-            userAccountEntity.setExpiredDate(expireTime);
+        if (userApplyArchiveEntity.getAccountType() == GOLDEN_ACCOUNT) {
+            expireDate = invoker.executeCommand(new GoldenAccCalculateExpiry(receiver));
+            userAccountEntity.setExpiredDate(expireDate);
         }
 
         userAccountDao.createUserAccount(userAccountEntity);
@@ -181,3 +182,6 @@ public class StaffService implements IStaffService {
 
 
 }
+
+
+

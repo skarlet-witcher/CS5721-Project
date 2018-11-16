@@ -171,7 +171,7 @@ public class CustomerMainView extends JFrame implements Observer {
             userAccountModel.setAccountNum(userAccountsReply.getAccountNumber());
             userAccountModel.setAccountType(userAccountsReply.getAccountType());
             userAccountModel.setCurrencyType(userAccountsReply.getCurrencyType());
-            userAccountModel.setBalance(userAccountsReply.getBalance());
+            userAccountModel.setBalance(Double.valueOf(userAccountsReply.getBalance()));
             userAccountModel.setStatus(userAccountsReply.getStatus());
 
             this.userModel.getUserAccountList().add(userAccountModel);

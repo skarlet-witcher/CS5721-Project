@@ -2,7 +2,6 @@ package rpc.impl.bank_staff;
 
 import bankStaff_rpc.AcceptApplicationGrpc;
 import bankStaff_rpc.AcceptedResponse;
-import bankStaff_rpc.ListUserApplyArchiveEntitiesResponse;
 import io.grpc.stub.StreamObserver;
 import service.IStaffService;
 import service.impl.StaffService;
