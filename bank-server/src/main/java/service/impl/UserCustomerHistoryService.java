@@ -109,4 +109,19 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
         operationHistoryDao.addOperationHistory(userHistoryEntity);
     }
 
+    @Override
+    public void addNewChargeHistory(Long user_pk, Long account_pk, Double amount, int currencyType, int operationType, int operationStatus) {
+        UserHistoryEntity userHistoryEntity = new UserHistoryEntity();
+        userHistoryEntity.setOperateNo(operationNoGenerator.generateOperationNo());
+        userHistoryEntity.setOperateType(operationType);
+        userHistoryEntity.setOperateTime(new Timestamp(new Date().getTime()));
+        userHistoryEntity.setOperateSource(UserOperateSourceType.SELF_SERVICE);
+        userHistoryEntity.setAmount(amount);
+        userHistoryEntity.setCurrencyType(currencyType);
+        userHistoryEntity.setStatus(operationStatus);
+        userHistoryEntity.setUserId(user_pk);
+        userHistoryEntity.setAccountId(account_pk);
+        operationHistoryDao.addOperationHistory(userHistoryEntity);
+    }
+
 }
