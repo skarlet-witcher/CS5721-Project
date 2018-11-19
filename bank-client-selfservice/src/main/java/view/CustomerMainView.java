@@ -129,13 +129,6 @@ public class CustomerMainView extends JFrame implements Observer {
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        System.out.println("------------------");
-        System.out.println("");
-        System.out.println("TransferPageObserver: ready to update the transfer page");
-        System.out.println("");
-        System.out.println("------------------");
-
         initHomePage();
         initProfilePage();
         initTransactionPage();
