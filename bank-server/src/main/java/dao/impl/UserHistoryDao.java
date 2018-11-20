@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UserHistoryDao implements IUserHistoryDao {
     private static IUserHistoryDao instance = null;
-    private Session session = HibernateUtils.getSessionFactory().openSession();
+    private Session session = HibernateUtils.getSessionFactory().withOptions().interceptor(new MyInterceptor()).openSession();
 
     public static IUserHistoryDao getInstance() {
         if (instance == null) {

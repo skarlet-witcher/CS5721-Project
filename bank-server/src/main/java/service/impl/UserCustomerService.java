@@ -208,10 +208,10 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     private void transferToLocalPayee(Long payee_pk, Double amount) throws Exception {
-        UserPayeeEntity result_payee;
+        UserAccountEntity result_payee;
         try {
             // validate type of iban (created from out bank or other bank)
-            result_payee = userPayeeDao.getPayeeByPK(payee_pk);
+            result_payee = userAccountDao.getUserAccountByIBAN(userPayeeDao.getPayeeByPK(payee_pk).getIban());
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("fail to check type of iban before transfer");
         }

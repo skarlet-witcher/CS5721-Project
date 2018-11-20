@@ -291,6 +291,7 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void initBalance() {
+        System.out.println("your balance = " + this.userModel.getUserAccountList().get(0).getBalance());
         tf_transfer_balance.setText(String.valueOf(this.userModel.getUserAccountList().get(0).getBalance()));
     }
 
