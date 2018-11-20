@@ -340,7 +340,7 @@ public class CustomerLoginView extends JFrame {
             "[30:n,grow]"));
 
         //---- lbl_title ----
-        lbl_title.setText("Customer Bank System Login");
+        lbl_title.setText("Nuclear Bank System Login");
         lbl_title.setFont(new Font("Segoe UI", Font.PLAIN, 28));
         lbl_title.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lbl_title, "cell 2 0 3 1");
