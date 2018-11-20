@@ -1,9 +1,6 @@
 package service.impl;
 
-import Const.SysMailTemplateType;
-import Const.UserOperateStatusType;
-import Const.UserOperateType;
-import Const.UserStatusType;
+import Const.*;
 import dao.IUserDao;
 import dao.IUserHistoryDao;
 import dao.impl.UserDao;
@@ -48,61 +45,15 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
      * add operation record.
      */
     public UserLoginReqReply LoginReq(Long userId, Integer phoneLast4, Integer birthDay, Integer birthMon, Integer birthYear) throws Exception {
-        UserEntity user = userDao.selectUserByUserId(userId);
+        UserEntity user;
+        user = validateUserExistence(userId);
+        validateUserStatus(user);
 
-        if (user == null) {
-            throw FaultFactory.throwFaultException("The UserId you typed is not existed.");
-        }
-
-        // validate if accounts blocking now
-        if (user.getStatus() == UserStatusType.BLOCKED) {
-            throw FaultFactory.throwFaultException("Sorry, you have been blocked in case of security problems, please ask the bank staff for further assistance.");
-        } else if (user.getStatus() == UserStatusType.DELETED || user.getStatus() == UserStatusType.PENDING_FOR_BEING_DELETED) {
-            throw FaultFactory.throwFaultException("Sorry, your model account has been removed from our bank system.");
-        }
-
-        Calendar birthDate = Calendar.getInstance();
-        birthDate.setTimeInMillis(user.getBirthDate().getTime());
-
-        if (user.getPhone().endsWith(phoneLast4.toString())
-                || (birthDay == birthDate.get(Calendar.DAY_OF_MONTH) &&
-                (birthMon == birthDate.get(Calendar.MONTH) + 1) &&
-                birthYear == birthDate.get(Calendar.YEAR))) {
-            // validate pass
-
-            try {
-                List<Integer> digits = RandomUtil.generateNumbsNoDuplicatedASC(1, 6, 3);
-                UserLoginReqReply.Builder userLoginReqBuilder = UserLoginReqReply.newBuilder();
-                StringBuilder digitsInInteger = new StringBuilder();
-                for (Integer digit : digits) {
-                    digitsInInteger.append(digit);
-                    if (digit == 1) {
-                        userLoginReqBuilder.setPin1(1);
-                    } else if (digit == 2) {
-                        userLoginReqBuilder.setPin2(1);
-                    } else if (digit == 3) {
-                        userLoginReqBuilder.setPin3(1);
-                    } else if (digit == 4) {
-                        userLoginReqBuilder.setPin4(1);
-                    } else if (digit == 5) {
-                        userLoginReqBuilder.setPin5(1);
-                    } else if (digit == 6) {
-                        userLoginReqBuilder.setPin6(1);
-                    }
-                }
-                Integer executeResult = userDao.updateUserPinDigitById(user.getId(), digitsInInteger.toString());
-                if (executeResult >= 1) {
-                    return userLoginReqBuilder.build();
-                }
-                throw FaultFactory.throwFaultException("Internal Error: fail to update login pin digit");
-            } catch (Exception e) {
-                throw FaultFactory.throwFaultException("LoginReq request Operation Fails.");
-            }
+        if (identifyLoginOptions(user, birthDay, birthMon, birthYear, phoneLast4)) {
+                return initLoginPinDigits(user);
         } else {
-            // validate fail
-            operationHistoryService.addNewUserLoginReqHistory(user.getId(), UserOperateStatusType.FAILURE);
-            operationHistoryService.refreshUserLoginStatus(user.getId());
-            throw FaultFactory.throwFaultException("Customer detail validation fails.");
+            archiveFailedHistory(user);
+            throw FaultFactory.throwFaultException("LoginReq request Operation Fails.");
         }
     }
 
@@ -164,5 +115,77 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
             throw FaultFactory.throwFaultException("UserId is not matched with email and birthdate, please check again.");
 
         }
+    }
+
+
+    private UserEntity validateUserExistence(Long userId) throws Exception {
+        UserEntity user;
+        try {
+            user = userDao.selectUserByUserId(userId);
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException("fail to get user info when validating user existence");
+        }
+
+        if (userDao.selectUserByUserId(userId) == null) {
+            throw FaultFactory.throwFaultException("The UserId you typed is not existed.");
+        } else {
+            return user;
+        }
+    }
+
+    private void validateUserStatus(UserEntity user) throws Exception {
+        // validate if accounts blocking now
+        if (user.getStatus() == UserStatusType.BLOCKED) {
+            throw FaultFactory.throwFaultException("Sorry, you have been blocked in case of security problems, please ask the bank staff for further assistance.");
+        } else if (user.getStatus() == UserStatusType.DELETED || user.getStatus() == UserStatusType.PENDING_FOR_BEING_DELETED) {
+            throw FaultFactory.throwFaultException("Sorry, your model account has been removed from our bank system.");
+        }
+    }
+
+    private UserLoginReqReply initLoginPinDigits(UserEntity user) throws Exception {
+        List<Integer> loginDigitsTemplate = RandomUtil.generateNumbsNoDuplicatedASC(1, 6, 3);
+        UserLoginReqReply.Builder userLoginReqBuilder = UserLoginReqReply.newBuilder();
+        StringBuilder digitsInInteger = new StringBuilder();
+        for (Integer digit : loginDigitsTemplate) {
+            digitsInInteger.append(digit);
+            if (digit == 1) {
+                userLoginReqBuilder.setPin1(PinReplyType.REQUIRED);
+            } else if (digit == 2) {
+                userLoginReqBuilder.setPin2(PinReplyType.REQUIRED);
+            } else if (digit == 3) {
+                userLoginReqBuilder.setPin3(PinReplyType.REQUIRED);
+            } else if (digit == 4) {
+                userLoginReqBuilder.setPin4(PinReplyType.REQUIRED);
+            } else if (digit == 5) {
+                userLoginReqBuilder.setPin5(PinReplyType.REQUIRED);
+            } else if (digit == 6) {
+                userLoginReqBuilder.setPin6(PinReplyType.REQUIRED);
+            }
+        }
+        Integer executeResult = userDao.updateUserPinDigitById(user.getId(), digitsInInteger.toString());
+        if (executeResult >= 1) {
+            return userLoginReqBuilder.build();
+        }
+        throw FaultFactory.throwFaultException("Internal Error: fail to update login pin digit");
+    }
+
+    private void archiveFailedHistory(UserEntity user) throws Exception {
+        try {
+            // validate fail
+            operationHistoryService.addNewUserLoginReqHistory(user.getId(), UserOperateStatusType.FAILURE);
+            operationHistoryService.refreshUserLoginStatus(user.getId());
+
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException("Customer detail validation fails.");
+        }
+    }
+
+    private Boolean identifyLoginOptions(UserEntity user, Integer birthDay, Integer birthMon, Integer birthYear, Integer phoneLast4) {
+        Calendar birthDate = Calendar.getInstance();
+        birthDate.setTimeInMillis(user.getBirthDate().getTime());
+        return (user.getPhone().endsWith(phoneLast4.toString())
+                || (birthDay == birthDate.get(Calendar.DAY_OF_MONTH) &&
+                (birthMon == birthDate.get(Calendar.MONTH) + 1) &&
+                birthYear == birthDate.get(Calendar.YEAR)));
     }
 }

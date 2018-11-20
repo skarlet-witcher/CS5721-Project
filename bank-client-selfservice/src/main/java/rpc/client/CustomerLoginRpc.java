@@ -58,7 +58,7 @@ public class CustomerLoginRpc {
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
-            logger.info(loginReqRequest.getUserId() + " login request detail check successful.");
+            logger.info(loginReqRequest.getUserId() + " login request successful. Details of inputting the PIN have returned. ");
             return response.getUserLoginReqReply();
         } else {
             logger.info(loginReqRequest.getUserId() + " login request fail due to " + response.getDescription());
@@ -79,7 +79,7 @@ public class CustomerLoginRpc {
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
-            logger.info(userLoginRequest.getUserId() + " login request detail check successful.");
+            logger.info(userLoginRequest.getUserId() + " login request check successful.");
             return response.getUserLoginReply();
         } else {
             logger.info(userLoginRequest.getUserId() + " login request fail due to " + response.getDescription());

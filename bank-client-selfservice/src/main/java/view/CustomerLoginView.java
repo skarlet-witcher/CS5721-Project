@@ -250,7 +250,7 @@ public class CustomerLoginView extends JFrame {
                     PinFields = CustomerLoginService.getInstance().requestLoginUsingDOB(userLoginRequestModel);
                 } catch (Exception E) {
                     JOptionPane.showMessageDialog(null,
-                            "Please input valid date of birth or UserId",
+                            "Please input valid date of birth or UserId due to " + E.getMessage(),
                             "Error Message",JOptionPane.ERROR_MESSAGE);
                     return;
                 }

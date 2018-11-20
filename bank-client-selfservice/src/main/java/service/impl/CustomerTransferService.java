@@ -12,11 +12,6 @@ import java.util.List;
 
 public class CustomerTransferService implements ICustomerTransferService {
     private static ICustomerTransferService customerTransferService = null;
-    private List<Observer> observers;
-
-    private CustomerTransferService() {
-        observers = new ArrayList<>();
-    }
 
     public static ICustomerTransferService getInstance() {
         if(customerTransferService == null) {
