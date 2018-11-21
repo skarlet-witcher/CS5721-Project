@@ -7,10 +7,7 @@ package view;
 
 import model.UserLoginPINModel;
 import net.miginfocom.swing.MigLayout;
-import rpc.UserAccountsReply;
 import rpc.UserLoginReply;
-import rpc.client.CustomerLoginRpc;
-import service.impl.CustomerHomeService;
 import service.impl.CustomerLoginService;
 import util.JTextFieldLimit;
 import util.KeyPadGenerator;
@@ -19,12 +16,11 @@ import util.TimestampConvertHelper;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author xiangkai22
+ * @author Xiangkai Tang
  */
 public class CustomerPINView extends JFrame {
     List<JPasswordField> passwordFieldsList = new ArrayList<JPasswordField>();
@@ -50,16 +46,16 @@ public class CustomerPINView extends JFrame {
 
     public CustomerPINView(long userId,int pin1, int pin2, int pin3) {
         initComponents();
-        setUserId(userId);
+        initInternalVariables(userId);
         generateKeyPad();
-        generatePINField(pin1, pin2, pin3); // the number should be acquired from the db
+        generatePINFields(pin1, pin2, pin3);
     }
 
-    private void setUserId(long userId) {
+    private void initInternalVariables(long userId) {
         this.userId = userId;
     }
 
-    private JPasswordField emptyPasswordFieldCheckerForInput() {
+    private JPasswordField checkEmptyPasswordField() {
         JPasswordField result = null;
         for (int i = 0; i < 3; i++) {
             if (passwordFieldsList.get(i).getPassword().length <= 0) {
@@ -70,7 +66,7 @@ public class CustomerPINView extends JFrame {
         return result;
     }
 
-    private JPasswordField passwordFieldCheckerForRemove() {
+    private JPasswordField checkInputtedPasswordField() {
         JPasswordField result = null;
         for(int i = 2; i >= 0; i--) {
             if(passwordFieldsList.get(i).getPassword().length >0) {
@@ -82,17 +78,17 @@ public class CustomerPINView extends JFrame {
     }
 
     private void inputPIN(String str) {
-        if(emptyPasswordFieldCheckerForInput()== null) {
+        if(checkEmptyPasswordField()== null) {
             return;
         } else {
-            emptyPasswordFieldCheckerForInput().setText(str);
+            checkEmptyPasswordField().setText(str);
         }
 
     }
 
     private void backSpacePIN() {
-        if(passwordFieldCheckerForRemove()== null) return;
-        passwordFieldCheckerForRemove().setText("");
+        if(checkInputtedPasswordField()== null) return;
+        checkInputtedPasswordField().setText("");
     }
 
     private void generatePasswordField() {
@@ -104,17 +100,17 @@ public class CustomerPINView extends JFrame {
         passwordFieldsList.add(pf);
     }
 
-    private void generateLabel() {
+    private void generateAsterisk() {
         JLabel lbl = new JLabel("*");
         getContentPane().add(lbl, "cell 2 0");
     }
 
-    private void generatePINField(int digit_1, int digit_2, int digit_3) {
+    private void generatePINFields(int digit_1, int digit_2, int digit_3) {
         for(int i = 1; i <= 6; i++) {
             if( i == digit_1 || i == digit_2 || i == digit_3) {
                generatePasswordField();
             } else {
-                generateLabel();
+                generateAsterisk();
             }
         }
         pinDigitList.add(digit_1);
@@ -204,32 +200,18 @@ public class CustomerPINView extends JFrame {
     }
 
     private void btn_confirmActionPerformed(ActionEvent e) {
-        for(JPasswordField pwdField: passwordFieldsList) {
-            if(pwdField.getPassword().length <= 0) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your PIN",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
         UserLoginReply userLoginReply;
-        UserLoginPINModel userLoginPINModel = initUserLoginPINModel(pinDigitList);
+        if(!validateBeforeLogin()) return;
         try {
-            userLoginReply = CustomerLoginService.getInstance().requestLoginUsingPIN(userLoginPINModel);
+            userLoginReply = CustomerLoginService.getInstance().requestLoginUsingPIN(initUserLoginPINModel(pinDigitList));
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
-                    E.getMessage(),
+                    "Fail to login due to " + E.getMessage(),
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             E.printStackTrace();
             return;
         }
-        String firstName = userLoginReply.getFirstName().trim();
-        Long user_pk = userLoginReply.getUserPk();
-        String lastLoginTime = TimestampConvertHelper.rpcToMysql(userLoginReply.getLastLoginTime()).toString();
-        lastLoginTime = lastLoginTime.substring(0, lastLoginTime.indexOf('.'));
-
-        this.dispose();
-        new CustomerMainView(userId, user_pk, firstName, lastLoginTime).run();
+        initCustomerMainView(userLoginReply);
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
@@ -240,6 +222,26 @@ public class CustomerPINView extends JFrame {
     private void btn_forgotPINActionPerformed(ActionEvent e) {
         this.dispose();
         new CustomerForgotPINView(userId).run();
+    }
+
+    private Boolean validateBeforeLogin() {
+        for(JPasswordField pwdField: passwordFieldsList) {
+            if(pwdField.getPassword().length <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your PIN",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void initCustomerMainView(UserLoginReply userLoginReply) {
+        String lastLoginTime = TimestampConvertHelper.rpcToMysql(userLoginReply.getLastLoginTime()).toString();
+        lastLoginTime = lastLoginTime.substring(0, TimestampConvertHelper.rpcToMysql(userLoginReply.getLastLoginTime()).toString().indexOf('.'));
+
+        this.dispose();
+        new CustomerMainView(this.userId, userLoginReply.getUserPk(), userLoginReply.getFirstName().trim(), lastLoginTime).run();
     }
 
     public void run() {

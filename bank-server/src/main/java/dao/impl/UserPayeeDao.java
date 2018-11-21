@@ -28,8 +28,8 @@ public class UserPayeeDao implements IUserPayeeDao {
     public List<UserPayeeEntity> getPayeeListById(Long userId) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("from UserPayeeEntity where userId=?");
-            query.setParameter(0, userId);
+            Query query = session.createQuery("from UserPayeeEntity where userId=:userId");
+            query.setParameter("userId", userId);
             List<UserPayeeEntity> userPayeeEntityList = (List<UserPayeeEntity>)query.getResultList();
             session.getTransaction().commit();
             return userPayeeEntityList;
@@ -45,8 +45,8 @@ public class UserPayeeDao implements IUserPayeeDao {
     public UserPayeeEntity getPayeeByPK(Long payee_pk) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("From UserPayeeEntity where id=?");
-            query.setParameter(0, payee_pk);
+            Query query = session.createQuery("From UserPayeeEntity where id=:id");
+            query.setParameter("id", payee_pk);
 
             UserPayeeEntity result = (UserPayeeEntity)query.uniqueResult();
             session.getTransaction().commit();
@@ -76,9 +76,9 @@ public class UserPayeeDao implements IUserPayeeDao {
     public void removePayee(Long payee_pk, Long user_id) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("delete from UserPayeeEntity where id=? and userId=?");
-            query.setParameter(0, payee_pk);
-            query.setParameter(1, user_id);
+            Query query = session.createQuery("delete from UserPayeeEntity where id=:id and userId=:userId");
+            query.setParameter("id", payee_pk);
+            query.setParameter("userId", user_id);
             query.executeUpdate();
 
             Query query2 = session.createQuery("from UserPayeeEntity ");

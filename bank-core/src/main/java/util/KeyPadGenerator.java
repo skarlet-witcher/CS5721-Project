@@ -19,11 +19,11 @@ public class KeyPadGenerator {
     }
 
     public List<Integer> getKeyPadArr() {
-        List<Integer> li = new ArrayList<Integer>();
-        for(int i = 0; i< 10; i++) {
-            li.add(i);
+        List<Integer> digits = new ArrayList<Integer>();
+        for(int digit = 0; digit< 10; digit++) {
+            digits.add(digit);
         }
-        Collections.shuffle(li);
-        return li;
+        Collections.shuffle(digits);
+        return digits;
     }
 }

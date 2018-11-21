@@ -7,7 +7,6 @@ import dao.impl.UserDao;
 import dao.impl.UserHistoryDao;
 import entity.UserEntity;
 import entity.UserHistoryEntity;
-import rpc.UserCustomerLoginGrpc;
 import rpc.UserLoginReply;
 import rpc.UserLoginReqReply;
 import service.IUserCustomerHistoryService;
@@ -22,10 +21,9 @@ import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 public class UserCustomerLoginService implements IUserCustomerLoginService {
-    private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
+    // private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
     private static UserCustomerLoginService instance = null;
     private IUserDao userDao = UserDao.getInstance();
     private IUserHistoryDao operationHistoryDao = UserHistoryDao.getInstance();
@@ -50,73 +48,43 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
         validateUserStatus(user);
 
         if (identifyLoginOptions(user, birthDay, birthMon, birthYear, phoneLast4)) {
-                return initLoginPinDigits(user);
+            archiveSuccessfulHistory(user);
+            return initLoginPinDigits(user);
         } else {
             archiveFailedHistory(user);
             throw FaultFactory.throwFaultException("LoginReq request Operation Fails.");
         }
     }
 
-    public UserLoginReply LoginByUserIdAndPin(Long userId, Map<Integer, Integer> pin) throws Exception {
-        UserEntity userEntity = userDao.LoginByUserIdAndPin(userId, pin);
-        if (userEntity != null) {
-            UserLoginReply.Builder loginReplyBuilder = UserLoginReply.newBuilder();
-            loginReplyBuilder.setUserPk(userEntity.getId());
-            loginReplyBuilder.setUserId(userEntity.getUserId());
-            loginReplyBuilder.setLastName(userEntity.getLastName());
-            loginReplyBuilder.setFirstName(userEntity.getFirstName());
-
-            UserHistoryEntity record = operationHistoryDao.getLastLoginRecordByUserId(userEntity.getId());
-            if (record != null) {
-                loginReplyBuilder.setLastLoginTime(TimestampConvertHelper.mysqlToRpc(record.getOperateTime()));
-                operationHistoryService.addNewUserLoginHistory(userEntity.getId(), UserOperateType.LOGIN, UserOperateStatusType.SUCCESS);
-            }
-            logger.info("ready to response");
-
-            return loginReplyBuilder.build();
+    public UserLoginReply login(Long userId, Map<Integer, Integer> pin) throws Exception {
+        UserEntity result;
+        result = loginUsingPIN(userId, pin);
+        if (result != null) {
+           return buildLoginReply(result);
         } else {
             throw FaultFactory.throwFaultException("UserId is not matched with pin, please check again.");
         }
 
     }
 
-    @Override
-    public void forgotUserId(String firstName, String lastName, Timestamp birthDate, String contactNum, String email) {
-
-    }
-
-    /**
-     * The method is responsibility for checking the information of requester, generate a new pin, and send the new PIN
-     * to requester's email
-     *
-     * @param userId    User ID of requester
-     * @param email     Email of requester
-     * @param birthDate Birth date of requester
-     * @throws Exception if UserId is not matched with email and birthdate
-     */
-    @Override
-    public void forgotPIN(Long userId, String email, Timestamp birthDate) throws Exception {
-        UserEntity userEntity = userDao.selectUserByUserIdEmailDOB(userId, email, birthDate);
-        if (userEntity != null) {
-            //Generate new PIN and save it
-            PINGenerator pinGenerator = PINGenerator.getInstance();
-            String PIN = String.valueOf(pinGenerator.generatePIN());
-            userDao.updateUserPINByUserId(userEntity.getUserId(), PIN);
-
-
-            //Send Email
-            String mailTemplate = SysEmailService.getInstance().getMailTemplate(SysMailTemplateType.FORGET_PIN);
-            String formatMail = MessageFormat.format(mailTemplate, userEntity.getFirstName(), PIN);
-            System.out.print(formatMail);
-            SysEmailService.getInstance().send("thelongdt@gmail.com",
-                    "Nuclear Bank - Requesting new PIN",
-                    formatMail);
-        } else {
-            throw FaultFactory.throwFaultException("UserId is not matched with email and birthdate, please check again.");
-
+    private UserEntity loginUsingPIN(Long userId, Map<Integer, Integer> pin) throws Exception {
+        try {
+            return userDao.LoginByUserIdAndPin(userId, pin);
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException("Fail to login using PIN. please contact Admin");
         }
     }
 
+    private UserHistoryEntity archiveSuccessfulLoginHistory(UserEntity result) throws Exception {
+        UserHistoryEntity record;
+        record = operationHistoryDao.getLastLoginRecordByUserId(result.getId());
+        if (record != null || record == null) {
+            operationHistoryService.addNewUserLoginHistory(result.getId(), UserOperateType.LOGIN, UserOperateStatusType.SUCCESS);
+        } else {
+            throw FaultFactory.throwFaultException("Fail to add login history when login using PIN, please contact admin.");
+        }
+        return record;
+    }
 
     private UserEntity validateUserExistence(Long userId) throws Exception {
         UserEntity user;
@@ -180,6 +148,15 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
         }
     }
 
+    private void archiveSuccessfulHistory(UserEntity user) throws Exception {
+        try {
+            operationHistoryService.addNewUserLoginReqHistory(user.getId(), UserOperateStatusType.SUCCESS);
+
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException("Fail to add history of login req, please contact admin");
+        }
+    }
+
     private Boolean identifyLoginOptions(UserEntity user, Integer birthDay, Integer birthMon, Integer birthYear, Integer phoneLast4) {
         Calendar birthDate = Calendar.getInstance();
         birthDate.setTimeInMillis(user.getBirthDate().getTime());
@@ -187,5 +164,54 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
                 || (birthDay == birthDate.get(Calendar.DAY_OF_MONTH) &&
                 (birthMon == birthDate.get(Calendar.MONTH) + 1) &&
                 birthYear == birthDate.get(Calendar.YEAR)));
+    }
+
+    private UserLoginReply buildLoginReply(UserEntity result) throws Exception {
+        UserLoginReply.Builder loginReplyBuilder = UserLoginReply.newBuilder();
+        loginReplyBuilder.setUserPk(result.getId());
+        loginReplyBuilder.setUserId(result.getUserId());
+        loginReplyBuilder.setLastName(result.getLastName());
+        loginReplyBuilder.setFirstName(result.getFirstName());
+        loginReplyBuilder.setLastLoginTime(TimestampConvertHelper.mysqlToRpc(
+                archiveSuccessfulLoginHistory(result).getOperateTime()));
+
+        return loginReplyBuilder.build();
+    }
+
+    @Override
+    public void forgotUserId(String firstName, String lastName, Timestamp birthDate, String contactNum, String email) {
+
+    }
+
+    /**
+     * The method is responsibility for checking the information of requester, generate a new pin, and send the new PIN
+     * to requester's email
+     *
+     * @param userId    User ID of requester
+     * @param email     Email of requester
+     * @param birthDate Birth date of requester
+     * @throws Exception if UserId is not matched with email and birthdate
+     */
+    @Override
+    public void forgotPIN(Long userId, String email, Timestamp birthDate) throws Exception {
+        UserEntity userEntity = userDao.selectUserByUserIdEmailDOB(userId, email, birthDate);
+        if (userEntity != null) {
+            //Generate new PIN and save it
+            PINGenerator pinGenerator = PINGenerator.getInstance();
+            String PIN = String.valueOf(pinGenerator.generatePIN());
+            userDao.updateUserPINByUserId(userEntity.getUserId(), PIN);
+
+
+            //Send Email
+            String mailTemplate = SysEmailService.getInstance().getMailTemplate(SysMailTemplateType.FORGET_PIN);
+            String formatMail = MessageFormat.format(mailTemplate, userEntity.getFirstName(), PIN);
+            System.out.print(formatMail);
+            SysEmailService.getInstance().send("thelongdt@gmail.com",
+                    "Nuclear Bank - Requesting new PIN",
+                    formatMail);
+        } else {
+            throw FaultFactory.throwFaultException("UserId is not matched with email and birthdate, please check again.");
+
+        }
     }
 }

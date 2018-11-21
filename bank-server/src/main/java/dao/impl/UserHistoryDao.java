@@ -45,14 +45,14 @@ public class UserHistoryDao implements IUserHistoryDao {
             Calendar calendar = Calendar.getInstance();
 
             Query query = session.createQuery("from UserHistoryEntity " +
-                    "where userId = ? and " +
-                    "year(operateTime) = ? and " +
-                    "month(operateTime) = ? and " +
-                    "day(operateTime) = ? order by operateTime desc");
-            query.setParameter(0, userId);
-            query.setParameter(1, calendar.get(Calendar.YEAR));
-            query.setParameter(2, calendar.get(Calendar.MONTH) + 1);
-            query.setParameter(3, calendar.get(Calendar.DAY_OF_MONTH));
+                    "where userId = :userId and " +
+                    "year(operateTime) = :year and " +
+                    "month(operateTime) = :month and " +
+                    "day(operateTime) = :day order by operateTime desc");
+            query.setParameter("userId", userId);
+            query.setParameter("year", calendar.get(Calendar.YEAR));
+            query.setParameter("month", calendar.get(Calendar.MONTH) + 1);
+            query.setParameter("day", calendar.get(Calendar.DAY_OF_MONTH));
 
             session.getTransaction().commit();
 
@@ -94,14 +94,14 @@ public class UserHistoryDao implements IUserHistoryDao {
 
             Calendar c = Calendar.getInstance();
             c.add(Calendar.DAY_OF_YEAR, -7);
-            Date d = c.getTime();
+            Date operateTime = c.getTime();
 
 
             Query query = session.createQuery(" from UserHistoryEntity " +
-                    "where userId=? and accountId=? and operateTime >= ? and operateType >=0 and operateType <= 3");
-            query.setParameter(0, user_pk);
-            query.setParameter(1, account_pk);
-            query.setParameter(2, d);
+                    "where userId=:userId and accountId=:accountId and operateTime >=:operateTime and operateType >=0 and operateType <= 3");
+            query.setParameter("userId", user_pk);
+            query.setParameter("accountId", account_pk);
+            query.setParameter("operateTime", operateTime);
             session.getTransaction().commit();
 
             return query.getResultList();

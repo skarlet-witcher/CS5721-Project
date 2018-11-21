@@ -56,7 +56,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         pin.put(5, request.getPin5());
         pin.put(6, request.getPin6());
         try {
-            UserLoginReply loginReply = customerLoginService.LoginByUserIdAndPin(request.getUserId(), pin);
+            UserLoginReply loginReply = customerLoginService.login(request.getUserId(), pin);
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .setUserLoginReply(loginReply)
                     .build());
