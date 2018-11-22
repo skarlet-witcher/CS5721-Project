@@ -447,8 +447,8 @@ new FormModel {
 				"value": "cell 2 4"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 505, 605 )
+			"location": new java.awt.Point( 0, 45 )
+			"size": new java.awt.Dimension( 505, 520 )
 		} )
 	}
 }

@@ -1,5 +1,6 @@
 package service.impl;
 
+import Const.PinReplyType;
 import javafx.util.converter.TimeStringConverter;
 import model.*;
 import rpc.*;
@@ -94,22 +95,22 @@ public class CustomerLoginService implements ICustomerLoginService {
     }
 
     private void initPinDigits(List<Integer> PinDigits, UserLoginReqReply userLoginReqReply){
-        if(userLoginReqReply.getPin1() == 1) {
+        if(userLoginReqReply.getPin1() == PinReplyType.REQUIRED) {
             PinDigits.add(1);
         }
-        if(userLoginReqReply.getPin2() == 1) {
+        if(userLoginReqReply.getPin2() == PinReplyType.REQUIRED) {
             PinDigits.add(2);
         }
-        if(userLoginReqReply.getPin3() == 1) {
+        if(userLoginReqReply.getPin3() == PinReplyType.REQUIRED) {
             PinDigits.add(3);
         }
-        if(userLoginReqReply.getPin4() == 1) {
+        if(userLoginReqReply.getPin4() == PinReplyType.REQUIRED) {
             PinDigits.add(4);
         }
-        if(userLoginReqReply.getPin5() == 1) {
+        if(userLoginReqReply.getPin5() == PinReplyType.REQUIRED) {
             PinDigits.add(5);
         }
-        if(userLoginReqReply.getPin6() == 1) {
+        if(userLoginReqReply.getPin6() == PinReplyType.REQUIRED) {
             PinDigits.add(6);
         }
     }

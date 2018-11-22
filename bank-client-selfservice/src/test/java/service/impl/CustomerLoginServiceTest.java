@@ -1,5 +1,6 @@
 package service.impl;
 
+import model.UserLoginPINModel;
 import model.UserLoginRequestModel;
 import org.junit.jupiter.api.Test;
 import rpc.UserLoginReqReply;
@@ -16,40 +17,53 @@ class CustomerLoginServiceTest {
     CustomerLoginRpc customerLoginRpc = CustomerLoginRpc.getInstance();
 
     @Test
-    void requestLoginUsingPhoneNum() throws Exception {
-        Long userId = 1000000000L;
-        String last4PhoneNum = "3222";
-        UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel(userId, last4PhoneNum);
-        UserLoginReqReply userLoginReqReply = customerLoginRpc.loginReq(
-                UserLoginReqRequest.newBuilder().setUserId(userLoginRequestModel.getUserId())
-                .setPhoneLast4(Integer.parseInt(userLoginRequestModel.getPhoneNumLast4()))
-                .build()
-        );
-        List<Integer> PinDigits = new ArrayList<>();
-        if(userLoginReqReply.getPin1() == 1) {
-            PinDigits.add(1);
-        }
-        if(userLoginReqReply.getPin2() == 1) {
-            PinDigits.add(2);
-        }
-        if(userLoginReqReply.getPin3() == 1) {
-            PinDigits.add(3);
-        }
-        if(userLoginReqReply.getPin4() == 1) {
-            PinDigits.add(4);
-        }
-        if(userLoginReqReply.getPin5() == 1) {
-            PinDigits.add(5);
-        }
-        if(userLoginReqReply.getPin6() == 1) {
-            PinDigits.add(6);
-        }
-        for(int digit: PinDigits) {
-            System.out.println(digit);
-        }
+    void requestLoginUsingPhoneNum() {
+        UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel(1000000001L, "6789");
+
+        assertDoesNotThrow(() -> {
+            customerLoginRpc.loginReq(
+                    UserLoginReqRequest.newBuilder().setUserId(userLoginRequestModel.getUserId())
+                            .setPhoneLast4(Integer.parseInt(userLoginRequestModel.getPhoneNumLast4()))
+                            .build()
+            );
+        });
     }
 
     @Test
     void requestLoginUsingDOB() {
+        UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel(1000000001L, 23, 03, 1996);
+
+        assertDoesNotThrow(() -> {
+            customerLoginRpc.loginReq(
+                    UserLoginReqRequest.newBuilder().setUserId(userLoginRequestModel.getUserId())
+                    .setBirthDay(userLoginRequestModel.getDay())
+                            .setBirthMon(userLoginRequestModel.getMonth())
+                            .setBirthYear(userLoginRequestModel.getYear()).build()
+            );
+        });
+    }
+
+    @Test
+    void requestLoginUsingPIN() {
+        UserLoginPINModel userLoginPINModel = new UserLoginPINModel();
+        userLoginPINModel.setUserId(1000000001L);
+        userLoginPINModel.setPin1(8);
+        userLoginPINModel.setPin2(6);
+        userLoginPINModel.setPin3(9);
+        userLoginPINModel.setPin4(5);
+        userLoginPINModel.setPin5(0);
+        userLoginPINModel.setPin6(1);
+
+        assertDoesNotThrow(() -> {
+            customerLoginRpc.login(
+                    UserLoginRequest.newBuilder().setUserId(userLoginPINModel.getUserId())
+                    .setPin1(userLoginPINModel.getPin1())
+                    .setPin2(userLoginPINModel.getPin2())
+                    .setPin3(userLoginPINModel.getPin3())
+                    .setPin4(userLoginPINModel.getPin4())
+                    .setPin5(userLoginPINModel.getPin5())
+                    .setPin6(userLoginPINModel.getPin6()).build()
+            );
+        });
     }
 }

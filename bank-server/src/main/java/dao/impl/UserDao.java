@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 
 public class UserDao implements IUserDao {
-    private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
+    // private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
     private static IUserDao instance = null;
     private Session session = HibernateUtils.getSessionFactory().openSession();
 
@@ -30,8 +30,8 @@ public class UserDao implements IUserDao {
 
             session.getTransaction().begin();
 
-            Query query = session.createQuery("from UserEntity where userId=?");
-            query.setParameter(0, userId).setMaxResults(1);
+            Query query = session.createQuery("from UserEntity where userId=:userId");
+            query.setParameter("userId", userId).setMaxResults(1);
             UserEntity user = (UserEntity) query.uniqueResult();
 
             String[] pinDigit = user.getLoginPinDigit().split("");
@@ -65,9 +65,9 @@ public class UserDao implements IUserDao {
     public UserEntity selectUserByIdAndPin(Long id, String pin) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("from UserEntity where id=? and pin=?");
-            query.setParameter(0, id);
-            query.setParameter(1, pin);
+            Query query = session.createQuery("from UserEntity where id= :id and pin= :pin");
+            query.setParameter("id", id);
+            query.setParameter("pin", pin);
             UserEntity result = (UserEntity) query.uniqueResult();
             session.getTransaction().commit();
             return result;
@@ -94,8 +94,8 @@ public class UserDao implements IUserDao {
     public UserEntity selectUserByUserId(Long userId) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("from UserEntity where userId=?");
-            query.setParameter(0, userId);
+            Query query = session.createQuery("from UserEntity where userId=:userId");
+            query.setParameter("userId", userId);
             query.setMaxResults(1);
             UserEntity result = (UserEntity) query.uniqueResult();
             session.getTransaction().commit();
@@ -144,8 +144,8 @@ public class UserDao implements IUserDao {
     public UserEntity selectUserById(Long id) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("from UserEntity where id=?");
-            query.setParameter(0, id);
+            Query query = session.createQuery("from UserEntity where id=:id");
+            query.setParameter("id", id);
             UserEntity result = (UserEntity) query.uniqueResult();
             session.refresh(result);
             session.getTransaction().commit();
@@ -184,10 +184,10 @@ public class UserDao implements IUserDao {
     public UserEntity selectUserByIdAndName(Long userId, String firstName, String lastName) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("from UserEntity where userId=? and firstName=? and lastName=?");
-            query.setParameter(0, userId);
-            query.setParameter(1, firstName);
-            query.setParameter(2, lastName);
+            Query query = session.createQuery("from UserEntity where userId=:userId and firstName=:firstName and lastName=:lastName");
+            query.setParameter("userId", userId);
+            query.setParameter("firstName", firstName);
+            query.setParameter("lastName", lastName);
 
 
             UserEntity result = (UserEntity) query.uniqueResult();
@@ -204,14 +204,14 @@ public class UserDao implements IUserDao {
     public Integer updateUserPinDigitById(Long id, String loginPinDigit) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("update UserEntity set loginPinDigit = ? where id=?");
-            query.setParameter(0, loginPinDigit).setParameter(1, id);
+            Query query = session.createQuery("update UserEntity set loginPinDigit = :loginPinDigit where id= :id");
+            query.setParameter("loginPinDigit", loginPinDigit).setParameter("id", id);
             int updateRows = query.executeUpdate();
             session.getTransaction().commit();
 
             // refresh entity for updating the data in the session
-            Query query2 = session.createQuery("from UserEntity where id=?");
-            query2.setParameter(0, id);
+            Query query2 = session.createQuery("from UserEntity where id=:id");
+            query2.setParameter("id", id);
             UserEntity result = (UserEntity) query2.uniqueResult();
             session.refresh(result);
             return updateRows;

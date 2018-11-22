@@ -43,9 +43,9 @@ public class UserAccountDao implements IUserAccountDao {
     public UserAccountEntity getUserAccountByAccountNumber(Long accountNumber) {
         try {
             session.getTransaction().begin();
-            String hql ="from UserAccountEntity where accountNumber=?";
+            String hql ="from UserAccountEntity where accountNumber=:accountNumber";
             Query query = session.createQuery(hql);
-            query.setParameter(0, accountNumber);
+            query.setParameter("accountNumber", accountNumber);
             UserAccountEntity result = (UserAccountEntity)query.uniqueResult();
             session.getTransaction().commit();
             return result;
@@ -61,9 +61,9 @@ public class UserAccountDao implements IUserAccountDao {
     public List<UserAccountEntity> getUserAccountByUserId(Long userId) {
         try {
             session.getTransaction().begin();
-            String hql = "from UserAccountEntity where userId=?";
+            String hql = "from UserAccountEntity where userId=:userId";
             Query query = session.createQuery(hql);
-            query.setParameter(0, userId);
+            query.setParameter("userId", userId);
             List<UserAccountEntity> result = (List<UserAccountEntity>)query.getResultList();
             session.getTransaction().commit();
             return result;
@@ -80,9 +80,9 @@ public class UserAccountDao implements IUserAccountDao {
     public UserAccountEntity getUserAccountByIBAN(String iban) {
         try {
             session.getTransaction().begin();
-            String hql ="from UserAccountEntity where iban=?";
+            String hql ="from UserAccountEntity where iban=:iban";
             Query query = session.createQuery(hql);
-            query.setParameter(0, iban);
+            query.setParameter("iban", iban);
             UserAccountEntity result = (UserAccountEntity)query.uniqueResult();
             session.getTransaction().commit();
             return result;
@@ -98,9 +98,9 @@ public class UserAccountDao implements IUserAccountDao {
     public UserAccountEntity getUserAccountByPK(Long id) {
         try {
             session.getTransaction().begin();
-            String hql ="from UserAccountEntity where id=?";
+            String hql ="from UserAccountEntity where id=:id";
             Query query = session.createQuery(hql);
-            query.setParameter(0, id);
+            query.setParameter("id", id);
             UserAccountEntity result = (UserAccountEntity)query.uniqueResult();
             session.getTransaction().commit();
             return result;
@@ -116,16 +116,17 @@ public class UserAccountDao implements IUserAccountDao {
     public Integer updateUserAccountByBalanceAndPk(Double balance, Long account_pk) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("update UserAccountEntity set balance = ? where id=?");
-            query.setParameter(0, balance).setParameter(1, account_pk);
+            Query query = session.createQuery("update UserAccountEntity set balance =:balance where id=:id");
+            query.setParameter("balance", balance).setParameter("id", account_pk);
             int updateRows = query.executeUpdate();
-            session.getTransaction().commit();
+
 
             // refresh entity for updating the data in the session
-            Query query2 = session.createQuery("from UserAccountEntity where id=?");
-            query2.setParameter(0, account_pk);
+            Query query2 = session.createQuery("from UserAccountEntity where id=:id");
+            query2.setParameter("id", account_pk);
             UserAccountEntity result = (UserAccountEntity) query2.uniqueResult();
-            session.refresh(result);
+            session.update(result);
+            session.getTransaction().commit();
             return updateRows;
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,16 +139,16 @@ public class UserAccountDao implements IUserAccountDao {
     public Integer updateUserAccountByBalanceAndIban(Double balance, String iban) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("update UserAccountEntity set balance = ? + balance where iban=?");
-            query.setParameter(0, balance).setParameter(1, iban);
+            Query query = session.createQuery("update UserAccountEntity set balance =:balance + balance where iban=:iban");
+            query.setParameter("balance", balance).setParameter("iban", iban);
             int updateRows = query.executeUpdate();
             session.getTransaction().commit();
 
             // refresh entity for updating the data in the session
-            Query query2 = session.createQuery("from UserAccountEntity where iban=?");
-            query2.setParameter(0, iban);
+            Query query2 = session.createQuery("from UserAccountEntity where iban=:iban");
+            query2.setParameter("iban", iban);
             UserAccountEntity result = (UserAccountEntity) query2.uniqueResult();
-            session.refresh(result);
+            session.update(result);
             return updateRows;
         } catch (Exception e) {
             e.printStackTrace();

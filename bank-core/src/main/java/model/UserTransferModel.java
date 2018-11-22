@@ -15,6 +15,32 @@ public class UserTransferModel implements Subject {
         observers = new ArrayList<>();
     }
 
+    public void setAmounts(Double amounts) {
+        this.amounts = amounts;
+        updateAmounts();
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        int index = observers.indexOf(o);
+        if(index >= 0) {
+            observers.remove(o);
+        }
+    }
+
+    @Override
+    public void notifyObserver() {
+        for(int i = 0; i < observers.size(); i++) {
+            Observer observer = observers.get(i);
+            observer.updateTransferPage(this);
+        }
+    }
+
     public UserPayeeModel getPayee() {
         return payee;
     }
@@ -51,11 +77,6 @@ public class UserTransferModel implements Subject {
         return amounts;
     }
 
-    public void setAmounts(Double amounts) {
-        this.amounts = amounts;
-        updateAmounts();
-    }
-
     public String getPostScript() {
         return postScript;
     }
@@ -68,24 +89,5 @@ public class UserTransferModel implements Subject {
         notifyObserver();
     }
 
-    @Override
-    public void registerObserver(Observer o) {
-        observers.add(o);
-    }
 
-    @Override
-    public void removeObserver(Observer o) {
-        int index = observers.indexOf(o);
-        if(index >= 0) {
-            observers.remove(o);
-        }
-    }
-
-    @Override
-    public void notifyObserver() {
-        for(int i = 0; i < observers.size(); i++) {
-            Observer observer = observers.get(i);
-            observer.updateTransferPage(this);
-        }
-    }
 }

@@ -129,13 +129,6 @@ public class CustomerMainView extends JFrame implements Observer {
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        System.out.println("------------------");
-        System.out.println("");
-        System.out.println("TransferPageObserver: ready to update the transfer page");
-        System.out.println("");
-        System.out.println("------------------");
-
         initHomePage();
         initProfilePage();
         initTransactionPage();
@@ -298,6 +291,7 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void initBalance() {
+        System.out.println("your balance = " + this.userModel.getUserAccountList().get(0).getBalance());
         tf_transfer_balance.setText(String.valueOf(this.userModel.getUserAccountList().get(0).getBalance()));
     }
 

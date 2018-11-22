@@ -13,7 +13,7 @@ new FormModel {
 			"minimumSize": new java.awt.Dimension( 27, 35 )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_title"
-				"text": "Customer Bank System Login"
+				"text": "Nuclear Bank System Login"
 				"font": new java.awt.Font( "Segoe UI", 0, 28 )
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {

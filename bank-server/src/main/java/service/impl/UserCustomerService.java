@@ -1,14 +1,8 @@
 package service.impl;
 
 import Const.*;
-import dao.IUserAccountDao;
-import dao.IUserDao;
-import dao.IUserHistoryDao;
-import dao.IUserPayeeDao;
-import dao.impl.UserAccountDao;
-import dao.impl.UserDao;
-import dao.impl.UserHistoryDao;
-import dao.impl.UserPayeeDao;
+import dao.*;
+import dao.impl.*;
 import entity.UserAccountEntity;
 import entity.UserEntity;
 import entity.UserHistoryEntity;
@@ -18,6 +12,7 @@ import org.iban4j.*;
 import rpc.*;
 import service.IUserCustomerHistoryService;
 import service.IUserCustomerService;
+import util.AccountNumberGenerator;
 import util.FaultFactory;
 import util.IBANValidator;
 import util.TimestampConvertHelper;
@@ -33,6 +28,7 @@ public class UserCustomerService implements IUserCustomerService {
     private IUserPayeeDao userPayeeDao = UserPayeeDao.getInstance();
     private IUserHistoryDao userHistoryDao = UserHistoryDao.getInstance();
     private IUserCustomerHistoryService userCustomerHistoryService = UserCustomerHistoryService.getInstance();
+    private IUserAccountTypeDao userAccountTypeDao = UserAccountTypeDao.getInstance();
     // private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
 
     public static UserCustomerService getInstance() {
@@ -212,10 +208,10 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     private void transferToLocalPayee(Long payee_pk, Double amount) throws Exception {
-        UserPayeeEntity result_payee;
+        UserAccountEntity result_payee;
         try {
             // validate type of iban (created from out bank or other bank)
-            result_payee = userPayeeDao.getPayeeByPK(payee_pk);
+            result_payee = userAccountDao.getUserAccountByIBAN(userPayeeDao.getPayeeByPK(payee_pk).getIban());
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("fail to check type of iban before transfer");
         }
@@ -255,19 +251,47 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     private Double updateBalanceFromUserAccount(Long user_pk, Long account_pk, Double amount) throws Exception {
-        UserAccountEntity userAccountEntity;
-        int updateRows;
+        int updatedRows;
         Double currentBalance;
         try {
-            userAccountEntity = userAccountDao.getUserAccountByPK(user_pk);
-            currentBalance= userAccountEntity.getBalance() - amount;
-            updateRows = userAccountDao.updateUserAccountByBalanceAndPk(currentBalance, account_pk);
+            currentBalance = getCurrentBalance(userAccountDao.getUserAccountByPK(user_pk), amount);
+            updatedRows = userAccountDao.updateUserAccountByBalanceAndPk(currentBalance, account_pk);
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("fail to update balance in your account");
         }
-        if(updateRows <= 0) {
+        if(updatedRows <= 0) {
             throw FaultFactory.throwFaultException("fail to update balance in your account");
         }
         return currentBalance;
+    }
+
+    private Double getCurrentBalance(UserAccountEntity userAccountEntity, Double amount) throws Exception {
+        return userAccountEntity.getBalance() - chargeFees(userAccountEntity, amount);
+    }
+
+    private Double chargeFees(UserAccountEntity userAccountEntity, Double amount) throws Exception {
+        Double chargedAmount = 0.0;
+        Double fees = getFees(userAccountEntity);
+        try {
+             chargedAmount= amount - (amount * fees);
+        } catch (Exception E) {
+            FaultFactory.throwFaultException("Fail to charge fees");
+        }
+        addChargeHistory(userAccountEntity, amount * fees);
+        return chargedAmount;
+    }
+    private Double getFees(UserAccountEntity userAccountEntity) throws Exception {
+        try {
+            return userAccountTypeDao.getUserAccountType(userAccountEntity.getId()).getChargeSelfserviceTrans();
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException("fail to get fees");
+        }
+    }
+    private void addChargeHistory(UserAccountEntity userAccountEntity, Double chargedAmount) throws Exception {
+        try {
+            userCustomerHistoryService.addNewChargeHistory(userAccountEntity.getUserId(), userAccountEntity.getId(), chargedAmount * -1, userAccountEntity.getCurrencyType(), UserOperateType.CHARGE, UserOperateStatusType.SUCCESS);
+        } catch (Exception E) {
+            throw FaultFactory.throwFaultException("fail to add charge history");
+        }
     }
 }

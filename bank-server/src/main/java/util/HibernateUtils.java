@@ -1,5 +1,6 @@
 package util;
 
+import org.hibernate.Interceptor;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
