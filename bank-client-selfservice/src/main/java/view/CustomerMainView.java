@@ -117,6 +117,15 @@ public class CustomerMainView extends JFrame implements Observer {
 
     @Override
     public void updateTransferPage(UserTransferModel userTransferModel) {
+        transfer(userTransferModel);
+        initHomePage();
+        initProfilePage();
+        initTransactionPage();
+        initPayeePage();
+        initTransferPage();
+    }
+
+    private void transfer(UserTransferModel userTransferModel) {
         try {
             CustomerTransferService.getInstance().transfer(userTransferModel,
                     Integer.parseInt(new String(pf_transfer_PIN.getPassword())));
@@ -129,11 +138,6 @@ public class CustomerMainView extends JFrame implements Observer {
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return;
         }
-        initHomePage();
-        initProfilePage();
-        initTransactionPage();
-        initPayeePage();
-        initTransferPage();
     }
 
     private void initUserModel(long userId, long user_pk, String firstName, String lastLoginTime) {

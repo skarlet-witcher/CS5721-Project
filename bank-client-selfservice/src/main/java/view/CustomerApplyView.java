@@ -376,7 +376,8 @@ public class CustomerApplyView extends JFrame {
         int cardType = cb_cardTypeList.getSelectedIndex() + 1;
         String accountTypeName = cb_accountTypeList.getSelectedItem().toString();
         try {
-            UserApplyNewPersonalAccountBaseModel userApplyNewPersonalAccountBaseModel = (UserApplyNewPersonalAccountBaseModel) UserApplyNewAccountFactory.applyAccount(accountTypeName);
+            UserApplyNewPersonalAccountBaseModel userApplyNewPersonalAccountBaseModel =
+                    (UserApplyNewPersonalAccountBaseModel) UserApplyNewAccountFactory.applyAccount(accountTypeName);
             userApplyNewPersonalAccountBaseModel.setUserId(userId);
             userApplyNewPersonalAccountBaseModel.setAccountType(accountType);
             userApplyNewPersonalAccountBaseModel.setCardType(cardType);
@@ -385,6 +386,7 @@ public class CustomerApplyView extends JFrame {
             userApplyNewPersonalAccountBaseModel.setIdentityNum(this.identityNum);
 
             CustomerApplyService.getInstance().applyPersonalAccountForExistingUser(userApplyNewPersonalAccountBaseModel);
+
             JOptionPane.showMessageDialog(null,
                     "Request Personal Account apply successfully",
                     "Success Message",JOptionPane.INFORMATION_MESSAGE);
