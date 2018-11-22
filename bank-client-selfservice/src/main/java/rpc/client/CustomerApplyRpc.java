@@ -54,17 +54,17 @@ public class CustomerApplyRpc {
 
         UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
 
-        logger.info(userValidateExistingUserRequest.getUserId() +" is requesting to validate.");
+        logger.info(userValidateExistingUserRequest.getUserId() +" is requesting to validate user existence.");
 
         Response response = blockingStub.validateExistingUser(userValidateExistingUserRequest);
 
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
-            logger.info(userValidateExistingUserRequest.getUserId() + " validation request successful.");
+            logger.info(userValidateExistingUserRequest.getUserId() + " validate user existence successful.");
             return response;
         } else {
-            logger.info(userValidateExistingUserRequest.getUserId() + " validation request failure due to " + response.getDescription());
+            logger.info(userValidateExistingUserRequest.getUserId() + " validate user existence failure due to " + response.getDescription());
             throw new Exception(response.getDescription());
         }
 

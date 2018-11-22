@@ -181,19 +181,16 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
     @Override
     public void forgotUserId(String firstName, String lastName, Timestamp birthDate, String contactNum, String email) throws Exception {
 
-        logger.info("ready to interact with db");
         UserEntity userEntity = userDao.selectUserByNameDOBPhoneEmail(firstName,lastName,birthDate,contactNum,email);
-        logger.info("get data complete!!!");
-        logger.info("result: " + userEntity.getEmail());
+
         if(userEntity == null) {
             throw FaultFactory.throwFaultException("No user record found with these details!!!");
         }
-        logger.info("ready to send an email");
         // send email
         String mailTemplate = SysEmailService.getInstance().getMailTemplate(SysMailTemplateType.FORGET_USER_ID);
         String formatEmail = MessageFormat.format(mailTemplate, firstName, userEntity.getUserId());
         SysEmailService.getInstance().send("empathytxk@hotmail.com", "Nuclear Bank - Your User ID", formatEmail);
-        logger.info("an email has been sent");
+
     }
 
     /**

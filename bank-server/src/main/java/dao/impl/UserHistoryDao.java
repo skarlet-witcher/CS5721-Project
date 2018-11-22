@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UserHistoryDao implements IUserHistoryDao {
     private static IUserHistoryDao instance = null;
-    private Session session = HibernateUtils.getSessionFactory().withOptions().interceptor(new MyInterceptor()).openSession();
+    private Session session = HibernateUtils.getSessionFactory().openSession();
 
     public static IUserHistoryDao getInstance() {
         if (instance == null) {
@@ -120,11 +120,11 @@ public class UserHistoryDao implements IUserHistoryDao {
             int month = Calendar.getInstance().get(Calendar.MONTH) - 1;
             int year = Calendar.getInstance().get(Calendar.YEAR);
 
-            Query query = session.createQuery(" from UserHistoryEntity where userId=? and accountId=? and month(operateTime) >= ? and year(operateTime) >= ? and operateType >= 0 and operateType <= 3");
-            query.setParameter(0, user_pk);
-            query.setParameter(1, account_pk);
-            query.setParameter(2, month);
-            query.setParameter(3, year);
+            Query query = session.createQuery(" from UserHistoryEntity where userId=:userId and accountId=:accountId and month(operateTime) >=:month and year(operateTime) >=:year and operateType >= 0 and operateType <= 3");
+            query.setParameter("userId", user_pk);
+            query.setParameter("accountId", account_pk);
+            query.setParameter("month", month);
+            query.setParameter("year", year);
             session.getTransaction().commit();
 
             return query.getResultList();

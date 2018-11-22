@@ -33,8 +33,6 @@ public class UserCustomerRpc {
 
         Response response = blockingStub.getAccounts(userCustomerGetAccountsRequest);
 
-        logger.info("check the response: " + response.getUserAccountsList().size());
-
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
@@ -54,8 +52,6 @@ public class UserCustomerRpc {
 
         Response response = blockingStub.getProfile(userCustomerGetProfileRequest);
 
-        logger.info("check the response: " + response.getUserAccountsList().size());
-
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
@@ -71,11 +67,9 @@ public class UserCustomerRpc {
                 .usePlaintext().build();
         UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
 
-        logger.info(userCustomerEditProfileRequest.getUserPk() + " is requesting to get accounts.");
+        logger.info(userCustomerEditProfileRequest.getUserPk() + " is requesting to edit profile.");
 
         Response response = blockingStub.editProfile(userCustomerEditProfileRequest);
-
-        logger.info("check the response: " + response.getUserAccountsList().size());
 
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
@@ -97,8 +91,6 @@ public class UserCustomerRpc {
 
         Response response = blockingStub.transfer(userCustomerTransferRequest);
 
-        logger.info("check the response: " + response.getUserAccountsList().size());
-
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
@@ -118,8 +110,6 @@ public class UserCustomerRpc {
         logger.info(userCustomerGetTransactionsRequest.getUserPk() + " is requesting to get transaction list.");
 
         Response response = blockingStub.getTransactions(userCustomerGetTransactionsRequest);
-
-        logger.info("check the size of transaction list: " + response.getUserTransactionsList().size());
 
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 

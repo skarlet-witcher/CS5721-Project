@@ -17,4 +17,5 @@ class UserCustomerServiceTest {
                     AccountCurrencyType.EURO);
         });
     }
+
 }

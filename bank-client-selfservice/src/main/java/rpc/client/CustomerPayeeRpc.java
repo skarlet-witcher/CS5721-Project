@@ -63,7 +63,7 @@ public class CustomerPayeeRpc {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
                 .usePlaintext().build();
         UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
-        logger.info(userCustomerRemovePayeeRequest.getUserPk() + " is requesting to remove.");
+        logger.info(userCustomerRemovePayeeRequest.getUserPk() + " is requesting to remove payee.");
 
         Response response = blockingStub.removePayee(userCustomerRemovePayeeRequest);
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);

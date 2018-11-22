@@ -97,9 +97,9 @@ public class UserPayeeDao implements IUserPayeeDao {
     public UserPayeeEntity checkDuplicatePayee(UserPayeeEntity userPayeeEntity) {
         try {
             session.getTransaction().begin();
-            Query query = session.createQuery("From UserPayeeEntity where name=? and iban=?");
-            query.setParameter(0, userPayeeEntity.getName());
-            query.setParameter(1, userPayeeEntity.getIban());
+            Query query = session.createQuery("From UserPayeeEntity where name=:name and iban=:iban");
+            query.setParameter("name", userPayeeEntity.getName());
+            query.setParameter("iban", userPayeeEntity.getIban());
 
             UserPayeeEntity result = (UserPayeeEntity)query.uniqueResult();
             session.getTransaction().commit();

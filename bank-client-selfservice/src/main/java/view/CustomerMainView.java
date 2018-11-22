@@ -101,13 +101,15 @@ public class CustomerMainView extends JFrame implements Observer {
     public CustomerMainView(long userId, Long user_pk, String firstName, String lastLoginTime) {
         initComponents();
         initUserModel(userId, user_pk, firstName, lastLoginTime);
+        registerObserver();
+    }
+
+    private void thisComponentShown(ComponentEvent e) {
         initHomePage();
         initProfilePage();
         initTransactionPage();
         initPayeePage();
         initTransferPage();
-        registerObserver();
-
     }
 
     private void registerObserver() {
@@ -568,14 +570,6 @@ public class CustomerMainView extends JFrame implements Observer {
 
     private void cb_transaction_filterActionPerformed(ActionEvent e) {
         initTransactionInfo();
-    }
-
-    private void thisComponentShown(ComponentEvent e) {
-        initHomePage();
-        initProfilePage();
-        initTransactionPage();
-        initPayeePage();
-        initTransferPage();
     }
 
     public void run() {
