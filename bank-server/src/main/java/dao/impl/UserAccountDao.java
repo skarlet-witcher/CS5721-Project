@@ -98,9 +98,9 @@ public class UserAccountDao implements IUserAccountDao {
     public UserAccountEntity getUserAccountByPK(Long id) {
         try {
             session.getTransaction().begin();
-            String hql ="from UserAccountEntity where id=:id";
+            String hql ="from UserAccountEntity where userId=:userId";
             Query query = session.createQuery(hql);
-            query.setParameter("id", id);
+            query.setParameter("userId", id);
             UserAccountEntity result = (UserAccountEntity)query.uniqueResult();
             session.getTransaction().commit();
             return result;
@@ -126,6 +126,7 @@ public class UserAccountDao implements IUserAccountDao {
             query2.setParameter("id", account_pk);
             UserAccountEntity result = (UserAccountEntity) query2.uniqueResult();
             session.update(result);
+            session.refresh(result);
             session.getTransaction().commit();
             return updateRows;
         } catch (Exception e) {

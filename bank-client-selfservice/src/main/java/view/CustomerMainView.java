@@ -15,7 +15,6 @@ import rpc.UserProfileReply;
 import rpc.UserTransactionsReply;
 import service.impl.*;
 import util.JTextFieldLimit;
-import util.RandomUtil;
 import util.TimestampConvertHelper;
 
 import javax.swing.*;
@@ -295,7 +294,6 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void initBalance() {
-        System.out.println("your balance = " + this.userModel.getUserAccountList().get(0).getBalance());
         tf_transfer_balance.setText(String.valueOf(this.userModel.getUserAccountList().get(0).getBalance()));
     }
 
@@ -431,7 +429,6 @@ public class CustomerMainView extends JFrame implements Observer {
         return true;
     }
 
-
     private Boolean validateEmail() {
         // email field validator
         if(tf_profile_email.getText().trim().length() <= 0) {
@@ -529,6 +526,7 @@ public class CustomerMainView extends JFrame implements Observer {
                 return;
             }
             initPayeePage();
+            initTransferPage();
         }
     }
 
@@ -573,8 +571,11 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void thisComponentShown(ComponentEvent e) {
-        initAccountTable();
+        initHomePage();
+        initProfilePage();
+        initTransactionPage();
         initPayeePage();
+        initTransferPage();
     }
 
     public void run() {
