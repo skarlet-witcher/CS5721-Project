@@ -127,17 +127,22 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void transfer(UserTransferModel userTransferModel) {
-        try {
-            CustomerTransferService.getInstance().transfer(userTransferModel,
-                    Integer.parseInt(new String(pf_transfer_PIN.getPassword())));
-            JOptionPane.showMessageDialog(null,
-                    "Transfer Successful",
-                    "Info Message",JOptionPane.INFORMATION_MESSAGE);
-        } catch( Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    "Fail to transfer due to " + E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
+        if(JOptionPane.showConfirmDialog(
+                new JFrame(),"Are you sure to transfer " + userTransferModel.getAmounts() +" "+ CardCurrencyType.getCurrencyType(userTransferModel.getCurrencyType())+ " to " + userTransferModel.getPayee().getName() + " ?",
+                "Transfer Confirmation",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            try {
+                CustomerTransferService.getInstance().transfer(userTransferModel,
+                        Integer.parseInt(new String(pf_transfer_PIN.getPassword())));
+                JOptionPane.showMessageDialog(null,
+                        "Transfer Successful",
+                        "Info Message",JOptionPane.INFORMATION_MESSAGE);
+            } catch( Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Fail to transfer due to " + E.getMessage(),
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
     }
 
@@ -261,7 +266,17 @@ public class CustomerMainView extends JFrame implements Observer {
         initAccountComboBox(cb_transfer_accountList);
         initCurrency();
         initBalance();
+        initAmounts();
         initPostscriptTextFieldLimit();
+        initTransferPINField();
+    }
+
+    private void initAmounts() {
+        tf_transfer_amounts.setText("");
+    }
+
+    private void initTransferPINField() {
+        pf_transfer_PIN.setText("");
     }
 
     private void initTransactionInfo() {
