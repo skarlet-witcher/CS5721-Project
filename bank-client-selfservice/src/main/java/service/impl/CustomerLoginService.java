@@ -1,10 +1,12 @@
 package service.impl;
 
 import Const.PinReplyType;
+import javafx.util.converter.TimeStringConverter;
 import model.*;
 import rpc.*;
 import rpc.client.CustomerLoginRpc;
 import service.ICustomerLoginService;
+import util.TimestampConvertHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +63,19 @@ public class CustomerLoginService implements ICustomerLoginService {
     }
 
     @Override
-    public void requestForgotUserId(UserForgotUserIdModel userForgotUserIdModel) {
+    public void requestForgotUserId(UserForgotUserIdModel userForgotUserIdModel) throws Exception {
+        CustomerLoginRpc.getInstance().forgotUserIdReq(
+                UserForgetUserIdRequest.newBuilder().setFirstName(userForgotUserIdModel.getFirstName())
+                .setLastName(userForgotUserIdModel.getLastName())
+                .setBirthDate(TimestampConvertHelper.mysqlToRpc(userForgotUserIdModel.getBirthDate()))
+                .setEmail(userForgotUserIdModel.getEmail())
+                .setPhone(userForgotUserIdModel.getContactNum())
+                .build()
+        );
+
+
     }
+
 
     /**
      * Client-side build a forgetting PIN request and dispatch it by the client RPC

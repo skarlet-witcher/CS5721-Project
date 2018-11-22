@@ -13,7 +13,7 @@ public interface IUserCustomerLoginService {
 
     UserLoginReply login(Long userId, Map<Integer, Integer> pin) throws Exception;
 
-    void forgotUserId(String firstName, String lastName, Timestamp birthDate, String contactNum, String email);
+    void forgotUserId(String firstName, String lastName, Timestamp birthDate, String contactNum, String email) throws Exception;
 
     void forgotPIN(Long userId, String email, Timestamp birthDate) throws Exception;
 }

@@ -87,4 +87,31 @@ public class CustomerLoginRpc {
         }
     }
 
+//Ashly
+
+    public Response forgotUserIdReq(UserForgetUserIdRequest forgotUserIdRequest) throws Exception {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
+                .usePlaintext().build();
+        UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
+
+        logger.info(forgotUserIdRequest.getFirstName() + " forgot his user ID");
+
+        Response response = blockingStub.forgetUserId(forgotUserIdRequest);
+
+        
+        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
+            logger.info(forgotUserIdRequest.getFirstName() + " details verified to be successful");
+            return response;
+
+        } else {
+            logger.info(forgotUserIdRequest.getFirstName() + " request failed due to " + response.getDescription());
+            throw new Exception(response.getDescription());
+        }
+
+    }
+
+
+
 }

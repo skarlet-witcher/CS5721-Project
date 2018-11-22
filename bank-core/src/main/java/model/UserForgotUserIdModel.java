@@ -9,10 +9,18 @@ public class UserForgotUserIdModel {
     private String contactNum;
     private String email;
 
+
+   public  UserForgotUserIdModel(String fname,String lName,Timestamp timestampbDate,String email,String contactNum){
+        this.firstName=fname;
+        this.lastName=lName;
+        this.birthDate=timestampbDate;
+        this.email=email;
+        this.contactNum=contactNum;
+    }
+
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }

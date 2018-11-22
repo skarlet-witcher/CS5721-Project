@@ -159,7 +159,25 @@ public class UserDao implements IUserDao {
 
     @Override
     public UserEntity selectUserByNameDOBPhoneEmail(String firstName, String lastName, Timestamp birthDate, String phone, String email) {
-        return null;
+       try{
+           session.getTransaction().begin();
+           Query query=session.createQuery("from UserEntity where firstName=? and lastName=? and birthDate=? and phone=? and email=?");
+           query.setParameter(0, firstName);
+           query.setParameter(1, lastName);
+           query.setParameter(2, birthDate);
+           query.setParameter(3, phone);
+           query.setParameter(4, email);
+
+           UserEntity result = (UserEntity) query.uniqueResult();
+           session.getTransaction().commit();
+           return result;
+       }
+       catch (Exception e) {
+           e.printStackTrace();
+           session.getTransaction().rollback();
+           return null;
+       }
+
     }
 
     @Override
@@ -170,6 +188,7 @@ public class UserDao implements IUserDao {
             query.setParameter("userId", userId);
             query.setParameter("firstName", firstName);
             query.setParameter("lastName", lastName);
+
 
             UserEntity result = (UserEntity) query.uniqueResult();
             session.getTransaction().commit();
