@@ -552,14 +552,30 @@ public class CustomerMainView extends JFrame implements Observer {
         initBalance();
     }
 
-    private Boolean transferValidator(Double balance, Double amounts) {
-        if(balance <= 0) {
+    private Boolean validatePayeeComboBox() {
+        if(cb_transfer_payeeList.getSelectedItem().toString()== "No payee found") {
             JOptionPane.showMessageDialog(null,
-                    "Not enough balance to be transferred.",
+                    "No payee in your account. Please add a payee.",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if(amounts > balance) {
+        return true;
+    }
+
+    private Boolean validateAmount() {
+        if(tf_transfer_amounts.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "The amount should not be blank. Please input amount before transfer",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if(!tf_transfer_amounts.getText().matches("^[0-9]*$")) {
+            JOptionPane.showMessageDialog(null,
+                    "The amount should be numeric. Please input valid amount before transfer",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if(Double.parseDouble(tf_transfer_balance.getText().trim()) < Double.parseDouble(tf_transfer_amounts.getText().trim())) {
             JOptionPane.showMessageDialog(null,
                     "The amounts should be less or equal to the balance",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
@@ -568,9 +584,35 @@ public class CustomerMainView extends JFrame implements Observer {
         return true;
     }
 
+    private Boolean validatePostScript() {
+        if(tf_transfer_postScript.getText().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "The postscript should not be blank. Please input your postscript.",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    private Boolean validatePINBeforeTransfer() {
+        if(pf_transfer_PIN.getPassword().length <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "The PIN should not be blank. Please input your PIN.",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    private Boolean validateBeforeTransfer() {
+        if(!validatePayeeComboBox() || !validateAmount() || !validatePostScript() || !validatePINBeforeTransfer()) {
+            return false;
+        }
+        return true;
+    }
+
     private void btn_transfer_transferActionPerformed(ActionEvent e) {
-        if(!transferValidator(Double.parseDouble(tf_transfer_balance.getText().trim()),
-                Double.parseDouble(tf_transfer_amounts.getText().trim())))
+        if(!validateBeforeTransfer())
         {
             return;
         }
