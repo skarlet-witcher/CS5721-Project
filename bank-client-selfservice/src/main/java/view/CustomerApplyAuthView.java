@@ -179,6 +179,8 @@ public class CustomerApplyAuthView extends JFrame {
     }
 
     private void initComponents() {
+        setTitle("Apply view");
+
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         lbl_isExist = new JLabel();
         cb_isExisting = new JComboBox<>();

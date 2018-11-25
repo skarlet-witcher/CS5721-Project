@@ -315,7 +315,7 @@ public class CustomerLoginView extends JFrame {
         btn_register = new JButton();
 
         //======== this ========
-        setTitle("Cusotmer Secure Login");
+        setTitle("Customer Secure Login");
         setMinimumSize(new Dimension(27, 35));
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
