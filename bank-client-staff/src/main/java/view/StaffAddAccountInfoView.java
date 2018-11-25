@@ -99,8 +99,11 @@ public class StaffAddAccountInfoView extends JFrame {
         tf_parentLastName.setText(x.getParentLastName());
 
         String accountStatus = "";
-        if(x.getStatus() == PENDING_FOR_BEING_APPROVED) accountStatus = "PENDING_FOR_BEING_APPROVED";
-        if(x.getStatus() == PASS) accountStatus = "PASS";
+        if(x.getStatus() == PENDING_FOR_BEING_APPROVED) accountStatus = "PENDING";
+        if(x.getStatus() == PASS) {
+            accountStatus = "PASS";
+            btn_accept.setEnabled(false);
+        }
         if(x.getStatus() == DENY) accountStatus = "DENY";
         tf_status.setText(String.valueOf(accountStatus));
 
@@ -140,6 +143,7 @@ public class StaffAddAccountInfoView extends JFrame {
                 JOptionPane.showMessageDialog(null,
                         "Accept an application successfully",
                         "Success Message", JOptionPane.PLAIN_MESSAGE);
+                btn_accept.setEnabled(false);
             }
         }catch (Exception ee){
             JOptionPane.showMessageDialog(null,
@@ -156,10 +160,10 @@ public class StaffAddAccountInfoView extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         lbl_firstName = new JLabel();
-        tf_firstName = new JTextField();
+        tf_firstName = new JTextField(20);
         panel_studentAccount = new JPanel();
         lbl_graduateDate = new JLabel();
-        tf_graduateDate = new JTextField();
+        tf_graduateDate = new JTextField(20);
         lbl_studentId = new JLabel();
         tf_studentId = new JTextField();
         lbl_schoolName = new JLabel();
@@ -174,7 +178,7 @@ public class StaffAddAccountInfoView extends JFrame {
         lbl_parentUserId = new JLabel();
         tf_parentUserId = new JTextField();
         lbl_parentFirstName = new JLabel();
-        tf_parentFirstName = new JTextField();
+        tf_parentFirstName = new JTextField(20);
         lbl_parentLastName = new JLabel();
         tf_parentLastName = new JTextField();
         lbl_cardType = new JLabel();
