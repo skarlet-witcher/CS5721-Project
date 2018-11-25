@@ -69,6 +69,9 @@ public class BankStaffDao implements IBankStaffDao {
 
             List<UserApplyArchiveEntity> userApplyArchiveEntity =  query.getResultList();
             session.getTransaction().commit();
+            for (UserApplyArchiveEntity x: userApplyArchiveEntity) {
+                session.refresh(x);
+            }
 
             List<UserApplyArchiveEntitiesResponse> insertList = new ArrayList<>();
             ListUserApplyArchiveEntitiesResponse returnlist = ListUserApplyArchiveEntitiesResponse.newBuilder().build();
@@ -160,6 +163,7 @@ public class BankStaffDao implements IBankStaffDao {
                     builder.setAddress(existingUser.getAddress());
                     builder.setGender(existingUser.getGender());
                     session.getTransaction().commit();
+                    session.refresh(existingUser);
 
                 }
 
@@ -188,7 +192,7 @@ public class BankStaffDao implements IBankStaffDao {
         query.setParameter(0, application_id);
         UserApplyArchiveEntity userApplyArchiveEntity = (UserApplyArchiveEntity) query.uniqueResult();
         session.getTransaction().commit();
-
+        session.refresh(userApplyArchiveEntity);
         return userApplyArchiveEntity;
     }
 
@@ -200,6 +204,5 @@ public class BankStaffDao implements IBankStaffDao {
         query2.setParameter(1,application_Id);
         query2.executeUpdate();
         session.getTransaction().commit();
-
     }
 }

@@ -45,7 +45,7 @@ public class StaffService implements IStaffService {
     public StaffLoginResponse login(long staffId, String password) throws Exception {
         BankStaffEntity bankStaffEntity = bankStaffDao.selectStaffByIdAndPassword(staffId, password);
         if (bankStaffEntity == null) {
-            throw FaultFactory.throwFaultException("The Id you typed is not existed.");
+            throw FaultFactory.throwFaultException("The credential you typed is not existed.");
         }
         StaffLoginResponse staffLoginResponse = StaffLoginResponse.newBuilder()
                 .setIsValid(true)
