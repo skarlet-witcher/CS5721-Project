@@ -274,13 +274,15 @@ public class UserDao implements IUserDao {
 
             int updateRows = query.executeUpdate();
 
+            session.getTransaction().commit();
+
             // refresh entity for updating the data in the session
             Query query2 = session.createQuery("from UserEntity where id=?");
             query2.setParameter(0, id);
             UserEntity result = (UserEntity) query2.uniqueResult();
             session.refresh(result);
 
-            session.getTransaction().commit();
+
 
 
 
