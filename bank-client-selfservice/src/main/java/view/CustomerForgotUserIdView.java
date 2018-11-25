@@ -5,6 +5,8 @@
 package view;
 
 import net.miginfocom.swing.MigLayout;
+import rpc.UserForgetUserIdRequest;
+import service.impl.CustomerLoginService;
 import util.JTextFieldLimit;
 
 import javax.swing.*;
@@ -13,12 +15,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.sql.Timestamp;
 import java.util.Calendar;
+
+
+import java.util.Date;
+import java.util.logging.Logger;
+
+import model.UserForgotUserIdModel;
 
 /**
  * @author xiangkai22
  */
 public class CustomerForgotUserIdView extends JFrame {
+    private static final Logger logger = Logger.getLogger(CustomerForgotUserIdView.class.getName());
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_firstname;
     private JTextField tf_firstName;
@@ -97,7 +108,7 @@ public class CustomerForgotUserIdView extends JFrame {
             tf_day.grabFocus();
             return;
         }
-        if(!tf_day.getText().trim().matches("^[1-9]*$")) {
+        if(!tf_day.getText().trim().matches("^[0-9]*$")) {
             JOptionPane.showMessageDialog(null,
                     "The day of the date of birth should be numeric",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
@@ -203,6 +214,30 @@ public class CustomerForgotUserIdView extends JFrame {
             return;
 
             // TO-DO forgot userId using model and service
+            //
+            }
+        String firstName = tf_firstName.getText().trim();
+        String lastName=tf_lastName.getText().trim();
+        String email=tf_email.getText();
+        String contactNum=tf_contactNum.getText();
+        System.out.println("Reaching here!!!");
+        String birthDateText = tf_year.getText().trim()+"-"+
+                tf_month.getText().trim()+"-"+tf_day.getText().trim()+" 00:00:00";
+        //month and day with one digit
+        Timestamp birthDate = Timestamp.valueOf(birthDateText);
+        /*
+        Calendar bdate= Calendar.getInstance();
+        bdate.set(year,month,day);
+        System.out.println("Printing all fields..."+firstName+" "+lastName+" "+bdate);
+        Timestamp timestampBDate = new Timestamp(bdate.getTimeInMillis());
+        */
+        UserForgotUserIdModel userForgotUserIdModel = new UserForgotUserIdModel(firstName,lastName,birthDate,email,contactNum);
+        try {
+            CustomerLoginService.getInstance().requestForgotUserId(userForgotUserIdModel);
+        }
+        catch(Exception forgotUserId){
+            logger.info("Caught an exception at CustomerForgotUserIdView");
+            forgotUserId.printStackTrace();
         }
     }
 

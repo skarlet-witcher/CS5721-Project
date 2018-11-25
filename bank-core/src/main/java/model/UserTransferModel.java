@@ -15,6 +15,15 @@ public class UserTransferModel implements Subject {
         observers = new ArrayList<>();
     }
 
+    public UserTransferModel(UserPayeeModel payee, UserAccountModel account, Integer currencyType, Double amounts, String postScript) {
+        this.payee = payee;
+        this.account = account;
+        this.currencyType = currencyType;
+        this.amounts = amounts;
+        this.postScript = postScript;
+        observers = new ArrayList<>();
+    }
+
     public void setAmounts(Double amounts) {
         this.amounts = amounts;
         updateAmounts();

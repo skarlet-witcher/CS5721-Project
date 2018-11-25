@@ -56,7 +56,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         pin.put(5, request.getPin5());
         pin.put(6, request.getPin6());
         try {
-            UserLoginReply loginReply = customerLoginService.LoginByUserIdAndPin(request.getUserId(), pin);
+            UserLoginReply loginReply = customerLoginService.login(request.getUserId(), pin);
             responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
                     .setUserLoginReply(loginReply)
                     .build());
@@ -153,8 +153,24 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
     }
 
     @Override
-    public void forgetUserId(UserForgetUserIdRequest request, StreamObserver<Response> responseObserver) {
-        super.forgetUserId(request, responseObserver);
+    public void forgetUserId(UserForgetUserIdRequest request, StreamObserver<Response> responseObserver) {;
+        String firstName=request.getFirstName();
+        String lastName=request.getLastName();
+        Timestamp bDate=TimestampConvertHelper.rpcToMysql(request.getBirthDate());
+        String email=request.getEmail();
+        String contactN=request.getPhone();
+        logger.info("birthdate: " + bDate);
+        try{
+            logger.info("Validate the user in forgotUsrId");
+            customerLoginService.forgotUserId(firstName,lastName,bDate,contactN,email);
+            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+                    .build());
+        }
+        catch(Exception e){
+            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getLocalizedMessage())
+                    .build());
+        }
+
     }
 
     /**

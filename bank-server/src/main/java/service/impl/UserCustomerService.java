@@ -135,7 +135,8 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public void transfer(Long payee_pk, Long user_pk, Long account_pk, Double amount, String pin, String postScript, int currencyType) throws Exception {
+    public void transfer(Long payee_pk, Long user_pk, Long account_pk,
+                         Double amount, String pin, String postScript, int currencyType) throws Exception {
         Double updatedBalance;
 
         validatePin(user_pk, pin);
@@ -270,23 +271,24 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     private Double chargeFees(UserAccountEntity userAccountEntity, Double amount) throws Exception {
-        Double chargedAmount = 0.0;
-        Double fees = getFees(userAccountEntity);
+        Double fees = 0.0;
         try {
-             chargedAmount= amount - (amount * fees);
+            fees = getFees(userAccountEntity);
+            addChargeHistory(userAccountEntity, amount * fees);
         } catch (Exception E) {
             FaultFactory.throwFaultException("Fail to charge fees");
         }
-        addChargeHistory(userAccountEntity, amount * fees);
-        return chargedAmount;
+        return amount - (amount * fees);
     }
+
     private Double getFees(UserAccountEntity userAccountEntity) throws Exception {
         try {
-            return userAccountTypeDao.getUserAccountType(userAccountEntity.getId()).getChargeSelfserviceTrans();
+            return userAccountTypeDao.getUserAccountType(userAccountEntity.getAccountType()).getChargeSelfserviceTrans();
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("fail to get fees");
         }
     }
+
     private void addChargeHistory(UserAccountEntity userAccountEntity, Double chargedAmount) throws Exception {
         try {
             userCustomerHistoryService.addNewChargeHistory(userAccountEntity.getUserId(), userAccountEntity.getId(), chargedAmount * -1, userAccountEntity.getCurrencyType(), UserOperateType.CHARGE, UserOperateStatusType.SUCCESS);

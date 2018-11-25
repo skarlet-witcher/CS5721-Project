@@ -72,19 +72,46 @@ public class CustomerLoginRpc {
                 .usePlaintext().build();
         UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
 
-        logger.info(userLoginRequest.getUserId() + " is requesting to login.");
+        logger.info(userLoginRequest.getUserId() + " is requesting to login using PIN.");
 
         Response response = blockingStub.login(userLoginRequest);
 
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
-            logger.info(userLoginRequest.getUserId() + " login request check successful.");
+            logger.info(userLoginRequest.getUserId() + " PIN login request check successful.");
             return response.getUserLoginReply();
         } else {
-            logger.info(userLoginRequest.getUserId() + " login request fail due to " + response.getDescription());
+            logger.info(userLoginRequest.getUserId() + " PIN login request fail due to " + response.getDescription());
             throw new Exception(response.getDescription());
         }
     }
+
+//Ashly
+
+    public Response forgotUserIdReq(UserForgetUserIdRequest forgotUserIdRequest) throws Exception {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
+                .usePlaintext().build();
+        UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
+
+        logger.info(forgotUserIdRequest.getFirstName() + " forgot his user ID");
+
+        Response response = blockingStub.forgetUserId(forgotUserIdRequest);
+
+        
+        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
+            logger.info(forgotUserIdRequest.getFirstName() + " details verified to be successful");
+            return response;
+
+        } else {
+            logger.info(forgotUserIdRequest.getFirstName() + " request failed due to " + response.getDescription());
+            throw new Exception(response.getDescription());
+        }
+
+    }
+
+
 
 }

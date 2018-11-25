@@ -15,7 +15,6 @@ import rpc.UserProfileReply;
 import rpc.UserTransactionsReply;
 import service.impl.*;
 import util.JTextFieldLimit;
-import util.RandomUtil;
 import util.TimestampConvertHelper;
 
 import javax.swing.*;
@@ -102,13 +101,15 @@ public class CustomerMainView extends JFrame implements Observer {
     public CustomerMainView(long userId, Long user_pk, String firstName, String lastLoginTime) {
         initComponents();
         initUserModel(userId, user_pk, firstName, lastLoginTime);
+        registerObserver();
+    }
+
+    private void thisComponentShown(ComponentEvent e) {
         initHomePage();
         initProfilePage();
         initTransactionPage();
         initPayeePage();
         initTransferPage();
-        registerObserver();
-
     }
 
     private void registerObserver() {
@@ -117,23 +118,32 @@ public class CustomerMainView extends JFrame implements Observer {
 
     @Override
     public void updateTransferPage(UserTransferModel userTransferModel) {
-        try {
-            CustomerTransferService.getInstance().transfer(userTransferModel,
-                    Integer.parseInt(new String(pf_transfer_PIN.getPassword())));
-            JOptionPane.showMessageDialog(null,
-                    "Transfer Successful",
-                    "Info Message",JOptionPane.INFORMATION_MESSAGE);
-        } catch( Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    "Fail to transfer due to " + E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        transfer(userTransferModel);
         initHomePage();
         initProfilePage();
         initTransactionPage();
         initPayeePage();
         initTransferPage();
+    }
+
+    private void transfer(UserTransferModel userTransferModel) {
+        if(JOptionPane.showConfirmDialog(
+                new JFrame(),"Are you sure to transfer " + userTransferModel.getAmounts() +" "+ CardCurrencyType.getCurrencyType(userTransferModel.getCurrencyType())+ " to " + userTransferModel.getPayee().getName() + " ?",
+                "Transfer Confirmation",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            try {
+                CustomerTransferService.getInstance().transfer(userTransferModel,
+                        Integer.parseInt(new String(pf_transfer_PIN.getPassword())));
+                JOptionPane.showMessageDialog(null,
+                        "Transfer Successful",
+                        "Info Message",JOptionPane.INFORMATION_MESSAGE);
+            } catch( Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Fail to transfer due to " + E.getMessage(),
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
     }
 
     private void initUserModel(long userId, long user_pk, String firstName, String lastLoginTime) {
@@ -256,7 +266,17 @@ public class CustomerMainView extends JFrame implements Observer {
         initAccountComboBox(cb_transfer_accountList);
         initCurrency();
         initBalance();
+        initAmounts();
         initPostscriptTextFieldLimit();
+        initTransferPINField();
+    }
+
+    private void initAmounts() {
+        tf_transfer_amounts.setText("");
+    }
+
+    private void initTransferPINField() {
+        pf_transfer_PIN.setText("");
     }
 
     private void initTransactionInfo() {
@@ -291,7 +311,6 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void initBalance() {
-        System.out.println("your balance = " + this.userModel.getUserAccountList().get(0).getBalance());
         tf_transfer_balance.setText(String.valueOf(this.userModel.getUserAccountList().get(0).getBalance()));
     }
 
@@ -427,7 +446,6 @@ public class CustomerMainView extends JFrame implements Observer {
         return true;
     }
 
-
     private Boolean validateEmail() {
         // email field validator
         if(tf_profile_email.getText().trim().length() <= 0) {
@@ -525,6 +543,7 @@ public class CustomerMainView extends JFrame implements Observer {
                 return;
             }
             initPayeePage();
+            initTransferPage();
         }
     }
 
@@ -533,14 +552,30 @@ public class CustomerMainView extends JFrame implements Observer {
         initBalance();
     }
 
-    private Boolean transferValidator(Double balance, Double amounts) {
-        if(balance <= 0) {
+    private Boolean validatePayeeComboBox() {
+        if(cb_transfer_payeeList.getSelectedItem().toString()== "No payee found") {
             JOptionPane.showMessageDialog(null,
-                    "Not enough balance to be transferred.",
+                    "No payee in your account. Please add a payee.",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if(amounts > balance) {
+        return true;
+    }
+
+    private Boolean validateAmount() {
+        if(tf_transfer_amounts.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "The amount should not be blank. Please input amount before transfer",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if(!tf_transfer_amounts.getText().matches("^[0-9]*$")) {
+            JOptionPane.showMessageDialog(null,
+                    "The amount should be numeric. Please input valid amount before transfer",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if(Double.parseDouble(tf_transfer_balance.getText().trim()) < Double.parseDouble(tf_transfer_amounts.getText().trim())) {
             JOptionPane.showMessageDialog(null,
                     "The amounts should be less or equal to the balance",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
@@ -549,9 +584,35 @@ public class CustomerMainView extends JFrame implements Observer {
         return true;
     }
 
+    private Boolean validatePostScript() {
+        if(tf_transfer_postScript.getText().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "The postscript should not be blank. Please input your postscript.",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    private Boolean validatePINBeforeTransfer() {
+        if(pf_transfer_PIN.getPassword().length <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "The PIN should not be blank. Please input your PIN.",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    private Boolean validateBeforeTransfer() {
+        if(!validatePayeeComboBox() || !validateAmount() || !validatePostScript() || !validatePINBeforeTransfer()) {
+            return false;
+        }
+        return true;
+    }
+
     private void btn_transfer_transferActionPerformed(ActionEvent e) {
-        if(!transferValidator(Double.parseDouble(tf_transfer_balance.getText().trim()),
-                Double.parseDouble(tf_transfer_amounts.getText().trim())))
+        if(!validateBeforeTransfer())
         {
             return;
         }
@@ -566,11 +627,6 @@ public class CustomerMainView extends JFrame implements Observer {
 
     private void cb_transaction_filterActionPerformed(ActionEvent e) {
         initTransactionInfo();
-    }
-
-    private void thisComponentShown(ComponentEvent e) {
-        initAccountTable();
-        initPayeePage();
     }
 
     public void run() {
