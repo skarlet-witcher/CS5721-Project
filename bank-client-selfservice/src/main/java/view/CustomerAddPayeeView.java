@@ -4,7 +4,10 @@
 
 package view;
 
+import model.UserPayeeModel;
 import net.miginfocom.swing.MigLayout;
+import service.impl.CustomerPayeeService;
+import util.JTextFieldLimit;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,29 +23,91 @@ public class CustomerAddPayeeView extends JFrame {
     private JTextField tf_payeeName;
     private JLabel lbl_IBAN;
     private JTextField tf_IBAN;
+    private JLabel lbl_pin;
+    private JPasswordField pf_pin;
     private JButton btn_add;
     private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     private long userId;
+    private CustomerMainView customerMainView;
 
-    public CustomerAddPayeeView(long userId) {
+    public CustomerAddPayeeView(long userId, CustomerMainView customerMainView) {
         initComponents();
-        setUserId(userId);
+        setFields(userId, customerMainView);
+        initFields();
     }
 
-    private void setUserId(long userId) {
+    private void setFields(long userId, CustomerMainView customerMainView) {
         this.userId = userId;
+        this.customerMainView = customerMainView;
     }
 
+    private void initFields() {
+        tf_IBAN.setDocument(new JTextFieldLimit(34));
+        pf_pin.setDocument(new JTextFieldLimit(6));
+    }
 
     private void btn_backActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerMainView(userId).run();
+        customerMainView.setVisible(true);
     }
 
     private void btn_addActionPerformed(ActionEvent e) {
+        // payee name validator
+        if(tf_payeeName.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your payee name",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_payeeName.grabFocus();
+            return;
+        } if(!tf_payeeName.getText().trim().matches("^[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "Payee name should only contain letters",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_payeeName.grabFocus();
+            return;
+        }
+        // IBAN validator
+        if(tf_IBAN.getText().trim().length() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your payee's IBAN",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_IBAN.grabFocus();
+            return;
+        } if(!tf_IBAN.getText().trim().matches("^[0-9A-Z]+$")) {
+            JOptionPane.showMessageDialog(null,
+                    "IBAN should only contain capital letters and digits",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            tf_IBAN.grabFocus();
+            return;
+        }
+        // pin validator
+        if(pf_pin.getPassword().length <=0) {
+            JOptionPane.showMessageDialog(null,
+                    "Please input your PIN",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            pf_pin.grabFocus();
+            return;
+        }
+        // add payee service
+        UserPayeeModel userPayeeModel = new UserPayeeModel();
+        userPayeeModel.setUserId(this.userId);
+        userPayeeModel.setIban(tf_IBAN.getText().trim());
+        userPayeeModel.setName(tf_payeeName.getText().trim());
+        String pin = new String(pf_pin.getPassword());
+        try {
+            CustomerPayeeService.getInstance().addPayee(userPayeeModel, pin);
+            JOptionPane.showMessageDialog(null,
+                    "add payee successful",
+                    "Info Message", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to add payee, due to " + E.getMessage() + "please contact with admin",
+                    "Error Message", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         this.dispose();
-        new CustomerPINView(userId).run();
+        customerMainView.setVisible(true);
     }
 
     private void initComponents() {
@@ -51,6 +116,8 @@ public class CustomerAddPayeeView extends JFrame {
         tf_payeeName = new JTextField();
         lbl_IBAN = new JLabel();
         tf_IBAN = new JTextField();
+        lbl_pin = new JLabel();
+        pf_pin = new JPasswordField();
         btn_add = new JButton();
         btn_back = new JButton();
 
@@ -58,19 +125,24 @@ public class CustomerAddPayeeView extends JFrame {
         setTitle("Customer Add Payee View");
         Container contentPane = getContentPane();
         contentPane.setLayout(new MigLayout(
-                "hidemode 3",
-                // columns
-                "[100:n,fill]" +
-                        "[fill]" +
-                        "[fill]" +
-                        "[100:n,fill]",
-                // rows
-                "[50:n]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[]" +
-                        "[100:n]"));
+            "hidemode 3",
+            // columns
+            "[100:n,fill]" +
+            "[fill]" +
+            "[fill]" +
+            "[100:n,fill]",
+            // rows
+            "[50:n]" +
+            "[]" +
+            "[]" +
+            "[]0" +
+            "[]0" +
+            "[]0" +
+            "[]0" +
+            "[]0" +
+            "[]" +
+            "[]" +
+            "[100:n]"));
 
         //---- lbl_payeeName ----
         lbl_payeeName.setText("Payee name");
@@ -88,23 +160,20 @@ public class CustomerAddPayeeView extends JFrame {
         tf_IBAN.setMinimumSize(new Dimension(100, 30));
         contentPane.add(tf_IBAN, "cell 2 2");
 
+        //---- lbl_pin ----
+        lbl_pin.setText("PIN");
+        contentPane.add(lbl_pin, "cell 1 3");
+        contentPane.add(pf_pin, "cell 2 3");
+
         //---- btn_add ----
         btn_add.setText("Add");
-        btn_add.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_addActionPerformed(e);
-            }
-        });
-        contentPane.add(btn_add, "cell 2 3");
+        btn_add.addActionListener(e -> btn_addActionPerformed(e));
+        contentPane.add(btn_add, "cell 2 8");
 
         //---- btn_back ----
         btn_back.setText("Back");
-        btn_back.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_backActionPerformed(e);
-            }
-        });
-        contentPane.add(btn_back, "cell 2 4");
+        btn_back.addActionListener(e -> btn_backActionPerformed(e));
+        contentPane.add(btn_back, "cell 2 9");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

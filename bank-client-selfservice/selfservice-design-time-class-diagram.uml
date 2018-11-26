@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="2045.0" y="0.0">service.ICustomerApplyService</node>
+    <node x="0.0" y="2948.0">service.impl.CustomerHomeService</node>
+    <node x="2650.0" y="0.0">view.CustomerForgotPINView</node>
+    <node x="1230.0" y="2847.0">rpc.client.CustomerApplyRpc</node>
+    <node x="827.0" y="2407.0">service.ICustomerPayeeService</node>
+    <node x="1250.0" y="2407.0">service.ICustomerProfileService</node>
+    <node x="2609.5" y="2407.0">service.ICustomerTransferService</node>
+    <node x="0.0" y="2596.0">service.impl.CustomerLoginService</node>
+    <node x="2573.0" y="2508.0">service.impl.CustomerTransferService</node>
+    <node x="1734.0" y="2847.0">BankClient</node>
+    <node x="2143.0" y="2508.0">service.impl.CustomerTransactionService</node>
+    <node x="1647.0" y="0.0">view.CustomerApplyAuthView</node>
+    <node x="827.0" y="2552.0">service.impl.CustomerPayeeService</node>
+    <node x="359.0" y="2847.0">rpc.client.CustomerPayeeRpc</node>
+    <node x="0.0" y="0.0">view.CustomerMainView</node>
+    <node x="481.0" y="2407.0">view.CustomerAddPayeeView</node>
+    <node x="4.5" y="2847.0">service.ICustomerHomeService</node>
+    <node x="2045.0" y="277.0">service.impl.CustomerApplyService</node>
+    <node x="1257.0" y="0.0">view.CustomerLoginView</node>
+    <node x="1225.0" y="2530.0">service.impl.CustomerProfileService</node>
+    <node x="837.0" y="0.0">view.CustomerPINView</node>
+    <node x="841.0" y="2847.0">rpc.client.CustomerLoginRpc</node>
+    <node x="2143.0" y="2407.0">service.ICustomerTransactionService</node>
+    <node x="1585.0" y="2407.0">rpc.client.UserCustomerRpc</node>
+    <node x="437.0" y="0.0">view.CustomerApplyView</node>
+    <node x="0.0" y="2407.0">service.ICustomerLoginService</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="service.impl.CustomerProfileService" target="service.ICustomerProfileService">
+      <point x="0.0" y="-59.0" />
+      <point x="0.0" y="36.5" />
+    </edge>
+    <edge source="service.impl.CustomerLoginService" target="service.ICustomerLoginService">
+      <point x="0.0" y="-103.0" />
+      <point x="0.0" y="69.5" />
+    </edge>
+    <edge source="service.impl.CustomerTransactionService" target="service.ICustomerTransactionService">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="service.impl.CustomerTransferService" target="service.ICustomerTransferService">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="service.impl.CustomerPayeeService" target="service.ICustomerPayeeService">
+      <point x="0.0" y="-70.0" />
+      <point x="0.0" y="47.5" />
+    </edge>
+    <edge source="service.impl.CustomerHomeService" target="service.ICustomerHomeService">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="service.impl.CustomerApplyService" target="service.ICustomerApplyService">
+      <point x="0.0" y="-136.0" />
+      <point x="0.0" y="113.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6032608695652174" x="3222.4607820848023" y="2374.7504831192455" />
+  <SelectedNodes>
+    <node>service.ICustomerApplyService</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

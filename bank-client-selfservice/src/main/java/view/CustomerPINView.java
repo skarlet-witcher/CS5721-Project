@@ -4,27 +4,27 @@
 
 package view;
 
+
+import model.UserLoginPINModel;
 import net.miginfocom.swing.MigLayout;
+import rpc.UserLoginReply;
+import service.impl.CustomerLoginService;
 import util.JTextFieldLimit;
 import util.KeyPadGenerator;
-import util.PINFieldSetter;
+import util.TimestampConvertHelper;
 
 import javax.swing.*;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author xiangkai22
+ * @author Xiangkai Tang
  */
 public class CustomerPINView extends JFrame {
     List<JPasswordField> passwordFieldsList = new ArrayList<JPasswordField>();
+    List<Integer> pinDigitList = new ArrayList<>();
     private long userId;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_PIN;
@@ -41,18 +41,118 @@ public class CustomerPINView extends JFrame {
     private JButton btn_backSpace;
     private JButton btn_confirm;
     private JButton btn_back;
+    private JButton btn_forgotPIN;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    public CustomerPINView(long userId) {
+    public CustomerPINView(long userId,int pin1, int pin2, int pin3) {
         initComponents();
-        setUserId(userId);
+        initInternalVariables(userId);
         generateKeyPad();
-        generatePINField(1,3,6); // the number should be acquired from the db
+        generatePINFields(pin1, pin2, pin3);
     }
 
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
+    private void initInternalVariables(long userId) {
+        this.userId = userId;
+    }
+
+    private JPasswordField checkEmptyPasswordField() {
+        JPasswordField result = null;
+        for (int i = 0; i < 3; i++) {
+            if (passwordFieldsList.get(i).getPassword().length <= 0) {
+                result = passwordFieldsList.get(i);
+                break;
+            }
+        }
+        return result;
+    }
+
+    private JPasswordField checkInputtedPasswordField() {
+        JPasswordField result = null;
+        for(int i = 2; i >= 0; i--) {
+            if(passwordFieldsList.get(i).getPassword().length >0) {
+                result = passwordFieldsList.get(i);
+                break;
+            }
+        }
+        return result;
+    }
+
+    private void inputPIN(String str) {
+        if(checkEmptyPasswordField()== null) {
+            return;
+        } else {
+            checkEmptyPasswordField().setText(str);
+        }
+
+    }
+
+    private void backSpacePIN() {
+        if(checkInputtedPasswordField()== null) return;
+        checkInputtedPasswordField().setText("");
+    }
+
+    private void generatePasswordField() {
+        JPasswordField pf = new JPasswordField();
+        pf.setMinimumSize(new Dimension(20,20));
+        pf.setDocument(new JTextFieldLimit(1));
+        pf.setEditable(false);
+        getContentPane().add(pf, "cell 2 0");
+        passwordFieldsList.add(pf);
+    }
+
+    private void generateAsterisk() {
+        JLabel lbl = new JLabel("*");
+        getContentPane().add(lbl, "cell 2 0");
+    }
+
+    private void generatePINFields(int digit_1, int digit_2, int digit_3) {
+        for(int i = 1; i <= 6; i++) {
+            if( i == digit_1 || i == digit_2 || i == digit_3) {
+               generatePasswordField();
+            } else {
+                generateAsterisk();
+            }
+        }
+        pinDigitList.add(digit_1);
+        pinDigitList.add(digit_2);
+        pinDigitList.add(digit_3);
+        pack();
+    }
+
+    private void generateKeyPad() {
+        List<Integer> keyPadList = KeyPadGenerator.getInstance().getKeyPadArr();
+
+        btn_1.setText(keyPadList.get(0).toString());
+        btn_2.setText(keyPadList.get(1).toString());
+        btn_3.setText(keyPadList.get(2).toString());
+        btn_4.setText(keyPadList.get(3).toString());
+        btn_5.setText(keyPadList.get(4).toString());
+        btn_6.setText(keyPadList.get(5).toString());
+        btn_7.setText(keyPadList.get(6).toString());
+        btn_8.setText(keyPadList.get(7).toString());
+        btn_9.setText(keyPadList.get(8).toString());
+        btn_10.setText(keyPadList.get(9).toString());
+    }
+
+    private UserLoginPINModel initUserLoginPINModel(List<Integer> digitList) {
+        UserLoginPINModel userLoginPINModel = new UserLoginPINModel();
+        int i = 0;
+        for(int digit : digitList) {
+
+                JPasswordField temp = passwordFieldsList.get(i);
+                int pwd = Integer.parseInt(new String(temp.getPassword()));
+                switch (digit) {
+                    case 1: userLoginPINModel.setPin1(pwd); break;
+                    case 2: userLoginPINModel.setPin2(pwd); break;
+                    case 3: userLoginPINModel.setPin3(pwd); break;
+                    case 4: userLoginPINModel.setPin4(pwd); break;
+                    case 5: userLoginPINModel.setPin5(pwd); break;
+                    case 6: userLoginPINModel.setPin6(pwd); break;
+                }
+            i++;
+        }
+        userLoginPINModel.setUserId(userId);
+        return userLoginPINModel;
     }
 
     private void btn_1ActionPerformed(ActionEvent e) {
@@ -100,12 +200,18 @@ public class CustomerPINView extends JFrame {
     }
 
     private void btn_confirmActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerMainView(userId).run();
-    }
-
-    private void button13ActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        UserLoginReply userLoginReply;
+        if(!validateBeforeLogin()) return;
+        try {
+            userLoginReply = CustomerLoginService.getInstance().requestLoginUsingPIN(initUserLoginPINModel(pinDigitList));
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to login due to " + E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            E.printStackTrace();
+            return;
+        }
+        initCustomerMainView(userLoginReply);
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
@@ -113,84 +219,34 @@ public class CustomerPINView extends JFrame {
         new CustomerLoginView().run();
     }
 
-    private void setUserId(long userId) {
-        this.userId = userId;
+    private void btn_forgotPINActionPerformed(ActionEvent e) {
+        this.dispose();
+        new CustomerForgotPINView(userId).run();
     }
 
-    private JPasswordField emptyPasswordFieldCheckerForInput() {
-        JPasswordField result = null;
-        for (int i = 0; i < 3; i++) {
-            if (passwordFieldsList.get(i).getPassword().length <= 0) {
-                result = passwordFieldsList.get(i);
-                break;
+    private Boolean validateBeforeLogin() {
+        for(JPasswordField pwdField: passwordFieldsList) {
+            if(pwdField.getPassword().length <= 0) {
+                JOptionPane.showMessageDialog(null,
+                        "Please input your PIN",
+                        "Error Message", JOptionPane.ERROR_MESSAGE);
+                return false;
             }
         }
-        return result;
+        return true;
     }
 
-    private JPasswordField passwordFieldCheckerForRemove() {
-        JPasswordField result = null;
-        for(int i = 2; i >= 0; i--) {
-            if(passwordFieldsList.get(i).getPassword().length >0) {
-                result = passwordFieldsList.get(i);
-                break;
-            }
-        }
-        return result;
+    private void initCustomerMainView(UserLoginReply userLoginReply) {
+        String lastLoginTime = TimestampConvertHelper.rpcToMysql(userLoginReply.getLastLoginTime()).toString();
+        lastLoginTime = lastLoginTime.substring(0, TimestampConvertHelper.rpcToMysql(userLoginReply.getLastLoginTime()).toString().indexOf('.'));
+
+        this.dispose();
+        new CustomerMainView(this.userId, userLoginReply.getUserPk(), userLoginReply.getFirstName().trim(), lastLoginTime).run();
     }
 
-    private void inputPIN(String str) {
-        if(emptyPasswordFieldCheckerForInput()== null) {
-            return;
-        } else {
-            emptyPasswordFieldCheckerForInput().setText(str);
-        }
-
-    }
-
-    private void backSpacePIN() {
-        if(passwordFieldCheckerForRemove()== null) return;
-        passwordFieldCheckerForRemove().setText("");
-    }
-
-    private void generatePasswordField() {
-        JPasswordField pf = new JPasswordField();
-        pf.setMinimumSize(new Dimension(20,20));
-        pf.setDocument(new JTextFieldLimit(1));
-        pf.setEditable(false);
-        getContentPane().add(pf, "cell 2 0");
-        passwordFieldsList.add(pf);
-    }
-
-    private void generateLabel() {
-        JLabel lbl = new JLabel("*");
-        getContentPane().add(lbl, "cell 2 0");
-    }
-
-    private void generatePINField(int digit_1, int digit_2, int digit_3) {
-        for(int i = 1; i <= 6; i++) {
-            if( i == digit_1 || i == digit_2 || i == digit_3) {
-               generatePasswordField();
-            } else {
-                generateLabel();
-            }
-        }
-        pack();
-    }
-
-    private void generateKeyPad() {
-        List<Integer> keyPadList = KeyPadGenerator.getInstance().getKeyPadArr();
-
-        btn_1.setText(keyPadList.get(0).toString());
-        btn_2.setText(keyPadList.get(1).toString());
-        btn_3.setText(keyPadList.get(2).toString());
-        btn_4.setText(keyPadList.get(3).toString());
-        btn_5.setText(keyPadList.get(4).toString());
-        btn_6.setText(keyPadList.get(5).toString());
-        btn_7.setText(keyPadList.get(6).toString());
-        btn_8.setText(keyPadList.get(7).toString());
-        btn_9.setText(keyPadList.get(8).toString());
-        btn_10.setText(keyPadList.get(9).toString());
+    public void run() {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
     private void initComponents() {
@@ -209,6 +265,7 @@ public class CustomerPINView extends JFrame {
         btn_backSpace = new JButton();
         btn_confirm = new JButton();
         btn_back = new JButton();
+        btn_forgotPIN = new JButton();
 
         //======== this ========
         setTitle("Customer PIN View");
@@ -230,6 +287,7 @@ public class CustomerPINView extends JFrame {
             "[]" +
             "[]" +
             "[]" +
+            "[]" +
             "[5:n,grow,fill]"));
 
         //---- lbl_PIN ----
@@ -238,121 +296,73 @@ public class CustomerPINView extends JFrame {
 
         //---- btn_1 ----
         btn_1.setText("text");
-        btn_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_1ActionPerformed(e);
-            }
-        });
+        btn_1.addActionListener(e -> btn_1ActionPerformed(e));
         contentPane.add(btn_1, "cell 2 1");
 
         //---- btn_2 ----
         btn_2.setText("text");
-        btn_2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_2ActionPerformed(e);
-            }
-        });
+        btn_2.addActionListener(e -> btn_2ActionPerformed(e));
         contentPane.add(btn_2, "cell 3 1");
 
         //---- btn_3 ----
         btn_3.setText("text");
-        btn_3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_3ActionPerformed(e);
-            }
-        });
+        btn_3.addActionListener(e -> btn_3ActionPerformed(e));
         contentPane.add(btn_3, "cell 4 1");
 
         //---- btn_4 ----
         btn_4.setText("text");
-        btn_4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_4ActionPerformed(e);
-            }
-        });
+        btn_4.addActionListener(e -> btn_4ActionPerformed(e));
         contentPane.add(btn_4, "cell 2 2");
 
         //---- btn_5 ----
         btn_5.setText("text");
-        btn_5.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_5ActionPerformed(e);
-            }
-        });
+        btn_5.addActionListener(e -> btn_5ActionPerformed(e));
         contentPane.add(btn_5, "cell 3 2");
 
         //---- btn_6 ----
         btn_6.setText("text");
-        btn_6.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_6ActionPerformed(e);
-            }
-        });
+        btn_6.addActionListener(e -> btn_6ActionPerformed(e));
         contentPane.add(btn_6, "cell 4 2");
 
         //---- btn_7 ----
         btn_7.setText("text");
-        btn_7.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_7ActionPerformed(e);
-            }
-        });
+        btn_7.addActionListener(e -> btn_7ActionPerformed(e));
         contentPane.add(btn_7, "cell 2 3");
 
         //---- btn_8 ----
         btn_8.setText("text");
-        btn_8.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_8ActionPerformed(e);
-            }
-        });
+        btn_8.addActionListener(e -> btn_8ActionPerformed(e));
         contentPane.add(btn_8, "cell 3 3");
 
         //---- btn_9 ----
         btn_9.setText("text");
-        btn_9.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_9ActionPerformed(e);
-            }
-        });
+        btn_9.addActionListener(e -> btn_9ActionPerformed(e));
         contentPane.add(btn_9, "cell 4 3");
 
         //---- btn_10 ----
         btn_10.setText("text");
-        btn_10.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_10ActionPerformed(e);
-            }
-        });
+        btn_10.addActionListener(e -> btn_10ActionPerformed(e));
         contentPane.add(btn_10, "cell 2 4 2 1");
 
         //---- btn_backSpace ----
         btn_backSpace.setText("Backspace");
-        btn_backSpace.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_backSpaceActionPerformed(e);
-            }
-        });
+        btn_backSpace.addActionListener(e -> btn_backSpaceActionPerformed(e));
         contentPane.add(btn_backSpace, "cell 4 4");
 
         //---- btn_confirm ----
         btn_confirm.setText("Confirm");
-        btn_confirm.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                btn_confirmActionPerformed(e);
-            }
-        });
+        btn_confirm.addActionListener(e -> btn_confirmActionPerformed(e));
         contentPane.add(btn_confirm, "cell 2 6 3 1");
 
         //---- btn_back ----
         btn_back.setText("Back");
-        btn_back.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                button13ActionPerformed(e);
-                btn_backActionPerformed(e);
-            }
-        });
+        btn_back.addActionListener(e -> btn_backActionPerformed(e));
         contentPane.add(btn_back, "cell 2 6 3 1");
+
+        //---- btn_forgotPIN ----
+        btn_forgotPIN.setText("Forgot PIN ?");
+        btn_forgotPIN.addActionListener(e -> btn_forgotPINActionPerformed(e));
+        contentPane.add(btn_forgotPIN, "cell 2 7 3 1");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

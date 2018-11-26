@@ -1,5 +1,6 @@
 package rpc.client;
 
+import Const.ResponseStatusType;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import rpc.*;
@@ -10,13 +11,17 @@ import java.util.logging.Logger;
 import static Const.Server.SERVER_HOST;
 import static Const.Server.SERVER_PORT;
 
+/*
+    @author Xiangkai Tang
+ */
+
 public class CustomerApplyRpc {
     private static final Logger logger = Logger.getLogger(CustomerApplyRpc.class.getName());
 
     private static CustomerApplyRpc customerApplyRpc = null;
 
     public static CustomerApplyRpc getInstance() {
-        if(customerApplyRpc == null) {
+        if (customerApplyRpc == null) {
             customerApplyRpc = new CustomerApplyRpc();
         }
         return customerApplyRpc;
@@ -34,12 +39,35 @@ public class CustomerApplyRpc {
 
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
-        if (response.getStatusCode() == 200) {
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info(applyAccountRequest.getFirstName() + " apply request successful.");
             return response;
         } else {
             logger.info(applyAccountRequest.getFirstName() + " apply request fail due to " + response.getDescription());
             throw new Exception(response.getDescription());
         }
+
     }
+    public Response checkExistingUserBeforeApply(UserValidateExistingUserRequest userValidateExistingUserRequest) throws Exception {
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
+                .usePlaintext().build();
+
+        UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(channel);
+
+        logger.info(userValidateExistingUserRequest.getUserId() +" is requesting to validate user existence.");
+
+        Response response = blockingStub.validateExistingUser(userValidateExistingUserRequest);
+
+        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
+            logger.info(userValidateExistingUserRequest.getUserId() + " validate user existence successful.");
+            return response;
+        } else {
+            logger.info(userValidateExistingUserRequest.getUserId() + " validate user existence failure due to " + response.getDescription());
+            throw new Exception(response.getDescription());
+        }
+
+    }
+
 }

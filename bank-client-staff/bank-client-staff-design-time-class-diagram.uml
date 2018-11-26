@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="316.75" y="1351.0">view.StaffMainView</node>
+    <node x="1169.9484126984128" y="1516.0">service.impl.StaffLoginService</node>
+    <node x="677.0" y="744.0">view.StaffFrozenAccountInfoView</node>
+    <node x="0.0" y="315.0">view.StaffAddAccountInfoView</node>
+    <node x="137.5" y="102.0">service.impl.StaffService</node>
+    <node x="502.5" y="1783.0">view.StaffLoginView</node>
+    <node x="894.0" y="754.5">rpc.client.StaffRpc</node>
+    <node x="545.5" y="1995.0">StaffClient</node>
+    <node x="1262.0" y="788.0">service.IStaffLoginService</node>
+    <node x="137.5" y="0.0">service.IStaffService</node>
+    <node x="452.0" y="744.0">view.StaffRemoveAccountInfoView</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="service.impl.StaffLoginService" target="service.IStaffLoginService">
+      <point x="-25.75" y="-26.0" />
+      <point x="1247.1984126984128" y="1331.0" />
+      <point x="1285.6666666666665" y="1331.0" />
+      <point x="-47.333333333333336" y="15.0" />
+    </edge>
+    <edge source="view.StaffMainView" target="view.StaffLoginView">
+      <point x="93.25" y="191.0" />
+      <point x="0.0" y="-81.0" />
+    </edge>
+    <edge source="service.impl.StaffLoginService" target="rpc.client.StaffRpc">
+      <point x="-77.25" y="-26.0" />
+      <point x="1195.6984126984128" y="1331.0" />
+      <point x="1068.0" y="1331.0" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="view.StaffLoginView" target="view.StaffMainView">
+      <point x="-62.66666666666663" y="-81.0" />
+      <point x="533.8333333333334" y="1758.0" />
+      <point x="410.0" y="1758.0" />
+      <point x="-93.25" y="191.0" />
+    </edge>
+    <edge source="view.StaffRemoveAccountInfoView" target="view.StaffMainView">
+      <point x="51.25" y="59.0" />
+      <point x="605.75" y="1311.0" />
+      <point x="556.5357142857142" y="1311.0" />
+      <point x="53.28571428571422" y="-191.0" />
+    </edge>
+    <edge source="view.StaffLoginView" target="service.impl.StaffLoginService">
+      <point x="62.66666666666663" y="-81.0" />
+      <point x="659.1666666666666" y="1758.0" />
+      <point x="1272.9484126984128" y="1758.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="view.StaffMainView" target="service.impl.StaffService">
+      <point x="-53.285714285714334" y="-191.0" />
+      <point x="449.96428571428567" y="1331.0" />
+      <point x="441.5" y="1331.0" />
+      <point x="441.5" y="290.0" />
+      <point x="424.0" y="290.0" />
+      <point x="95.5" y="81.5" />
+    </edge>
+    <edge source="view.StaffMainView" target="view.StaffRemoveAccountInfoView">
+      <point x="0.0" y="-191.0" />
+      <point x="-51.25" y="59.0" />
+    </edge>
+    <edge source="StaffClient" target="view.StaffLoginView">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="view.StaffAddAccountInfoView" target="view.StaffMainView">
+      <point x="107.75" y="488.0" />
+      <point x="323.25" y="1321.0" />
+      <point x="396.67857142857133" y="1321.0" />
+      <point x="-106.57142857142867" y="-191.0" />
+    </edge>
+    <edge source="view.StaffMainView" target="view.StaffFrozenAccountInfoView">
+      <point x="106.57142857142856" y="-191.0" />
+      <point x="609.8214285714286" y="1321.0" />
+      <point x="726.25" y="1321.0" />
+      <point x="-49.25" y="59.0" />
+    </edge>
+    <edge source="view.StaffAddAccountInfoView" target="service.impl.StaffService">
+      <point x="0.0" y="-488.0" />
+      <point x="215.5" y="290.0" />
+      <point x="233.0" y="290.0" />
+      <point x="-95.5" y="81.5" />
+    </edge>
+    <edge source="service.impl.StaffService" target="service.IStaffService">
+      <point x="0.0" y="-81.5" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="view.StaffMainView" target="view.StaffAddAccountInfoView">
+      <point x="-159.8571428571429" y="-191.0" />
+      <point x="343.3928571428571" y="1331.0" />
+      <point x="107.75" y="1331.0" />
+      <point x="-107.75" y="488.0" />
+    </edge>
+    <edge source="view.StaffFrozenAccountInfoView" target="view.StaffMainView">
+      <point x="49.25" y="59.0" />
+      <point x="824.75" y="1331.0" />
+      <point x="663.1071428571429" y="1331.0" />
+      <point x="159.8571428571429" y="-191.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7520547945205479" x="1008.568306010929" y="345.0" />
+  <SelectedNodes>
+    <node>service.impl.StaffService</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

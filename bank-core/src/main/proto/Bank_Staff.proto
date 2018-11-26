@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "bankStaff_rpc";
+option java_outer_classname = "BankStaffProto";
+import "google/protobuf/timestamp.proto";
+import "Bank.proto";
+
+package rpc;
+
+
+service StaffLogin {
+    rpc StaffLogin (StaffLoginRequest) returns (StaffLoginResponse);
+}
+
+message StaffLoginRequest{
+    int64 staff_id = 1;
+    string password = 2;
+}
+
+message StaffLoginResponse{
+    bool is_valid = 1;
+    int32 status_code = 2;
+    string description = 3;
+
+}
+
+service AcceptApplication{
+    rpc acceptApplication (AcceptedRequest) returns (AcceptedResponse);
+}
+message AcceptedRequest{
+    int64 application_id = 1;
+}
+message AcceptedResponse{
+    bool is_accepted = 1;
+    int32 status_code = 2;
+}
+service StaffGetNewApplies{
+    rpc StaffGetNewApplies (Empty) returns (ListUserApplyArchiveEntitiesResponse);
+}
+message Empty{
+}
+
+message ListUserApplyArchiveEntitiesResponse{
+    repeated UserApplyArchiveEntitiesResponse listUserApplyArchiveEntitiesResponse = 1;
+    int32 status_code = 2;
+    string description = 3;
+}
+message UserApplyArchiveEntitiesResponse{
+    int64 id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string identity_id = 4;
+    int32 identity_id_type = 5;
+    int32 account_type = 6;
+    int32 card_type = 7;
+    google.protobuf.Timestamp graduate_date = 8;
+    string university = 9;
+    string student_id = 10;
+    int64 parent_user_id = 11;
+    string parent_first_name = 12;
+    string parent_last_name = 13;
+    google.protobuf.Timestamp birth_date = 14;
+    int32 gender = 15;
+    string address = 16;
+    string email = 17;
+    string phone  =18;
+    google.protobuf.Timestamp  apply_time = 19;
+    int32 status = 20;
+    string remark = 21;
+    int64 user_id = 22;
+    int32 new_user_apply = 23;
+
+}

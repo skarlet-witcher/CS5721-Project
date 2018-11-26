@@ -1,10 +1,7 @@
 package util;
 
-import dao.impl.UserOperationHistoryDao;
-
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
-import java.util.Calendar;
 
 public class OperationNoGenerator {
     private static OperationNoGenerator operationNoGenerator = null;

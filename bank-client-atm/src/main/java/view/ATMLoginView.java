@@ -18,7 +18,6 @@ public class ATMLoginView extends JFrame {
     }
 
     private void btn_continueActionPerformed(ActionEvent e) {
-        // TODO add your code here
         this.dispose();
         new ATMMainView(Long.parseLong(tf_cardNum.getText().trim())).run();
     }

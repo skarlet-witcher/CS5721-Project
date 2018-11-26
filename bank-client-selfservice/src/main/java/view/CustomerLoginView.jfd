@@ -5,19 +5,19 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[30:n,grow,fill][28,fill]0[fill][92,grow,fill][30:n,grow,fill]"
-			"$rowConstraints": "[50:n][][fill][][fill][15:n,grow,fill][][][30:n,grow]"
+			"$columnConstraints": "[30:n,grow,fill][28,fill]0[fill][fill][92,grow,fill][30:n,grow,fill]"
+			"$rowConstraints": "[50:n][][fill][][][fill][15:n,grow,fill][][][30:n,grow]"
 		} ) {
 			name: "this"
 			"title": "Cusotmer Secure Login"
 			"minimumSize": new java.awt.Dimension( 27, 35 )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_title"
-				"text": "Customer Bank System Login"
+				"text": "Nuclear Bank System Login"
 				"font": new java.awt.Font( "Segoe UI", 0, 28 )
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 0 2 1"
+				"value": "cell 2 0 3 1"
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "lbl_userId"
@@ -30,59 +30,77 @@ new FormModel {
 				name: "tf_userId"
 				"minimumSize": new java.awt.Dimension( 90, 30 )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 2"
+				"value": "cell 4 2"
 			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lbl_dob"
-				"text": "Date of Birth"
-				"font": new java.awt.Font( "Segoe UI", 0, 20 )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+				"$layoutConstraints": "hidemode 3"
+				"$columnConstraints": "[fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill][fill]"
+				"$rowConstraints": "[][][]"
+			} ) {
+				name: "panel_contactNum"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lbl_contactNum"
+					"text": "<html><strong>Last four digits</strong> of Contact Number</html>"
+					"font": new java.awt.Font( "Segoe UI", 0, 16 )
+					"minimumSize": new java.awt.Dimension( 102, 15 )
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 2 3 1"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "tf_contactNum"
+					"minimumSize": new java.awt.Dimension( 90, 30 )
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 3 2 9 1"
+				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 4"
+				"value": "cell 2 4 3 1"
 			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lbl_contactNum"
-				"text": "<html><strong>Last four digits</strong> of Contact Number</html>"
-				"font": new java.awt.Font( "Segoe UI", 0, 16 )
-				"minimumSize": new java.awt.Dimension( 102, 15 )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+				"$layoutConstraints": "hidemode 3"
+				"$columnConstraints": "[fill][fill][fill][fill][fill][fill]"
+				"$rowConstraints": "[][][]"
+			} ) {
+				name: "panel_dob"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lbl_dob"
+					"text": "Date of Birth"
+					"font": new java.awt.Font( "Segoe UI", 0, 20 )
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 0"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "tf_day"
+					addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "tf_dayFocusGained", true ) )
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 1 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lbl_dob_mark1"
+					"text": "/"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 2 0"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "tf_month"
+					addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "tf_monthFocusGained", true ) )
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 3 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "lbl_dob_mark2"
+					"text": "/"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 4 0"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "tf_year"
+					"minimumSize": new java.awt.Dimension( 64, 30 )
+					addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "tf_yearFocusGained", true ) )
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 5 0"
+				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 4"
-			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "tf_day"
-				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "tf_dayFocusGained", true ) )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 4"
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lbl_dob_mark1"
-				"text": "/"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 4"
-			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "tf_month"
-				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "tf_monthFocusGained", true ) )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 4"
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "lbl_dob_mark2"
-				"text": "/"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 4"
-			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "tf_year"
-				"minimumSize": new java.awt.Dimension( 64, 30 )
-				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "tf_yearFocusGained", true ) )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 4"
-			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "tf_contactNum"
-				"minimumSize": new java.awt.Dimension( 90, 30 )
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 3 4"
+				"value": "cell 2 6 3 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_login"
@@ -90,7 +108,7 @@ new FormModel {
 				"font": new java.awt.Font( "Segoe UI", 0, 16 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_loginActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 6 2 1"
+				"value": "cell 2 7 3 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_forgotUserId"
@@ -101,7 +119,7 @@ new FormModel {
 				"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_forgotUserIdActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 7 2 1"
+				"value": "cell 2 8 3 1"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "btn_register"
@@ -112,7 +130,7 @@ new FormModel {
 				"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "btn_registerActionPerformed", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 7 2 1"
+				"value": "cell 2 8 3 1"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 100, 15 )

@@ -81,7 +81,7 @@ CREATE TABLE `bank_apply` (
   `remark`            varchar(255) NOT NULL DEFAULT ''
   COMMENT 'Approved / reason for being denied.',
   `user_id`           bigint(20)            DEFAULT NULL
-  COMMENT 'after being approved, get connected to user id',
+  COMMENT 'after being approved, get connected to UserId',
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -113,20 +113,20 @@ CREATE TABLE `bank_staff` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `model`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `model`;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id`              bigint(20)   NOT NULL AUTO_INCREMENT,
   `user_id`         bigint(20)   NOT NULL
-  COMMENT 'user visible, for login. get by auto-generated',
+  COMMENT 'model visible, for login. get by auto-generated',
   `pin`             int(11)      NOT NULL
   COMMENT 'get by auto-generated 6 digit',
   `login_pin_digit` int(11)               DEFAULT NULL
-  COMMENT '3 digit, represent which 3 of 6 digit user has to input. get by auto-generated',
+  COMMENT '3 digit, represent which 3 of 6 digit model has to input. get by auto-generated',
   `first_name`      varchar(255) NOT NULL,
   `last_name`       varchar(255) NOT NULL,
   `gender`          int(11)      NOT NULL

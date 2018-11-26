@@ -1,5 +1,8 @@
 syntax = "proto3";
 
+
+
+
 option java_multiple_files = true;
 option java_package = "rpc";
 option java_outer_classname = "BankProto";
@@ -7,9 +10,11 @@ import "google/protobuf/timestamp.proto";
 
 package rpc;
 
+
 service UserCustomerLogin {
     rpc LoginReq (UserLoginReqRequest) returns (Response);
     rpc Login (UserLoginRequest) returns (Response);
+    rpc ValidateExistingUser (UserValidateExistingUserRequest) returns (Response);
     rpc ApplyNewAccount (UserApplyNewAccountRequest) returns (Response);
     rpc ForgetUserId (UserForgetUserIdRequest) returns (Response);
     rpc ForgetPin (UserForgetPinRequest) returns (Response);
@@ -42,6 +47,14 @@ service UserAdmin {
     rpc RemoveStaff (UserAdminRequest) returns (Response);
     rpc ConfigEmail (UserAdminRequest) returns (Response);
     rpc CheckEmailAvailability (UserAdminRequest) returns (Response);
+}
+
+message UserValidateExistingUserRequest {
+    int64 user_id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    int32 identity_id_type = 4;
+    string identity_id = 5;
 }
 
 message UserStaffRequest {
@@ -88,6 +101,7 @@ message UserLoginRequest {
 }
 
 message UserApplyNewAccountRequest {
+    int64 user_id = 18;
     string first_name = 1;
     string last_name = 2;
     int32 gender = 3;
@@ -105,13 +119,15 @@ message UserApplyNewAccountRequest {
     int64 parent_user_id = 15;
     string parent_first_name = 16;
     string parent_last_name = 17;
+    int32 new_user_apply = 19;
 }
 
 message UserForgetUserIdRequest {
-    string iban = 1;
-    google.protobuf.Timestamp birth_date = 2;
-    string phone = 3;
-    string email = 4;
+    string first_name = 1;
+    string last_name = 2;
+    google.protobuf.Timestamp birth_date = 3;
+    string phone = 4;
+    string email = 5;
 }
 
 message UserForgetPinRequest {
@@ -137,7 +153,7 @@ message UserCustomerEditProfileRequest {
 
 message UserCustomerGetTransactionsRequest {
     int64 user_pk = 1;
-    int32 filter_by_account = 2;
+    int64 filter_by_account = 2;
     int32 filter_by_date = 3;
 }
 
@@ -153,10 +169,9 @@ message UserCustomerGetPayeesRequest {
 
 message UserCustomerAddPayeeRequest {
     int64 user_pk = 1;
-    string first_name = 2;
-    string last_name = 3;
-    string iban = 4;
-    int32 pin = 5;
+    string name = 2;
+    string iban = 3;
+    string pin = 4;
 }
 
 message UserCustomerRemovePayeeRequest {
@@ -170,6 +185,8 @@ message UserCustomerTransferRequest {
     int64 payee_pk = 3;
     double amount = 4;
     int32 pin = 5;
+    string postScript = 6;
+    int32 currencyType = 7;
 }
 
 message Response {
@@ -249,10 +266,10 @@ message UserTransactionsReply {
     int64 user_pk = 1;
     google.protobuf.Timestamp date = 2;
     string description = 3;
-    string debit = 4;
-    string credit = 5;
-    double balance = 6;
-    string transaction_no = 7;
+    double amount = 4;
+    double balance = 5;
+    string transaction_no = 6;
+    int32 operate_type = 7;
 }
 
 message UserPayeesReply {
@@ -319,6 +336,6 @@ message UserAccountsReply {
     int64 account_number = 2;
     int32 account_type = 3;
     int32 currency_type = 4;
-    int32 balance = 5;
+    double balance = 5;
     int32 status = 6;
 }

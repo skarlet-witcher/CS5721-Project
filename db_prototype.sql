@@ -1,11 +1,11 @@
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `model`;
 CREATE TABLE user (
   id              BIGINT                 AUTO_INCREMENT PRIMARY KEY,
   user_id         bigint UNIQUE not null
-  comment 'user visible, for login. get by auto-generated',
+  comment 'model visible, for login. get by auto-generated',
   pin             varchar(6)    not null
   comment 'get by auto-generated 6 digit',
-  login_pin_digit varchar(3) comment '3 digit, represent which 3 of 6 digit user has to input. get by auto-generated',
+  login_pin_digit varchar(3) comment '3 digit, represent which 3 of 6 digit model has to input. get by auto-generated',
   first_name      varchar(255)  not null,
   last_name       varchar(255)  not null,
   gender          int           not null
@@ -20,13 +20,17 @@ CREATE TABLE user (
 
 DROP TABLE IF EXISTS `user_account`;
 create table user_account (
-  id             bigint                AUTO_INCREMENT,
+  id             bigint                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                AUTO_INCREMENT,
   account_number bigint       not null
   comment 'account number, the last 8 digit of iban',
   account_type   bigint       not null,
   bic            varchar(255) not null default 'BOFIIE2DXXX',
   iban           varchar(255) not null
   comment 'iban, get by auto-generated.',
+  balance        double       not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 0,
+  currency_type  int          not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 0
+  comment '0.euro 1.....',
+  expired_date   datetime     not null,
   user_id        bigint,
   status         int          not null default 1
   comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.',
@@ -36,7 +40,7 @@ create table user_account (
 );
 
 CREATE INDEX fk_user_id
-  ON user (id);
+  ON model (id);
 CREATE INDEX fk_account_type
   ON user_account_type (id);
 
@@ -48,22 +52,22 @@ create table user_account_type (
   description                         varchar(1000) null     default '',
   minimum_age                         int           not null default 0,
   maximum_age                         int           not null default 100,
-  card_type                           int           not null
+  card_type                          int    not null
   comment '1.debit card 2.credit card',
-  physical_card                       int           not null
+  physical_card                      int    not null
   comment '0.no 1.yes',
-  student_info_require                int           not null
+  student_info_require               int    not null
   comment '0.no 1.yes',
-  charge_selfservice_trans            double        not null default 0
+  charge_selfservice_trans           double not null default 0
   comment 'charge amount per transaction',
-  charge_atm_deposit_withdraw         double        not null default 0
+  charge_atm_deposit_withdraw        double not null default 0
   comment 'charge amount per d/w',
-  charge_per_quarter                  int           not null default 0
+  charge_per_quarter                 int    not null default 0
   comment '0.no 1.yes',
-  charge_per_quarter_minimum_banlance double        not null default 0,
-  charge_per_quarter_amount           double        not null default 0,
-  charge_per_year                     double        not null default 0,
-  charge_card_issue                   double        not null default 0
+  charge_per_quarter_minimum_balance double not null default 0,
+  charge_per_quarter_amount          double not null default 0,
+  charge_per_year                    double not null default 0,
+  charge_card_issue                  double not null default 0
 );
 
 DROP TABLE IF EXISTS `user_card`;
@@ -74,9 +78,6 @@ CREATE TABLE user_card (
   comment '1.debit card 2.credit card',
   pin           varchar(6) not null
   comment 'get by auto-generated 6 digit',
-  balance       double     not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 0,
-  currency_type int        not null                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             default 0
-  comment '0.euro 1.....',
   expired_date  datetime   not null,
   account_id    BIGINT     not null,
   status        int        not null default 1
@@ -98,42 +99,44 @@ create table user_payee (
 
 DROP TABLE IF EXISTS `user_apply_archive`;
 create table user_apply_archive (
-  id                bigint                        AUTO_INCREMENT PRIMARY KEY,
-  first_name        varchar(255) not null,
-  last_name         varchar(255) not null,
-  identity_id       varchar(50)  not null
+  id               bigint                        AUTO_INCREMENT PRIMARY KEY,
+  first_name       varchar(255) ,
+  last_name        varchar(255) ,
+  identity_id      varchar(50)
   comment 'passport/license id number',
-  identity_id_type  int          not null
+  identity_id_type int
   comment '1.passport 2.driver license',
-  account_type      bigint       not null
+  account_type     int not null
   comment '1.current account 2.student current account 3.young saver account 4.golden older account',
-  card_type         int          not null
+  card_type        int not null
   comment '1.debit card 2.credit card(Not supported yet)',
-  graduate_date     datetime
+  graduate_date    datetime
   comment 'if the account type is student current account',
-  university        varchar(255)
+  university       varchar(255)
   comment 'if the account type is student current account',
-  student_id        varchar(50)
+  student_id       varchar(50)
   comment 'if the account type is student current account',
-  parent_user_id    bigint
+  parent_user_id   bigint
   comment 'if the account type is young savers account',
   parent_first_name varchar(255)
   comment 'if the account type is young savers account',
   parent_last_name  varchar(255)
   comment 'if the account type is young savers account',
-  birth_date        datetime     not null,
-  gender            int          not null
+  birth_date        datetime ,    
+  gender            int          
   comment '0.woman 1.man',
-  address           varchar(255) not null,
-  email             varchar(255) not null,
-  phone             varchar(20)  not null,
+  address           varchar(255) ,
+  email             varchar(255) ,
+  phone             varchar(20)  ,
   apply_time        datetime     not null,
   status            int          not null         default 0
   comment '0.pending for being approved 1.pass 2.deny',
   remark            varchar(255) null             default ''
   comment 'Approved / reason for being denied.',
   user_id           bigint
-  comment 'after being approved, get connected to user id'
+  comment 'after being approved, get connected to UserId',
+  new_user_apply    int          not null
+  comment '0.no 1.yes'
 );
 
 DROP TABLE IF EXISTS `bank_staff`;

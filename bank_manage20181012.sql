@@ -81,10 +81,10 @@ LOCK TABLES `card_transaction` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user`
+-- Table structure for table `model`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `model`;
 /*!40101 SET @saved_cs_client = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
@@ -105,15 +105,15 @@ CREATE TABLE `user` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `model`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user`
+LOCK TABLES `model` WRITE;
+/*!40000 ALTER TABLE `model`
   DISABLE KEYS */;
 INSERT INTO `user`
 VALUES (1, '123', '123', 'a', 'b', 'c', 'd', 'e');
-/*!40000 ALTER TABLE `user`
+/*!40000 ALTER TABLE `model`
   ENABLE KEYS */;
 UNLOCK TABLES;
 

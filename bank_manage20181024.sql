@@ -96,17 +96,17 @@ LOCK TABLES `sys_config` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user`
+-- Table structure for table `model`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `model`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL COMMENT 'user visible, for login. get by auto-generated',
+  `user_id` bigint(20) NOT NULL COMMENT 'model visible, for login. get by auto-generated',
   `pin` varchar(6) NOT NULL COMMENT 'get by auto-generated 6 digit',
-  `login_pin_digit` varchar(3) DEFAULT NULL COMMENT '3 digit, represent which 3 of 6 digit user has to input. get by auto-generated',
+  `login_pin_digit` varchar(3) DEFAULT NULL COMMENT '3 digit, represent which 3 of 6 digit model has to input. get by auto-generated',
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `gender` int(11) NOT NULL COMMENT '0. woman 1.man',
@@ -122,13 +122,13 @@ CREATE TABLE `user` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `model`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+LOCK TABLES `model` WRITE;
+/*!40000 ALTER TABLE `model` DISABLE KEYS */;
 INSERT INTO `user` VALUES (1,1000000000,'123123','234','xiangkai','tang',1,'1996-03-23 00:00:00','ul','haha@qq.com','123333222',1),(2,1000000001,'321321','321','hao','lu',2,'2018-01-01 00:00:00','hell','shit@qq.com','17481748',1);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+/*!40000 ALTER TABLE `model` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -222,16 +222,17 @@ CREATE TABLE `user_apply_archive` (
   `student_id` varchar(50) DEFAULT NULL COMMENT 'if the account type is student current account',
   `parent_user_id` bigint(20) DEFAULT NULL COMMENT 'if the account type is young savers account',
   `parent_first_name` varchar(255) DEFAULT NULL COMMENT 'if the account type is young savers account',
-  `parent_last_name` varchar(255) DEFAULT NULL COMMENT 'if the account type is young savers account',
-  `birth_date` datetime NOT NULL,
-  `gender` int(11) NOT NULL COMMENT '0.woman 1.man',
-  `address` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone` varchar(20) NOT NULL,
-  `apply_time` datetime NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0.pending for being approved 1.pass 2.deny',
-  `remark` varchar(255) DEFAULT '' COMMENT 'Approved / reason for being denied.',
-  `user_id` bigint(20) DEFAULT NULL COMMENT 'after being approved, get connected to user id',
+  `parent_last_name` varchar(255)     DEFAULT NULL COMMENT 'if the account type is young savers account',
+  `birth_date`       datetime NOT NULL,
+  `gender`           int(11) NOT NULL COMMENT '0.woman 1.man',
+  `address`          varchar(255) NOT NULL,
+  `email`            varchar(255) NOT NULL,
+  `phone`            varchar(20) NOT NULL,
+  `apply_time`       datetime NOT NULL,
+  `status`           int(11) NOT NULL DEFAULT '0' COMMENT '0.pending for being approved 1.pass 2.deny',
+  `remark`           varchar(255)     DEFAULT '' COMMENT 'Approved / reason for being denied.',
+  `user_id`          bigint(20)       DEFAULT NULL
+  COMMENT 'after being approved, get connected to UserId',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

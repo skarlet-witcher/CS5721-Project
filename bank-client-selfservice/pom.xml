@@ -9,13 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bank-client-selfserivce</artifactId>
+    <artifactId>bank-client-selfservice</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>nuclear</groupId>
             <artifactId>bank-core</artifactId>
             <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
