@@ -110,13 +110,15 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
     }
 
     @Override
-    public void addNewChargeHistory(Long user_pk, Long account_pk, Double amount, int currencyType, int operationType, int operationStatus) {
+    public void addNewChargeHistory(Long user_pk, Long account_pk, Double amount, Double balance, int currencyType, int operationType, int operationStatus) {
         UserHistoryEntity userHistoryEntity = new UserHistoryEntity();
         userHistoryEntity.setOperateNo(operationNoGenerator.generateOperationNo());
         userHistoryEntity.setOperateType(operationType);
         userHistoryEntity.setOperateTime(new Timestamp(new Date().getTime()));
         userHistoryEntity.setOperateSource(UserOperateSourceType.SELF_SERVICE);
+        userHistoryEntity.setDescription("charge fees for self_service");
         userHistoryEntity.setAmount(amount);
+        userHistoryEntity.setBalance(balance);
         userHistoryEntity.setCurrencyType(currencyType);
         userHistoryEntity.setStatus(operationStatus);
         userHistoryEntity.setUserId(user_pk);

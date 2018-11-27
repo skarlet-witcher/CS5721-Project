@@ -134,7 +134,9 @@ public class UserCustomerService implements IUserCustomerService {
     @Override
     public void transfer(Long payee_pk, Long user_pk, Long account_pk,
                          Double amount, String pin, String postScript, int currencyType) throws Exception {
+        Double updatedBalance;
         validatePin(user_pk, pin);
+        updatedBalance = updateBalanceFromUserAccount(user_pk, account_pk, amount);
         transferToLocalPayee(payee_pk, chargeFees(userAccountDao.getUserAccountByPK(user_pk), amount));
         addTransferHistory(user_pk,
                 account_pk,
@@ -142,12 +144,12 @@ public class UserCustomerService implements IUserCustomerService {
                 postScript,
                 amount,
                 currencyType,
-                updateBalanceFromUserAccount(user_pk, account_pk, amount),
+                updatedBalance,
                 UserOperateStatusType.SUCCESS);
     }
 
     @Override
-    public List<UserTransactionsReply> getTransaction(Long user_pk, Long account_pk, int date) {
+    public List<UserTransactionsReply> getTransaction(Long user_pk, Long account_pk, int date) throws Exception {
         List<UserTransactionsReply> userTransactionsReplies = new ArrayList<>();
         try {
             for(UserHistoryEntity userHistoryEntity: getUserHistoryListByFilter(user_pk, account_pk, date)) {
@@ -163,7 +165,7 @@ public class UserCustomerService implements IUserCustomerService {
                 userTransactionsReplies.add(userTransactionsReply);
             }
         } catch (Exception E) {
-            FaultFactory.throwFaultException("fail to get transaction");
+            throw FaultFactory.throwFaultException("fail to get transaction");
         }
         return userTransactionsReplies;
     }
@@ -249,7 +251,7 @@ public class UserCustomerService implements IUserCustomerService {
         int updatedRows;
         Double latestBalance;
         try {
-            latestBalance = getLatestBalance(userAccountDao.getUserAccountByPK(user_pk), amount);
+            latestBalance = getLatestBalance(userAccountDao.getUserAccountByPK(account_pk), amount);
             updatedRows = userAccountDao.updateUserAccountByBalanceAndPk(latestBalance, account_pk);
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("fail to update balance in your account");
@@ -285,7 +287,7 @@ public class UserCustomerService implements IUserCustomerService {
 
     private void addChargeHistory(UserAccountEntity userAccountEntity, Double chargedAmount) throws Exception {
         try {
-            userCustomerHistoryService.addNewChargeHistory(userAccountEntity.getUserId(), userAccountEntity.getId(), chargedAmount * -1, userAccountEntity.getCurrencyType(), UserOperateType.CHARGE, UserOperateStatusType.SUCCESS);
+            userCustomerHistoryService.addNewChargeHistory(userAccountEntity.getUserId(), userAccountEntity.getId(), chargedAmount * -1, userAccountEntity.getBalance(), userAccountEntity.getCurrencyType(), UserOperateType.CHARGE, UserOperateStatusType.SUCCESS);
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("fail to add charge history");
         }

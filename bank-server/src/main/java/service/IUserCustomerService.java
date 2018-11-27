@@ -22,5 +22,5 @@ public interface IUserCustomerService {
 
     void transfer(Long payee_pk, Long user_pk, Long account_pk, Double amount, String pin, String postScript, int currencyType) throws Exception;
 
-    List<UserTransactionsReply> getTransaction(Long user_pk, Long account_pk, int date);
+    List<UserTransactionsReply> getTransaction(Long user_pk, Long account_pk, int date) throws Exception;
 }
