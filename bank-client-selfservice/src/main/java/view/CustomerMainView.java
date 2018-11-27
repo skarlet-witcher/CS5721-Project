@@ -117,7 +117,7 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     @Override
-    public void updateTransferPage(UserTransferModel userTransferModel) {
+    public void updateData(UserTransferModel userTransferModel) {
         transfer(userTransferModel);
         initHomePage();
         initProfilePage();

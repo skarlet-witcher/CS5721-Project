@@ -14,6 +14,7 @@ public class UserModel {
     private String address;
     private String email;
     private String contactNum;
+    private Integer pin;
     private List<UserAccountModel> userAccountList;
     private List<UserPayeeModel> userPayeeList;
     private Timestamp lastLoginTime;
@@ -117,5 +118,13 @@ public class UserModel {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getPin() {
+        return pin;
+    }
+
+    public void setPin(Integer pin) {
+        this.pin = pin;
     }
 }

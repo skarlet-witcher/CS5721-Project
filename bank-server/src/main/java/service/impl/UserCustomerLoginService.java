@@ -59,6 +59,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
     public UserLoginReply login(Long userId, Map<Integer, Integer> pin) throws Exception {
         UserEntity result;
         result = loginUsingPIN(userId, pin);
+
         if (result != null) {
            return buildLoginReply(result);
         } else {

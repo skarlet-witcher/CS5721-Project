@@ -46,7 +46,7 @@ public class UserTransferModel implements Subject {
     public void notifyObserver() {
         for(int i = 0; i < observers.size(); i++) {
             Observer observer = observers.get(i);
-            observer.updateTransferPage(this);
+            observer.updateData(this);
         }
     }
 

@@ -34,22 +34,22 @@ public class UserDao implements IUserDao {
             query.setParameter("userId", userId).setMaxResults(1);
             UserEntity user = (UserEntity) query.uniqueResult();
 
-            String[] pinDigit = user.getLoginPinDigit().split("");
+            String[] loginPinDigit = user.getLoginPinDigit().split("");
             String[] truePin = user.getPin().split("");
 
-            int d1 = Integer.parseInt(pinDigit[0]);
-            int d2 = Integer.parseInt(pinDigit[1]);
-            int d3 = Integer.parseInt(pinDigit[2]);
+            int loginPinDigit_1 = Integer.parseInt(loginPinDigit[0]);
+            int loginPinDigit_2 = Integer.parseInt(loginPinDigit[1]);
+            int loginPinDigit_3 = Integer.parseInt(loginPinDigit[2]);
 
-            int truePin1 = Integer.valueOf(truePin[d1 - 1]);
-            int truePin2 = Integer.valueOf(truePin[d2 - 1]);
-            int truePin3 = Integer.valueOf(truePin[d3 - 1]);
+            int truePinDigit_1 = Integer.valueOf(truePin[loginPinDigit_1 - 1]);
+            int truePinDigit_2 = Integer.valueOf(truePin[loginPinDigit_2 - 1]);
+            int truePinDigit_3 = Integer.valueOf(truePin[loginPinDigit_3 - 1]);
 
             session.getTransaction().commit();
 
-            if (truePin1 == pin.get(d1) &&
-                    truePin2 == pin.get(d2) &&
-                    truePin3 == pin.get(d3)) {
+            if (truePinDigit_1 == pin.get(loginPinDigit_1) &&
+                    truePinDigit_2 == pin.get(loginPinDigit_2) &&
+                    truePinDigit_3 == pin.get(loginPinDigit_3)) {
                 return user;
             } else {
                 return null;
