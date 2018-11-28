@@ -5,6 +5,7 @@
 package view;
 
 import Const.*;
+import controller.CustomerMainController;
 import model.*;
 import net.miginfocom.swing.MigLayout;
 import rpc.UserAccountsReply;
@@ -30,609 +31,78 @@ import java.util.List;
  */
 public class CustomerMainView extends JFrame implements Observer {
 
-    // reply from server
-    private List<UserAccountsReply> accountsReplyList;
-    private List<UserPayeesReply> userPayeesReplyList;
-    private List<UserTransactionsReply> userTransactionsReplyList;
-    private UserProfileReply userProfileReply;
-
-    // model for data binding
-    private UserModel userModel;
-    private List<UserTransactionModel> userTransactionModelList;
-    private UserTransferModel userTransferModel = new UserTransferModel();
+    private CustomerMainController customerMainController;
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel lbl_welcome;
-    private JLabel lbl_nameField;
-    private JLabel lbl_lastLogin;
-    private JLabel lbl_lastLoginTime;
-    private JTabbedPane customerTabPane;
-    private JPanel homePanel;
-    private JScrollPane scrollPane1;
-    private JTable table_home_accountTable;
-    private JPanel profilePanel;
-    private JLabel lbl_profile_userId;
-    private JTextField tf_profile_userId;
-    private JLabel lbl_profile_firstName;
-    private JTextField tf_profile_firstName;
-    private JLabel lbl_profile_lastName;
-    private JTextField tf_profile_lastName;
-    private JLabel lbl_gender;
-    private JTextField tf_profile_gender;
-    private JLabel lbl_address;
-    private JTextField tf_profile_address;
-    private JLabel lbl_email;
-    private JTextField tf_profile_email;
-    private JLabel lbl_contactNum;
-    private JTextField tf_profile_contactNumber;
-    private JButton btn_profile_modify;
-    private JButton btn_profile_revert;
-    private JPanel transactionPanel;
-    private JComboBox cb_transaction_accountList;
-    private JComboBox<String> cb_transaction_filter;
-    private JScrollPane scrollPane2;
-    private JTable table_transaction;
-    private JButton btn_printStatement;
-    private JPanel payeePanel;
-    private JButton btn_payee_add;
-    private JButton btn_payee_remove;
-    private JScrollPane scrollPane3;
-    private JTable table_payee_payeeList;
-    private JPanel transferPanel;
-    private JLabel label7;
-    private JComboBox cb_transfer_payeeList;
-    private JLabel label8;
-    private JComboBox cb_transfer_accountList;
-    private JLabel label11;
-    private JTextField tf_transfer_currency;
-    private JLabel label10;
-    private JTextField tf_transfer_balance;
-    private JLabel label9;
-    private JTextField tf_transfer_amounts;
-    private JLabel lbl_postScript;
-    private JTextField tf_transfer_postScript;
-    private JLabel lbl_transfer_PIN;
-    private JPasswordField pf_transfer_PIN;
-    private JButton btn_transfer_transfer;
-    private JButton btn_signout;
+    public JLabel lbl_welcome;
+    public JLabel lbl_nameField;
+    public JLabel lbl_lastLogin;
+    public JLabel lbl_lastLoginTime;
+    public JTabbedPane customerTabPane;
+    public JPanel homePanel;
+    public JScrollPane scrollPane1;
+    public JTable table_home_accountTable;
+    public JPanel profilePanel;
+    public JLabel lbl_profile_userId;
+    public JTextField tf_profile_userId;
+    public JLabel lbl_profile_firstName;
+    public JTextField tf_profile_firstName;
+    public JLabel lbl_profile_lastName;
+    public JTextField tf_profile_lastName;
+    public JLabel lbl_gender;
+    public JTextField tf_profile_gender;
+    public JLabel lbl_address;
+    public JTextField tf_profile_address;
+    public JLabel lbl_email;
+    public JTextField tf_profile_email;
+    public JLabel lbl_contactNum;
+    public JTextField tf_profile_contactNumber;
+    public JButton btn_profile_modify;
+    public JButton btn_profile_revert;
+    public JPanel transactionPanel;
+    public JComboBox cb_transaction_accountList;
+    public JComboBox<String> cb_transaction_filter;
+    public JScrollPane scrollPane2;
+    public JTable table_transaction;
+    public JButton btn_printStatement;
+    public JPanel payeePanel;
+    public JButton btn_payee_add;
+    public JButton btn_payee_remove;
+    public JScrollPane scrollPane3;
+    public JTable table_payee_payeeList;
+    public JPanel transferPanel;
+    public JLabel label7;
+    public JComboBox cb_transfer_payeeList;
+    public JLabel label8;
+    public JComboBox cb_transfer_accountList;
+    public JLabel label11;
+    public JTextField tf_transfer_currency;
+    public JLabel label10;
+    public JTextField tf_transfer_balance;
+    public JLabel label9;
+    public JTextField tf_transfer_amounts;
+    public JLabel lbl_postScript;
+    public JTextField tf_transfer_postScript;
+    public JLabel lbl_transfer_PIN;
+    public JPasswordField pf_transfer_PIN;
+    public JButton btn_transfer_transfer;
+    public JButton btn_signout;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
-    public CustomerMainView(long userId, Long user_pk, String firstName, String lastLoginTime) {
-        initComponents();
-        initUserModel(userId, user_pk, firstName, lastLoginTime);
+    public CustomerMainView(UserModel userModel) {
+        customerMainController = new CustomerMainController(this, userModel);
+        customerMainController.initialize();
         registerObserver();
     }
 
-    private void thisComponentShown(ComponentEvent e) {
-        initHomePage();
-        initProfilePage();
-        initTransactionPage();
-        initPayeePage();
-        initTransferPage();
-    }
-
     private void registerObserver() {
-        this.userTransferModel.registerObserver(this);
+        this.customerMainController.getUserTransferModel().registerObserver(this);
     }
 
     @Override
-    public void updateData(UserTransferModel userTransferModel) {
-        transfer(userTransferModel);
-        initHomePage();
-        initTransactionInfo();
-        initTransactionModel();
-        initTransactionTable();
-        initBalance();
-        initCurrency();
-        initAmounts();
-        initPostscript();
-        initTransferPINField();
-    }
-
-    private void transfer(UserTransferModel userTransferModel) {
-        if(JOptionPane.showConfirmDialog(
-                new JFrame(),"Are you sure to transfer " + userTransferModel.getAmounts() +" "+ CardCurrencyType.getCurrencyType(userTransferModel.getCurrencyType())+ " to " + userTransferModel.getPayee().getName() + " ?",
-                "Transfer Confirmation",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            try {
-                CustomerTransferService.getInstance().transfer(userTransferModel,
-                        Integer.parseInt(new String(pf_transfer_PIN.getPassword())));
-                JOptionPane.showMessageDialog(null,
-                        "Transfer Successful",
-                        "Info Message",JOptionPane.INFORMATION_MESSAGE);
-            } catch( Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Fail to transfer due to " + E.getMessage(),
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
-
-    private void initUserModel(long userId, long user_pk, String firstName, String lastLoginTime) {
-        this.userModel = new UserModel();
-        this.userModel.setUserId(userId);
-        this.userModel.setId(user_pk);
-        this.userModel.setFirstName(firstName);
-        this.userModel.setLastLoginTime(Timestamp.valueOf(lastLoginTime));
-    }
-
-    private void initAccountReply() {
-        try {
-            this.accountsReplyList = CustomerHomeService.getInstance().getAccounts(this.userModel.getId());
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            E.printStackTrace();
-            return;
-        }
-    }
-
-    private void initAccountModel() {
-        this.userModel.getUserAccountList().clear();
-        for(UserAccountsReply userAccountsReply : this.accountsReplyList) {
-            UserAccountModel userAccountModel = new UserAccountModel();
-            userAccountModel.setAccount_pk(userAccountsReply.getAccountPk());
-            userAccountModel.setAccountNum(userAccountsReply.getAccountNumber());
-            userAccountModel.setAccountType(userAccountsReply.getAccountType());
-            userAccountModel.setCurrencyType(userAccountsReply.getCurrencyType());
-            userAccountModel.setBalance(Double.valueOf(userAccountsReply.getBalance()));
-            userAccountModel.setStatus(userAccountsReply.getStatus());
-
-            this.userModel.getUserAccountList().add(userAccountModel);
-        }
-    }
-
-    private void initUserModel() {
-        this.userModel.setFirstName(userProfileReply.getFirstName());
-        this.userModel.setLastName(userProfileReply.getLastName());
-        this.userModel.setGender(userProfileReply.getGender());
-        this.userModel.setBirthDate(TimestampConvertHelper.rpcToMysql(userProfileReply.getBirthDate()));
-        this.userModel.setAddress(userProfileReply.getAddress());
-        this.userModel.setEmail(userProfileReply.getEmail());
-        this.userModel.setContactNum(userProfileReply.getPhone());
-    }
-
-    private void initTransactionModel() {
-        this.userTransactionModelList = new ArrayList<>();
-        for(UserTransactionsReply userTransactionsReply: this.userTransactionsReplyList) {
-            UserTransactionModel userTransactionModel = new UserTransactionModel();
-            userTransactionModel.setDate(TimestampConvertHelper.rpcToMysql(userTransactionsReply.getDate()));
-            userTransactionModel.setDetails(userTransactionsReply.getDescription());
-            userTransactionModel.setAmounts(userTransactionsReply.getAmount());
-            userTransactionModel.setBalance(userTransactionsReply.getBalance());
-            userTransactionModel.setTransactionNum(userTransactionsReply.getTransactionNo());
-            userTransactionModel.setOperation_type(userTransactionsReply.getOperateType());
-
-            this.userTransactionModelList.add(userTransactionModel);
-        }
-    }
-
-    private void initPayeeModel() {
-        this.userModel.getUserPayeeList().clear();
-        for(UserPayeesReply userPayeesReply: userPayeesReplyList) {
-            UserPayeeModel userPayeeModel = new UserPayeeModel();
-            userPayeeModel.setPayee_pk(userPayeesReply.getPayeePk());
-            userPayeeModel.setIban(userPayeesReply.getIban());
-            userPayeeModel.setName(userPayeesReply.getName());
-            userPayeeModel.setUserId(userModel.getId());
-
-            this.userModel.getUserPayeeList().add(userPayeeModel);
-        }
-    }
-
-    private void initHomePage() {
-        initTitle();
-        initAccountReply();
-        initAccountModel();
-        initAccountTable();
-    }
-
-    private void initTitle() {
-        String lastLoginTime = this.userModel.getLastLoginTime().toString();
-        this.lbl_nameField.setText(this.userModel.getFirstName());
-        this.lbl_lastLoginTime.setText(lastLoginTime.substring(0, lastLoginTime.indexOf(".")));
-    }
-
-    private void initProfilePage() {
-        initProfileInfo();
-        updateUserModel();
-        initProfileFields(this.userModel);
-    }
-
-    private void updateUserModel() {
-        this.userModel.setFirstName(userProfileReply.getFirstName());
-        this.userModel.setLastName(userProfileReply.getLastName());
-        this.userModel.setGender(userProfileReply.getGender());
-        this.userModel.setAddress(userProfileReply.getAddress());
-        this.userModel.setEmail(userProfileReply.getEmail());
-        this.userModel.setContactNum(userProfileReply.getPhone());
-    }
-
-    private void initPayeePage() {
-        initPayeeInfo();
-        initPayeeModel();
-        initPayeeTable();
-    }
-
-    private void initTransactionPage() {
-        initAccountComboBox(cb_transaction_accountList);
-        initTransactionInfo();
-        initTransactionModel();
-        initTransactionTable();
-    }
-
-    private void initTransferPage() {
-        initPayeeComboBox();
-        initAccountComboBox(cb_transfer_accountList);
-        initCurrency();
-        initBalance();
-        initAmounts();
-        initPostscriptTextFieldLimit();
-        initTransferPINField();
-    }
-
-    private void initAmounts() {
-        tf_transfer_amounts.setText("");
-    }
-
-    private void initTransferPINField() {
-        pf_transfer_PIN.setText("");
-    }
-
-    private void initTransactionInfo() {
-        try {
-            this.userTransactionsReplyList = CustomerTransactionService.getInstance().getTransaction(this.userModel.getId(),
-                    this.userModel.getUserAccountList().get(cb_transaction_accountList.getSelectedIndex()).getAccount_pk(),
-                    cb_transaction_filter.getSelectedIndex() + 1);
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    "Fail to get transaction list due to " + E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void initTransactionTable() {
-        DefaultTableModel transactionListModel = (DefaultTableModel)table_transaction.getModel();
-        clearTable(transactionListModel);
-        for(UserTransactionModel userTransactionModel: this.userTransactionModelList) {
-            String date = userTransactionModel.getDate().toString();
-            transactionListModel.addRow(new Object[]{
-                    date.substring(0, date.indexOf(".")),
-                    UserOperateType.getType(userTransactionModel.getOperation_type()),
-                    userTransactionModel.getDetails(),
-                    userTransactionModel.getAmounts(),
-                    userTransactionModel.getBalance()
-            });
-        }
-    }
-
-    private void initCurrency() {
-        tf_transfer_currency.setText(CardCurrencyType.getCurrencyType(this.userModel.getUserAccountList().get(cb_transfer_accountList.getSelectedIndex()).getCurrencyType()));
-    }
-
-    private void initBalance() {
-        tf_transfer_balance.setText(String.valueOf(this.userModel.getUserAccountList().get(cb_transfer_accountList.getSelectedIndex()).getBalance()));
-    }
-
-    private void initAccountComboBox(JComboBox accountComboBox) {
-        accountComboBox.removeAllItems();
-        if(accountsReplyList.size() <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "No Account found.",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        for(UserAccountModel userAccountModel : this.userModel.getUserAccountList()) {
-            accountComboBox.addItem(String.valueOf(userAccountModel.getAccountNum()));
-        }
-        accountComboBox.setSelectedIndex(0);
-
-    }
-
-    private void initPayeeComboBox() {
-        cb_transfer_payeeList.removeAllItems();
-        if(this.userModel.getUserPayeeList().size() <= 0) {
-            cb_transfer_payeeList.addItem("No payee found");
-            return;
-        }
-        for(UserPayeeModel userPayeeModel: this.userModel.getUserPayeeList()) {
-            cb_transfer_payeeList.addItem(userPayeeModel.getName());
-        }
-    }
-
-    private void initAccountTable() {
-        DefaultTableModel accountListModel = (DefaultTableModel)table_home_accountTable.getModel();
-        clearTable(accountListModel);
-        for(UserAccountModel Account: this.userModel.getUserAccountList()) {
-            accountListModel.addRow(new Object[]{
-                    Account.getAccountNum(),
-                    UserAccountType.getTypeName(Account.getAccountType()),
-                    CardCurrencyType.getCurrencyType(Account.getCurrencyType()),
-                    Account.getBalance(),
-                    UserStatusType.getStatusType(Account.getStatus())});
-        }
-    }
-
-    private void initPostscriptTextFieldLimit() {
-        tf_transfer_postScript.setDocument(new JTextFieldLimit(200));
-    }
-
-    private void initPostscript() {
-        tf_transfer_postScript.setText("");
-    }
-
-    private void initProfileInfo() {
-        try {
-            userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.userModel.getId());
-
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    "Fail to acquire user profile, please contact admin",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-        }
-
-    }
-
-    private void initPayeeInfo() {
-        // init payee info
-        UserPayeeModel userPayeeModel = new UserPayeeModel();
-        userPayeeModel.setUserId(this.userModel.getId());
-        try {
-            userPayeesReplyList = CustomerPayeeService.getInstance().getPayeeList(userPayeeModel);
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    "Fail to acquire user payee, please contact admin",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void initPayeeTable() {
-        // init payee table
-        DefaultTableModel payeeTableModel = (DefaultTableModel)table_payee_payeeList.getModel();
-        clearTable(payeeTableModel);
-        for(UserPayeeModel userPayeeModel: this.userModel.getUserPayeeList()) {
-            payeeTableModel.addRow(new Object[]{
-                    userPayeeModel.getIban(),
-                    userPayeeModel.getName()
-            });
-        }
-    }
-
-    private void initTransferModel(Double balance, Double amounts, String postScript) {
-        UserAccountModel userAccountModel = this.userModel.getUserAccountList().get(cb_transfer_accountList.getSelectedIndex());
-        UserPayeeModel userPayeeModel = this.userModel.getUserPayeeList().get(cb_transfer_payeeList.getSelectedIndex());
-        userAccountModel.setBalance(balance);
-        userTransferModel.setPayee(userPayeeModel);
-        userTransferModel.setAccount(userAccountModel);
-        userTransferModel.setCurrencyType(userAccountModel.getCurrencyType());
-        userTransferModel.setPostScript(postScript);
-        userTransferModel.setAmounts(amounts);
-    }
-
-    private void clearTable(DefaultTableModel tableModel) {
-        int rowCount = tableModel.getRowCount();
-        for (int i = rowCount - 1; i >= 0; i--) {
-            tableModel.removeRow(i);
-        }
-    }
-
-    private void initProfileFields(UserModel userModel) {
-        tf_profile_userId.setText(String.valueOf(userModel.getUserId()));
-        tf_profile_firstName.setText(userModel.getFirstName());
-        tf_profile_lastName.setText(userModel.getLastName());
-        tf_profile_address.setText(userModel.getAddress());
-        tf_profile_contactNumber.setText(userModel.getContactNum());
-        tf_profile_email.setText(userModel.getEmail());
-        tf_profile_gender.setText(UserGenderType.getGenderType(userModel.getGender()));
-    }
-
-    private void btn_signoutActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerLoginView();
-    }
-
-    private void btn_payee_addActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        new CustomerAddPayeeView(this.userModel.getId(), this).run();
-    }
-
-    private void btn_profile_revertActionPerformed(ActionEvent e) {
-        initProfileFields(this.userModel);
-    }
-
-    private Boolean validateAddress() {
-        // address validator
-        if(tf_profile_address.getText().trim().length() <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Please input your address",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            tf_profile_address.grabFocus();
-            return false;
-        }
-        return true;
-    }
-
-    private Boolean validateEmail() {
-        // email field validator
-        if(tf_profile_email.getText().trim().length() <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Please input your email address",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            tf_profile_email.grabFocus();
-            return false;
-        }
-        if(!tf_profile_email.getText().trim().matches("\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b")) {
-            JOptionPane.showMessageDialog(null,
-                    "Please input valid email address",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            tf_profile_email.grabFocus();
-            return false;
-        }
-        return true;
-    }
-
-    private Boolean validateContactNum() {
-        // contact number validator
-        if(tf_profile_contactNumber.getText().trim().length() <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Please input your contact number",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            tf_profile_contactNumber.grabFocus();
-            return false;
-        }
-        if(!tf_profile_contactNumber.getText().trim().matches("^[0-9]*$")) {
-            JOptionPane.showMessageDialog(null,
-                    "The contact number must be numeric.",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            tf_profile_contactNumber.grabFocus();
-            return false;
-        }
-        return true;
-    }
-
-    private void btn_profile_modifyActionPerformed(ActionEvent e) {
-
-        if(validateAddress() && validateContactNum() && validateContactNum() && validateEmail()) {
-            this.userModel.setAddress(tf_profile_address.getText().trim());
-            this.userModel.setEmail(tf_profile_email.getText().trim());
-            this.userModel.setContactNum(tf_profile_contactNumber.getText().trim());
-            try {
-                CustomerProfileService.getInstance().modifyUserProfile(this.userModel);
-                JOptionPane.showMessageDialog(null,
-                        "Modify User profile complete",
-                        "Info Message",JOptionPane.INFORMATION_MESSAGE);
-                initUserModel();
-                initProfilePage();
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Fail to acquire user profile, please contact admin",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                initUserModel(); // recover
-                return;
-            }
-        } else {
-            return;
-        }
-    }
-
-    private Boolean validatePayeeTableBeforeRemove() {
-        if(table_payee_payeeList.getSelectedRow() < 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Please click a payee on the table to remove",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
-
-    private void btn_payee_removeActionPerformed(ActionEvent e) {
-        if(!validatePayeeTableBeforeRemove()) {
-            return;
-        }
-
-        UserPayeeModel userPayeeModel = this.userModel.getUserPayeeList().get(table_payee_payeeList.getSelectedRow());
-
-        int selection = JOptionPane.showConfirmDialog(
-                new JFrame(),"Are you sure to delete " + userPayeeModel.getName() + " from your payee list?",
-                "Deletion Confirmation",
-                JOptionPane.YES_NO_OPTION);
-        if(selection == JOptionPane.YES_OPTION) {
-            try {
-                CustomerPayeeService.getInstance().removePayee(userPayeeModel);
-                JOptionPane.showMessageDialog(null,
-                        "Payee deletion complete",
-                        "Info Message",JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Fail to delete payee," + E.getMessage() + " please contact admin",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            initPayeePage();
-            initTransferPage();
-        }
-    }
-
-
-    private Boolean validatePayeeComboBox() {
-        if(cb_transfer_payeeList.getSelectedItem().toString()== "No payee found") {
-            JOptionPane.showMessageDialog(null,
-                    "No payee in your account. Please add a payee.",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
-
-    private Boolean validateAmount() {
-        if(tf_transfer_amounts.getText().trim().length() <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "The amount should not be blank. Please input amount before transfer",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if(!tf_transfer_amounts.getText().matches("^[0-9]*$")) {
-            JOptionPane.showMessageDialog(null,
-                    "The amount should be numeric. Please input valid amount before transfer",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        if(Double.parseDouble(tf_transfer_balance.getText().trim()) < Double.parseDouble(tf_transfer_amounts.getText().trim())) {
-            JOptionPane.showMessageDialog(null,
-                    "The amounts should be less or equal to the balance",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
-
-    private Boolean validatePostScript() {
-        if(tf_transfer_postScript.getText().length() <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "The postscript should not be blank. Please input your postscript.",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
-
-    private Boolean validatePINBeforeTransfer() {
-        if(pf_transfer_PIN.getPassword().length <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "The PIN should not be blank. Please input your PIN.",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        return true;
-    }
-
-    private Boolean validateBeforeTransfer() {
-        return validatePayeeComboBox() && validateAmount() && validatePostScript() && validatePINBeforeTransfer();
-    }
-
-    private void btn_transfer_transferActionPerformed(ActionEvent e) {
-        if(!validateBeforeTransfer())
-        {
-            return;
-        }
-        initTransferModel(Double.parseDouble(tf_transfer_balance.getText().trim()),
-                Double.parseDouble(tf_transfer_amounts.getText().trim()),
-                tf_transfer_postScript.getText());
-    }
-
-    private void cb_transaction_accountListActionPerformed(ActionEvent e) {
-        initTransactionInfo();
-        initTransactionModel();
-        initTransactionTable();
-    }
-
-    private void cb_transaction_filterActionPerformed(ActionEvent e) {
-        initTransactionInfo();
-        initTransactionModel();
-        initTransactionTable();
+    public void updateData() {
+        customerMainController.updateData();
     }
 
     public void run() {
@@ -640,14 +110,7 @@ public class CustomerMainView extends JFrame implements Observer {
         this.setVisible(true);
     }
 
-    private void cb_transfer_accountListActionPerformed(ActionEvent e) {
-        System.out.println("selected INdex" + cb_transfer_accountList.getSelectedIndex());
-        initCurrency();
-        initBalance();
-    }
-
-
-    private void initComponents() {
+    public void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         lbl_welcome = new JLabel();
         lbl_nameField = new JLabel();
@@ -708,7 +171,7 @@ public class CustomerMainView extends JFrame implements Observer {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
-                thisComponentShown(e);
+                customerMainController.thisComponentShown(e);
             }
         });
         Container contentPane = getContentPane();
@@ -868,13 +331,13 @@ public class CustomerMainView extends JFrame implements Observer {
                 //---- btn_profile_modify ----
                 btn_profile_modify.setText("Modify");
                 btn_profile_modify.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_profile_modify.addActionListener(e -> btn_profile_modifyActionPerformed(e));
+                btn_profile_modify.addActionListener(e -> customerMainController.btn_profile_modifyActionPerformed(e));
                 profilePanel.add(btn_profile_modify, "cell 2 8");
 
                 //---- btn_profile_revert ----
                 btn_profile_revert.setText("Revert");
                 btn_profile_revert.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_profile_revert.addActionListener(e -> btn_profile_revertActionPerformed(e));
+                btn_profile_revert.addActionListener(e -> customerMainController.btn_profile_revertActionPerformed(e));
                 profilePanel.add(btn_profile_revert, "cell 3 8");
             }
             customerTabPane.addTab("Profile", profilePanel);
@@ -901,7 +364,7 @@ public class CustomerMainView extends JFrame implements Observer {
 
                 //---- cb_transaction_accountList ----
                 cb_transaction_accountList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                cb_transaction_accountList.addActionListener(e -> cb_transaction_accountListActionPerformed(e));
+                cb_transaction_accountList.addActionListener(e -> customerMainController.cb_transaction_accountListActionPerformed(e));
                 transactionPanel.add(cb_transaction_accountList, "cell 0 0");
 
                 //---- cb_transaction_filter ----
@@ -912,7 +375,7 @@ public class CustomerMainView extends JFrame implements Observer {
                     "Recent 6 months",
                     "Recent 1 year"
                 }));
-                cb_transaction_filter.addActionListener(e -> cb_transaction_filterActionPerformed(e));
+                cb_transaction_filter.addActionListener(e -> customerMainController.cb_transaction_filterActionPerformed(e));
                 transactionPanel.add(cb_transaction_filter, "cell 0 0");
 
                 //======== scrollPane2 ========
@@ -958,13 +421,13 @@ public class CustomerMainView extends JFrame implements Observer {
                 //---- btn_payee_add ----
                 btn_payee_add.setText("Add");
                 btn_payee_add.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_payee_add.addActionListener(e -> btn_payee_addActionPerformed(e));
+                btn_payee_add.addActionListener(e -> customerMainController.btn_payee_addActionPerformed(e));
                 payeePanel.add(btn_payee_add, "cell 0 0");
 
                 //---- btn_payee_remove ----
                 btn_payee_remove.setText("Remove");
                 btn_payee_remove.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_payee_remove.addActionListener(e -> btn_payee_removeActionPerformed(e));
+                btn_payee_remove.addActionListener(e -> customerMainController.btn_payee_removeActionPerformed(e));
                 payeePanel.add(btn_payee_remove, "cell 0 0");
 
                 //======== scrollPane3 ========
@@ -1017,7 +480,7 @@ public class CustomerMainView extends JFrame implements Observer {
                 transferPanel.add(label8, "cell 1 1");
 
                 //---- cb_transfer_accountList ----
-                cb_transfer_accountList.addActionListener(e -> cb_transfer_accountListActionPerformed(e));
+                cb_transfer_accountList.addActionListener(e -> customerMainController.cb_transfer_accountListActionPerformed(e));
                 transferPanel.add(cb_transfer_accountList, "cell 2 1");
 
                 //---- label11 ----
@@ -1059,7 +522,7 @@ public class CustomerMainView extends JFrame implements Observer {
                 //---- btn_transfer_transfer ----
                 btn_transfer_transfer.setText("Transfer");
                 btn_transfer_transfer.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_transfer_transfer.addActionListener(e -> btn_transfer_transferActionPerformed(e));
+                btn_transfer_transfer.addActionListener(e -> customerMainController.btn_transfer_transferActionPerformed(e));
                 transferPanel.add(btn_transfer_transfer, "cell 2 7");
             }
             customerTabPane.addTab("Transfer", transferPanel);
@@ -1070,7 +533,7 @@ public class CustomerMainView extends JFrame implements Observer {
         btn_signout.setText("Sign out");
         btn_signout.setMaximumSize(new Dimension(600, 30));
         btn_signout.setMinimumSize(new Dimension(450, 30));
-        btn_signout.addActionListener(e -> btn_signoutActionPerformed(e));
+        btn_signout.addActionListener(e -> customerMainController.btn_signoutActionPerformed(e));
         contentPane.add(btn_signout, "cell 2 4");
         pack();
         setLocationRelativeTo(getOwner());

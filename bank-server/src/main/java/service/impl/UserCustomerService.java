@@ -137,7 +137,7 @@ public class UserCustomerService implements IUserCustomerService {
         Double updatedBalance;
         validatePin(user_pk, pin);
         updatedBalance = updateBalanceFromUserAccount(user_pk, account_pk, amount);
-        transferToLocalPayee(payee_pk, chargeFees(userAccountDao.getUserAccountByPK(user_pk), amount));
+        transferToLocalPayee(payee_pk, chargeFees(userAccountDao.getUserAccountByPK(account_pk), amount));
         addTransferHistory(user_pk,
                 account_pk,
                 payee_pk,

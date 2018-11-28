@@ -23,6 +23,8 @@ public class UserLoginRequestModel {
         this.year = year;
     }
 
+    public UserLoginRequestModel() {}
+
     public Long getUserId() {
         return userId;
     }

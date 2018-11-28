@@ -6,6 +6,7 @@ package view;
 
 
 import model.UserLoginPINModel;
+import model.UserModel;
 import net.miginfocom.swing.MigLayout;
 import rpc.UserLoginReply;
 import service.impl.CustomerLoginService;
@@ -16,6 +17,7 @@ import util.TimestampConvertHelper;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class CustomerPINView extends JFrame {
     List<JPasswordField> passwordFieldsList = new ArrayList<JPasswordField>();
     List<Integer> pinDigitList = new ArrayList<>();
     private long userId;
+    private UserModel userModel;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_PIN;
     private JButton btn_1;
@@ -45,6 +48,7 @@ public class CustomerPINView extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public CustomerPINView(long userId,int pin1, int pin2, int pin3) {
+        userModel = new UserModel();
         initComponents();
         initInternalVariables(userId);
         generateKeyPad();
@@ -240,8 +244,13 @@ public class CustomerPINView extends JFrame {
         String lastLoginTime = TimestampConvertHelper.rpcToMysql(userLoginReply.getLastLoginTime()).toString();
         lastLoginTime = lastLoginTime.substring(0, TimestampConvertHelper.rpcToMysql(userLoginReply.getLastLoginTime()).toString().indexOf('.'));
 
+        userModel.setLastLoginTime(Timestamp.valueOf(lastLoginTime));
+        userModel.setId(userLoginReply.getUserPk());
+        userModel.setUserId(this.userId);
+        userModel.setFirstName(userLoginReply.getFirstName().trim());
+
         this.dispose();
-        new CustomerMainView(this.userId, userLoginReply.getUserPk(), userLoginReply.getFirstName().trim(), lastLoginTime).run();
+        new CustomerMainView(userModel).run();
     }
 
     public void run() {

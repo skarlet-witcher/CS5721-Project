@@ -19,29 +19,34 @@ import java.util.List;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class CustomerLoginController implements BaseController {
-    public CustomerLoginView view;
+    private CustomerLoginView view;
+    private UserLoginRequestModel userLoginRequestModel;
     private List<Integer> PinFields;
 
     public CustomerLoginController(CustomerLoginView view) {
         this.view = view;
-        view.initComponents();
     }
 
     @Override
     public void initialize() {
+        view.initComponents();
         initTextFieldsLimit();
         generateLoginField(generateRandomLoginType());
+        this.run();
+    }
+
+    private void run() {
         view.setDefaultCloseOperation(EXIT_ON_CLOSE);
         view.setVisible(true);
         view.pack(); // resize
     }
 
-    public int generateRandomLoginType() {
+    private int generateRandomLoginType() {
         // randomly generate one of the ways to login
         return RandomUtil.generateOneNum(1, 2);
     }
 
-    public void generateLoginField(int loginType) {
+    private void generateLoginField(int loginType) {
         if (loginType == UserLoginType.CONTACT_NUMBER) {
             view.panel_contactNum.setVisible(true);
             view.panel_dob.setVisible(false);
@@ -54,7 +59,7 @@ public class CustomerLoginController implements BaseController {
 
     }
 
-    public void initTextFieldsLimit() {
+    private void initTextFieldsLimit() {
         view.tf_userId.setDocument(new JTextFieldLimit(10));
         view.tf_contactNum.setDocument(new JTextFieldLimit(4));
         view.tf_day.setDocument(new JTextFieldLimit(2));
@@ -78,7 +83,7 @@ public class CustomerLoginController implements BaseController {
         view.tf_year.selectAll();
     }
 
-    public Boolean validateUserIdField() {
+    private Boolean validateUserIdField() {
         // useId validator
         if (view.tf_userId.getText().length() <= 0) {
             JOptionPane.showMessageDialog(null,
@@ -97,11 +102,11 @@ public class CustomerLoginController implements BaseController {
         return true;
     }
 
-    public Boolean validateDateOfBirth() {
+    private Boolean validateDateOfBirth() {
         return validateMonthField() && validateDayField() && validateYearField();
     }
 
-    public Boolean validateYearField() {
+    private Boolean validateYearField() {
         //  year of the date or birth validator
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         if (view.tf_year.getText().trim().length() <= 0) {
@@ -135,7 +140,7 @@ public class CustomerLoginController implements BaseController {
         return true;
     }
 
-    public Boolean validateDayField() {
+    private Boolean validateDayField() {
         // day of dob validator
         if (view.tf_day.getText().trim().length() <= 0) {
             JOptionPane.showMessageDialog(null,
@@ -165,7 +170,7 @@ public class CustomerLoginController implements BaseController {
         return true;
     }
 
-    public Boolean validateMonthField() {
+    private Boolean validateMonthField() {
         // month of dob validator
         if (view.tf_month.getText().trim().length() <= 0) {
             JOptionPane.showMessageDialog(null,
@@ -195,7 +200,7 @@ public class CustomerLoginController implements BaseController {
         return true;
     }
 
-    public Boolean validateContactNum() {
+    private Boolean validateContactNum() {
         // contact number validator
         if (view.tf_contactNum.getText().trim().length() <= 0) {
             JOptionPane.showMessageDialog(null,
@@ -226,11 +231,11 @@ public class CustomerLoginController implements BaseController {
             } else {
                 try {
                     // login in with date of birth
-                    UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel(Long.parseLong(view.tf_userId.getText().trim()),
+                    this.userLoginRequestModel = new UserLoginRequestModel(Long.parseLong(view.tf_userId.getText().trim()),
                             Integer.parseInt(view.tf_day.getText()),
                             Integer.parseInt(view.tf_month.getText()),
                             Integer.parseInt(view.tf_year.getText()));
-                    PinFields = CustomerLoginService.getInstance().requestLoginUsingDOB(userLoginRequestModel);
+                    this.PinFields = CustomerLoginService.getInstance().requestLoginUsingDOB(userLoginRequestModel);
                 } catch (Exception e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null,
@@ -246,9 +251,10 @@ public class CustomerLoginController implements BaseController {
             }
             try {
                 // login in with contactNum
-                UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel(Long.parseLong(view.tf_userId.getText().trim()),
+
+                this.userLoginRequestModel = new UserLoginRequestModel(Long.parseLong(view.tf_userId.getText().trim()),
                         view.tf_contactNum.getText().trim());
-                PinFields = CustomerLoginService.getInstance().requestLoginUsingPhoneNum(userLoginRequestModel);
+                this.PinFields = CustomerLoginService.getInstance().requestLoginUsingPhoneNum(userLoginRequestModel);
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null,
