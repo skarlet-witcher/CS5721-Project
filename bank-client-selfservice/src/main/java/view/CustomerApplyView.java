@@ -501,22 +501,14 @@ public class CustomerApplyView extends JFrame {
     }
 
     private Boolean validateAllFieldsForNewUser() {
-        if(validateNameFields() && validateGenderField() &&
-        validateIdentityFields() && validateDOBFields() &&
-        validateAddressField() && validateEmailField() &&
-        validateContactNumField() && validateAccountType()) {
-            return true;
-        } else {
-            return false;
-        }
+        return validateNameFields() && validateGenderField() &&
+                validateIdentityFields() && validateDOBFields() &&
+                validateAddressField() && validateEmailField() &&
+                validateContactNumField() && validateAccountType();
     }
 
     private Boolean validateAllFieldsForExistingUser() {
-        if(validateAccountType()) {
-            return true;
-        } else {
-            return false;
-        }
+        return validateAccountType();
     }
 
     private Boolean validateNameFields() {
@@ -953,7 +945,7 @@ public class CustomerApplyView extends JFrame {
 
     private void btn_backActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerLoginView().run();
+        new CustomerLoginView();
     }
 
     private void cb_accountTypeListActionPerformed(ActionEvent e) {

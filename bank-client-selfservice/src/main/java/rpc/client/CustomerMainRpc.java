@@ -1,39 +1,30 @@
 package rpc.client;
 
 import Const.ResponseStatusType;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
+import app.MainApp;
 import rpc.*;
 
+import javax.net.ssl.SSLException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import static Const.Server.SERVER_HOST;
-import static Const.Server.SERVER_PORT;
+public class CustomerMainRpc {
+    private static final Logger logger = Logger.getLogger(CustomerMainRpc.class.getName());
+    private static UserCustomerGrpc.UserCustomerBlockingStub blockingStub;
+    private static CustomerMainRpc instance = null;
 
-public class UserCustomerRpc {
-    private static final Logger logger = Logger.getLogger(UserCustomerRpc.class.getName());
-
-    private static UserCustomerRpc instance = null;
-
-    public static UserCustomerRpc getInstance() {
+    public static CustomerMainRpc getInstance() throws SSLException {
         if (instance == null) {
-            return new UserCustomerRpc();
+            instance = new CustomerMainRpc();
+            blockingStub = UserCustomerGrpc.newBlockingStub(MainApp.getChannel());
         }
         return instance;
     }
 
     public List<UserAccountsReply> getAccounts(UserCustomerGetAccountsRequest userCustomerGetAccountsRequest) throws Exception {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
-                .usePlaintext().build();
-        UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
-
         logger.info(userCustomerGetAccountsRequest.getUserPk() + " is requesting to get accounts.");
 
         Response response = blockingStub.getAccounts(userCustomerGetAccountsRequest);
-
-        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info(userCustomerGetAccountsRequest.getUserPk() + " get accounts successful.");
@@ -43,16 +34,11 @@ public class UserCustomerRpc {
             throw new Exception(response.getDescription());
         }
     }
-    public UserProfileReply getUserProfile(UserCustomerGetProfileRequest userCustomerGetProfileRequest) throws Exception {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
-                .usePlaintext().build();
-        UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
 
+    public UserProfileReply getUserProfile(UserCustomerGetProfileRequest userCustomerGetProfileRequest) throws Exception {
         logger.info(userCustomerGetProfileRequest.getUserPk() + " is requesting to get accounts.");
 
         Response response = blockingStub.getProfile(userCustomerGetProfileRequest);
-
-        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info(userCustomerGetProfileRequest.getUserPk() + " get user profile successful.");
@@ -62,16 +48,11 @@ public class UserCustomerRpc {
             throw new Exception(response.getDescription());
         }
     }
-    public Response editUserProfile(UserCustomerEditProfileRequest userCustomerEditProfileRequest) throws Exception {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
-                .usePlaintext().build();
-        UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
 
+    public Response editUserProfile(UserCustomerEditProfileRequest userCustomerEditProfileRequest) throws Exception {
         logger.info(userCustomerEditProfileRequest.getUserPk() + " is requesting to edit profile.");
 
         Response response = blockingStub.editProfile(userCustomerEditProfileRequest);
-
-        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info(userCustomerEditProfileRequest.getUserPk() + " edit profile successful.");
@@ -83,15 +64,9 @@ public class UserCustomerRpc {
     }
 
     public Response transfer(UserCustomerTransferRequest userCustomerTransferRequest) throws Exception {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
-                .usePlaintext().build();
-        UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
-
         logger.info(userCustomerTransferRequest.getUserPk() + " is requesting to transfer.");
 
         Response response = blockingStub.transfer(userCustomerTransferRequest);
-
-        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info(userCustomerTransferRequest.getUserPk() + " transfer successful.");
@@ -103,15 +78,9 @@ public class UserCustomerRpc {
     }
 
     public List<UserTransactionsReply> getTransactions(UserCustomerGetTransactionsRequest userCustomerGetTransactionsRequest) throws Exception {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
-                .usePlaintext().build();
-        UserCustomerGrpc.UserCustomerBlockingStub blockingStub = UserCustomerGrpc.newBlockingStub(channel);
-
         logger.info(userCustomerGetTransactionsRequest.getUserPk() + " is requesting to get transaction list.");
 
         Response response = blockingStub.getTransactions(userCustomerGetTransactionsRequest);
-
-        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info(userCustomerGetTransactionsRequest.getUserPk() + " get transaction list successful.");

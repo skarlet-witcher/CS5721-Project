@@ -4,9 +4,6 @@
 
 package view;
 
-import java.awt.event.*;
-import java.beans.*;
-
 import Const.*;
 import model.*;
 import net.miginfocom.swing.MigLayout;
@@ -22,6 +19,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -432,7 +431,7 @@ public class CustomerMainView extends JFrame implements Observer {
 
     private void btn_signoutActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerLoginView().run();
+        new CustomerLoginView();
     }
 
     private void btn_payee_addActionPerformed(ActionEvent e) {
@@ -611,10 +610,7 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private Boolean validateBeforeTransfer() {
-        if(!validatePayeeComboBox() || !validateAmount() || !validatePostScript() || !validatePINBeforeTransfer()) {
-            return false;
-        }
-        return true;
+        return validatePayeeComboBox() && validateAmount() && validatePostScript() && validatePINBeforeTransfer();
     }
 
     private void btn_transfer_transferActionPerformed(ActionEvent e) {

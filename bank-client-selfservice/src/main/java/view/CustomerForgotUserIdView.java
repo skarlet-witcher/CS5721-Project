@@ -4,25 +4,19 @@
 
 package view;
 
+import model.UserForgotUserIdModel;
 import net.miginfocom.swing.MigLayout;
-import rpc.UserForgetUserIdRequest;
 import service.impl.CustomerLoginService;
 import util.JTextFieldLimit;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Timestamp;
 import java.util.Calendar;
-
-
-import java.util.Date;
 import java.util.logging.Logger;
-
-import model.UserForgotUserIdModel;
 
 /**
  * @author xiangkai22
@@ -243,7 +237,7 @@ public class CustomerForgotUserIdView extends JFrame {
 
     private void btn_backActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerLoginView().run();
+        new CustomerLoginView();
     }
 
     private void initComponents() {

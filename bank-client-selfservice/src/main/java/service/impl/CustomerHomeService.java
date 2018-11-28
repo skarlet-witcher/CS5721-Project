@@ -1,11 +1,8 @@
 package service.impl;
 
-import model.UserAccountModel;
-import model.UserModel;
-
 import rpc.UserAccountsReply;
 import rpc.UserCustomerGetAccountsRequest;
-import rpc.client.UserCustomerRpc;
+import rpc.client.CustomerMainRpc;
 import service.ICustomerHomeService;
 
 import java.util.List;
@@ -23,7 +20,7 @@ public class CustomerHomeService implements ICustomerHomeService {
 
     @Override
     public List<UserAccountsReply> getAccounts(Long id) throws Exception {
-        List<UserAccountsReply> userAccountsReply = UserCustomerRpc.getInstance().getAccounts(
+        List<UserAccountsReply> userAccountsReply = CustomerMainRpc.getInstance().getAccounts(
                 UserCustomerGetAccountsRequest.newBuilder()
                         .setUserPk(id).build()
         );

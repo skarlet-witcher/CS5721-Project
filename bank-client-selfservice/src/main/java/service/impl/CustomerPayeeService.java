@@ -6,9 +6,7 @@ import rpc.UserCustomerGetPayeesRequest;
 import rpc.UserCustomerRemovePayeeRequest;
 import rpc.UserPayeesReply;
 import rpc.client.CustomerPayeeRpc;
-import rpc.client.UserCustomerRpc;
 import service.ICustomerPayeeService;
-import view.CustomerMainView;
 
 import java.util.List;
 

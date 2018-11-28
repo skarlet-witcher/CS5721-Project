@@ -3,7 +3,7 @@ package service.impl;
 
 import model.UserTransferModel;
 import rpc.UserCustomerTransferRequest;
-import rpc.client.UserCustomerRpc;
+import rpc.client.CustomerMainRpc;
 import service.ICustomerTransferService;
 
 
@@ -19,7 +19,7 @@ public class CustomerTransferService implements ICustomerTransferService {
 
     @Override
     public void transfer(UserTransferModel userTransferModel, int pin) throws Exception {
-        UserCustomerRpc.getInstance().transfer(
+        CustomerMainRpc.getInstance().transfer(
                 UserCustomerTransferRequest.newBuilder().setUserPk(userTransferModel.getPayee().getUserId())
                 .setAccountPk(userTransferModel.getAccount().getAccount_pk())
                 .setAmount(userTransferModel.getAmounts())

@@ -2,10 +2,9 @@ package service.impl;
 
 import rpc.UserCustomerGetTransactionsRequest;
 import rpc.UserTransactionsReply;
-import rpc.client.UserCustomerRpc;
+import rpc.client.CustomerMainRpc;
 import service.ICustomerTransactionService;
 
-import javax.swing.*;
 import java.util.List;
 
 public class CustomerTransactionService implements ICustomerTransactionService {
@@ -23,7 +22,7 @@ public class CustomerTransactionService implements ICustomerTransactionService {
 
     @Override
     public List<UserTransactionsReply> getTransaction(Long user_pk, Long accountPk, int filter) throws Exception {
-        List<UserTransactionsReply> userTransactionsReplies = UserCustomerRpc.getInstance().getTransactions(
+        List<UserTransactionsReply> userTransactionsReplies = CustomerMainRpc.getInstance().getTransactions(
                 UserCustomerGetTransactionsRequest.newBuilder().setUserPk(user_pk)
                 .setFilterByAccount(accountPk)
                 .setFilterByDate(filter).build()

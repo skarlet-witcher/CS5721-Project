@@ -3,18 +3,19 @@ package service.impl;
 import model.UserLoginPINModel;
 import model.UserLoginRequestModel;
 import org.junit.jupiter.api.Test;
-import rpc.UserLoginReqReply;
 import rpc.UserLoginReqRequest;
 import rpc.UserLoginRequest;
 import rpc.client.CustomerLoginRpc;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.net.ssl.SSLException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class CustomerLoginServiceTest {
     CustomerLoginRpc customerLoginRpc = CustomerLoginRpc.getInstance();
+
+    CustomerLoginServiceTest() throws SSLException {
+    }
 
     @Test
     void requestLoginUsingPhoneNum() {

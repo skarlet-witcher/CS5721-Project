@@ -2,10 +2,9 @@ package service.impl;
 
 import model.UserModel;
 import rpc.UserCustomerEditProfileRequest;
-import rpc.UserCustomerGetAccountsRequest;
 import rpc.UserCustomerGetProfileRequest;
 import rpc.UserProfileReply;
-import rpc.client.UserCustomerRpc;
+import rpc.client.CustomerMainRpc;
 import service.ICustomerProfileService;
 
 public class CustomerProfileService implements ICustomerProfileService {
@@ -20,7 +19,7 @@ public class CustomerProfileService implements ICustomerProfileService {
 
     @Override
     public UserProfileReply getUserProfile(Long Id) throws Exception {
-        UserProfileReply userProfileReply = UserCustomerRpc.getInstance().getUserProfile(
+        UserProfileReply userProfileReply = CustomerMainRpc.getInstance().getUserProfile(
                 UserCustomerGetProfileRequest.newBuilder().setUserPk(Id).build()
         );
         return userProfileReply;
@@ -28,7 +27,7 @@ public class CustomerProfileService implements ICustomerProfileService {
 
     @Override
     public void modifyUserProfile(UserModel userModel) throws Exception {
-        UserCustomerRpc.getInstance().editUserProfile(
+        CustomerMainRpc.getInstance().editUserProfile(
                 UserCustomerEditProfileRequest.newBuilder()
                 .setUserPk(userModel.getId())
                 .setEmail(userModel.getEmail())

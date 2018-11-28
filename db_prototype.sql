@@ -1,20 +1,20 @@
-DROP TABLE IF EXISTS `model`;
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE user (
-  id              BIGINT                 AUTO_INCREMENT PRIMARY KEY,
-  user_id         bigint UNIQUE not null
-  comment 'model visible, for login. get by auto-generated',
-  pin             varchar(6)    not null
+                    id              BIGINT                 AUTO_INCREMENT PRIMARY KEY,
+                    user_id         bigint UNIQUE not null
+                      comment 'user visible, for login. get by auto-generated',
+                    pin             varchar(6)    not null
   comment 'get by auto-generated 6 digit',
-  login_pin_digit varchar(3) comment '3 digit, represent which 3 of 6 digit model has to input. get by auto-generated',
-  first_name      varchar(255)  not null,
-  last_name       varchar(255)  not null,
-  gender          int           not null
+                    login_pin_digit varchar(3) comment '3 digit, represent which 3 of 6 digit user has to input. get by auto-generated',
+                    first_name      varchar(255)  not null,
+                    last_name       varchar(255)  not null,
+                    gender          int           not null
   comment '0. woman 1.man',
-  birth_date      datetime      not null,
-  address         varchar(255)  not null,
-  email           varchar(255)  not null,
-  phone           varchar(20)   not null,
-  status          int           not null default 1
+                    birth_date      datetime      not null,
+                    address         varchar(255)  not null,
+                    email           varchar(255)  not null,
+                    phone           varchar(20)   not null,
+                    status          int           not null default 1
   comment '0.blocked 1.normal 2.pending for being deleted 3.deleted.'
 );
 
@@ -40,7 +40,7 @@ create table user_account (
 );
 
 CREATE INDEX fk_user_id
-  ON model (id);
+  ON user (id);
 CREATE INDEX fk_account_type
   ON user_account_type (id);
 

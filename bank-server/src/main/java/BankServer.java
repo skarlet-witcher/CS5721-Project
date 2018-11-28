@@ -1,15 +1,20 @@
 import io.grpc.Server;
-import io.grpc.ServerBuilder;
+import io.grpc.netty.shaded.io.grpc.netty.GrpcSslContexts;
+import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
+import io.grpc.netty.shaded.io.netty.handler.ssl.ClientAuth;
+import io.grpc.netty.shaded.io.netty.handler.ssl.SslContextBuilder;
+import io.grpc.netty.shaded.io.netty.handler.ssl.SslProvider;
 import rpc.impl.UserCustomerImpl;
 import rpc.impl.UserCustomerLoginImpl;
 import rpc.impl.bank_staff.AcceptApplicationImpl;
 import rpc.impl.bank_staff.BankStaffLoginImpl;
 import rpc.impl.bank_staff.BankStaffServiceImpl;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-import static Const.Server.SERVER_PORT;
+import static Const.Server.*;
 
 public class BankServer {
     private static final Logger logger = Logger.getLogger(BankServer.class.getName());
@@ -26,10 +31,8 @@ public class BankServer {
         }
     }
 
-
     private void start() throws IOException {
-
-        server = ServerBuilder.forPort(SERVER_PORT)
+        server = NettyServerBuilder.forPort(SERVER_PORT).sslContext(getSslContextBuilder().build())
                 .addService(new UserCustomerLoginImpl())
                 .addService(new UserCustomerImpl())
                 .addService(new BankStaffLoginImpl())
@@ -38,15 +41,22 @@ public class BankServer {
                 .build()
                 .start();
         logger.info("Server started, listening on " + SERVER_PORT);
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                // Use stderr here since the logger may have been reset by its JVM shutdown hook.
-                System.err.println("*** shutting down gRPC server since JVM is shutting down");
-                BankServer.this.stop();
-                System.err.println("*** server shut down");
-            }
-        });
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            // Use stderr here since the logger may have been reset by its JVM shutdown hook.
+            System.err.println("*** shutting down gRPC server since JVM is shutting down");
+            BankServer.this.stop();
+            System.err.println("*** server shut down");
+        }));
+    }
+
+    private SslContextBuilder getSslContextBuilder() {
+        SslContextBuilder sslClientContextBuilder = SslContextBuilder
+                .forServer(new File("localhost".equals(SERVER_HOST) ? SERVER_CERT_CHAIN_LOCAL : SERVER_CERT_CHAIN), new File(SERVER_PRIVATE_KEY))
+                .trustManager(new File(TRUST_CERT_COLLECTION))
+                .clientAuth(ClientAuth.REQUIRE);
+
+        return GrpcSslContexts.configure(sslClientContextBuilder,
+                SslProvider.OPENSSL);
     }
 
     private void stop() {

@@ -26,7 +26,7 @@ public class CustomerApplyAuthView extends JFrame {
 
     private void btn_backActionPerformed(ActionEvent e) {
         this.dispose();
-        new CustomerLoginView().run();
+        new CustomerLoginView();
     }
 
     private void cb_isExistingActionPerformed(ActionEvent e) {
