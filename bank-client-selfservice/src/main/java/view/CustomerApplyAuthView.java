@@ -26,11 +26,6 @@ public class CustomerApplyAuthView extends JFrame {
         customerApplyAuthController.initialize();
     }
 
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-
     public void initComponents() {
         setTitle("Apply view");
 

@@ -15,6 +15,8 @@ import java.awt.event.FocusEvent;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 public class CustomerApplyController implements BaseController {
     private CustomerApplyView view;
     private int identityType;
@@ -41,10 +43,16 @@ public class CustomerApplyController implements BaseController {
         this.view.initComponents();
         initTextFields();
         resetAccountPanel();
-        this.view.pack();
         if(this.newUserApply == UserType.EXISTING_USER) {
             initFieldsForExistingUser();
         }
+        run();
+    }
+
+    public void run() {
+        this.view.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.view.setVisible(true);
+        this.view.pack(); // resize
     }
 
     private void initTextFields() {

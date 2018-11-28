@@ -149,7 +149,7 @@ public class CustomerPINController implements BaseController {
         userModel.setFirstName(userLoginReply.getFirstName().trim());
 
         this.view.dispose();
-        new CustomerMainView(userModel).run();
+        new CustomerMainView(userModel);
     }
 
     private UserLoginPINModel initUserLoginPINModel(List<Integer> digitList) {
@@ -239,6 +239,6 @@ public class CustomerPINController implements BaseController {
 
     public void btn_forgotPINActionPerformed(ActionEvent e) {
         this.view.dispose();
-        new CustomerForgotPINView(this.userModel.getUserId()).run();
+        new CustomerForgotPINView(this.userModel.getUserId());
     }
 }

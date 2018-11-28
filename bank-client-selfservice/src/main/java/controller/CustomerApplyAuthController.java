@@ -11,6 +11,8 @@ import view.CustomerLoginView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 public class CustomerApplyAuthController implements BaseController {
     private CustomerApplyAuthView view;
 
@@ -23,6 +25,13 @@ public class CustomerApplyAuthController implements BaseController {
         this.view.initComponents();
         initTextField();
         resetAllPanel();
+        run();
+    }
+
+    public void run() {
+        this.view.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.view.setVisible(true);
+        this.view.pack(); // resize
     }
 
     private void resetAllPanel() {
@@ -63,7 +72,7 @@ public class CustomerApplyAuthController implements BaseController {
     public void btn_none_nextActionPerformed(ActionEvent e) {
         // non-existing user
         this.view.dispose();
-        new CustomerApplyView().run();
+        new CustomerApplyView();
     }
 
     public void btn_customer_nextActionPerformed(ActionEvent e) {
@@ -169,6 +178,6 @@ public class CustomerApplyAuthController implements BaseController {
             return;
         }
         this.view.dispose();
-        new CustomerApplyView(userId, identityType, identityNum, UserType.EXISTING_USER).run();
+        new CustomerApplyView(userId, identityType, identityNum, UserType.EXISTING_USER);
     }
 }

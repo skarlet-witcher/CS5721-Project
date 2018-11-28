@@ -570,7 +570,7 @@ public class CustomerMainController implements BaseController {
 
     public void btn_payee_addActionPerformed(ActionEvent e) {
         this.view.dispose();
-        new CustomerAddPayeeView(userModel, this.view).run();
+        new CustomerAddPayeeView(userModel, this.view);
     }
 
     public void btn_profile_revertActionPerformed(ActionEvent e) {

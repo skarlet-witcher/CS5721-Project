@@ -263,7 +263,7 @@ public class CustomerLoginController implements BaseController {
             }
         }
         view.dispose();
-        new CustomerPINView(Long.parseLong(view.tf_userId.getText().trim()), this.pinList).run();
+        new CustomerPINView(Long.parseLong(view.tf_userId.getText().trim()), this.pinList);
     }
 
     public void btn_forgotUserIdActionPerformed(ActionEvent e) {
@@ -272,7 +272,7 @@ public class CustomerLoginController implements BaseController {
     }
 
     public void btn_registerActionPerformed(ActionEvent e) {
-        view.dispose();
-        new CustomerApplyAuthView().run();
+        this.view.dispose();
+        new CustomerApplyAuthView();
     }
 }

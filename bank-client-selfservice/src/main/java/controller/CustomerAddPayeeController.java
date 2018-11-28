@@ -10,6 +10,8 @@ import view.CustomerMainView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 public class CustomerAddPayeeController implements BaseController {
     private CustomerAddPayeeView view;
     private CustomerMainView customerMainView;
@@ -26,6 +28,13 @@ public class CustomerAddPayeeController implements BaseController {
     public void initialize() {
         this.view.initComponents();
         initFields();
+        run();
+    }
+
+    public void run() {
+        this.view.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.view.setVisible(true);
+        this.view.pack(); // resize
     }
 
     private void initFields() {
@@ -35,7 +44,7 @@ public class CustomerAddPayeeController implements BaseController {
 
     public void btn_backActionPerformed(ActionEvent e) {
         this.view.dispose();
-        new CustomerMainView(userModel).run();
+        new CustomerMainView(userModel);
     }
 
     public void btn_addActionPerformed(ActionEvent e) {
@@ -93,6 +102,6 @@ public class CustomerAddPayeeController implements BaseController {
             return;
         }
         this.view.dispose();
-        new CustomerMainView(userModel).run();
+        new CustomerMainView(userModel);
     }
 }

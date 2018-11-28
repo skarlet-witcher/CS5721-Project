@@ -84,11 +84,6 @@ public class CustomerApplyView extends JFrame {
         customerApplyController.initialize();
     }
 
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-
     public void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         lbl_userId = new JLabel();

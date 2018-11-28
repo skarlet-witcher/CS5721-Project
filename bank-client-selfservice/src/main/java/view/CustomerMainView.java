@@ -105,11 +105,6 @@ public class CustomerMainView extends JFrame implements Observer {
         customerMainController.updateData();
     }
 
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-
     public void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         lbl_welcome = new JLabel();
