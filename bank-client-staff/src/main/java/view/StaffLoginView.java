@@ -4,6 +4,7 @@
 
 package view;
 
+import controller.StaffLoginController;
 import model.StaffLoginModel;
 import net.miginfocom.swing.MigLayout;
 import service.impl.StaffLoginService;
@@ -18,35 +19,21 @@ import java.awt.event.ActionEvent;
  */
 public class StaffLoginView extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel label1;
-    private JLabel lbl_staffId;
-    private JTextField tf_staffId;
-    private JLabel lbl_pwd;
-    private JPasswordField pf_pwd;
-    private JButton btn_login;
+    public JLabel label1;
+    public JLabel lbl_staffId;
+    public JTextField tf_staffId;
+    public JLabel lbl_pwd;
+    public JPasswordField pf_pwd;
+    public JButton btn_login;
+
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
+    private StaffLoginController staffLoginController;
     public StaffLoginView() {
-        initComponents();
+        staffLoginController = new StaffLoginController(this);
+        staffLoginController.initialize();
     }
 
-    private void btn_loginActionPerformed(ActionEvent e) {
-        try {
-            long staffId = Long.parseLong(tf_staffId.getText().trim());
-            String password = String.valueOf(pf_pwd.getPassword());
-            StaffLoginModel staffLoginModel = new StaffLoginModel(staffId, password);
-            boolean isValidStaff = StaffLoginService.getInstance().staffLogin(staffLoginModel);
-            if (isValidStaff) {
-                new StaffMainView(staffId).run();
-                this.dispose();
-            }
-
-        } catch (Exception e1) {
-            JOptionPane.showMessageDialog(null,
-                    "Please input a valid combination of Staff ID and password.",
-                    "Error Message", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void initComponents() {
+    public void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         label1 = new JLabel();
         lbl_staffId = new JLabel();
@@ -97,16 +84,11 @@ public class StaffLoginView extends JFrame {
         //---- btn_login ----
         btn_login.setText("Login");
         btn_login.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        btn_login.addActionListener(e -> btn_loginActionPerformed(e));
+        btn_login.addActionListener(e -> staffLoginController.btn_loginActionPerformed(e));
         contentPane.add(btn_login, "cell 2 3");
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
-    public void run() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

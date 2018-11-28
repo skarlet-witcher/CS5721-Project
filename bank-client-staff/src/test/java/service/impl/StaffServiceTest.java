@@ -1,6 +1,5 @@
 package service.impl;
 
-import bankStaff_rpc.ListUserApplyArchiveEntitiesResponse;
 import org.junit.jupiter.api.Test;
 import rpc.client.StaffRpc;
 
@@ -11,14 +10,14 @@ class StaffServiceTest {
     @Test
     void getNewApplysReplies() {
         assertDoesNotThrow(()->{
-            StaffRpc.getInstance().getNewApplysReplies();
+            StaffRpc.getInstance().getNewApplesReplies();
         });
     }
 
     @Test
     void acceptAplication() throws Exception {
         assertDoesNotThrow(()->{
-            StaffRpc.getInstance().acceptApplication(StaffRpc.getInstance().getNewApplysReplies().getListUserApplyArchiveEntitiesResponseList().get(0).getId());
+            StaffRpc.getInstance().acceptApplication(StaffRpc.getInstance().getNewApplesReplies().getListUserApplyArchiveEntitiesResponseList().get(0).getId());
         });
     }
 }

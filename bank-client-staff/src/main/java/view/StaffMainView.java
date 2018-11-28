@@ -48,14 +48,14 @@ public class StaffMainView extends JFrame {
 
     private void btn_signoutActionPerformed(ActionEvent e) {
         this.dispose();
-        new StaffLoginView().run();
+        new StaffLoginView();
     }
 
     private void btn_add_moreInfoActionPerformed(ActionEvent e) {
         this.dispose();
         int selectedRow = table_requestTable.getSelectedRow();
 
-        new StaffAddAccountInfoView(staffId, newApplysReplyList.getListUserApplyArchiveEntitiesResponseList().get(selectedRow)).run();
+        new StaffAddAccountInfoView(staffId, newApplysReplyList.getListUserApplyArchiveEntitiesResponseList().get(selectedRow));
     }
 
     private void btn_remove_moreInfoActionPerformed(ActionEvent e) {
@@ -98,7 +98,8 @@ public class StaffMainView extends JFrame {
             table_requestTable.setModel(model);
 
             //SHOW ON TABLE
-        } catch (Exception E) {
+        } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Fail to get list of applications, please contact admin",
                     "Error Message", JOptionPane.ERROR_MESSAGE);

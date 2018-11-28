@@ -43,8 +43,6 @@ public class CustomerApplyRpc {
     }
 
     public Response checkExistingUserBeforeApply(UserValidateExistingUserRequest userValidateExistingUserRequest) throws Exception {
-        UserCustomerLoginGrpc.UserCustomerLoginBlockingStub blockingStub = UserCustomerLoginGrpc.newBlockingStub(MainApp.getChannel());
-
         logger.info(userValidateExistingUserRequest.getUserId() + " is requesting to validate user existence.");
 
         Response response = blockingStub.validateExistingUser(userValidateExistingUserRequest);

@@ -11,30 +11,33 @@ import java.util.logging.Logger;
 import static Const.Server.SERVER_HOST;
 import static Const.Server.SERVER_PORT;
 
+import app.StaffClient;
+
+import javax.net.ssl.SSLException;
+
 //Created manually by Long
 public class StaffRpc {
     private static final Logger logger = Logger.getLogger(StaffRpc.class.getName());
-
+    private static StaffLoginGrpc.StaffLoginBlockingStub loginBlockingStub;
+    private static StaffGetNewAppliesGrpc.StaffGetNewAppliesBlockingStub getNewAppliesBlockingStub;
+    private static AcceptApplicationGrpc.AcceptApplicationBlockingStub applicationBlockingStub;
     private static StaffRpc instance = null;
 
-    public static StaffRpc getInstance() {
+    public static StaffRpc getInstance() throws SSLException {
         if (instance == null) {
-            return new StaffRpc();
+            instance = new StaffRpc();
+            loginBlockingStub = StaffLoginGrpc.newBlockingStub(StaffClient.getChannel());
+            getNewAppliesBlockingStub = StaffGetNewAppliesGrpc.newBlockingStub(StaffClient.getChannel());
+            applicationBlockingStub = AcceptApplicationGrpc.newBlockingStub(StaffClient.getChannel());
         }
         return instance;
     }
 
 
-    public ListUserApplyArchiveEntitiesResponse getNewApplysReplies() throws Exception {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
-                .usePlaintext().build();
-        StaffGetNewAppliesGrpc.StaffGetNewAppliesBlockingStub blockingStub = StaffGetNewAppliesGrpc.newBlockingStub(channel);
-
+    public ListUserApplyArchiveEntitiesResponse getNewApplesReplies() throws Exception {
         logger.info( "Getting list of applications.");
 
-        ListUserApplyArchiveEntitiesResponse response = blockingStub.staffGetNewApplies(Empty.newBuilder().build());
-
-        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+        ListUserApplyArchiveEntitiesResponse response = getNewAppliesBlockingStub.staffGetNewApplies(Empty.newBuilder().build());
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info("Getting list of applications succeeds");
@@ -46,15 +49,9 @@ public class StaffRpc {
     }
 
     public StaffLoginResponse login(StaffLoginRequest staffLoginRequest) throws Exception {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
-                .usePlaintext().build();
-        StaffLoginGrpc.StaffLoginBlockingStub blockingStub = StaffLoginGrpc.newBlockingStub(channel);
-
         logger.info(staffLoginRequest.getStaffId() + " is requesting to login.");
 
-        StaffLoginResponse response = blockingStub.staffLogin(staffLoginRequest);
-
-        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+        StaffLoginResponse response = loginBlockingStub.staffLogin(staffLoginRequest);
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info(staffLoginRequest.getStaffId() + " login request detail check successful.");
@@ -67,15 +64,9 @@ public class StaffRpc {
     }
 
     public AcceptedResponse acceptApplication(long applicationId) throws Exception {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
-                .usePlaintext().build();
-        AcceptApplicationGrpc.AcceptApplicationBlockingStub blockingStub = AcceptApplicationGrpc.newBlockingStub(channel);
-
         logger.info( "Requesting to accept an application.");
 
-        AcceptedResponse response = blockingStub.acceptApplication(AcceptedRequest.newBuilder().setApplicationId(applicationId).build());
-
-        channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
+        AcceptedResponse response = applicationBlockingStub.acceptApplication(AcceptedRequest.newBuilder().setApplicationId(applicationId).build());
 
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info("Apply an application successfully");
