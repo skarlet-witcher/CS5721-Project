@@ -45,10 +45,6 @@ public class CustomerMainController implements BaseController {
         return userTransferModel;
     }
 
-    public void setUserTransferModel(UserTransferModel userTransferModel) {
-        this.userTransferModel = userTransferModel;
-    }
-
     @Override
     public void initialize() {
         this.view.initComponents();

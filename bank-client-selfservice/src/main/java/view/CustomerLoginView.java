@@ -5,7 +5,6 @@
 package view;
 
 import controller.CustomerLoginController;
-import model.UserLoginRequestModel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;

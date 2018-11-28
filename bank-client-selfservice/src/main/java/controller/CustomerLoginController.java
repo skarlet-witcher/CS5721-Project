@@ -21,7 +21,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class CustomerLoginController implements BaseController {
     private CustomerLoginView view;
     private UserLoginRequestModel userLoginRequestModel;
-    private List<Integer> PinFields;
+    private List<Integer> pinList;
 
     public CustomerLoginController(CustomerLoginView view) {
         this.view = view;
@@ -235,7 +235,7 @@ public class CustomerLoginController implements BaseController {
                             Integer.parseInt(view.tf_day.getText()),
                             Integer.parseInt(view.tf_month.getText()),
                             Integer.parseInt(view.tf_year.getText()));
-                    this.PinFields = CustomerLoginService.getInstance().requestLoginUsingDOB(userLoginRequestModel);
+                    this.pinList = CustomerLoginService.getInstance().requestLoginUsingDOB(userLoginRequestModel);
                 } catch (Exception e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null,
@@ -251,10 +251,9 @@ public class CustomerLoginController implements BaseController {
             }
             try {
                 // login in with contactNum
-
                 this.userLoginRequestModel = new UserLoginRequestModel(Long.parseLong(view.tf_userId.getText().trim()),
                         view.tf_contactNum.getText().trim());
-                this.PinFields = CustomerLoginService.getInstance().requestLoginUsingPhoneNum(userLoginRequestModel);
+                this.pinList = CustomerLoginService.getInstance().requestLoginUsingPhoneNum(userLoginRequestModel);
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null,
@@ -264,10 +263,7 @@ public class CustomerLoginController implements BaseController {
             }
         }
         view.dispose();
-        new CustomerPINView(Long.parseLong(view.tf_userId.getText().trim()),
-                PinFields.get(0),
-                PinFields.get(1),
-                PinFields.get(2)).run();
+        new CustomerPINView(Long.parseLong(view.tf_userId.getText().trim()), this.pinList).run();
     }
 
     public void btn_forgotUserIdActionPerformed(ActionEvent e) {

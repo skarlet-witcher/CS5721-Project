@@ -24,6 +24,12 @@ public class UserModel {
         userPayeeList = new ArrayList<>();
     }
 
+    public UserModel(Long userId) {
+        this.setUserId(userId);
+        userAccountList = new ArrayList<>();
+        userPayeeList = new ArrayList<>();
+    }
+
     public Timestamp getLastLoginTime() {
         return lastLoginTime;
     }
