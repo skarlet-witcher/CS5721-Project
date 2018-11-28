@@ -4,6 +4,8 @@
 
 package view;
 
+import controller.CustomerAddPayeeController;
+import model.UserModel;
 import model.UserPayeeModel;
 import net.miginfocom.swing.MigLayout;
 import service.impl.CustomerPayeeService;
@@ -19,98 +21,22 @@ import java.awt.event.ActionListener;
  */
 public class CustomerAddPayeeView extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel lbl_payeeName;
-    private JTextField tf_payeeName;
-    private JLabel lbl_IBAN;
-    private JTextField tf_IBAN;
-    private JLabel lbl_pin;
-    private JPasswordField pf_pin;
-    private JButton btn_add;
-    private JButton btn_back;
+    public JLabel lbl_payeeName;
+    public JTextField tf_payeeName;
+    public JLabel lbl_IBAN;
+    public JTextField tf_IBAN;
+    public JLabel lbl_pin;
+    public JPasswordField pf_pin;
+    public JButton btn_add;
+    public JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-    private long userId;
-    private CustomerMainView customerMainView;
-
-    public CustomerAddPayeeView(long userId, CustomerMainView customerMainView) {
-        initComponents();
-        setFields(userId, customerMainView);
-        initFields();
+    private CustomerAddPayeeController customerAddPayeeController;
+    public CustomerAddPayeeView(UserModel userModel, CustomerMainView customerMainView) {
+        customerAddPayeeController = new CustomerAddPayeeController(this, customerMainView, userModel);
+        customerAddPayeeController.initialize();
     }
 
-    private void setFields(long userId, CustomerMainView customerMainView) {
-        this.userId = userId;
-        this.customerMainView = customerMainView;
-    }
-
-    private void initFields() {
-        tf_IBAN.setDocument(new JTextFieldLimit(34));
-        pf_pin.setDocument(new JTextFieldLimit(6));
-    }
-
-    private void btn_backActionPerformed(ActionEvent e) {
-        this.dispose();
-        customerMainView.setVisible(true);
-    }
-
-    private void btn_addActionPerformed(ActionEvent e) {
-        // payee name validator
-        if(tf_payeeName.getText().trim().length() <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Please input your payee name",
-                    "Error Message", JOptionPane.ERROR_MESSAGE);
-            tf_payeeName.grabFocus();
-            return;
-        } if(!tf_payeeName.getText().trim().matches("^[a-zA-Z]+$")) {
-            JOptionPane.showMessageDialog(null,
-                    "Payee name should only contain letters",
-                    "Error Message", JOptionPane.ERROR_MESSAGE);
-            tf_payeeName.grabFocus();
-            return;
-        }
-        // IBAN validator
-        if(tf_IBAN.getText().trim().length() <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "Please input your payee's IBAN",
-                    "Error Message", JOptionPane.ERROR_MESSAGE);
-            tf_IBAN.grabFocus();
-            return;
-        } if(!tf_IBAN.getText().trim().matches("^[0-9A-Z]+$")) {
-            JOptionPane.showMessageDialog(null,
-                    "IBAN should only contain capital letters and digits",
-                    "Error Message", JOptionPane.ERROR_MESSAGE);
-            tf_IBAN.grabFocus();
-            return;
-        }
-        // pin validator
-        if(pf_pin.getPassword().length <=0) {
-            JOptionPane.showMessageDialog(null,
-                    "Please input your PIN",
-                    "Error Message", JOptionPane.ERROR_MESSAGE);
-            pf_pin.grabFocus();
-            return;
-        }
-        // add payee service
-        UserPayeeModel userPayeeModel = new UserPayeeModel();
-        userPayeeModel.setUserId(this.userId);
-        userPayeeModel.setIban(tf_IBAN.getText().trim());
-        userPayeeModel.setName(tf_payeeName.getText().trim());
-        String pin = new String(pf_pin.getPassword());
-        try {
-            CustomerPayeeService.getInstance().addPayee(userPayeeModel, pin);
-            JOptionPane.showMessageDialog(null,
-                    "add payee successful",
-                    "Info Message", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    "Fail to add payee, due to " + E.getMessage() + "please contact with admin",
-                    "Error Message", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        this.dispose();
-        customerMainView.setVisible(true);
-    }
-
-    private void initComponents() {
+    public void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         lbl_payeeName = new JLabel();
         tf_payeeName = new JTextField();
@@ -167,12 +93,12 @@ public class CustomerAddPayeeView extends JFrame {
 
         //---- btn_add ----
         btn_add.setText("Add");
-        btn_add.addActionListener(e -> btn_addActionPerformed(e));
+        btn_add.addActionListener(e -> customerAddPayeeController.btn_addActionPerformed(e));
         contentPane.add(btn_add, "cell 2 8");
 
         //---- btn_back ----
         btn_back.setText("Back");
-        btn_back.addActionListener(e -> btn_backActionPerformed(e));
+        btn_back.addActionListener(e -> customerAddPayeeController.btn_backActionPerformed(e));
         contentPane.add(btn_back, "cell 2 9");
         pack();
         setLocationRelativeTo(getOwner());

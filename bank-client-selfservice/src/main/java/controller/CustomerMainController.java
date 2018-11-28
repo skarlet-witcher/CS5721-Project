@@ -532,7 +532,12 @@ public class CustomerMainController implements BaseController {
                 return;
             }
             initPayeePage();
-            initTransferPage();
+            initPayeeComboBox();
+            initCurrency();
+            initBalance();
+            initAmounts();
+            initPostscriptTextFieldLimit();
+            initTransferPINField();
         }
     }
 
@@ -564,8 +569,8 @@ public class CustomerMainController implements BaseController {
     }
 
     public void btn_payee_addActionPerformed(ActionEvent e) {
-        this.view.setVisible(false);
-        new CustomerAddPayeeView(this.userModel.getId(), this.view).run();
+        this.view.dispose();
+        new CustomerAddPayeeView(userModel, this.view).run();
     }
 
     public void btn_profile_revertActionPerformed(ActionEvent e) {
