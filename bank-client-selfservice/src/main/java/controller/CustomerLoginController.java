@@ -268,7 +268,7 @@ public class CustomerLoginController implements BaseController {
 
     public void btn_forgotUserIdActionPerformed(ActionEvent e) {
         view.dispose();
-        new CustomerForgotUserIdView().run();
+        new CustomerForgotUserIdView();
     }
 
     public void btn_registerActionPerformed(ActionEvent e) {
