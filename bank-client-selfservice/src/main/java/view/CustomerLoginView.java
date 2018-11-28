@@ -94,7 +94,6 @@ public class CustomerLoginView extends JFrame {
     }
 
     private Boolean validateUserIdField() {
-        // useId validator
         if(tf_userId.getText().length() <= 0) {
             JOptionPane.showMessageDialog(null,
                     "Please input your User ID",
@@ -272,6 +271,7 @@ public class CustomerLoginView extends JFrame {
                 return;
             }
         }
+
         this.dispose();
         new CustomerPINView(Long.parseLong(tf_userId.getText().trim()),
                 PinFields.get(0),

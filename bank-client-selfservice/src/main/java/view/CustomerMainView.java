@@ -5,6 +5,7 @@
 package view;
 
 import java.awt.event.*;
+import java.beans.*;
 
 import Const.*;
 import model.*;
@@ -117,13 +118,17 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     @Override
-    public void updateTransferPage(UserTransferModel userTransferModel) {
+    public void updateData(UserTransferModel userTransferModel) {
         transfer(userTransferModel);
         initHomePage();
-        initProfilePage();
-        initTransactionPage();
-        initPayeePage();
-        initTransferPage();
+        initTransactionInfo();
+        initTransactionModel();
+        initTransactionTable();
+        initBalance();
+        initCurrency();
+        initAmounts();
+        initPostscript();
+        initTransferPINField();
     }
 
     private void transfer(UserTransferModel userTransferModel) {
@@ -193,8 +198,7 @@ public class CustomerMainView extends JFrame implements Observer {
 
     private void initTransactionModel() {
         this.userTransactionModelList = new ArrayList<>();
-        this.userTransactionModelList.clear();
-        for(UserTransactionsReply userTransactionsReply: userTransactionsReplyList) {
+        for(UserTransactionsReply userTransactionsReply: this.userTransactionsReplyList) {
             UserTransactionModel userTransactionModel = new UserTransactionModel();
             userTransactionModel.setDate(TimestampConvertHelper.rpcToMysql(userTransactionsReply.getDate()));
             userTransactionModel.setDetails(userTransactionsReply.getDescription());
@@ -282,7 +286,7 @@ public class CustomerMainView extends JFrame implements Observer {
     private void initTransactionInfo() {
         try {
             this.userTransactionsReplyList = CustomerTransactionService.getInstance().getTransaction(this.userModel.getId(),
-                    this.userModel.getUserAccountList().get(0).getAccount_pk(),
+                    this.userModel.getUserAccountList().get(cb_transaction_accountList.getSelectedIndex()).getAccount_pk(),
                     cb_transaction_filter.getSelectedIndex() + 1);
         } catch (Exception E) {
             JOptionPane.showMessageDialog(null,
@@ -307,11 +311,11 @@ public class CustomerMainView extends JFrame implements Observer {
     }
 
     private void initCurrency() {
-        tf_transfer_currency.setText(CardCurrencyType.getCurrencyType(this.userModel.getUserAccountList().get(0).getCurrencyType()));
+        tf_transfer_currency.setText(CardCurrencyType.getCurrencyType(this.userModel.getUserAccountList().get(cb_transfer_accountList.getSelectedIndex()).getCurrencyType()));
     }
 
     private void initBalance() {
-        tf_transfer_balance.setText(String.valueOf(this.userModel.getUserAccountList().get(0).getBalance()));
+        tf_transfer_balance.setText(String.valueOf(this.userModel.getUserAccountList().get(cb_transfer_accountList.getSelectedIndex()).getBalance()));
     }
 
     private void initAccountComboBox(JComboBox accountComboBox) {
@@ -325,6 +329,8 @@ public class CustomerMainView extends JFrame implements Observer {
         for(UserAccountModel userAccountModel : this.userModel.getUserAccountList()) {
             accountComboBox.addItem(String.valueOf(userAccountModel.getAccountNum()));
         }
+        accountComboBox.setSelectedIndex(0);
+
     }
 
     private void initPayeeComboBox() {
@@ -353,6 +359,10 @@ public class CustomerMainView extends JFrame implements Observer {
 
     private void initPostscriptTextFieldLimit() {
         tf_transfer_postScript.setDocument(new JTextFieldLimit(200));
+    }
+
+    private void initPostscript() {
+        tf_transfer_postScript.setText("");
     }
 
     private void initProfileInfo() {
@@ -403,10 +413,10 @@ public class CustomerMainView extends JFrame implements Observer {
         userTransferModel.setAmounts(amounts);
     }
 
-    private void clearTable(DefaultTableModel payeeTableModel) {
-        int rowCount = payeeTableModel.getRowCount();
+    private void clearTable(DefaultTableModel tableModel) {
+        int rowCount = tableModel.getRowCount();
         for (int i = rowCount - 1; i >= 0; i--) {
-            payeeTableModel.removeRow(i);
+            tableModel.removeRow(i);
         }
     }
 
@@ -486,7 +496,7 @@ public class CustomerMainView extends JFrame implements Observer {
 
     private void btn_profile_modifyActionPerformed(ActionEvent e) {
 
-        if(validateAddress() && validateContactNum() && validateContactNum()) {
+        if(validateAddress() && validateContactNum() && validateContactNum() && validateEmail()) {
             this.userModel.setAddress(tf_profile_address.getText().trim());
             this.userModel.setEmail(tf_profile_email.getText().trim());
             this.userModel.setContactNum(tf_profile_contactNumber.getText().trim());
@@ -547,10 +557,6 @@ public class CustomerMainView extends JFrame implements Observer {
         }
     }
 
-    private void cb_transfer_accountListActionPerformed(ActionEvent e) {
-        initCurrency();
-        initBalance();
-    }
 
     private Boolean validatePayeeComboBox() {
         if(cb_transfer_payeeList.getSelectedItem().toString()== "No payee found") {
@@ -623,16 +629,27 @@ public class CustomerMainView extends JFrame implements Observer {
 
     private void cb_transaction_accountListActionPerformed(ActionEvent e) {
         initTransactionInfo();
+        initTransactionModel();
+        initTransactionTable();
     }
 
     private void cb_transaction_filterActionPerformed(ActionEvent e) {
         initTransactionInfo();
+        initTransactionModel();
+        initTransactionTable();
     }
 
     public void run() {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
+
+    private void cb_transfer_accountListActionPerformed(ActionEvent e) {
+        System.out.println("selected INdex" + cb_transfer_accountList.getSelectedIndex());
+        initCurrency();
+        initBalance();
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents

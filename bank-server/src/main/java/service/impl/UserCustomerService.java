@@ -7,19 +7,16 @@ import entity.UserAccountEntity;
 import entity.UserEntity;
 import entity.UserHistoryEntity;
 import entity.UserPayeeEntity;
-import org.hibernate.type.CurrencyType;
 import org.iban4j.*;
 import rpc.*;
 import service.IUserCustomerHistoryService;
 import service.IUserCustomerService;
-import util.AccountNumberGenerator;
 import util.FaultFactory;
 import util.IBANValidator;
 import util.TimestampConvertHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class UserCustomerService implements IUserCustomerService {
     private static UserCustomerService instance = null;
@@ -138,10 +135,9 @@ public class UserCustomerService implements IUserCustomerService {
     public void transfer(Long payee_pk, Long user_pk, Long account_pk,
                          Double amount, String pin, String postScript, int currencyType) throws Exception {
         Double updatedBalance;
-
         validatePin(user_pk, pin);
         updatedBalance = updateBalanceFromUserAccount(user_pk, account_pk, amount);
-        transferToLocalPayee(payee_pk, amount);
+        transferToLocalPayee(payee_pk, chargeFees(userAccountDao.getUserAccountByPK(user_pk), amount));
         addTransferHistory(user_pk,
                 account_pk,
                 payee_pk,
@@ -153,7 +149,7 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     @Override
-    public List<UserTransactionsReply> getTransaction(Long user_pk, Long account_pk, int date) {
+    public List<UserTransactionsReply> getTransaction(Long user_pk, Long account_pk, int date) throws Exception {
         List<UserTransactionsReply> userTransactionsReplies = new ArrayList<>();
         try {
             for(UserHistoryEntity userHistoryEntity: getUserHistoryListByFilter(user_pk, account_pk, date)) {
@@ -169,7 +165,7 @@ public class UserCustomerService implements IUserCustomerService {
                 userTransactionsReplies.add(userTransactionsReply);
             }
         } catch (Exception E) {
-            FaultFactory.throwFaultException("fail to get transaction");
+            throw FaultFactory.throwFaultException("fail to get transaction");
         }
         return userTransactionsReplies;
     }
@@ -253,30 +249,30 @@ public class UserCustomerService implements IUserCustomerService {
 
     private Double updateBalanceFromUserAccount(Long user_pk, Long account_pk, Double amount) throws Exception {
         int updatedRows;
-        Double currentBalance;
+        Double latestBalance;
         try {
-            currentBalance = getCurrentBalance(userAccountDao.getUserAccountByPK(user_pk), amount);
-            updatedRows = userAccountDao.updateUserAccountByBalanceAndPk(currentBalance, account_pk);
+            latestBalance = getLatestBalance(userAccountDao.getUserAccountByPK(account_pk), amount);
+            updatedRows = userAccountDao.updateUserAccountByBalanceAndPk(latestBalance, account_pk);
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("fail to update balance in your account");
         }
         if(updatedRows <= 0) {
             throw FaultFactory.throwFaultException("fail to update balance in your account");
         }
-        return currentBalance;
+        return latestBalance;
     }
 
-    private Double getCurrentBalance(UserAccountEntity userAccountEntity, Double amount) throws Exception {
-        return userAccountEntity.getBalance() - chargeFees(userAccountEntity, amount);
+    private Double getLatestBalance(UserAccountEntity userAccountEntity, Double amount) {
+        return userAccountEntity.getBalance() - amount;
     }
 
     private Double chargeFees(UserAccountEntity userAccountEntity, Double amount) throws Exception {
-        Double fees = 0.0;
+        Double fees;
         try {
             fees = getFees(userAccountEntity);
             addChargeHistory(userAccountEntity, amount * fees);
         } catch (Exception E) {
-            FaultFactory.throwFaultException("Fail to charge fees");
+           throw FaultFactory.throwFaultException("Fail to charge fees");
         }
         return amount - (amount * fees);
     }
@@ -291,7 +287,7 @@ public class UserCustomerService implements IUserCustomerService {
 
     private void addChargeHistory(UserAccountEntity userAccountEntity, Double chargedAmount) throws Exception {
         try {
-            userCustomerHistoryService.addNewChargeHistory(userAccountEntity.getUserId(), userAccountEntity.getId(), chargedAmount * -1, userAccountEntity.getCurrencyType(), UserOperateType.CHARGE, UserOperateStatusType.SUCCESS);
+            userCustomerHistoryService.addNewChargeHistory(userAccountEntity.getUserId(), userAccountEntity.getId(), chargedAmount * -1, userAccountEntity.getBalance(), userAccountEntity.getCurrencyType(), UserOperateType.CHARGE, UserOperateStatusType.SUCCESS);
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("fail to add charge history");
         }
