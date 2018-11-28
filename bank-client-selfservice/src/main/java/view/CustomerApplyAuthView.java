@@ -5,6 +5,7 @@
 package view;
 
 import Const.UserType;
+import controller.CustomerApplyAuthController;
 import model.UserModel;
 import net.miginfocom.swing.MigLayout;
 import service.impl.CustomerApplyService;
@@ -18,159 +19,11 @@ import java.awt.event.ActionEvent;
  * @author xiangkai Tang
  */
 public class CustomerApplyAuthView extends JFrame {
+    private CustomerApplyAuthController customerApplyAuthController;
+
     public CustomerApplyAuthView() {
-        initComponents();
-        resetAllPanel();
-        initTextField();
-    }
-
-    private void btn_backActionPerformed(ActionEvent e) {
-        this.dispose();
-        new CustomerLoginView();
-    }
-
-    private void cb_isExistingActionPerformed(ActionEvent e) {
-        // choose the type of user
-        if(cb_isExisting.getSelectedIndex() == 0) {
-            resetAllPanel();
-            pack();
-        }
-        if(cb_isExisting.getSelectedIndex() == 1) {
-            resetAllPanel();
-            this.existingCustomerPanel.setVisible(true);
-            pack();
-        }
-        if(cb_isExisting.getSelectedIndex() == 2) {
-            resetAllPanel();
-            this.noneCustomerPanel.setVisible(true);
-            pack();
-        }
-    }
-
-    private void resetAllPanel() {
-        this.existingCustomerPanel.setVisible(false);
-        this.noneCustomerPanel.setVisible(false);
-    }
-
-
-    private void initTextField() {
-        tf_userId.setDocument(new JTextFieldLimit(10));
-        tf_firstName.setDocument(new JTextFieldLimit(20));
-        tf_lastName.setDocument(new JTextFieldLimit(20));
-        tf_identityNum.setDocument(new JTextFieldLimit(15));
-    }
-
-    private void btn_none_nextActionPerformed(ActionEvent e) {
-        // non-existing user
-        this.dispose();
-        new CustomerApplyView().run();
-    }
-
-
-    private void btn_customer_nextActionPerformed(ActionEvent e) {
-        // existing user
-        if(cb_isExisting.getSelectedIndex() == 1) {
-            // UserId validator
-            if(tf_userId.getText().trim().length() <= 0) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input UserId",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-                tf_userId.grabFocus();
-                return;
-            }
-            if(tf_userId.getText().trim().length() != 10) {
-                JOptionPane.showMessageDialog(null,
-                        "User id must be 10 digits",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-                tf_userId.grabFocus();
-                return;
-            }
-            if(!tf_userId.getText().trim().matches("^[0-9]*$")) {
-                JOptionPane.showMessageDialog(null,
-                        "User id should be numeric",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                tf_userId.grabFocus();
-                return;
-            }
-
-            // First Name validator
-            if(tf_firstName.getText().trim().length() <= 0) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your first name",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-                tf_firstName.grabFocus();
-                return;
-            } if(!tf_firstName.getText().trim().matches("^[a-zA-Z]+$")) {
-                JOptionPane.showMessageDialog(null,
-                        "First name should only contain characters",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-                tf_firstName.grabFocus();
-                return;
-            }
-
-            // Last name validator
-            if(tf_lastName.getText().trim().length() <= 0) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your last name",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-                tf_lastName.grabFocus();
-                return;
-            } if(!tf_lastName.getText().trim().matches("^[a-zA-Z]+$")) {
-                JOptionPane.showMessageDialog(null,
-                        "First name should only contain characters",
-                        "Error Message", JOptionPane.ERROR_MESSAGE);
-                tf_lastName.grabFocus();
-                return;
-            }
-
-            // identity type validator
-            if(cb_identityTypeList.getSelectedIndex() <= 0) {
-                JOptionPane.showMessageDialog(null,
-                        "Please select your identity type",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Identity number validator
-            if(tf_identityNum.getText().trim().length() <= 0) {
-                JOptionPane.showMessageDialog(null,
-                        "Please input your identity number",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                tf_identityNum.grabFocus();
-                return;
-            }
-            if(!tf_identityNum.getText().trim().matches("^[a-zA-Z0-9]*$")) {
-                JOptionPane.showMessageDialog(null,
-                        "Identity number should only contain numbers and letters",
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                tf_identityNum.grabFocus();
-                return;
-            }
-        }
-
-        Long userId = Long.parseLong(tf_userId.getText().trim());
-        String firstName = tf_firstName.getText().trim();
-        String lastName = tf_lastName.getText().trim();
-        int identityType = cb_identityTypeList.getSelectedIndex();
-        String identityNum = tf_identityNum.getText().trim();
-
-        UserModel userModel = new UserModel();
-        userModel.setUserId(userId);
-        userModel.setFirstName(firstName);
-        userModel.setLastName(lastName);
-
-        try {
-            CustomerApplyService.getInstance().checkExistingUserBeforeApply(userModel);
-
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            E.printStackTrace();
-            return;
-        }
-        this.dispose();
-        new CustomerApplyView(userId, identityType, identityNum, UserType.EXISTING_USER).run();
+        customerApplyAuthController = new CustomerApplyAuthController(this);
+        customerApplyAuthController.initialize();
     }
 
     public void run() {
@@ -178,7 +31,7 @@ public class CustomerApplyAuthView extends JFrame {
         this.setVisible(true);
     }
 
-    private void initComponents() {
+    public void initComponents() {
         setTitle("Apply view");
 
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -230,7 +83,7 @@ public class CustomerApplyAuthView extends JFrame {
             "Yes",
             "No"
         }));
-        cb_isExisting.addActionListener(e -> cb_isExistingActionPerformed(e));
+        cb_isExisting.addActionListener(e -> customerApplyAuthController.cb_isExistingActionPerformed(e));
         contentPane.add(cb_isExisting, "cell 2 1");
 
         //======== existingCustomerPanel ========
@@ -299,7 +152,7 @@ public class CustomerApplyAuthView extends JFrame {
             //---- btn_customer_next ----
             btn_customer_next.setText("Next");
             btn_customer_next.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-            btn_customer_next.addActionListener(e -> btn_customer_nextActionPerformed(e));
+            btn_customer_next.addActionListener(e -> customerApplyAuthController.btn_customer_nextActionPerformed(e));
             existingCustomerPanel.add(btn_customer_next, "cell 1 6 2 1");
         }
         contentPane.add(existingCustomerPanel, "cell 1 4 2 1");
@@ -320,7 +173,7 @@ public class CustomerApplyAuthView extends JFrame {
             btn_none_next.setText("Next");
             btn_none_next.setFont(new Font("Segoe UI", Font.PLAIN, 16));
             btn_none_next.setMinimumSize(new Dimension(150, 24));
-            btn_none_next.addActionListener(e -> btn_none_nextActionPerformed(e));
+            btn_none_next.addActionListener(e -> customerApplyAuthController.btn_none_nextActionPerformed(e));
             noneCustomerPanel.add(btn_none_next, "cell 0 1 1 2");
         }
         contentPane.add(noneCustomerPanel, "cell 1 3 2 1");
@@ -328,7 +181,7 @@ public class CustomerApplyAuthView extends JFrame {
         //---- btn_back ----
         btn_back.setText("Back");
         btn_back.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        btn_back.addActionListener(e -> btn_backActionPerformed(e));
+        btn_back.addActionListener(e -> customerApplyAuthController.btn_backActionPerformed(e));
         contentPane.add(btn_back, "cell 1 6 2 1");
         pack();
         setLocationRelativeTo(getOwner());
@@ -336,22 +189,22 @@ public class CustomerApplyAuthView extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel lbl_isExist;
-    private JComboBox<String> cb_isExisting;
-    private JPanel existingCustomerPanel;
-    private JLabel lbl_userId;
-    private JTextField tf_userId;
-    private JTextField tf_firstName;
-    private JLabel lbl_firstName;
-    private JLabel lbl_lastName;
-    private JTextField tf_lastName;
-    private JLabel lbl_identityType;
-    private JComboBox<String> cb_identityTypeList;
-    private JLabel lbl_identityNum;
-    private JTextField tf_identityNum;
-    private JButton btn_customer_next;
-    private JPanel noneCustomerPanel;
-    private JButton btn_none_next;
-    private JButton btn_back;
+    public JLabel lbl_isExist;
+    public JComboBox<String> cb_isExisting;
+    public JPanel existingCustomerPanel;
+    public JLabel lbl_userId;
+    public JTextField tf_userId;
+    public JTextField tf_firstName;
+    public JLabel lbl_firstName;
+    public JLabel lbl_lastName;
+    public JTextField tf_lastName;
+    public JLabel lbl_identityType;
+    public JComboBox<String> cb_identityTypeList;
+    public JLabel lbl_identityNum;
+    public JTextField tf_identityNum;
+    public JButton btn_customer_next;
+    public JPanel noneCustomerPanel;
+    public JButton btn_none_next;
+    public JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
