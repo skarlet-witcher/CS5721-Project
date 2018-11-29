@@ -3,114 +3,280 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="316.75" y="1351.0">view.StaffMainView</node>
-    <node x="1169.9484126984128" y="1516.0">service.impl.StaffLoginService</node>
-    <node x="677.0" y="744.0">view.StaffFrozenAccountInfoView</node>
-    <node x="0.0" y="315.0">view.StaffAddAccountInfoView</node>
-    <node x="137.5" y="102.0">service.impl.StaffService</node>
-    <node x="502.5" y="1783.0">view.StaffLoginView</node>
-    <node x="894.0" y="754.5">rpc.client.StaffRpc</node>
-    <node x="545.5" y="1995.0">StaffClient</node>
-    <node x="1262.0" y="788.0">service.IStaffLoginService</node>
-    <node x="137.5" y="0.0">service.IStaffService</node>
-    <node x="452.0" y="744.0">view.StaffRemoveAccountInfoView</node>
+    <node x="760.2211697722566" y="160.0">Const.UserAccountType</node>
+    <node x="1259.5246894409938" y="160.0">Const.CardCurrencyType</node>
+    <node x="461.8163561076605" y="550.0">view.StaffMainView</node>
+    <node x="1087.210222567288" y="260.0">Const.CardType</node>
+    <node x="93.01283643892316" y="350.0">controller.StaffLoginController</node>
+    <node x="143.23302277432708" y="260.0">service.impl.StaffLoginService</node>
+    <node x="10.5" y="450.0">view.StaffFrozenAccountInfoView</node>
+    <node x="282.75" y="350.0">util.JTextFieldLimit</node>
+    <node x="227.5" y="450.0">view.StaffLoginView</node>
+    <node x="939.2102225672879" y="260.0">Const.UserApplyType</node>
+    <node x="435.3996894409938" y="0.0">Const.Server</node>
+    <node x="1423.5246894409938" y="160.0">service.IStaffService</node>
+    <node x="420.8163561076605" y="630.0">view.StaffRemoveAccountInfoView</node>
+    <node x="91.05351966873718" y="80.0">model.StaffLoginModel</node>
+    <node x="1134.5246894409938" y="160.0">Const.CardStatus</node>
+    <node x="769.7663561076605" y="450.0">view.StaffAddAccountInfoView</node>
+    <node x="687.8163561076606" y="260.0">util.TimestampConvertHelper</node>
+    <node x="1205.210222567288" y="260.0">service.impl.StaffService</node>
+    <node x="920.2211697722566" y="160.0">Const.UserStatusType</node>
+    <node x="1555.5246894409938" y="160.0">Const.UserType</node>
+    <node x="302.8996894409938" y="160.0">rpc.client.StaffRpc</node>
+    <node x="93.89968944099382" y="160.0">service.IStaffLoginService</node>
+    <node x="424.3996894409938" y="80.0">app.StaffClient</node>
+    <node x="533.8163561076606" y="260.0">Const.UserGenderType</node>
+    <node x="774.3163561076606" y="350.0">controller.StaffAddAccountInfoController</node>
+    <node x="338.5201863354038" y="260.0">controller.BaseController</node>
+    <node x="247.39968944099382" y="80.0">Const.ResponseStatusType</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="service.impl.StaffLoginService" target="service.IStaffLoginService">
-      <point x="-25.75" y="-26.0" />
-      <point x="1247.1984126984128" y="1331.0" />
-      <point x="1285.6666666666665" y="1331.0" />
-      <point x="-47.333333333333336" y="15.0" />
+    <edge source="service.impl.StaffService" target="Const.UserAccountType">
+      <point x="-45.416666666666686" y="-15.0" />
+      <point x="1214.2935559006212" y="230.0" />
+      <point x="876.8878364389233" y="230.0" />
+      <point x="46.66666666666663" y="15.0" />
     </edge>
-    <edge source="view.StaffMainView" target="view.StaffLoginView">
-      <point x="93.25" y="191.0" />
-      <point x="0.0" y="-81.0" />
+    <edge source="controller.StaffLoginController" target="controller.BaseController">
+      <point x="57.75" y="-15.0" />
+      <point x="227.76283643892316" y="330.0" />
+      <point x="369.5201863354038" y="330.0" />
+      <point x="-31.0" y="15.0" />
     </edge>
-    <edge source="service.impl.StaffLoginService" target="rpc.client.StaffRpc">
-      <point x="-77.25" y="-26.0" />
-      <point x="1195.6984126984128" y="1331.0" />
-      <point x="1068.0" y="1331.0" />
-      <point x="0.0" y="48.5" />
+    <edge source="controller.StaffLoginController" target="view.StaffMainView">
+      <point x="-61.59999999999991" y="15.0" />
+      <point x="108.41283643892325" y="430.0" />
+      <point x="0.0" y="430.0" />
+      <point x="0.0" y="530.0" />
+      <point x="468.6496894409939" y="530.0" />
+      <point x="-54.66666666666663" y="-15.0" />
     </edge>
-    <edge source="view.StaffLoginView" target="view.StaffMainView">
-      <point x="-62.66666666666663" y="-81.0" />
-      <point x="533.8333333333334" y="1758.0" />
-      <point x="410.0" y="1758.0" />
-      <point x="-93.25" y="191.0" />
+    <edge source="controller.StaffAddAccountInfoController" target="service.impl.StaffService">
+      <point x="90.85714285714289" y="-15.0" />
+      <point x="971.1734989648035" y="330.0" />
+      <point x="1232.460222567288" y="330.0" />
+      <point x="-27.25" y="15.0" />
     </edge>
-    <edge source="view.StaffRemoveAccountInfoView" target="view.StaffMainView">
-      <point x="51.25" y="59.0" />
-      <point x="605.75" y="1311.0" />
-      <point x="556.5357142857142" y="1311.0" />
-      <point x="53.28571428571422" y="-191.0" />
+    <edge source="service.impl.StaffService" target="Const.CardCurrencyType">
+      <point x="9.083333333333314" y="-15.0" />
+      <point x="1268.7935559006212" y="220.0" />
+      <point x="1331.5246894409938" y="220.0" />
+      <point x="0.0" y="15.0" />
     </edge>
-    <edge source="view.StaffLoginView" target="service.impl.StaffLoginService">
-      <point x="62.66666666666663" y="-81.0" />
-      <point x="659.1666666666666" y="1758.0" />
-      <point x="1272.9484126984128" y="1758.0" />
-      <point x="0.0" y="26.0" />
+    <edge source="service.impl.StaffLoginService" target="model.StaffLoginModel">
+      <point x="27.59999999999991" y="-15.0" />
+      <point x="239.833022774327" y="240.0" />
+      <point x="246.39968944099382" y="240.0" />
+      <point x="246.39968944099382" y="140.0" />
+      <point x="210.05351966873718" y="140.0" />
+      <point x="51.0" y="15.0" />
     </edge>
-    <edge source="view.StaffMainView" target="service.impl.StaffService">
-      <point x="-53.285714285714334" y="-191.0" />
-      <point x="449.96428571428567" y="1331.0" />
-      <point x="441.5" y="1331.0" />
-      <point x="441.5" y="290.0" />
-      <point x="424.0" y="290.0" />
-      <point x="95.5" y="81.5" />
-    </edge>
-    <edge source="view.StaffMainView" target="view.StaffRemoveAccountInfoView">
-      <point x="0.0" y="-191.0" />
-      <point x="-51.25" y="59.0" />
-    </edge>
-    <edge source="StaffClient" target="view.StaffLoginView">
-      <point x="0.0" y="-15.0" />
-      <point x="0.0" y="81.0" />
-    </edge>
-    <edge source="view.StaffAddAccountInfoView" target="view.StaffMainView">
-      <point x="107.75" y="488.0" />
-      <point x="323.25" y="1321.0" />
-      <point x="396.67857142857133" y="1321.0" />
-      <point x="-106.57142857142867" y="-191.0" />
-    </edge>
-    <edge source="view.StaffMainView" target="view.StaffFrozenAccountInfoView">
-      <point x="106.57142857142856" y="-191.0" />
-      <point x="609.8214285714286" y="1321.0" />
-      <point x="726.25" y="1321.0" />
-      <point x="-49.25" y="59.0" />
-    </edge>
-    <edge source="view.StaffAddAccountInfoView" target="service.impl.StaffService">
-      <point x="0.0" y="-488.0" />
-      <point x="215.5" y="290.0" />
-      <point x="233.0" y="290.0" />
-      <point x="-95.5" y="81.5" />
+    <edge source="controller.StaffAddAccountInfoController" target="util.TimestampConvertHelper">
+      <point x="-30.285714285714334" y="-15.0" />
+      <point x="850.0306418219461" y="310.0" />
+      <point x="778.8163561076606" y="310.0" />
+      <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="service.IStaffService">
-      <point x="0.0" y="-81.5" />
-      <point x="0.0" y="26.0" />
+      <point x="27.25" y="-15.0" />
+      <point x="1286.960222567288" y="230.0" />
+      <point x="1479.5246894409938" y="230.0" />
+      <point x="0.0" y="15.0" />
     </edge>
-    <edge source="view.StaffMainView" target="view.StaffAddAccountInfoView">
-      <point x="-159.8571428571429" y="-191.0" />
-      <point x="343.3928571428571" y="1331.0" />
-      <point x="107.75" y="1331.0" />
-      <point x="-107.75" y="488.0" />
+    <edge source="controller.StaffAddAccountInfoController" target="view.StaffAddAccountInfoView">
+      <point x="0.0" y="15.0" />
+      <point x="880.3163561076606" y="430.0" />
+      <point x="884.7663561076605" y="430.0" />
+      <point x="23.0" y="-15.0" />
     </edge>
     <edge source="view.StaffFrozenAccountInfoView" target="view.StaffMainView">
-      <point x="49.25" y="59.0" />
-      <point x="824.75" y="1331.0" />
-      <point x="663.1071428571429" y="1331.0" />
-      <point x="159.8571428571429" y="-191.0" />
+      <point x="49.25" y="15.0" />
+      <point x="158.25" y="510.0" />
+      <point x="495.98302277432714" y="510.0" />
+      <point x="-27.33333333333337" y="-15.0" />
+    </edge>
+    <edge source="service.impl.StaffLoginService" target="service.IStaffLoginService">
+      <point x="0.0" y="-15.0" />
+      <point x="47.33333333333326" y="15.0" />
+    </edge>
+    <edge source="view.StaffMainView" target="view.StaffLoginView">
+      <point x="-13.666666666666629" y="-15.0" />
+      <point x="509.6496894409939" y="500.0" />
+      <point x="290.5" y="500.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.StaffLoginService" target="rpc.client.StaffRpc">
+      <point x="55.200000000000045" y="-15.0" />
+      <point x="267.4330227743271" y="240.0" />
+      <point x="348.8996894409938" y="240.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.StaffService" target="Const.UserType">
+      <point x="45.416666666666686" y="-15.0" />
+      <point x="1305.1268892339547" y="240.0" />
+      <point x="1579.5246894409938" y="240.0" />
+      <point x="-24.0" y="15.0" />
+    </edge>
+    <edge source="rpc.client.StaffRpc" target="app.StaffClient">
+      <point x="23.0" y="-15.0" />
+      <point x="371.8996894409938" y="140.0" />
+      <point x="449.8996894409938" y="140.0" />
+      <point x="-25.5" y="15.0" />
+    </edge>
+    <edge source="view.StaffMainView" target="Const.UserAccountType">
+      <point x="0.0" y="-15.0" />
+      <point x="523.3163561076606" y="240.0" />
+      <point x="783.55450310559" y="240.0" />
+      <point x="-46.66666666666663" y="15.0" />
+    </edge>
+    <edge source="controller.StaffAddAccountInfoController" target="Const.UserApplyType">
+      <point x="30.28571428571422" y="-15.0" />
+      <point x="910.6020703933748" y="310.0" />
+      <point x="1003.2102225672879" y="310.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="rpc.client.StaffRpc" target="Const.ResponseStatusType">
+      <point x="-23.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="view.StaffAddAccountInfoView" target="controller.StaffAddAccountInfoController">
+      <point x="-69.0" y="-15.0" />
+      <point x="792.7663561076605" y="430.0" />
+      <point x="795.5163561076606" y="430.0" />
+      <point x="-84.79999999999995" y="15.0" />
+    </edge>
+    <edge source="controller.StaffAddAccountInfoController" target="Const.UserAccountType">
+      <point x="0.0" y="-15.0" />
+      <point x="880.3163561076606" y="240.0" />
+      <point x="830.2211697722566" y="240.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="view.StaffLoginView" target="util.JTextFieldLimit">
+      <point x="31.5" y="-15.0" />
+      <point x="322.0" y="420.0" />
+      <point x="344.25" y="420.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="view.StaffRemoveAccountInfoView" target="view.StaffMainView">
+      <point x="-51.25" y="-15.0" />
+      <point x="472.0663561076605" y="605.0" />
+      <point x="492.5663561076605" y="605.0" />
+      <point x="-30.75" y="15.0" />
+    </edge>
+    <edge source="controller.StaffAddAccountInfoController" target="Const.CardType">
+      <point x="60.57142857142867" y="-15.0" />
+      <point x="940.8877846790892" y="320.0" />
+      <point x="1136.210222567288" y="320.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.StaffLoginController" target="model.StaffLoginModel">
+      <point x="-57.75" y="-15.0" />
+      <point x="112.26283643892316" y="330.0" />
+      <point x="72.39968944099382" y="330.0" />
+      <point x="72.39968944099382" y="130.0" />
+      <point x="108.05351966873718" y="130.0" />
+      <point x="-51.0" y="15.0" />
+    </edge>
+    <edge source="service.IStaffLoginService" target="model.StaffLoginModel">
+      <point x="0.0" y="-15.0" />
+      <point x="164.89968944099382" y="140.0" />
+      <point x="176.05351966873718" y="140.0" />
+      <point x="17.0" y="15.0" />
+    </edge>
+    <edge source="view.StaffMainView" target="view.StaffRemoveAccountInfoView">
+      <point x="30.75" y="15.0" />
+      <point x="554.0663561076606" y="605.0" />
+      <point x="574.5663561076606" y="605.0" />
+      <point x="51.25" y="-15.0" />
+    </edge>
+    <edge source="service.impl.StaffService" target="Const.CardStatus">
+      <point x="-9.083333333333314" y="-15.0" />
+      <point x="1250.6268892339547" y="210.0" />
+      <point x="1187.0246894409938" y="210.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="view.StaffMainView" target="Const.UserType">
+      <point x="54.66666666666663" y="-15.0" />
+      <point x="577.9830227743271" y="530.0" />
+      <point x="1627.5246894409938" y="530.0" />
+      <point x="24.0" y="15.0" />
+    </edge>
+    <edge source="controller.StaffAddAccountInfoController" target="Const.UserGenderType">
+      <point x="-60.571428571428555" y="-15.0" />
+      <point x="819.7449275362319" y="320.0" />
+      <point x="600.8163561076606" y="320.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.StaffLoginController" target="view.StaffLoginView">
+      <point x="30.799999999999955" y="15.0" />
+      <point x="200.8128364389231" y="410.0" />
+      <point x="280.0" y="410.0" />
+      <point x="-10.5" y="-15.0" />
+    </edge>
+    <edge source="controller.StaffAddAccountInfoController" target="view.StaffMainView">
+      <point x="84.79999999999995" y="15.0" />
+      <point x="964.2663561076605" y="510.0" />
+      <point x="550.6496894409938" y="510.0" />
+      <point x="27.33333333333337" y="-15.0" />
+    </edge>
+    <edge source="service.impl.StaffService" target="Const.UserStatusType">
+      <point x="-27.25" y="-15.0" />
+      <point x="1232.460222567288" y="220.0" />
+      <point x="984.7211697722566" y="220.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="view.StaffLoginView" target="controller.StaffLoginController">
+      <point x="-52.5" y="-15.0" />
+      <point x="238.0" y="430.0" />
+      <point x="139.2128364389232" y="430.0" />
+      <point x="-30.799999999999955" y="15.0" />
+    </edge>
+    <edge source="controller.StaffLoginController" target="service.impl.StaffLoginService">
+      <point x="19.25" y="-15.0" />
+      <point x="189.26283643892316" y="330.0" />
+      <point x="212.23302277432708" y="330.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="app.StaffClient" target="view.StaffLoginView">
+      <point x="25.5" y="15.0" />
+      <point x="500.8996894409938" y="430.0" />
+      <point x="343.0" y="430.0" />
+      <point x="52.5" y="-15.0" />
+    </edge>
+    <edge source="view.StaffMainView" target="service.impl.StaffService">
+      <point x="41.0" y="-15.0" />
+      <point x="564.3163561076606" y="520.0" />
+      <point x="1286.960222567288" y="520.0" />
+      <point x="27.25" y="15.0" />
+    </edge>
+    <edge source="view.StaffMainView" target="view.StaffFrozenAccountInfoView">
+      <point x="-41.0" y="-15.0" />
+      <point x="482.3163561076605" y="520.0" />
+      <point x="59.75" y="520.0" />
+      <point x="-49.25" y="15.0" />
+    </edge>
+    <edge source="app.StaffClient" target="Const.Server">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="view.StaffMainView" target="view.StaffAddAccountInfoView">
+      <point x="13.666666666666629" y="-15.0" />
+      <point x="536.9830227743271" y="500.0" />
+      <point x="861.7663561076605" y="500.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.StaffAddAccountInfoController" target="controller.BaseController">
+      <point x="-90.85714285714289" y="-15.0" />
+      <point x="789.4592132505177" y="330.0" />
+      <point x="431.5201863354038" y="330.0" />
+      <point x="31.0" y="15.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.7520547945205479" x="1008.568306010929" y="345.0" />
-  <SelectedNodes>
-    <node>service.impl.StaffService</node>
-  </SelectedNodes>
-  <Categories>
-    <Category>Inner Classes</Category>
-    <Category>Properties</Category>
-    <Category>Fields</Category>
-  </Categories>
+  <settings layout="Hierarchic Group" zoom="0.5000000000000001" x="816.9999999999998" y="528.9999999999999" />
+  <SelectedNodes />
+  <Categories />
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>

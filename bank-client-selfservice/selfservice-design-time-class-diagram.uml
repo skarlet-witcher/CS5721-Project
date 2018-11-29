@@ -3,73 +3,1142 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="2045.0" y="0.0">service.ICustomerApplyService</node>
-    <node x="0.0" y="2948.0">service.impl.CustomerHomeService</node>
-    <node x="2650.0" y="0.0">view.CustomerForgotPINView</node>
-    <node x="1230.0" y="2847.0">rpc.client.CustomerApplyRpc</node>
-    <node x="827.0" y="2407.0">service.ICustomerPayeeService</node>
-    <node x="1250.0" y="2407.0">service.ICustomerProfileService</node>
-    <node x="2609.5" y="2407.0">service.ICustomerTransferService</node>
-    <node x="0.0" y="2596.0">service.impl.CustomerLoginService</node>
-    <node x="2573.0" y="2508.0">service.impl.CustomerTransferService</node>
-    <node x="1734.0" y="2847.0">BankClient</node>
-    <node x="2143.0" y="2508.0">service.impl.CustomerTransactionService</node>
-    <node x="1647.0" y="0.0">view.CustomerApplyAuthView</node>
-    <node x="827.0" y="2552.0">service.impl.CustomerPayeeService</node>
-    <node x="359.0" y="2847.0">rpc.client.CustomerPayeeRpc</node>
-    <node x="0.0" y="0.0">view.CustomerMainView</node>
-    <node x="481.0" y="2407.0">view.CustomerAddPayeeView</node>
-    <node x="4.5" y="2847.0">service.ICustomerHomeService</node>
-    <node x="2045.0" y="277.0">service.impl.CustomerApplyService</node>
-    <node x="1257.0" y="0.0">view.CustomerLoginView</node>
-    <node x="1225.0" y="2530.0">service.impl.CustomerProfileService</node>
-    <node x="837.0" y="0.0">view.CustomerPINView</node>
-    <node x="841.0" y="2847.0">rpc.client.CustomerLoginRpc</node>
-    <node x="2143.0" y="2407.0">service.ICustomerTransactionService</node>
-    <node x="1585.0" y="2407.0">rpc.client.UserCustomerRpc</node>
-    <node x="437.0" y="0.0">view.CustomerApplyView</node>
-    <node x="0.0" y="2407.0">service.ICustomerLoginService</node>
+    <node x="3617.5595380044183" y="780.0">Const.UserOperateType</node>
+    <node x="2394.236682541512" y="780.0">service.impl.CustomerHomeService</node>
+    <node x="1652.5146662095465" y="780.0">Const.UserAccountType</node>
+    <node x="4555.146923535554" y="1080.0">view.CustomerForgotPINView</node>
+    <node x="3029.976204671085" y="780.0">Const.CardCurrencyType</node>
+    <node x="229.65216620954652" y="250.0">model.UserApplyNewPersonalAccountBaseModel</node>
+    <node x="5039.105196886447" y="600.0">Const.PinReplyType</node>
+    <node x="4324.505326603292" y="1080.0">util.KeyPadGenerator</node>
+    <node x="5490.832012211842" y="250.0">model.UserForgotUserIdModel</node>
+    <node x="3563.5595380044183" y="120.0">service.ICustomerPayeeService</node>
+    <node x="3933.7326923076917" y="120.0">model.Subject</node>
+    <node x="2655.351204671085" y="600.0">service.ICustomerProfileService</node>
+    <node x="1548.2146662095465" y="1270.0">view.CustomerApplyAuthView</node>
+    <node x="5575.428486776453" y="1560.0">controller.CustomerForgotUserIdController</node>
+    <node x="1563.9717110671263" y="120.0">rpc.client.CustomerPayeeRpc</node>
+    <node x="4272.999999071544" y="250.0">util.JTextFieldLimit</node>
+    <node x="4892.582012211842" y="250.0">model.UserForgotPINModel</node>
+    <node x="4110.321297926128" y="780.0">view.CustomerAddPayeeView</node>
+    <node x="147.15216620954652" y="780.0">service.impl.CustomerApplyService</node>
+    <node x="2257.5146662095467" y="600.0">rpc.client.CustomerMainRpc</node>
+    <node x="26.050000000000182" y="1470.0">Const.Server</node>
+    <node x="4561.746923535554" y="970.0">controller.CustomerForgotPINController</node>
+    <node x="1140.2246947351605" y="600.0">model.UserApplyNewAccountFactory</node>
+    <node x="5541.261820109786" y="1270.0">util.RandomUtil</node>
+    <node x="3225.976204671085" y="970.0">controller.CustomerMainController</node>
+    <node x="4433.309423535554" y="1270.0">view.CustomerPINView</node>
+    <node x="5562.761820109786" y="1370.0">util.PINFieldSetter</node>
+    <node x="4404.434423535554" y="1190.0">controller.CustomerPINController</node>
+    <node x="1835.5146662095465" y="600.0">service.ICustomerTransactionService</node>
+    <node x="3342.976204671085" y="780.0">model.UserTransactionModel</node>
+    <node x="4846.246923535554" y="1370.0">controller.CustomerLoginController</node>
+    <node x="1516.0146662095465" y="1190.0">controller.CustomerApplyAuthController</node>
+    <node x="1280.4738772766727" y="1080.0">view.CustomerApplyView</node>
+    <node x="5177.105196886447" y="600.0">service.ICustomerLoginService</node>
+    <node x="5276.207012211842" y="250.0">model.UserLoginRequestModel</node>
+    <node x="2677.947358517239" y="250.0">model.UserModel</node>
+    <node x="603.7741825415123" y="600.0">service.ICustomerApplyService</node>
+    <node x="819.3467110671263" y="120.0">model.UserApplyNewRequestBaseModel</node>
+    <node x="79.05000000000018" y="600.0">rpc.client.CustomerApplyRpc</node>
+    <node x="88.65216620954652" y="1560.0">app.MainApp</node>
+    <node x="521.6521662095465" y="250.0">model.UserApplyNewGoldenAccountBaseModel</node>
+    <node x="5056.355196886447" y="780.0">service.impl.CustomerLoginService</node>
+    <node x="3836.392871337752" y="600.0">service.ICustomerTransferService</node>
+    <node x="3777.5595380044183" y="780.0">service.impl.CustomerTransferService</node>
+    <node x="1870.1813328762132" y="780.0">service.impl.CustomerTransactionService</node>
+    <node x="1094.6521662095465" y="250.0">model.UserApplyNewYoungSaverAccountBaseModel</node>
+    <node x="3112.2005572209728" y="120.0">model.UserAccountModel</node>
+    <node x="3936.5838905543055" y="0.0">model.Observer</node>
+    <node x="3565.5595380044183" y="250.0">service.impl.CustomerPayeeService</node>
+    <node x="2054.5146662095467" y="600.0">util.TimestampConvertHelper</node>
+    <node x="4124.380852106982" y="1080.0">view.CustomerMainView</node>
+    <node x="4134.457012211842" y="600.0">controller.CustomerAddPayeeController</node>
+    <node x="3193.976204671085" y="780.0">Const.UserStatusType</node>
+    <node x="2422.5146662095467" y="600.0">service.ICustomerHomeService</node>
+    <node x="1479.0146662095465" y="780.0">Const.UserType</node>
+    <node x="4792.246923535554" y="1470.0">view.CustomerLoginView</node>
+    <node x="806.6521662095465" y="250.0">model.UserApplyNewStudentAccountBaseModel</node>
+    <node x="3622.533890554306" y="0.0">model.UserPayeeModel</node>
+    <node x="3835.981249071545" y="250.0">model.UserTransferModel</node>
+    <node x="2875.976204671085" y="780.0">Const.UserGenderType</node>
+    <node x="2656.851204671085" y="780.0">service.impl.CustomerProfileService</node>
+    <node x="4128.999999071544" y="250.0">controller.BaseController</node>
+    <node x="4803.699320109786" y="1270.0">Const.UserLoginType</node>
+    <node x="62.65216620954652" y="1640.0">rpc.client.CustomerLoginRpc</node>
+    <node x="4717.019512211842" y="250.0">model.UserLoginPINModel</node>
+    <node x="1248.773877276673" y="970.0">controller.CustomerApplyController</node>
+    <node x="1008.5967110671263" y="0.0">Const.ResponseStatusType</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="service.impl.CustomerProfileService" target="service.ICustomerProfileService">
-      <point x="0.0" y="-59.0" />
-      <point x="0.0" y="36.5" />
+    <edge source="service.impl.CustomerLoginService" target="model.UserForgotPINModel">
+      <point x="-36.666666666666515" y="-15.0" />
+      <point x="5102.188530219781" y="690.0" />
+      <point x="5028.605196886447" y="690.0" />
+      <point x="5028.605196886447" y="580.0" />
+      <point x="4992.582012211842" y="580.0" />
+      <point x="20.0" y="15.0" />
     </edge>
-    <edge source="service.impl.CustomerLoginService" target="service.ICustomerLoginService">
-      <point x="0.0" y="-103.0" />
-      <point x="0.0" y="69.5" />
+    <edge source="model.UserTransferModel" target="model.UserAccountModel">
+      <point x="-63.00000000000023" y="-15.0" />
+      <point x="3846.4812490715444" y="190.0" />
+      <point x="3223.2005572209728" y="190.0" />
+      <point x="37.0" y="15.0" />
     </edge>
-    <edge source="service.impl.CustomerTransactionService" target="service.ICustomerTransactionService">
-      <point x="0.0" y="-48.0" />
-      <point x="0.0" y="25.5" />
+    <edge source="controller.CustomerMainController" target="service.impl.CustomerTransactionService">
+      <point x="-78.28846153846143" y="-15.0" />
+      <point x="3236.187743132624" y="940.0" />
+      <point x="1968.1813328762132" y="940.0" />
+      <point x="0.0" y="15.0" />
     </edge>
-    <edge source="service.impl.CustomerTransferService" target="service.ICustomerTransferService">
-      <point x="0.0" y="-48.0" />
-      <point x="0.0" y="25.5" />
+    <edge source="rpc.client.CustomerApplyRpc" target="app.MainApp">
+      <point x="-37.5" y="15.0" />
+      <point x="116.55000000000018" y="1520.0" />
+      <point x="136.65216620954652" y="1520.0" />
+      <point x="0.0" y="-15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="model.UserTransferModel">
+      <point x="44.25" y="-15.0" />
+      <point x="3358.726204671085" y="890.0" />
+      <point x="3767.0595380044183" y="890.0" />
+      <point x="3767.0595380044183" y="510.0" />
+      <point x="3850.6812490715447" y="510.0" />
+      <point x="-58.799999999999955" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerPINController" target="util.TimestampConvertHelper">
+      <point x="-46.36363636363649" y="-15.0" />
+      <point x="4443.070787171917" y="1150.0" />
+      <point x="2140.0146662095467" y="1150.0" />
+      <point x="2140.0146662095467" y="740.0" />
+      <point x="2122.7646662095467" y="740.0" />
+      <point x="-22.75" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="util.JTextFieldLimit">
+      <point x="45.5" y="-15.0" />
+      <point x="1385.273877276673" y="930.0" />
+      <point x="1464.6146662095464" y="930.0" />
+      <point x="1464.6146662095464" y="560.0" />
+      <point x="4280.687499071544" y="560.0" />
+      <point x="-53.8125" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerApplyService" target="rpc.client.CustomerApplyRpc">
+      <point x="-75.14999999999964" y="-15.0" />
+      <point x="155.50216620954689" y="650.0" />
+      <point x="191.55000000000018" y="650.0" />
+      <point x="37.5" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerApplyService" target="util.TimestampConvertHelper">
+      <point x="75.14999999999964" y="-15.0" />
+      <point x="305.80216620954616" y="740.0" />
+      <point x="2077.2646662095467" y="740.0" />
+      <point x="-68.25" y="15.0" />
+    </edge>
+    <edge source="rpc.client.CustomerPayeeRpc" target="app.MainApp">
+      <point x="-37.5" y="15.0" />
+      <point x="1601.4717110671263" y="230.0" />
+      <point x="15.550000000000182" y="230.0" />
+      <point x="15.550000000000182" y="1540.0" />
+      <point x="98.25216620954643" y="1540.0" />
+      <point x="-38.40000000000009" y="-15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyAuthController" target="Const.UserType">
+      <point x="-29.71428571428578" y="-15.0" />
+      <point x="1590.3003804952607" y="1150.0" />
+      <point x="1551.0146662095465" y="1150.0" />
+      <point x="24.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerApplyService" target="model.UserApplyNewGoldenAccountBaseModel">
+      <point x="-41.75" y="-15.0" />
+      <point x="188.90216620954652" y="670.0" />
+      <point x="484.83668254151235" y="670.0" />
+      <point x="484.83668254151235" y="580.0" />
+      <point x="554.7771662095465" y="580.0" />
+      <point x="-99.375" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerLoginService" target="model.UserForgotUserIdModel">
+      <point x="73.33333333333348" y="-15.0" />
+      <point x="5212.188530219781" y="760.0" />
+      <point x="5461.386820109786" y="760.0" />
+      <point x="5461.386820109786" y="580.0" />
+      <point x="5556.457012211842" y="580.0" />
+      <point x="-21.875" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerForgotUserIdController" target="view.CustomerLoginView">
+      <point x="-92.08333333333334" y="-15.0" />
+      <point x="5593.845153443119" y="1540.0" />
+      <point x="4906.996923535554" y="1540.0" />
+      <point x="38.25" y="15.0" />
+    </edge>
+    <edge source="model.UserModel" target="model.UserAccountModel">
+      <point x="13.125" y="-15.0" />
+      <point x="2743.572358517239" y="210.0" />
+      <point x="3124.533890554306" y="210.0" />
+      <point x="-61.666666666666515" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="view.CustomerLoginView">
+      <point x="-72.80000000000018" y="15.0" />
+      <point x="1266.9738772766727" y="1060.0" />
+      <point x="1269.9738772766727" y="1060.0" />
+      <point x="1269.9738772766727" y="1450.0" />
+      <point x="4800.746923535554" y="1450.0" />
+      <point x="-68.0" y="-15.0" />
+    </edge>
+    <edge source="controller.CustomerForgotUserIdController" target="controller.BaseController">
+      <point x="-18.416666666666515" y="-15.0" />
+      <point x="5667.511820109787" y="1530.0" />
+      <point x="5706.261820109786" y="1530.0" />
+      <point x="5706.261820109786" y="330.0" />
+      <point x="4245.249999071544" y="330.0" />
+      <point x="54.25" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerForgotUserIdController" target="util.JTextFieldLimit">
+      <point x="18.416666666666515" y="-15.0" />
+      <point x="5704.345153443119" y="1540.0" />
+      <point x="5717.261820109786" y="1540.0" />
+      <point x="5717.261820109786" y="320.0" />
+      <point x="4388.312499071544" y="320.0" />
+      <point x="53.8125" y="15.0" />
+    </edge>
+    <edge source="model.UserApplyNewAccountFactory" target="model.UserApplyNewStudentAccountBaseModel">
+      <point x="0.0" y="-15.0" />
+      <point x="1244.2246947351605" y="370.0" />
+      <point x="974.1521662095465" y="370.0" />
+      <point x="33.5" y="15.0" />
+    </edge>
+    <edge source="service.ICustomerApplyService" target="model.UserModel">
+      <point x="68.0" y="-15.0" />
+      <point x="756.7741825415123" y="450.0" />
+      <point x="2681.697358517239" y="450.0" />
+      <point x="-48.75" y="15.0" />
+    </edge>
+    <edge source="model.UserTransferModel" target="model.UserPayeeModel">
+      <point x="-21.000000000000227" y="-15.0" />
+      <point x="3888.4812490715444" y="170.0" />
+      <point x="3870.9812490715444" y="170.0" />
+      <point x="3870.9812490715444" y="90.0" />
+      <point x="3710.933890554306" y="90.0" />
+      <point x="20.40000000000009" y="15.0" />
+    </edge>
+    <edge source="service.ICustomerPayeeService" target="model.UserPayeeModel">
+      <point x="0.0" y="-15.0" />
+      <point x="3648.5595380044183" y="100.0" />
+      <point x="3683.7338905543056" y="100.0" />
+      <point x="-6.800000000000182" y="15.0" />
+    </edge>
+    <edge source="service.ICustomerLoginService" target="model.UserLoginRequestModel">
+      <point x="21.0" y="-15.0" />
+      <point x="5282.105196886447" y="580.0" />
+      <point x="5298.332012211842" y="580.0" />
+      <point x="-66.375" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="Const.CardCurrencyType">
+      <point x="-10.211538461538566" y="-15.0" />
+      <point x="3304.2646662095467" y="840.0" />
+      <point x="3101.976204671085" y="840.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerLoginController" target="Const.UserLoginType">
+      <point x="-20.0" y="-15.0" />
+      <point x="4916.246923535554" y="1320.0" />
+      <point x="4866.699320109786" y="1320.0" />
+      <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.CustomerPayeeService" target="service.ICustomerPayeeService">
-      <point x="0.0" y="-70.0" />
-      <point x="0.0" y="47.5" />
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
     </edge>
-    <edge source="service.impl.CustomerHomeService" target="service.ICustomerHomeService">
-      <point x="0.0" y="-48.0" />
-      <point x="0.0" y="25.5" />
+    <edge source="model.UserApplyNewAccountFactory" target="model.UserApplyNewGoldenAccountBaseModel">
+      <point x="-41.600000000000364" y="-15.0" />
+      <point x="1202.6246947351601" y="380.0" />
+      <point x="753.5271662095465" y="380.0" />
+      <point x="99.375" y="15.0" />
+    </edge>
+    <edge source="view.CustomerPINView" target="controller.CustomerPINController">
+      <point x="-53.25" y="-15.0" />
+      <point x="4451.059423535554" y="1245.0" />
+      <point x="4455.434423535554" y="1245.0" />
+      <point x="-34.0" y="15.0" />
+    </edge>
+    <edge source="rpc.client.CustomerApplyRpc" target="Const.ResponseStatusType">
+      <point x="0.0" y="-15.0" />
+      <point x="154.05000000000018" y="100.0" />
+      <point x="1067.4717110671263" y="100.0" />
+      <point x="-19.625" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerPINController" target="controller.BaseController">
+      <point x="0.0" y="-15.0" />
+      <point x="4489.434423535554" y="1160.0" />
+      <point x="4499.999999071544" y="1160.0" />
+      <point x="4499.999999071544" y="420.0" />
+      <point x="4198.749999071544" y="420.0" />
+      <point x="7.75" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerForgotPINController" target="service.impl.CustomerLoginService">
+      <point x="82.39999999999998" y="-15.0" />
+      <point x="4747.146923535554" y="940.0" />
+      <point x="5072.855196886447" y="940.0" />
+      <point x="-66.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="controller.BaseController">
+      <point x="27.300000000000182" y="-15.0" />
+      <point x="1367.073877276673" y="920.0" />
+      <point x="1453.6146662095464" y="920.0" />
+      <point x="1453.6146662095464" y="530.0" />
+      <point x="4136.749999071544" y="530.0" />
+      <point x="-54.25" y="15.0" />
+    </edge>
+    <edge source="rpc.client.CustomerMainRpc" target="Const.ResponseStatusType">
+      <point x="0.0" y="-15.0" />
+      <point x="2330.0146662095467" y="50.0" />
+      <point x="1145.9717110671263" y="50.0" />
+      <point x="58.875" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerForgotUserIdController" target="model.UserForgotUserIdModel">
+      <point x="92.08333333333348" y="-15.0" />
+      <point x="5778.011820109787" y="1530.0" />
+      <point x="5739.261820109786" y="1530.0" />
+      <point x="5739.261820109786" y="300.0" />
+      <point x="5643.957012211842" y="300.0" />
+      <point x="65.625" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="service.impl.CustomerTransferService">
+      <point x="51.05769230769238" y="-15.0" />
+      <point x="3365.533896978777" y="900.0" />
+      <point x="3866.5595380044183" y="900.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerAddPayeeController" target="model.UserModel">
+      <point x="-58.28571428571422" y="-15.0" />
+      <point x="4178.171297926127" y="470.0" />
+      <point x="2779.197358517239" y="470.0" />
+      <point x="48.75" y="15.0" />
+    </edge>
+    <edge source="model.UserApplyNewAccountFactory" target="model.UserApplyNewYoungSaverAccountBaseModel">
+      <point x="41.600000000000364" y="-15.0" />
+      <point x="1285.8246947351608" y="440.0" />
+      <point x="1275.9021662095465" y="440.0" />
+      <point x="36.25" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerApplyService" target="model.UserApplyNewPersonalAccountBaseModel">
+      <point x="-58.44999999999982" y="-15.0" />
+      <point x="172.2021662095467" y="660.0" />
+      <point x="239.55000000000018" y="660.0" />
+      <point x="239.55000000000018" y="580.0" />
+      <point x="263.6521662095465" y="580.0" />
+      <point x="-102.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="service.impl.CustomerApplyService">
+      <point x="-81.89999999999964" y="-15.0" />
+      <point x="1257.8738772766733" y="940.0" />
+      <point x="272.4021662095465" y="940.0" />
+      <point x="41.75" y="15.0" />
+    </edge>
+    <edge source="service.ICustomerTransferService" target="model.UserTransferModel">
+      <point x="0.0" y="-15.0" />
+      <point x="3926.892871337752" y="520.0" />
+      <point x="3909.481249071545" y="520.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="view.CustomerApplyView">
+      <point x="36.399999999999636" y="15.0" />
+      <point x="1376.1738772766726" y="1060.0" />
+      <point x="1377.3488772766727" y="1060.0" />
+      <point x="19.375" y="-15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="service.impl.CustomerHomeService">
+      <point x="-57.865384615384755" y="-15.0" />
+      <point x="3256.6108200557" y="910.0" />
+      <point x="2478.236682541512" y="910.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerProfileService" target="rpc.client.CustomerMainRpc">
+      <point x="-67.59999999999991" y="-15.0" />
+      <point x="2673.7512046710854" y="750.0" />
+      <point x="2359.0146662095467" y="750.0" />
+      <point x="29.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerLoginService" target="rpc.client.CustomerLoginRpc">
+      <point x="33.0" y="15.0" />
+      <point x="5171.855196886447" y="950.0" />
+      <point x="5528.470153443119" y="950.0" />
+      <point x="5528.470153443119" y="1615.0" />
+      <point x="185.98549954287955" y="1615.0" />
+      <point x="49.33333333333303" y="-15.0" />
+    </edge>
+    <edge source="service.ICustomerApplyService" target="model.UserApplyNewYoungSaverAccountBaseModel">
+      <point x="34.0" y="-15.0" />
+      <point x="722.7741825415123" y="430.0" />
+      <point x="1130.9021662095465" y="430.0" />
+      <point x="-108.75" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerTransferService" target="service.ICustomerTransferService">
+      <point x="35.59999999999991" y="-15.0" />
+      <point x="3902.159538004418" y="760.0" />
+      <point x="3926.892871337752" y="760.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyAuthController" target="service.impl.CustomerApplyService">
+      <point x="-89.14285714285734" y="-15.0" />
+      <point x="1530.8718090666891" y="1170.0" />
+      <point x="808.8217110671267" y="1170.0" />
+      <point x="808.8217110671267" y="950.0" />
+      <point x="188.90216620954652" y="950.0" />
+      <point x="-41.75" y="15.0" />
+    </edge>
+    <edge source="view.CustomerAddPayeeView" target="controller.CustomerAddPayeeController">
+      <point x="-35.40000000000009" y="-15.0" />
+      <point x="4163.421297926127" y="760.0" />
+      <point x="4149.0284407832705" y="760.0" />
+      <point x="-87.42857142857133" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerAddPayeeController" target="service.impl.CustomerPayeeService">
+      <point x="-29.14285714285711" y="-15.0" />
+      <point x="4207.314155068984" y="460.0" />
+      <point x="3690.0595380044183" y="460.0" />
+      <point x="41.5" y="15.0" />
+    </edge>
+    <edge source="rpc.client.CustomerMainRpc" target="app.MainApp">
+      <point x="-58.0" y="15.0" />
+      <point x="2272.0146662095467" y="750.0" />
+      <point x="324.6521662095465" y="750.0" />
+      <point x="324.6521662095465" y="1530.0" />
+      <point x="155.85216620954634" y="1530.0" />
+      <point x="19.199999999999818" y="-15.0" />
+    </edge>
+    <edge source="service.ICustomerLoginService" target="model.UserLoginPINModel">
+      <point x="-63.0" y="-15.0" />
+      <point x="5198.105196886447" y="350.0" />
+      <point x="4850.894512211842" y="350.0" />
+      <point x="57.375" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyAuthController" target="controller.BaseController">
+      <point x="59.42857142857156" y="-15.0" />
+      <point x="1679.443237638118" y="1160.0" />
+      <point x="1642.0146662095465" y="1160.0" />
+      <point x="1642.0146662095465" y="540.0" />
+      <point x="4152.249999071544" y="540.0" />
+      <point x="-38.75" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="Const.UserAccountType">
+      <point x="81.89999999999964" y="-15.0" />
+      <point x="1421.6738772766726" y="950.0" />
+      <point x="1687.5146662095465" y="950.0" />
+      <point x="-35.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="view.CustomerAddPayeeView">
+      <point x="85.09615384615381" y="-15.0" />
+      <point x="3399.572358517239" y="950.0" />
+      <point x="4154.571297926128" y="950.0" />
+      <point x="-44.25" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerLoginController" target="service.impl.CustomerLoginService">
+      <point x="20.0" y="-15.0" />
+      <point x="4956.246923535554" y="1320.0" />
+      <point x="5138.855196886447" y="1320.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="Const.UserStatusType">
+      <point x="-3.403846153846189" y="-15.0" />
+      <point x="3311.072358517239" y="830.0" />
+      <point x="3258.476204671085" y="830.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="view.CustomerApplyAuthView" target="controller.CustomerApplyAuthController">
+      <point x="-67.5" y="-15.0" />
+      <point x="1570.7146662095465" y="1245.0" />
+      <point x="1578.4146662095466" y="1245.0" />
+      <point x="-41.59999999999991" y="15.0" />
+    </edge>
+    <edge source="view.CustomerLoginView" target="controller.CustomerLoginController">
+      <point x="17.0" y="-15.0" />
+      <point x="4885.746923535554" y="1420.0" />
+      <point x="4913.746923535554" y="1420.0" />
+      <point x="-22.5" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerApplyService" target="model.UserApplyNewStudentAccountBaseModel">
+      <point x="25.050000000000182" y="-15.0" />
+      <point x="255.7021662095467" y="710.0" />
+      <point x="836.7246947351605" y="710.0" />
+      <point x="836.7246947351605" y="420.0" />
+      <point x="907.1521662095465" y="420.0" />
+      <point x="-33.5" y="15.0" />
+    </edge>
+    <edge source="model.UserApplyNewAccountFactory" target="model.UserApplyNewPersonalAccountBaseModel">
+      <point x="-83.19999999999982" y="-15.0" />
+      <point x="1161.0246947351607" y="390.0" />
+      <point x="467.6521662095465" y="390.0" />
+      <point x="102.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerForgotUserIdController" target="service.impl.CustomerLoginService">
+      <point x="-55.25" y="-15.0" />
+      <point x="5630.678486776453" y="1520.0" />
+      <point x="5695.261820109786" y="1520.0" />
+      <point x="5695.261820109786" y="940.0" />
+      <point x="5204.855196886447" y="940.0" />
+      <point x="66.0" y="15.0" />
+    </edge>
+    <edge source="service.ICustomerLoginService" target="model.UserForgotUserIdModel">
+      <point x="63.0" y="-15.0" />
+      <point x="5324.105196886447" y="570.0" />
+      <point x="5512.707012211842" y="570.0" />
+      <point x="-65.625" y="15.0" />
     </edge>
     <edge source="service.impl.CustomerApplyService" target="service.ICustomerApplyService">
-      <point x="0.0" y="-136.0" />
-      <point x="0.0" y="113.5" />
+      <point x="-8.350000000000364" y="-15.0" />
+      <point x="222.30216620954616" y="690.0" />
+      <point x="688.7741825415123" y="690.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerForgotPINController" target="view.CustomerLoginView">
+      <point x="82.40000000000009" y="15.0" />
+      <point x="4747.146923535554" y="1060.0" />
+      <point x="5513.470153443119" y="1060.0" />
+      <point x="5513.470153443119" y="1450.0" />
+      <point x="4936.746923535554" y="1450.0" />
+      <point x="68.0" y="-15.0" />
+    </edge>
+    <edge source="controller.CustomerLoginController" target="util.RandomUtil">
+      <point x="80.0" y="-15.0" />
+      <point x="5016.246923535554" y="1350.0" />
+      <point x="5568.761820109786" y="1350.0" />
+      <point x="-27.5" y="15.0" />
+    </edge>
+    <edge source="model.UserApplyNewPersonalAccountBaseModel" target="model.UserApplyNewRequestBaseModel">
+      <point x="0.0" y="-15.0" />
+      <point x="365.6521662095465" y="210.0" />
+      <point x="841.9467110671267" y="210.0" />
+      <point x="-90.39999999999964" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerPayeeService" target="rpc.client.CustomerPayeeRpc">
+      <point x="-66.40000000000009" y="-15.0" />
+      <point x="3582.159538004418" y="200.0" />
+      <point x="1676.4717110671263" y="200.0" />
+      <point x="37.5" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerTransferService" target="model.UserTransferModel">
+      <point x="-35.59999999999991" y="-15.0" />
+      <point x="3830.9595380044184" y="760.0" />
+      <point x="3801.976204671085" y="760.0" />
+      <point x="3801.976204671085" y="520.0" />
+      <point x="3880.081249071545" y="520.0" />
+      <point x="-29.40000000000009" y="15.0" />
+    </edge>
+    <edge source="view.CustomerMainView" target="model.Observer">
+      <point x="67.5" y="-15.0" />
+      <point x="4266.880852106982" y="1060.0" />
+      <point x="4478.434423535554" y="1060.0" />
+      <point x="4478.434423535554" y="50.0" />
+      <point x="4020.5838905543055" y="50.0" />
+      <point x="36.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="view.CustomerMainView">
+      <point x="70.80000000000018" y="15.0" />
+      <point x="3385.276204671085" y="1030.0" />
+      <point x="4176.880852106982" y="1030.0" />
+      <point x="-22.5" y="-15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="model.UserAccountModel">
+      <point x="-23.826923076922867" y="-15.0" />
+      <point x="3290.649281594162" y="860.0" />
+      <point x="2865.476204671085" y="860.0" />
+      <point x="2865.476204671085" y="230.0" />
+      <point x="3173.867223887639" y="230.0" />
+      <point x="-12.333333333333485" y="15.0" />
+    </edge>
+    <edge source="util.PINFieldSetter" target="util.RandomUtil">
+      <point x="0.0" y="-15.0" />
+      <point x="27.5" y="15.0" />
+    </edge>
+    <edge source="model.UserApplyNewStudentAccountBaseModel" target="model.UserApplyNewRequestBaseModel">
+      <point x="0.0" y="-15.0" />
+      <point x="940.6521662095465" y="220.0" />
+      <point x="932.3467110671263" y="220.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerForgotPINController" target="view.CustomerForgotPINView">
+      <point x="41.200000000000045" y="15.0" />
+      <point x="4705.946923535554" y="1060.0" />
+      <point x="4710.896923535554" y="1060.0" />
+      <point x="66.75" y="-15.0" />
+    </edge>
+    <edge source="service.impl.CustomerProfileService" target="service.ICustomerProfileService">
+      <point x="33.80000000000018" y="-15.0" />
+      <point x="2775.151204671085" y="760.0" />
+      <point x="2798.6845380044188" y="760.0" />
+      <point x="57.333333333333485" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerPINController" target="service.impl.CustomerLoginService">
+      <point x="77.27272727272725" y="-15.0" />
+      <point x="4566.707150808281" y="1170.0" />
+      <point x="4778.246923535554" y="1170.0" />
+      <point x="4778.246923535554" y="950.0" />
+      <point x="5105.855196886447" y="950.0" />
+      <point x="-33.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerLoginController" target="controller.BaseController">
+      <point x="-40.0" y="-15.0" />
+      <point x="4896.246923535554" y="1330.0" />
+      <point x="4793.199320109786" y="1330.0" />
+      <point x="4793.199320109786" y="380.0" />
+      <point x="4229.749999071544" y="380.0" />
+      <point x="38.75" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerPayeeService" target="model.UserPayeeModel">
+      <point x="66.40000000000009" y="-15.0" />
+      <point x="3714.9595380044184" y="230.0" />
+      <point x="3782.382692307692" y="230.0" />
+      <point x="3782.382692307692" y="100.0" />
+      <point x="3697.333890554306" y="100.0" />
+      <point x="6.800000000000182" y="15.0" />
+    </edge>
+    <edge source="view.CustomerForgotPINView" target="controller.CustomerForgotPINController">
+      <point x="-22.25" y="-15.0" />
+      <point x="4621.896923535554" y="1060.0" />
+      <point x="4623.546923535554" y="1060.0" />
+      <point x="-41.200000000000045" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerForgotPINController" target="controller.BaseController">
+      <point x="-82.40000000000009" y="-15.0" />
+      <point x="4582.346923535553" y="940.0" />
+      <point x="4647.8499990715445" y="940.0" />
+      <point x="4647.8499990715445" y="400.0" />
+      <point x="4214.249999071544" y="400.0" />
+      <point x="23.25" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerApplyService" target="model.UserApplyNewYoungSaverAccountBaseModel">
+      <point x="41.75" y="-15.0" />
+      <point x="272.4021662095465" y="720.0" />
+      <point x="1118.7246947351605" y="720.0" />
+      <point x="1118.7246947351605" y="440.0" />
+      <point x="1203.4021662095465" y="440.0" />
+      <point x="-36.25" y="15.0" />
+    </edge>
+    <edge source="service.ICustomerApplyService" target="model.UserApplyNewGoldenAccountBaseModel">
+      <point x="-34.0" y="-15.0" />
+      <point x="654.7741825415123" y="560.0" />
+      <point x="621.0271662095465" y="560.0" />
+      <point x="-33.125" y="15.0" />
+    </edge>
+    <edge source="service.ICustomerApplyService" target="model.UserApplyNewStudentAccountBaseModel">
+      <point x="0.0" y="-15.0" />
+      <point x="688.7741825415123" y="410.0" />
+      <point x="840.1521662095465" y="410.0" />
+      <point x="-100.5" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerAddPayeeController" target="controller.BaseController">
+      <point x="58.28571428571422" y="-15.0" />
+      <point x="4294.742726497556" y="430.0" />
+      <point x="4183.249999071544" y="430.0" />
+      <point x="-7.75" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="model.UserModel">
+      <point x="-44.25" y="-15.0" />
+      <point x="3270.226204671085" y="890.0" />
+      <point x="2638.0435123633924" y="890.0" />
+      <point x="2638.0435123633924" y="510.0" />
+      <point x="2726.697358517239" y="510.0" />
+      <point x="-3.75" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerLoginService" target="model.UserLoginPINModel">
+      <point x="-55.0" y="-15.0" />
+      <point x="5083.855196886447" y="700.0" />
+      <point x="4951.199320109786" y="700.0" />
+      <point x="4951.199320109786" y="360.0" />
+      <point x="4812.644512211842" y="360.0" />
+      <point x="19.125" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="view.CustomerLoginView">
+      <point x="-70.80000000000018" y="15.0" />
+      <point x="3243.6762046710846" y="1060.0" />
+      <point x="1450.786377276673" y="1060.0" />
+      <point x="1450.786377276673" y="1440.0" />
+      <point x="4817.746923535554" y="1440.0" />
+      <point x="-51.0" y="-15.0" />
+    </edge>
+    <edge source="service.impl.CustomerTransactionService" target="service.ICustomerTransactionService">
+      <point x="-73.5" y="-15.0" />
+      <point x="1894.6813328762132" y="730.0" />
+      <point x="1868.681332876213" y="730.0" />
+      <point x="-66.33333333333348" y="15.0" />
+    </edge>
+    <edge source="view.CustomerApplyView" target="controller.CustomerApplyController">
+      <point x="-58.125" y="-15.0" />
+      <point x="1299.8488772766727" y="1060.0" />
+      <point x="1303.3738772766733" y="1060.0" />
+      <point x="-36.399999999999636" y="15.0" />
+    </edge>
+    <edge source="view.CustomerAddPayeeView" target="view.CustomerMainView">
+      <point x="44.25" y="15.0" />
+      <point x="4243.071297926128" y="1020.0" />
+      <point x="4206.880852106982" y="1020.0" />
+      <point x="7.5" y="-15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="util.JTextFieldLimit">
+      <point x="78.28846153846143" y="-15.0" />
+      <point x="3392.7646662095467" y="940.0" />
+      <point x="4088.8212979261275" y="940.0" />
+      <point x="4088.8212979261275" y="580.0" />
+      <point x="4311.437499071544" y="580.0" />
+      <point x="-23.0625" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyAuthController" target="view.CustomerApplyAuthView">
+      <point x="41.59999999999991" y="15.0" />
+      <point x="22.5" y="-15.0" />
+    </edge>
+    <edge source="controller.CustomerLoginController" target="view.CustomerApplyAuthView">
+      <point x="-80.0" y="-15.0" />
+      <point x="4856.246923535554" y="1350.0" />
+      <point x="1638.2146662095465" y="1350.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerLoginService" target="Const.PinReplyType">
+      <point x="-18.333333333333258" y="-15.0" />
+      <point x="5120.521863553114" y="680.0" />
+      <point x="5098.105196886447" y="680.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="service.ICustomerLoginService" target="model.UserForgotPINModel">
+      <point x="-21.0" y="-15.0" />
+      <point x="5240.105196886447" y="340.0" />
+      <point x="5032.582012211842" y="340.0" />
+      <point x="60.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="model.UserPayeeModel">
+      <point x="-51.05769230769238" y="-15.0" />
+      <point x="3263.4185123633924" y="900.0" />
+      <point x="2605.0146662095467" y="900.0" />
+      <point x="2605.0146662095467" y="70.0" />
+      <point x="3642.933890554306" y="70.0" />
+      <point x="-47.59999999999991" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerAddPayeeController" target="util.JTextFieldLimit">
+      <point x="87.42857142857133" y="-15.0" />
+      <point x="4323.885583640413" y="580.0" />
+      <point x="4326.812499071544" y="580.0" />
+      <point x="-7.6875" y="15.0" />
+    </edge>
+    <edge source="app.MainApp" target="view.CustomerLoginView">
+      <point x="38.40000000000009" y="-15.0" />
+      <point x="175.0521662095466" y="1540.0" />
+      <point x="4830.496923535554" y="1540.0" />
+      <point x="-38.25" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerPINController" target="view.CustomerMainView">
+      <point x="-30.90909090909099" y="-15.0" />
+      <point x="4458.525332626463" y="1140.0" />
+      <point x="4199.380852106982" y="1140.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="service.ICustomerApplyService" target="model.UserApplyNewPersonalAccountBaseModel">
+      <point x="-68.0" y="-15.0" />
+      <point x="620.7741825415123" y="570.0" />
+      <point x="399.6521662095465" y="570.0" />
+      <point x="34.0" y="15.0" />
+    </edge>
+    <edge source="view.CustomerAddPayeeView" target="model.UserModel">
+      <point x="-70.79999999999995" y="-15.0" />
+      <point x="4128.021297926128" y="760.0" />
+      <point x="4123.957012211842" y="760.0" />
+      <point x="4123.957012211842" y="490.0" />
+      <point x="2764.197358517239" y="490.0" />
+      <point x="33.75" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerForgotPINController" target="model.UserForgotPINModel">
+      <point x="41.200000000000045" y="-15.0" />
+      <point x="4705.946923535554" y="950.0" />
+      <point x="4732.0999990715445" y="950.0" />
+      <point x="4732.0999990715445" y="580.0" />
+      <point x="4952.582012211842" y="580.0" />
+      <point x="-20.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerHomeService" target="service.ICustomerHomeService">
+      <point x="21.0" y="-15.0" />
+      <point x="2499.236682541512" y="760.0" />
+      <point x="2508.5146662095467" y="760.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyAuthController" target="view.CustomerApplyView">
+      <point x="-59.42857142857156" y="-15.0" />
+      <point x="1560.586094780975" y="1160.0" />
+      <point x="1357.9738772766727" y="1160.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerPINController" target="view.CustomerLoginView">
+      <point x="-68.0" y="15.0" />
+      <point x="4421.434423535554" y="1245.0" />
+      <point x="4422.809423535554" y="1245.0" />
+      <point x="4422.809423535554" y="1420.0" />
+      <point x="4851.746923535554" y="1420.0" />
+      <point x="-17.0" y="-15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyAuthController" target="util.JTextFieldLimit">
+      <point x="89.14285714285734" y="-15.0" />
+      <point x="1709.1575233524038" y="1170.0" />
+      <point x="1803.0146662095465" y="1170.0" />
+      <point x="1803.0146662095465" y="570.0" />
+      <point x="4296.062499071544" y="570.0" />
+      <point x="-38.4375" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerPINController" target="model.UserLoginPINModel">
+      <point x="46.36363636363626" y="-15.0" />
+      <point x="4535.79805989919" y="1170.0" />
+      <point x="4532.999999071544" y="1170.0" />
+      <point x="4532.999999071544" y="560.0" />
+      <point x="4774.394512211842" y="560.0" />
+      <point x="-19.125" y="15.0" />
+    </edge>
+    <edge source="view.CustomerMainView" target="model.UserModel">
+      <point x="-7.5" y="-15.0" />
+      <point x="4191.880852106982" y="1020.0" />
+      <point x="4099.821297926128" y="1020.0" />
+      <point x="4099.821297926128" y="500.0" />
+      <point x="2756.697358517239" y="500.0" />
+      <point x="26.25" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="model.UserApplyNewGoldenAccountBaseModel">
+      <point x="-45.5" y="-15.0" />
+      <point x="1294.273877276673" y="920.0" />
+      <point x="1129.7246947351605" y="920.0" />
+      <point x="1129.7246947351605" y="400.0" />
+      <point x="687.2771662095465" y="400.0" />
+      <point x="33.125" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerTransferService" target="rpc.client.CustomerMainRpc">
+      <point x="-71.19999999999982" y="-15.0" />
+      <point x="3795.3595380044185" y="740.0" />
+      <point x="2388.0146662095467" y="740.0" />
+      <point x="58.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyAuthController" target="model.UserModel">
+      <point x="0.0" y="-15.0" />
+      <point x="1620.0146662095465" y="470.0" />
+      <point x="2696.697358517239" y="470.0" />
+      <point x="-33.75" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="Const.UserOperateType">
+      <point x="37.44230769230762" y="-15.0" />
+      <point x="3351.9185123633924" y="880.0" />
+      <point x="3687.0595380044183" y="880.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="Const.UserType">
+      <point x="63.69999999999982" y="-15.0" />
+      <point x="1403.4738772766727" y="940.0" />
+      <point x="1503.0146662095465" y="940.0" />
+      <point x="-24.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerLoginController" target="view.CustomerLoginView">
+      <point x="22.5" y="15.0" />
+      <point x="4958.746923535554" y="1430.0" />
+      <point x="4902.746923535554" y="1430.0" />
+      <point x="34.0" y="-15.0" />
+    </edge>
+    <edge source="service.ICustomerProfileService" target="model.UserModel">
+      <point x="0.0" y="-15.0" />
+      <point x="11.25" y="15.0" />
+    </edge>
+    <edge source="model.UserTransferModel" target="model.Subject">
+      <point x="41.99999999999977" y="-15.0" />
+      <point x="3951.4812490715444" y="220.0" />
+      <point x="3976.7326923076917" y="220.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerPINController" target="util.KeyPadGenerator">
+      <point x="-15.454545454545496" y="-15.0" />
+      <point x="4473.979878081009" y="1130.0" />
+      <point x="4393.505326603292" y="1130.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerApplyService" target="model.UserModel">
+      <point x="58.44999999999982" y="-15.0" />
+      <point x="289.10216620954634" y="730.0" />
+      <point x="1358.7246947351605" y="730.0" />
+      <point x="1358.7246947351605" y="460.0" />
+      <point x="2689.197358517239" y="460.0" />
+      <point x="-41.25" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerForgotPINController" target="util.JTextFieldLimit">
+      <point x="-41.200000000000045" y="-15.0" />
+      <point x="4623.546923535554" y="950.0" />
+      <point x="4658.8499990715445" y="950.0" />
+      <point x="4658.8499990715445" y="390.0" />
+      <point x="4357.562499071544" y="390.0" />
+      <point x="23.0625" y="15.0" />
+    </edge>
+    <edge source="view.CustomerMainView" target="controller.CustomerMainController">
+      <point x="-52.5" y="-15.0" />
+      <point x="4146.880852106982" y="1050.0" />
+      <point x="3314.476204671085" y="1050.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="Const.UserGenderType">
+      <point x="-17.019230769230944" y="-15.0" />
+      <point x="3297.4569739018543" y="850.0" />
+      <point x="2942.976204671085" y="850.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerLoginService" target="model.UserLoginRequestModel">
+      <point x="55.0" y="-15.0" />
+      <point x="5193.855196886447" y="750.0" />
+      <point x="5370.332012211842" y="750.0" />
+      <point x="5370.332012211842" y="560.0" />
+      <point x="5342.582012211842" y="560.0" />
+      <point x="-22.125" y="15.0" />
+    </edge>
+    <edge source="rpc.client.CustomerLoginRpc" target="app.MainApp">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="service.impl.CustomerProfileService">
+      <point x="-30.634615384615245" y="-15.0" />
+      <point x="3283.8415892864696" y="870.0" />
+      <point x="2741.351204671085" y="870.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="app.MainApp" target="Const.Server">
+      <point x="-19.199999999999818" y="-15.0" />
+      <point x="117.4521662095467" y="1530.0" />
+      <point x="66.05000000000018" y="1530.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="model.UserApplyNewAccountFactory" target="model.UserApplyNewRequestBaseModel">
+      <point x="83.19999999999982" y="-15.0" />
+      <point x="1327.4246947351603" y="440.0" />
+      <point x="1446.1499999999996" y="440.0" />
+      <point x="1446.1499999999996" y="210.0" />
+      <point x="1022.746711067126" y="210.0" />
+      <point x="90.39999999999964" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="controller.BaseController">
+      <point x="71.48076923076906" y="-15.0" />
+      <point x="3385.9569739018543" y="930.0" />
+      <point x="4041.508255953136" y="930.0" />
+      <point x="4041.508255953136" y="550.0" />
+      <point x="4167.749999071544" y="550.0" />
+      <point x="-23.25" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerPINController" target="view.CustomerForgotPINView">
+      <point x="61.818181818181756" y="-15.0" />
+      <point x="4551.252605353736" y="1160.0" />
+      <point x="4644.146923535554" y="1160.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerAddPayeeController" target="model.UserPayeeModel">
+      <point x="29.14285714285711" y="-15.0" />
+      <point x="4265.599869354699" y="440.0" />
+      <point x="4118.499999071544" y="440.0" />
+      <point x="4118.499999071544" y="60.0" />
+      <point x="3751.7338905543056" y="60.0" />
+      <point x="61.19999999999982" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="model.UserApplyNewStudentAccountBaseModel">
+      <point x="-9.100000000000364" y="-15.0" />
+      <point x="1330.6738772766726" y="900.0" />
+      <point x="1369.7246947351605" y="900.0" />
+      <point x="1369.7246947351605" y="360.0" />
+      <point x="1041.1521662095465" y="360.0" />
+      <point x="100.5" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerLoginService" target="service.ICustomerLoginService">
+      <point x="18.33333333333337" y="-15.0" />
+      <point x="5157.188530219781" y="730.0" />
+      <point x="5261.105196886447" y="730.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="model.Subject" target="model.Observer">
+      <point x="-2.2737367544323206E-13" y="-15.0" />
+      <point x="3976.7326923076917" y="100.0" />
+      <point x="3972.5838905543055" y="100.0" />
+      <point x="-12.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="model.UserTransactionModel">
+      <point x="17.019230769230944" y="-15.0" />
+      <point x="3331.495435440316" y="850.0" />
+      <point x="3480.476204671085" y="850.0" />
+      <point x="55.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="util.TimestampConvertHelper">
+      <point x="-71.48076923076906" y="-15.0" />
+      <point x="3242.995435440316" y="930.0" />
+      <point x="2151.0146662095467" y="930.0" />
+      <point x="2151.0146662095467" y="740.0" />
+      <point x="2168.2646662095467" y="740.0" />
+      <point x="22.75" y="15.0" />
+    </edge>
+    <edge source="rpc.client.CustomerPayeeRpc" target="Const.ResponseStatusType">
+      <point x="0.0" y="-15.0" />
+      <point x="1638.9717110671263" y="100.0" />
+      <point x="1106.7217110671263" y="100.0" />
+      <point x="19.625" y="15.0" />
+    </edge>
+    <edge source="model.UserApplyNewYoungSaverAccountBaseModel" target="model.UserApplyNewRequestBaseModel">
+      <point x="0.0" y="-15.0" />
+      <point x="1239.6521662095465" y="220.0" />
+      <point x="977.5467110671261" y="220.0" />
+      <point x="45.19999999999982" y="15.0" />
+    </edge>
+    <edge source="model.UserTransferModel" target="model.Observer">
+      <point x="62.99999999999977" y="-15.0" />
+      <point x="3972.4812490715444" y="230.0" />
+      <point x="4030.2326923076917" y="230.0" />
+      <point x="4030.2326923076917" y="100.0" />
+      <point x="3996.5838905543055" y="100.0" />
+      <point x="12.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerAddPayeeController" target="view.CustomerAddPayeeView">
+      <point x="0.0" y="15.0" />
+      <point x="4236.457012211842" y="750.0" />
+      <point x="4269.621297926127" y="750.0" />
+      <point x="70.79999999999995" y="-15.0" />
+    </edge>
+    <edge source="rpc.client.CustomerLoginRpc" target="Const.ResponseStatusType">
+      <point x="-49.33333333333303" y="-15.0" />
+      <point x="87.31883287621349" y="1615.0" />
+      <point x="0.0" y="1615.0" />
+      <point x="0.0" y="90.0" />
+      <point x="1028.2217110671263" y="90.0" />
+      <point x="-58.875" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerHomeService" target="rpc.client.CustomerMainRpc">
+      <point x="-63.0" y="-15.0" />
+      <point x="2415.236682541512" y="760.0" />
+      <point x="2330.0146662095467" y="760.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="model.UserApplyNewYoungSaverAccountBaseModel">
+      <point x="9.100000000000364" y="-15.0" />
+      <point x="1348.8738772766733" y="910.0" />
+      <point x="1406.9021662095465" y="910.0" />
+      <point x="1406.9021662095465" y="350.0" />
+      <point x="1348.4021662095465" y="350.0" />
+      <point x="108.75" y="15.0" />
+    </edge>
+    <edge source="model.UserModel" target="model.UserPayeeModel">
+      <point x="-39.375" y="-15.0" />
+      <point x="2691.072358517239" y="230.0" />
+      <point x="2687.6375" y="230.0" />
+      <point x="2687.6375" y="80.0" />
+      <point x="3656.533890554306" y="80.0" />
+      <point x="-34.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="Const.UserAccountType">
+      <point x="-85.09615384615381" y="-15.0" />
+      <point x="3229.3800508249315" y="950.0" />
+      <point x="1757.5146662095465" y="950.0" />
+      <point x="35.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="model.UserApplyNewAccountFactory">
+      <point x="-27.300000000000182" y="-15.0" />
+      <point x="1312.4738772766727" y="910.0" />
+      <point x="1244.2246947351605" y="910.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerMainController" target="service.impl.CustomerPayeeService">
+      <point x="30.634615384615245" y="-15.0" />
+      <point x="3345.1108200557" y="870.0" />
+      <point x="3607.0595380044183" y="870.0" />
+      <point x="-41.5" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerLoginService" target="util.TimestampConvertHelper">
+      <point x="-73.33333333333331" y="-15.0" />
+      <point x="5065.521863553114" y="710.0" />
+      <point x="2213.7646662095467" y="710.0" />
+      <point x="68.25" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerLoginController" target="model.UserLoginRequestModel">
+      <point x="40.0" y="-15.0" />
+      <point x="4976.246923535554" y="1330.0" />
+      <point x="5476.720153443119" y="1330.0" />
+      <point x="5476.720153443119" y="560.0" />
+      <point x="5386.832012211842" y="560.0" />
+      <point x="22.125" y="15.0" />
+    </edge>
+    <edge source="model.UserApplyNewGoldenAccountBaseModel" target="model.UserApplyNewRequestBaseModel">
+      <point x="0.0" y="-15.0" />
+      <point x="654.1521662095465" y="220.0" />
+      <point x="887.1467110671265" y="220.0" />
+      <point x="-45.19999999999982" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerPINController" target="model.UserModel">
+      <point x="-77.27272727272725" y="-15.0" />
+      <point x="4412.161696262827" y="1170.0" />
+      <point x="1814.0146662095465" y="1170.0" />
+      <point x="1814.0146662095465" y="490.0" />
+      <point x="2711.697358517239" y="490.0" />
+      <point x="-18.75" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerAddPayeeController" target="view.CustomerMainView">
+      <point x="87.42857142857156" y="15.0" />
+      <point x="4323.885583640413" y="720.0" />
+      <point x="4336.070772422438" y="720.0" />
+      <point x="4336.070772422438" y="1050.0" />
+      <point x="4251.880852106982" y="1050.0" />
+      <point x="52.5" y="-15.0" />
+    </edge>
+    <edge source="service.impl.CustomerProfileService" target="model.UserModel">
+      <point x="67.59999999999991" y="-15.0" />
+      <point x="2808.951204671085" y="760.0" />
+      <point x="2837.851204671085" y="760.0" />
+      <point x="2837.851204671085" y="520.0" />
+      <point x="2749.197358517239" y="520.0" />
+      <point x="18.75" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerTransactionService" target="rpc.client.CustomerMainRpc">
+      <point x="73.5" y="-15.0" />
+      <point x="2041.6813328762132" y="760.0" />
+      <point x="2301.0146662095467" y="760.0" />
+      <point x="-29.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerPINController" target="util.JTextFieldLimit">
+      <point x="15.454545454545496" y="-15.0" />
+      <point x="4504.888968990099" y="1170.0" />
+      <point x="4510.999999071544" y="1170.0" />
+      <point x="4510.999999071544" y="410.0" />
+      <point x="4342.187499071544" y="410.0" />
+      <point x="7.6875" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerPINController" target="view.CustomerPINView">
+      <point x="34.0" y="15.0" />
+      <point x="4523.434423535554" y="1245.0" />
+      <point x="4522.059423535554" y="1245.0" />
+      <point x="17.75" y="-15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyAuthController" target="view.CustomerLoginView">
+      <point x="-83.19999999999982" y="15.0" />
+      <point x="1536.8146662095467" y="1245.0" />
+      <point x="1498.014948705244" y="1245.0" />
+      <point x="1498.014948705244" y="1430.0" />
+      <point x="4834.746923535554" y="1430.0" />
+      <point x="-34.0" y="-15.0" />
+    </edge>
+    <edge source="controller.CustomerApplyController" target="model.UserApplyNewPersonalAccountBaseModel">
+      <point x="-63.69999999999982" y="-15.0" />
+      <point x="1276.073877276673" y="930.0" />
+      <point x="335.6521662095465" y="930.0" />
+      <point x="335.6521662095465" y="580.0" />
+      <point x="331.6521662095465" y="580.0" />
+      <point x="-34.0" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerLoginController" target="util.JTextFieldLimit">
+      <point x="0.0" y="-15.0" />
+      <point x="4936.246923535554" y="1350.0" />
+      <point x="4940.199320109786" y="1350.0" />
+      <point x="4940.199320109786" y="370.0" />
+      <point x="4372.937499071544" y="370.0" />
+      <point x="38.4375" y="15.0" />
+    </edge>
+    <edge source="controller.CustomerLoginController" target="view.CustomerPINView">
+      <point x="-60.0" y="-15.0" />
+      <point x="4876.246923535554" y="1340.0" />
+      <point x="4504.309423535554" y="1340.0" />
+      <point x="0.0" y="15.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.6032608695652174" x="3222.4607820848023" y="2374.7504831192455" />
-  <SelectedNodes>
-    <node>service.ICustomerApplyService</node>
-  </SelectedNodes>
-  <Categories>
-    <Category>Fields</Category>
-    <Category>Methods</Category>
-    <Category>Inner Classes</Category>
-  </Categories>
+  <settings layout="Hierarchic Group" zoom="0.1" x="2705.0" y="-152.61551192683237" />
+  <SelectedNodes />
+  <Categories />
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>
