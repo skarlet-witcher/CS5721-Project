@@ -13,9 +13,7 @@ import java.awt.event.ActionEvent;
 import static Const.CardType.CREDIT_CARD;
 import static Const.CardType.DEBIT_CARD;
 import static Const.UserAccountType.*;
-import static Const.UserApplyType.DENY;
-import static Const.UserApplyType.PASS;
-import static Const.UserApplyType.PENDING_FOR_BEING_APPROVED;
+import static Const.UserApplyType.*;
 import static Const.UserGenderType.FEMALE;
 import static Const.UserGenderType.MALE;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -63,30 +61,30 @@ public class StaffAddAccountInfoController implements BaseController {
         this.view.tf_parentLastName.setText(x.getParentLastName());
 
         String accountStatus = "";
-        if(x.getStatus() == PENDING_FOR_BEING_APPROVED) accountStatus = "PENDING";
-        if(x.getStatus() == PASS) {
+        if (x.getStatus() == PENDING_FOR_BEING_APPROVED) accountStatus = "PENDING";
+        if (x.getStatus() == PASS) {
             accountStatus = "PASS";
             this.view.btn_accept.setEnabled(false);
         }
-        if(x.getStatus() == DENY) accountStatus = "DENY";
-        this.view.tf_status.setText(String.valueOf(accountStatus));
+        if (x.getStatus() == DENY) accountStatus = "DENY";
+        this.view.tf_status.setText(accountStatus);
 
         String accountType = "";
-        if(x.getAccountType() == PERSONAL_ACCOUNT) accountType = "PERSONAL_ACCOUNT";
-        if(x.getAccountType() == STUDENT_ACCOUNT ) accountType = "STUDENT_ACCOUNT";
-        if(x.getAccountType() == YOUNG_SAVER_ACCOUNT) accountType = "Deletion YOUNG_SAVER_ACCOUNT";
-        if(x.getAccountType() == GOLDEN_ACCOUNT) accountType = "GOLDEN_ACCOUNT";
-        this.view.tf_accountType.setText(String.valueOf(accountType));
+        if (x.getAccountType() == PERSONAL_ACCOUNT) accountType = "PERSONAL_ACCOUNT";
+        if (x.getAccountType() == STUDENT_ACCOUNT) accountType = "STUDENT_ACCOUNT";
+        if (x.getAccountType() == YOUNG_SAVER_ACCOUNT) accountType = "Deletion YOUNG_SAVER_ACCOUNT";
+        if (x.getAccountType() == GOLDEN_ACCOUNT) accountType = "GOLDEN_ACCOUNT";
+        this.view.tf_accountType.setText(accountType);
 
         String cardType = "";
-        if(x.getCardType() == DEBIT_CARD) cardType = "DEBIT_CARD";
-        if(x.getCardType() == CREDIT_CARD) cardType = "CREDIT_CARD";
-        this.view.tf_cardType.setText(String.valueOf(cardType));
+        if (x.getCardType() == DEBIT_CARD) cardType = "DEBIT_CARD";
+        if (x.getCardType() == CREDIT_CARD) cardType = "CREDIT_CARD";
+        this.view.tf_cardType.setText(cardType);
 
         String gender = "";
-        if(x.getGender() == MALE) gender = "MALE";
-        if(x.getGender() == FEMALE) gender = "FEMALE";
-        this.view.tf_gender.setText(String.valueOf(gender));
+        if (x.getGender() == MALE) gender = "MALE";
+        if (x.getGender() == FEMALE) gender = "FEMALE";
+        this.view.tf_gender.setText(gender);
     }
 
     public void btn_backActionPerformed(ActionEvent e) {
@@ -95,16 +93,15 @@ public class StaffAddAccountInfoController implements BaseController {
     }
 
     public void btn_acceptActionPerformed(ActionEvent e) {
-        // TODO add your code here
-        try{
+        try {
             AcceptedResponse response = StaffService.getInstance().acceptAplication(userApplyArchiveEntitiesResponse.getId());
-            if(response.getIsAccepted()){
+            if (response.getIsAccepted()) {
                 JOptionPane.showMessageDialog(null,
                         "Accept an application successfully",
                         "Success Message", JOptionPane.PLAIN_MESSAGE);
                 this.view.btn_accept.setEnabled(false);
             }
-        } catch (Exception ee){
+        } catch (Exception ee) {
             JOptionPane.showMessageDialog(null,
                     "Fail to accept an application. Please contact an administrator",
                     "Error Message", JOptionPane.ERROR_MESSAGE);
@@ -113,6 +110,5 @@ public class StaffAddAccountInfoController implements BaseController {
     }
 
     public void btn_declineActionPerformed(ActionEvent e) {
-        // TODO add your code here
     }
 }

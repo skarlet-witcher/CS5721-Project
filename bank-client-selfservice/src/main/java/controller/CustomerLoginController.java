@@ -219,7 +219,6 @@ public class CustomerLoginController implements BaseController {
         return true;
     }
 
-
     public void btn_loginActionPerformed(ActionEvent event) {
 
         if (!validateUserIdField()) {

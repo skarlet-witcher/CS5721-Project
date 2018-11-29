@@ -8,7 +8,7 @@ import service.impl.StaffService;
 
 import java.util.logging.Logger;
 
-public class BankStaffServiceImpl extends StaffGetNewAppliesGrpc.StaffGetNewAppliesImplBase {
+public class BankStaffImpl extends StaffGetNewAppliesGrpc.StaffGetNewAppliesImplBase {
     private static final Logger logger = Logger.getLogger(BankStaffLoginImpl.class.getName());
     private static final IStaffService staffService = StaffService.getInstance();
 

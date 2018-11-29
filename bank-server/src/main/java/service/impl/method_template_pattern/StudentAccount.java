@@ -1,10 +1,7 @@
-package util;
+package service.impl.method_template_pattern;
 
 import java.sql.Timestamp;
 
-/**
- * Created by user on 11/12/2018.
- */
 public class StudentAccount extends FeesTemplate implements IAccounts {
     public boolean checkAgeValidity(Timestamp dob){
 
@@ -14,10 +11,8 @@ public class StudentAccount extends FeesTemplate implements IAccounts {
         Integer curInt= Integer.valueOf(curYear);
         Integer birInt=Integer.valueOf(birthYear);
 
-        if((curInt-birInt) >16 )
-            return true;
+        return (curInt - birInt) > 16;
 
-        return false;
     }
 
     double calculateQuarterlyMaintenanceFee(){

@@ -10,10 +10,15 @@
 
 ####techniques
 - Maven
-- gRPC incl. Protbuf & cert support
+- MVC pattern
+- gRPC incl. Protobuf & cert authentication
 - MySQL + Hibernate
 - JFormDesigner
 - JUnit
+
+####further
+- use converters to avoid big amounts of set get methods. like `https://github.com/BAData/protobuf-converter`
+- project not finished.
 
 ####Notice
 - **use local cert in local testing environment** 
@@ -22,11 +27,9 @@
 
 ####Design Pattern
 - Singleton Pattern
-- Abstract Factory Pattern
+- Factory Pattern
 - Builder Pattern
 - Observer Pattern
-- Template Method Pattern
-- Proxy Pattern (remote)
 - Facade Pattern
 - ...
 -----------

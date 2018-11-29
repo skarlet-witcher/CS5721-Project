@@ -1,6 +1,3 @@
-/*
- * Created by JFormDesigner on Sat Oct 20 15:50:05 BST 2018
- */
 
 package view;
 

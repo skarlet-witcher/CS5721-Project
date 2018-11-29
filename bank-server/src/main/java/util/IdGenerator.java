@@ -22,7 +22,7 @@ public class IdGenerator {
 
     public long generateStaffId() {
         // 10 digit userId
-        long currentId = 1000000001L;
+        long currentId = 10001L;
         Long staffId = staffDao.selectTheBiggestId();
         if (staffId != null) {
             currentId = staffId + 1L;

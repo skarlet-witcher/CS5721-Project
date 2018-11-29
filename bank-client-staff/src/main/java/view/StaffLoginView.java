@@ -1,18 +1,12 @@
-/*
- * Created by JFormDesigner on Mon Oct 15 21:59:49 BST 2018
- */
 
 package view;
 
 import controller.StaffLoginController;
-import model.StaffLoginModel;
 import net.miginfocom.swing.MigLayout;
-import service.impl.StaffLoginService;
 import util.JTextFieldLimit;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 /**
  * @author xiangkai22

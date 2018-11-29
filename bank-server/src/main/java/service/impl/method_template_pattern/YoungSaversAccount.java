@@ -1,12 +1,9 @@
-package util;
+package service.impl.method_template_pattern;
 
 import java.sql.Timestamp;
 
-/**
- * Created by user on 11/12/2018.
- */
-public class GoldenAccount extends FeesTemplate implements IAccounts {
-    boolean isOverDraft=false;
+
+public class YoungSaversAccount extends FeesTemplate implements IAccounts {
     public boolean checkAgeValidity(Timestamp dob){
 
         Timestamp curdate=new Timestamp(System.currentTimeMillis());
@@ -15,21 +12,15 @@ public class GoldenAccount extends FeesTemplate implements IAccounts {
         Integer curInt= Integer.valueOf(curYear);
         Integer birInt=Integer.valueOf(birthYear);
 
-        if((curInt-birInt) >66 )
-            return true;
+        return (curInt - birInt) > 6 && (curInt - birInt) < 18;
 
-        return false;
     }
-
 
     double calculateQuarterlyMaintenanceFee(){
         return 1.25;
     }
 
     double calculateOverdraftFee(){
-    if(isOverDraft)
-            return 5;
-        else
-            return 0;
+        return 0;
     }
 }

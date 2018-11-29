@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import static Const.ResponseStatusType.OPERATION_FAIL;
 
 
-public class AcceptApplicationImpl extends AcceptApplicationGrpc.AcceptApplicationImplBase {
+public class BankStaffAcceptApplysImpl extends AcceptApplicationGrpc.AcceptApplicationImplBase {
     private static final Logger logger = Logger.getLogger(BankStaffLoginImpl.class.getName());
     private static final IStaffService staffService = StaffService.getInstance();
     public void acceptApplication(bankStaff_rpc.AcceptedRequest request, StreamObserver<AcceptedResponse> responseObserver) {

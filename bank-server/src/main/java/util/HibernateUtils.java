@@ -1,7 +1,6 @@
 package util;
 
-import dao.impl.MyInterceptor;
-import org.hibernate.Interceptor;
+import dao.impl.DbInterceptor;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
@@ -21,7 +20,7 @@ public class HibernateUtils {
             // Create a metadata sources using the specified service registry.
             Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();
 
-            return metadata.getSessionFactoryBuilder().applyInterceptor(new MyInterceptor()).build();
+            return metadata.getSessionFactoryBuilder().applyInterceptor(new DbInterceptor()).build();
         } catch (Throwable ex) {
 
             System.err.println("Initial SessionFactory creation failed." + ex);

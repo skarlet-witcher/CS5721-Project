@@ -4,16 +4,9 @@ import io.grpc.stub.StreamObserver;
 import rpc.*;
 import service.IUserCustomerService;
 import service.impl.UserCustomerService;
-import util.ResponseBuilderFactory;
+import util.ResponseBuilder;
 
 import java.util.List;
-import java.util.logging.Logger;
-
-import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
-
-/*
-    @author Xiangkai Tang
- */
 
 public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     // private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
@@ -21,14 +14,13 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
 
     @Override
     public void getAccounts(UserCustomerGetAccountsRequest request, StreamObserver<Response> responseObserver) {
-
         try {
             List<UserAccountsReply> userAccountsReply = customerService.getAccounts(request.getUserPk());
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .addAllUserAccounts(userAccountsReply)
                     .build());
         } catch (Exception e) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(e.getMessage())
                     .build());
         }
         responseObserver.onCompleted();
@@ -39,11 +31,11 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
 
         try {
             UserProfileReply userProfileReply = customerService.getUserProfile(request.getUserPk());
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .setUserProfile(userProfileReply)
                     .build());
         } catch (Exception E) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(E.getMessage())
                     .build());
         }
         responseObserver.onCompleted();
@@ -58,10 +50,10 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
                     request.getAddress(),
                     request.getEmail(),
                     request.getPhone());
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .build());
         } catch (Exception E) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(E.getMessage())
                     .build());
         }
         responseObserver.onCompleted();
@@ -72,11 +64,11 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
 
         try {
             List<UserPayeesReply> userPayeesReplies = UserCustomerService.getInstance().getPayeeList(request.getUserPk());
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .addAllUserPayees(userPayeesReplies)
                     .build());
         } catch (Exception E) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(E.getMessage())
                     .build());
         }
         responseObserver.onCompleted();
@@ -90,10 +82,10 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
                     request.getName(),
                     request.getIban(),
                     request.getPin());
-           responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+           responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                    .build());
        } catch (Exception E) {
-           responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+           responseObserver.onNext(ResponseBuilder.getFailBuilder(E.getMessage())
                    .build());
        }
         responseObserver.onCompleted();
@@ -103,10 +95,10 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     public void removePayee(UserCustomerRemovePayeeRequest request, StreamObserver<Response> responseObserver) {
         try {
             UserCustomerService.getInstance().removePayee(request.getPayeePk(), request.getUserPk());
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .build());
         } catch (Exception E) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(E.getMessage())
                     .build());
         }
         responseObserver.onCompleted();
@@ -123,11 +115,11 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
                     String.valueOf(request.getPin()),
                     request.getPostScript(),
                     request.getCurrencyType());
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .build());
 
         } catch (Exception E) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(E.getMessage())
                     .build());
         }
         responseObserver.onCompleted();
@@ -141,11 +133,11 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
                     request.getUserPk(),
                     request.getFilterByAccount(),
                     request.getFilterByDate());
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .addAllUserTransactions(userTransactionsReplies)
                     .build());
         } catch (Exception E) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(E.getMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(E.getMessage())
                     .build());
         }
         responseObserver.onCompleted();

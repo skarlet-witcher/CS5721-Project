@@ -6,9 +6,9 @@ import io.grpc.netty.shaded.io.netty.handler.ssl.SslContextBuilder;
 import io.grpc.netty.shaded.io.netty.handler.ssl.SslProvider;
 import rpc.impl.UserCustomerImpl;
 import rpc.impl.UserCustomerLoginImpl;
-import rpc.impl.bank_staff.AcceptApplicationImpl;
+import rpc.impl.bank_staff.BankStaffAcceptApplysImpl;
+import rpc.impl.bank_staff.BankStaffImpl;
 import rpc.impl.bank_staff.BankStaffLoginImpl;
-import rpc.impl.bank_staff.BankStaffServiceImpl;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,8 +36,8 @@ public class BankServer {
                 .addService(new UserCustomerLoginImpl())
                 .addService(new UserCustomerImpl())
                 .addService(new BankStaffLoginImpl())
-                .addService(new BankStaffServiceImpl())
-                .addService(new AcceptApplicationImpl())
+                .addService(new BankStaffImpl())
+                .addService(new BankStaffAcceptApplysImpl())
                 .build()
                 .start();
         logger.info("Server started, listening on " + SERVER_PORT);

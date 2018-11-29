@@ -1,29 +1,12 @@
-/*
- * Created by JFormDesigner on Sat Oct 20 15:45:41 BST 2018
- */
 
 package view;
 
-import Const.UserGenderType;
-import Const.UserStatusType;
-import bankStaff_rpc.AcceptedResponse;
 import bankStaff_rpc.UserApplyArchiveEntitiesResponse;
 import controller.StaffAddAccountInfoController;
 import net.miginfocom.swing.MigLayout;
-import service.impl.StaffService;
-import util.TimestampConvertHelper;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-
-import static Const.CardType.*;
-import static Const.UserAccountType.*;
-import static Const.UserApplyType.DENY;
-import static Const.UserApplyType.PASS;
-import static Const.UserApplyType.PENDING_FOR_BEING_APPROVED;
-import static Const.UserGenderType.*;
-import static Const.UserStatusType.*;
 
 /**
  * @author Long

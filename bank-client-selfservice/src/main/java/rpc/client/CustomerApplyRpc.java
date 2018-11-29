@@ -10,9 +10,6 @@ import rpc.UserValidateExistingUserRequest;
 import javax.net.ssl.SSLException;
 import java.util.logging.Logger;
 
-/*
-    @author Xiangkai Tang
- */
 
 public class CustomerApplyRpc {
     private static final Logger logger = Logger.getLogger(CustomerApplyRpc.class.getName());

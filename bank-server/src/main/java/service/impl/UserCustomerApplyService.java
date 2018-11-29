@@ -7,14 +7,12 @@ import dao.impl.UserDao;
 import entity.UserApplyArchiveEntity;
 import entity.UserEntity;
 import service.IUserCustomerApplyService;
-import util.*;
+import service.impl.method_template_pattern.*;
+import util.FaultFactory;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
-/*
-    @author Xiangkai Tang
- */
 
 public class UserCustomerApplyService implements IUserCustomerApplyService {
     private static UserCustomerApplyService userCustomerApplyService = null;

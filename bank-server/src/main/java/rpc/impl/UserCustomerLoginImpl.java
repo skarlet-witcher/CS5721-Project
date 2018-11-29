@@ -7,17 +7,13 @@ import service.IUserCustomerApplyService;
 import service.IUserCustomerLoginService;
 import service.impl.UserCustomerApplyService;
 import service.impl.UserCustomerLoginService;
-import util.ResponseBuilderFactory;
+import util.ResponseBuilder;
 import util.TimestampConvertHelper;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
-
-/*
-    @author Xiangkai Tang 80%
- */
 
 public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLoginImplBase {
     private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
@@ -27,22 +23,19 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
     @Override
     public void loginReq(UserLoginReqRequest request, StreamObserver<Response> responseObserver) {
         try {
-            //1 create result of service, which contains pin and some other attr
             UserLoginReqReply userLoginReqReply = customerLoginService.LoginReq(
                     request.getUserId(),
                     request.getPhoneLast4(),
                     request.getBirthDay(),
                     request.getBirthMon(),
                     request.getBirthYear());
-            //2 set the above result to responseObserver
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .setUserLoginReqReply(userLoginReqReply)
                     .build());
         } catch (Exception e) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(e.getMessage())
                     .build());
         }
-            //3 Send all above to client
         responseObserver.onCompleted();
     }
 
@@ -57,11 +50,11 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         pin.put(6, request.getPin6());
         try {
             UserLoginReply loginReply = customerLoginService.login(request.getUserId(), pin);
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .setUserLoginReply(loginReply)
                     .build());
         } catch (Exception e) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getLocalizedMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(e.getLocalizedMessage())
                     .build());
         }
         responseObserver.onCompleted();
@@ -99,7 +92,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
                 customerApplyService.checkDuplicateApply(userId, accountType, cardType);
             }
             // apply an account according to the type
-            switch(accountType) {
+            switch (accountType) {
                 case UserAccountType.PERSONAL_ACCOUNT:
                     logger.info("ready to apply personal account (ready to invoke customerApplySerivce)");
                     customerApplyService.requestPersonalAccountApply(
@@ -124,10 +117,10 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
                             birthDate, gender, address, email, phone, isNewUser, userId);
                     break;
             }
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .build());
         } catch (Exception e) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getLocalizedMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(e.getLocalizedMessage())
                     .build());
         }
         responseObserver.onCompleted();
@@ -143,31 +136,30 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         try {
             logger.info("ready to checkExistingUserBeforeApply");
             customerApplyService.checkExistingUserBeforeApply(userId, firstName, lastName);
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .build());
         } catch (Exception e) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getLocalizedMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(e.getLocalizedMessage())
                     .build());
         }
         responseObserver.onCompleted();
     }
 
     @Override
-    public void forgetUserId(UserForgetUserIdRequest request, StreamObserver<Response> responseObserver) {;
-        String firstName=request.getFirstName();
-        String lastName=request.getLastName();
-        Timestamp bDate=TimestampConvertHelper.rpcToMysql(request.getBirthDate());
-        String email=request.getEmail();
-        String contactN=request.getPhone();
+    public void forgetUserId(UserForgetUserIdRequest request, StreamObserver<Response> responseObserver) {
+        String firstName = request.getFirstName();
+        String lastName = request.getLastName();
+        Timestamp bDate = TimestampConvertHelper.rpcToMysql(request.getBirthDate());
+        String email = request.getEmail();
+        String contactN = request.getPhone();
         logger.info("birthdate: " + bDate);
-        try{
+        try {
             logger.info("Validate the user in forgotUsrId");
-            customerLoginService.forgotUserId(firstName,lastName,bDate,contactN,email);
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            customerLoginService.forgotUserId(firstName, lastName, bDate, contactN, email);
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .build());
-        }
-        catch(Exception e){
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getLocalizedMessage())
+        } catch (Exception e) {
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(e.getLocalizedMessage())
                     .build());
         }
 
@@ -175,7 +167,8 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
 
     /**
      * The method is called by RPC in server-side when receiving a request of forgetting PIN
-     * @param request A request of forgeting PIN which contains information of requester
+     *
+     * @param request          A request of forgeting PIN which contains information of requester
      * @param responseObserver Response observer to dispatch the response to client-side
      */
     @Override
@@ -185,11 +178,11 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         long userId = request.getUserId();
         try {
             logger.info("ready to check user's supplied information to get PIN");
-            customerLoginService.forgotPIN(userId,email,birthdate);
-            responseObserver.onNext(ResponseBuilderFactory.ResponseSuccessBuilder()
+            customerLoginService.forgotPIN(userId, email, birthdate);
+            responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .build());
         } catch (Exception e) {
-            responseObserver.onNext(ResponseBuilderFactory.ResponseFailBuilder(e.getLocalizedMessage())
+            responseObserver.onNext(ResponseBuilder.getFailBuilder(e.getLocalizedMessage())
                     .build());
         }
         responseObserver.onCompleted();

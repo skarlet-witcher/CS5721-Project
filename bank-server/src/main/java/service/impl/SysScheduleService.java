@@ -3,44 +3,39 @@ package service.impl;
 import Const.SysMailTemplateType;
 import dao.IUserAccountDao;
 import dao.IUserAccountTypeDao;
-import dao.IUserDao;
 import dao.impl.UserAccountDao;
-import dao.impl.UserDao;
 import entity.UserAccountEntity;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
-import service.IApplyFees;
-import util.FeesTemplate;
-import util.IAccounts;
+import service.ISysScheduleService;
+import service.impl.method_template_pattern.FeesTemplate;
 
 import java.text.MessageFormat;
 
-import static util.IAccounts.allAccounts;
+import static service.impl.method_template_pattern.IAccounts.allAccounts;
 
-/**
- * Created by user on 11/23/2018.
- */
-public class AdminService implements IApplyFees,Job {
+
+public class SysScheduleService implements ISysScheduleService, Job {
     private IUserAccountTypeDao userAccountTypeDao;
     private IUserAccountDao userAccountDao = UserAccountDao.getInstance();
 
     public void applyFeesToAllAccounts() {
-        JobDetail job= JobBuilder.newJob(AdminService.class).build();
-        CronScheduleBuilder scheduleBuilder=CronScheduleBuilder.cronSchedule("1 0 1 3,6,9,12 * ?");
-        Trigger trigger=TriggerBuilder.newTrigger().withSchedule(scheduleBuilder).build();
+        JobDetail job = JobBuilder.newJob(SysScheduleService.class).build();
+        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("1 0 1 3,6,9,12 * ?");
+        Trigger trigger = TriggerBuilder.newTrigger().withSchedule(scheduleBuilder).build();
         try {
             Scheduler scheduler = new StdSchedulerFactory().getScheduler();
             scheduler.start();
             scheduler.scheduleJob(job, trigger);
-        }
-        catch(SchedulerException e){
+        } catch (SchedulerException e) {
             e.printStackTrace();
         }
 
     }
+
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
-        double feesToReduce=0;
+        double feesToReduce = 0;
         double balance;
         FeesTemplate account;
         Long typeId;
@@ -52,34 +47,31 @@ public class AdminService implements IApplyFees,Job {
             for (String eachAccount : allAccounts) {
                 account = (FeesTemplate) Class.forName(eachAccount).newInstance();
                 //fetch id of account type
-                typeId=userAccountTypeDao.getUserAccountTypeId(eachAccount);
+                typeId = userAccountTypeDao.getUserAccountTypeId(eachAccount);
 
                 //fetch all accounts of id type
 
-                for(UserAccountEntity userAccountEntity: userAccountDao.getAccountsByAccountType(typeId)){
+                for (UserAccountEntity userAccountEntity : userAccountDao.getAccountsByAccountType(typeId)) {
                     //apply fees for all
-                    feesToReduce=account.calculateFees();
+                    feesToReduce = account.calculateFees();
 
-                    balance =userAccountEntity.getBalance()-feesToReduce;
-                    if(balance>0)
-                    userAccountEntity.setBalance(balance);
-                    else{
+                    balance = userAccountEntity.getBalance() - feesToReduce;
+                    if (balance > 0)
+                        userAccountEntity.setBalance(balance);
+                    else {
                         String mailTemplate = SysEmailService.getInstance().getMailTemplate(SysMailTemplateType.FORGET_USER_ID);
-                        String formatEmail = MessageFormat.format(mailTemplate, "dummy",0);
+                        String formatEmail = MessageFormat.format(mailTemplate, "dummy", 0);
                         SysEmailService.getInstance().send("empathytxk@hotmail.com", "Nuclear Bank - Your Balance", formatEmail);
                     }
 
                 }
 
             }
-        }
-        catch(ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-        catch(InstantiationException r){
+        } catch (InstantiationException r) {
             r.printStackTrace();
-        }
-        catch(IllegalAccessException i){
+        } catch (IllegalAccessException i) {
             i.printStackTrace();
         }
 

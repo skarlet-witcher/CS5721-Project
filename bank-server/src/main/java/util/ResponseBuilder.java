@@ -3,31 +3,31 @@ package util;
 import Const.ResponseStatusType;
 import rpc.Response;
 
-public class ResponseBuilderFactory {
-    public static Response.Builder ResponseSuccessBuilder() {
+public class ResponseBuilder {
+    public static Response.Builder getSuccessBuilder() {
         return Response.newBuilder().setStatusCode(ResponseStatusType.SUCCESS);
     }
 
-    public static Response.Builder ResponseFailBuilder() {
+    public static Response.Builder getFailBuilder() {
         return Response.newBuilder()
                 .setStatusCode(ResponseStatusType.OPERATION_FAIL);
     }
 
-    public static Response.Builder ResponseFailBuilder(String description) {
+    public static Response.Builder getFailBuilder(String description) {
         if (description == null) {
-            return ResponseFailBuilder();
+            return getFailBuilder();
         }
         return Response.newBuilder()
                 .setStatusCode(ResponseStatusType.OPERATION_FAIL)
                 .setDescription(description);
     }
 
-    public static Response.Builder ResponseFailBuilder(Integer statusType, String description) {
+    public static Response.Builder getFailBuilder(Integer statusType, String description) {
         if (description == null) {
-            return ResponseFailBuilder();
+            return getFailBuilder();
         }
         if (statusType == null) {
-            return ResponseFailBuilder(description);
+            return getFailBuilder(description);
         }
         return Response.newBuilder()
                 .setStatusCode(statusType)
