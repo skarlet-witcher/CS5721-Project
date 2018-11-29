@@ -76,6 +76,27 @@ public class UserAccountDao implements IUserAccountDao {
         }
     }
 
+
+    @Override
+    public List<UserAccountEntity> getAccountsByAccountType(Long acId) {
+        try {
+            session.getTransaction().begin();
+            String hql = "from UserAccountEntity where accountType=:acId";
+            Query query = session.createQuery(hql);
+            query.setParameter("acId", acId);
+            List<UserAccountEntity> result = (List<UserAccountEntity>)query.getResultList();
+            session.getTransaction().commit();
+            return result;
+
+        } catch (Exception E) {
+            E.printStackTrace();
+            // Rollback in case of an error occurred.
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+
     @Override
     public UserAccountEntity getUserAccountByIBAN(String iban) {
         try {

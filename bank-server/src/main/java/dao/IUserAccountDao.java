@@ -11,6 +11,8 @@ public interface IUserAccountDao {
 
     List<UserAccountEntity> getUserAccountByUserId(Long userId);
 
+    List<UserAccountEntity> getAccountsByAccountType(Long acId);
+
     UserAccountEntity getUserAccountByIBAN(String iban);
 
     UserAccountEntity getUserAccountByPK(Long id);

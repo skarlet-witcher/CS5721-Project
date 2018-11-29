@@ -5,7 +5,9 @@ import java.sql.Timestamp;
 /**
  * Created by user on 11/11/2018.
  */
-public class PersonalAccount implements IAccounts {
+public class PersonalAccount extends FeesTemplate implements IAccounts {
+
+    boolean isOverDraft=false;
 
     public boolean checkAgeValidity(Timestamp dob){
 
@@ -19,5 +21,16 @@ public class PersonalAccount implements IAccounts {
             return true;
 
         return false;
+    }
+
+     double calculateQuarterlyMaintenanceFee(){
+        return 5;
+    }
+
+     double calculateOverdraftFee(){
+         if(isOverDraft)
+            return 10;
+         else
+             return 0;
     }
 }

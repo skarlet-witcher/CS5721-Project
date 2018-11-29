@@ -5,7 +5,8 @@ import java.sql.Timestamp;
 /**
  * Created by user on 11/12/2018.
  */
-public class GoldenAccount implements IAccounts {
+public class GoldenAccount extends FeesTemplate implements IAccounts {
+    boolean isOverDraft=false;
     public boolean checkAgeValidity(Timestamp dob){
 
         Timestamp curdate=new Timestamp(System.currentTimeMillis());
@@ -18,5 +19,17 @@ public class GoldenAccount implements IAccounts {
             return true;
 
         return false;
+    }
+
+
+    double calculateQuarterlyMaintenanceFee(){
+        return 1.25;
+    }
+
+    double calculateOverdraftFee(){
+    if(isOverDraft)
+            return 5;
+        else
+            return 0;
     }
 }

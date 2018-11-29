@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  * Created by user on 11/12/2018.
  */
-public class StudentAccount implements IAccounts {
+public class StudentAccount extends FeesTemplate implements IAccounts {
     public boolean checkAgeValidity(Timestamp dob){
 
         Timestamp curdate=new Timestamp(System.currentTimeMillis());
@@ -18,5 +18,13 @@ public class StudentAccount implements IAccounts {
             return true;
 
         return false;
+    }
+
+    double calculateQuarterlyMaintenanceFee(){
+        return 0;
+    }
+
+    double calculateOverdraftFee(){
+        return 0;
     }
 }

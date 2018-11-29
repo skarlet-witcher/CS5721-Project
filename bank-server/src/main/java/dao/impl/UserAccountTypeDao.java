@@ -38,4 +38,21 @@ public class UserAccountTypeDao implements IUserAccountTypeDao {
             return null;
         }
     }
+
+    public Long getUserAccountTypeId(String accountTypeName) {
+        try {
+            session.getTransaction().begin();
+            String hql =" Select UserAccountTypeEntity.id from UserAccountTypeEntity where name=?";
+            Query query = session.createQuery(hql);
+            query.setParameter(0, accountTypeName);
+            Long result = (Long)query.uniqueResult();
+            session.getTransaction().commit();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Rollback in case of an error occurred.
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
 }
