@@ -12,7 +12,6 @@ import rpc.impl.bank_staff.BankStaffLoginImpl;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.util.logging.Logger;
 
 import static Const.Server.*;
@@ -33,7 +32,7 @@ public class BankServer {
     }
 
     private void start() throws IOException {
-        server = NettyServerBuilder.forAddress(new InetSocketAddress(SERVER_HOST, SERVER_PORT)).sslContext(getSslContextBuilder().build())
+        server = NettyServerBuilder.forPort(SERVER_PORT).sslContext(getSslContextBuilder().build())
                 .addService(new UserCustomerLoginImpl())
                 .addService(new UserCustomerImpl())
                 .addService(new BankStaffLoginImpl())
