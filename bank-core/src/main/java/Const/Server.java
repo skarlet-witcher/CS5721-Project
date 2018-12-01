@@ -1,7 +1,7 @@
 package Const;
 
 public class Server {
-    public static final String SERVER_HOST = "localhost";
+    public static final String SERVER_HOST = "ec2-52-204-41-200.compute-1.amazonaws.com";
     public static final int SERVER_PORT = 7777;
     public static final String SERVER_PRIVATE_KEY = "cert/server.pem";
     public static final String SERVER_CERT_CHAIN_LOCAL = "cert/server-local.crt";
