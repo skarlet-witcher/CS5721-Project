@@ -1,7 +1,5 @@
 package model;
 
-import rpc.UserLoginRequest;
-
 public class UserLoginRequestModel {
     private Long userId;
     private String phoneNumLast4;

@@ -6,20 +6,10 @@ package view;
 
 
 import controller.CustomerPINController;
-import model.UserLoginPINModel;
-import model.UserModel;
 import net.miginfocom.swing.MigLayout;
-import rpc.UserLoginReply;
-import service.impl.CustomerLoginService;
-import util.JTextFieldLimit;
-import util.KeyPadGenerator;
-import util.TimestampConvertHelper;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -1,14 +1,13 @@
 package rpc.client;
 
 import Const.ResponseStatusType;
-import app.MainApp;
 import rpc.*;
 
 import javax.net.ssl.SSLException;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class CustomerMainRpc {
+public class CustomerMainRpc extends ClientRpc {
     private static final Logger logger = Logger.getLogger(CustomerMainRpc.class.getName());
     private static UserCustomerGrpc.UserCustomerBlockingStub blockingStub;
     private static CustomerMainRpc instance = null;
@@ -16,7 +15,7 @@ public class CustomerMainRpc {
     public static CustomerMainRpc getInstance() throws SSLException {
         if (instance == null) {
             instance = new CustomerMainRpc();
-            blockingStub = UserCustomerGrpc.newBlockingStub(MainApp.getChannel());
+            blockingStub = UserCustomerGrpc.newBlockingStub(getChannel());
         }
         return instance;
     }

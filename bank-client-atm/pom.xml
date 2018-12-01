@@ -11,4 +11,11 @@
 
     <artifactId>bank-client-atm</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>nuclear</groupId>
+            <artifactId>bank-client</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 </project>

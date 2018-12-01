@@ -1,29 +1,32 @@
 package service.impl;
 
+import Const.ClientRpcType;
 import model.*;
 import rpc.UserApplyNewAccountRequest;
 import rpc.UserValidateExistingUserRequest;
 import rpc.client.CustomerApplyRpc;
+import rpc.client.SelfServiceRpcFactory;
 import service.ICustomerApplyService;
 import util.TimestampConvertHelper;
 
-
 public class CustomerApplyService implements ICustomerApplyService {
     private static ICustomerApplyService customerApplyService = null;
+    private static CustomerApplyRpc customerApplyRpc;
 
     private CustomerApplyService() {
     }
 
-    public static ICustomerApplyService getInstance() {
+    public static ICustomerApplyService getInstance() throws Exception {
         if (customerApplyService == null) {
             customerApplyService = new CustomerApplyService();
+            customerApplyRpc = (CustomerApplyRpc) SelfServiceRpcFactory.getClientRpc(ClientRpcType.CustomerApplyRpc);
         }
         return customerApplyService;
     }
 
     @Override
     public void applyPersonalAccountForNewUser(UserApplyNewPersonalAccountBaseModel userApplyNewPersonalAccountBaseModel) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        customerApplyRpc.applyReq(
                 UserApplyNewAccountRequest.newBuilder()
                         .setFirstName(userApplyNewPersonalAccountBaseModel.getFirstName())
                         .setLastName(userApplyNewPersonalAccountBaseModel.getLastName())
@@ -42,7 +45,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     @Override
     public void applyStudentAccountForNewUser(UserApplyNewStudentAccountBaseModel userApplyNewStudentAccountBaseModel) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        customerApplyRpc.applyReq(
                 UserApplyNewAccountRequest.newBuilder()
                         .setFirstName(userApplyNewStudentAccountBaseModel.getFirstName())
                         .setLastName(userApplyNewStudentAccountBaseModel.getLastName())
@@ -63,7 +66,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     @Override
     public void applyYoungSaverAccountForNewUser(UserApplyNewYoungSaverAccountBaseModel userApplyNewYoungSaverAccountBaseModel) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        customerApplyRpc.applyReq(
                 UserApplyNewAccountRequest.newBuilder()
                         .setFirstName(userApplyNewYoungSaverAccountBaseModel.getFirstName())
                         .setLastName(userApplyNewYoungSaverAccountBaseModel.getLastName())
@@ -86,7 +89,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     @Override
     public void applyGoldenAccountForNewUser(UserApplyNewGoldenAccountBaseModel userApplyNewGoldenAccountBaseModel) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        customerApplyRpc.applyReq(
                 UserApplyNewAccountRequest.newBuilder()
                         .setFirstName(userApplyNewGoldenAccountBaseModel.getFirstName())
                         .setLastName(userApplyNewGoldenAccountBaseModel.getLastName())
@@ -105,7 +108,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     @Override
     public void checkExistingUserBeforeApply(UserModel userModel) throws Exception {
-        CustomerApplyRpc.getInstance().checkExistingUserBeforeApply(
+        customerApplyRpc.checkExistingUserBeforeApply(
                 UserValidateExistingUserRequest.newBuilder().setUserId(userModel.getUserId())
                         .setFirstName(userModel.getFirstName())
                         .setLastName(userModel.getLastName()).build());
@@ -113,7 +116,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     @Override
     public void applyPersonalAccountForExistingUser(UserApplyNewPersonalAccountBaseModel userApplyNewPersonalAccountBaseModel) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        customerApplyRpc.applyReq(
                 UserApplyNewAccountRequest.newBuilder().setUserId(userApplyNewPersonalAccountBaseModel.getUserId())
                         .setAccountType(userApplyNewPersonalAccountBaseModel.getAccountType())
                         .setCardType(userApplyNewPersonalAccountBaseModel.getCardType())
@@ -123,7 +126,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     @Override
     public void applyStudentAccountForExistingUser(UserApplyNewStudentAccountBaseModel userApplyNewStudentAccountBaseModel) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        customerApplyRpc.applyReq(
                 UserApplyNewAccountRequest.newBuilder().setUserId(userApplyNewStudentAccountBaseModel.getUserId())
                         .setAccountType(userApplyNewStudentAccountBaseModel.getAccountType())
                         .setCardType(userApplyNewStudentAccountBaseModel.getAccountType())
@@ -136,7 +139,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     @Override
     public void applyYoungSaverAccountForExistingUser(UserApplyNewYoungSaverAccountBaseModel userApplyNewYoungSaverAccountBaseModel) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        customerApplyRpc.applyReq(
                 UserApplyNewAccountRequest.newBuilder().setUserId(userApplyNewYoungSaverAccountBaseModel.getUserId())
                         .setAccountType(userApplyNewYoungSaverAccountBaseModel.getAccountType())
                         .setCardType(userApplyNewYoungSaverAccountBaseModel.getCardType())
@@ -151,7 +154,7 @@ public class CustomerApplyService implements ICustomerApplyService {
 
     @Override
     public void applyGoldenAccountForExistingUser(UserApplyNewGoldenAccountBaseModel userApplyNewGoldenAccountBaseModel) throws Exception {
-        CustomerApplyRpc.getInstance().applyReq(
+        customerApplyRpc.applyReq(
                 UserApplyNewAccountRequest.newBuilder().setUserId(userApplyNewGoldenAccountBaseModel.getUserId())
                         .setAccountType(userApplyNewGoldenAccountBaseModel.getAccountType())
                         .setCardType(userApplyNewGoldenAccountBaseModel.getCardType())

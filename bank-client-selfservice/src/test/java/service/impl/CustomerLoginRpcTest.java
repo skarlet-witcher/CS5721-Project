@@ -11,10 +11,10 @@ import javax.net.ssl.SSLException;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-class CustomerLoginServiceTest {
+class CustomerLoginRpcTest {
     CustomerLoginRpc customerLoginRpc = CustomerLoginRpc.getInstance();
 
-    CustomerLoginServiceTest() throws SSLException {
+    CustomerLoginRpcTest() throws SSLException {
     }
 
     @Test

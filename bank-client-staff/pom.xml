@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>nuclear</groupId>
-            <artifactId>bank-core</artifactId>
+            <artifactId>bank-client</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>

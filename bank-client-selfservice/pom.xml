@@ -14,15 +14,8 @@
     <dependencies>
         <dependency>
             <groupId>nuclear</groupId>
-            <artifactId>bank-core</artifactId>
+            <artifactId>bank-client</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.2</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
-
 </project>

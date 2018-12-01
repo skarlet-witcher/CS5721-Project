@@ -6,15 +6,10 @@ package view;
 
 import controller.CustomerAddPayeeController;
 import model.UserModel;
-import model.UserPayeeModel;
 import net.miginfocom.swing.MigLayout;
-import service.impl.CustomerPayeeService;
-import util.JTextFieldLimit;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * @author xiangkai22

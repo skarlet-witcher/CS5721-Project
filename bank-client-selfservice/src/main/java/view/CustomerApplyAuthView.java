@@ -4,16 +4,11 @@
 
 package view;
 
-import Const.UserType;
 import controller.CustomerApplyAuthController;
-import model.UserModel;
 import net.miginfocom.swing.MigLayout;
-import service.impl.CustomerApplyService;
-import util.JTextFieldLimit;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 /**
  * @author xiangkai Tang

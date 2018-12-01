@@ -1,22 +1,21 @@
 package rpc.client;
 
 import Const.ResponseStatusType;
-import app.MainApp;
 import rpc.*;
 
 import javax.net.ssl.SSLException;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class CustomerPayeeRpc {
+public class CustomerPayeeRpc extends ClientRpc {
     private static final Logger logger = Logger.getLogger(CustomerPayeeRpc.class.getName());
     private static UserCustomerGrpc.UserCustomerBlockingStub blockingStub;
     private static CustomerPayeeRpc customerPayeeRpc = null;
 
     public static CustomerPayeeRpc getInstance() throws SSLException {
-        if(customerPayeeRpc == null) {
+        if (customerPayeeRpc == null) {
             customerPayeeRpc = new CustomerPayeeRpc();
-            blockingStub = UserCustomerGrpc.newBlockingStub(MainApp.getChannel());
+            blockingStub = UserCustomerGrpc.newBlockingStub(getChannel());
         }
         return customerPayeeRpc;
     }

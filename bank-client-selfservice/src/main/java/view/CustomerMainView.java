@@ -4,27 +4,16 @@
 
 package view;
 
-import Const.*;
 import controller.CustomerMainController;
-import model.*;
+import model.Observer;
+import model.UserModel;
 import net.miginfocom.swing.MigLayout;
-import rpc.UserAccountsReply;
-import rpc.UserPayeesReply;
-import rpc.UserProfileReply;
-import rpc.UserTransactionsReply;
-import service.impl.*;
-import util.JTextFieldLimit;
-import util.TimestampConvertHelper;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Xiangkai Tang

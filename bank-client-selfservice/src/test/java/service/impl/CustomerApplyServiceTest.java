@@ -7,10 +7,13 @@ import service.ICustomerApplyService;
 
 import java.sql.Timestamp;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class CustomerApplyServiceTest {
     ICustomerApplyService customerApplyService = CustomerApplyService.getInstance();
+
+    CustomerApplyServiceTest() throws Exception {
+    }
 
     @Test
     void applyPersonalAccountForNewUser() throws Exception {

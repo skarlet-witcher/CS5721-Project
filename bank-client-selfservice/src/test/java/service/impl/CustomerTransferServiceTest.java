@@ -1,18 +1,14 @@
 package service.impl;
 
 import Const.AccountCurrencyType;
-import Const.CardCurrencyType;
 import Const.UserAccountType;
-import Const.UserGenderType;
 import model.UserAccountModel;
-import model.UserModel;
 import model.UserPayeeModel;
 import model.UserTransferModel;
-import org.hibernate.type.CurrencyType;
 import org.junit.jupiter.api.Test;
 import service.ICustomerTransferService;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class CustomerTransferServiceTest {
     private static ICustomerTransferService customerTransferService = CustomerTransferService.getInstance();

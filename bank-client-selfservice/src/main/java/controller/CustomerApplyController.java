@@ -2,7 +2,6 @@ package controller;
 
 import Const.UserAccountType;
 import Const.UserType;
-import com.sun.xml.bind.v2.runtime.reflect.Lister;
 import model.*;
 import service.impl.CustomerApplyService;
 import util.JTextFieldLimit;

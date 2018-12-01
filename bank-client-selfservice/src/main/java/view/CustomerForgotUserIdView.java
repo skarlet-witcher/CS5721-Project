@@ -5,19 +5,12 @@
 package view;
 
 import controller.CustomerForgotUserIdController;
-import model.UserForgotUserIdModel;
 import net.miginfocom.swing.MigLayout;
-import service.impl.CustomerLoginService;
-import util.JTextFieldLimit;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.logging.Logger;
 
 /**
  * @author xiangkai22

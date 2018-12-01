@@ -15,6 +15,7 @@
         <module>bank-client-atm</module>
         <module>bank-client-staff</module>
         <module>bank-client-admin</module>
+        <module>bank-client</module>
     </modules>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
