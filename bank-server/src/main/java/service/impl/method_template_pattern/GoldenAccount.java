@@ -16,8 +16,6 @@ public class GoldenAccount extends FeesTemplate implements IAccounts {
         return (curInt - birInt) > 66;
 
     }
-
-
     double calculateQuarterlyMaintenanceFee(){
         return 1.25;
     }

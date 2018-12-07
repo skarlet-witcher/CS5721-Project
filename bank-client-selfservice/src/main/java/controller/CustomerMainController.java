@@ -63,7 +63,7 @@ public class CustomerMainController implements BaseController {
     }
 
     public void updateData() {
-        transfer(userTransferModel);
+        transfer();
         initHomePage();
         initTransactionInfo();
         initTransactionModel();
@@ -75,7 +75,7 @@ public class CustomerMainController implements BaseController {
         initTransferPINField();
     }
 
-    private void transfer(UserTransferModel userTransferModel) {
+    private void transfer() {
         if(JOptionPane.showConfirmDialog(
                 new JFrame(),"Are you sure to transfer " + userTransferModel.getAmounts() +" "+ CardCurrencyType.getCurrencyType(userTransferModel.getCurrencyType())+ " to " + userTransferModel.getPayee().getName() + " ?",
                 "Transfer Confirmation",
@@ -342,11 +342,14 @@ public class CustomerMainController implements BaseController {
         UserAccountModel userAccountModel = this.userModel.getUserAccountList().get(this.view.cb_transfer_accountList.getSelectedIndex());
         UserPayeeModel userPayeeModel = this.userModel.getUserPayeeList().get(this.view.cb_transfer_payeeList.getSelectedIndex());
         userAccountModel.setBalance(balance);
+        userTransferModel.setTransferModel(userPayeeModel, userAccountModel, userAccountModel.getCurrencyType(), amounts, postScript);
+        /*
         userTransferModel.setPayee(userPayeeModel);
         userTransferModel.setAccount(userAccountModel);
         userTransferModel.setCurrencyType(userAccountModel.getCurrencyType());
         userTransferModel.setPostScript(postScript);
         userTransferModel.setAmounts(amounts);
+        */
     }
 
     private void clearTable(DefaultTableModel tableModel) {

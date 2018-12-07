@@ -16,7 +16,7 @@ import static Const.UserType.EXISTING_USER;
 import static Const.UserType.NEW_USER;
 
 /**
- * @author xiangkai22
+ * @author long
  */
 public class StaffMainView extends JFrame {
     private long staffId;

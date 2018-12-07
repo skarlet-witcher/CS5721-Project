@@ -24,9 +24,30 @@ public class UserTransferModel implements Subject {
         observers = new ArrayList<>();
     }
 
+    public void setTransferModel(UserPayeeModel payee, UserAccountModel account, Integer currencyType, Double amounts, String postScript) {
+        this.payee = payee;
+        this.account = account;
+        this.currencyType = currencyType;
+        this.amounts = amounts;
+        this.postScript = postScript;
+        updateModel();
+    }
+
     public void setAmounts(Double amounts) {
         this.amounts = amounts;
-        updateAmounts();
+        updateModel();
+    }
+
+    public void updateModel() {
+        notifyObserver();
+    }
+
+    @Override
+    public void notifyObserver() {
+        for(int i = 0; i < observers.size(); i++) {
+            Observer observer = observers.get(i);
+            observer.updateData();
+        }
     }
 
     @Override
@@ -42,13 +63,9 @@ public class UserTransferModel implements Subject {
         }
     }
 
-    @Override
-    public void notifyObserver() {
-        for(int i = 0; i < observers.size(); i++) {
-            Observer observer = observers.get(i);
-            observer.updateData();
-        }
-    }
+
+
+
 
     public UserPayeeModel getPayee() {
         return payee;
@@ -94,9 +111,6 @@ public class UserTransferModel implements Subject {
         this.postScript = postScript;
     }
 
-    public void updateAmounts() {
-        notifyObserver();
-    }
 
 
 }

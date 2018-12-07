@@ -108,11 +108,11 @@ class CustomerApplyServiceTest {
     }
 
     @Test
-    void checkExistingUserBeforeApply() throws Exception {
+    void checkExistingUserBeforeApply() {
         UserModel userModel = new UserModel();
         userModel.setUserId(Long.parseLong("1000000000"));
-        userModel.setFirstName("xiangkai");
-        userModel.setLastName("tang");
+        userModel.setFirstName("John");
+        userModel.setLastName("Mathew");
 
         assertDoesNotThrow(() -> {
             customerApplyService.checkExistingUserBeforeApply(userModel);

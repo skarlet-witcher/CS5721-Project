@@ -13,7 +13,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 /**
- * @author xiangkai22
+ * @author Ashly
  */
 public class CustomerForgotUserIdView extends JFrame {
 

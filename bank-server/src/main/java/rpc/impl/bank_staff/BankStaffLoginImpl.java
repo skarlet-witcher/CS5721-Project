@@ -33,6 +33,4 @@ public class BankStaffLoginImpl extends StaffLoginGrpc.StaffLoginImplBase {
         //3 Send all above to client
         responseObserver.onCompleted();
     }
-
-
 }

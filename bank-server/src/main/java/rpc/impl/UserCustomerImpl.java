@@ -142,8 +142,4 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
         }
         responseObserver.onCompleted();
     }
-
-
-
-
 }

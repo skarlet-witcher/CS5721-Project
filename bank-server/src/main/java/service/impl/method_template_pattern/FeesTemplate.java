@@ -15,5 +15,4 @@ public abstract class FeesTemplate {
         fees += calculateOverdraftFee();
         return fees;
     }
-
 }

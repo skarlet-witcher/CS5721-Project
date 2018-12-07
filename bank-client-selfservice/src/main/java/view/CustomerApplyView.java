@@ -21,7 +21,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 /**
- * @author xiangkai Tang
+ * @author Ashly
  */
 public class CustomerApplyView extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

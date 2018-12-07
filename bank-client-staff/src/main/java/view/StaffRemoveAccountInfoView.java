@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * @author xiangkai22
+ * @author Long
  */
 public class StaffRemoveAccountInfoView extends JFrame {
     private long staffId;
