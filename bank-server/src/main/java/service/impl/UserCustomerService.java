@@ -48,7 +48,6 @@ public class UserCustomerService implements IUserCustomerService {
                         .setBalance(userAccount.getBalance().intValue())
                         .setStatus(userAccount.getStatus()).build();
                 userAccountsReplies.add(userAccountsReply);
-                System.out.println("balance: " + userAccount.getBalance().intValue());
             }
             return userAccountsReplies;
         } catch (Exception E) {
