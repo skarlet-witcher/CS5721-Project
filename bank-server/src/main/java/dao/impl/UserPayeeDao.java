@@ -80,12 +80,13 @@ public class UserPayeeDao implements IUserPayeeDao {
             query.setParameter("id", payee_pk);
             query.setParameter("userId", user_id);
             query.executeUpdate();
+            session.getTransaction().commit();
 
-            Query query2 = session.createQuery("from UserPayeeEntity ");
+            Query query2 = session.createQuery("from UserPayeeEntity");
             for(UserPayeeEntity userPayeeEntity: (List<UserPayeeEntity>)query2.getResultList()) {
                 session.refresh(userPayeeEntity);
             }
-            session.getTransaction().commit();
+
         } catch (Exception E) {
             E.printStackTrace();
             // Rollback in case of an error occurred.
