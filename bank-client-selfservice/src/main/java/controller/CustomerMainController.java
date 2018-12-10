@@ -64,6 +64,7 @@ public class CustomerMainController implements BaseController {
 
     public void updateData() {
         transfer();
+
         initHomePage();
         initTransactionInfo();
         initTransactionModel();
@@ -446,6 +447,12 @@ public class CustomerMainController implements BaseController {
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        if(Double.parseDouble(this.view.tf_transfer_amounts.getText().trim()) <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "The amount should be more than 0. Please input correct amount before transfer",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         if(!this.view.tf_transfer_amounts.getText().matches("^[0-9]*$")) {
             JOptionPane.showMessageDialog(null,
                     "The amount should be numeric. Please input valid amount before transfer",
@@ -581,7 +588,6 @@ public class CustomerMainController implements BaseController {
     }
 
     public void cb_transfer_accountListActionPerformed(ActionEvent e) {
-        System.out.println("selected INdex" + this.view.cb_transfer_accountList.getSelectedIndex());
         initCurrency();
         initBalance();
     }

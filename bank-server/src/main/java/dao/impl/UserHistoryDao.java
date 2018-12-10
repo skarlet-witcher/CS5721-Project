@@ -29,6 +29,7 @@ public class UserHistoryDao implements IUserHistoryDao {
             session.getTransaction().begin();
             session.save(operationHistory);
             session.getTransaction().commit();
+
             return 1;
         } catch (Exception e) {
             e.printStackTrace();

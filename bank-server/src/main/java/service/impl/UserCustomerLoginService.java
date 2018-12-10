@@ -81,6 +81,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
         record = operationHistoryDao.getLastLoginRecordByUserId(result.getId());
         if (record != null || record == null) {
             operationHistoryService.addNewUserLoginHistory(result.getId(), UserOperateType.LOGIN, UserOperateStatusType.SUCCESS);
+            record = operationHistoryDao.getLastLoginRecordByUserId(result.getId());
         } else {
             throw FaultFactory.throwFaultException("Fail to add login history when login using PIN, please contact admin.");
         }
