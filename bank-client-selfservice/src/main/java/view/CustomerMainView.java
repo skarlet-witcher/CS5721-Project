@@ -4,7 +4,6 @@
 
 package view;
 
-import java.awt.event.*;
 import controller.CustomerMainController;
 import model.Observer;
 import model.UserModel;
@@ -13,6 +12,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
