@@ -235,7 +235,7 @@ public class UserCustomerService implements IUserCustomerService {
 
     private void addTransferHistoryForTransferredAccount(UserAccountEntity transferredAccount, Double amount) throws Exception {
         try {
-            addTransferHistory(transferredAccount.getUserId(),
+            addTransferHistoryForTransferredAccount(transferredAccount.getUserId(),
                     transferredAccount.getId(),
                     null,
                     "receive transfer",
@@ -252,6 +252,11 @@ public class UserCustomerService implements IUserCustomerService {
     private void addTransferHistory(Long user_pk, Long account_pk, Long payee_pk, String postScript, Double amount, int currencyType, Double updatedBalance, int operateStatus) {
         userCustomerHistoryService.addNewTransferHistory(user_pk, account_pk, payee_pk, postScript,
                 updatedBalance, amount * -1, currencyType, UserOperateType.TRANSFER, operateStatus);
+    }
+
+    private void addTransferHistoryForTransferredAccount(Long user_pk, Long account_pk, Long payee_pk, String postScript, Double amount, int currencyType, Double updatedBalance, int operateStatus) {
+        userCustomerHistoryService.addNewTransferHistory(user_pk, account_pk, payee_pk, postScript,
+                updatedBalance, amount, currencyType, UserOperateType.TRANSFER, operateStatus);
     }
 
     private List<UserHistoryEntity> getUserHistoryListByFilter(Long user_pk, Long account_pk, int filter) throws Exception {
