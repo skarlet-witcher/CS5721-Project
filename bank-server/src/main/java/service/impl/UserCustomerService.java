@@ -1,14 +1,21 @@
 package service.impl;
 
-import Const.*;
+import Const.UserOperateStatusType;
+import Const.UserOperateType;
+import Const.UserTransactionTimeFilter;
 import dao.*;
 import dao.impl.*;
 import entity.UserAccountEntity;
 import entity.UserEntity;
 import entity.UserHistoryEntity;
 import entity.UserPayeeEntity;
-import org.iban4j.*;
-import rpc.*;
+import org.iban4j.IbanFormatException;
+import org.iban4j.InvalidCheckDigitException;
+import org.iban4j.UnsupportedCountryException;
+import rpc.UserAccountsReply;
+import rpc.UserPayeesReply;
+import rpc.UserProfileReply;
+import rpc.UserTransactionsReply;
 import service.IUserCustomerHistoryService;
 import service.IUserCustomerService;
 import util.FaultFactory;
@@ -143,7 +150,7 @@ public class UserCustomerService implements IUserCustomerService {
                 account_pk,
                 payee_pk,
                 postScript,
-                amount,
+                amount * -1,
                 currencyType,
                 updatedBalance,
                 UserOperateStatusType.SUCCESS);
@@ -223,11 +230,28 @@ public class UserCustomerService implements IUserCustomerService {
                 throw FaultFactory.throwFaultException("Fail to update balance of local account");
             }
         }
+        addTransferHistoryForTransferredAccount(result_payee, amount);
+    }
+
+    private void addTransferHistoryForTransferredAccount(UserAccountEntity transferredAccount, Double amount) throws Exception {
+        try {
+            addTransferHistory(transferredAccount.getUserId(),
+                    transferredAccount.getId(),
+                    null,
+                    "receive transfer",
+                    amount,
+                    transferredAccount.getCurrencyType(),
+                    transferredAccount.getBalance(),
+                    UserOperateStatusType.SUCCESS);
+        } catch (Exception e) {
+            throw FaultFactory.throwFaultException("Fail to add transfer history to transferred account.");
+        }
+
     }
 
     private void addTransferHistory(Long user_pk, Long account_pk, Long payee_pk, String postScript, Double amount, int currencyType, Double updatedBalance, int operateStatus) {
         userCustomerHistoryService.addNewTransferHistory(user_pk, account_pk, payee_pk, postScript,
-                updatedBalance, amount * -1, currencyType, UserOperateType.TRANSFER , operateStatus);
+                updatedBalance, amount, currencyType, UserOperateType.TRANSFER, operateStatus);
     }
 
     private List<UserHistoryEntity> getUserHistoryListByFilter(Long user_pk, Long account_pk, int filter) throws Exception {

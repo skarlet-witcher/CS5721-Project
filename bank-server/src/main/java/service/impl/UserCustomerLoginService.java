@@ -61,7 +61,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
         result = loginUsingPIN(userId, pin);
 
         if (result != null) {
-           return buildLoginReply(result);
+            return buildLoginReply(result);
         } else {
             throw FaultFactory.throwFaultException("UserId is not matched with pin, please check again.");
         }
@@ -183,15 +183,15 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
     @Override
     public void forgotUserId(String firstName, String lastName, Timestamp birthDate, String contactNum, String email) throws Exception {
 
-        UserEntity userEntity = userDao.selectUserByNameDOBPhoneEmail(firstName,lastName,birthDate,contactNum,email);
+        UserEntity userEntity = userDao.selectUserByNameDOBPhoneEmail(firstName, lastName, birthDate, contactNum, email);
 
-        if(userEntity == null) {
+        if (userEntity == null) {
             throw FaultFactory.throwFaultException("No user record found with these details!!!");
         }
         // send email
         String mailTemplate = SysEmailService.getInstance().getMailTemplate(SysMailTemplateType.FORGET_USER_ID);
         String formatEmail = MessageFormat.format(mailTemplate, firstName, userEntity.getUserId());
-        SysEmailService.getInstance().send("empathytxk@hotmail.com", "Nuclear Bank - Your User ID", formatEmail);
+        SysEmailService.getInstance().send(email, "Nuclear Bank - Your User ID", formatEmail);
 
     }
 
@@ -218,7 +218,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
             String mailTemplate = SysEmailService.getInstance().getMailTemplate(SysMailTemplateType.FORGET_PIN);
             String formatMail = MessageFormat.format(mailTemplate, userEntity.getFirstName(), PIN);
             System.out.print(formatMail);
-            SysEmailService.getInstance().send("thelongdt@gmail.com",
+            SysEmailService.getInstance().send(email,
                     "Nuclear Bank - Requesting new PIN",
                     formatMail);
         } else {

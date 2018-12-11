@@ -1,6 +1,7 @@
 package service.impl;
 
 import Const.CardStatus;
+import Const.SysMailTemplateType;
 import Const.UserStatusType;
 import bankStaff_rpc.AcceptedRequest;
 import bankStaff_rpc.AcceptedResponse;
@@ -20,6 +21,7 @@ import service.impl.command_pattern.*;
 import util.*;
 
 import java.sql.Timestamp;
+import java.text.MessageFormat;
 
 import static Const.CardCurrencyType.EURO;
 import static Const.UserAccountType.*;
@@ -84,6 +86,7 @@ public class StaffService implements IStaffService {
         if (userApplyArchiveEntity.getNewUserApply() == NEW_USER) {
             response = applyForNewUser(request, userApplyArchiveEntity);
         }
+
         return response;
 
     }
@@ -100,6 +103,13 @@ public class StaffService implements IStaffService {
 
         //Return accepted response
         AcceptedResponse response = AcceptedResponse.newBuilder().setIsAccepted(true).setStatusCode(200).build();
+
+        // send email
+        UserApplyArchiveEntity apply = bankStaffDao.selectOneApplication(request.getApplicationId());
+        String mailTemplate = SysEmailService.getInstance().getMailTemplate(SysMailTemplateType.NEW_ACCOUNT);
+        String formatEmail = MessageFormat.format(mailTemplate, apply.getFirstName() + " " + apply.getLastName());
+        SysEmailService.getInstance().send(apply.getEmail(), "Nuclear Bank - Your apply has been accepted!", formatEmail);
+
         return response;
     }
 
@@ -113,10 +123,12 @@ public class StaffService implements IStaffService {
         userEntity.setLastName(userApplyArchiveEntity.getLastName());
         userEntity.setGender(userApplyArchiveEntity.getGender());
 //        userEntity.setLoginPinDigit(String.valueOf(PINFieldSetter.getInstance().setPINField()));
-        userEntity.setPin(String.valueOf(PINGenerator.getInstance().generatePIN()));
+        String pin = String.valueOf(PINGenerator.getInstance().generatePIN());
+        userEntity.setPin(pin);
         userEntity.setPhone(userApplyArchiveEntity.getPhone());
         userEntity.setStatus(UserStatusType.NORMAL);
-        userEntity.setUserId(AccountNumberGenerator.getInstance().generateAccountNumber());
+        long id = AccountNumberGenerator.getInstance().generateAccountNumber();
+        userEntity.setUserId(id);
         userDao.createUser(userEntity);
         bankStaffDao.applyAnApplication(request.getApplicationId());
 
@@ -128,6 +140,15 @@ public class StaffService implements IStaffService {
 
         //4. Return acceptedResponse
         AcceptedResponse response = AcceptedResponse.newBuilder().setIsAccepted(true).setStatusCode(200).build();
+
+        // send email
+        UserApplyArchiveEntity apply = bankStaffDao.selectOneApplication(request.getApplicationId());
+        String mailTemplate = SysEmailService.getInstance().getMailTemplate(SysMailTemplateType.NEW_USER);
+        String formatEmail = MessageFormat.format(mailTemplate,
+                apply.getFirstName() + " " + apply.getLastName(),
+                id, pin, userAccountEntity.getAccountNumber(), userCardEntity.getCardNumber());
+        SysEmailService.getInstance().send(apply.getEmail(), "Nuclear Bank - Your apply has been accepted!", formatEmail);
+
         return response;
     }
 
