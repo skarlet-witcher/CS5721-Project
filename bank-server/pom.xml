@@ -21,7 +21,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>BankServer</mainClass>
+                            <mainClass>main.BankServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -31,7 +31,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>BankServer</mainClass>
+                            <mainClass>main.BankServer</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

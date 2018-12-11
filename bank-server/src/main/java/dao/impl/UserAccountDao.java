@@ -171,6 +171,9 @@ public class UserAccountDao implements IUserAccountDao {
             query2.setParameter("iban", iban);
             UserAccountEntity result = (UserAccountEntity) query2.uniqueResult();
             session.update(result);
+
+            session.refresh(result);
+            session.getTransaction().commit();
             return updateRows;
         } catch (Exception e) {
             e.printStackTrace();
