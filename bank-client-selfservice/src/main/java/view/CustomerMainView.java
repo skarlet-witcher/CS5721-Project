@@ -94,45 +94,6 @@ public class CustomerMainView extends JFrame implements Observer {
         customerMainController.updateData();
     }
 
-    private void thisComponentShown(ComponentEvent e) {
-        // TODO add your code here
-    }
-
-    private void btn_profile_modifyActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void btn_profile_revertActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void cb_transaction_accountListActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void cb_transaction_filterActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void btn_payee_addActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void btn_payee_removeActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void cb_transfer_accountListActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void btn_transfer_transferActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void btn_signoutActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
 
     public void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -194,7 +155,7 @@ public class CustomerMainView extends JFrame implements Observer {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
-                thisComponentShown(e);
+                customerMainController.thisComponentShown(e);
             }
         });
         Container contentPane = getContentPane();
@@ -354,13 +315,13 @@ public class CustomerMainView extends JFrame implements Observer {
                 //---- btn_profile_modify ----
                 btn_profile_modify.setText("Modify");
                 btn_profile_modify.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_profile_modify.addActionListener(e -> btn_profile_modifyActionPerformed(e));
+                btn_profile_modify.addActionListener(e -> customerMainController.btn_profile_modifyActionPerformed(e));
                 profilePanel.add(btn_profile_modify, "cell 2 8");
 
                 //---- btn_profile_revert ----
                 btn_profile_revert.setText("Revert");
                 btn_profile_revert.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_profile_revert.addActionListener(e -> btn_profile_revertActionPerformed(e));
+                btn_profile_revert.addActionListener(e -> customerMainController.btn_profile_revertActionPerformed(e));
                 profilePanel.add(btn_profile_revert, "cell 3 8");
             }
             customerTabPane.addTab("Profile", profilePanel);
@@ -387,7 +348,7 @@ public class CustomerMainView extends JFrame implements Observer {
 
                 //---- cb_transaction_accountList ----
                 cb_transaction_accountList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                cb_transaction_accountList.addActionListener(e -> cb_transaction_accountListActionPerformed(e));
+                cb_transaction_accountList.addActionListener(e -> customerMainController.cb_transaction_accountListActionPerformed(e));
                 transactionPanel.add(cb_transaction_accountList, "cell 0 0");
 
                 //---- cb_transaction_filter ----
@@ -398,7 +359,7 @@ public class CustomerMainView extends JFrame implements Observer {
                     "Recent 6 months",
                     "Recent 1 year"
                 }));
-                cb_transaction_filter.addActionListener(e -> cb_transaction_filterActionPerformed(e));
+                cb_transaction_filter.addActionListener(e -> customerMainController.cb_transaction_filterActionPerformed(e));
                 transactionPanel.add(cb_transaction_filter, "cell 0 0");
 
                 //======== scrollPane2 ========
@@ -439,13 +400,13 @@ public class CustomerMainView extends JFrame implements Observer {
                 //---- btn_payee_add ----
                 btn_payee_add.setText("Add");
                 btn_payee_add.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_payee_add.addActionListener(e -> btn_payee_addActionPerformed(e));
+                btn_payee_add.addActionListener(e -> customerMainController.btn_payee_addActionPerformed(e));
                 payeePanel.add(btn_payee_add, "cell 0 0");
 
                 //---- btn_payee_remove ----
                 btn_payee_remove.setText("Remove");
                 btn_payee_remove.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_payee_remove.addActionListener(e -> btn_payee_removeActionPerformed(e));
+                btn_payee_remove.addActionListener(e -> customerMainController.btn_payee_removeActionPerformed(e));
                 payeePanel.add(btn_payee_remove, "cell 0 0");
 
                 //======== scrollPane3 ========
@@ -498,7 +459,7 @@ public class CustomerMainView extends JFrame implements Observer {
                 transferPanel.add(label8, "cell 1 1");
 
                 //---- cb_transfer_accountList ----
-                cb_transfer_accountList.addActionListener(e -> cb_transfer_accountListActionPerformed(e));
+                cb_transfer_accountList.addActionListener(e -> customerMainController.cb_transfer_accountListActionPerformed(e));
                 transferPanel.add(cb_transfer_accountList, "cell 2 1");
 
                 //---- label11 ----
@@ -540,7 +501,7 @@ public class CustomerMainView extends JFrame implements Observer {
                 //---- btn_transfer_transfer ----
                 btn_transfer_transfer.setText("Transfer");
                 btn_transfer_transfer.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_transfer_transfer.addActionListener(e -> btn_transfer_transferActionPerformed(e));
+                btn_transfer_transfer.addActionListener(e -> customerMainController.btn_transfer_transferActionPerformed(e));
                 transferPanel.add(btn_transfer_transfer, "cell 2 7");
             }
             customerTabPane.addTab("Transfer", transferPanel);
@@ -551,7 +512,7 @@ public class CustomerMainView extends JFrame implements Observer {
         btn_signout.setText("Sign out");
         btn_signout.setMaximumSize(new Dimension(600, 30));
         btn_signout.setMinimumSize(new Dimension(450, 30));
-        btn_signout.addActionListener(e -> btn_signoutActionPerformed(e));
+        btn_signout.addActionListener(e -> customerMainController.btn_signoutActionPerformed(e));
         contentPane.add(btn_signout, "cell 2 4");
         pack();
         setLocationRelativeTo(getOwner());
