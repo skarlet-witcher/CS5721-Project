@@ -146,7 +146,7 @@ public class StaffService implements IStaffService {
         String mailTemplate = SysEmailService.getInstance().getMailTemplate(SysMailTemplateType.NEW_USER);
         String formatEmail = MessageFormat.format(mailTemplate,
                 apply.getFirstName() + " " + apply.getLastName(),
-                id, pin, userAccountEntity.getAccountNumber(), userCardEntity.getCardNumber());
+                String.valueOf(id), pin, userAccountEntity.getAccountNumber().toString(), userCardEntity.getCardNumber().toString());
         SysEmailService.getInstance().send(apply.getEmail(), "Nuclear Bank - Your apply has been accepted!", formatEmail);
 
         return response;

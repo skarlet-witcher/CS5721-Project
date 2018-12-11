@@ -150,7 +150,7 @@ public class UserCustomerService implements IUserCustomerService {
                 account_pk,
                 payee_pk,
                 postScript,
-                amount * -1,
+                amount,
                 currencyType,
                 updatedBalance,
                 UserOperateStatusType.SUCCESS);
@@ -251,7 +251,7 @@ public class UserCustomerService implements IUserCustomerService {
 
     private void addTransferHistory(Long user_pk, Long account_pk, Long payee_pk, String postScript, Double amount, int currencyType, Double updatedBalance, int operateStatus) {
         userCustomerHistoryService.addNewTransferHistory(user_pk, account_pk, payee_pk, postScript,
-                updatedBalance, amount, currencyType, UserOperateType.TRANSFER, operateStatus);
+                updatedBalance, amount * -1, currencyType, UserOperateType.TRANSFER, operateStatus);
     }
 
     private List<UserHistoryEntity> getUserHistoryListByFilter(Long user_pk, Long account_pk, int filter) throws Exception {
