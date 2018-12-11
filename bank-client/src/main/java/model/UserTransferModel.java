@@ -33,11 +33,6 @@ public class UserTransferModel implements Subject {
         updateModel();
     }
 
-    public void setAmounts(Double amounts) {
-        this.amounts = amounts;
-        updateModel();
-    }
-
     public void updateModel() {
         notifyObserver();
     }

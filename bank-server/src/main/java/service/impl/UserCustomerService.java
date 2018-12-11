@@ -229,8 +229,9 @@ public class UserCustomerService implements IUserCustomerService {
             } catch (Exception E) {
                 throw FaultFactory.throwFaultException("Fail to update balance of local account");
             }
+            addTransferHistoryForTransferredAccount(result_payee, amount);
         }
-        addTransferHistoryForTransferredAccount(result_payee, amount);
+
     }
 
     private void addTransferHistoryForTransferredAccount(UserAccountEntity transferredAccount, Double amount) throws Exception {

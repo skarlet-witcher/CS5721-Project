@@ -4,6 +4,7 @@
 
 package view;
 
+import java.awt.event.*;
 import controller.CustomerMainController;
 import model.Observer;
 import model.UserModel;
@@ -23,59 +24,58 @@ public class CustomerMainView extends JFrame implements Observer {
     private CustomerMainController customerMainController;
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    public JLabel lbl_welcome;
-    public JLabel lbl_nameField;
-    public JLabel lbl_lastLogin;
-    public JLabel lbl_lastLoginTime;
-    public JTabbedPane customerTabPane;
-    public JPanel homePanel;
-    public JScrollPane scrollPane1;
-    public JTable table_home_accountTable;
-    public JPanel profilePanel;
-    public JLabel lbl_profile_userId;
-    public JTextField tf_profile_userId;
-    public JLabel lbl_profile_firstName;
-    public JTextField tf_profile_firstName;
-    public JLabel lbl_profile_lastName;
-    public JTextField tf_profile_lastName;
-    public JLabel lbl_gender;
-    public JTextField tf_profile_gender;
-    public JLabel lbl_address;
-    public JTextField tf_profile_address;
-    public JLabel lbl_email;
-    public JTextField tf_profile_email;
-    public JLabel lbl_contactNum;
-    public JTextField tf_profile_contactNumber;
-    public JButton btn_profile_modify;
-    public JButton btn_profile_revert;
-    public JPanel transactionPanel;
-    public JComboBox cb_transaction_accountList;
-    public JComboBox<String> cb_transaction_filter;
-    public JScrollPane scrollPane2;
-    public JTable table_transaction;
-    public JButton btn_printStatement;
-    public JPanel payeePanel;
-    public JButton btn_payee_add;
-    public JButton btn_payee_remove;
-    public JScrollPane scrollPane3;
-    public JTable table_payee_payeeList;
-    public JPanel transferPanel;
-    public JLabel label7;
-    public JComboBox cb_transfer_payeeList;
-    public JLabel label8;
-    public JComboBox cb_transfer_accountList;
-    public JLabel label11;
-    public JTextField tf_transfer_currency;
-    public JLabel label10;
-    public JTextField tf_transfer_balance;
-    public JLabel label9;
-    public JTextField tf_transfer_amounts;
-    public JLabel lbl_postScript;
-    public JTextField tf_transfer_postScript;
-    public JLabel lbl_transfer_PIN;
-    public JPasswordField pf_transfer_PIN;
-    public JButton btn_transfer_transfer;
-    public JButton btn_signout;
+    private JLabel lbl_welcome;
+    private JLabel lbl_nameField;
+    private JLabel lbl_lastLogin;
+    private JLabel lbl_lastLoginTime;
+    private JTabbedPane customerTabPane;
+    private JPanel homePanel;
+    private JScrollPane scrollPane1;
+    private JTable table_home_accountTable;
+    private JPanel profilePanel;
+    private JLabel lbl_profile_userId;
+    private JTextField tf_profile_userId;
+    private JLabel lbl_profile_firstName;
+    private JTextField tf_profile_firstName;
+    private JLabel lbl_profile_lastName;
+    private JTextField tf_profile_lastName;
+    private JLabel lbl_gender;
+    private JTextField tf_profile_gender;
+    private JLabel lbl_address;
+    private JTextField tf_profile_address;
+    private JLabel lbl_email;
+    private JTextField tf_profile_email;
+    private JLabel lbl_contactNum;
+    private JTextField tf_profile_contactNumber;
+    private JButton btn_profile_modify;
+    private JButton btn_profile_revert;
+    private JPanel transactionPanel;
+    private JComboBox cb_transaction_accountList;
+    private JComboBox<String> cb_transaction_filter;
+    private JScrollPane scrollPane2;
+    private JTable table_transaction;
+    private JPanel payeePanel;
+    private JButton btn_payee_add;
+    private JButton btn_payee_remove;
+    private JScrollPane scrollPane3;
+    private JTable table_payee_payeeList;
+    private JPanel transferPanel;
+    private JLabel label7;
+    private JComboBox cb_transfer_payeeList;
+    private JLabel label8;
+    private JComboBox cb_transfer_accountList;
+    private JLabel label11;
+    private JTextField tf_transfer_currency;
+    private JLabel label10;
+    private JTextField tf_transfer_balance;
+    private JLabel label9;
+    private JTextField tf_transfer_amounts;
+    private JLabel lbl_postScript;
+    private JTextField tf_transfer_postScript;
+    private JLabel lbl_transfer_PIN;
+    private JPasswordField pf_transfer_PIN;
+    private JButton btn_transfer_transfer;
+    private JButton btn_signout;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 
@@ -92,6 +92,46 @@ public class CustomerMainView extends JFrame implements Observer {
     @Override
     public void updateData() {
         customerMainController.updateData();
+    }
+
+    private void thisComponentShown(ComponentEvent e) {
+        // TODO add your code here
+    }
+
+    private void btn_profile_modifyActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void btn_profile_revertActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void cb_transaction_accountListActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void cb_transaction_filterActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void btn_payee_addActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void btn_payee_removeActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void cb_transfer_accountListActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void btn_transfer_transferActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void btn_signoutActionPerformed(ActionEvent e) {
+        // TODO add your code here
     }
 
     public void initComponents() {
@@ -126,7 +166,6 @@ public class CustomerMainView extends JFrame implements Observer {
         cb_transaction_filter = new JComboBox<>();
         scrollPane2 = new JScrollPane();
         table_transaction = new JTable();
-        btn_printStatement = new JButton();
         payeePanel = new JPanel();
         btn_payee_add = new JButton();
         btn_payee_remove = new JButton();
@@ -155,7 +194,7 @@ public class CustomerMainView extends JFrame implements Observer {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
-                customerMainController.thisComponentShown(e);
+                thisComponentShown(e);
             }
         });
         Container contentPane = getContentPane();
@@ -315,13 +354,13 @@ public class CustomerMainView extends JFrame implements Observer {
                 //---- btn_profile_modify ----
                 btn_profile_modify.setText("Modify");
                 btn_profile_modify.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_profile_modify.addActionListener(e -> customerMainController.btn_profile_modifyActionPerformed(e));
+                btn_profile_modify.addActionListener(e -> btn_profile_modifyActionPerformed(e));
                 profilePanel.add(btn_profile_modify, "cell 2 8");
 
                 //---- btn_profile_revert ----
                 btn_profile_revert.setText("Revert");
                 btn_profile_revert.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_profile_revert.addActionListener(e -> customerMainController.btn_profile_revertActionPerformed(e));
+                btn_profile_revert.addActionListener(e -> btn_profile_revertActionPerformed(e));
                 profilePanel.add(btn_profile_revert, "cell 3 8");
             }
             customerTabPane.addTab("Profile", profilePanel);
@@ -348,7 +387,7 @@ public class CustomerMainView extends JFrame implements Observer {
 
                 //---- cb_transaction_accountList ----
                 cb_transaction_accountList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                cb_transaction_accountList.addActionListener(e -> customerMainController.cb_transaction_accountListActionPerformed(e));
+                cb_transaction_accountList.addActionListener(e -> cb_transaction_accountListActionPerformed(e));
                 transactionPanel.add(cb_transaction_accountList, "cell 0 0");
 
                 //---- cb_transaction_filter ----
@@ -359,7 +398,7 @@ public class CustomerMainView extends JFrame implements Observer {
                     "Recent 6 months",
                     "Recent 1 year"
                 }));
-                cb_transaction_filter.addActionListener(e -> customerMainController.cb_transaction_filterActionPerformed(e));
+                cb_transaction_filter.addActionListener(e -> cb_transaction_filterActionPerformed(e));
                 transactionPanel.add(cb_transaction_filter, "cell 0 0");
 
                 //======== scrollPane2 ========
@@ -380,11 +419,6 @@ public class CustomerMainView extends JFrame implements Observer {
                     scrollPane2.setViewportView(table_transaction);
                 }
                 transactionPanel.add(scrollPane2, "cell 0 1");
-
-                //---- btn_printStatement ----
-                btn_printStatement.setText("Print Statement");
-                btn_printStatement.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-                transactionPanel.add(btn_printStatement, "cell 0 9");
             }
             customerTabPane.addTab("Transaction", transactionPanel);
 
@@ -405,13 +439,13 @@ public class CustomerMainView extends JFrame implements Observer {
                 //---- btn_payee_add ----
                 btn_payee_add.setText("Add");
                 btn_payee_add.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_payee_add.addActionListener(e -> customerMainController.btn_payee_addActionPerformed(e));
+                btn_payee_add.addActionListener(e -> btn_payee_addActionPerformed(e));
                 payeePanel.add(btn_payee_add, "cell 0 0");
 
                 //---- btn_payee_remove ----
                 btn_payee_remove.setText("Remove");
                 btn_payee_remove.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_payee_remove.addActionListener(e -> customerMainController.btn_payee_removeActionPerformed(e));
+                btn_payee_remove.addActionListener(e -> btn_payee_removeActionPerformed(e));
                 payeePanel.add(btn_payee_remove, "cell 0 0");
 
                 //======== scrollPane3 ========
@@ -464,7 +498,7 @@ public class CustomerMainView extends JFrame implements Observer {
                 transferPanel.add(label8, "cell 1 1");
 
                 //---- cb_transfer_accountList ----
-                cb_transfer_accountList.addActionListener(e -> customerMainController.cb_transfer_accountListActionPerformed(e));
+                cb_transfer_accountList.addActionListener(e -> cb_transfer_accountListActionPerformed(e));
                 transferPanel.add(cb_transfer_accountList, "cell 2 1");
 
                 //---- label11 ----
@@ -506,7 +540,7 @@ public class CustomerMainView extends JFrame implements Observer {
                 //---- btn_transfer_transfer ----
                 btn_transfer_transfer.setText("Transfer");
                 btn_transfer_transfer.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                btn_transfer_transfer.addActionListener(e -> customerMainController.btn_transfer_transferActionPerformed(e));
+                btn_transfer_transfer.addActionListener(e -> btn_transfer_transferActionPerformed(e));
                 transferPanel.add(btn_transfer_transfer, "cell 2 7");
             }
             customerTabPane.addTab("Transfer", transferPanel);
@@ -517,7 +551,7 @@ public class CustomerMainView extends JFrame implements Observer {
         btn_signout.setText("Sign out");
         btn_signout.setMaximumSize(new Dimension(600, 30));
         btn_signout.setMinimumSize(new Dimension(450, 30));
-        btn_signout.addActionListener(e -> customerMainController.btn_signoutActionPerformed(e));
+        btn_signout.addActionListener(e -> btn_signoutActionPerformed(e));
         contentPane.add(btn_signout, "cell 2 4");
         pack();
         setLocationRelativeTo(getOwner());

@@ -45,7 +45,7 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     public void editProfile(UserCustomerEditProfileRequest request, StreamObserver<Response> responseObserver) {
 
         try {
-            UserCustomerService.getInstance().editUserProfile(
+            customerService.editUserProfile(
                     request.getUserPk(),
                     request.getAddress(),
                     request.getEmail(),
@@ -63,7 +63,7 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     public void getPayees(UserCustomerGetPayeesRequest request, StreamObserver<Response> responseObserver) {
 
         try {
-            List<UserPayeesReply> userPayeesReplies = UserCustomerService.getInstance().getPayeeList(request.getUserPk());
+            List<UserPayeesReply> userPayeesReplies = customerService.getPayeeList(request.getUserPk());
             responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .addAllUserPayees(userPayeesReplies)
                     .build());
@@ -77,7 +77,7 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     @Override
     public void addPayee(UserCustomerAddPayeeRequest request, StreamObserver<Response> responseObserver) {
        try {
-            UserCustomerService.getInstance().addPayee(
+           customerService.addPayee(
                     request.getUserPk(),
                     request.getName(),
                     request.getIban(),
@@ -94,7 +94,7 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     @Override
     public void removePayee(UserCustomerRemovePayeeRequest request, StreamObserver<Response> responseObserver) {
         try {
-            UserCustomerService.getInstance().removePayee(request.getPayeePk(), request.getUserPk());
+            customerService.removePayee(request.getPayeePk(), request.getUserPk());
             responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .build());
         } catch (Exception E) {
@@ -107,7 +107,7 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     @Override
     public void transfer(UserCustomerTransferRequest request, StreamObserver<Response> responseObserver) {
         try {
-            UserCustomerService.getInstance().transfer(
+            customerService.transfer(
                     request.getPayeePk(),
                     request.getUserPk(),
                     request.getAccountPk(),
@@ -129,7 +129,7 @@ public class UserCustomerImpl extends UserCustomerGrpc.UserCustomerImplBase {
     public void getTransactions(UserCustomerGetTransactionsRequest request,
                                 StreamObserver<Response> responseObserver) {
         try {
-            List<UserTransactionsReply> userTransactionsReplies = UserCustomerService.getInstance().getTransaction(
+            List<UserTransactionsReply> userTransactionsReplies = customerService.getTransaction(
                     request.getUserPk(),
                     request.getFilterByAccount(),
                     request.getFilterByDate());

@@ -344,13 +344,6 @@ public class CustomerMainController implements BaseController {
         UserPayeeModel userPayeeModel = this.userModel.getUserPayeeList().get(this.view.cb_transfer_payeeList.getSelectedIndex());
         userAccountModel.setBalance(balance);
         userTransferModel.setTransferModel(userPayeeModel, userAccountModel, userAccountModel.getCurrencyType(), amounts, postScript);
-        /*
-        userTransferModel.setPayee(userPayeeModel);
-        userTransferModel.setAccount(userAccountModel);
-        userTransferModel.setCurrencyType(userAccountModel.getCurrencyType());
-        userTransferModel.setPostScript(postScript);
-        userTransferModel.setAmounts(amounts);
-        */
     }
 
     private void clearTable(DefaultTableModel tableModel) {

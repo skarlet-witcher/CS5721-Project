@@ -217,16 +217,16 @@ public class CustomerPINController implements BaseController {
         backSpacePIN();
     }
 
-    public void btn_confirmActionPerformed(ActionEvent e) {
+    public void btn_confirmActionPerformed(ActionEvent e1) {
         UserLoginReply userLoginReply;
         if(!validateBeforeLogin()) return;
         try {
             userLoginReply = CustomerLoginService.getInstance().requestLoginUsingPIN(initUserLoginPINModel(pinDigitList));
-        } catch (Exception E) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
-                    "Fail to login due to " + E.getMessage(),
+                    "Fail to login due to " + e.getMessage(),
                     "Error Message",JOptionPane.ERROR_MESSAGE);
-            E.printStackTrace();
+            e.printStackTrace();
             return;
         }
         initCustomerMainView(userLoginReply);
