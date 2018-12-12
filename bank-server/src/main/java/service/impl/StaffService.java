@@ -175,27 +175,26 @@ public class StaffService implements IStaffService {
         userAccountEntity.setStatus(UserStatusType.NORMAL);
         userAccountEntity.setUserId(userEntity.getId());
         userAccountEntity.setCurrencyType(EURO);
-
+        //Goal of command pattern: to calculate the expiry date for every account type
         Timestamp expireDate = null;
         Invoker invoker = new Invoker();
         Receiver receiver = new Receiver(userApplyArchiveEntity);
         if (userApplyArchiveEntity.getAccountType() == STUDENT_ACCOUNT) {
+            //the expiry date is calculated by the Receiver
+            //Inovker is just the one who wants something to be done not by himself
             expireDate = invoker.executeCommand(new StudentAccCalculateExpiry(receiver));
-            userAccountEntity.setExpiredDate(expireDate);
         }
         if (userApplyArchiveEntity.getAccountType() == YOUNG_SAVER_ACCOUNT) {
             expireDate = invoker.executeCommand(new YoungSaverAccCalculateExpiry(receiver));
-            userAccountEntity.setExpiredDate(expireDate);
         }
 
         if (userApplyArchiveEntity.getAccountType() == PERSONAL_ACCOUNT) {
             expireDate = invoker.executeCommand(new PersonalAccCalculateExpiry(receiver));
-            userAccountEntity.setExpiredDate(expireDate);
         }
         if (userApplyArchiveEntity.getAccountType() == GOLDEN_ACCOUNT) {
             expireDate = invoker.executeCommand(new GoldenAccCalculateExpiry(receiver));
-            userAccountEntity.setExpiredDate(expireDate);
         }
+        userAccountEntity.setExpiredDate(expireDate);
 
         userAccountDao.createUserAccount(userAccountEntity);
         return userAccountEntity;
