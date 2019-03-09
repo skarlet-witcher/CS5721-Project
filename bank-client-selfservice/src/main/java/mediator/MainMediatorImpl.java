@@ -1,5 +1,6 @@
 package mediator;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +18,9 @@ public class MainMediatorImpl implements MainMediator {
     }
 
     @Override
-    public void updatePages() {
-        for(SubPage subPage :  subPages) {
-            subPage.updatePage();
+    public void updatePages(List<SubPage> subPages) {
+        for(int i = 0; i< subPages.size(); i++) {
+            subPages.get(i).updatePage();
         }
     }
 }

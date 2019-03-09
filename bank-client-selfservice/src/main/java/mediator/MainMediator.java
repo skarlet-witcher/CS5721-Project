@@ -1,7 +1,9 @@
 package mediator;
 
 
+import java.util.List;
+
 public interface MainMediator {
         void addSubPage(SubPage subPage);
-        void updatePages();
+        void updatePages(List<SubPage> subPages);
 }

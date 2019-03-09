@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -35,13 +36,14 @@ public class CustomerMainController implements BaseController {
 
     // model for data binding
     private UserModel userModel;
-    private List<UserTransactionModel> userTransactionModelList;
+    private List<UserTransactionModel> userTransactionModelList = new ArrayList<>();
     private UserTransferModel userTransferModel;
 
     //todo mediator fields
     private MainMediator mainMediator;
     private SubPage homePage;
     private SubPage profilePage;
+    private SubPage transactionPage;
 
     public CustomerMainController(CustomerMainView view, UserModel userModel) {
         userTransferModel = new UserTransferModel();
@@ -52,7 +54,10 @@ public class CustomerMainController implements BaseController {
         this.mainMediator = new MainMediatorImpl();
         this.profilePage = new ProfilePage(this.mainMediator, this.view, userModel);
         this.homePage = new HomePage(mainMediator, view, userModel);
+        this.transactionPage = new TransactionPage(mainMediator, view, this.userTransactionModelList, userModel);
         this.mainMediator.addSubPage(profilePage);
+        this.mainMediator.addSubPage(homePage);
+        this.mainMediator.addSubPage(transactionPage);
 
     }
 
@@ -84,7 +89,7 @@ public class CustomerMainController implements BaseController {
         initHomePage();
         initTransactionInfo();
         initTransactionModel();
-        initTransactionTable();
+        // initTransactionTable(); // todo after mediator
         initBalance();
         initCurrency();
         initAmounts();
@@ -154,8 +159,19 @@ public class CustomerMainController implements BaseController {
     }
 
     private void initTransactionModel() {
-        this.userTransactionModelList = new ArrayList<>();
+        try {
+            this.userTransactionsReplyList = CustomerTransactionService.getInstance().getTransaction(this.userModel.getId(),
+                    this.userModel.getUserAccountList().get(this.view.cb_transaction_accountList.getSelectedIndex()).getAccount_pk(),
+                    this.view.cb_transaction_filter.getSelectedIndex() + 1);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to get transaction list due to " + E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+        }
+
+
         for(UserTransactionsReply userTransactionsReply: this.userTransactionsReplyList) {
+
             UserTransactionModel userTransactionModel = new UserTransactionModel();
             userTransactionModel.setDate(TimestampConvertHelper.rpcToMysql(userTransactionsReply.getDate()));
             userTransactionModel.setDetails(userTransactionsReply.getDescription());
@@ -166,7 +182,9 @@ public class CustomerMainController implements BaseController {
 
             this.userTransactionModelList.add(userTransactionModel);
         }
+
     }
+
 
     private void initPayeeModel() {
         this.userModel.getUserPayeeList().clear();
@@ -186,7 +204,7 @@ public class CustomerMainController implements BaseController {
         // initAccountReply();
         initAccountModel();
         // initAccountTable();
-        this.homePage.updatePage();
+        this.mainMediator.updatePages(Arrays.asList(homePage));
     }
     /*
     private void initTitle() {
@@ -199,7 +217,7 @@ public class CustomerMainController implements BaseController {
     private void initProfilePage() {
         initProfileModel();
         // initProfileFields(this.userModel);
-        this.mainMediator.updatePages();
+        this.mainMediator.updatePages(Arrays.asList(profilePage));
     }
 
     private void initPayeePage() {
@@ -209,10 +227,11 @@ public class CustomerMainController implements BaseController {
     }
 
     private void initTransactionPage() {
-        initAccountComboBox(this.view.cb_transaction_accountList);
-        initTransactionInfo();
-        initTransactionModel();
-        initTransactionTable();
+         initAccountComboBox(this.view.cb_transaction_accountList);
+        // initTransactionInfo();
+         initTransactionModel();
+        //initTransactionTable();
+        this.mainMediator.updatePages(Arrays.asList(transactionPage));
     }
 
     private void initTransferPage() {
@@ -234,17 +253,9 @@ public class CustomerMainController implements BaseController {
     }
 
     private void initTransactionInfo() {
-        try {
-            this.userTransactionsReplyList = CustomerTransactionService.getInstance().getTransaction(this.userModel.getId(),
-                    this.userModel.getUserAccountList().get(this.view.cb_transaction_accountList.getSelectedIndex()).getAccount_pk(),
-                    this.view.cb_transaction_filter.getSelectedIndex() + 1);
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    "Fail to get transaction list due to " + E.getMessage(),
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-        }
-    }
 
+    }
+    /*
     private void initTransactionTable() {
         DefaultTableModel transactionListModel = (DefaultTableModel)this.view.table_transaction.getModel();
         clearTable(transactionListModel);
@@ -259,6 +270,7 @@ public class CustomerMainController implements BaseController {
             });
         }
     }
+    */
 
     private void initCurrency() {
         this.view.tf_transfer_currency.setText(CardCurrencyType.getCurrencyType(this.userModel.getUserAccountList().get(this.view.cb_transfer_accountList.getSelectedIndex()).getCurrencyType()));
@@ -367,6 +379,7 @@ public class CustomerMainController implements BaseController {
         userAccountModel.setBalance(balance);
         userTransferModel.setTransferModel(userPayeeModel, userAccountModel, userAccountModel.getCurrencyType(), amounts, postScript);
     }
+
 
     private void clearTable(DefaultTableModel tableModel) {
         int rowCount = tableModel.getRowCount();
@@ -567,15 +580,17 @@ public class CustomerMainController implements BaseController {
     }
 
     public void cb_transaction_accountListActionPerformed(ActionEvent e) {
-        initTransactionInfo();
-        initTransactionModel();
-        initTransactionTable();
+        // initTransactionInfo();
+        // initTransactionModel();
+        // initTransactionTable();
+        this.mainMediator.updatePages(Arrays.asList(transactionPage));
     }
 
     public void cb_transaction_filterActionPerformed(ActionEvent e) {
-        initTransactionInfo();
-        initTransactionModel();
-        initTransactionTable();
+        // initTransactionInfo();
+        // initTransactionModel();
+        // initTransactionTable();
+        this.mainMediator.updatePages(Arrays.asList(transactionPage));
     }
 
     public void btn_signoutActionPerformed(ActionEvent e) {
@@ -589,7 +604,7 @@ public class CustomerMainController implements BaseController {
     }
 
     public void btn_profile_revertActionPerformed(ActionEvent e) {
-        this.mainMediator.updatePages();
+        this.mainMediator.updatePages(Arrays.asList(profilePage));
     }
 
     public void cb_transfer_accountListActionPerformed(ActionEvent e) {
