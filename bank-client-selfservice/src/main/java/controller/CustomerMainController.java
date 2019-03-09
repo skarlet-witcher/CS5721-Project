@@ -1,6 +1,7 @@
 package controller;
 
 import Const.*;
+import mediator.*;
 import model.*;
 import rpc.UserAccountsReply;
 import rpc.UserPayeesReply;
@@ -23,21 +24,36 @@ import java.util.List;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class CustomerMainController implements BaseController {
+
     private CustomerMainView view;
+
     // reply from server
     private List<UserAccountsReply> accountsReplyList;
     private List<UserPayeesReply> userPayeesReplyList;
     private List<UserTransactionsReply> userTransactionsReplyList;
     private UserProfileReply userProfileReply;
+
     // model for data binding
     private UserModel userModel;
     private List<UserTransactionModel> userTransactionModelList;
     private UserTransferModel userTransferModel;
 
+    //todo mediator fields
+    private MainMediator mainMediator;
+    private SubPage homePage;
+    private SubPage profilePage;
+
     public CustomerMainController(CustomerMainView view, UserModel userModel) {
         userTransferModel = new UserTransferModel();
         this.userModel = userModel;
         this.view = view;
+
+        //todo mediator test
+        this.mainMediator = new MainMediatorImpl();
+        this.profilePage = new ProfilePage(this.mainMediator, this.view, userModel);
+        this.homePage = new HomePage(mainMediator, view, userModel);
+        this.mainMediator.addSubPage(profilePage);
+
     }
 
 
@@ -97,6 +113,10 @@ public class CustomerMainController implements BaseController {
     }
 
     private void initAccountReply() {
+
+    }
+
+    private void initAccountModel() {
         try {
             this.accountsReplyList = CustomerHomeService.getInstance().getAccounts(this.userModel.getId());
         } catch (Exception E) {
@@ -106,9 +126,7 @@ public class CustomerMainController implements BaseController {
             E.printStackTrace();
             return;
         }
-    }
 
-    private void initAccountModel() {
         this.userModel.getUserAccountList().clear();
         for(UserAccountsReply userAccountsReply : this.accountsReplyList) {
             UserAccountModel userAccountModel = new UserAccountModel();
@@ -162,10 +180,11 @@ public class CustomerMainController implements BaseController {
     }
 
     private void initHomePage() {
-        initTitle();
-        initAccountReply();
+        // initTitle();
+        // initAccountReply();
         initAccountModel();
-        initAccountTable();
+        // initAccountTable();
+        this.homePage.updatePage();
     }
 
     private void initTitle() {
@@ -175,18 +194,9 @@ public class CustomerMainController implements BaseController {
     }
 
     private void initProfilePage() {
-        initProfileInfo();
-        updateUserModel();
-        initProfileFields(this.userModel);
-    }
-
-    private void updateUserModel() {
-        this.userModel.setFirstName(userProfileReply.getFirstName());
-        this.userModel.setLastName(userProfileReply.getLastName());
-        this.userModel.setGender(userProfileReply.getGender());
-        this.userModel.setAddress(userProfileReply.getAddress());
-        this.userModel.setEmail(userProfileReply.getEmail());
-        this.userModel.setContactNum(userProfileReply.getPhone());
+        initProfileModel();
+        // initProfileFields(this.userModel);
+        this.mainMediator.updatePages();
     }
 
     private void initPayeePage() {
@@ -302,7 +312,7 @@ public class CustomerMainController implements BaseController {
         this.view.tf_transfer_postScript.setText("");
     }
 
-    private void initProfileInfo() {
+    private void initProfileModel() {
         try {
             userProfileReply = CustomerProfileService.getInstance().getUserProfile(this.userModel.getId());
 
@@ -311,6 +321,13 @@ public class CustomerMainController implements BaseController {
                     "Fail to acquire user profile, please contact admin",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
         }
+
+        this.userModel.setFirstName(userProfileReply.getFirstName());
+        this.userModel.setLastName(userProfileReply.getLastName());
+        this.userModel.setGender(userProfileReply.getGender());
+        this.userModel.setAddress(userProfileReply.getAddress());
+        this.userModel.setEmail(userProfileReply.getEmail());
+        this.userModel.setContactNum(userProfileReply.getPhone());
 
     }
 
@@ -351,16 +368,6 @@ public class CustomerMainController implements BaseController {
         for (int i = rowCount - 1; i >= 0; i--) {
             tableModel.removeRow(i);
         }
-    }
-
-    private void initProfileFields(UserModel userModel) {
-        this.view.tf_profile_userId.setText(String.valueOf(userModel.getUserId()));
-        this.view.tf_profile_firstName.setText(userModel.getFirstName());
-        this.view.tf_profile_lastName.setText(userModel.getLastName());
-        this.view.tf_profile_address.setText(userModel.getAddress());
-        this.view.tf_profile_contactNumber.setText(userModel.getContactNum());
-        this.view.tf_profile_email.setText(userModel.getEmail());
-        this.view.tf_profile_gender.setText(UserGenderType.getGenderType(userModel.getGender()));
     }
 
     private Boolean validateAddress() {
@@ -577,7 +584,7 @@ public class CustomerMainController implements BaseController {
     }
 
     public void btn_profile_revertActionPerformed(ActionEvent e) {
-        initProfileFields(this.userModel);
+        this.mainMediator.updatePages();
     }
 
     public void cb_transfer_accountListActionPerformed(ActionEvent e) {
