@@ -112,9 +112,11 @@ public class CustomerMainController implements BaseController {
         }
     }
 
+    /*
     private void initAccountReply() {
 
     }
+    */
 
     private void initAccountModel() {
         try {
@@ -186,12 +188,13 @@ public class CustomerMainController implements BaseController {
         // initAccountTable();
         this.homePage.updatePage();
     }
-
+    /*
     private void initTitle() {
         String lastLoginTime = this.userModel.getLastLoginTime().toString();
         this.view.lbl_nameField.setText(this.userModel.getFirstName());
         this.view.lbl_lastLoginTime.setText(lastLoginTime.substring(0, lastLoginTime.indexOf(".")));
     }
+    */
 
     private void initProfilePage() {
         initProfileModel();
@@ -291,6 +294,7 @@ public class CustomerMainController implements BaseController {
         }
     }
 
+    /*
     private void initAccountTable() {
         DefaultTableModel accountListModel = (DefaultTableModel)this.view.table_home_accountTable.getModel();
         clearTable(accountListModel);
@@ -303,6 +307,7 @@ public class CustomerMainController implements BaseController {
                     UserStatusType.getStatusType(Account.getStatus())});
         }
     }
+    */
 
     private void initPostscriptTextFieldLimit() {
         this.view.tf_transfer_postScript.setDocument(new JTextFieldLimit(200));
