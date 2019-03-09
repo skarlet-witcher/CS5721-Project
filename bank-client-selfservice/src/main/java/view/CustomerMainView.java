@@ -60,17 +60,17 @@ public class CustomerMainView extends JFrame implements Observer {
     public JScrollPane scrollPane3;
     public JTable table_payee_payeeList;
     public JPanel transferPanel;
-    public JLabel label7;
+    public JLabel lbl_transfer_payeeList;
     public JComboBox cb_transfer_payeeList;
-    public JLabel label8;
+    public JLabel lbl_transfer_accountNum;
     public JComboBox cb_transfer_accountList;
-    public JLabel label11;
+    public JLabel lbl_transfer_currency;
     public JTextField tf_transfer_currency;
-    public JLabel label10;
+    public JLabel lbl_transfer_balance;
     public JTextField tf_transfer_balance;
-    public JLabel label9;
+    public JLabel lbl_transfer_amount;
     public JTextField tf_transfer_amounts;
-    public JLabel lbl_postScript;
+    public JLabel lbl_transfer_postScript;
     public JTextField tf_transfer_postScript;
     public JLabel lbl_transfer_PIN;
     public JPasswordField pf_transfer_PIN;
@@ -85,7 +85,7 @@ public class CustomerMainView extends JFrame implements Observer {
         registerObserver();
     }
 
-    private void registerObserver() {
+    public void registerObserver() {
         this.customerMainController.getUserTransferModel().registerObserver(this);
     }
 
@@ -133,17 +133,17 @@ public class CustomerMainView extends JFrame implements Observer {
         scrollPane3 = new JScrollPane();
         table_payee_payeeList = new JTable();
         transferPanel = new JPanel();
-        label7 = new JLabel();
+        lbl_transfer_payeeList = new JLabel();
         cb_transfer_payeeList = new JComboBox();
-        label8 = new JLabel();
+        lbl_transfer_accountNum = new JLabel();
         cb_transfer_accountList = new JComboBox();
-        label11 = new JLabel();
+        lbl_transfer_currency = new JLabel();
         tf_transfer_currency = new JTextField();
-        label10 = new JLabel();
+        lbl_transfer_balance = new JLabel();
         tf_transfer_balance = new JTextField();
-        label9 = new JLabel();
+        lbl_transfer_amount = new JLabel();
         tf_transfer_amounts = new JTextField();
-        lbl_postScript = new JLabel();
+        lbl_transfer_postScript = new JLabel();
         tf_transfer_postScript = new JTextField();
         lbl_transfer_PIN = new JLabel();
         pf_transfer_PIN = new JPasswordField();
@@ -447,49 +447,49 @@ public class CustomerMainView extends JFrame implements Observer {
                     "[]" +
                     "[]"));
 
-                //---- label7 ----
-                label7.setText("Payee:");
-                label7.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                transferPanel.add(label7, "cell 1 0");
+                //---- lbl_transfer_payeeList ----
+                lbl_transfer_payeeList.setText("Payee:");
+                lbl_transfer_payeeList.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                transferPanel.add(lbl_transfer_payeeList, "cell 1 0");
                 transferPanel.add(cb_transfer_payeeList, "cell 2 0");
 
-                //---- label8 ----
-                label8.setText("Account Number: ");
-                label8.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                transferPanel.add(label8, "cell 1 1");
+                //---- lbl_transfer_accountNum ----
+                lbl_transfer_accountNum.setText("Account Number: ");
+                lbl_transfer_accountNum.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                transferPanel.add(lbl_transfer_accountNum, "cell 1 1");
 
                 //---- cb_transfer_accountList ----
                 cb_transfer_accountList.addActionListener(e -> customerMainController.cb_transfer_accountListActionPerformed(e));
                 transferPanel.add(cb_transfer_accountList, "cell 2 1");
 
-                //---- label11 ----
-                label11.setText("Currency");
-                label11.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                transferPanel.add(label11, "cell 1 2");
+                //---- lbl_transfer_currency ----
+                lbl_transfer_currency.setText("Currency");
+                lbl_transfer_currency.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                transferPanel.add(lbl_transfer_currency, "cell 1 2");
 
                 //---- tf_transfer_currency ----
                 tf_transfer_currency.setEditable(false);
                 transferPanel.add(tf_transfer_currency, "cell 2 2");
 
-                //---- label10 ----
-                label10.setText("Balance");
-                label10.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                transferPanel.add(label10, "cell 1 3");
+                //---- lbl_transfer_balance ----
+                lbl_transfer_balance.setText("Balance");
+                lbl_transfer_balance.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                transferPanel.add(lbl_transfer_balance, "cell 1 3");
 
                 //---- tf_transfer_balance ----
                 tf_transfer_balance.setEditable(false);
                 transferPanel.add(tf_transfer_balance, "cell 2 3");
 
-                //---- label9 ----
-                label9.setText("Amounts");
-                label9.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                transferPanel.add(label9, "cell 1 4");
+                //---- lbl_transfer_amount ----
+                lbl_transfer_amount.setText("Amounts");
+                lbl_transfer_amount.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                transferPanel.add(lbl_transfer_amount, "cell 1 4");
                 transferPanel.add(tf_transfer_amounts, "cell 2 4");
 
-                //---- lbl_postScript ----
-                lbl_postScript.setText("Postscript");
-                lbl_postScript.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-                transferPanel.add(lbl_postScript, "cell 1 5");
+                //---- lbl_transfer_postScript ----
+                lbl_transfer_postScript.setText("Postscript");
+                lbl_transfer_postScript.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+                transferPanel.add(lbl_transfer_postScript, "cell 1 5");
                 transferPanel.add(tf_transfer_postScript, "cell 2 5");
 
                 //---- lbl_transfer_PIN ----

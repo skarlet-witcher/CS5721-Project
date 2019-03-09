@@ -330,7 +330,7 @@ new FormModel {
 					name: "transferPanel"
 					"font": &Font2 new java.awt.Font( "Segoe UI", 0, 18 )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label7"
+						name: "lbl_transfer_payeeList"
 						"text": "Payee:"
 						"font": #Font2
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
@@ -342,7 +342,7 @@ new FormModel {
 						"value": "cell 2 0"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label8"
+						name: "lbl_transfer_accountNum"
 						"text": "Account Number: "
 						"font": #Font2
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
@@ -355,7 +355,7 @@ new FormModel {
 						"value": "cell 2 1"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label11"
+						name: "lbl_transfer_currency"
 						"text": "Currency"
 						"font": #Font2
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
@@ -368,7 +368,7 @@ new FormModel {
 						"value": "cell 2 2"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label10"
+						name: "lbl_transfer_balance"
 						"text": "Balance"
 						"font": #Font2
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
@@ -381,7 +381,7 @@ new FormModel {
 						"value": "cell 2 3"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label9"
+						name: "lbl_transfer_amount"
 						"text": "Amounts"
 						"font": #Font2
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
@@ -393,7 +393,7 @@ new FormModel {
 						"value": "cell 2 4"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "lbl_postScript"
+						name: "lbl_transfer_postScript"
 						"text": "Postscript"
 						"font": new java.awt.Font( "Segoe UI", 0, 18 )
 					}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
