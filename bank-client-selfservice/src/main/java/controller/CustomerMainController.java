@@ -18,6 +18,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +45,8 @@ public class CustomerMainController implements BaseController {
     private SubPage homePage;
     private SubPage profilePage;
     private SubPage transactionPage;
+    private SubPage payeePage;
+    private SubPage transferPage;
 
     public CustomerMainController(CustomerMainView view, UserModel userModel) {
         userTransferModel = new UserTransferModel();
@@ -52,12 +55,18 @@ public class CustomerMainController implements BaseController {
 
         //todo mediator test
         this.mainMediator = new MainMediatorImpl();
-        this.profilePage = new ProfilePage(this.mainMediator, this.view, userModel);
+
         this.homePage = new HomePage(mainMediator, view, userModel);
+        this.profilePage = new ProfilePage(this.mainMediator, this.view, userModel);
         this.transactionPage = new TransactionPage(mainMediator, view, this.userTransactionModelList, userModel);
-        this.mainMediator.addSubPage(profilePage);
+        this.payeePage = new PayeePage(mainMediator, view, userModel);
+        this.transferPage = new TransferPage(mainMediator, view, userModel);
+
         this.mainMediator.addSubPage(homePage);
+        this.mainMediator.addSubPage(profilePage);
         this.mainMediator.addSubPage(transactionPage);
+        this.mainMediator.addSubPage(payeePage);
+        this.mainMediator.addSubPage(transferPage);
 
     }
 
@@ -87,14 +96,10 @@ public class CustomerMainController implements BaseController {
         transfer();
 
         initHomePage();
-        initTransactionInfo();
-        initTransactionModel();
-        // initTransactionTable(); // todo after mediator
-        initBalance();
-        initCurrency();
-        initAmounts();
-        initPostscript();
-        initTransferPINField();
+        initProfilePage();
+        initTransactionPage();
+        initPayeePage();
+        initTransferPage();
     }
 
     private void transfer() {
@@ -117,11 +122,31 @@ public class CustomerMainController implements BaseController {
         }
     }
 
-    /*
-    private void initAccountReply() {
+    private void initHomePage() {
+        initAccountModel();
+        this.mainMediator.updatePages(Arrays.asList(homePage));
+    }
+
+    private void initProfilePage() {
+        initProfileModel();
+        this.mainMediator.updatePages(Arrays.asList(profilePage));
+    }
+
+    private void initPayeePage() {
+        initPayeeModel();
+        this.mainMediator.updatePages(Arrays.asList(payeePage));
+    }
+
+    private void initTransactionPage() {
+         initAccountComboBox(this.view.cb_transaction_accountList);
+         initTransactionModel();
+         this.mainMediator.updatePages(Arrays.asList(transactionPage));
+    }
+
+    private void initTransferPage() {
+        this.mainMediator.updatePages(Arrays.asList(transferPage));
 
     }
-    */
 
     private void initAccountModel() {
         try {
@@ -169,6 +194,7 @@ public class CustomerMainController implements BaseController {
                     "Error Message",JOptionPane.ERROR_MESSAGE);
         }
 
+        this.userTransactionModelList.clear();
 
         for(UserTransactionsReply userTransactionsReply: this.userTransactionsReplyList) {
 
@@ -185,8 +211,18 @@ public class CustomerMainController implements BaseController {
 
     }
 
-
     private void initPayeeModel() {
+        // init payee info
+        UserPayeeModel userPayeeModelWithUserId = new UserPayeeModel();
+        userPayeeModelWithUserId.setUserId(this.userModel.getId());
+        try {
+            userPayeesReplyList = CustomerPayeeService.getInstance().getPayeeList(userPayeeModelWithUserId);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to acquire user payee, please contact admin",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+        }
+
         this.userModel.getUserPayeeList().clear();
         for(UserPayeesReply userPayeesReply: userPayeesReplyList) {
             UserPayeeModel userPayeeModel = new UserPayeeModel();
@@ -197,136 +233,6 @@ public class CustomerMainController implements BaseController {
 
             this.userModel.getUserPayeeList().add(userPayeeModel);
         }
-    }
-
-    private void initHomePage() {
-        // initTitle();
-        // initAccountReply();
-        initAccountModel();
-        // initAccountTable();
-        this.mainMediator.updatePages(Arrays.asList(homePage));
-    }
-    /*
-    private void initTitle() {
-        String lastLoginTime = this.userModel.getLastLoginTime().toString();
-        this.view.lbl_nameField.setText(this.userModel.getFirstName());
-        this.view.lbl_lastLoginTime.setText(lastLoginTime.substring(0, lastLoginTime.indexOf(".")));
-    }
-    */
-
-    private void initProfilePage() {
-        initProfileModel();
-        // initProfileFields(this.userModel);
-        this.mainMediator.updatePages(Arrays.asList(profilePage));
-    }
-
-    private void initPayeePage() {
-        initPayeeInfo();
-        initPayeeModel();
-        initPayeeTable();
-    }
-
-    private void initTransactionPage() {
-         initAccountComboBox(this.view.cb_transaction_accountList);
-        // initTransactionInfo();
-         initTransactionModel();
-        //initTransactionTable();
-        this.mainMediator.updatePages(Arrays.asList(transactionPage));
-    }
-
-    private void initTransferPage() {
-        initPayeeComboBox();
-        initAccountComboBox(this.view.cb_transfer_accountList);
-        initCurrency();
-        initBalance();
-        initAmounts();
-        initPostscriptTextFieldLimit();
-        initTransferPINField();
-    }
-
-    private void initAmounts() {
-        this.view.tf_transfer_amounts.setText("");
-    }
-
-    private void initTransferPINField() {
-        this.view.pf_transfer_PIN.setText("");
-    }
-
-    private void initTransactionInfo() {
-
-    }
-    /*
-    private void initTransactionTable() {
-        DefaultTableModel transactionListModel = (DefaultTableModel)this.view.table_transaction.getModel();
-        clearTable(transactionListModel);
-        for(UserTransactionModel userTransactionModel: this.userTransactionModelList) {
-            String date = userTransactionModel.getDate().toString();
-            transactionListModel.addRow(new Object[]{
-                    date.substring(0, date.indexOf(".")),
-                    UserOperateType.getType(userTransactionModel.getOperation_type()),
-                    userTransactionModel.getDetails(),
-                    userTransactionModel.getAmounts(),
-                    userTransactionModel.getBalance()
-            });
-        }
-    }
-    */
-
-    private void initCurrency() {
-        this.view.tf_transfer_currency.setText(CardCurrencyType.getCurrencyType(this.userModel.getUserAccountList().get(this.view.cb_transfer_accountList.getSelectedIndex()).getCurrencyType()));
-    }
-
-    private void initBalance() {
-        this.view.tf_transfer_balance.setText(String.valueOf(this.userModel.getUserAccountList().get(this.view.cb_transfer_accountList.getSelectedIndex()).getBalance()));
-    }
-
-    private void initAccountComboBox(JComboBox accountComboBox) {
-        accountComboBox.removeAllItems();
-        if(accountsReplyList.size() <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "No Account found.",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        for(UserAccountModel userAccountModel : this.userModel.getUserAccountList()) {
-            accountComboBox.addItem(String.valueOf(userAccountModel.getAccountNum()));
-        }
-        accountComboBox.setSelectedIndex(0);
-
-    }
-
-    private void initPayeeComboBox() {
-        this.view.cb_transfer_payeeList.removeAllItems();
-        if(this.userModel.getUserPayeeList().size() <= 0) {
-            this.view.cb_transfer_payeeList.addItem("No payee found");
-            return;
-        }
-        for(UserPayeeModel userPayeeModel: this.userModel.getUserPayeeList()) {
-            this.view.cb_transfer_payeeList.addItem(userPayeeModel.getName());
-        }
-    }
-
-    /*
-    private void initAccountTable() {
-        DefaultTableModel accountListModel = (DefaultTableModel)this.view.table_home_accountTable.getModel();
-        clearTable(accountListModel);
-        for(UserAccountModel Account: this.userModel.getUserAccountList()) {
-            accountListModel.addRow(new Object[]{
-                    Account.getAccountNum(),
-                    UserAccountType.getTypeName(Account.getAccountType()),
-                    CardCurrencyType.getCurrencyType(Account.getCurrencyType()),
-                    Account.getBalance(),
-                    UserStatusType.getStatusType(Account.getStatus())});
-        }
-    }
-    */
-
-    private void initPostscriptTextFieldLimit() {
-        this.view.tf_transfer_postScript.setDocument(new JTextFieldLimit(200));
-    }
-
-    private void initPostscript() {
-        this.view.tf_transfer_postScript.setText("");
     }
 
     private void initProfileModel() {
@@ -348,31 +254,6 @@ public class CustomerMainController implements BaseController {
 
     }
 
-    private void initPayeeInfo() {
-        // init payee info
-        UserPayeeModel userPayeeModel = new UserPayeeModel();
-        userPayeeModel.setUserId(this.userModel.getId());
-        try {
-            userPayeesReplyList = CustomerPayeeService.getInstance().getPayeeList(userPayeeModel);
-        } catch (Exception E) {
-            JOptionPane.showMessageDialog(null,
-                    "Fail to acquire user payee, please contact admin",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void initPayeeTable() {
-        // init payee table
-        DefaultTableModel payeeTableModel = (DefaultTableModel)this.view.table_payee_payeeList.getModel();
-        clearTable(payeeTableModel);
-        for(UserPayeeModel userPayeeModel: this.userModel.getUserPayeeList()) {
-            payeeTableModel.addRow(new Object[]{
-                    userPayeeModel.getIban(),
-                    userPayeeModel.getName()
-            });
-        }
-    }
-
     private void initTransferModel(Double balance, Double amounts, String postScript) {
         UserAccountModel userAccountModel = this.userModel.getUserAccountList().get(this.view.cb_transfer_accountList.getSelectedIndex());
         UserPayeeModel userPayeeModel = this.userModel.getUserPayeeList().get(this.view.cb_transfer_payeeList.getSelectedIndex());
@@ -380,12 +261,19 @@ public class CustomerMainController implements BaseController {
         userTransferModel.setTransferModel(userPayeeModel, userAccountModel, userAccountModel.getCurrencyType(), amounts, postScript);
     }
 
-
-    private void clearTable(DefaultTableModel tableModel) {
-        int rowCount = tableModel.getRowCount();
-        for (int i = rowCount - 1; i >= 0; i--) {
-            tableModel.removeRow(i);
+    private void initAccountComboBox(JComboBox accountComboBox) {
+        accountComboBox.removeAllItems();
+        if(this.userModel.getUserAccountList().size() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "No Account found.",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        for(UserAccountModel userAccountModel : this.userModel.getUserAccountList()) {
+            accountComboBox.addItem(String.valueOf(userAccountModel.getAccountNum()));
+        }
+        accountComboBox.setSelectedIndex(0);
+
     }
 
     private Boolean validateAddress() {
@@ -560,12 +448,7 @@ public class CustomerMainController implements BaseController {
                 return;
             }
             initPayeePage();
-            initPayeeComboBox();
-            initCurrency();
-            initBalance();
-            initAmounts();
-            initPostscriptTextFieldLimit();
-            initTransferPINField();
+            initTransferPage();
         }
     }
 
@@ -580,16 +463,12 @@ public class CustomerMainController implements BaseController {
     }
 
     public void cb_transaction_accountListActionPerformed(ActionEvent e) {
-        // initTransactionInfo();
-        // initTransactionModel();
-        // initTransactionTable();
+        initTransactionModel();
         this.mainMediator.updatePages(Arrays.asList(transactionPage));
     }
 
     public void cb_transaction_filterActionPerformed(ActionEvent e) {
-        // initTransactionInfo();
-        // initTransactionModel();
-        // initTransactionTable();
+        initTransactionModel();
         this.mainMediator.updatePages(Arrays.asList(transactionPage));
     }
 
@@ -608,8 +487,7 @@ public class CustomerMainController implements BaseController {
     }
 
     public void cb_transfer_accountListActionPerformed(ActionEvent e) {
-        initCurrency();
-        initBalance();
+        initTransferPage();
     }
 
     public void thisComponentShown(ComponentEvent e) {
