@@ -12,4 +12,6 @@ public abstract class SubPage {
     }
 
     public abstract void updatePage();
+
+    public abstract void initPage();
 }

@@ -23,4 +23,13 @@ public class MainMediatorImpl implements MainMediator {
             subPages.get(i).updatePage();
         }
     }
+
+    @Override
+    public void initPages(SubPage subpage) {
+        for(SubPage oneSubPage : subPages) {
+            if(subpage.equals(oneSubPage)) {
+                oneSubPage.initPage();
+            }
+        }
+    }
 }

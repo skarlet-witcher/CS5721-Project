@@ -25,4 +25,9 @@ public class ProfilePage extends SubPage {
         this.view.tf_profile_gender.setText(UserGenderType.getGenderType(profileModel.getGender()));
     }
 
+    @Override
+    public void initPage() {
+        updatePage();
+    }
+
 }

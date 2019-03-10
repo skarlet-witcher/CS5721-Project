@@ -20,6 +20,15 @@ public class TransferPage extends SubPage {
 
     @Override
     public void updatePage() {
+        initCurrency();
+        initBalance();
+        initAmounts();
+        initPostscriptTextFieldLimit();
+        initTransferPINField();
+    }
+
+    @Override
+    public void initPage() {
         initPayeeComboBox();
         initAccountComboBox(this.view.cb_transfer_accountList);
         initCurrency();

@@ -42,6 +42,11 @@ public class HomePage extends SubPage {
         }
     }
 
+    @Override
+    public void initPage() {
+        updatePage();
+    }
+
     private void clearTable(DefaultTableModel tableModel) {
         int rowCount = tableModel.getRowCount();
         for (int i = rowCount - 1; i >= 0; i--) {

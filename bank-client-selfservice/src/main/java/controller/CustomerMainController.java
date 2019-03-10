@@ -29,18 +29,18 @@ public class CustomerMainController implements BaseController {
 
     private CustomerMainView view;
 
-    // reply from server
+    // data binding from server
     private List<UserAccountsReply> accountsReplyList;
     private List<UserPayeesReply> userPayeesReplyList;
     private List<UserTransactionsReply> userTransactionsReplyList;
     private UserProfileReply userProfileReply;
 
-    // model for data binding
+    // data binding for updating GUI
     private UserModel userModel;
     private List<UserTransactionModel> userTransactionModelList = new ArrayList<>();
     private UserTransferModel userTransferModel;
 
-    //todo mediator fields
+    // mediator fields
     private MainMediator mainMediator;
     private SubPage homePage;
     private SubPage profilePage;
@@ -94,12 +94,7 @@ public class CustomerMainController implements BaseController {
 
     public void updateData() {
         transfer();
-
-        initHomePage();
-        initProfilePage();
-        initTransactionPage();
-        initPayeePage();
-        initTransferPage();
+        this.mainMediator.updatePages(Arrays.asList(homePage, profilePage, transactionPage, payeePage, transferPage));
     }
 
     private void transfer() {
@@ -124,27 +119,27 @@ public class CustomerMainController implements BaseController {
 
     private void initHomePage() {
         initAccountModel();
-        this.mainMediator.updatePages(Arrays.asList(homePage));
+        this.mainMediator.initPages(homePage);
     }
 
     private void initProfilePage() {
         initProfileModel();
-        this.mainMediator.updatePages(Arrays.asList(profilePage));
+        this.mainMediator.initPages(profilePage);
     }
 
     private void initPayeePage() {
         initPayeeModel();
-        this.mainMediator.updatePages(Arrays.asList(payeePage));
+        this.mainMediator.initPages(payeePage);
     }
 
     private void initTransactionPage() {
-         initAccountComboBox(this.view.cb_transaction_accountList);
+         // initAccountComboBox(this.view.cb_transaction_accountList);
          initTransactionModel();
-         this.mainMediator.updatePages(Arrays.asList(transactionPage));
+         this.mainMediator.initPages(transactionPage);
     }
 
     private void initTransferPage() {
-        this.mainMediator.updatePages(Arrays.asList(transferPage));
+        this.mainMediator.initPages(transferPage);
 
     }
 
@@ -186,6 +181,21 @@ public class CustomerMainController implements BaseController {
     private void initTransactionModel() {
         try {
             this.userTransactionsReplyList = CustomerTransactionService.getInstance().getTransaction(this.userModel.getId(),
+                    this.userModel.getUserAccountList().get(0).getAccount_pk(),
+                    this.view.cb_transaction_filter.getSelectedIndex() + 1);
+        } catch (Exception E) {
+            JOptionPane.showMessageDialog(null,
+                    "Fail to get transaction list due to " + E.getMessage(),
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+        }
+
+        getTransactionModelFromServer(this.userTransactionsReplyList);
+
+    }
+
+    private void updateTransactionModel() {
+        try {
+            this.userTransactionsReplyList = CustomerTransactionService.getInstance().getTransaction(this.userModel.getId(),
                     this.userModel.getUserAccountList().get(this.view.cb_transaction_accountList.getSelectedIndex()).getAccount_pk(),
                     this.view.cb_transaction_filter.getSelectedIndex() + 1);
         } catch (Exception E) {
@@ -194,9 +204,14 @@ public class CustomerMainController implements BaseController {
                     "Error Message",JOptionPane.ERROR_MESSAGE);
         }
 
+        getTransactionModelFromServer(this.userTransactionsReplyList);
+
+    }
+
+    private void getTransactionModelFromServer(List<UserTransactionsReply> userTransactionsReplyList) {
         this.userTransactionModelList.clear();
 
-        for(UserTransactionsReply userTransactionsReply: this.userTransactionsReplyList) {
+        for(UserTransactionsReply userTransactionsReply: userTransactionsReplyList) {
 
             UserTransactionModel userTransactionModel = new UserTransactionModel();
             userTransactionModel.setDate(TimestampConvertHelper.rpcToMysql(userTransactionsReply.getDate()));
@@ -208,7 +223,6 @@ public class CustomerMainController implements BaseController {
 
             this.userTransactionModelList.add(userTransactionModel);
         }
-
     }
 
     private void initPayeeModel() {
@@ -259,21 +273,6 @@ public class CustomerMainController implements BaseController {
         UserPayeeModel userPayeeModel = this.userModel.getUserPayeeList().get(this.view.cb_transfer_payeeList.getSelectedIndex());
         userAccountModel.setBalance(balance);
         userTransferModel.setTransferModel(userPayeeModel, userAccountModel, userAccountModel.getCurrencyType(), amounts, postScript);
-    }
-
-    private void initAccountComboBox(JComboBox accountComboBox) {
-        accountComboBox.removeAllItems();
-        if(this.userModel.getUserAccountList().size() <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "No Account found.",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        for(UserAccountModel userAccountModel : this.userModel.getUserAccountList()) {
-            accountComboBox.addItem(String.valueOf(userAccountModel.getAccountNum()));
-        }
-        accountComboBox.setSelectedIndex(0);
-
     }
 
     private Boolean validateAddress() {
@@ -463,12 +462,12 @@ public class CustomerMainController implements BaseController {
     }
 
     public void cb_transaction_accountListActionPerformed(ActionEvent e) {
-        initTransactionModel();
+        updateTransactionModel();
         this.mainMediator.updatePages(Arrays.asList(transactionPage));
     }
 
     public void cb_transaction_filterActionPerformed(ActionEvent e) {
-        initTransactionModel();
+        updateTransactionModel();
         this.mainMediator.updatePages(Arrays.asList(transactionPage));
     }
 
@@ -487,7 +486,7 @@ public class CustomerMainController implements BaseController {
     }
 
     public void cb_transfer_accountListActionPerformed(ActionEvent e) {
-        initTransferPage();
+        this.mainMediator.updatePages(Arrays.asList(transferPage));
     }
 
     public void thisComponentShown(ComponentEvent e) {

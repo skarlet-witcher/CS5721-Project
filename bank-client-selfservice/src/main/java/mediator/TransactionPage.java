@@ -27,6 +27,12 @@ public class TransactionPage extends SubPage {
         initTransactionTable();
     }
 
+    @Override
+    public void initPage() {
+        initAccountComboBox(this.view.cb_transaction_accountList);
+        initTransactionTable();
+    }
+
     private void initTransactionTable() {
         DefaultTableModel transactionListModel = (DefaultTableModel)this.view.table_transaction.getModel();
         clearTable(transactionListModel);
@@ -53,6 +59,21 @@ public class TransactionPage extends SubPage {
         for (int i = rowCount - 1; i >= 0; i--) {
             tableModel.removeRow(i);
         }
+    }
+
+    private void initAccountComboBox(JComboBox accountComboBox) {
+        accountComboBox.removeAllItems();
+        if(this.userModel.getUserAccountList().size() <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "No Account found.",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        for(UserAccountModel userAccountModel : this.userModel.getUserAccountList()) {
+            accountComboBox.addItem(String.valueOf(userAccountModel.getAccountNum()));
+        }
+        accountComboBox.setSelectedIndex(0);
+
     }
 
 
