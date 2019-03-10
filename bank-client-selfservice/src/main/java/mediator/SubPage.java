@@ -1,6 +1,9 @@
 package mediator;
 
+import model.UserAccountModel;
 import view.CustomerMainView;
+
+import javax.swing.*;
 
 public abstract class SubPage {
     protected MainMediator mediator;
@@ -14,4 +17,5 @@ public abstract class SubPage {
     public abstract void updatePage();
 
     public abstract void initPage();
+
 }

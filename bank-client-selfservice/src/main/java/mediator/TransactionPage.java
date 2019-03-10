@@ -65,7 +65,7 @@ public class TransactionPage extends SubPage {
         accountComboBox.removeAllItems();
         if(this.userModel.getUserAccountList().size() <= 0) {
             JOptionPane.showMessageDialog(null,
-                    "No Account found.",
+                    "No Account found in Transaction Page.",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return;
         }

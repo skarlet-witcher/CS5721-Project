@@ -20,6 +20,7 @@ public class TransferPage extends SubPage {
 
     @Override
     public void updatePage() {
+        initPayeeComboBox();
         initCurrency();
         initBalance();
         initAmounts();
@@ -50,7 +51,7 @@ public class TransferPage extends SubPage {
         accountComboBox.removeAllItems();
         if(this.userModel.getUserAccountList().size() <= 0) {
             JOptionPane.showMessageDialog(null,
-                    "No Account found.",
+                    "No Account found in Transfer Page.",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return;
         }

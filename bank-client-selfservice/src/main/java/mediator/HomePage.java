@@ -13,8 +13,6 @@ public class HomePage extends SubPage {
 
     private UserModel userModel;
 
-    private UserAccountModel accountModel;
-
     public HomePage(MainMediator mediator, CustomerMainView view, UserModel userModel) {
         super(mediator, view);
         this.userModel = userModel;

@@ -53,7 +53,7 @@ public class CustomerMainController implements BaseController {
         this.userModel = userModel;
         this.view = view;
 
-        //todo mediator test
+        // mediator
         this.mainMediator = new MainMediatorImpl();
 
         this.homePage = new HomePage(mainMediator, view, userModel);
@@ -70,15 +70,9 @@ public class CustomerMainController implements BaseController {
 
     }
 
-
-    public UserTransferModel getUserTransferModel() {
-        return userTransferModel;
-    }
-
     @Override
     public void initialize() {
         this.view.initComponents();
-        initUserModel(this.userModel);
         this.run();
     }
 
@@ -88,8 +82,9 @@ public class CustomerMainController implements BaseController {
         this.view.pack(); // resize
     }
 
-    private void initUserModel(UserModel userModel) {
-        this.userModel = userModel;
+    // for the observer
+    public UserTransferModel getUserTransferModel() {
+        return userTransferModel;
     }
 
     public void updateData() {
@@ -117,6 +112,8 @@ public class CustomerMainController implements BaseController {
         }
     }
 
+
+    // page Initializations
     private void initHomePage() {
         initAccountModel();
         this.mainMediator.initPages(homePage);
@@ -133,9 +130,9 @@ public class CustomerMainController implements BaseController {
     }
 
     private void initTransactionPage() {
-         // initAccountComboBox(this.view.cb_transaction_accountList);
-         initTransactionModel();
-         this.mainMediator.initPages(transactionPage);
+        // initAccountComboBox(this.view.cb_transaction_accountList);
+        initTransactionModel();
+        this.mainMediator.initPages(transactionPage);
     }
 
     private void initTransferPage() {
@@ -143,6 +140,8 @@ public class CustomerMainController implements BaseController {
 
     }
 
+
+    // model initializations
     private void initAccountModel() {
         try {
             this.accountsReplyList = CustomerHomeService.getInstance().getAccounts(this.userModel.getId());
@@ -275,6 +274,8 @@ public class CustomerMainController implements BaseController {
         userTransferModel.setTransferModel(userPayeeModel, userAccountModel, userAccountModel.getCurrencyType(), amounts, postScript);
     }
 
+
+    // fields validation
     private Boolean validateAddress() {
         // address validator
         if(this.view.tf_profile_address.getText().trim().length() <= 0) {
@@ -352,15 +353,15 @@ public class CustomerMainController implements BaseController {
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if(Double.parseDouble(this.view.tf_transfer_amounts.getText().trim()) <= 0) {
-            JOptionPane.showMessageDialog(null,
-                    "The amount should be more than 0. Please input correct amount before transfer",
-                    "Error Message",JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
         if(!this.view.tf_transfer_amounts.getText().matches("^[0-9]*$")) {
             JOptionPane.showMessageDialog(null,
                     "The amount should be numeric. Please input valid amount before transfer",
+                    "Error Message",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if(Double.parseDouble(this.view.tf_transfer_amounts.getText().trim()) <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "The amount should be more than 0. Please input correct amount before transfer",
                     "Error Message",JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -398,6 +399,7 @@ public class CustomerMainController implements BaseController {
     }
 
 
+    // GUI Events
     public void btn_profile_modifyActionPerformed(ActionEvent e) {
 
         if(validateAddress() && validateContactNum() && validateContactNum() && validateEmail()) {
@@ -446,8 +448,8 @@ public class CustomerMainController implements BaseController {
                         "Error Message",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            initPayeePage();
-            initTransferPage();
+            initPayeeModel();
+            this.mainMediator.updatePages(Arrays.asList(payeePage, transferPage));
         }
     }
 
