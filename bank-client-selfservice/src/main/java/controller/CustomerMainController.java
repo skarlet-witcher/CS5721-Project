@@ -86,6 +86,7 @@ public class CustomerMainController implements BaseController {
     private void initHomePage() {
         initAccountModel();
         this.mainMediator.initPages(homePage);
+
     }
 
     private void initProfilePage() {
