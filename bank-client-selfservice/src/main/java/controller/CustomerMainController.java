@@ -82,11 +82,6 @@ public class CustomerMainController implements BaseController {
         this.view.pack(); // resize
     }
 
-    // for the observer
-    public UserTransferModel getUserTransferModel() {
-        return userTransferModel;
-    }
-
     // page Initializations
     private void initHomePage() {
         initAccountModel();
