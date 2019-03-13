@@ -30,7 +30,7 @@ public class UserTransferModel implements Subject {
         this.currencyType = currencyType;
         this.amounts = amounts;
         this.postScript = postScript;
-        updateModel();
+        // updateModel();
     }
 
     public void updateModel() {

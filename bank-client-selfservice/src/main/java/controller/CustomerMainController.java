@@ -87,32 +87,6 @@ public class CustomerMainController implements BaseController {
         return userTransferModel;
     }
 
-    public void updateData() {
-        transfer();
-        this.mainMediator.updatePages(Arrays.asList(homePage, profilePage, transactionPage, payeePage, transferPage));
-    }
-
-    private void transfer() {
-        if(JOptionPane.showConfirmDialog(
-                new JFrame(),"Are you sure to transfer " + userTransferModel.getAmounts() +" "+ CardCurrencyType.getCurrencyType(userTransferModel.getCurrencyType())+ " to " + userTransferModel.getPayee().getName() + " ?",
-                "Transfer Confirmation",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            try {
-                CustomerTransferService.getInstance().transfer(userTransferModel,
-                        Integer.parseInt(new String(this.view.pf_transfer_PIN.getPassword())));
-                JOptionPane.showMessageDialog(null,
-                        "Transfer Successful",
-                        "Info Message",JOptionPane.INFORMATION_MESSAGE);
-            } catch( Exception E) {
-                JOptionPane.showMessageDialog(null,
-                        "Fail to transfer due to " + E.getMessage(),
-                        "Error Message",JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
-    }
-
-
     // page Initializations
     private void initHomePage() {
         initAccountModel();
@@ -461,6 +435,25 @@ public class CustomerMainController implements BaseController {
         initTransferModel(Double.parseDouble(this.view.tf_transfer_balance.getText().trim()),
                 Double.parseDouble(this.view.tf_transfer_amounts.getText().trim()),
                 this.view.tf_transfer_postScript.getText());
+        if(JOptionPane.showConfirmDialog(
+                new JFrame(),"Are you sure to transfer " + userTransferModel.getAmounts() +" "+ CardCurrencyType.getCurrencyType(userTransferModel.getCurrencyType())+ " to " + userTransferModel.getPayee().getName() + " ?",
+                "Transfer Confirmation",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            try {
+                CustomerTransferService.getInstance().transfer(userTransferModel,
+                        Integer.parseInt(new String(this.view.pf_transfer_PIN.getPassword())));
+                JOptionPane.showMessageDialog(null,
+                        "Transfer Successful",
+                        "Info Message",JOptionPane.INFORMATION_MESSAGE);
+            } catch( Exception E) {
+                JOptionPane.showMessageDialog(null,
+                        "Fail to transfer due to " + E.getMessage(),
+                        "Error Message",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        initAccountModel();
+        this.mainMediator.updatePages(Arrays.asList(homePage, profilePage, transactionPage, payeePage, transferPage));
     }
 
     public void cb_transaction_accountListActionPerformed(ActionEvent e) {
