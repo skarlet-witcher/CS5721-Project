@@ -8,17 +8,14 @@ import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
 import rpc.UserTransactionsReply;
 import service.impl.*;
-import util.JTextFieldLimit;
 import util.TimestampConvertHelper;
 import view.CustomerAddPayeeView;
 import view.CustomerLoginView;
 import view.CustomerMainView;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +51,7 @@ public class CustomerMainController implements BaseController {
         this.view = view;
 
         // mediator
-        this.mainMediator = new MainMediatorImpl();
+        this.mainMediator = new SubPageMediator();
 
         this.homePage = new HomePage(mainMediator, view, userModel);
         this.profilePage = new ProfilePage(this.mainMediator, this.view, userModel);

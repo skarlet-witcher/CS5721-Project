@@ -4,11 +4,11 @@ package mediator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainMediatorImpl implements MainMediator {
+public class SubPageMediator implements MainMediator {
 
     private List<SubPage> subPages;
 
-    public MainMediatorImpl() {
+    public SubPageMediator() {
         this.subPages = new ArrayList<>();
     }
 
