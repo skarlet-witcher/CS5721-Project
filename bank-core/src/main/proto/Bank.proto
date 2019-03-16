@@ -329,6 +329,7 @@ message UserLoginReply {
     string first_name = 3;
     string last_name = 4;
     google.protobuf.Timestamp last_login_time = 5;
+    string jwt_token = 6;
 }
 
 message UserAccountsReply {

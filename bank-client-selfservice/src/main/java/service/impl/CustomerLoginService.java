@@ -13,6 +13,8 @@ import util.TimestampConvertHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import static app.MainApp.CLIENT_TOKEN;
+
 
 public class CustomerLoginService implements ICustomerLoginService {
     private static ICustomerLoginService instance = null;
@@ -65,6 +67,7 @@ public class CustomerLoginService implements ICustomerLoginService {
                         .setPin6(userLoginPINModel.getPin6())
                         .build()
         );
+        CLIENT_TOKEN = userLoginReply.getJwtToken();
         return userLoginReply;
     }
 

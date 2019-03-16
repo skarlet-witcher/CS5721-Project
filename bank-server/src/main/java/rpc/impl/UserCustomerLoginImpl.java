@@ -1,7 +1,11 @@
 package rpc.impl;
 
+import Const.Server;
 import Const.UserAccountType;
 import io.grpc.stub.StreamObserver;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import rpc.*;
 import service.IUserCustomerApplyService;
 import service.IUserCustomerLoginService;
@@ -10,10 +14,14 @@ import service.impl.UserCustomerLoginService;
 import util.ResponseBuilder;
 import util.TimestampConvertHelper;
 
+import javax.crypto.SecretKey;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+
+import static main.BankServer.SESSION_STORAGE;
 
 public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLoginImplBase {
     private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
@@ -50,14 +58,47 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         pin.put(6, request.getPin6());
         try {
             UserLoginReply loginReply = customerLoginService.login(request.getUserId(), pin);
+            String token = tokenGenerate(loginReply);
+            UserLoginReply loginReply_withToken = loginReply.toBuilder().setJwtToken(token).build();
             responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
-                    .setUserLoginReply(loginReply)
+                    .setUserLoginReply(loginReply_withToken)
                     .build());
+            //Save the token into the SESSION_STORAGE
+            SESSION_STORAGE.put(request.getUserId(), token);
         } catch (Exception e) {
             responseObserver.onNext(ResponseBuilder.getFailBuilder(e.getLocalizedMessage())
                     .build());
         }
         responseObserver.onCompleted();
+    }
+
+    private String tokenGenerate(UserLoginReply loginReply) {
+        //The JWT signature algorithm we will be using to sign the token
+
+        long nowMillis = System.currentTimeMillis();
+        Date now = new Date(nowMillis);
+        //We will sign our JWT with our ApiKey secret
+//        Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        byte[] keyBytes = Server.JWT_SECRETKEY.getBytes() ;
+        SecretKey key = Keys.hmacShaKeyFor(keyBytes);
+
+        //Let's set the JWT Claims
+        JwtBuilder builder = Jwts.builder()
+                .claim("User_id", loginReply.getUserId())
+                .claim("Module name","Software Architecture")
+                .setIssuedAt(now)
+                .setIssuer("Nuclear Bank")
+                .signWith(key);
+
+        //if it has been specified, let's add the expiration
+        if (Server.SESSION_TIME > 0) {
+            long expMillis = nowMillis + Server.SESSION_TIME;
+            Date exp = new Date(expMillis);
+            builder.setExpiration(exp);
+        }
+
+        //Builds the JWT and serializes it to a compact, URL-safe string
+        return builder.compact();
     }
 
     @Override

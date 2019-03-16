@@ -1,6 +1,8 @@
 package Const;
 
 public class Server {
+    public static final String JWT_SECRETKEY = "NUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEAR";
+    public static final int SESSION_TIME = 3600000;
     public static final String SERVER_HOST = "localhost";
     public static final int SERVER_PORT = 7777;
     public static final String SERVER_PRIVATE_KEY = "cert/server.pem";
