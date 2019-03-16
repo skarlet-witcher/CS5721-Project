@@ -1,7 +1,5 @@
 package adapter;
 
-import Const.AccountCurrencyType;
-import Const.CardCurrencyType;
 import Const.UserOperateType;
 import model.UserTransactionModel;
 
@@ -9,19 +7,10 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Vector;
 
-public class Adapter extends Adaptee implements ITarget  {
-
-    public Runnable getDataVectorReq;
-    public Runnable getColumnIdentifierReq;
+public class Adapter extends Adaptee implements TableData {
 
     public Adapter(List<UserTransactionModel> userTransactionModelList) {
         super(userTransactionModelList);
-    }
-
-    // pluggable adatper?
-    public Adapter(Runnable r, Runnable r2) {
-        getDataVectorReq = r;
-        getColumnIdentifierReq = r2;
     }
 
     @Override

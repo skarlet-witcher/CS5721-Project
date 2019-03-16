@@ -20,9 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -252,20 +250,11 @@ public class CustomerMainController implements BaseController {
 
         List<String> columnList = new ArrayList<>();
 
-        for(int i = 0; i < this.view.table_transaction.getColumnCount(); i++) {
-            columnList.add(this.view.table_transaction.getColumnName(i));
-        }
-
-        Vector columnIdentifier = new Vector(columnList);
-
         Adapter adapter = new Adapter(this.userTransactionModelList);
 
         // Adapter getDataVector
         transactionTableModel.setDataVector(adapter.getDataVector(),
                 adapter.getColumnIdentifiersVector());
-
-
-
 
         /*
         for(UserTransactionModel userTransactionModel: this.userTransactionModelList) {
