@@ -9,7 +9,6 @@ public class UserTransactionModel {
     private Double balance;
     private String transactionNum;
     private Integer operation_type;
-    private Integer currencyType;
 
 
     public Timestamp getDate() {
@@ -42,14 +41,6 @@ public class UserTransactionModel {
 
     public void setTransactionNum(String transactionNum) {
         this.transactionNum = transactionNum;
-    }
-
-    public Integer getCurrencyType() {
-        return currencyType;
-    }
-
-    public void setCurrencyType(Integer currencyType) {
-        this.currencyType = currencyType;
     }
 
     public Double getAmounts() {

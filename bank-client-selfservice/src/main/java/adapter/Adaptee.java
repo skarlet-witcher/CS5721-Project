@@ -11,10 +11,6 @@ public class Adaptee {
         this.userTransactionModelList = userTransactionModelList;
     }
 
-    public Adaptee() {
-
-    }
-
     public List<UserTransactionModel> getList() {
         return this.userTransactionModelList;
     }
