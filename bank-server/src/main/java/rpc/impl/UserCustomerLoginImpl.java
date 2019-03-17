@@ -11,6 +11,7 @@ import service.IUserCustomerApplyService;
 import service.IUserCustomerLoginService;
 import service.impl.UserCustomerApplyService;
 import service.impl.UserCustomerLoginService;
+import util.JWT_Util;
 import util.ResponseBuilder;
 import util.TimestampConvertHelper;
 
@@ -58,7 +59,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         pin.put(6, request.getPin6());
         try {
             UserLoginReply loginReply = customerLoginService.login(request.getUserId(), pin);
-            String token = tokenGenerate(loginReply);
+            String token = JWT_Util.tokenGenerate(loginReply);
             UserLoginReply loginReply_withToken = loginReply.toBuilder().setJwtToken(token).build();
             responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .setUserLoginReply(loginReply_withToken)
@@ -72,34 +73,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         responseObserver.onCompleted();
     }
 
-    private String tokenGenerate(UserLoginReply loginReply) {
-        //The JWT signature algorithm we will be using to sign the token
 
-        long nowMillis = System.currentTimeMillis();
-        Date now = new Date(nowMillis);
-        //We will sign our JWT with our ApiKey secret
-//        Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-        byte[] keyBytes = Server.JWT_SECRETKEY.getBytes() ;
-        SecretKey key = Keys.hmacShaKeyFor(keyBytes);
-
-        //Let's set the JWT Claims
-        JwtBuilder builder = Jwts.builder()
-                .claim("User_id", loginReply.getUserId())
-                .claim("Module name","Software Architecture")
-                .setIssuedAt(now)
-                .setIssuer("Nuclear Bank")
-                .signWith(key);
-
-        //if it has been specified, let's add the expiration
-        if (Server.SESSION_TIME > 0) {
-            long expMillis = nowMillis + Server.SESSION_TIME;
-            Date exp = new Date(expMillis);
-            builder.setExpiration(exp);
-        }
-
-        //Builds the JWT and serializes it to a compact, URL-safe string
-        return builder.compact();
-    }
 
     @Override
     public void applyNewAccount(UserApplyNewAccountRequest request, StreamObserver<Response> responseObserver) {
