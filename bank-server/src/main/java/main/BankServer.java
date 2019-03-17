@@ -22,7 +22,6 @@ import static Const.Server.*;
 public class BankServer {
     private static final Logger logger = Logger.getLogger(BankServer.class.getName());
     private Server server;
-    public static HashMap<Long, String> SESSION_STORAGE = new HashMap<>();
 
     public static void main(String[] args) {
         final BankServer server = new BankServer();

@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import static main.BankServer.SESSION_STORAGE;
 
 public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLoginImplBase {
     private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
@@ -64,8 +63,6 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
             responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .setUserLoginReply(loginReply_withToken)
                     .build());
-            //Save the token into the SESSION_STORAGE
-            SESSION_STORAGE.put(request.getUserId(), token);
         } catch (Exception e) {
             responseObserver.onNext(ResponseBuilder.getFailBuilder(e.getLocalizedMessage())
                     .build());
