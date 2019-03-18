@@ -7,13 +7,12 @@ import model.UserLoginPINModel;
 import model.UserLoginRequestModel;
 import rpc.*;
 import rpc.client.CustomerLoginRpc;
+import rpc.interceptor.AuthorityInterceptor;
 import service.ICustomerLoginService;
 import util.TimestampConvertHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static app.MainApp.CLIENT_TOKEN;
 
 
 public class CustomerLoginService implements ICustomerLoginService {
@@ -65,9 +64,8 @@ public class CustomerLoginService implements ICustomerLoginService {
                         .setPin4(userLoginPINModel.getPin4())
                         .setPin5(userLoginPINModel.getPin5())
                         .setPin6(userLoginPINModel.getPin6())
-                        .build()
-        );
-        CLIENT_TOKEN = userLoginReply.getJwtToken();
+                        .build());
+        AuthorityInterceptor.jwtToken = userLoginReply.getJwtToken();
         return userLoginReply;
     }
 

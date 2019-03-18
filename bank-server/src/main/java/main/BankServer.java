@@ -6,15 +6,11 @@ import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
 import io.grpc.netty.shaded.io.netty.handler.ssl.ClientAuth;
 import io.grpc.netty.shaded.io.netty.handler.ssl.SslContextBuilder;
 import io.grpc.netty.shaded.io.netty.handler.ssl.SslProvider;
-import rpc.impl.UserCustomerImpl;
-import rpc.impl.UserCustomerLoginImpl;
-import rpc.impl.bank_staff.BankStaffAcceptApplysImpl;
-import rpc.impl.bank_staff.BankStaffImpl;
-import rpc.impl.bank_staff.BankStaffLoginImpl;
+import rpc.impl.*;
+import rpc.interceptor.AuthorityInterceptor;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.logging.Logger;
 
 import static Const.Server.*;
@@ -41,6 +37,7 @@ public class BankServer {
                 .addService(new BankStaffLoginImpl())
                 .addService(new BankStaffImpl())
                 .addService(new BankStaffAcceptApplysImpl())
+                .intercept(new AuthorityInterceptor())
                 .build()
                 .start();
         logger.info("Server started, listening on " + SERVER_PORT);

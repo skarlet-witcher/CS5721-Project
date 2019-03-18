@@ -1,7 +1,10 @@
 package Const;
 
+import io.grpc.Metadata;
+
 public class Server {
     public static final String JWT_SECRETKEY = "NUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEARNUCLEAR";
+    public static final Metadata.Key<String> JWT_METADATA_KEY = Metadata.Key.of("Authorization", Metadata.ASCII_STRING_MARSHALLER);
     public static final int SESSION_TIME = 3600000;
     public static final String SERVER_HOST = "localhost";
     public static final int SERVER_PORT = 7777;
