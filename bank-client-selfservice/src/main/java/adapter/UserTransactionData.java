@@ -4,10 +4,10 @@ import model.UserTransactionModel;
 
 import java.util.List;
 
-public class Adaptee {
+public class UserTransactionData {   // A list of UserTransactionModel // Adaptee
     private List<UserTransactionModel> userTransactionModelList;
 
-    public Adaptee(List<UserTransactionModel> userTransactionModelList) {
+    public UserTransactionData(List<UserTransactionModel> userTransactionModelList) {
         this.userTransactionModelList = userTransactionModelList;
     }
 
