@@ -1,4 +1,4 @@
-package dao.impl;
+package util;
 
 import entity.UserAccountEntity;
 import entity.UserHistoryEntity;

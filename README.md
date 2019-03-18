@@ -1,7 +1,10 @@
 ## bank manage
 > team assignment
 
-####parts
+`for fiddler`
+-DproxySet=true -DproxyHost=127.0.0.1 -DproxyPort=8888
+
+####architecture
 - unique central server
 - client of self service
 - client of atm
@@ -17,7 +20,7 @@
 - JUnit
 
 ####further
-- use converters to avoid big amounts of set get methods. like `https://github.com/BAData/protobuf-converter`
+- use mapper to avoid big amounts of set get methods. like `https://github.com/BAData/protobuf-converter`
 - project not finished.
 
 ####Notice

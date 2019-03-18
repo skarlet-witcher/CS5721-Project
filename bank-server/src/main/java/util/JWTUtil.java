@@ -1,7 +1,10 @@
 package util;
 
 import Const.Server;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import rpc.UserLoginReply;
@@ -9,7 +12,7 @@ import rpc.UserLoginReply;
 import javax.crypto.SecretKey;
 import java.util.Date;
 
-public class JWT_Util {
+public class JWTUtil {
 
     public static String tokenGenerate(UserLoginReply loginReply) {
         //The JWT signature algorithm we will be using to sign the token

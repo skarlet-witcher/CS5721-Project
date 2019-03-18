@@ -1,4 +1,4 @@
-package rpc.impl.bank_staff;
+package rpc.impl;
 import bankStaff_rpc.StaffLoginGrpc;
 import bankStaff_rpc.StaffLoginResponse;
 import io.grpc.stub.StreamObserver;

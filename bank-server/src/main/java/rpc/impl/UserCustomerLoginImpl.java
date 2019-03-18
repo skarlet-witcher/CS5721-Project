@@ -1,23 +1,17 @@
 package rpc.impl;
 
-import Const.Server;
 import Const.UserAccountType;
 import io.grpc.stub.StreamObserver;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import rpc.*;
 import service.IUserCustomerApplyService;
 import service.IUserCustomerLoginService;
 import service.impl.UserCustomerApplyService;
 import service.impl.UserCustomerLoginService;
-import util.JWT_Util;
+import util.JWTUtil;
 import util.ResponseBuilder;
 import util.TimestampConvertHelper;
 
-import javax.crypto.SecretKey;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -58,7 +52,7 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         pin.put(6, request.getPin6());
         try {
             UserLoginReply loginReply = customerLoginService.login(request.getUserId(), pin);
-            String token = JWT_Util.tokenGenerate(loginReply);
+            String token = JWTUtil.tokenGenerate(loginReply);
             UserLoginReply loginReply_withToken = loginReply.toBuilder().setJwtToken(token).build();
             responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
                     .setUserLoginReply(loginReply_withToken)
