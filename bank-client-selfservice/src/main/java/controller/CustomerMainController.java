@@ -371,13 +371,14 @@ public class CustomerMainController implements BaseController {
 
         userPayeeTableData.register(new String[]{"getIban", "getName"});
 
+        for(int i = 0; i<this.view.table_payee_payeeList.getColumnCount(); i++) {
+            columnNames.add(this.view.table_payee_payeeList.getColumnName(i));
+        }
+
         for(UserPayeeModel userPayeeModel : this.userModel.getUserPayeeList()) {
             userPayeeTableData.setDataVector(userPayeeModel);
         }
 
-        for(int i = 0; i<this.view.table_payee_payeeList.getColumnCount(); i++) {
-            columnNames.add(this.view.table_payee_payeeList.getColumnName(i));
-        }
         payeeTableModel.setDataVector(userPayeeTableData.getDataVector(), new Vector(columnNames));
 
         /*
