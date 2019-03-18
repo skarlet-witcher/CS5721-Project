@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class AuthorityInterceptor implements ServerInterceptor {
-    private static final Logger logger = Logger.getLogger(AuthorityInterceptor.class.getName());
+public class AuthorizationInterceptor implements ServerInterceptor {
+    private static final Logger logger = Logger.getLogger(AuthorizationInterceptor.class.getName());
     private final List<String> permitMethod = Arrays.asList(
             "rpc.UserCustomerLogin/LoginReq",
             "rpc.UserCustomerLogin/Login",
