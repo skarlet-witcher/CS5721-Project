@@ -18,6 +18,7 @@
 - MySQL + Hibernate
 - JFormDesigner
 - JUnit
+- JWT authentication based on gRPC(Mar 18, 2019)
 
 ####further
 - use mapper to avoid big amounts of set get methods. like `https://github.com/BAData/protobuf-converter`
@@ -35,6 +36,7 @@
 - Observer Pattern
 - Facade Pattern
 - ...
+
 -----------
 Introduction about 23 kinds of design pattern.(Chinese website)
 https://blog.csdn.net/anxpp/article/details/51224293
