@@ -1,6 +1,7 @@
 package controller;
 
 import Const.*;
+import adapter.TableData;
 import adapter.UserTransactionTableData;
 import adapter.UserPayeeTableData;
 import model.*;
@@ -251,7 +252,7 @@ public class CustomerMainController implements BaseController {
         DefaultTableModel transactionTableModel = (DefaultTableModel)this.view.table_transaction.getModel();
         clearTable(transactionTableModel);
 
-        UserTransactionTableData userTransactionTableData = new UserTransactionTableData(this.userTransactionModelList);
+        TableData userTransactionTableData = new UserTransactionTableData(this.userTransactionModelList);
 
         for(int i = 0; i<this.view.table_transaction.getColumnCount(); i++) {
             columnNames.add(this.view.table_transaction.getColumnName(i));

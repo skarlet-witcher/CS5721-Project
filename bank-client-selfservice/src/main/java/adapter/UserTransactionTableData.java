@@ -6,14 +6,14 @@ import model.UserTransactionModel;
 import java.util.List;
 import java.util.Vector;
 
-public class UserTransactionTableData extends UserTransactionData implements TableData {   // classic adapter for UserTransactionModel
+public class UserTransactionTableData extends UserTransactionData implements TableData {   // adapter for UserTransactionModel
 
     public UserTransactionTableData(List<UserTransactionModel> userTransactionModelList) {
         super(userTransactionModelList);
     }
 
     @Override
-    public Vector getDataVector() {
+    public Vector getDataVector() {  // Request
         Vector dataVector = new Vector();
 
         for(UserTransactionModel userTransactionModel : this.getList()) {
