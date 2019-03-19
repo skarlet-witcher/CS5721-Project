@@ -222,6 +222,7 @@ public class CustomerPINController implements BaseController {
         if(!validateBeforeLogin()) return;
         try {
             userLoginReply = CustomerLoginService.getInstance().requestLoginUsingPIN(initUserLoginPINModel(pinDigitList));
+            initCustomerMainView(userLoginReply);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
                     "Fail to login due to " + e.getMessage(),
@@ -229,7 +230,7 @@ public class CustomerPINController implements BaseController {
             e.printStackTrace();
             return;
         }
-        initCustomerMainView(userLoginReply);
+
     }
 
     public void btn_backActionPerformed(ActionEvent e) {

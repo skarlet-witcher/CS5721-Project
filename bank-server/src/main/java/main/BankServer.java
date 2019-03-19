@@ -7,7 +7,7 @@ import io.grpc.netty.shaded.io.netty.handler.ssl.ClientAuth;
 import io.grpc.netty.shaded.io.netty.handler.ssl.SslContextBuilder;
 import io.grpc.netty.shaded.io.netty.handler.ssl.SslProvider;
 import rpc.impl.*;
-import rpc.interceptor.AuthorityInterceptor;
+import rpc.interceptor.AuthorizationInterceptor;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class BankServer {
                 .addService(new BankStaffLoginImpl())
                 .addService(new BankStaffImpl())
                 .addService(new BankStaffAcceptApplysImpl())
-                .intercept(new AuthorityInterceptor())
+                .intercept(new AuthorizationInterceptor())
                 .build()
                 .start();
         logger.info("Server started, listening on " + SERVER_PORT);

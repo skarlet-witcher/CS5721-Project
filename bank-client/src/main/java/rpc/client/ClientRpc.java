@@ -4,7 +4,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.netty.shaded.io.grpc.netty.GrpcSslContexts;
 import io.grpc.netty.shaded.io.grpc.netty.NegotiationType;
 import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
-import rpc.interceptor.AuthorityInterceptor;
+import rpc.interceptor.AuthorizationInterceptor;
 import rpc.interceptor.ClientRpcDispatcher;
 import rpc.interceptor.TestInterceptor;
 
@@ -18,7 +18,7 @@ public abstract class ClientRpc {
 
     public static ManagedChannel getChannel() throws SSLException {
         ClientRpcDispatcher.register(new TestInterceptor());
-        ClientRpcDispatcher.register(new AuthorityInterceptor());
+        ClientRpcDispatcher.register(new AuthorizationInterceptor());
 
         if (channel == null) {
             channel = NettyChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)

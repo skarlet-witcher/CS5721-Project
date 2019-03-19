@@ -3,18 +3,17 @@ package adapter;
 import Const.UserOperateType;
 import model.UserTransactionModel;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Vector;
 
-public class Adapter extends Adaptee implements TableData {
+public class UserTransactionTableData extends UserTransactionData implements TableData {   // adapter for UserTransactionModel
 
-    public Adapter(List<UserTransactionModel> userTransactionModelList) {
+    public UserTransactionTableData(List<UserTransactionModel> userTransactionModelList) {
         super(userTransactionModelList);
     }
 
     @Override
-    public Vector getDataVector() {
+    public Vector getDataVector() {  // Request
         Vector dataVector = new Vector();
 
         for(UserTransactionModel userTransactionModel : this.getList()) {
@@ -32,13 +31,4 @@ public class Adapter extends Adaptee implements TableData {
         return dataVector;
     }
 
-    @Override
-    public Vector getColumnIdentifiersVector() {
-        Vector columnIdentifiers = new Vector();
-
-        for(Field field: UserTransactionModel.class.getDeclaredFields()) {
-            columnIdentifiers.add(field.getName());
-        }
-        return columnIdentifiers;
-    }
 }

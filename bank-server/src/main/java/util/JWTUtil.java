@@ -44,6 +44,7 @@ public class JWTUtil {
     }
 
     public static Jws verifyJWTToken(String jwtToken){
+        jwtToken = " a";
         byte[] keyBytes = Server.JWT_SECRETKEY.getBytes() ;
         SecretKey key = Keys.hmacShaKeyFor(keyBytes);
         try {

@@ -2,8 +2,9 @@ package rpc.interceptor;
 
 import io.grpc.*;
 import io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
+import rpc.Response;
 
-public class AuthorityInterceptor implements ClientInterceptor {
+public class AuthorizationInterceptor implements ClientInterceptor {
     public static String jwtToken;
 
     @Override
@@ -15,10 +16,20 @@ public class AuthorityInterceptor implements ClientInterceptor {
             public void start(Listener<RespT> responseListener, Metadata headers) {
                 if (!StringUtil.isNullOrEmpty(jwtToken)) {
                     headers.put(Metadata.Key.of("Authorization", Metadata.ASCII_STRING_MARSHALLER),
-                            "Bearer " + jwtToken);
+                            jwtToken);
                 }
-                super.start(responseListener, headers);
+
+                super.start(new ForwardingClientCallListener.SimpleForwardingClientCallListener<>(responseListener) {
+                    @Override
+                    public void onMessage(RespT message) {
+                        System.out.println(message);
+                        System.out.println(((Response) message).getStatusCode());
+                        super.onMessage(message);
+                    }
+                }, headers);
             }
+
+
         };
     }
 }
