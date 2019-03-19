@@ -2,7 +2,10 @@ package rpc.interceptor;
 
 import io.grpc.*;
 
+import java.util.logging.Logger;
+
 public class TestInterceptor implements ClientInterceptor {
+    private static final Logger logger = Logger.getLogger(TestInterceptor.class.getName());
 
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(
@@ -12,7 +15,7 @@ public class TestInterceptor implements ClientInterceptor {
             @Override
             public void start(Listener<RespT> responseListener, Metadata headers) {
                 //headers.merge(extraHeaders);
-                System.out.println("TestInterceptor invoked");
+                logger.info("TestInterceptor invoked");
 
                 super.start(responseListener, headers);
             }

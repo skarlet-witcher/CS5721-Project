@@ -1,16 +1,22 @@
 package rpc.interceptor;
 
 import io.grpc.*;
+import io.grpc.ForwardingClientCall.SimpleForwardingClientCall;
+import io.grpc.ForwardingClientCallListener.SimpleForwardingClientCallListener;
 import io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
-import rpc.Response;
+
+import javax.swing.*;
+import java.util.logging.Logger;
 
 public class AuthorizationInterceptor implements ClientInterceptor {
+    private static final Logger logger = Logger.getLogger(AuthorizationInterceptor.class.getName());
+
     public static String jwtToken;
 
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(
             MethodDescriptor<ReqT, RespT> method, CallOptions callOptions, Channel next) {
-        return new ForwardingClientCall.SimpleForwardingClientCall<>((next.newCall(method, callOptions))) {
+        return new SimpleForwardingClientCall<>(next.newCall(method, callOptions)) {
 
             @Override
             public void start(Listener<RespT> responseListener, Metadata headers) {
@@ -19,12 +25,17 @@ public class AuthorizationInterceptor implements ClientInterceptor {
                             jwtToken);
                 }
 
-                super.start(new ForwardingClientCallListener.SimpleForwardingClientCallListener<>(responseListener) {
+                super.start(new SimpleForwardingClientCallListener<>(responseListener) {
                     @Override
-                    public void onMessage(RespT message) {
-                        System.out.println(message);
-                        System.out.println(((Response) message).getStatusCode());
-                        super.onMessage(message);
+                    public void onClose(Status status, Metadata trailers) {
+
+                        if (status.getCode().equals(Status.Code.UNAUTHENTICATED)) {
+                            JOptionPane.showMessageDialog(null,
+                                    status.getDescription(),
+                                    "Sorry", JOptionPane.WARNING_MESSAGE);
+                            System.exit(0);
+                        }
+                        super.onClose(status, trailers);
                     }
                 }, headers);
             }
