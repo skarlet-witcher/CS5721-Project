@@ -8,6 +8,7 @@ import rpc.UserAccountsReply;
 import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
 import rpc.UserTransactionsReply;
+import rpc.interceptor.AuthorizationInterceptor;
 import service.impl.*;
 import util.JTextFieldLimit;
 import util.TimestampConvertHelper;
@@ -15,6 +16,7 @@ import view.CustomerAddPayeeView;
 import view.CustomerLoginView;
 import view.CustomerMainView;
 
+import javax.naming.AuthenticationException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -619,6 +621,8 @@ public class CustomerMainController implements BaseController {
     }
 
     public void btn_signoutActionPerformed(ActionEvent e) {
+        //Empty the token
+        AuthorizationInterceptor.jwtToken = "";
         this.view.dispose();
         new CustomerLoginView();
     }

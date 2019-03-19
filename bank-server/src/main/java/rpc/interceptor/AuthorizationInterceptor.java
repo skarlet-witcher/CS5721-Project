@@ -2,6 +2,8 @@ package rpc.interceptor;
 
 import Const.Server;
 import io.grpc.*;
+import io.jsonwebtoken.Jws;
+import util.JWTUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,20 +32,20 @@ public class AuthorizationInterceptor implements ServerInterceptor {
         }
 
         String token = headers.get(Server.JWT_METADATA_KEY);
+        try{
+            checkToken(token);
+        }catch (Exception e){
+            logger.info("request from " + fullMethodName + " with token " + token + " rejected because "+e.getMessage());
 
-        if (!checkToken(token)) {
-            logger.info("request from " + fullMethodName + " with token " + token + " rejected.");
-
-            call.close(Status.UNAUTHENTICATED.withDescription("Invalid Token"), headers);
-            return new ServerCall.Listener<>() {
-            };// noop_listener
+            call.close(Status.UNAUTHENTICATED.withDescription(e.getMessage()), headers);
+            return new ServerCall.Listener<>() {};
         }
 
-        logger.info("request from " + fullMethodName + "with token" + token + " permitted.");
+        logger.info("request from " + fullMethodName + "with token " + token + " permitted.");
         return next.startCall(call, headers);
     }
 
-    private boolean checkToken(String token) {
-        return true;
+    private Jws checkToken(String token) {
+        return JWTUtil.verifyJWTToken(token);
     }
 }
