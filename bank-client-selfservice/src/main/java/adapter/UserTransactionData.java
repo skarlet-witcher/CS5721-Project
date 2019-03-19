@@ -13,5 +13,5 @@ public class UserTransactionData {   // A list of UserTransactionModel // Adapte
 
     public List<UserTransactionModel> getList() {
         return this.userTransactionModelList;
-    }
+    }  // specific request
 }
