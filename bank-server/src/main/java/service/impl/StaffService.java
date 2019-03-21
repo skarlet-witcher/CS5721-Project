@@ -2,6 +2,7 @@ package service.impl;
 
 import Const.CardStatus;
 import Const.SysMailTemplateType;
+import Const.UserAccountType;
 import Const.UserStatusType;
 import bankStaff_rpc.AcceptedRequest;
 import bankStaff_rpc.AcceptedResponse;
@@ -18,6 +19,7 @@ import dao.impl.UserDao;
 import entity.*;
 import service.IStaffService;
 import service.impl.command_pattern.*;
+import service.impl.facade_pattern.ConversionEligibility;
 import util.*;
 
 import java.sql.Timestamp;
@@ -113,6 +115,30 @@ public class StaffService implements IStaffService {
         return response;
     }
 
+    //Ashly
+    public AcceptedResponse changeAccountTypeOfUser(AcceptedRequest request, UserApplyArchiveEntity userApplyArchiveEntity) throws NotEligibleException{
+        //UserEntity userEntity = userDao.selectUserByUserId(userApplyArchiveEntity.getUserId());
+        ConversionEligibility c = new ConversionEligibility(userApplyArchiveEntity);
+        switch (request.getAccountType()) {
+
+            case PERSONAL_ACCOUNT:
+                c.checkConversionEligibilityPersonalAccount();
+                break;
+            case GOLDEN_ACCOUNT:
+                c.checkConversionEligibilityGoldenAccount();
+                break;
+            default:
+                throw new NotEligibleException(request.getAccountType());
+
+
+        }
+
+        AcceptedResponse response = AcceptedResponse.newBuilder().setIsAccepted(true).setStatusCode(200).build();
+
+        return response;
+    }
+
+
     public AcceptedResponse applyForNewUser(AcceptedRequest request, UserApplyArchiveEntity userApplyArchiveEntity) {
         //1. Create  new UserEntity and save it to DB
         UserEntity userEntity = new UserEntity();
@@ -201,6 +227,15 @@ public class StaffService implements IStaffService {
         return userAccountEntity;
     }
 }
+
+    class NotEligibleException extends Exception{
+
+        public NotEligibleException(int exceptionTypeAccount){
+            System.out.println("Staff can convert only to Personal or Golden Savers account .Recieved "+ UserAccountType.getTypeName(exceptionTypeAccount));  //NeedLoggerInstead
+        }
+
+    }
+
 
 
 
