@@ -68,6 +68,7 @@ public class StaffRpc {
 
         AcceptedResponse response = applicationBlockingStub.acceptApplication(AcceptedRequest.newBuilder().setApplicationId(applicationId).build());
 
+
         if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
             logger.info("Apply an application successfully");
             return response;

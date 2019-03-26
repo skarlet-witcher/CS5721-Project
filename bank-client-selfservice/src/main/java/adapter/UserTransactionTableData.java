@@ -1,31 +1,19 @@
 package adapter;
 
-import Const.AccountCurrencyType;
-import Const.CardCurrencyType;
 import Const.UserOperateType;
 import model.UserTransactionModel;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Vector;
 
-public class Adapter extends Adaptee implements ITarget  {
+public class UserTransactionTableData extends UserTransactionData implements TableData {   // adapter for UserTransactionModel
 
-    public Runnable getDataVectorReq;
-    public Runnable getColumnIdentifierReq;
-
-    public Adapter(List<UserTransactionModel> userTransactionModelList) {
+    public UserTransactionTableData(List<UserTransactionModel> userTransactionModelList) {
         super(userTransactionModelList);
     }
 
-    // pluggable adatper?
-    public Adapter(Runnable r, Runnable r2) {
-        getDataVectorReq = r;
-        getColumnIdentifierReq = r2;
-    }
-
     @Override
-    public Vector getDataVector() {
+    public Vector getDataVector() {  // Request
         Vector dataVector = new Vector();
 
         for(UserTransactionModel userTransactionModel : this.getList()) {
@@ -43,13 +31,4 @@ public class Adapter extends Adaptee implements ITarget  {
         return dataVector;
     }
 
-    @Override
-    public Vector getColumnIdentifiersVector() {
-        Vector columnIdentifiers = new Vector();
-
-        for(Field field: UserTransactionModel.class.getDeclaredFields()) {
-            columnIdentifiers.add(field.getName());
-        }
-        return columnIdentifiers;
-    }
 }

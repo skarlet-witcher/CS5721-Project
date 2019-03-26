@@ -7,6 +7,7 @@ import service.IUserCustomerApplyService;
 import service.IUserCustomerLoginService;
 import service.impl.UserCustomerApplyService;
 import service.impl.UserCustomerLoginService;
+import util.JWTUtil;
 import util.ResponseBuilder;
 import util.TimestampConvertHelper;
 
@@ -14,6 +15,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+
 
 public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLoginImplBase {
     private static final Logger logger = Logger.getLogger(UserCustomerLoginGrpc.class.getName());
@@ -50,8 +52,10 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         pin.put(6, request.getPin6());
         try {
             UserLoginReply loginReply = customerLoginService.login(request.getUserId(), pin);
+            String token = JWTUtil.tokenGenerate(loginReply);
+            UserLoginReply loginReply_withToken = loginReply.toBuilder().setJwtToken(token).build();
             responseObserver.onNext(ResponseBuilder.getSuccessBuilder()
-                    .setUserLoginReply(loginReply)
+                    .setUserLoginReply(loginReply_withToken)
                     .build());
         } catch (Exception e) {
             responseObserver.onNext(ResponseBuilder.getFailBuilder(e.getLocalizedMessage())
@@ -59,6 +63,8 @@ public class UserCustomerLoginImpl extends UserCustomerLoginGrpc.UserCustomerLog
         }
         responseObserver.onCompleted();
     }
+
+
 
     @Override
     public void applyNewAccount(UserApplyNewAccountRequest request, StreamObserver<Response> responseObserver) {

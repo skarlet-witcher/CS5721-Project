@@ -7,6 +7,7 @@ import model.UserLoginPINModel;
 import model.UserLoginRequestModel;
 import rpc.*;
 import rpc.client.CustomerLoginRpc;
+import rpc.interceptor.AuthorizationInterceptor;
 import service.ICustomerLoginService;
 import util.TimestampConvertHelper;
 
@@ -63,8 +64,8 @@ public class CustomerLoginService implements ICustomerLoginService {
                         .setPin4(userLoginPINModel.getPin4())
                         .setPin5(userLoginPINModel.getPin5())
                         .setPin6(userLoginPINModel.getPin6())
-                        .build()
-        );
+                        .build());
+        AuthorizationInterceptor.jwtToken = userLoginReply.getJwtToken();
         return userLoginReply;
     }
 

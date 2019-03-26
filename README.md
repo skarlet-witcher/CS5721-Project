@@ -1,7 +1,10 @@
 ## bank manage
 > team assignment
 
-####parts
+`for fiddler`
+-DproxySet=true -DproxyHost=127.0.0.1 -DproxyPort=8888
+
+####architecture
 - unique central server
 - client of self service
 - client of atm
@@ -15,9 +18,10 @@
 - MySQL + Hibernate
 - JFormDesigner
 - JUnit
+- JWT authentication based on gRPC(Mar 18, 2019)
 
 ####further
-- use converters to avoid big amounts of set get methods. like `https://github.com/BAData/protobuf-converter`
+- use mapper to avoid big amounts of set get methods. like `https://github.com/BAData/protobuf-converter`
 - project not finished.
 
 ####Notice
@@ -32,6 +36,7 @@
 - Observer Pattern
 - Facade Pattern
 - ...
+
 -----------
 Introduction about 23 kinds of design pattern.(Chinese website)
 https://blog.csdn.net/anxpp/article/details/51224293

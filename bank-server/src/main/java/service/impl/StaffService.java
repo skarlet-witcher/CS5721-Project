@@ -222,6 +222,7 @@ public class StaffService implements IStaffService {
         }
         userAccountEntity.setExpiredDate(expireDate);
 
+        userAccountEntity.setExpiredDate(expireDate);
         userAccountDao.createUserAccount(userAccountEntity);
         return userAccountEntity;
     }

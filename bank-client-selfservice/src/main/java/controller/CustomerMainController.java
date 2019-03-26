@@ -1,12 +1,15 @@
 package controller;
 
 import Const.*;
-import adapter.Adapter;
+import adapter.TableData;
+import adapter.UserTransactionTableData;
+import adapter.UserPayeeTableData;
 import model.*;
 import rpc.UserAccountsReply;
 import rpc.UserPayeesReply;
 import rpc.UserProfileReply;
 import rpc.UserTransactionsReply;
+import rpc.interceptor.AuthorizationInterceptor;
 import service.impl.*;
 import util.JTextFieldLimit;
 import util.TimestampConvertHelper;
@@ -14,13 +17,13 @@ import view.CustomerAddPayeeView;
 import view.CustomerLoginView;
 import view.CustomerMainView;
 
+import javax.naming.AuthenticationException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
@@ -236,36 +239,29 @@ public class CustomerMainController implements BaseController {
         }
     }
 
-    private void initTransactionTable() { // adapter test
+    private void initTransactionTable() { // userTransactionTableData test
 
         // Interface getDataVector()  ITarget
-        // List<UserTransactionModel> Adaptee  get get ....
-        // AdapterName Adapter getDataVector
+        // List<UserTransactionModel> UserTransactionData  get get ....
+        // AdapterName UserTransactionTableData getDataVector
 
         // have List<model>
 
-        // Adapter.getDataVector()  = CircleShape.getArea()
+        // UserTransactionTableData.getDataVector()  = CircleShape.getArea()
 
         // need DataVector
+        List<String> columnNames = new ArrayList<>();
         DefaultTableModel transactionTableModel = (DefaultTableModel)this.view.table_transaction.getModel();
         clearTable(transactionTableModel);
 
-        List<String> columnList = new ArrayList<>();
+        TableData userTransactionTableData = new UserTransactionTableData(this.userTransactionModelList);
 
-        for(int i = 0; i < this.view.table_transaction.getColumnCount(); i++) {
-            columnList.add(this.view.table_transaction.getColumnName(i));
+        for(int i = 0; i<this.view.table_transaction.getColumnCount(); i++) {
+            columnNames.add(this.view.table_transaction.getColumnName(i));
         }
 
-        Vector columnIdentifier = new Vector(columnList);
-
-        Adapter adapter = new Adapter(this.userTransactionModelList);
-
-        // Adapter getDataVector
-        transactionTableModel.setDataVector(adapter.getDataVector(),
-                adapter.getColumnIdentifiersVector());
-
-
-
+        // UserTransactionTableData getDataVector
+        transactionTableModel.setDataVector(userTransactionTableData.getDataVector(), new Vector(columnNames));
 
         /*
         for(UserTransactionModel userTransactionModel: this.userTransactionModelList) {
@@ -319,6 +315,9 @@ public class CustomerMainController implements BaseController {
     private void initAccountTable() {
         DefaultTableModel accountListModel = (DefaultTableModel)this.view.table_home_accountTable.getModel();
         clearTable(accountListModel);
+
+
+
         for(UserAccountModel Account: this.userModel.getUserAccountList()) {
             accountListModel.addRow(new Object[]{
                     Account.getAccountNum(),
@@ -327,6 +326,7 @@ public class CustomerMainController implements BaseController {
                     Account.getBalance(),
                     UserStatusType.getStatusType(Account.getStatus())});
         }
+
     }
 
     private void initPostscriptTextFieldLimit() {
@@ -364,14 +364,34 @@ public class CustomerMainController implements BaseController {
 
     private void initPayeeTable() {
         // init payee table
+        List<String> columnNames = new ArrayList<>();
         DefaultTableModel payeeTableModel = (DefaultTableModel)this.view.table_payee_payeeList.getModel();
         clearTable(payeeTableModel);
+
+        // pluggable adapater
+
+        UserPayeeTableData userPayeeTableData = new UserPayeeTableData();
+
+        userPayeeTableData.register(new String[]{"getIban", "getName"});
+
+        for(int i = 0; i<this.view.table_payee_payeeList.getColumnCount(); i++) {
+            columnNames.add(this.view.table_payee_payeeList.getColumnName(i));
+        }
+
+        for(UserPayeeModel userPayeeModel : this.userModel.getUserPayeeList()) {
+            userPayeeTableData.setDataVector(userPayeeModel);
+        }
+
+        payeeTableModel.setDataVector(userPayeeTableData.getDataVector(), new Vector(columnNames));
+
+        /*
         for(UserPayeeModel userPayeeModel: this.userModel.getUserPayeeList()) {
             payeeTableModel.addRow(new Object[]{
                     userPayeeModel.getIban(),
                     userPayeeModel.getName()
             });
         }
+        */
     }
 
     private void initTransferModel(Double balance, Double amounts, String postScript) {
@@ -602,6 +622,8 @@ public class CustomerMainController implements BaseController {
     }
 
     public void btn_signoutActionPerformed(ActionEvent e) {
+        //Empty the token
+        AuthorizationInterceptor.jwtToken = "";
         this.view.dispose();
         new CustomerLoginView();
     }

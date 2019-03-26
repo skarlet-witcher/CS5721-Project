@@ -2,8 +2,6 @@ package adapter;
 
 import java.util.Vector;
 
-public interface ITarget {
+public interface TableData {  // ITarget
     Vector getDataVector();
-
-    Vector getColumnIdentifiersVector();
 }

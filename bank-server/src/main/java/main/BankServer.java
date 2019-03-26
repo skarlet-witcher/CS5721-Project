@@ -6,11 +6,8 @@ import io.grpc.netty.shaded.io.grpc.netty.NettyServerBuilder;
 import io.grpc.netty.shaded.io.netty.handler.ssl.ClientAuth;
 import io.grpc.netty.shaded.io.netty.handler.ssl.SslContextBuilder;
 import io.grpc.netty.shaded.io.netty.handler.ssl.SslProvider;
-import rpc.impl.UserCustomerImpl;
-import rpc.impl.UserCustomerLoginImpl;
-import rpc.impl.bank_staff.BankStaffAcceptApplysImpl;
-import rpc.impl.bank_staff.BankStaffImpl;
-import rpc.impl.bank_staff.BankStaffLoginImpl;
+import rpc.impl.*;
+import rpc.interceptor.AuthorizationInterceptor;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +30,10 @@ public class BankServer {
         }
     }
 
+    /**
+     * Concrete Framework - Dispatcher integration area
+     * @throws IOException
+     */
     private void start() throws IOException {
         server = NettyServerBuilder.forPort(SERVER_PORT).sslContext(getSslContextBuilder().build())
                 .addService(new UserCustomerLoginImpl())
@@ -40,6 +41,7 @@ public class BankServer {
                 .addService(new BankStaffLoginImpl())
                 .addService(new BankStaffImpl())
                 .addService(new BankStaffAcceptApplysImpl())
+                .intercept(new AuthorizationInterceptor())
                 .build()
                 .start();
         logger.info("Server started, listening on " + SERVER_PORT);
