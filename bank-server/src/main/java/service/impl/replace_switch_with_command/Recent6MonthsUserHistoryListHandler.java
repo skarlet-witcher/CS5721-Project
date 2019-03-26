@@ -1,10 +1,11 @@
-package service.impl;
+package service.impl.replace_switch_with_command;
 
 import entity.UserHistoryEntity;
+import service.impl.UserCustomerService;
 
 import java.util.List;
 
-public class Recent6MonthsUserHistoryListHandler {
+public class Recent6MonthsUserHistoryListHandler {  // concrete command
     private UserCustomerService userCustomerService;
 
     public Recent6MonthsUserHistoryListHandler(UserCustomerService userCustomerService) {
