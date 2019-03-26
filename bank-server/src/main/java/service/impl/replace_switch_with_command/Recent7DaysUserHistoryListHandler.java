@@ -17,6 +17,7 @@ public class Recent7DaysUserHistoryListHandler extends Handler { // concrete com
     }
 
     private List<UserHistoryEntity> getTransactionHistory7Days(Long user_pk, Long account_pk) {
+        // UserHistoryDao is the receiver
         return UserHistoryDao.getInstance().getTransactionHistory7Days(user_pk, account_pk);
     }
 }

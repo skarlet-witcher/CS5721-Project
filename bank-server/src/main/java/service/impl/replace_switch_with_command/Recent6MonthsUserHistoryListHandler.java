@@ -17,6 +17,7 @@ public class Recent6MonthsUserHistoryListHandler extends Handler {  // concrete 
     }
 
     private List<UserHistoryEntity> getTransactionHistory6Months(Long user_pk, Long account_pk) {
+        // UserHistoryDao is the receiver
         return UserHistoryDao.getInstance().getTransactionHistory6Month(user_pk, account_pk);
     }
 }

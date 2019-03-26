@@ -28,9 +28,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserCustomerService implements IUserCustomerService {
+public class UserCustomerService implements IUserCustomerService {  // invoker
 
-    private Map handlers;  // invoker? receiver?
+    private Map handlers;  // a Command Map
     private static UserCustomerService instance = null;
     private IUserAccountDao userAccountDao = UserAccountDao.getInstance();
     private IUserDao userDao = UserDao.getInstance();
