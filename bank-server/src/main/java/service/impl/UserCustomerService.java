@@ -18,19 +18,23 @@ import rpc.UserProfileReply;
 import rpc.UserTransactionsReply;
 import service.IUserCustomerHistoryService;
 import service.IUserCustomerService;
+import service.impl.replace_switch_with_command.*;
 import util.FaultFactory;
 import util.IBANValidator;
 import util.TimestampConvertHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class UserCustomerService implements IUserCustomerService {
+public class UserCustomerService implements IUserCustomerService {  // invoker
+
+    private Map handlers;  // a Command Map (dictionary)
     private static UserCustomerService instance = null;
     private IUserAccountDao userAccountDao = UserAccountDao.getInstance();
     private IUserDao userDao = UserDao.getInstance();
     private IUserPayeeDao userPayeeDao = UserPayeeDao.getInstance();
-    private IUserHistoryDao userHistoryDao = UserHistoryDao.getInstance();
     private IUserCustomerHistoryService userCustomerHistoryService = UserCustomerHistoryService.getInstance();
     private IUserAccountTypeDao userAccountTypeDao = UserAccountTypeDao.getInstance();
     // private static final Logger logger = Logger.getLogger(UserCustomerGrpc.class.getName());
@@ -41,6 +45,24 @@ public class UserCustomerService implements IUserCustomerService {
         }
         return instance;
     }
+
+    private UserCustomerService() {
+        createHandlers();
+    }
+
+    // for extensibility. add new hanlder(filter)
+    private void createHandlers() {
+        handlers = new HashMap();
+        handlers.put(UserTransactionTimeFilter.RECENT_7_DAYS, new Recent7DaysUserHistoryListHandler(this));
+        handlers.put(UserTransactionTimeFilter.RECENT_6_MONTHS, new Recent6MonthsUserHistoryListHandler(this));
+        handlers.put(UserTransactionTimeFilter.RECENT_1_MONTH, new Recent1MonthUserHistoryListHandler(this));
+        handlers.put(UserTransactionTimeFilter.RECENT_1_YEAR, new Recent1YearUserHistoryListHandler(this));
+    }
+
+    private Handler lookupHandlerBy(int filterName) {
+        return (Handler)handlers.get(filterName);
+    }
+
 
     @Override
     public List<UserAccountsReply> getAccounts(Long user_pk) throws Exception {
@@ -261,23 +283,30 @@ public class UserCustomerService implements IUserCustomerService {
     }
 
     private List<UserHistoryEntity> getUserHistoryListByFilter(Long user_pk, Long account_pk, int filter) throws Exception {
-        List<UserHistoryEntity> userHistoryEntityList = new ArrayList<>();
+        List<UserHistoryEntity> userHistoryEntityList;
         try {
+            Handler handler = lookupHandlerBy(filter);
+            userHistoryEntityList = handler.execute(user_pk, account_pk);
+
+            /*
             switch(filter) {
                 case UserTransactionTimeFilter.RECENT_7_DAYS:
-                    userHistoryEntityList = userHistoryDao.getTransactionHistory7Days(user_pk, account_pk); break;
+                    userHistoryEntityList = new Recent7DaysUserHistoryListHandler(this).execute(user_pk, account_pk); break;
                 case UserTransactionTimeFilter.RECENT_1_MONTH:
-                    userHistoryEntityList = userHistoryDao.getTransactionHistory1Month(user_pk, account_pk); break;
+                    userHistoryEntityList = new Recent1MonthUserHistoryListHandler(this).execute(user_pk, account_pk); break;
                 case UserTransactionTimeFilter.RECENT_6_MONTHS:
-                    userHistoryEntityList = userHistoryDao.getTransactionHistory6Month(user_pk, account_pk); break;
+                    userHistoryEntityList = new Recent6MonthsUserHistoryListHandler(this).execute(user_pk, account_pk); break;
                 case UserTransactionTimeFilter.RECENT_1_YEAR:
-                    userHistoryEntityList = userHistoryDao.getTransactionHistory1Year(user_pk, account_pk); break;
+                    userHistoryEntityList = new Recent1YearUserHistoryListHandler(this).execute(user_pk, account_pk); break;
             }
+            */
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("Fail to get user history list by filter");
         }
         return userHistoryEntityList;
     }
+
+
 
     private Double updateBalanceFromUserAccount(Long account_pk, Double amount) throws Exception {
         int updatedRows;

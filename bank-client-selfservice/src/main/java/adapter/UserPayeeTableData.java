@@ -3,7 +3,7 @@ package adapter;
 import java.lang.reflect.Method;
 import java.util.Vector;
 
-public class UserPayeeTableData implements TableData { // Pluggable adapter // UserPayeeData
+public class UserPayeeTableData implements TableData {
 
     private String[] methodArr;
     private Vector dataVector;
@@ -14,11 +14,6 @@ public class UserPayeeTableData implements TableData { // Pluggable adapter // U
 
     public void register(String[] methodName) {
         this.methodArr = methodName;
-    }
-
-    @Override
-    public Vector getDataVector() {
-        return dataVector;
     }
 
     public void setDataVector(Object obj) {
@@ -38,5 +33,9 @@ public class UserPayeeTableData implements TableData { // Pluggable adapter // U
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public Vector getDataVector() {
+        return dataVector;
     }
 }
