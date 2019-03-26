@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class UserCustomerService implements IUserCustomerService {  // invoker
 
-    private Map handlers;  // a Command Map
+    private Map handlers;  // a Command Map (dictionary)
     private static UserCustomerService instance = null;
     private IUserAccountDao userAccountDao = UserAccountDao.getInstance();
     private IUserDao userDao = UserDao.getInstance();
@@ -50,12 +50,17 @@ public class UserCustomerService implements IUserCustomerService {  // invoker
         createHandlers();
     }
 
+    // for extensibility. add new hanlder(filter)
     private void createHandlers() {
         handlers = new HashMap();
         handlers.put(UserTransactionTimeFilter.RECENT_7_DAYS, new Recent7DaysUserHistoryListHandler(this));
         handlers.put(UserTransactionTimeFilter.RECENT_6_MONTHS, new Recent6MonthsUserHistoryListHandler(this));
         handlers.put(UserTransactionTimeFilter.RECENT_1_MONTH, new Recent1MonthUserHistoryListHandler(this));
         handlers.put(UserTransactionTimeFilter.RECENT_1_YEAR, new Recent1YearUserHistoryListHandler(this));
+    }
+
+    private Handler lookupHandlerBy(int filterName) {
+        return (Handler)handlers.get(filterName);
     }
 
 
@@ -301,9 +306,7 @@ public class UserCustomerService implements IUserCustomerService {  // invoker
         return userHistoryEntityList;
     }
 
-    private Handler lookupHandlerBy(int filterName) {
-        return (Handler)handlers.get(filterName);
-    }
+
 
     private Double updateBalanceFromUserAccount(Long account_pk, Double amount) throws Exception {
         int updatedRows;
