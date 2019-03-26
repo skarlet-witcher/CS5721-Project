@@ -265,13 +265,13 @@ public class UserCustomerService implements IUserCustomerService {
         try {
             switch(filter) {
                 case UserTransactionTimeFilter.RECENT_7_DAYS:
-                    userHistoryEntityList = getTransactionHistory7Days(user_pk, account_pk); break;
+                    userHistoryEntityList = new Recent7DaysUserHistoryListHandler(this).getTransactionHistory7Days(user_pk, account_pk); break;
                 case UserTransactionTimeFilter.RECENT_1_MONTH:
-                    userHistoryEntityList = getTransactionHistory1Month(user_pk, account_pk); break;
+                    userHistoryEntityList = new Recent1MonthUserHistoryListHandler(this).getTransactionHistory1Month(user_pk, account_pk); break;
                 case UserTransactionTimeFilter.RECENT_6_MONTHS:
-                    userHistoryEntityList = getTransactionHistory6Month(user_pk, account_pk); break;
+                    userHistoryEntityList = new Recent6MonthsUserHistoryListHandler(this).getTransactionHistory6Months(user_pk, account_pk); break;
                 case UserTransactionTimeFilter.RECENT_1_YEAR:
-                    userHistoryEntityList = getTransactionHistory1Year(user_pk, account_pk); break;
+                    userHistoryEntityList = new Recent1YearUserHistoryListHandler(this).getTransactionHistory1Year(user_pk, account_pk); break;
             }
         } catch (Exception E) {
             throw FaultFactory.throwFaultException("Fail to get user history list by filter");
@@ -279,19 +279,19 @@ public class UserCustomerService implements IUserCustomerService {
         return userHistoryEntityList;
     }
 
-    private List<UserHistoryEntity> getTransactionHistory7Days(Long user_pk, Long account_pk) {
+    public List<UserHistoryEntity> getTransactionHistory7Days(Long user_pk, Long account_pk) {
         return userHistoryDao.getTransactionHistory7Days(user_pk, account_pk);
     }
 
-    private List<UserHistoryEntity> getTransactionHistory1Month(Long user_pk, Long account_pk) {
+    public List<UserHistoryEntity> getTransactionHistory1Month(Long user_pk, Long account_pk) {
         return userHistoryDao.getTransactionHistory1Month(user_pk, account_pk);
     }
 
-    private List<UserHistoryEntity> getTransactionHistory6Month(Long user_pk, Long account_pk) {
+    public List<UserHistoryEntity> getTransactionHistory6Months(Long user_pk, Long account_pk) {
         return userHistoryDao.getTransactionHistory6Month(user_pk, account_pk);
     }
 
-    private List<UserHistoryEntity> getTransactionHistory1Year(Long user_pk, Long account_pk) {
+    public List<UserHistoryEntity> getTransactionHistory1Year(Long user_pk, Long account_pk) {
         return userHistoryDao.getTransactionHistory1Year(user_pk, account_pk);
     }
 
