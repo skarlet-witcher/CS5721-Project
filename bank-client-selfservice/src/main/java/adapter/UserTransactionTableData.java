@@ -19,11 +19,10 @@ public class UserTransactionTableData extends UserTransactionData implements Tab
         for(UserTransactionModel userTransactionModel : this.getList()) {
             Vector rowVector = new Vector();
             rowVector.add(userTransactionModel.getDate().toString().substring(0, userTransactionModel.getDate().toString().indexOf(".")));
+            rowVector.add(UserOperateType.getType(userTransactionModel.getOperation_type()));
             rowVector.add(userTransactionModel.getDetails());
             rowVector.add(userTransactionModel.getAmounts());
             rowVector.add(userTransactionModel.getBalance());
-            rowVector.add(userTransactionModel.getTransactionNum());
-            rowVector.add(UserOperateType.getType(userTransactionModel.getOperation_type()));
 
             dataVector.add(rowVector);
 

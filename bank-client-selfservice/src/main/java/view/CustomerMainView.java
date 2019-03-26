@@ -19,7 +19,7 @@ import java.awt.event.ComponentEvent;
 /**
  * @author Xiangkai Tang
  */
-public class CustomerMainView extends JFrame {
+public class CustomerMainView extends JFrame implements Observer {
 
     private CustomerMainController customerMainController;
 
@@ -82,6 +82,16 @@ public class CustomerMainView extends JFrame {
     public CustomerMainView(UserModel userModel) {
         customerMainController = new CustomerMainController(this, userModel);
         customerMainController.initialize();
+        registerObserver();
+    }
+
+    private void registerObserver() {
+        this.customerMainController.getUserTransferModel().registerObserver(this);
+    }
+
+    @Override
+    public void updateData() {
+        customerMainController.updateData();
     }
 
     public void initComponents() {
@@ -507,5 +517,6 @@ public class CustomerMainView extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
+
 
 }
