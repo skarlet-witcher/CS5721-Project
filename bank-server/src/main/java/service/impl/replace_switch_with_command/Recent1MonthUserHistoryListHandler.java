@@ -17,7 +17,7 @@ public class Recent1MonthUserHistoryListHandler extends Handler { // concrete co
         return getTransactionHistory1Month(user_pk, account_pk);
     }
 
-    public List<UserHistoryEntity> getTransactionHistory1Month(Long user_pk, Long account_pk) {
+    private List<UserHistoryEntity> getTransactionHistory1Month(Long user_pk, Long account_pk) {
         return UserHistoryDao.getInstance().getTransactionHistory1Month(user_pk, account_pk);
     }
 
