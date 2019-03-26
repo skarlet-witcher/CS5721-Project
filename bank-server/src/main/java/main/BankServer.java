@@ -30,6 +30,10 @@ public class BankServer {
         }
     }
 
+    /**
+     * Concrete Framework - Dispatcher integration area
+     * @throws IOException
+     */
     private void start() throws IOException {
         server = NettyServerBuilder.forPort(SERVER_PORT).sslContext(getSslContextBuilder().build())
                 .addService(new UserCustomerLoginImpl())
