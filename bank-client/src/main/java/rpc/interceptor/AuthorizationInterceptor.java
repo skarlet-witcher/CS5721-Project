@@ -8,6 +8,12 @@ import io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
 import javax.swing.*;
 import java.util.logging.Logger;
 
+/**
+ * Concrete Interceptor
+ * Responsibility:
+ * 1) Implement a specific out-of-band (additional) service
+ * 2) Use context object to control GRPC framework
+ */
 public class AuthorizationInterceptor implements ClientInterceptor {
     private static final Logger logger = Logger.getLogger(AuthorizationInterceptor.class.getName());
 
