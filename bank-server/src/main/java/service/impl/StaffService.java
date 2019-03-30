@@ -208,17 +208,21 @@ public class StaffService implements IStaffService {
         if (userApplyArchiveEntity.getAccountType() == STUDENT_ACCOUNT) {
             //the expiry date is calculated by the Receiver
             //Inovker is just the one who wants something to be done not by himself
-            expireDate = invoker.executeCommand(new StudentAccCalculateExpiry(receiver));
+            invoker.setCommand(new StudentAccCalculateExpiry(receiver));
+            expireDate = invoker.executeCommand();
         }
         if (userApplyArchiveEntity.getAccountType() == YOUNG_SAVER_ACCOUNT) {
-            expireDate = invoker.executeCommand(new YoungSaverAccCalculateExpiry(receiver));
+            invoker.setCommand(new YoungSaverAccCalculateExpiry(receiver));
+            expireDate = invoker.executeCommand();
         }
 
         if (userApplyArchiveEntity.getAccountType() == PERSONAL_ACCOUNT) {
-            expireDate = invoker.executeCommand(new PersonalAccCalculateExpiry(receiver));
+            invoker.setCommand(new PersonalAccCalculateExpiry(receiver));
+            expireDate = invoker.executeCommand();
         }
         if (userApplyArchiveEntity.getAccountType() == GOLDEN_ACCOUNT) {
-            expireDate = invoker.executeCommand(new GoldenAccCalculateExpiry(receiver));
+            invoker.setCommand(new GoldenAccCalculateExpiry(receiver));
+            expireDate = invoker.executeCommand();
         }
         userAccountEntity.setExpiredDate(expireDate);
 

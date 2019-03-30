@@ -20,6 +20,54 @@ public class UserHistoryEntity {
     private Long toPayeeId;
     private Long accountId;
 
+    public UserHistoryEntity() {
+
+    }
+
+    public UserHistoryEntity(String operateNo, Integer operateType, Timestamp operateTime, Integer operateSource,
+                             String description, Long userId, Integer status) {
+        this.operateNo = operateNo;
+        this.operateType = operateType;
+        this.operateTime = operateTime;
+        this.operateSource = operateSource;
+        this.description = description;
+        this.status = status;
+        this.userId = userId;
+    }
+
+    public UserHistoryEntity(String operateNo, Integer operateType, Timestamp operateTime, Integer operateSource,
+                             Double amount, Integer currencyType, Double balance, String description,
+                             Integer status, Long userId, Long toPayeeId, Long accountId) {
+        this.operateNo = operateNo;
+        this.operateType = operateType;
+        this.operateTime = operateTime;
+        this.operateSource = operateSource;
+        this.amount = amount;
+        this.currencyType = currencyType;
+        this.balance = balance;
+        this.description = description;
+        this.status = status;
+        this.userId = userId;
+        this.toPayeeId = toPayeeId;
+        this.accountId = accountId;
+    }
+
+    public UserHistoryEntity(String operateNo, Integer operateType, Timestamp operateTime, Integer operateSource,
+                             Double amount, Integer currencyType, Double balance, String description,
+                             Integer status, Long userId, Long accountId) {
+        this.operateNo = operateNo;
+        this.operateType = operateType;
+        this.operateTime = operateTime;
+        this.operateSource = operateSource;
+        this.amount = amount;
+        this.currencyType = currencyType;
+        this.balance = balance;
+        this.description = description;
+        this.status = status;
+        this.userId = userId;
+        this.accountId = accountId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

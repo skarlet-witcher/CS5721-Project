@@ -3,7 +3,7 @@ package adapter;
 import java.lang.reflect.Method;
 import java.util.Vector;
 
-public class UserPayeeTableData implements TableData { // Pluggable adapter // UserPayeeData
+public class UserPayeeTableData implements TableData {
 
     private String[] methodArr;
     private Vector dataVector;
@@ -16,11 +16,13 @@ public class UserPayeeTableData implements TableData { // Pluggable adapter // U
         this.methodArr = methodName;
     }
 
-    @Override
-    public Vector getDataVector() {
-        return dataVector;
-    }
 
+    /**
+     * @param obj : Object is UserPayeeModel in our scenario.
+     * The method is to adapt the UserPayeeModel type to match the dataVector type,
+     *
+     * The use of reflection is that the client only needs to provide the name of "Get" method, ignores datatype of input
+     */
     public void setDataVector(Object obj) {
 
         try {
@@ -38,5 +40,9 @@ public class UserPayeeTableData implements TableData { // Pluggable adapter // U
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public Vector getDataVector() {
+        return dataVector;
     }
 }

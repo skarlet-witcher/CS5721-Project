@@ -7,7 +7,14 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Receiver: the person who actually perform the execution.
+ */
 public class Receiver{
+    /**
+     * {@link UserApplyArchiveEntity}: to obtain the information of one user,
+     * so as to calculate the expiry date based on that information.
+     */
     private UserApplyArchiveEntity userApplyArchiveEntity;
 
     public Receiver(UserApplyArchiveEntity userApplyArchiveEntity) {
