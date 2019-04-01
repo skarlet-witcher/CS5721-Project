@@ -24,15 +24,16 @@ public class Receiver{
     public Timestamp StudentAccExpire(){
         return userApplyArchiveEntity.getGraduateDate();
     }
-    public Timestamp YoungSaverExpire(){
-        ZonedDateTime zonedDateTime = userApplyArchiveEntity.getBirthDate().toInstant().atZone(ZoneId.of("UTC"));
-        Timestamp expireTime = Timestamp.from(zonedDateTime.plus(18, ChronoUnit.YEARS).toInstant());
-        return expireTime;
-    }
 
     public Timestamp PersonalAccExpire() {
         ZonedDateTime zonedDateTime = userApplyArchiveEntity.getApplyTime().toInstant().atZone(ZoneId.of("UTC"));
         Timestamp expireTime = Timestamp.from(zonedDateTime.plus(3, ChronoUnit.YEARS).toInstant());
+        return expireTime;
+    }
+
+    public Timestamp YoungSaverExpire(){
+        ZonedDateTime zonedDateTime = userApplyArchiveEntity.getBirthDate().toInstant().atZone(ZoneId.of("UTC"));
+        Timestamp expireTime = Timestamp.from(zonedDateTime.plus(18, ChronoUnit.YEARS).toInstant());
         return expireTime;
     }
 

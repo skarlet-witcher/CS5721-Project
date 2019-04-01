@@ -7,15 +7,24 @@ package view;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import controller.ATMController;
 import net.miginfocom.swing.*;
 
 /**
  * @author xiangkai22
  */
 public class ATMWithdrawView extends JFrame {
-    public ATMWithdrawView(long cardNum) {
+    public ATMWithdrawView(long cardNum, double balance) {
         initComponents();
         setCardNum(cardNum);
+        setBalance(balance);
+        atmController = new ATMController(this, cardNum);
+    }
+
+    private void setBalance(double balance) {
+        this.balance = balance;
+        tf_balance.setText(String.valueOf(balance));
     }
 
     private void btn_backActionPerformed(ActionEvent e) {
@@ -72,6 +81,7 @@ public class ATMWithdrawView extends JFrame {
         //---- btn_confirm ----
         btn_confirm.setText("Confirm");
         btn_confirm.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        btn_confirm.addActionListener(e -> atmController.withdraw(e));
         contentPane.add(btn_confirm, "cell 1 3 2 1");
 
         //---- btn_back ----
@@ -97,11 +107,13 @@ public class ATMWithdrawView extends JFrame {
         this.setVisible(true);
     }
     private long cardNum;
+    private ATMController atmController ;
+    private double balance;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JLabel lbl_balance;
-    private JTextField tf_balance;
+    public JTextField tf_balance;
     private JLabel lbl_amounts;
-    private JTextField tf_amounts;
+    public JTextField tf_amounts;
     private JButton btn_confirm;
     private JButton btn_back;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

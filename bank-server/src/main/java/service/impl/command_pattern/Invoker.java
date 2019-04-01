@@ -4,7 +4,8 @@ package service.impl.command_pattern;
 import java.sql.Timestamp;
 
 /**
- * Invoker class: to instruct the Command to execute the request in respose to Expiry Date calculating event.
+ * Invoker class:
+ * To instruct the Command to execute the request in response to Expiry Date calculating event.
  * Method setCommand(Command): set a command to the class's property.
  * Method executeCommand(): to execute a command which is set by setCommand(Command) method.
  */

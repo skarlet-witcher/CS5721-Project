@@ -136,7 +136,7 @@ public class UserCustomerLoginService implements IUserCustomerLoginService {
         if (executeResult >= 1) {
             return userLoginReqBuilder.build();
         }
-        throw FaultFactory.throwFaultException("Internal Error: fail to update login pin digit");
+        throw FaultFactory.throwFaultException("Internal Error: fail to updateBalanceByUserAccountEntity login pin digit");
     }
 
     private void archiveFailedHistory(UserEntity user) throws Exception {

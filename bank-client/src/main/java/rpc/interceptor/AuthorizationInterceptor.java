@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.util.logging.Logger;
 
 /**
- * Concrete Interceptor
+ * CLient Concrete Interceptor
  * Responsibility:
  * 1) Implement a specific out-of-band (additional) service
  * 2) Use context object to control GRPC framework
@@ -18,7 +18,9 @@ public class AuthorizationInterceptor implements ClientInterceptor {
     private static final Logger logger = Logger.getLogger(AuthorizationInterceptor.class.getName());
 
     public static String jwtToken;
-
+    /**
+     * Callback method, using Header as a context object
+     */
     @Override
     public <ReqT, RespT> ClientCall<ReqT, RespT> interceptCall(
             MethodDescriptor<ReqT, RespT> method, CallOptions callOptions, Channel next) {
