@@ -42,6 +42,26 @@ public class UserCardDao implements IUserCardDao {
     }
 
     @Override
+    public UserCardEntity getCardByCardNumber(Long cardNumber) {
+        try {
+            session.getTransaction().begin();
+
+            String hql = "from UserCardEntity where cardNumber=?1";
+            Query query = session.createQuery(hql);
+            query.setParameter(1, cardNumber);
+            UserCardEntity result = (UserCardEntity) query.uniqueResult();
+            session.getTransaction().commit();
+            return result;
+
+        } catch (Exception E) {
+            E.printStackTrace();
+            // Rollback in case of an error occurred.
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
     public void createUserCard(UserCardEntity userCardEntity) {
         try {
             session.getTransaction().begin();

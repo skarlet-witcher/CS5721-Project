@@ -109,7 +109,7 @@ public class UserCustomerService implements IUserCustomerService {  // invoker
         try {
             int updateRows = userDao.updateUserProfileById(user_pk, address, email, contactNum);
             if(updateRows <= 0) {
-                throw FaultFactory.throwFaultException("fail to update user profile");
+                throw FaultFactory.throwFaultException("fail to updateBalanceByUserAccountEntity user profile");
             }
         } catch (Exception E) {
             throw FaultFactory.throwFaultException(E.getMessage());
@@ -249,7 +249,7 @@ public class UserCustomerService implements IUserCustomerService {  // invoker
             try {
                 userAccountDao.updateUserAccountByBalanceAndIban(amount, result_payee.getIban());
             } catch (Exception E) {
-                throw FaultFactory.throwFaultException("Fail to update balance of local account");
+                throw FaultFactory.throwFaultException("Fail to updateBalanceByUserAccountEntity balance of local account");
             }
             addTransferHistoryForTransferredAccount(result_payee, amount);
         }
@@ -315,10 +315,10 @@ public class UserCustomerService implements IUserCustomerService {  // invoker
             latestBalance = getLatestBalance(userAccountDao.getUserAccountByPK(account_pk), amount);
             updatedRows = userAccountDao.updateUserAccountByBalanceAndPk(latestBalance, account_pk);
         } catch (Exception E) {
-            throw FaultFactory.throwFaultException("fail to update balance in your account");
+            throw FaultFactory.throwFaultException("fail to updateBalanceByUserAccountEntity balance in your account");
         }
         if(updatedRows <= 0) {
-            throw FaultFactory.throwFaultException("fail to update balance in your account");
+            throw FaultFactory.throwFaultException("fail to updateBalanceByUserAccountEntity balance in your account");
         }
         return latestBalance;
     }

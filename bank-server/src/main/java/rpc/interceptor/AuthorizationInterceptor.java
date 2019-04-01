@@ -25,7 +25,9 @@ public class AuthorizationInterceptor implements ServerInterceptor {
             "rpc.UserCustomerLogin/ValidateExistingUser",
             "rpc.UserCustomerLogin/ForgetUserId",
             "rpc.UserCustomerLogin/ForgetPin",
-            "rpc.BankStaffLogin/StaffLogin"
+            "rpc.BankStaffLogin/StaffLogin",
+            "rpc.ATMWithdraw/ATMWithDraw",
+            "rpc.ATMWithdraw/ATMGetBalance"
     );
 
     /**

@@ -41,6 +41,7 @@ public class BankServer { //Concrete framework
                 .addService(new UserCustomerImpl())
                 .addService(new BankStaffLoginImpl())
                 .addService(new BankStaffImpl())
+                .addService(new BankATMImpl())
                 .addService(new BankStaffAcceptApplysImpl())
                 .intercept(new AuthorizationInterceptor()) //register a concrete interceptor
                 .build()

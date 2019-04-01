@@ -16,6 +16,7 @@ public interface IUserAccountDao {
     UserAccountEntity getUserAccountByIBAN(String iban);
 
     UserAccountEntity getUserAccountByPK(Long id);
+    UserAccountEntity updateBalanceByUserAccountEntity(UserAccountEntity UserAccountEntity);
 
     Integer updateUserAccountByBalanceAndPk(Double balance, Long account_pk);
 

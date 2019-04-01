@@ -25,7 +25,8 @@ public class ATMMainView extends JFrame {
 
     private void btn_withdrawActionPerformed(ActionEvent e) {
         this.dispose();
-        new ATMWithdrawView(cardNum).run();
+        new ATMPINView(cardNum).run();
+//        new ATMWithdrawView(cardNum).run();
     }
 
     private void btn_depositActionPerformed(ActionEvent e) {
