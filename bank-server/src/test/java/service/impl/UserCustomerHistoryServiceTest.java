@@ -8,7 +8,7 @@ import dao.IUserHistoryDao;
 import dao.impl.UserHistoryDao;
 import entity.UserHistoryEntity;
 import org.junit.jupiter.api.Test;
-import service.NewTransferHistoryFactory;
+import service.impl.replace_constructors_with_creation_methods.NewTransferHistoryFactory;
 import service.impl.replace_constructors_with_creation_methods.NewChargeHistoryFactory;
 import service.impl.replace_constructors_with_creation_methods.NewUserLoginReqHistoryFactory;
 import util.OperationNoGenerator;
