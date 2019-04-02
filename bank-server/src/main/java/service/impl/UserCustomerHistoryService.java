@@ -12,6 +12,9 @@ import dao.impl.UserHistoryDao;
 import entity.UserHistoryEntity;
 import service.IUserCustomerHistoryService;
 import service.NewTransferHistoryFactory;
+import service.impl.replace_constructors_with_creation_methods.NewChargeHistoryFactory;
+import service.impl.replace_constructors_with_creation_methods.NewUserLoginHistoryFactory;
+import service.impl.replace_constructors_with_creation_methods.NewUserLoginReqHistoryFactory;
 import util.OperationNoGenerator;
 
 import java.sql.Timestamp;
