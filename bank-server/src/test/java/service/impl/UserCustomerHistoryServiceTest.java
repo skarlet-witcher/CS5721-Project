@@ -4,14 +4,13 @@ import Const.AccountCurrencyType;
 import Const.UserOperateSourceType;
 import Const.UserOperateStatusType;
 import Const.UserOperateType;
-import dao.IUserDao;
 import dao.IUserHistoryDao;
-import dao.impl.UserDao;
 import dao.impl.UserHistoryDao;
 import entity.UserHistoryEntity;
-import org.hibernate.type.CurrencyType;
 import org.junit.jupiter.api.Test;
 import service.NewTransferHistoryFactory;
+import service.impl.replace_constructors_with_creation_methods.NewChargeHistoryFactory;
+import service.impl.replace_constructors_with_creation_methods.NewUserLoginReqHistoryFactory;
 import util.OperationNoGenerator;
 
 import java.sql.Timestamp;
