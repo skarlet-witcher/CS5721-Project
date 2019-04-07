@@ -116,25 +116,18 @@ public class StaffService implements IStaffService {
     }
 
     //Ashly
-    public AcceptedResponse changeAccountTypeOfUser(AcceptedRequest request, UserApplyArchiveEntity userApplyArchiveEntity) throws NotEligibleException{
-        //UserEntity userEntity = userDao.selectUserByUserId(userApplyArchiveEntity.getUserId());
+    public AcceptedResponse changeAccountTypeOfUser(AcceptedRequest request, UserApplyArchiveEntity userApplyArchiveEntity) {
+        AcceptedResponse response = null;
         ConversionEligibility c = new ConversionEligibility(userApplyArchiveEntity);
-        switch (request.getAccountType()) {
-
-            case PERSONAL_ACCOUNT:
-                c.checkConversionEligibilityPersonalAccount();
-                break;
-            case GOLDEN_ACCOUNT:
-                c.checkConversionEligibilityGoldenAccount();
-                break;
-            default:
-                throw new NotEligibleException(request.getAccountType());
-
-
+        //request.getAccountType()
+        try {
+            if (c.checkConversionEligibility(userApplyArchiveEntity.getAccountType(), 1))
+                response = AcceptedResponse.newBuilder().setIsAccepted(true).setStatusCode(200).build();
+            else
+                response = null;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        AcceptedResponse response = AcceptedResponse.newBuilder().setIsAccepted(true).setStatusCode(200).build();
-
         return response;
     }
 
@@ -231,15 +224,6 @@ public class StaffService implements IStaffService {
         return userAccountEntity;
     }
 }
-
-    class NotEligibleException extends Exception{
-
-        public NotEligibleException(int exceptionTypeAccount){
-            System.out.println("Staff can convert only to Personal or Golden Savers account .Recieved "+ UserAccountType.getTypeName(exceptionTypeAccount));  //NeedLoggerInstead
-        }
-
-    }
-
 
 
 
