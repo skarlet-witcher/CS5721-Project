@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 import static Const.Server.*;
 
-public class BankServer {
+public class BankServer { //Concrete framework
     private static final Logger logger = Logger.getLogger(BankServer.class.getName());
     private Server server;
 
@@ -30,14 +30,20 @@ public class BankServer {
         }
     }
 
+    /**
+     * Concrete Framework and Dispatcher integration area
+     * Responsibility of dispatcher: register and remove concrete interceptor
+     * @throws IOException
+     */
     private void start() throws IOException {
         server = NettyServerBuilder.forPort(SERVER_PORT).sslContext(getSslContextBuilder().build())
                 .addService(new UserCustomerLoginImpl())
                 .addService(new UserCustomerImpl())
                 .addService(new BankStaffLoginImpl())
                 .addService(new BankStaffImpl())
+                .addService(new BankATMImpl())
                 .addService(new BankStaffAcceptApplysImpl())
-                .intercept(new AuthorizationInterceptor())
+                .intercept(new AuthorizationInterceptor()) //register a concrete interceptor
                 .build()
                 .start();
         logger.info("Server started, listening on " + SERVER_PORT);

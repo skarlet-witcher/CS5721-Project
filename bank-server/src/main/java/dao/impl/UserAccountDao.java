@@ -134,6 +134,30 @@ public class UserAccountDao implements IUserAccountDao {
     }
 
     @Override
+    public UserAccountEntity updateBalanceByUserAccountEntity(UserAccountEntity userAccountEntity) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("update UserAccountEntity set balance =:balance where id=:id");
+            query.setParameter("balance",userAccountEntity.getBalance() ).setParameter("id", userAccountEntity.getId());
+            int updateRows = query.executeUpdate();
+
+
+            // refresh entity for updating the data in the session
+            Query query2 = session.createQuery("from UserAccountEntity where id=:id");
+            query2.setParameter("id", userAccountEntity.getId());
+            UserAccountEntity result = (UserAccountEntity) query2.uniqueResult();
+            session.update(result);
+            session.refresh(result);
+            session.getTransaction().commit();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+    @Override
     public Integer updateUserAccountByBalanceAndPk(Double balance, Long account_pk) {
         try {
             session.getTransaction().begin();

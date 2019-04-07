@@ -11,6 +11,10 @@ import dao.impl.UserDao;
 import dao.impl.UserHistoryDao;
 import entity.UserHistoryEntity;
 import service.IUserCustomerHistoryService;
+import service.NewTransferHistoryFactory;
+import service.impl.replace_constructors_with_creation_methods.NewChargeHistoryFactory;
+import service.impl.replace_constructors_with_creation_methods.NewUserLoginHistoryFactory;
+import service.impl.replace_constructors_with_creation_methods.NewUserLoginReqHistoryFactory;
 import util.OperationNoGenerator;
 
 import java.sql.Timestamp;
@@ -38,6 +42,13 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
      */
     @Override
     public void addNewUserLoginReqHistory(Long userId, Integer status) {
+
+        UserHistoryEntity userHistoryEntity = NewUserLoginReqHistoryFactory.createNewUserLoginReqHistory(userId, operationNoGenerator.generateOperationNo(),
+                new Timestamp(new Date().getTime()), UserOperateType.LOGIN_REQ,
+                UserOperateSourceType.SELF_SERVICE,
+                "Login request: " + (status == UserOperateStatusType.SUCCESS ? "Successful" : "Fail"),
+                status);
+        /*
         UserHistoryEntity historyEntity = new UserHistoryEntity();
         historyEntity.setUserId(userId);
         historyEntity.setOperateNo(operationNoGenerator.generateOperationNo());
@@ -46,11 +57,19 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
         historyEntity.setOperateSource(UserOperateSourceType.SELF_SERVICE);
         historyEntity.setDescription("Login request: " + (status == UserOperateStatusType.SUCCESS ? "Successful" : "Fail"));
         historyEntity.setStatus(status);
-        operationHistoryDao.addOperationHistory(historyEntity);
+        */
+        operationHistoryDao.addOperationHistory(userHistoryEntity);
         refreshUserLoginStatus(userId);
     }
     @Override
     public void addNewUserLoginHistory(Long userId, Integer operateSource, Integer status) {
+
+        UserHistoryEntity userHistoryEntity = NewUserLoginHistoryFactory.createNewUserLoginHistory(userId, operationNoGenerator.generateOperationNo(),
+                new Timestamp(new Date().getTime()), UserOperateType.LOGIN, operateSource,
+                "Login: " + (status == UserOperateStatusType.SUCCESS ? "Successful" : "Fail"),
+                status);
+
+        /*
         UserHistoryEntity historyEntity = new UserHistoryEntity();
         historyEntity.setUserId(userId);
         historyEntity.setOperateNo(operationNoGenerator.generateOperationNo());
@@ -59,8 +78,59 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
         historyEntity.setOperateSource(operateSource);
         historyEntity.setDescription("Login: " + (status == UserOperateStatusType.SUCCESS ? "Successful" : "Fail"));
         historyEntity.setStatus(status);
-        operationHistoryDao.addOperationHistory(historyEntity);
+        */
+        operationHistoryDao.addOperationHistory(userHistoryEntity);
         refreshUserLoginStatus(userId);
+    }
+
+    @Override
+    public void addNewTransferHistory(Long user_pk, Long account_pk, Long payee_pk, String postScript, Double balance, Double amounts,
+                                      int currencyType, int operationType, int operateStatus) {
+
+        UserHistoryEntity userHistoryEntity = NewTransferHistoryFactory.createNewTransferHistory(user_pk, account_pk, payee_pk,
+                postScript, balance, amounts,
+                operationNoGenerator.generateOperationNo(), currencyType, operationType, operateStatus,
+                new Timestamp(new Date().getTime()), UserOperateSourceType.SELF_SERVICE);
+        /*
+        UserHistoryEntity userHistoryEntity = new UserHistoryEntity();
+        userHistoryEntity.setOperateNo(operationNoGenerator.generateOperationNo());
+        userHistoryEntity.setOperateType(operationType);
+        userHistoryEntity.setOperateTime(new Timestamp(new Date().getTime()));
+        userHistoryEntity.setOperateSource(UserOperateSourceType.SELF_SERVICE);
+        userHistoryEntity.setAmount(amounts);
+        userHistoryEntity.setCurrencyType(currencyType);
+        userHistoryEntity.setBalance(balance);
+        userHistoryEntity.setDescription(postScript);
+        userHistoryEntity.setStatus(operateStatus);
+        userHistoryEntity.setUserId(user_pk);
+        userHistoryEntity.setToPayeeId(payee_pk);
+        userHistoryEntity.setAccountId(account_pk);
+        */
+        operationHistoryDao.addOperationHistory(userHistoryEntity);
+    }
+
+    @Override
+    public void addNewChargeHistory(Long user_pk, Long account_pk, Double amount, Double balance, int currencyType, int operationType, int operationStatus) {
+
+        UserHistoryEntity userHistoryEntity = NewChargeHistoryFactory.createNewChargeHistory(user_pk, account_pk,
+                "charge fees for self_service", balance, amount,
+                operationNoGenerator.generateOperationNo(), currencyType, operationType, operationStatus,
+                new Timestamp(new Date().getTime()), UserOperateSourceType.SELF_SERVICE);
+        /*
+        UserHistoryEntity userHistoryEntity = new UserHistoryEntity();
+        userHistoryEntity.setOperateNo(operationNoGenerator.generateOperationNo());
+        userHistoryEntity.setOperateType(operationType);
+        userHistoryEntity.setOperateTime(new Timestamp(new Date().getTime()));
+        userHistoryEntity.setOperateSource(UserOperateSourceType.SELF_SERVICE);
+        userHistoryEntity.setDescription("charge fees for self_service");
+        userHistoryEntity.setAmount(amount);
+        userHistoryEntity.setBalance(balance);
+        userHistoryEntity.setCurrencyType(currencyType);
+        userHistoryEntity.setStatus(operationStatus);
+        userHistoryEntity.setUserId(user_pk);
+        userHistoryEntity.setAccountId(account_pk);
+        */
+        operationHistoryDao.addOperationHistory(userHistoryEntity);
     }
 
     @Override
@@ -90,40 +160,6 @@ public class UserCustomerHistoryService implements IUserCustomerHistoryService {
         }
     }
 
-    @Override
-    public void addNewTransferHistory(Long user_pk, Long account_pk, Long payee_pk, String postScript, Double balance, Double amounts,
-                                      int currencyType, int operationType, int operateStatus) {
-        UserHistoryEntity userHistoryEntity = new UserHistoryEntity();
-        userHistoryEntity.setOperateNo(operationNoGenerator.generateOperationNo());
-        userHistoryEntity.setOperateType(operationType);
-        userHistoryEntity.setOperateTime(new Timestamp(new Date().getTime()));
-        userHistoryEntity.setOperateSource(UserOperateSourceType.SELF_SERVICE);
-        userHistoryEntity.setAmount(amounts);
-        userHistoryEntity.setCurrencyType(currencyType);
-        userHistoryEntity.setBalance(balance);
-        userHistoryEntity.setDescription(postScript);
-        userHistoryEntity.setStatus(operateStatus);
-        userHistoryEntity.setUserId(user_pk);
-        userHistoryEntity.setToPayeeId(payee_pk);
-        userHistoryEntity.setAccountId(account_pk);
-        operationHistoryDao.addOperationHistory(userHistoryEntity);
-    }
 
-    @Override
-    public void addNewChargeHistory(Long user_pk, Long account_pk, Double amount, Double balance, int currencyType, int operationType, int operationStatus) {
-        UserHistoryEntity userHistoryEntity = new UserHistoryEntity();
-        userHistoryEntity.setOperateNo(operationNoGenerator.generateOperationNo());
-        userHistoryEntity.setOperateType(operationType);
-        userHistoryEntity.setOperateTime(new Timestamp(new Date().getTime()));
-        userHistoryEntity.setOperateSource(UserOperateSourceType.SELF_SERVICE);
-        userHistoryEntity.setDescription("charge fees for self_service");
-        userHistoryEntity.setAmount(amount);
-        userHistoryEntity.setBalance(balance);
-        userHistoryEntity.setCurrencyType(currencyType);
-        userHistoryEntity.setStatus(operationStatus);
-        userHistoryEntity.setUserId(user_pk);
-        userHistoryEntity.setAccountId(account_pk);
-        operationHistoryDao.addOperationHistory(userHistoryEntity);
-    }
 
 }

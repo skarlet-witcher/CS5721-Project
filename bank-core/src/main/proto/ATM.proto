@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ATM_rpc";
+option java_outer_classname = "ATMProto";
+
+package rpc;
+
+service ATMWithdraw{
+    rpc ATMGetBalance (ATMLoginRequest) returns (ATMResponse);
+    rpc ATMWithDraw (ATMLoginRequest) returns (ATMResponse);
+}
+
+
+message ATMLoginRequest{
+    int64 card_number = 1;
+    string PIN = 2;
+    double amount = 3;
+}
+
+message ATMResponse{
+    double balance = 1;
+    int32 status_code = 2;
+
+}
+
+
