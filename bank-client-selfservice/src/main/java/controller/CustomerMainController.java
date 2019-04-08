@@ -2,8 +2,8 @@ package controller;
 
 import Const.*;
 import adapter.TableData;
-import adapter.UserTransactionTableData;
-import adapter.UserPayeeTableData;
+import adapter.UserTransactionTableDataAdapter;
+import adapter.UserPayeeTableDataAdapter;
 import model.*;
 import rpc.UserAccountsReply;
 import rpc.UserPayeesReply;
@@ -17,7 +17,6 @@ import view.CustomerAddPayeeView;
 import view.CustomerLoginView;
 import view.CustomerMainView;
 
-import javax.naming.AuthenticationException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -243,25 +242,25 @@ public class CustomerMainController implements BaseController {
 
         // Interface getDataVector()  ITarget
         // List<UserTransactionModel> UserTransactionData  get get ....
-        // AdapterName UserTransactionTableData getDataVector
+        // AdapterName UserTransactionTableDataAdapter getDataVector
 
         // have List<model>
 
-        // UserTransactionTableData.getDataVector()  = CircleShape.getArea()
+        // UserTransactionTableDataAdapter.getDataVector()  = CircleShape.getArea()
 
         // need DataVector
         List<String> columnNames = new ArrayList<>();
         DefaultTableModel transactionTableModel = (DefaultTableModel)this.view.table_transaction.getModel();
         clearTable(transactionTableModel);
 
-        TableData userTransactionTableData = new UserTransactionTableData(this.userTransactionModelList);
+        TableData userTransactionTableDataAdapter = new UserTransactionTableDataAdapter(this.userTransactionModelList);
 
         for(int i = 0; i<this.view.table_transaction.getColumnCount(); i++) {
             columnNames.add(this.view.table_transaction.getColumnName(i));
         }
 
-        // UserTransactionTableData getDataVector
-        transactionTableModel.setDataVector(userTransactionTableData.getDataVector(), new Vector(columnNames));
+        // UserTransactionTableDataAdapter getDataVector
+        transactionTableModel.setDataVector(userTransactionTableDataAdapter.getDataVector(), new Vector(columnNames));
 
         /*
         for(UserTransactionModel userTransactionModel: this.userTransactionModelList) {
@@ -365,24 +364,24 @@ public class CustomerMainController implements BaseController {
     private void initPayeeTable() {
         // init payee table
         List<String> columnNames = new ArrayList<>();
+        UserPayeeTableDataAdapter userPayeeTableDataAdapter = new UserPayeeTableDataAdapter();
+
         DefaultTableModel payeeTableModel = (DefaultTableModel)this.view.table_payee_payeeList.getModel();
         clearTable(payeeTableModel);
 
         // pluggable adapater
 
-        UserPayeeTableData userPayeeTableData = new UserPayeeTableData();
+        userPayeeTableDataAdapter.register(new String[]{"getIban", "getName"});
 
-        userPayeeTableData.register(new String[]{"getIban", "getName"});
+        for(UserPayeeModel userPayeeModel : this.userModel.getUserPayeeList()) {
+            userPayeeTableDataAdapter.convertData(userPayeeModel);
+        }
 
         for(int i = 0; i<this.view.table_payee_payeeList.getColumnCount(); i++) {
             columnNames.add(this.view.table_payee_payeeList.getColumnName(i));
         }
 
-        for(UserPayeeModel userPayeeModel : this.userModel.getUserPayeeList()) {
-            userPayeeTableData.setDataVector(userPayeeModel);
-        }
-
-        payeeTableModel.setDataVector(userPayeeTableData.getDataVector(), new Vector(columnNames));
+        payeeTableModel.setDataVector(userPayeeTableDataAdapter.getDataVector(), new Vector(columnNames));
 
         /*
         for(UserPayeeModel userPayeeModel: this.userModel.getUserPayeeList()) {

@@ -3,12 +3,12 @@ package adapter;
 import java.lang.reflect.Method;
 import java.util.Vector;
 
-public class UserPayeeTableData implements TableData {
+public class UserPayeeTableDataAdapter implements TableData {
 
     private String[] methodArr;
     private Vector dataVector;
 
-    public UserPayeeTableData() {
+    public UserPayeeTableDataAdapter() {
         this.dataVector = new Vector();
     }
 
@@ -16,14 +16,7 @@ public class UserPayeeTableData implements TableData {
         this.methodArr = methodName;
     }
 
-
-    /**
-     * @param obj : Object is UserPayeeModel in our scenario.
-     * The method is to adapt the UserPayeeModel type to match the dataVector type,
-     *
-     * The use of reflection is that the client only needs to provide the name of "Get" method, ignores datatype of input
-     */
-    public void setDataVector(Object obj) {
+    public void convertData(Object obj) {
 
         try {
             Vector rowVector = new Vector();

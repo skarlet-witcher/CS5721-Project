@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class AuthorizationInterceptor implements ServerInterceptor {
     private static final Logger logger = Logger.getLogger(AuthorizationInterceptor.class.getName());
     //permitted methods which are not intercepted
-    private final List<String> permitMethod = Arrays.asList(
+    private final List<String> permitMethod = Arrays.asList( // services without token validation
             "rpc.UserCustomerLogin/LoginReq",
             "rpc.UserCustomerLogin/Login",
             "rpc.UserCustomerLogin/ApplyNewAccount",
@@ -48,7 +48,7 @@ public class AuthorizationInterceptor implements ServerInterceptor {
 
         String token = headers.get(Server.JWT_METADATA_KEY);
         try{
-            checkToken(token);
+            checkToken(token);  // token validation
         }catch (Exception e){
             logger.info("request from " + fullMethodName + " with token " + token + " rejected because "+e.getMessage());
 
