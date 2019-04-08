@@ -6,6 +6,8 @@ import Const.UserAccountType;
 import Const.UserStatusType;
 import bankStaff_rpc.AcceptedRequest;
 import bankStaff_rpc.AcceptedResponse;
+import bankStaff_rpc.ChangeRequest;
+import bankStaff_rpc.ChangeResponse;
 import bankStaff_rpc.ListUserApplyArchiveEntitiesResponse;
 import bankStaff_rpc.StaffLoginResponse;
 import dao.IBankStaffDao;
@@ -116,13 +118,13 @@ public class StaffService implements IStaffService {
     }
 
     //Ashly
-    public AcceptedResponse changeAccountTypeOfUser(AcceptedRequest request, UserApplyArchiveEntity userApplyArchiveEntity) {
-        AcceptedResponse response = null;
-        ConversionEligibility c = new ConversionEligibility(userApplyArchiveEntity);
-        //request.getAccountType()
+    public ChangeResponse changeAccountTypeOfUser(ChangeRequest request) {
+        ChangeResponse response = null;
+        UserApplyArchiveEntity userApplyArchiveEntiy = userDao.selectUserArchiveEntityByUserId(request.getUserId());
+        ConversionEligibility c = new ConversionEligibility(userApplyArchiveEntiy);
         try {
-            if (c.checkConversionEligibility(userApplyArchiveEntity.getAccountType(), 1))
-                response = AcceptedResponse.newBuilder().setIsAccepted(true).setStatusCode(200).build();
+            if (c.checkConversionEligibility(userApplyArchiveEntiy.getAccountType(), (int) request.getAccountType()))
+                response = ChangeResponse.newBuilder().setIsAccepted(true).setStatusCode(200).build();
             else
                 response = null;
         } catch (Exception e) {

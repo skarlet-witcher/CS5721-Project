@@ -1,5 +1,6 @@
 package dao;
 
+import entity.UserApplyArchiveEntity;
 import entity.UserEntity;
 
 import java.sql.Timestamp;
@@ -31,4 +32,6 @@ public interface IUserDao {
     Long selectTheBiggestId();
 
     UserEntity selectUserByIdAndName(Long parentUserId, String parentFirstName, String parentLastName);
+
+    UserApplyArchiveEntity selectUserArchiveEntityByUserId(Long userId);
 }

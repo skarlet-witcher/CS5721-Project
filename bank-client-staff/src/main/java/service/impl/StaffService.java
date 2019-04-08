@@ -28,4 +28,8 @@ public class StaffService implements IStaffService {
     public AcceptedResponse acceptAplication(long applicationId) throws Exception {
         return StaffRpc.getInstance().acceptApplication(applicationId);
     }
+    @Override
+    public ChangeResponse changeAccountTypeOfUser(Long UserId,Integer newAccountType) throws Exception {
+        return StaffRpc.getInstance().changeUserAccountTpe(UserId,newAccountType);
+    }
 }

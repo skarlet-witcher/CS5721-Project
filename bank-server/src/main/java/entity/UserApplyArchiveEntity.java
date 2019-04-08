@@ -2,6 +2,7 @@ package entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_apply_archive", schema = "bank_manage", catalog = "")
@@ -259,6 +260,31 @@ public class UserApplyArchiveEntity {
 
     public void setNewUserApply(Integer newUserApply) {
         this.newUserApply = newUserApply;
+    }
+
+
+
+    public UserApplyArchiveEntity generateObjectFromUserEntity(UserEntity userEntity){
+
+        UserApplyArchiveEntity userApplyArchiveEntity= new UserApplyArchiveEntity();
+
+        userApplyArchiveEntity.setFirstName(userEntity.getFirstName());
+        userApplyArchiveEntity.setLastName(userEntity.getLastName());
+       // userApplyArchiveEntity.setIdentityId(userEntity.getId());
+        userApplyArchiveEntity.setAccountType(userEntity.getaccountType);
+        userApplyArchiveEntity.setCardType(cardType);
+        userApplyArchiveEntity.setBirthDate(birthDate);
+        userApplyArchiveEntity.setGender(gender);
+        userApplyArchiveEntity.setAddress(address);
+        userApplyArchiveEntity.setEmail(email);
+        userApplyArchiveEntity.setPhone(phone);
+        userApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
+        userApplyArchiveEntity.setStatus(0);
+        userApplyArchiveEntity.setNewUserApply(isNewUser);
+        userApplyArchiveEntity.setUserId(userId)
+
+
+
     }
 
     @Override
