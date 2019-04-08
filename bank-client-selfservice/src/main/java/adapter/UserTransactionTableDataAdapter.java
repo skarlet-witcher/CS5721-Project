@@ -6,9 +6,9 @@ import model.UserTransactionModel;
 import java.util.List;
 import java.util.Vector;
 
-public class UserTransactionTableData extends UserTransactionData implements TableData {   // adapter for UserTransactionModel
+public class UserTransactionTableDataAdapter extends UserTransactionData implements TableData {   // adapter for UserTransactionModel
 
-    public UserTransactionTableData(List<UserTransactionModel> userTransactionModelList) {
+    public UserTransactionTableDataAdapter(List<UserTransactionModel> userTransactionModelList) {
         super(userTransactionModelList);
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserTransactionTableDataTest {
+class UserTransactionTableDataAdapterTest {
 
     @Test
     void getDataVector() {
@@ -28,9 +28,9 @@ class UserTransactionTableDataTest {
         userTransactionModelList.add(userTransactionModel);
 
         assertDoesNotThrow(() -> {
-            UserTransactionTableData userTransactionTableData = new UserTransactionTableData(userTransactionModelList);
+            UserTransactionTableDataAdapter userTransactionTableDataAdapter = new UserTransactionTableDataAdapter(userTransactionModelList);
 
-            userTransactionTableData.getDataVector();
+            userTransactionTableDataAdapter.getDataVector();
         });
     }
 }
