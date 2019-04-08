@@ -21,6 +21,8 @@ public class StaffRpc {
     private static StaffLoginGrpc.StaffLoginBlockingStub loginBlockingStub;
     private static StaffGetNewAppliesGrpc.StaffGetNewAppliesBlockingStub getNewAppliesBlockingStub;
     private static AcceptApplicationGrpc.AcceptApplicationBlockingStub applicationBlockingStub;
+    private static ChangeUserAccountTypeGrpc.ChangeUserAccountTypeBlockingStub changeUserAccountTypeStub;
+
     private static StaffRpc instance = null;
 
     public static StaffRpc getInstance() throws SSLException {
@@ -77,4 +79,19 @@ public class StaffRpc {
             throw new Exception("");
         }
     }
+    public ChangeResponse changeUserAccountTpe(Long UserId,Integer newAccountType) throws Exception {
+        logger.info( "Requesting to change account type of the user");
+        ChangeResponse response =changeUserAccountTypeStub.changeUserAccountType(ChangeRequest.newBuilder().setUserId(UserId).setAccountType(newAccountType).build());
+                //changeUserAccountTypeStub.changeUserAccountType(ChangeRequest.newBuilder().setUserId(UserId).setAccountType(newAccountType).build());
+
+
+        if (response.getStatusCode() == ResponseStatusType.SUCCESS) {
+            logger.info("User's account type changes successfully");
+            return response;
+        } else {
+            logger.info("Failed to change user's account" );
+            throw new Exception("");
+        }
+    }
+
 }

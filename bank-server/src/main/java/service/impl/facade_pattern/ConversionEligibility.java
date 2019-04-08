@@ -51,19 +51,14 @@ public class ConversionEligibility {
         else if(currentAccountType == PERSONAL_ACCOUNT && newAccountType ==GOLDEN_ACCOUNT){
             newAccount= new GoldenAccount();
             invoker.setCommand(new PersonalAccCalculateExpiry(expiryChecker));
-
-
         }
         else{
             throw new NotEligibleException(1);//request.getAccountType());
-
-
         }
         expiredate = invoker.executeCommand();
 
         // 1.check if the account has expired 2. check if user is eligible for newAccount
         if(expiredate.before(curdate) && newAccount.checkAgeValidity(user.getBirthDate())){
-
             //perform some complex calculations to check eligibility
             return true;
         }

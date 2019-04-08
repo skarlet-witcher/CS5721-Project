@@ -13,7 +13,7 @@ import java.io.File;
 
 import static Const.Server.*;
 
-public abstract class ClientRpc {
+public abstract class ClientRpc { // do three steps from the sequence diagram
     private static ManagedChannel channel;
 
     public static ManagedChannel getChannel() throws SSLException {
