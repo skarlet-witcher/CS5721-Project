@@ -1,4 +1,4 @@
-package service.impl.proxy;
+package service.impl;
 
 import ATM_rpc.ATMLoginRequest;
 import ATM_rpc.ATMResponse;
@@ -28,6 +28,7 @@ public class ATMService implements IATMService {
     @Override
     public ATMResponse getBalance(ATMLoginRequest atmLoginRequest) throws Exception {
         UserCardEntity card = cardDB.getCardByCardNumber(atmLoginRequest.getCardNumber());
+        System.out.println(io.grpc.Grpc.TRANSPORT_ATTR_REMOTE_ADDR);
         if (card.getPin().equals(atmLoginRequest.getPIN())) {
             UserAccountEntity account = accountDB.getUserAccountByPK(card.getAccountId());
             if (account != null) {

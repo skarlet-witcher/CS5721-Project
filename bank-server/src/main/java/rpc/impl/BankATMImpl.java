@@ -1,16 +1,12 @@
 package rpc.impl;
 
-import ATM_rpc.ATMLoginRequest;
 import ATM_rpc.ATMResponse;
 import ATM_rpc.ATMWithdrawGrpc;
 import Const.ResponseStatusType;
-import io.grpc.stub.StreamObserver;
 import service.IATMService;
-import service.impl.proxy.ATMService;
+import service.impl.ATMService;
 
 import java.util.logging.Logger;
-
-import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 public class BankATMImpl extends ATMWithdrawGrpc.ATMWithdrawImplBase {
     private static final Logger logger = Logger.getLogger(BankATMImpl.class.getName());

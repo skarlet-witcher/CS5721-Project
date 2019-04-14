@@ -18,7 +18,7 @@ public abstract class ClientRpc { // do three steps from the sequence diagram
 
     public static ManagedChannel getChannel() throws SSLException {
         ClientRpcDispatcher.register(new TestInterceptor());
-        ClientRpcDispatcher.register(new AuthorizationInterceptor());
+        ClientRpcDispatcher.register(new AuthorizationInterceptor()); //2. create concrete intercepter
 
         if (channel == null) {
             channel = NettyChannelBuilder.forAddress(SERVER_HOST, SERVER_PORT)
@@ -28,7 +28,7 @@ public abstract class ClientRpc { // do three steps from the sequence diagram
                             .trustManager(new File(TRUST_CERT_COLLECTION))
                             .keyManager(new File(CLIENT_CERT_CHAIN), new File(CLIENT_PRIVATE_KEY))
                             .build())
-                    .intercept(ClientRpcDispatcher.getInterceptors())
+                    .intercept(ClientRpcDispatcher.getInterceptors()) // 3. attach the interceptor
                     .build();
         }
         return channel;
