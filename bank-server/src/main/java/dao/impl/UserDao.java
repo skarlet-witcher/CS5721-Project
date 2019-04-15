@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.IUserDao;
+import entity.UserApplyArchiveEntity;
 import entity.UserEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -106,7 +107,6 @@ public class UserDao implements IUserDao {
             return null;
         }
     }
-
     @Override
     public UserEntity selectUserByUserIdEmailDOB(Long userId, String email, Timestamp birthDate) {
         try {
@@ -262,6 +262,9 @@ public class UserDao implements IUserDao {
         }
     }
 
+
+
+
     @Override
     public Integer updateUserProfileById(Long id, String address, String email, String contactNum) {
         try {
@@ -293,4 +296,28 @@ public class UserDao implements IUserDao {
             return null;
         }
     }
+    //**************************************UserArchiveApplyEntity*****************************
+
+    //Ashly
+
+    @Override
+    public UserApplyArchiveEntity selectUserArchiveEntityByUserId(Long userId) {
+        try {
+            session.getTransaction().begin();
+            Query query = session.createQuery("from UserApplyArchiveEntity where userId=:userId");
+            query.setParameter("userId", userId);
+            query.setMaxResults(1);
+            UserApplyArchiveEntity result = (UserApplyArchiveEntity) query.uniqueResult();
+            session.getTransaction().commit();
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        }
+    }
+
+
+
+
 }

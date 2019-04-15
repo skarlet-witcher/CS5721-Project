@@ -2,9 +2,12 @@ package service.impl;
 
 import Const.CardStatus;
 import Const.SysMailTemplateType;
+import Const.UserAccountType;
 import Const.UserStatusType;
 import bankStaff_rpc.AcceptedRequest;
 import bankStaff_rpc.AcceptedResponse;
+import bankStaff_rpc.ChangeRequest;
+import bankStaff_rpc.ChangeResponse;
 import bankStaff_rpc.ListUserApplyArchiveEntitiesResponse;
 import bankStaff_rpc.StaffLoginResponse;
 import dao.IBankStaffDao;
@@ -18,6 +21,7 @@ import dao.impl.UserDao;
 import entity.*;
 import service.IStaffService;
 import service.impl.command_pattern.*;
+import service.impl.facade_pattern.ConversionEligibility;
 import util.*;
 
 import java.sql.Timestamp;
@@ -112,6 +116,23 @@ public class StaffService implements IStaffService {
 
         return response;
     }
+
+    //Ashly
+    public ChangeResponse changeAccountTypeOfUser(ChangeRequest request) {
+        ChangeResponse response = null;
+        UserApplyArchiveEntity userApplyArchiveEntiy = userDao.selectUserArchiveEntityByUserId(request.getUserId());
+        ConversionEligibility c = new ConversionEligibility(userApplyArchiveEntiy);
+        try {
+            if (c.checkConversionEligibility(userApplyArchiveEntiy.getAccountType(), (int) request.getAccountType()))
+                response = ChangeResponse.newBuilder().setIsAccepted(true).setStatusCode(200).build();
+            else
+                response = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
 
     public AcceptedResponse applyForNewUser(AcceptedRequest request, UserApplyArchiveEntity userApplyArchiveEntity) {
         //1. Create  new UserEntity and save it to DB
