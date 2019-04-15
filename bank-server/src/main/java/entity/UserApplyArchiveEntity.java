@@ -264,29 +264,6 @@ public class UserApplyArchiveEntity {
 
 
 
-    public UserApplyArchiveEntity generateObjectFromUserEntity(UserEntity userEntity){
-
-        UserApplyArchiveEntity userApplyArchiveEntity= new UserApplyArchiveEntity();
-
-        userApplyArchiveEntity.setFirstName(userEntity.getFirstName());
-        userApplyArchiveEntity.setLastName(userEntity.getLastName());
-       // userApplyArchiveEntity.setIdentityId(userEntity.getId());
-        userApplyArchiveEntity.setAccountType(userEntity.getaccountType);
-        userApplyArchiveEntity.setCardType(cardType);
-        userApplyArchiveEntity.setBirthDate(birthDate);
-        userApplyArchiveEntity.setGender(gender);
-        userApplyArchiveEntity.setAddress(address);
-        userApplyArchiveEntity.setEmail(email);
-        userApplyArchiveEntity.setPhone(phone);
-        userApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
-        userApplyArchiveEntity.setStatus(0);
-        userApplyArchiveEntity.setNewUserApply(isNewUser);
-        userApplyArchiveEntity.setUserId(userId)
-
-
-
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

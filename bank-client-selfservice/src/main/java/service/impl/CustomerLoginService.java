@@ -65,7 +65,7 @@ public class CustomerLoginService implements ICustomerLoginService {
                         .setPin5(userLoginPINModel.getPin5())
                         .setPin6(userLoginPINModel.getPin6())
                         .build());
-        AuthorizationInterceptor.jwtToken = userLoginReply.getJwtToken();
+        AuthorizationInterceptor.jwtToken = userLoginReply.getJwtToken(); // request to get the token?
         return userLoginReply;
     }
 
