@@ -1,5 +1,7 @@
 package entity;
 
+import Const.UserType;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -271,7 +273,7 @@ public class UserApplyArchiveEntity {
         userApplyArchiveEntity.setFirstName(userEntity.getFirstName());
         userApplyArchiveEntity.setLastName(userEntity.getLastName());
        // userApplyArchiveEntity.setIdentityId(userEntity.getId());
-        userApplyArchiveEntity.setAccountType(userEntity.getaccountType);
+       // userApplyArchiveEntity.setAccountType();
         userApplyArchiveEntity.setCardType(cardType);
         userApplyArchiveEntity.setBirthDate(birthDate);
         userApplyArchiveEntity.setGender(gender);
@@ -280,11 +282,11 @@ public class UserApplyArchiveEntity {
         userApplyArchiveEntity.setPhone(phone);
         userApplyArchiveEntity.setApplyTime(new Timestamp(new Date().getTime()));
         userApplyArchiveEntity.setStatus(0);
-        userApplyArchiveEntity.setNewUserApply(isNewUser);
-        userApplyArchiveEntity.setUserId(userId)
+        userApplyArchiveEntity.setNewUserApply(UserType.EXISTING_USER);
+        userApplyArchiveEntity.setUserId(userId);
 
 
-
+        return userApplyArchiveEntity;
     }
 
     @Override
