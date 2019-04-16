@@ -4,6 +4,10 @@ import model.UserTransactionModel;
 
 import java.util.List;
 
+
+/*
+    Adaptee: defines an existing interface that needs adapting.
+ */
 public class UserTransactionData {   // A list of UserTransactionModel // Adaptee
     private List<UserTransactionModel> userTransactionModelList;
 

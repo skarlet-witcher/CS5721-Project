@@ -1,5 +1,10 @@
 package model;
 
+/*
+    intent: Define an interface for creating an object, but let subclasses decide which class
+            to instantiate. Factory Method lets a class defer instantiation to subclasses.
+ */
+
 public class UserApplyNewAccountFactory {
     public static UserApplyNewRequestBaseModel applyAccount(String type) {
         if(type == "Personal Current Account") {

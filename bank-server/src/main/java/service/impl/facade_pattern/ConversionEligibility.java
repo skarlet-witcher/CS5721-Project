@@ -18,10 +18,25 @@ import static Const.UserAccountType.GOLDEN_ACCOUNT;
  * Facacde pattern is used in here to provide a common inerface to check conversion
  * eligibility for different accounts
  */
-public class ConversionEligibility {
+
+/*
+    Intent: Provide a unified interface to a set of interfaces in a subsystem. Facade defines
+            a higher-level interface that makes the subsystem easier to use.
+
+     Participants:
+     · Facade (Compiler)
+        o knows which subsystem classes are responsible for a request.
+        o delegates client requests to appropriate subsystem objects.
+     · subsystem classes (Scanner, Parser, ProgramNode, etc.)
+        o implement subsystem functionality.
+        o handle work assigned by the Facade object.
+        o have no knowledge of the facade; that is, they keep no references to it.
+ */
+
+public class ConversionEligibility {   // facade class
     //PersonalAccount personalAccount;
     //GoldenAccount goldenAccount;
-    IAccounts newAccount;
+    IAccounts newAccount;   // sub classes
     //more accoutns might come in future
     Receiver expiryChecker;
     Invoker invoker;

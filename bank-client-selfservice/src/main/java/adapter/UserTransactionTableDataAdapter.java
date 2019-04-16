@@ -6,6 +6,10 @@ import model.UserTransactionModel;
 import java.util.List;
 import java.util.Vector;
 
+
+/*
+    Adapter: adapts the interface of Adaptee to the Target interface
+ */
 public class UserTransactionTableDataAdapter extends UserTransactionData implements TableData {   // adapter for UserTransactionModel
 
     public UserTransactionTableDataAdapter(List<UserTransactionModel> userTransactionModelList) {
