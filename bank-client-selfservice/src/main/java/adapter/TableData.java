@@ -3,8 +3,9 @@ package adapter;
 import java.util.Vector;
 
 /*
-    intent: Define an interface for creating an object, but let subclasses decide which class
-    to instantiate. Factory Method lets a class defer instantiation to subclasses.
+    intent: Convert the interface of a class into another interface clients expect. Adapter
+            lets classes work together that couldn't otherwise because of incompatible
+            interfaces.
 
 
  */

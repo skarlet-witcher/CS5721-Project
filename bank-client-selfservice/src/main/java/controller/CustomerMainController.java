@@ -249,9 +249,11 @@ public class CustomerMainController implements BaseController {
         // UserTransactionTableDataAdapter.getDataVector()  = CircleShape.getArea()
 
         // need DataVector
-        List<String> columnNames = new ArrayList<>();
+
         DefaultTableModel transactionTableModel = (DefaultTableModel)this.view.table_transaction.getModel();
         clearTable(transactionTableModel);
+        // two way adapter
+        List<String> columnNames = new ArrayList<>();
 
         TableData userTransactionTableDataAdapter = new UserTransactionTableDataAdapter(this.userTransactionModelList);
 
@@ -363,11 +365,11 @@ public class CustomerMainController implements BaseController {
 
     private void initPayeeTable() {
         // init payee table
-        List<String> columnNames = new ArrayList<>();
-        UserPayeeTableDataAdapter userPayeeTableDataAdapter = new UserPayeeTableDataAdapter();
-
         DefaultTableModel payeeTableModel = (DefaultTableModel)this.view.table_payee_payeeList.getModel();
         clearTable(payeeTableModel);
+
+        List<String> columnNames = new ArrayList<>();
+        UserPayeeTableDataAdapter userPayeeTableDataAdapter = new UserPayeeTableDataAdapter();
 
         // pluggable adapater
 
