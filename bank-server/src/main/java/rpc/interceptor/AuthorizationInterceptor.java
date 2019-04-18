@@ -25,7 +25,10 @@ public class AuthorizationInterceptor implements ServerInterceptor {
             "rpc.UserCustomerLogin/ValidateExistingUser",
             "rpc.UserCustomerLogin/ForgetUserId",
             "rpc.UserCustomerLogin/ForgetPin",
-            "rpc.BankStaffLogin/StaffLogin",
+            "rpc.StaffLogin/StaffLogin",
+            "rpc.StaffGetNewApplies/StaffGetNewApplies",
+            "rpc.StaffGetNewApplies/acceptAplication",
+            "rpc.StaffGetNewApplies/changeAccountTypeOfUser",
             "rpc.ATMWithdraw/ATMWithDraw",
             "rpc.ATMWithdraw/ATMGetBalance"
     );
@@ -40,6 +43,8 @@ public class AuthorizationInterceptor implements ServerInterceptor {
     public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(ServerCall<ReqT, RespT> call,
                                           Metadata headers, ServerCallHandler<ReqT, RespT> next) {
         String fullMethodName = call.getMethodDescriptor().getFullMethodName();
+
+        logger.info("request from " + fullMethodName);
 
         if (permitMethod.contains(fullMethodName)) {
             logger.info("request from " + fullMethodName + " permitted without validation.");

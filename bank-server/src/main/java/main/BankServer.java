@@ -8,6 +8,7 @@ import io.grpc.netty.shaded.io.netty.handler.ssl.SslContextBuilder;
 import io.grpc.netty.shaded.io.netty.handler.ssl.SslProvider;
 import rpc.impl.*;
 import rpc.interceptor.AuthorizationInterceptor;
+import service.impl.SysScheduleService;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +47,7 @@ public class BankServer { //Concrete framework
                 .intercept(new AuthorizationInterceptor()) //register a concrete interceptor
                 .build()
                 .start();
+        SysScheduleService.applyFeesToAllAccounts();
         logger.info("Server started, listening on " + SERVER_PORT);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             // Use stderr here since the logger may have been reset by its JVM shutdown hook.

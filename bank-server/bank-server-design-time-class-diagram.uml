@@ -3,1545 +3,1678 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="6219.324830060913" y="720.0">rpc.interceptor.AuthorizationInterceptor</node>
-    <node x="361.95352239669364" y="720.0">dao.IUserCardDao</node>
-    <node x="6326.34788732083" y="240.0">Const.UserOperateType</node>
-    <node x="1850.360004709245" y="720.0">service.impl.SysEmailService</node>
-    <node x="7384.083186640587" y="720.0">dao.impl.UserAccountTypeDao</node>
-    <node x="3206.4544430218566" y="1140.0">Const.UserAccountType</node>
-    <node x="2297.6663110155514" y="1140.0">Const.CardCurrencyType</node>
-    <node x="5096.522837163444" y="720.0">Const.PinReplyType</node>
-    <node x="2150.6663110155514" y="1140.0">util.IBANGenerator</node>
-    <node x="5436.522837163444" y="720.0">service.impl.UserCustomerHistoryService</node>
-    <node x="2741.3711096885236" y="1140.0">dao.impl.BankStaffDao</node>
-    <node x="144.64304942372155" y="1140.0">util.AccountNumberGenerator</node>
-    <node x="5148.866587163444" y="490.0">Const.UserOperateSourceType</node>
-    <node x="1507.5350047092452" y="240.0">dao.ISysConfigDao</node>
-    <node x="8205.812330060915" y="490.0">dao.impl.UserHistoryDao</node>
-    <node x="2442.9527027027007" y="490.0">entity.BankStaffEntity</node>
-    <node x="8193.633758632343" y="240.0">dao.IUserHistoryDao</node>
-    <node x="5503.005128830111" y="240.0">service.impl.replace_constructors_with_creation_methods.NewUserLoginReqHistoryFactory</node>
-    <node x="1526.3858108108093" y="0.0">entity.SysConfigEntity</node>
-    <node x="4036.584009009007" y="0.0">entity.UserEntity</node>
-    <node x="6456.167628830111" y="1390.0">rpc.impl.UserCustomerImpl</node>
-    <node x="3366.7044430218566" y="1140.0">service.impl.UserCustomerApplyService</node>
-    <node x="933.1358108108093" y="720.0">service.impl.command_pattern.Receiver</node>
-    <node x="1279.5350047092452" y="1140.0">service.impl.command_pattern.YoungSaverAccCalculateExpiry</node>
-    <node x="4743.866587163444" y="490.0">util.OperationNoGenerator</node>
-    <node x="3585.959009009007" y="490.0">service.impl.method_template_pattern.FeesTemplate</node>
-    <node x="3232.959009009007" y="720.0">service.impl.method_template_pattern.YoungSaversAccount</node>
-    <node x="535.6898648648635" y="1140.0">service.impl.command_pattern.Invoker</node>
-    <node x="6217.663462163444" y="1140.0">service.impl.CustomerApplyService</node>
-    <node x="5744.005128830111" y="240.0">service.impl.replace_constructors_with_creation_methods.NewChargeHistoryFactory</node>
-    <node x="6521.289530741156" y="490.0">Const.Server</node>
-    <node x="2818.8756756756734" y="0.0">entity.UserApplyArchiveEntity</node>
-    <node x="8324.18012883011" y="1390.0">service.impl.replace_switch_with_command.Handler</node>
-    <node x="4884.522837163444" y="720.0">service.IUserCustomerLoginService</node>
-    <node x="6604.324830060913" y="720.0">service.IUserCustomerService</node>
-    <node x="3412.959009009007" y="720.0">service.impl.method_template_pattern.GoldenAccount</node>
-    <node x="4376.156377430059" y="240.0">util.RandomUtil</node>
-    <node x="169.64304942372155" y="720.0">dao.impl.UserAccountDao</node>
-    <node x="0.0" y="1140.0">service.IStaffService</node>
-    <node x="2099.6663110155514" y="720.0">Const.SysMailTemplateType</node>
-    <node x="4298.656377430059" y="490.0">util.PINFieldSetter</node>
-    <node x="2714.7385332377735" y="720.0">util.PINGenerator</node>
-    <node x="4125.084009009007" y="720.0">util.FaultFactory</node>
-    <node x="5808.770686640586" y="0.0">entity.UserHistoryEntity</node>
-    <node x="3713.959009009007" y="720.0">service.impl.method_template_pattern.PersonalAccount</node>
-    <node x="5975.675495653437" y="490.0">service.IUserCustomerHistoryService</node>
-    <node x="7283.462330060914" y="240.0">entity.UserPayeeEntity</node>
-    <node x="137.04189189189037" y="490.0">dao.IUserAccountDao</node>
-    <node x="6416.324830060913" y="720.0">service.ICustomerLoginService</node>
-    <node x="7424.270686640586" y="490.0">dao.IUserAccountTypeDao</node>
-    <node x="4014.584009009007" y="240.0">dao.IUserDao</node>
-    <node x="6786.324830060913" y="720.0">service.ICustomerApplyService</node>
-    <node x="6485.34788732083" y="240.0">Const.UserOperateStatusType</node>
-    <node x="2514.2663110155518" y="720.0">dao.IBankStaffDao</node>
-    <node x="3561.959009009007" y="720.0">service.impl.method_template_pattern.StudentAccount</node>
-    <node x="4823.366587163444" y="240.0">service.impl.replace_constructors_with_creation_methods.NewUserLoginHistoryFactory</node>
-    <node x="7679.562330060914" y="720.0">util.IBANValidator</node>
-    <node x="134.54189189189037" y="240.0">entity.UserAccountEntity</node>
-    <node x="4022.084009009007" y="490.0">dao.impl.UserDao</node>
-    <node x="1551.360004709245" y="490.0">dao.impl.SysConfigDao</node>
-    <node x="1695.360004709245" y="490.0">service.ISysEmailService</node>
-    <node x="7134.105128830111" y="1140.0">service.impl.UserCustomerService</node>
-    <node x="868.5350047092452" y="1140.0">service.impl.command_pattern.PersonalAccCalculateExpiry</node>
-    <node x="602.1098287030004" y="720.0">service.impl.command_pattern.CalculateExpiry</node>
-    <node x="2466.329968547382" y="1140.0">Const.CardStatus</node>
-    <node x="5813.038462163444" y="1140.0">service.impl.CustomerLoginService</node>
-    <node x="3395.209009009007" y="490.0">service.impl.method_template_pattern.IAccounts</node>
-    <node x="8549.562330060913" y="720.0">service.impl.replace_switch_with_command.Recent1YearUserHistoryListHandler</node>
-    <node x="2863.2044430218566" y="1390.0">util.IdGenerator</node>
-    <node x="327.58691912366066" y="490.0">entity.UserCardEntity</node>
-    <node x="7135.462330060914" y="490.0">dao.IUserPayeeDao</node>
-    <node x="8279.562330060913" y="720.0">service.impl.replace_switch_with_command.Recent6MonthsUserHistoryListHandler</node>
-    <node x="3911.084009009007" y="720.0">service.IUserCustomerApplyService</node>
-    <node x="4248.485144776243" y="1390.0">rpc.impl.UserCustomerLoginImpl</node>
-    <node x="5234.522837163444" y="720.0">util.TimestampConvertHelper</node>
-    <node x="1447.0236622410757" y="1390.0">service.impl.StaffService</node>
-    <node x="7821.562330060914" y="720.0">Const.UserTransactionTimeFilter</node>
-    <node x="8023.562330060915" y="720.0">service.impl.replace_switch_with_command.Recent7DaysUserHistoryListHandler</node>
-    <node x="4499.879881618349" y="1140.0">service.impl.UserCustomerLoginService</node>
-    <node x="2935.134479183719" y="720.0">dao.impl.UserApplyDao</node>
-    <node x="4441.656377430059" y="490.0">Const.UserStatusType</node>
-    <node x="1077.5350047092452" y="1140.0">service.impl.command_pattern.GoldenAccCalculateExpiry</node>
-    <node x="1546.235004709245" y="720.0">Const.UserType</node>
-    <node x="2973.9344791837193" y="490.0">dao.IUserApplyDao</node>
-    <node x="8801.562330060913" y="720.0">service.impl.replace_switch_with_command.Recent1MonthUserHistoryListHandler</node>
-    <node x="7096.287330060914" y="720.0">dao.impl.UserPayeeDao</node>
-    <node x="1893.360004709245" y="1140.0">util.CardNumberGenerator</node>
-    <node x="7434.462330060914" y="240.0">entity.UserAccountTypeEntity</node>
-    <node x="662.5350047092452" y="1140.0">service.impl.command_pattern.StudentAccCalculateExpiry</node>
-    <node x="397.68986486486347" y="1140.0">dao.impl.UserCardDao</node>
-    <node x="5043.366587163444" y="240.0">service.impl.replace_constructors_with_creation_methods.NewTransferHistoryFactory</node>
-    <node x="2771.3756756756734" y="240.0">util.HibernateUtils</node>
+    <node x="2334.41107395202" y="1000.0">rpc.interceptor.AuthorizationInterceptor</node>
+    <node x="7619.748383250519" y="1000.0">dao.IUserCardDao</node>
+    <node x="8894.838126840263" y="1430.0">service.impl.facade_pattern.ConversionEligibility</node>
+    <node x="2468.408176385601" y="230.0">Const.UserOperateType</node>
+    <node x="5937.664072433801" y="1000.0">service.impl.SysEmailService</node>
+    <node x="1679.491983203784" y="1000.0">dao.impl.UserAccountTypeDao</node>
+    <node x="8951.343239100468" y="630.0">Const.UserAccountType</node>
+    <node x="7223.933639660775" y="1430.0">Const.CardCurrencyType</node>
+    <node x="3126.41107395202" y="1000.0">Const.PinReplyType</node>
+    <node x="7761.748383250519" y="1430.0">util.IBANGenerator</node>
+    <node x="2719.41107395202" y="1000.0">service.impl.UserCustomerHistoryService</node>
+    <node x="5441.577231835925" y="1430.0">dao.impl.BankStaffDao</node>
+    <node x="6085.787183678283" y="1430.0">util.AccountNumberGenerator</node>
+    <node x="3201.31732395202" y="630.0">Const.UserOperateSourceType</node>
+    <node x="7371.933639660774" y="230.0">dao.ISysConfigDao</node>
+    <node x="790.0738636363621" y="630.0">dao.impl.UserHistoryDao</node>
+    <node x="6999.766972994108" y="630.0">entity.BankStaffEntity</node>
+    <node x="788.5738636363621" y="230.0">dao.IUserHistoryDao</node>
+    <node x="3425.827310157531" y="230.0">service.impl.replace_constructors_with_creation_methods.NewUserLoginReqHistoryFactory</node>
+    <node x="7242.788511237153" y="0.0">entity.SysConfigEntity</node>
+    <node x="4695.814152262794" y="0.0">entity.UserEntity</node>
+    <node x="1385.5359812876418" y="1730.0">rpc.impl.UserCustomerImpl</node>
+    <node x="4921.4191551313415" y="1430.0">service.impl.UserCustomerApplyService</node>
+    <node x="8151.860626621769" y="630.0">service.impl.command_pattern.Receiver</node>
+    <node x="8322.338126840263" y="1000.0">service.impl.command_pattern.YoungSaverAccCalculateExpiry</node>
+    <node x="3396.31732395202" y="630.0">util.OperationNoGenerator</node>
+    <node x="6194.579536878179" y="630.0">service.impl.method_template_pattern.FeesTemplate</node>
+    <node x="5144.314152262794" y="1000.0">service.impl.method_template_pattern.YoungSaversAccount</node>
+    <node x="8758.338126840263" y="1000.0">service.impl.command_pattern.Invoker</node>
+    <node x="2776.47357395202" y="1430.0">service.impl.CustomerApplyService</node>
+    <node x="7392.788511237153" y="0.0">entity.UserApplyArchiveEntity</node>
+    <node x="2819.408176385601" y="230.0">service.impl.replace_constructors_with_creation_methods.NewChargeHistoryFactory</node>
+    <node x="0.0" y="1805.0">Const.Server</node>
+    <node x="9148.421460173595" y="1730.0">service.impl.facade_pattern.ConversionEligibilityTest</node>
+    <node x="3466.41107395202" y="1000.0">service.IUserCustomerLoginService</node>
+    <node x="162.42045454545405" y="630.0">service.impl.replace_switch_with_command.Handler</node>
+    <node x="2152.41107395202" y="1000.0">service.IUserCustomerService</node>
+    <node x="6605.955132396231" y="1000.0">service.impl.method_template_pattern.GoldenAccount</node>
+    <node x="3904.722046999636" y="230.0">util.RandomUtil</node>
+    <node x="5525.766636536366" y="1000.0">Const.SysMailTemplateType</node>
+    <node x="5953.787183678283" y="1430.0">service.IStaffService</node>
+    <node x="5766.766636536366" y="1000.0">dao.impl.UserAccountDao</node>
+    <node x="3898.722046999636" y="630.0">util.PINFieldSetter</node>
+    <node x="4354.478209319308" y="1000.0">util.PINGenerator</node>
+    <node x="4222.478209319308" y="1000.0">util.FaultFactory</node>
+    <node x="2279.408176385601" y="0.0">entity.UserHistoryEntity</node>
+    <node x="7322.433639660775" y="1000.0">service.impl.method_template_pattern.PersonalAccount</node>
+    <node x="2368.4106004671717" y="630.0">service.IUserCustomerHistoryService</node>
+    <node x="1286.0113636363621" y="230.0">entity.UserPayeeEntity</node>
+    <node x="5737.766636536366" y="630.0">dao.IUserAccountDao</node>
+    <node x="2531.41107395202" y="1000.0">service.ICustomerLoginService</node>
+    <node x="1636.304483203784" y="630.0">dao.IUserAccountTypeDao</node>
+    <node x="4406.439152262794" y="230.0">dao.IUserDao</node>
+    <node x="2936.41107395202" y="1000.0">service.ICustomerApplyService</node>
+    <node x="2627.408176385601" y="230.0">Const.UserOperateStatusType</node>
+    <node x="6088.664072433801" y="1000.0">dao.IBankStaffDao</node>
+    <node x="4992.314152262794" y="1000.0">service.impl.method_template_pattern.StudentAccount</node>
+    <node x="1064.1363636363621" y="1000.0">util.IBANValidator</node>
+    <node x="2248.408176385601" y="230.0">service.impl.replace_constructors_with_creation_methods.NewUserLoginHistoryFactory</node>
+    <node x="6833.766972994108" y="630.0">service.ISysEmailService</node>
+    <node x="4415.689152262794" y="630.0">dao.impl.UserDao</node>
+    <node x="6690.766972994108" y="630.0">dao.impl.SysConfigDao</node>
+    <node x="7206.933639660774" y="230.0">entity.UserAccountEntity</node>
+    <node x="1102.8939358330967" y="1430.0">service.impl.UserCustomerService</node>
+    <node x="8639.878190942825" y="1430.0">Const.CardStatus</node>
+    <node x="8660.129793506929" y="630.0">service.impl.command_pattern.CalculateExpiry</node>
+    <node x="8549.338126840263" y="1000.0">service.impl.command_pattern.PersonalAccCalculateExpiry</node>
+    <node x="2477.91107395202" y="1430.0">service.impl.CustomerLoginService</node>
+    <node x="6570.766972994108" y="630.0">service.impl.method_template_pattern.IAccounts</node>
+    <node x="5358.6691551313415" y="1730.0">util.IdGenerator</node>
+    <node x="20.136363636362148" y="1000.0">service.impl.replace_switch_with_command.Recent1YearUserHistoryListHandler</node>
+    <node x="7629.998383250519" y="630.0">entity.UserCardEntity</node>
+    <node x="1410.1363636363621" y="630.0">dao.IUserPayeeDao</node>
+    <node x="272.13636363636215" y="1000.0">service.impl.replace_switch_with_command.Recent6MonthsUserHistoryListHandler</node>
+    <node x="4492.478209319308" y="1000.0">service.IUserCustomerApplyService</node>
+    <node x="3973.191084955903" y="1730.0">rpc.impl.UserCustomerLoginImpl</node>
+    <node x="7564.454411541597" y="1730.0">service.impl.StaffService</node>
+    <node x="3264.41107395202" y="1000.0">util.TimestampConvertHelper</node>
+    <node x="1207.1363636363621" y="1000.0">Const.UserTransactionTimeFilter</node>
+    <node x="9112.343239100468" y="1000.0">service.impl.facade_pattern.NotEligibleException</node>
+    <node x="3771.598979692745" y="1430.0">service.impl.UserCustomerLoginService</node>
+    <node x="807.1363636363621" y="1000.0">service.impl.replace_switch_with_command.Recent7DaysUserHistoryListHandler</node>
+    <node x="4847.314152262794" y="1000.0">dao.impl.UserApplyDao</node>
+    <node x="4040.722046999636" y="630.0">Const.UserStatusType</node>
+    <node x="7914.338126840263" y="1000.0">service.impl.command_pattern.GoldenAccCalculateExpiry</node>
+    <node x="4910.314152262794" y="630.0">dao.IUserApplyDao</node>
+    <node x="6422.161203763339" y="1000.0">Const.UserType</node>
+    <node x="542.1363636363621" y="1000.0">service.impl.replace_switch_with_command.Recent1MonthUserHistoryListHandler</node>
+    <node x="1441.773863636362" y="1000.0">dao.impl.UserPayeeDao</node>
+    <node x="7387.933639660775" y="1430.0">util.CardNumberGenerator</node>
+    <node x="1486.023863636362" y="230.0">entity.UserAccountTypeEntity</node>
+    <node x="8116.338126840263" y="1000.0">service.impl.command_pattern.StudentAccCalculateExpiry</node>
+    <node x="7582.523383250518" y="1430.0">dao.impl.UserCardDao</node>
+    <node x="3666.827310157531" y="230.0">service.impl.replace_constructors_with_creation_methods.NewTransferHistoryFactory</node>
+    <node x="4767.314152262794" y="230.0">util.HibernateUtils</node>
   </nodes>
   <notes />
   <edges>
     <edge source="service.impl.StaffService" target="Const.UserAccountType">
-      <point x="53.027027027026634" y="-15.0" />
-      <point x="1554.5506892681024" y="1370.0" />
-      <point x="3241.4544430218566" y="1370.0" />
-      <point x="-35.0" y="15.0" />
+      <point x="47.51282051282078" y="-15.0" />
+      <point x="7666.467232054419" y="1690.0" />
+      <point x="8855.838126840263" y="1690.0" />
+      <point x="8855.838126840263" y="980.0" />
+      <point x="8993.343239100468" y="980.0" />
+      <point x="-28.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="dao.IUserAccountDao">
-      <point x="-44.189189189189165" y="-15.0" />
-      <point x="1457.3344730518866" y="1340.0" />
-      <point x="131.19710347777527" y="1340.0" />
-      <point x="131.19710347777527" y="700.0" />
-      <point x="150.94189189189" y="700.0" />
-      <point x="-55.600000000000364" y="15.0" />
+      <point x="-22.358974358974137" y="-15.0" />
+      <point x="7596.595437182624" y="1580.0" />
+      <point x="6411.661203763339" y="1580.0" />
+      <point x="6411.661203763339" y="750.0" />
+      <point x="5862.866636536366" y="750.0" />
+      <point x="55.59999999999991" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibility" target="service.impl.command_pattern.Invoker">
+      <point x="-5.5" y="-15.0" />
+      <point x="8966.338126840263" y="1340.0" />
+      <point x="8834.463126840263" y="1340.0" />
+      <point x="32.625" y="15.0" />
     </edge>
     <edge source="service.impl.method_template_pattern.StudentAccount" target="service.impl.method_template_pattern.FeesTemplate">
-      <point x="33.0" y="-15.0" />
-      <point x="15.0" y="15.0" />
+      <point x="-32.999999999999545" y="-15.0" />
+      <point x="5025.314152262794" y="830.0" />
+      <point x="6209.579536878179" y="830.0" />
+      <point x="-45.0" y="15.0" />
     </edge>
     <edge source="service.impl.command_pattern.StudentAccCalculateExpiry" target="service.impl.command_pattern.Receiver">
       <point x="0.0" y="-15.0" />
-      <point x="755.5350047092452" y="1100.0" />
-      <point x="955.8858108108093" y="1100.0" />
-      <point x="-22.75" y="15.0" />
+      <point x="8209.338126840263" y="920.0" />
+      <point x="8193.568959955102" y="920.0" />
+      <point x="-3.7916666666667425" y="15.0" />
     </edge>
     <edge source="dao.IBankStaffDao" target="entity.UserApplyArchiveEntity">
-      <point x="30.75" y="-15.0" />
-      <point x="2606.5163110155518" y="170.0" />
-      <point x="2872.9665847665824" y="170.0" />
-      <point x="-30.90909090909099" y="15.0" />
+      <point x="-30.75" y="-15.0" />
+      <point x="6119.414072433801" y="930.0" />
+      <point x="6989.266972994108" y="930.0" />
+      <point x="6989.266972994108" y="610.0" />
+      <point x="7540.433639660774" y="610.0" />
+      <point x="7540.433639660774" y="210.0" />
+      <point x="7477.788511237153" y="210.0" />
+      <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="service.IUserCustomerService">
-      <point x="-55.65000000000009" y="-15.0" />
-      <point x="7157.955128830112" y="850.0" />
-      <point x="6725.824830060913" y="850.0" />
-      <point x="40.5" y="15.0" />
+      <point x="57.81818181818198" y="-15.0" />
+      <point x="1240.2121176512787" y="1200.0" />
+      <point x="2192.91107395202" y="1200.0" />
+      <point x="-40.5" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Recent6MonthsUserHistoryListHandler" target="dao.impl.UserHistoryDao">
-      <point x="-62.5" y="-15.0" />
-      <point x="8342.062330060913" y="700.0" />
-      <point x="8282.228996727581" y="700.0" />
-      <point x="10.916666666666629" y="15.0" />
+      <point x="93.75" y="-15.0" />
+      <point x="490.88636363636215" y="970.0" />
+      <point x="822.8238636363621" y="970.0" />
+      <point x="-32.75" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibility" target="service.impl.method_template_pattern.GoldenAccount">
+      <point x="-71.5" y="-15.0" />
+      <point x="8900.338126840263" y="1400.0" />
+      <point x="6702.705132396231" y="1400.0" />
+      <point x="32.25" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibility" target="service.impl.facade_pattern.NotEligibleException">
+      <point x="71.5" y="-15.0" />
+      <point x="9043.338126840263" y="1410.0" />
+      <point x="9151.343239100468" y="1410.0" />
+      <point x="-39.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibilityTest" target="Const.UserAccountType">
+      <point x="14.58333333333303" y="-15.0" />
+      <point x="9250.504793506929" y="1700.0" />
+      <point x="9278.843239100468" y="1700.0" />
+      <point x="9278.843239100468" y="970.0" />
+      <point x="9077.343239100468" y="970.0" />
+      <point x="56.0" y="15.0" />
     </edge>
     <edge source="util.IdGenerator" target="dao.IBankStaffDao">
-      <point x="-41.25" y="-15.0" />
-      <point x="2876.9544430218566" y="1350.0" />
-      <point x="2717.8211096885234" y="1350.0" />
-      <point x="2717.8211096885234" y="1060.0" />
-      <point x="2551.1663110155514" y="1060.0" />
-      <point x="-24.600000000000364" y="15.0" />
+      <point x="41.25" y="-15.0" />
+      <point x="5454.9191551313415" y="1710.0" />
+      <point x="5943.287183678283" y="1710.0" />
+      <point x="5943.287183678283" y="1380.0" />
+      <point x="6174.764072433802" y="1380.0" />
+      <point x="24.59999999999991" y="15.0" />
     </edge>
     <edge source="dao.impl.UserAccountDao" target="util.HibernateUtils">
-      <point x="54.399999999999636" y="-15.0" />
-      <point x="292.0430494237212" y="700.0" />
-      <point x="297.5418918918904" y="700.0" />
-      <point x="297.5418918918904" y="410.0" />
-      <point x="2778.1534534534508" y="410.0" />
-      <point x="-54.222222222222626" y="15.0" />
+      <point x="27.199999999999818" y="-15.0" />
+      <point x="5861.9666365363655" y="850.0" />
+      <point x="6549.266972994108" y="850.0" />
+      <point x="6549.266972994108" y="420.0" />
+      <point x="4855.425263373905" y="420.0" />
+      <point x="27.111111111111313" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="service.IStaffService">
-      <point x="-53.027027027026634" y="-15.0" />
-      <point x="1448.496635214049" y="1370.0" />
-      <point x="56.0" y="1370.0" />
+      <point x="-39.12820512820508" y="-15.0" />
+      <point x="7579.826206413392" y="1640.0" />
+      <point x="6009.787183678283" y="1640.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="util.IdGenerator" target="dao.IUserDao">
-      <point x="13.75" y="-15.0" />
-      <point x="2931.9544430218566" y="1330.0" />
-      <point x="2899.1844791837193" y="1330.0" />
-      <point x="2899.1844791837193" y="460.0" />
-      <point x="4030.584009009007" y="460.0" />
-      <point x="-32.0" y="15.0" />
+      <point x="-13.75" y="-15.0" />
+      <point x="5399.9191551313415" y="1710.0" />
+      <point x="5379.897485596128" y="1710.0" />
+      <point x="5379.897485596128" y="450.0" />
+      <point x="4486.439152262794" y="450.0" />
+      <point x="32.0" y="15.0" />
     </edge>
     <edge source="dao.impl.UserDao" target="dao.IUserDao">
-      <point x="23.25" y="-15.0" />
-      <point x="4091.834009009007" y="450.0" />
-      <point x="4073.250675675674" y="450.0" />
+      <point x="7.75" y="-15.0" />
+      <point x="4469.939152262794" y="470.0" />
+      <point x="4465.105818929461" y="470.0" />
       <point x="10.66666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="util.FaultFactory">
-      <point x="-59.368421052631675" y="-15.0" />
-      <point x="4534.511460565717" y="940.0" />
-      <point x="4195.084009009007" y="940.0" />
-      <point x="14.0" y="15.0" />
+      <point x="59.368421052631675" y="-15.0" />
+      <point x="3924.967400745377" y="1290.0" />
+      <point x="4264.478209319308" y="1290.0" />
+      <point x="-14.0" y="15.0" />
     </edge>
     <edge source="dao.impl.UserPayeeDao" target="util.HibernateUtils">
-      <point x="-49.59999999999991" y="-15.0" />
-      <point x="7108.687330060915" y="670.0" />
-      <point x="7101.899830060914" y="670.0" />
-      <point x="7101.899830060914" y="350.0" />
-      <point x="2859.4867867867847" y="350.0" />
-      <point x="27.111111111111313" y="15.0" />
+      <point x="49.600000000000364" y="-15.0" />
+      <point x="1553.3738636363623" y="980.0" />
+      <point x="1558.6363636363621" y="980.0" />
+      <point x="1558.6363636363621" y="490.0" />
+      <point x="4787.647485596128" y="490.0" />
+      <point x="-40.666666666666515" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="dao.impl.UserHistoryDao">
-      <point x="92.34375" y="-15.0" />
-      <point x="5627.366587163444" y="690.0" />
-      <point x="8238.562330060915" y="690.0" />
-      <point x="-32.75" y="15.0" />
+      <point x="-92.34375" y="-15.0" />
+      <point x="2725.56732395202" y="770.0" />
+      <point x="888.3238636363621" y="770.0" />
+      <point x="32.75" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerApplyService" target="dao.IUserDao">
-      <point x="38.0" y="-15.0" />
-      <point x="3499.7044430218566" y="1040.0" />
-      <point x="3859.459009009007" y="1040.0" />
-      <point x="3859.459009009007" y="470.0" />
-      <point x="4041.250675675674" y="470.0" />
-      <point x="-21.33333333333303" y="15.0" />
+      <point x="-50.66666666666697" y="-15.0" />
+      <point x="4965.752488464675" y="1250.0" />
+      <point x="4734.814152262794" y="1250.0" />
+      <point x="4734.814152262794" y="460.0" />
+      <point x="4475.772485596127" y="460.0" />
+      <point x="21.33333333333303" y="15.0" />
     </edge>
     <edge source="service.impl.replace_constructors_with_creation_methods.NewUserLoginReqHistoryFactory" target="entity.UserHistoryEntity">
-      <point x="55.25" y="-15.0" />
-      <point x="5668.755128830111" y="210.0" />
-      <point x="5866.270686640586" y="210.0" />
-      <point x="-11.5" y="15.0" />
+      <point x="-55.25" y="-15.0" />
+      <point x="3481.077310157531" y="170.0" />
+      <point x="2382.908176385601" y="170.0" />
+      <point x="34.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="service.IUserCustomerHistoryService">
-      <point x="39.57894736842081" y="-15.0" />
-      <point x="4633.45882898677" y="1060.0" />
-      <point x="4864.128100321339" y="1060.0" />
-      <point x="4864.128100321339" y="660.0" />
-      <point x="6009.00882898677" y="660.0" />
-      <point x="-66.66666666666652" y="15.0" />
+      <point x="-39.57894736842081" y="-15.0" />
+      <point x="3826.0200323243243" y="1130.0" />
+      <point x="3678.805810794126" y="1130.0" />
+      <point x="3678.805810794126" y="680.0" />
+      <point x="2535.0772671338386" y="680.0" />
+      <point x="66.66666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.command_pattern.GoldenAccCalculateExpiry" target="service.impl.command_pattern.Receiver">
-      <point x="60.66666666666697" y="-15.0" />
-      <point x="1229.2016713759122" y="1030.0" />
-      <point x="1001.3858108108093" y="1030.0" />
-      <point x="22.75" y="15.0" />
+      <point x="0.0" y="-15.0" />
+      <point x="8005.338126840263" y="910.0" />
+      <point x="8178.402293288436" y="910.0" />
+      <point x="-18.958333333333258" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="Const.SysMailTemplateType">
-      <point x="-79.15789473684208" y="-15.0" />
-      <point x="4514.721986881506" y="960.0" />
-      <point x="2221.1663110155514" y="960.0" />
-      <point x="40.5" y="15.0" />
+      <point x="79.15789473684254" y="-15.0" />
+      <point x="3944.7568744295877" y="1310.0" />
+      <point x="5566.266636536366" y="1310.0" />
+      <point x="-40.5" y="15.0" />
     </edge>
     <edge source="rpc.impl.UserCustomerLoginImpl" target="service.impl.UserCustomerLoginService">
-      <point x="14.66666666666697" y="-15.0" />
-      <point x="4351.15181144291" y="1350.0" />
-      <point x="4593.879881618349" y="1350.0" />
+      <point x="-14.66666666666697" y="-15.0" />
+      <point x="4046.524418289236" y="1690.0" />
+      <point x="3865.598979692745" y="1690.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="dao.impl.UserPayeeDao">
-      <point x="-13.25" y="-15.0" />
-      <point x="7200.355128830111" y="770.0" />
-      <point x="7158.287330060914" y="770.0" />
+      <point x="4.8181818181819835" y="-15.0" />
+      <point x="1187.2121176512787" y="1090.0" />
+      <point x="1503.773863636362" y="1090.0" />
       <point x="0.0" y="15.0" />
     </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibilityTest" target="service.impl.facade_pattern.NotEligibleException">
+      <point x="-14.58333333333303" y="-15.0" />
+      <point x="9221.338126840263" y="1710.0" />
+      <point x="9229.343239100468" y="1710.0" />
+      <point x="39.0" y="15.0" />
+    </edge>
     <edge source="service.impl.StaffService" target="dao.IBankStaffDao">
-      <point x="41.24324324324334" y="-15.0" />
-      <point x="1542.766905484319" y="1330.0" />
-      <point x="2581.829968547382" y="1330.0" />
-      <point x="2581.829968547382" y="1120.0" />
-      <point x="2526.566311015552" y="1120.0" />
-      <point x="-49.19999999999982" y="15.0" />
+      <point x="-25.15384615384619" y="-15.0" />
+      <point x="7593.800565387752" y="1590.0" />
+      <point x="6408.866331968467" y="1590.0" />
+      <point x="6408.866331968467" y="1280.0" />
+      <point x="6199.364072433801" y="1280.0" />
+      <point x="49.19999999999982" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="entity.UserHistoryEntity">
       <point x="0.0" y="-15.0" />
-      <point x="4593.879881618349" y="1090.0" />
-      <point x="4591.051114272164" y="1090.0" />
-      <point x="4591.051114272164" y="140.0" />
-      <point x="5812.60401997392" y="140.0" />
-      <point x="-65.16666666666652" y="15.0" />
+      <point x="3865.598979692745" y="1220.0" />
+      <point x="3878.327310157531" y="1220.0" />
+      <point x="3878.327310157531" y="100.0" />
+      <point x="2413.574843052268" y="100.0" />
+      <point x="65.16666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Recent1MonthUserHistoryListHandler" target="dao.impl.UserHistoryDao">
-      <point x="-61.25" y="-15.0" />
-      <point x="8862.812330060913" y="680.0" />
-      <point x="8325.895663394247" y="680.0" />
-      <point x="54.58333333333326" y="15.0" />
+      <point x="91.875" y="-15.0" />
+      <point x="756.5113636363621" y="980.0" />
+      <point x="844.6571969696961" y="980.0" />
+      <point x="-10.91666666666606" y="15.0" />
+    </edge>
+    <edge source="service.impl.StaffService" target="dao.impl.UserDao">
+      <point x="-30.743589743589837" y="-15.0" />
+      <point x="7588.210821798008" y="1610.0" />
+      <point x="6300.267952909052" y="1610.0" />
+      <point x="6300.267952909052" y="1300.0" />
+      <point x="5927.164072433801" y="1300.0" />
+      <point x="5927.164072433801" y="760.0" />
+      <point x="4500.939152262794" y="760.0" />
+      <point x="38.75" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibility" target="service.impl.command_pattern.Receiver">
+      <point x="16.5" y="-15.0" />
+      <point x="8988.338126840263" y="1320.0" />
+      <point x="8918.843239100468" y="1320.0" />
+      <point x="8918.843239100468" y="690.0" />
+      <point x="8231.485626621768" y="690.0" />
+      <point x="34.125" y="15.0" />
     </edge>
     <edge source="dao.IUserApplyDao" target="entity.UserApplyArchiveEntity">
       <point x="0.0" y="-15.0" />
-      <point x="3037.9344791837193" y="170.0" />
-      <point x="2919.3302211302184" y="170.0" />
-      <point x="15.454545454545041" y="15.0" />
-    </edge>
-    <edge source="service.impl.StaffService" target="dao.impl.UserDao">
-      <point x="29.45945945945914" y="-15.0" />
-      <point x="1530.9831217005349" y="1290.0" />
-      <point x="2287.1663110155514" y="1290.0" />
-      <point x="2287.1663110155514" y="660.0" />
-      <point x="4029.834009009007" y="660.0" />
-      <point x="-38.75" y="15.0" />
+      <point x="4974.314152262794" y="180.0" />
+      <point x="7432.455177903819" y="180.0" />
+      <point x="-45.333333333333485" y="15.0" />
     </edge>
     <edge source="dao.impl.SysConfigDao" target="dao.ISysConfigDao">
-      <point x="-24.600000000000364" y="-15.0" />
-      <point x="1588.2600047092446" y="400.0" />
-      <point x="1586.2850047092452" y="400.0" />
-      <point x="15.75" y="15.0" />
+      <point x="0.0" y="-15.0" />
+      <point x="6752.266972994108" y="570.0" />
+      <point x="7387.683639660774" y="570.0" />
+      <point x="-47.25" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="Const.UserOperateSourceType">
-      <point x="-6.15625" y="-15.0" />
-      <point x="5528.866587163444" y="580.0" />
-      <point x="5236.366587163444" y="580.0" />
+      <point x="30.78125" y="-15.0" />
+      <point x="2848.69232395202" y="740.0" />
+      <point x="3288.81732395202" y="740.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.method_template_pattern.PersonalAccount" target="service.impl.method_template_pattern.IAccounts">
-      <point x="-33.75" y="-15.0" />
-      <point x="3747.709009009007" y="620.0" />
-      <point x="3485.209009009007" y="620.0" />
-      <point x="40.0" y="15.0" />
+      <point x="33.75" y="-15.0" />
+      <point x="7423.683639660775" y="710.0" />
+      <point x="6645.766972994108" y="710.0" />
+      <point x="25.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerApplyService" target="service.impl.method_template_pattern.GoldenAccount">
-      <point x="0.0" y="-15.0" />
-      <point x="3461.7044430218566" y="1010.0" />
-      <point x="3477.459009009007" y="1010.0" />
-      <point x="0.0" y="15.0" />
+      <point x="76.0" y="-15.0" />
+      <point x="5092.4191551313415" y="1400.0" />
+      <point x="6638.205132396231" y="1400.0" />
+      <point x="-32.25" y="15.0" />
     </edge>
     <edge source="dao.impl.UserPayeeDao" target="entity.UserPayeeEntity">
-      <point x="-24.800000000000182" y="-15.0" />
-      <point x="7133.487330060914" y="660.0" />
-      <point x="7112.899830060914" y="660.0" />
-      <point x="7112.899830060914" y="440.0" />
-      <point x="7299.837330060914" y="440.0" />
-      <point x="-49.125" y="15.0" />
+      <point x="24.799999999999272" y="-15.0" />
+      <point x="1528.5738636363612" y="980.0" />
+      <point x="1547.6363636363621" y="980.0" />
+      <point x="1547.6363636363621" y="360.0" />
+      <point x="1400.6363636363621" y="360.0" />
+      <point x="49.125" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="dao.IUserDao">
-      <point x="17.675675675675848" y="-15.0" />
-      <point x="1519.1993379167516" y="1250.0" />
-      <point x="2071.860004709245" y="1250.0" />
-      <point x="2071.860004709245" y="450.0" />
-      <point x="4019.91734234234" y="450.0" />
-      <point x="-42.66666666666697" y="15.0" />
+      <point x="-16.769230769230944" y="-15.0" />
+      <point x="7602.185180772367" y="1560.0" />
+      <point x="6528.661203763339" y="1560.0" />
+      <point x="6528.661203763339" y="430.0" />
+      <point x="4497.105818929461" y="430.0" />
+      <point x="42.66666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="service.IUserCustomerLoginService">
-      <point x="59.368421052631675" y="-15.0" />
-      <point x="4653.248302670981" y="1080.0" />
-      <point x="4932.522837163444" y="1080.0" />
-      <point x="-48.0" y="15.0" />
+      <point x="-59.368421052631675" y="-15.0" />
+      <point x="3806.2305586401135" y="1150.0" />
+      <point x="3610.41107395202" y="1150.0" />
+      <point x="48.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibility" target="Const.UserAccountType">
+      <point x="49.5" y="-15.0" />
+      <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="service.impl.command_pattern.Invoker">
-      <point x="-23.567567567567494" y="-15.0" />
-      <point x="1477.9560946735082" y="1270.0" />
-      <point x="557.4398648648635" y="1270.0" />
-      <point x="-21.75" y="15.0" />
+      <point x="41.92307692307668" y="-15.0" />
+      <point x="7660.877488464675" y="1670.0" />
+      <point x="8778.690690942825" y="1670.0" />
+      <point x="8778.690690942825" y="1410.0" />
+      <point x="8769.213126840263" y="1410.0" />
+      <point x="-32.625" y="15.0" />
     </edge>
     <edge source="rpc.impl.UserCustomerLoginImpl" target="service.impl.UserCustomerApplyService">
-      <point x="-44.0" y="-15.0" />
-      <point x="4292.485144776243" y="1360.0" />
-      <point x="3461.7044430218566" y="1360.0" />
+      <point x="44.0" y="-15.0" />
+      <point x="4105.191084955903" y="1700.0" />
+      <point x="5016.4191551313415" y="1700.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.replace_constructors_with_creation_methods.NewChargeHistoryFactory" target="entity.UserHistoryEntity">
-      <point x="-46.25" y="-15.0" />
-      <point x="5790.255128830111" y="220.0" />
-      <point x="5873.937353307253" y="220.0" />
-      <point x="-3.833333333333485" y="15.0" />
+      <point x="46.25" y="-15.0" />
+      <point x="2958.158176385601" y="190.0" />
+      <point x="2367.574843052268" y="190.0" />
+      <point x="19.16666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="service.impl.command_pattern.Receiver">
-      <point x="-14.729729729730025" y="-15.0" />
-      <point x="1486.7939325113457" y="1240.0" />
-      <point x="652.0350047092452" y="1240.0" />
-      <point x="652.0350047092452" y="1090.0" />
-      <point x="946.7858108108089" y="1090.0" />
-      <point x="-31.850000000000364" y="15.0" />
+      <point x="22.358974358974137" y="-15.0" />
+      <point x="7641.313385900572" y="1600.0" />
+      <point x="7901.043255045391" y="1600.0" />
+      <point x="7901.043255045391" y="880.0" />
+      <point x="8155.652293288436" y="880.0" />
+      <point x="-41.70833333333303" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="entity.UserEntity">
-      <point x="-2.650000000000091" y="-15.0" />
-      <point x="7210.955128830112" y="970.0" />
-      <point x="7272.962330060914" y="970.0" />
-      <point x="7272.962330060914" y="130.0" />
-      <point x="4131.028453453451" y="130.0" />
-      <point x="44.44444444444434" y="15.0" />
+      <point x="28.909090909090082" y="-15.0" />
+      <point x="1211.3030267421868" y="1140.0" />
+      <point x="1856.8101650219642" y="1140.0" />
+      <point x="1856.8101650219642" y="430.0" />
+      <point x="3867.327310157531" y="430.0" />
+      <point x="3867.327310157531" y="110.0" />
+      <point x="4701.3697078183495" y="110.0" />
+      <point x="-44.44444444444434" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="entity.UserHistoryEntity">
-      <point x="6.15625" y="-15.0" />
-      <point x="5541.179087163444" y="570.0" />
-      <point x="5334.366587163444" y="570.0" />
-      <point x="5334.366587163444" y="190.0" />
-      <point x="5850.937353307253" y="190.0" />
-      <point x="-26.833333333333485" y="15.0" />
+      <point x="-6.15625" y="-15.0" />
+      <point x="2811.75482395202" y="710.0" />
+      <point x="3168.81732395202" y="710.0" />
+      <point x="3168.81732395202" y="180.0" />
+      <point x="2375.241509718934" y="180.0" />
+      <point x="26.83333333333303" y="15.0" />
     </edge>
     <edge source="service.impl.SysEmailService" target="dao.impl.SysConfigDao">
-      <point x="0.0" y="-15.0" />
-      <point x="1915.360004709245" y="680.0" />
-      <point x="1612.860004709245" y="680.0" />
+      <point x="-43.333333333333485" y="-15.0" />
+      <point x="5959.330739100467" y="900.0" />
+      <point x="6752.266972994108" y="900.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="dao.impl.UserApplyDao" target="util.HibernateUtils">
       <point x="-49.600000000000364" y="-15.0" />
-      <point x="2947.5344791837188" y="650.0" />
-      <point x="2910.1844791837193" y="650.0" />
-      <point x="2910.1844791837193" y="440.0" />
-      <point x="2832.3756756756734" y="440.0" />
+      <point x="4859.7141522627935" y="810.0" />
+      <point x="4828.314152262794" y="810.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="util.PINGenerator">
-      <point x="44.189189189189165" y="-15.0" />
-      <point x="1545.712851430265" y="1340.0" />
-      <point x="2703.8751637425776" y="1340.0" />
-      <point x="2703.8751637425776" y="1070.0" />
-      <point x="2744.2385332377735" y="1070.0" />
-      <point x="-29.5" y="15.0" />
+      <point x="-47.51282051282078" y="-15.0" />
+      <point x="7571.441591028777" y="1670.0" />
+      <point x="5572.077231835925" y="1670.0" />
+      <point x="5572.077231835925" y="1110.0" />
+      <point x="4442.978209319308" y="1110.0" />
+      <point x="29.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="dao.impl.UserAccountDao">
-      <point x="-76.84999999999991" y="-15.0" />
-      <point x="7136.755128830111" y="890.0" />
-      <point x="282.9763827570555" y="890.0" />
-      <point x="45.33333333333394" y="15.0" />
-    </edge>
-    <edge source="dao.impl.BankStaffDao" target="Const.UserType">
-      <point x="-53.33333333333303" y="-15.0" />
-      <point x="2748.0377763551905" y="1050.0" />
-      <point x="1618.235004709245" y="1050.0" />
-      <point x="24.0" y="15.0" />
+      <point x="77.09090909090992" y="-15.0" />
+      <point x="1259.4848449240067" y="1320.0" />
+      <point x="5789.433303203032" y="1320.0" />
+      <point x="-45.333333333333485" y="15.0" />
     </edge>
     <edge source="service.impl.command_pattern.YoungSaverAccCalculateExpiry" target="service.impl.command_pattern.Receiver">
-      <point x="69.0" y="-15.0" />
-      <point x="1452.0350047092452" y="1000.0" />
-      <point x="1019.58581081081" y="1000.0" />
-      <point x="40.95000000000073" y="15.0" />
+      <point x="-69.0" y="-15.0" />
+      <point x="8356.838126840263" y="910.0" />
+      <point x="8201.152293288436" y="910.0" />
+      <point x="3.7916666666667425" y="15.0" />
+    </edge>
+    <edge source="dao.impl.BankStaffDao" target="Const.UserType">
+      <point x="53.333333333333485" y="-15.0" />
+      <point x="5554.910565169259" y="1390.0" />
+      <point x="6446.161203763339" y="1390.0" />
+      <point x="-24.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="service.impl.UserCustomerHistoryService">
-      <point x="-60.950000000000045" y="-15.0" />
-      <point x="7152.655128830112" y="860.0" />
-      <point x="5584.272837163444" y="860.0" />
-      <point x="49.25" y="15.0" />
+      <point x="62.63636363636397" y="-15.0" />
+      <point x="1245.0302994694607" y="1210.0" />
+      <point x="2768.66107395202" y="1210.0" />
+      <point x="-49.25" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="entity.UserCardEntity">
-      <point x="-35.351351351351695" y="-15.0" />
-      <point x="1466.172310889724" y="1310.0" />
-      <point x="341.1430494237211" y="1310.0" />
-      <point x="341.1430494237211" y="700.0" />
-      <point x="343.21191912366066" y="700.0" />
-      <point x="-46.875" y="15.0" />
+      <point x="13.974358974358893" y="-15.0" />
+      <point x="7632.928770515957" y="1570.0" />
+      <point x="7751.248383250519" y="1570.0" />
+      <point x="7751.248383250519" y="960.0" />
+      <point x="7708.123383250519" y="960.0" />
+      <point x="15.625" y="15.0" />
     </edge>
     <edge source="dao.impl.UserApplyDao" target="dao.IUserApplyDao">
       <point x="49.600000000000364" y="-15.0" />
-      <point x="3046.7344791837195" y="650.0" />
-      <point x="3053.9344791837193" y="650.0" />
+      <point x="4958.914152262794" y="800.0" />
+      <point x="4990.314152262794" y="800.0" />
       <point x="16.0" y="15.0" />
     </edge>
+    <edge source="service.impl.StaffService" target="service.impl.facade_pattern.ConversionEligibility">
+      <point x="53.1025641025642" y="-15.0" />
+      <point x="7672.056975644162" y="1710.0" />
+      <point x="8952.588126840263" y="1710.0" />
+      <point x="-19.25" y="15.0" />
+    </edge>
     <edge source="service.impl.replace_switch_with_command.Recent1MonthUserHistoryListHandler" target="service.impl.UserCustomerService">
-      <point x="-30.625" y="15.0" />
-      <point x="8893.437330060913" y="1120.0" />
-      <point x="7290.455128830112" y="1120.0" />
-      <point x="76.84999999999991" y="-15.0" />
+      <point x="61.25" y="15.0" />
+      <point x="725.8863636363621" y="1330.0" />
+      <point x="1143.8484812876427" y="1330.0" />
+      <point x="-38.54545454545405" y="-15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="service.impl.SysEmailService">
-      <point x="11.783783783784202" y="-15.0" />
-      <point x="1513.30744602486" y="1230.0" />
-      <point x="1882.860004709245" y="1230.0" />
-      <point x="-32.5" y="15.0" />
+      <point x="-27.94871794871824" y="-15.0" />
+      <point x="7591.00569359288" y="1600.0" />
+      <point x="6406.0714601735945" y="1600.0" />
+      <point x="6406.0714601735945" y="1290.0" />
+      <point x="6035.164072433801" y="1290.0" />
+      <point x="32.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerApplyService" target="service.IUserCustomerApplyService">
-      <point x="76.0" y="-15.0" />
-      <point x="3537.7044430218566" y="1070.0" />
-      <point x="3959.584009009007" y="1070.0" />
-      <point x="-48.5" y="15.0" />
+      <point x="-76.0" y="-15.0" />
+      <point x="4940.4191551313415" y="1270.0" />
+      <point x="4637.978209319308" y="1270.0" />
+      <point x="48.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="util.IBANValidator">
-      <point x="29.15000000000009" y="-15.0" />
-      <point x="7242.755128830111" y="1030.0" />
-      <point x="7740.562330060914" y="1030.0" />
+      <point x="-19.272727272727934" y="-15.0" />
+      <point x="1163.1212085603688" y="1290.0" />
+      <point x="1125.1363636363621" y="1290.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="util.IBANGenerator">
-      <point x="26.513513513513317" y="-15.0" />
-      <point x="1528.037175754589" y="1280.0" />
-      <point x="2213.6663110155514" y="1280.0" />
+      <point x="16.769230769230717" y="-15.0" />
+      <point x="7635.723642310829" y="1580.0" />
+      <point x="7824.748383250519" y="1580.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="dao.IUserAccountTypeDao">
-      <point x="7.949999999999818" y="-15.0" />
-      <point x="7221.555128830111" y="990.0" />
-      <point x="7576.770686640587" y="990.0" />
-      <point x="7576.770686640587" y="670.0" />
-      <point x="7568.645686640586" y="670.0" />
-      <point x="61.875" y="15.0" />
+      <point x="14.45454545454595" y="-15.0" />
+      <point x="1196.8484812876427" y="1110.0" />
+      <point x="1648.563574112875" y="1110.0" />
+      <point x="1648.563574112875" y="980.0" />
+      <point x="1656.929483203784" y="980.0" />
+      <point x="-61.875" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="service.impl.replace_switch_with_command.Recent1YearUserHistoryListHandler">
-      <point x="60.950000000000045" y="-15.0" />
-      <point x="7274.555128830111" y="1090.0" />
-      <point x="8578.562330060913" y="1090.0" />
-      <point x="-87.0" y="15.0" />
+      <point x="-62.63636363636397" y="-15.0" />
+      <point x="1119.7575721967328" y="1380.0" />
+      <point x="78.13636363636215" y="1380.0" />
+      <point x="-58.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="dao.impl.UserAccountDao">
-      <point x="-41.24324324324334" y="-15.0" />
-      <point x="1460.2804189978324" y="1330.0" />
-      <point x="134.14304942372155" y="1330.0" />
-      <point x="134.14304942372155" y="1120.0" />
-      <point x="192.3097160903876" y="1120.0" />
-      <point x="-45.33333333333394" y="15.0" />
+      <point x="-33.53846153846143" y="-15.0" />
+      <point x="7585.4159500031365" y="1620.0" />
+      <point x="6282.287183678283" y="1620.0" />
+      <point x="6282.287183678283" y="1310.0" />
+      <point x="5880.0999698697" y="1310.0" />
+      <point x="45.333333333333485" y="15.0" />
     </edge>
     <edge source="util.IdGenerator" target="dao.impl.UserDao">
-      <point x="41.25" y="-15.0" />
-      <point x="2959.4544430218566" y="1360.0" />
-      <point x="3156.4344791837193" y="1360.0" />
-      <point x="3156.4344791837193" y="670.0" />
-      <point x="4045.334009009007" y="670.0" />
-      <point x="-23.25" y="15.0" />
+      <point x="-41.25" y="-15.0" />
+      <point x="5372.4191551313415" y="1710.0" />
+      <point x="5368.897485596128" y="1710.0" />
+      <point x="5368.897485596128" y="780.0" />
+      <point x="4485.439152262794" y="780.0" />
+      <point x="23.25" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="dao.impl.UserCardDao">
-      <point x="-26.513513513513317" y="-15.0" />
-      <point x="1475.0101487275624" y="1280.0" />
-      <point x="456.68986486486347" y="1280.0" />
+      <point x="8.384615384615472" y="-15.0" />
+      <point x="7627.339026926214" y="1550.0" />
+      <point x="7641.523383250518" y="1550.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="util.FaultFactory">
-      <point x="47.13513513513499" y="-15.0" />
-      <point x="1548.6587973762107" y="1350.0" />
-      <point x="2706.8211096885234" y="1350.0" />
-      <point x="2706.8211096885234" y="1080.0" />
-      <point x="4139.084009009007" y="1080.0" />
-      <point x="-42.0" y="15.0" />
+      <point x="-53.102564102563974" y="-15.0" />
+      <point x="7565.851847439034" y="1690.0" />
+      <point x="4424.9217647414935" y="1690.0" />
+      <point x="4424.9217647414935" y="1290.0" />
+      <point x="4292.478209319308" y="1290.0" />
+      <point x="14.0" y="15.0" />
     </edge>
     <edge source="service.impl.command_pattern.PersonalAccCalculateExpiry" target="service.impl.command_pattern.Receiver">
-      <point x="0.0" y="-15.0" />
-      <point x="963.0350047092452" y="1120.0" />
-      <point x="974.08581081081" y="1120.0" />
-      <point x="-4.549999999999272" y="15.0" />
+      <point x="-63.0" y="-15.0" />
+      <point x="8580.838126840263" y="890.0" />
+      <point x="8216.318959955102" y="890.0" />
+      <point x="18.958333333333258" y="15.0" />
     </edge>
     <edge source="dao.impl.UserAccountDao" target="entity.UserAccountEntity">
-      <point x="27.200000000000728" y="-15.0" />
-      <point x="264.8430494237223" y="700.0" />
-      <point x="286.5418918918904" y="700.0" />
-      <point x="286.5418918918904" y="470.0" />
-      <point x="235.34189189188965" y="470.0" />
-      <point x="28.799999999999272" y="15.0" />
+      <point x="54.40000000000009" y="-15.0" />
+      <point x="5889.166636536365" y="860.0" />
+      <point x="6560.266972994108" y="860.0" />
+      <point x="6560.266972994108" y="540.0" />
+      <point x="7278.933639660774" y="540.0" />
+      <point x="0.0" y="15.0" />
     </edge>
     <edge source="util.OperationNoGenerator" target="util.RandomUtil">
       <point x="0.0" y="-15.0" />
-      <point x="4828.366587163444" y="400.0" />
-      <point x="4467.823044096727" y="400.0" />
-      <point x="36.66666666666697" y="15.0" />
+      <point x="3480.81732395202" y="440.0" />
+      <point x="3923.055380332969" y="440.0" />
+      <point x="-36.66666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="service.impl.replace_constructors_with_creation_methods.NewUserLoginHistoryFactory">
-      <point x="-30.78125" y="-15.0" />
-      <point x="5504.241587163444" y="600.0" />
-      <point x="4923.366587163444" y="600.0" />
+      <point x="-55.40625" y="-15.0" />
+      <point x="2762.50482395202" y="740.0" />
+      <point x="2589.9106004671717" y="740.0" />
+      <point x="2589.9106004671717" y="320.0" />
+      <point x="2348.408176385601" y="320.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Recent6MonthsUserHistoryListHandler" target="service.impl.replace_switch_with_command.Handler">
-      <point x="31.25" y="15.0" />
-      <point x="8435.812330060913" y="1310.0" />
-      <point x="8364.971795496778" y="1310.0" />
-      <point x="-3.70833333333303" y="-15.0" />
-    </edge>
-    <edge source="service.impl.UserCustomerLoginService" target="Const.UserStatusType">
-      <point x="-19.789473684210407" y="-15.0" />
-      <point x="4574.090407934138" y="900.0" />
-      <point x="4506.156377430059" y="900.0" />
+      <point x="-93.75" y="-15.0" />
+      <point x="303.38636363636215" y="950.0" />
+      <point x="206.92045454545405" y="950.0" />
       <point x="0.0" y="15.0" />
     </edge>
+    <edge source="service.impl.UserCustomerLoginService" target="Const.UserStatusType">
+      <point x="19.78947368421086" y="-15.0" />
+      <point x="3885.388453376956" y="1240.0" />
+      <point x="4105.2220469996355" y="1240.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibility" target="service.impl.method_template_pattern.IAccounts">
+      <point x="5.5" y="-15.0" />
+      <point x="8977.338126840263" y="1330.0" />
+      <point x="8907.843239100468" y="1330.0" />
+      <point x="8907.843239100468" y="700.0" />
+      <point x="6662.433639660774" y="700.0" />
+      <point x="41.666666666666515" y="15.0" />
+    </edge>
     <edge source="service.impl.UserCustomerLoginService" target="dao.impl.UserDao">
-      <point x="-49.473684210526244" y="-15.0" />
-      <point x="4544.406197407822" y="930.0" />
-      <point x="4247.584009009007" y="930.0" />
-      <point x="4247.584009009007" y="680.0" />
-      <point x="4076.334009009007" y="680.0" />
-      <point x="7.75" y="15.0" />
+      <point x="49.4736842105267" y="-15.0" />
+      <point x="3915.072663903272" y="1270.0" />
+      <point x="4211.978209319308" y="1270.0" />
+      <point x="4211.978209319308" y="810.0" />
+      <point x="4454.439152262794" y="810.0" />
+      <point x="-7.75" y="15.0" />
     </edge>
     <edge source="dao.impl.UserApplyDao" target="entity.UserApplyArchiveEntity">
       <point x="-24.800000000000182" y="-15.0" />
-      <point x="2972.334479183719" y="640.0" />
-      <point x="2951.4344791837193" y="640.0" />
-      <point x="2951.4344791837193" y="180.0" />
-      <point x="2903.8756756756734" y="180.0" />
-      <point x="0.0" y="15.0" />
+      <point x="4884.514152262794" y="810.0" />
+      <point x="4899.814152262794" y="810.0" />
+      <point x="4899.814152262794" y="170.0" />
+      <point x="7421.121844570487" y="170.0" />
+      <point x="-56.666666666666515" y="15.0" />
     </edge>
     <edge source="service.impl.replace_constructors_with_creation_methods.NewUserLoginHistoryFactory" target="entity.UserHistoryEntity">
       <point x="50.0" y="-15.0" />
-      <point x="4973.366587163444" y="160.0" />
-      <point x="5827.937353307253" y="160.0" />
-      <point x="-49.833333333333485" y="15.0" />
+      <point x="2398.408176385601" y="210.0" />
+      <point x="2352.241509718934" y="210.0" />
+      <point x="3.83333333333303" y="15.0" />
     </edge>
     <edge source="dao.impl.UserHistoryDao" target="Const.UserOperateType">
-      <point x="-37.428571428571445" y="-15.0" />
-      <point x="8233.883758632343" y="300.0" />
-      <point x="6447.97288732083" y="300.0" />
-      <point x="52.125" y="15.0" />
+      <point x="18.714285714286234" y="-15.0" />
+      <point x="874.2881493506484" y="390.0" />
+      <point x="2485.783176385601" y="390.0" />
+      <point x="-52.125" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="entity.BankStaffEntity">
-      <point x="20.62162162162167" y="-15.0" />
-      <point x="1522.1452838626974" y="1260.0" />
-      <point x="2089.1663110155514" y="1260.0" />
-      <point x="2089.1663110155514" y="650.0" />
-      <point x="2464.1193693693676" y="650.0" />
-      <point x="-42.33333333333303" y="15.0" />
+      <point x="-13.974358974358893" y="-15.0" />
+      <point x="7604.980052567239" y="1550.0" />
+      <point x="6595.455132396231" y="1550.0" />
+      <point x="6595.455132396231" y="960.0" />
+      <point x="7105.600306327442" y="960.0" />
+      <point x="42.333333333333485" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="Const.UserType">
-      <point x="2.945945945945823" y="-15.0" />
-      <point x="1504.4696081870215" y="1200.0" />
-      <point x="1570.235004709245" y="1200.0" />
-      <point x="-24.0" y="15.0" />
+      <point x="-19.56410256410254" y="-15.0" />
+      <point x="7599.390308977496" y="1570.0" />
+      <point x="6494.161203763339" y="1570.0" />
+      <point x="24.0" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Recent1YearUserHistoryListHandler" target="dao.impl.UserHistoryDao">
-      <point x="-58.0" y="-15.0" />
-      <point x="8607.562330060913" y="690.0" />
-      <point x="8304.062330060915" y="690.0" />
-      <point x="32.75" y="15.0" />
+      <point x="87.0" y="-15.0" />
+      <point x="223.13636363636215" y="960.0" />
+      <point x="800.9905303030282" y="960.0" />
+      <point x="-54.58333333333394" y="15.0" />
     </edge>
     <edge source="dao.impl.BankStaffDao" target="util.TimestampConvertHelper">
-      <point x="53.33333333333303" y="-15.0" />
-      <point x="2854.7044430218566" y="1100.0" />
-      <point x="5249.689503830111" y="1100.0" />
-      <point x="-75.83333333333348" y="15.0" />
+      <point x="-53.333333333333485" y="-15.0" />
+      <point x="5448.243898502591" y="1120.0" />
+      <point x="3431.244407285353" y="1120.0" />
+      <point x="75.83333333333303" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibilityTest" target="service.impl.facade_pattern.ConversionEligibility">
+      <point x="-72.91666666666671" y="-15.0" />
+      <point x="9163.004793506929" y="1710.0" />
+      <point x="8991.088126840263" y="1710.0" />
+      <point x="19.25" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="dao.impl.BankStaffDao">
-      <point x="50.08108108108081" y="-15.0" />
-      <point x="1551.6047433221565" y="1360.0" />
-      <point x="2771.3711096885236" y="1360.0" />
-      <point x="-30.0" y="15.0" />
+      <point x="-50.30769230769238" y="-15.0" />
+      <point x="7568.646719233906" y="1680.0" />
+      <point x="5531.577231835925" y="1680.0" />
+      <point x="30.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.UserCustomerHistoryService" target="Const.UserOperateType">
+      <point x="-43.09375" y="-15.0" />
+      <point x="2774.81732395202" y="730.0" />
+      <point x="2698.8481004671717" y="730.0" />
+      <point x="2698.8481004671717" y="310.0" />
+      <point x="2555.283176385601" y="310.0" />
+      <point x="17.375" y="15.0" />
     </edge>
     <edge source="dao.IUserAccountTypeDao" target="entity.UserAccountTypeEntity">
       <point x="0.0" y="-15.0" />
-      <point x="7506.770686640586" y="450.0" />
-      <point x="7561.212330060914" y="450.0" />
-      <point x="42.25" y="15.0" />
-    </edge>
-    <edge source="service.impl.UserCustomerHistoryService" target="Const.UserOperateType">
-      <point x="43.09375" y="-15.0" />
-      <point x="5578.116587163444" y="630.0" />
-      <point x="5862.987995653437" y="630.0" />
-      <point x="5862.987995653437" y="430.0" />
-      <point x="6378.47288732083" y="430.0" />
-      <point x="-17.375" y="15.0" />
-    </edge>
-    <edge source="service.impl.StaffService" target="entity.UserEntity">
-      <point x="8.83783783783747" y="-15.0" />
-      <point x="1510.3615000789132" y="1220.0" />
-      <point x="1839.860004709245" y="1220.0" />
-      <point x="1839.860004709245" y="200.0" />
-      <point x="4053.250675675674" y="200.0" />
-      <point x="-33.33333333333303" y="15.0" />
+      <point x="1718.804483203784" y="350.0" />
+      <point x="1528.273863636362" y="350.0" />
+      <point x="-42.25" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="dao.IUserDao">
-      <point x="-29.149999999999636" y="-15.0" />
-      <point x="7184.455128830112" y="800.0" />
-      <point x="6988.024830060914" y="800.0" />
-      <point x="6988.024830060914" y="380.0" />
-      <point x="4105.250675675674" y="380.0" />
-      <point x="42.66666666666697" y="15.0" />
+      <point x="33.727272727272066" y="-15.0" />
+      <point x="1216.1212085603688" y="1150.0" />
+      <point x="1861.6283468401462" y="1150.0" />
+      <point x="1861.6283468401462" y="450.0" />
+      <point x="4411.772485596127" y="450.0" />
+      <point x="-42.66666666666697" y="15.0" />
+    </edge>
+    <edge source="service.impl.StaffService" target="entity.UserEntity">
+      <point x="-11.179487179487296" y="-15.0" />
+      <point x="7607.774924362111" y="1540.0" />
+      <point x="7196.433639660774" y="1540.0" />
+      <point x="7196.433639660774" y="130.0" />
+      <point x="4779.147485596127" y="130.0" />
+      <point x="33.33333333333303" y="15.0" />
     </edge>
     <edge source="dao.impl.UserPayeeDao" target="dao.IUserPayeeDao">
-      <point x="49.59999999999991" y="-15.0" />
-      <point x="7207.887330060914" y="670.0" />
-      <point x="7214.837330060914" y="670.0" />
-      <point x="15.875" y="15.0" />
+      <point x="-49.600000000000364" y="-15.0" />
+      <point x="1454.1738636363616" y="980.0" />
+      <point x="1457.7613636363621" y="980.0" />
+      <point x="-15.875" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.NotEligibleException" target="Const.UserAccountType">
+      <point x="0.0" y="-15.0" />
+      <point x="9190.343239100468" y="980.0" />
+      <point x="9049.343239100468" y="980.0" />
+      <point x="28.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibility" target="service.impl.command_pattern.YoungSaverAccCalculateExpiry">
+      <point x="-38.5" y="-15.0" />
+      <point x="8933.338126840263" y="1370.0" />
+      <point x="8477.588126840263" y="1370.0" />
+      <point x="51.75" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Recent6MonthsUserHistoryListHandler" target="service.impl.UserCustomerService">
-      <point x="-31.25" y="15.0" />
-      <point x="8373.312330060913" y="1080.0" />
-      <point x="7269.255128830111" y="1080.0" />
-      <point x="55.65000000000009" y="-15.0" />
+      <point x="62.5" y="15.0" />
+      <point x="459.63636363636215" y="1350.0" />
+      <point x="1134.2121176512787" y="1350.0" />
+      <point x="-48.18181818181802" y="-15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="dao.IUserHistoryDao">
-      <point x="29.684210526315837" y="-15.0" />
-      <point x="4623.564092144665" y="1090.0" />
-      <point x="4620.735324798481" y="1090.0" />
-      <point x="4620.735324798481" y="460.0" />
-      <point x="8207.033758632342" y="460.0" />
-      <point x="-53.59999999999991" y="15.0" />
+      <point x="-29.684210526315837" y="-15.0" />
+      <point x="3835.9147691664293" y="1190.0" />
+      <point x="3840.985204894373" y="1190.0" />
+      <point x="3840.985204894373" y="300.0" />
+      <point x="909.1738636363625" y="300.0" />
+      <point x="53.600000000000364" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="service.IUserCustomerHistoryService">
-      <point x="80.03125" y="-15.0" />
-      <point x="5615.054087163444" y="670.0" />
-      <point x="6075.675495653437" y="670.0" />
+      <point x="-80.03125" y="-15.0" />
+      <point x="2737.87982395202" y="760.0" />
+      <point x="2468.4106004671717" y="760.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="dao.impl.UserDao" target="entity.UserEntity">
-      <point x="38.75" y="-15.0" />
-      <point x="4107.334009009007" y="470.0" />
-      <point x="4121.084009009007" y="470.0" />
-      <point x="4121.084009009007" y="220.0" />
-      <point x="4097.695120120118" y="220.0" />
-      <point x="11.111111111111313" y="15.0" />
+      <point x="-38.75" y="-15.0" />
+      <point x="4423.439152262794" y="440.0" />
+      <point x="4395.939152262794" y="440.0" />
+      <point x="4395.939152262794" y="130.0" />
+      <point x="4723.591930040571" y="130.0" />
+      <point x="-22.222222222222626" y="15.0" />
     </edge>
     <edge source="dao.impl.UserDao" target="util.HibernateUtils">
-      <point x="-38.75" y="-15.0" />
-      <point x="4029.834009009007" y="430.0" />
-      <point x="2845.931231231229" y="430.0" />
-      <point x="13.555555555555657" y="15.0" />
-    </edge>
-    <edge source="service.impl.replace_switch_with_command.Recent1MonthUserHistoryListHandler" target="service.impl.replace_switch_with_command.Handler">
-      <point x="91.875" y="15.0" />
-      <point x="9015.937330060913" y="1120.0" />
-      <point x="9005.874830060913" y="1120.0" />
-      <point x="9005.874830060913" y="1360.0" />
-      <point x="8402.05512883011" y="1360.0" />
-      <point x="33.375" y="-15.0" />
-    </edge>
-    <edge source="service.impl.command_pattern.StudentAccCalculateExpiry" target="service.impl.command_pattern.CalculateExpiry">
-      <point x="-62.0" y="-15.0" />
-      <point x="693.5350047092452" y="1070.0" />
-      <point x="654.1931620363334" y="1070.0" />
-      <point x="-10.41666666666697" y="15.0" />
-    </edge>
-    <edge source="service.impl.UserCustomerService" target="service.impl.replace_switch_with_command.Recent1MonthUserHistoryListHandler">
-      <point x="71.54999999999995" y="-15.0" />
-      <point x="7285.155128830112" y="1110.0" />
-      <point x="8832.187330060913" y="1110.0" />
-      <point x="-91.875" y="15.0" />
-    </edge>
-    <edge source="service.impl.StaffService" target="entity.UserAccountEntity">
-      <point x="-50.08108108108081" y="-15.0" />
-      <point x="1451.442581159995" y="1360.0" />
-      <point x="122.49999999999955" y="1360.0" />
-      <point x="122.49999999999955" y="460.0" />
-      <point x="148.94189189189" y="460.0" />
-      <point x="-57.600000000000364" y="15.0" />
-    </edge>
-    <edge source="service.impl.UserCustomerLoginService" target="service.impl.UserCustomerHistoryService">
-      <point x="89.05263157894751" y="-15.0" />
-      <point x="4682.932513197296" y="1120.0" />
-      <point x="5485.772837163444" y="1120.0" />
-      <point x="-49.25" y="15.0" />
-    </edge>
-    <edge source="service.impl.UserCustomerApplyService" target="util.FaultFactory">
-      <point x="88.66666666666697" y="-15.0" />
-      <point x="3550.3711096885236" y="1090.0" />
-      <point x="4167.084009009007" y="1090.0" />
-      <point x="-14.0" y="15.0" />
-    </edge>
-    <edge source="service.impl.command_pattern.Invoker" target="service.impl.command_pattern.CalculateExpiry">
-      <point x="-21.75" y="-15.0" />
-      <point x="557.4398648648635" y="1110.0" />
-      <point x="612.5264953696674" y="1110.0" />
-      <point x="-52.08333333333303" y="15.0" />
-    </edge>
-    <edge source="service.impl.SysEmailService" target="dao.ISysConfigDao">
-      <point x="-43.33333333333303" y="-15.0" />
-      <point x="1872.026671375912" y="690.0" />
-      <point x="1529.860004709245" y="690.0" />
-      <point x="1529.860004709245" y="400.0" />
-      <point x="1523.2850047092452" y="400.0" />
-      <point x="-47.25" y="15.0" />
-    </edge>
-    <edge source="service.impl.StaffService" target="Const.SysMailTemplateType">
-      <point x="23.567567567567494" y="-15.0" />
-      <point x="1525.0912298086432" y="1270.0" />
-      <point x="2140.1663110155514" y="1270.0" />
-      <point x="-40.5" y="15.0" />
-    </edge>
-    <edge source="rpc.interceptor.AuthorizationInterceptor" target="Const.Server">
-      <point x="0.0" y="-15.0" />
-      <point x="6307.824830060913" y="670.0" />
-      <point x="6561.289530741156" y="670.0" />
-      <point x="0.0" y="15.0" />
-    </edge>
-    <edge source="service.impl.StaffService" target="service.impl.command_pattern.PersonalAccCalculateExpiry">
-      <point x="-8.83783783783747" y="-15.0" />
-      <point x="1492.6858244032383" y="1220.0" />
-      <point x="963.0350047092452" y="1220.0" />
-      <point x="0.0" y="15.0" />
-    </edge>
-    <edge source="service.impl.replace_switch_with_command.Recent1YearUserHistoryListHandler" target="service.impl.UserCustomerService">
-      <point x="-29.0" y="15.0" />
-      <point x="8636.562330060913" y="1100.0" />
-      <point x="7279.855128830111" y="1100.0" />
-      <point x="66.25" y="-15.0" />
-    </edge>
-    <edge source="dao.IUserDao" target="entity.UserEntity">
-      <point x="24.0" y="-15.0" />
-      <point x="0.0" y="15.0" />
-    </edge>
-    <edge source="dao.impl.BankStaffDao" target="util.HibernateUtils">
-      <point x="40.0" y="-15.0" />
-      <point x="2841.3711096885236" y="980.0" />
-      <point x="2704.2385332377735" y="980.0" />
-      <point x="2704.2385332377735" y="440.0" />
-      <point x="2818.8201201201177" y="440.0" />
+      <point x="38.75" y="-15.0" />
+      <point x="4500.939152262794" y="510.0" />
+      <point x="4814.758596707238" y="510.0" />
       <point x="-13.555555555555657" y="15.0" />
     </edge>
+    <edge source="service.impl.replace_switch_with_command.Recent1MonthUserHistoryListHandler" target="service.impl.replace_switch_with_command.Handler">
+      <point x="-91.875" y="-15.0" />
+      <point x="572.7613636363621" y="930.0" />
+      <point x="223.10227272727207" y="930.0" />
+      <point x="16.181818181818016" y="15.0" />
+    </edge>
+    <edge source="service.impl.command_pattern.StudentAccCalculateExpiry" target="service.impl.command_pattern.CalculateExpiry">
+      <point x="62.0" y="-15.0" />
+      <point x="8271.338126840263" y="940.0" />
+      <point x="8691.379793506929" y="940.0" />
+      <point x="-31.25" y="15.0" />
+    </edge>
+    <edge source="service.impl.UserCustomerService" target="service.impl.replace_switch_with_command.Recent1MonthUserHistoryListHandler">
+      <point x="-43.36363636363603" y="-15.0" />
+      <point x="1139.0302994694607" y="1340.0" />
+      <point x="603.3863636363621" y="1340.0" />
+      <point x="-61.25" y="15.0" />
+    </edge>
+    <edge source="service.impl.StaffService" target="entity.UserAccountEntity">
+      <point x="-8.3846153846157" y="-15.0" />
+      <point x="7610.569796156982" y="1530.0" />
+      <point x="7213.433639660775" y="1530.0" />
+      <point x="7213.433639660775" y="550.0" />
+      <point x="7307.733639660774" y="550.0" />
+      <point x="28.799999999999727" y="15.0" />
+    </edge>
+    <edge source="service.impl.UserCustomerLoginService" target="service.impl.UserCustomerHistoryService">
+      <point x="-89.05263157894751" y="-15.0" />
+      <point x="3776.5463481137976" y="1180.0" />
+      <point x="2867.16107395202" y="1180.0" />
+      <point x="49.25" y="15.0" />
+    </edge>
+    <edge source="service.impl.UserCustomerApplyService" target="util.FaultFactory">
+      <point x="-88.66666666666697" y="-15.0" />
+      <point x="4927.752488464675" y="1280.0" />
+      <point x="4320.478209319308" y="1280.0" />
+      <point x="42.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.command_pattern.Invoker" target="service.impl.command_pattern.CalculateExpiry">
+      <point x="21.75" y="-15.0" />
+      <point x="8823.588126840263" y="950.0" />
+      <point x="8774.713126840263" y="950.0" />
+      <point x="52.08333333333337" y="15.0" />
+    </edge>
+    <edge source="service.impl.SysEmailService" target="dao.ISysConfigDao">
+      <point x="43.333333333333485" y="-15.0" />
+      <point x="6045.997405767135" y="920.0" />
+      <point x="6978.266972994108" y="920.0" />
+      <point x="6978.266972994108" y="600.0" />
+      <point x="7482.183639660774" y="600.0" />
+      <point x="47.25" y="15.0" />
+    </edge>
+    <edge source="service.impl.StaffService" target="Const.SysMailTemplateType">
+      <point x="-41.92307692307668" y="-15.0" />
+      <point x="7577.031334618521" y="1650.0" />
+      <point x="5750.872103630797" y="1650.0" />
+      <point x="5750.872103630797" y="1310.0" />
+      <point x="5647.266636536366" y="1310.0" />
+      <point x="40.5" y="15.0" />
+    </edge>
+    <edge source="service.impl.StaffService" target="service.impl.command_pattern.PersonalAccCalculateExpiry">
+      <point x="36.333333333333485" y="-15.0" />
+      <point x="7655.287744874931" y="1650.0" />
+      <point x="8596.588126840263" y="1650.0" />
+      <point x="-47.25" y="15.0" />
+    </edge>
+    <edge source="service.impl.replace_switch_with_command.Recent1YearUserHistoryListHandler" target="service.impl.UserCustomerService">
+      <point x="58.0" y="15.0" />
+      <point x="194.13636363636215" y="1370.0" />
+      <point x="1124.5757540149148" y="1370.0" />
+      <point x="-57.81818181818198" y="-15.0" />
+    </edge>
+    <edge source="dao.IUserDao" target="entity.UserEntity">
+      <point x="-24.0" y="-15.0" />
+      <point x="4430.439152262794" y="140.0" />
+      <point x="4734.703041151683" y="140.0" />
+      <point x="-11.111111111111313" y="15.0" />
+    </edge>
+    <edge source="dao.impl.BankStaffDao" target="util.HibernateUtils">
+      <point x="-40.0" y="-15.0" />
+      <point x="5461.577231835925" y="1270.0" />
+      <point x="5482.266636536366" y="1270.0" />
+      <point x="5482.266636536366" y="440.0" />
+      <point x="4841.8697078183495" y="440.0" />
+      <point x="13.555555555555657" y="15.0" />
+    </edge>
     <edge source="rpc.impl.UserCustomerLoginImpl" target="service.IUserCustomerLoginService">
-      <point x="44.0" y="-15.0" />
-      <point x="4380.485144776243" y="1360.0" />
-      <point x="5425.413462163444" y="1360.0" />
-      <point x="5425.413462163444" y="1080.0" />
-      <point x="5028.522837163444" y="1080.0" />
-      <point x="48.0" y="15.0" />
+      <point x="-44.0" y="-15.0" />
+      <point x="4017.191084955903" y="1700.0" />
+      <point x="3148.53607395202" y="1700.0" />
+      <point x="3148.53607395202" y="1270.0" />
+      <point x="3514.41107395202" y="1270.0" />
+      <point x="-48.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="entity.UserAccountEntity">
-      <point x="-34.44999999999982" y="-15.0" />
-      <point x="7179.155128830112" y="810.0" />
-      <point x="6982.7248300609135" y="810.0" />
-      <point x="6982.7248300609135" y="390.0" />
-      <point x="264.14189189189074" y="390.0" />
-      <point x="57.600000000000364" y="15.0" />
+      <point x="38.54545454545405" y="-15.0" />
+      <point x="1220.9393903785508" y="1160.0" />
+      <point x="1866.4465286583281" y="1160.0" />
+      <point x="1866.4465286583281" y="520.0" />
+      <point x="7221.333639660775" y="520.0" />
+      <point x="-57.59999999999991" y="15.0" />
     </edge>
     <edge source="dao.impl.UserAccountTypeDao" target="util.HibernateUtils">
-      <point x="-64.80000000000018" y="-15.0" />
-      <point x="7400.283186640587" y="670.0" />
-      <point x="7370.587330060914" y="670.0" />
-      <point x="7370.587330060914" y="340.0" />
-      <point x="2873.0423423423404" y="340.0" />
-      <point x="40.66666666666697" y="15.0" />
+      <point x="64.80000000000018" y="-15.0" />
+      <point x="1825.2919832037842" y="980.0" />
+      <point x="1822.804483203784" y="980.0" />
+      <point x="1822.804483203784" y="500.0" />
+      <point x="4801.203041151683" y="500.0" />
+      <point x="-27.111111111111313" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibility" target="service.impl.command_pattern.PersonalAccCalculateExpiry">
+      <point x="-27.5" y="-15.0" />
+      <point x="8944.338126840263" y="1360.0" />
+      <point x="8691.088126840263" y="1360.0" />
+      <point x="47.25" y="15.0" />
     </edge>
     <edge source="dao.impl.UserCardDao" target="entity.UserCardEntity">
-      <point x="23.600000000000364" y="-15.0" />
-      <point x="480.28986486486383" y="1120.0" />
-      <point x="494.25236486486347" y="1120.0" />
-      <point x="494.25236486486347" y="700.0" />
-      <point x="436.96191912366066" y="700.0" />
-      <point x="46.875" y="15.0" />
+      <point x="-23.59999999999991" y="-15.0" />
+      <point x="7617.923383250519" y="1410.0" />
+      <point x="7605.873383250519" y="1410.0" />
+      <point x="7605.873383250519" y="960.0" />
+      <point x="7645.623383250519" y="960.0" />
+      <point x="-46.875" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Recent1YearUserHistoryListHandler" target="service.impl.replace_switch_with_command.Handler">
-      <point x="29.0" y="15.0" />
-      <point x="8694.562330060913" y="1330.0" />
-      <point x="8379.80512883011" y="1330.0" />
-      <point x="11.125" y="-15.0" />
+      <point x="-29.0" y="-15.0" />
+      <point x="107.13636363636215" y="970.0" />
+      <point x="190.73863636363603" y="970.0" />
+      <point x="-16.181818181818016" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerApplyService" target="entity.UserEntity">
-      <point x="63.33333333333303" y="-15.0" />
-      <point x="3525.0377763551896" y="1060.0" />
-      <point x="3900.584009009007" y="1060.0" />
-      <point x="3900.584009009007" y="690.0" />
-      <point x="4288.156377430059" y="690.0" />
-      <point x="4288.156377430059" y="210.0" />
-      <point x="4108.8062312312295" y="210.0" />
-      <point x="22.222222222222626" y="15.0" />
+      <point x="-25.33333333333303" y="-15.0" />
+      <point x="4991.0858217980085" y="1230.0" />
+      <point x="4756.814152262794" y="1230.0" />
+      <point x="11.111111111111313" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="service.impl.command_pattern.YoungSaverAccCalculateExpiry">
-      <point x="-2.945945945945823" y="-15.0" />
-      <point x="1498.57771629513" y="1200.0" />
-      <point x="1383.0350047092452" y="1200.0" />
-      <point x="0.0" y="15.0" />
+      <point x="33.53846153846143" y="-15.0" />
+      <point x="7652.492873080059" y="1640.0" />
+      <point x="8374.088126840263" y="1640.0" />
+      <point x="-51.75" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="dao.impl.UserDao">
-      <point x="-45.05000000000018" y="-15.0" />
-      <point x="7168.555128830111" y="830.0" />
-      <point x="6972.124830060913" y="830.0" />
-      <point x="6972.124830060913" y="550.0" />
-      <point x="4107.334009009007" y="550.0" />
-      <point x="38.75" y="15.0" />
+      <point x="48.18181818181802" y="-15.0" />
+      <point x="1230.5757540149148" y="1180.0" />
+      <point x="2137.092892133838" y="1180.0" />
+      <point x="2137.092892133838" y="790.0" />
+      <point x="4423.439152262794" y="790.0" />
+      <point x="-38.75" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="dao.IUserDao">
-      <point x="-39.57894736842081" y="-15.0" />
-      <point x="4554.300934249928" y="920.0" />
-      <point x="4277.156377430059" y="920.0" />
-      <point x="4277.156377430059" y="440.0" />
-      <point x="4083.91734234234" y="440.0" />
-      <point x="21.33333333333303" y="15.0" />
-    </edge>
-    <edge source="service.impl.CustomerApplyService" target="util.TimestampConvertHelper">
-      <point x="-62.625" y="-15.0" />
-      <point x="6238.538462163444" y="1040.0" />
-      <point x="5371.022837163444" y="1040.0" />
-      <point x="45.5" y="15.0" />
+      <point x="39.57894736842081" y="-15.0" />
+      <point x="3905.177927061166" y="1260.0" />
+      <point x="4190.1167838417405" y="1260.0" />
+      <point x="4190.1167838417405" y="470.0" />
+      <point x="4433.105818929461" y="470.0" />
+      <point x="-21.33333333333303" y="15.0" />
     </edge>
     <edge source="dao.IUserPayeeDao" target="entity.UserPayeeEntity">
       <point x="0.0" y="-15.0" />
-      <point x="7198.962330060914" y="450.0" />
-      <point x="7332.587330060914" y="450.0" />
-      <point x="-16.375" y="15.0" />
+      <point x="1473.6363636363621" y="370.0" />
+      <point x="1367.8863636363621" y="370.0" />
+      <point x="16.375" y="15.0" />
+    </edge>
+    <edge source="service.impl.CustomerApplyService" target="util.TimestampConvertHelper">
+      <point x="62.625" y="-15.0" />
+      <point x="2922.59857395202" y="1250.0" />
+      <point x="3340.244407285353" y="1250.0" />
+      <point x="-15.16666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="Const.UserOperateStatusType">
-      <point x="19.78947368421086" y="-15.0" />
-      <point x="4613.66935530256" y="1090.0" />
-      <point x="4610.840587956376" y="1090.0" />
-      <point x="4610.840587956376" y="440.0" />
-      <point x="6506.84788732083" y="440.0" />
-      <point x="-64.5" y="15.0" />
+      <point x="-9.894736842104976" y="-15.0" />
+      <point x="3855.70424285064" y="1210.0" />
+      <point x="3860.774678578584" y="1210.0" />
+      <point x="3860.774678578584" y="280.0" />
+      <point x="2777.908176385601" y="280.0" />
+      <point x="64.5" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Handler" target="service.impl.UserCustomerService">
-      <point x="-40.791666666666686" y="-15.0" />
-      <point x="8327.888462163444" y="1370.0" />
-      <point x="7193.730128830111" y="1370.0" />
-      <point x="-19.875" y="15.0" />
+      <point x="-24.272727272727934" y="15.0" />
+      <point x="182.64772727272612" y="960.0" />
+      <point x="9.636363636362148" y="960.0" />
+      <point x="9.636363636362148" y="1390.0" />
+      <point x="1114.9393903785508" y="1390.0" />
+      <point x="-67.45454545454595" y="-15.0" />
     </edge>
     <edge source="util.AccountNumberGenerator" target="dao.impl.UserAccountDao">
       <point x="0.0" y="-15.0" />
+      <point x="6178.787183678283" y="1320.0" />
+      <point x="5834.766636536366" y="1320.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Recent7DaysUserHistoryListHandler" target="service.impl.UserCustomerService">
-      <point x="-29.5" y="15.0" />
-      <point x="8112.062330060915" y="1060.0" />
-      <point x="7258.655128830112" y="1060.0" />
-      <point x="45.05000000000018" y="-15.0" />
+      <point x="59.0" y="15.0" />
+      <point x="984.1363636363621" y="1310.0" />
+      <point x="1153.4848449240067" y="1310.0" />
+      <point x="-28.909090909090082" y="-15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="dao.IUserPayeeDao">
-      <point x="-7.949999999999818" y="-15.0" />
-      <point x="7205.655128830112" y="960.0" />
-      <point x="7245.749830060914" y="960.0" />
-      <point x="47.625" y="15.0" />
+      <point x="0.0" y="-15.0" />
+      <point x="1182.3939358330967" y="1080.0" />
+      <point x="1431.273863636362" y="1080.0" />
+      <point x="1431.273863636362" y="980.0" />
+      <point x="1426.0113636363621" y="980.0" />
+      <point x="-47.625" y="15.0" />
     </edge>
     <edge source="dao.IBankStaffDao" target="entity.BankStaffEntity">
-      <point x="-30.75" y="-15.0" />
-      <point x="2545.0163110155518" y="650.0" />
-      <point x="2506.4527027027007" y="650.0" />
+      <point x="30.75" y="-15.0" />
+      <point x="6180.914072433801" y="950.0" />
+      <point x="7063.266972994108" y="950.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="rpc.impl.UserCustomerImpl" target="service.impl.UserCustomerService">
-      <point x="36.5" y="-15.0" />
-      <point x="6565.667628830111" y="1370.0" />
-      <point x="7153.980128830111" y="1370.0" />
-      <point x="-59.625" y="15.0" />
+      <point x="-36.5" y="-15.0" />
+      <point x="1422.0359812876418" y="1710.0" />
+      <point x="1182.3939358330967" y="1710.0" />
+      <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="dao.impl.UserDao">
-      <point x="-92.34375" y="-15.0" />
-      <point x="5442.679087163444" y="650.0" />
-      <point x="4091.834009009007" y="650.0" />
-      <point x="23.25" y="15.0" />
+      <point x="92.34375" y="-15.0" />
+      <point x="2910.25482395202" y="800.0" />
+      <point x="4438.939152262794" y="800.0" />
+      <point x="-23.25" y="15.0" />
     </edge>
     <edge source="service.impl.method_template_pattern.PersonalAccount" target="service.impl.method_template_pattern.FeesTemplate">
-      <point x="33.75" y="-15.0" />
-      <point x="3815.209009009007" y="610.0" />
-      <point x="3690.959009009007" y="610.0" />
+      <point x="-33.75" y="-15.0" />
+      <point x="7356.183639660775" y="720.0" />
+      <point x="6299.579536878179" y="720.0" />
       <point x="45.0" y="15.0" />
     </edge>
     <edge source="service.impl.replace_constructors_with_creation_methods.NewTransferHistoryFactory" target="entity.UserHistoryEntity">
-      <point x="-47.5" y="-15.0" />
-      <point x="5090.866587163444" y="170.0" />
-      <point x="5835.60401997392" y="170.0" />
-      <point x="-42.166666666666515" y="15.0" />
+      <point x="47.5" y="-15.0" />
+      <point x="3809.327310157531" y="140.0" />
+      <point x="2405.908176385601" y="140.0" />
+      <point x="57.5" y="15.0" />
     </edge>
     <edge source="dao.impl.UserCardDao" target="util.HibernateUtils">
-      <point x="47.20000000000073" y="-15.0" />
-      <point x="503.8898648648642" y="1120.0" />
-      <point x="505.25236486486347" y="1120.0" />
-      <point x="505.25236486486347" y="700.0" />
-      <point x="1540.860004709245" y="700.0" />
-      <point x="1540.860004709245" y="420.0" />
-      <point x="2791.7090090090064" y="420.0" />
-      <point x="-40.66666666666697" y="15.0" />
+      <point x="-47.20000000000027" y="-15.0" />
+      <point x="7594.323383250518" y="1410.0" />
+      <point x="7587.310883250519" y="1410.0" />
+      <point x="7587.310883250519" y="400.0" />
+      <point x="4882.5363744850165" y="400.0" />
+      <point x="54.222222222222626" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="service.impl.replace_switch_with_command.Recent7DaysUserHistoryListHandler">
-      <point x="39.75" y="-15.0" />
-      <point x="7253.355128830111" y="1050.0" />
-      <point x="8053.062330060915" y="1050.0" />
-      <point x="-88.5" y="15.0" />
+      <point x="-33.727272727272066" y="-15.0" />
+      <point x="1148.6666631058247" y="1320.0" />
+      <point x="866.1363636363621" y="1320.0" />
+      <point x="-59.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="util.TimestampConvertHelper">
-      <point x="-66.25" y="-15.0" />
-      <point x="7147.355128830111" y="870.0" />
-      <point x="5401.356170496778" y="870.0" />
-      <point x="75.83333333333348" y="15.0" />
+      <point x="67.45454545454595" y="-15.0" />
+      <point x="1249.8484812876427" y="1230.0" />
+      <point x="3279.577740618687" y="1230.0" />
+      <point x="-75.83333333333303" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerApplyService" target="service.impl.method_template_pattern.StudentAccount">
       <point x="12.66666666666697" y="-15.0" />
-      <point x="3474.3711096885236" y="1020.0" />
-      <point x="3627.959009009007" y="1020.0" />
+      <point x="5029.0858217980085" y="1260.0" />
+      <point x="5058.314152262794" y="1260.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.method_template_pattern.GoldenAccount" target="service.impl.method_template_pattern.FeesTemplate">
-      <point x="32.25" y="-15.0" />
-      <point x="3509.709009009007" y="650.0" />
-      <point x="3630.959009009007" y="650.0" />
-      <point x="-15.0" y="15.0" />
+      <point x="-32.25" y="-15.0" />
+      <point x="6638.205132396231" y="740.0" />
+      <point x="6269.579536878179" y="740.0" />
+      <point x="15.0" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibility" target="entity.UserApplyArchiveEntity">
+      <point x="38.5" y="-15.0" />
+      <point x="9010.338126840263" y="1300.0" />
+      <point x="8940.843239100468" y="1300.0" />
+      <point x="8940.843239100468" y="80.0" />
+      <point x="7523.121844570487" y="80.0" />
+      <point x="45.333333333333485" y="15.0" />
     </edge>
     <edge source="rpc.impl.UserCustomerImpl" target="service.IUserCustomerService">
-      <point x="-36.5" y="-15.0" />
-      <point x="6492.667628830111" y="1370.0" />
-      <point x="6095.538462163444" y="1370.0" />
-      <point x="6095.538462163444" y="1090.0" />
-      <point x="6644.824830060913" y="1090.0" />
-      <point x="-40.5" y="15.0" />
+      <point x="36.5" y="-15.0" />
+      <point x="1495.0359812876418" y="1710.0" />
+      <point x="2273.91107395202" y="1710.0" />
+      <point x="40.5" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibility" target="service.impl.method_template_pattern.PersonalAccount">
+      <point x="-60.5" y="-15.0" />
+      <point x="8911.338126840263" y="1390.0" />
+      <point x="7423.683639660775" y="1390.0" />
+      <point x="33.75" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerApplyService" target="service.impl.method_template_pattern.IAccounts">
-      <point x="-25.33333333333303" y="-15.0" />
-      <point x="3436.3711096885236" y="1020.0" />
-      <point x="3222.459009009007" y="1020.0" />
-      <point x="3222.459009009007" y="620.0" />
-      <point x="3405.209009009007" y="620.0" />
-      <point x="-40.0" y="15.0" />
-    </edge>
-    <edge source="dao.impl.UserAccountTypeDao" target="dao.IUserAccountTypeDao">
-      <point x="64.79999999999995" y="-15.0" />
-      <point x="7529.883186640587" y="670.0" />
-      <point x="7527.395686640586" y="670.0" />
-      <point x="20.625" y="15.0" />
+      <point x="63.33333333333303" y="-15.0" />
+      <point x="5079.752488464675" y="1300.0" />
+      <point x="5336.814152262794" y="1300.0" />
+      <point x="5336.814152262794" y="890.0" />
+      <point x="6612.433639660774" y="890.0" />
+      <point x="-8.333333333333485" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="Const.UserTransactionTimeFilter">
-      <point x="34.450000000000045" y="-15.0" />
-      <point x="7248.055128830111" y="1040.0" />
-      <point x="7912.562330060914" y="1040.0" />
+      <point x="-9.636363636363967" y="-15.0" />
+      <point x="1172.7575721967328" y="1060.0" />
+      <point x="1298.1363636363621" y="1060.0" />
       <point x="0.0" y="15.0" />
     </edge>
+    <edge source="dao.impl.UserAccountTypeDao" target="dao.IUserAccountTypeDao">
+      <point x="0.0" y="-15.0" />
+      <point x="1760.491983203784" y="980.0" />
+      <point x="1780.679483203784" y="980.0" />
+      <point x="61.875" y="15.0" />
+    </edge>
     <edge source="service.impl.UserCustomerApplyService" target="dao.IUserApplyDao">
-      <point x="-76.0" y="-15.0" />
-      <point x="3385.7044430218566" y="1060.0" />
-      <point x="3081.9344791837193" y="1060.0" />
-      <point x="3081.9344791837193" y="650.0" />
-      <point x="3085.9344791837193" y="650.0" />
+      <point x="0.0" y="-15.0" />
+      <point x="5016.4191551313415" y="1210.0" />
+      <point x="4981.814152262794" y="1210.0" />
+      <point x="4981.814152262794" y="810.0" />
+      <point x="5022.314152262794" y="810.0" />
       <point x="48.0" y="15.0" />
     </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibilityTest" target="entity.UserApplyArchiveEntity">
+      <point x="43.75" y="-15.0" />
+      <point x="9279.671460173595" y="1710.0" />
+      <point x="9289.843239100468" y="1710.0" />
+      <point x="9289.843239100468" y="60.0" />
+      <point x="7545.788511237153" y="60.0" />
+      <point x="68.0" y="15.0" />
+    </edge>
     <edge source="service.impl.UserCustomerService" target="service.IUserCustomerHistoryService">
-      <point x="-39.75" y="-15.0" />
-      <point x="7173.855128830111" y="820.0" />
-      <point x="6977.424830060913" y="820.0" />
-      <point x="6977.424830060913" y="540.0" />
-      <point x="6142.342162320103" y="540.0" />
-      <point x="66.66666666666652" y="15.0" />
+      <point x="43.36363636363603" y="-15.0" />
+      <point x="1225.7575721967328" y="1170.0" />
+      <point x="2132.274710315656" y="1170.0" />
+      <point x="2132.274710315656" y="780.0" />
+      <point x="2401.7439338005047" y="780.0" />
+      <point x="-66.66666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="service.impl.replace_constructors_with_creation_methods.NewUserLoginReqHistoryFactory">
-      <point x="18.46875" y="-15.0" />
-      <point x="5553.491587163444" y="610.0" />
-      <point x="5613.505128830111" y="610.0" />
+      <point x="6.15625" y="-15.0" />
+      <point x="2824.06732395202" y="720.0" />
+      <point x="3179.81732395202" y="720.0" />
+      <point x="3179.81732395202" y="410.0" />
+      <point x="3536.327310157531" y="410.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Recent7DaysUserHistoryListHandler" target="entity.UserHistoryEntity">
-      <point x="-59.0" y="-15.0" />
-      <point x="8082.562330060915" y="670.0" />
-      <point x="8097.592091965676" y="670.0" />
-      <point x="8097.592091965676" y="110.0" />
-      <point x="5896.937353307253" y="110.0" />
-      <point x="19.166666666666515" y="15.0" />
+      <point x="88.5" y="-15.0" />
+      <point x="1013.6363636363621" y="980.0" />
+      <point x="1017.4280303030296" y="980.0" />
+      <point x="1017.4280303030296" y="190.0" />
+      <point x="2329.241509718934" y="190.0" />
+      <point x="-19.16666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Recent1MonthUserHistoryListHandler" target="entity.UserHistoryEntity">
-      <point x="61.25" y="-15.0" />
-      <point x="8985.312330060913" y="60.0" />
-      <point x="5935.270686640586" y="60.0" />
-      <point x="57.5" y="15.0" />
-    </edge>
-    <edge source="service.impl.replace_switch_with_command.Recent1YearUserHistoryListHandler" target="entity.UserHistoryEntity">
-      <point x="58.0" y="-15.0" />
-      <point x="8723.562330060913" y="70.0" />
-      <point x="5927.60401997392" y="70.0" />
-      <point x="49.833333333333485" y="15.0" />
+      <point x="30.625" y="-15.0" />
+      <point x="695.2613636363621" y="950.0" />
+      <point x="688.7613636363621" y="950.0" />
+      <point x="688.7613636363621" y="160.0" />
+      <point x="2306.241509718934" y="160.0" />
+      <point x="-42.16666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Handler" target="entity.UserHistoryEntity">
-      <point x="40.79166666666697" y="-15.0" />
-      <point x="8409.471795496778" y="1370.0" />
-      <point x="9057.062330060913" y="1370.0" />
-      <point x="9057.062330060913" y="50.0" />
-      <point x="5942.937353307253" y="50.0" />
-      <point x="65.16666666666652" y="15.0" />
+      <point x="0.0" y="-15.0" />
+      <point x="206.92045454545405" y="140.0" />
+      <point x="2290.908176385601" y="140.0" />
+      <point x="-57.5" y="15.0" />
+    </edge>
+    <edge source="service.impl.replace_switch_with_command.Recent1YearUserHistoryListHandler" target="entity.UserHistoryEntity">
+      <point x="-87.0" y="-15.0" />
+      <point x="49.13636363636215" y="930.0" />
+      <point x="17.29545454545405" y="930.0" />
+      <point x="17.29545454545405" y="130.0" />
+      <point x="2283.241509718934" y="130.0" />
+      <point x="-65.16666666666697" y="15.0" />
     </edge>
     <edge source="dao.impl.UserAccountDao" target="dao.IUserAccountDao">
-      <point x="-54.399999999999636" y="-15.0" />
-      <point x="183.2430494237219" y="700.0" />
-      <point x="178.7418918918911" y="700.0" />
-      <point x="-27.799999999999272" y="15.0" />
+      <point x="0.0" y="-15.0" />
+      <point x="27.800000000000182" y="15.0" />
+    </edge>
+    <edge source="dao.impl.BankStaffDao" target="dao.IBankStaffDao">
+      <point x="40.0" y="-15.0" />
+      <point x="5541.577231835925" y="1370.0" />
+      <point x="6150.164072433801" y="1370.0" />
+      <point x="0.0" y="15.0" />
     </edge>
     <edge source="dao.IUserAccountDao" target="entity.UserAccountEntity">
       <point x="0.0" y="-15.0" />
-      <point x="0.0" y="15.0" />
-    </edge>
-    <edge source="dao.impl.BankStaffDao" target="dao.IBankStaffDao">
-      <point x="-13.33333333333303" y="-15.0" />
-      <point x="2788.0377763551905" y="1020.0" />
-      <point x="2624.9663110155516" y="1020.0" />
-      <point x="49.19999999999982" y="15.0" />
+      <point x="5807.266636536366" y="530.0" />
+      <point x="7250.133639660775" y="530.0" />
+      <point x="-28.799999999999955" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="entity.UserApplyArchiveEntity">
-      <point x="0.0" y="-15.0" />
-      <point x="1501.5236622410757" y="1190.0" />
-      <point x="1497.0350047092452" y="1190.0" />
-      <point x="1497.0350047092452" y="160.0" />
-      <point x="2857.5120393120374" y="160.0" />
-      <point x="-46.36363636363603" y="15.0" />
+      <point x="5.589743589743648" y="-15.0" />
+      <point x="7624.5441551313415" y="1480.0" />
+      <point x="7572.023383250518" y="1480.0" />
+      <point x="7572.023383250518" y="110.0" />
+      <point x="7489.121844570487" y="110.0" />
+      <point x="11.333333333333485" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="util.CardNumberGenerator">
-      <point x="14.729729729730025" y="-15.0" />
-      <point x="1516.2533919708058" y="1240.0" />
-      <point x="1977.360004709245" y="1240.0" />
+      <point x="-2.794871794871824" y="-15.0" />
+      <point x="7616.159539746726" y="1510.0" />
+      <point x="7471.933639660775" y="1510.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.method_template_pattern.StudentAccount" target="service.impl.method_template_pattern.IAccounts">
-      <point x="-33.0" y="-15.0" />
-      <point x="3594.959009009007" y="630.0" />
-      <point x="3465.209009009007" y="630.0" />
-      <point x="20.0" y="15.0" />
+      <point x="33.000000000000455" y="-15.0" />
+      <point x="5091.314152262794" y="870.0" />
+      <point x="6579.100306327442" y="870.0" />
+      <point x="-41.666666666666515" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="Const.UserOperateType">
-      <point x="-23.84999999999991" y="-15.0" />
-      <point x="7189.755128830111" y="790.0" />
-      <point x="6993.324830060914" y="790.0" />
-      <point x="6993.324830060914" y="370.0" />
-      <point x="6413.22288732083" y="370.0" />
-      <point x="17.375" y="15.0" />
+      <point x="9.636363636363967" y="-15.0" />
+      <point x="1192.0302994694607" y="1100.0" />
+      <point x="1625.804483203784" y="1100.0" />
+      <point x="1625.804483203784" y="400.0" />
+      <point x="2520.533176385601" y="400.0" />
+      <point x="-17.375" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="Const.UserStatusType">
-      <point x="-80.03125" y="-15.0" />
-      <point x="5454.991587163444" y="640.0" />
-      <point x="4549.156377430059" y="640.0" />
-      <point x="43.0" y="15.0" />
+      <point x="80.03125" y="-15.0" />
+      <point x="2897.94232395202" y="780.0" />
+      <point x="4062.222046999636" y="780.0" />
+      <point x="-43.0" y="15.0" />
     </edge>
     <edge source="dao.impl.BankStaffDao" target="entity.UserApplyArchiveEntity">
-      <point x="13.33333333333303" y="-15.0" />
-      <point x="2814.7044430218566" y="1000.0" />
-      <point x="2658.7663110155518" y="1000.0" />
-      <point x="2658.7663110155518" y="180.0" />
-      <point x="2888.4211302211284" y="180.0" />
-      <point x="-15.454545454545041" y="15.0" />
+      <point x="-13.333333333333485" y="-15.0" />
+      <point x="5488.243898502591" y="1290.0" />
+      <point x="5504.266636536366" y="1290.0" />
+      <point x="5504.266636536366" y="210.0" />
+      <point x="7466.455177903819" y="210.0" />
+      <point x="-11.333333333333485" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="dao.impl.UserAccountTypeDao">
-      <point x="2.650000000000091" y="-15.0" />
-      <point x="7216.255128830111" y="980.0" />
-      <point x="7465.083186640587" y="980.0" />
+      <point x="19.272727272727934" y="-15.0" />
+      <point x="1201.6666631058247" y="1120.0" />
+      <point x="1760.491983203784" y="1120.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Recent7DaysUserHistoryListHandler" target="dao.impl.UserHistoryDao">
-      <point x="59.0" y="-15.0" />
-      <point x="8200.562330060915" y="700.0" />
-      <point x="8260.395663394247" y="700.0" />
-      <point x="-10.916666666666629" y="15.0" />
+      <point x="29.5" y="-15.0" />
+      <point x="954.6363636363621" y="890.0" />
+      <point x="866.4905303030282" y="890.0" />
+      <point x="10.91666666666606" y="15.0" />
     </edge>
     <edge source="dao.impl.BankStaffDao" target="entity.UserEntity">
-      <point x="26.66666666666697" y="-15.0" />
-      <point x="2828.0377763551905" y="990.0" />
-      <point x="2669.7663110155518" y="990.0" />
-      <point x="2669.7663110155518" y="210.0" />
-      <point x="4064.3617867867843" y="210.0" />
-      <point x="-22.222222222222626" y="15.0" />
+      <point x="-26.666666666666515" y="-15.0" />
+      <point x="5474.910565169259" y="1280.0" />
+      <point x="5493.266636536366" y="1280.0" />
+      <point x="5493.266636536366" y="140.0" />
+      <point x="4768.0363744850165" y="140.0" />
+      <point x="22.222222222222626" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="dao.impl.UserHistoryDao">
-      <point x="49.4736842105267" y="-15.0" />
-      <point x="4643.353565828876" y="1070.0" />
-      <point x="4874.022837163444" y="1070.0" />
-      <point x="4874.022837163444" y="680.0" />
-      <point x="8216.728996727581" y="680.0" />
-      <point x="-54.583333333333485" y="15.0" />
+      <point x="-49.4736842105267" y="-15.0" />
+      <point x="3816.1252954822185" y="1140.0" />
+      <point x="3668.91107395202" y="1140.0" />
+      <point x="3668.91107395202" y="690.0" />
+      <point x="910.1571969696961" y="690.0" />
+      <point x="54.58333333333394" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="util.FaultFactory">
-      <point x="-71.54999999999995" y="-15.0" />
-      <point x="7142.055128830111" y="880.0" />
-      <point x="4223.084009009007" y="880.0" />
-      <point x="42.0" y="15.0" />
+      <point x="72.27272727272793" y="-15.0" />
+      <point x="1254.6666631058247" y="1280.0" />
+      <point x="4236.478209319308" y="1280.0" />
+      <point x="-42.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="util.OperationNoGenerator">
-      <point x="-43.09375" y="-15.0" />
-      <point x="5491.929087163444" y="610.0" />
-      <point x="4870.616587163444" y="610.0" />
-      <point x="42.25" y="15.0" />
+      <point x="43.09375" y="-15.0" />
+      <point x="2861.00482395202" y="750.0" />
+      <point x="3438.56732395202" y="750.0" />
+      <point x="-42.25" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="util.AccountNumberGenerator">
-      <point x="-38.29729729729752" y="-15.0" />
-      <point x="1463.2263649437782" y="1320.0" />
-      <point x="237.64304942372155" y="1320.0" />
+      <point x="-36.33333333333326" y="-15.0" />
+      <point x="7582.621078208264" y="1630.0" />
+      <point x="6178.787183678283" y="1630.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.command_pattern.Receiver" target="entity.UserApplyArchiveEntity">
-      <point x="22.75" y="-15.0" />
-      <point x="1001.3858108108093" y="690.0" />
-      <point x="984.1358108108093" y="690.0" />
-      <point x="984.1358108108093" y="150.0" />
-      <point x="2842.0574938574914" y="150.0" />
-      <point x="-61.81818181818198" y="15.0" />
+      <point x="-22.75" y="-15.0" />
+      <point x="8174.610626621769" y="610.0" />
+      <point x="8191.860626621769" y="610.0" />
+      <point x="8191.860626621769" y="100.0" />
+      <point x="7500.455177903819" y="100.0" />
+      <point x="22.666666666666515" y="15.0" />
     </edge>
     <edge source="service.impl.CustomerApplyService" target="service.ICustomerApplyService">
-      <point x="62.625" y="-15.0" />
-      <point x="6363.788462163444" y="1120.0" />
-      <point x="6927.99149672758" y="1120.0" />
-      <point x="56.666666666666515" y="15.0" />
+      <point x="-62.625" y="-15.0" />
+      <point x="2797.34857395202" y="1190.0" />
+      <point x="2964.744407285353" y="1190.0" />
+      <point x="-56.66666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.command_pattern.YoungSaverAccCalculateExpiry" target="service.impl.command_pattern.CalculateExpiry">
-      <point x="-69.0" y="-15.0" />
-      <point x="1314.0350047092452" y="1020.0" />
-      <point x="716.6931620363334" y="1020.0" />
-      <point x="52.08333333333303" y="15.0" />
+      <point x="69.0" y="-15.0" />
+      <point x="8494.838126840263" y="950.0" />
+      <point x="8712.213126840263" y="950.0" />
+      <point x="-10.416666666666629" y="15.0" />
     </edge>
     <edge source="util.IdGenerator" target="dao.impl.BankStaffDao">
-      <point x="-13.75" y="-15.0" />
-      <point x="2904.4544430218566" y="1340.0" />
-      <point x="2831.3711096885236" y="1340.0" />
-      <point x="30.0" y="15.0" />
+      <point x="13.75" y="-15.0" />
+      <point x="5427.4191551313415" y="1700.0" />
+      <point x="5471.577231835925" y="1700.0" />
+      <point x="-30.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="dao.IUserCardDao">
-      <point x="-29.45945945945914" y="-15.0" />
-      <point x="1472.0642027816166" y="1290.0" />
-      <point x="371.87533783783647" y="1290.0" />
-      <point x="371.87533783783647" y="1120.0" />
-      <point x="377.07852239669364" y="1120.0" />
-      <point x="-45.375" y="15.0" />
+      <point x="11.179487179486841" y="-15.0" />
+      <point x="7630.133898721085" y="1560.0" />
+      <point x="7726.413447353083" y="1560.0" />
+      <point x="45.375" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerApplyService" target="service.impl.method_template_pattern.PersonalAccount">
-      <point x="25.33333333333303" y="-15.0" />
-      <point x="3487.0377763551896" y="1030.0" />
-      <point x="3781.459009009007" y="1030.0" />
-      <point x="0.0" y="15.0" />
+      <point x="88.66666666666697" y="-15.0" />
+      <point x="5105.0858217980085" y="1410.0" />
+      <point x="7356.183639660775" y="1410.0" />
+      <point x="-33.75" y="15.0" />
     </edge>
     <edge source="dao.IUserDao" target="entity.UserApplyArchiveEntity">
-      <point x="-24.0" y="-15.0" />
-      <point x="4038.584009009007" y="130.0" />
-      <point x="2981.1484029484004" y="130.0" />
-      <point x="77.27272727272702" y="15.0" />
+      <point x="24.0" y="-15.0" />
+      <point x="4478.439152262794" y="150.0" />
+      <point x="7398.455177903819" y="150.0" />
+      <point x="-79.33333333333348" y="15.0" />
+    </edge>
+    <edge source="service.impl.replace_switch_with_command.Recent6MonthsUserHistoryListHandler" target="entity.UserHistoryEntity">
+      <point x="31.25" y="-15.0" />
+      <point x="428.38636363636215" y="150.0" />
+      <point x="2298.574843052268" y="150.0" />
+      <point x="-49.83333333333303" y="15.0" />
     </edge>
     <edge source="util.PINFieldSetter" target="util.RandomUtil">
       <point x="0.0" y="-15.0" />
-      <point x="4359.656377430059" y="470.0" />
-      <point x="4394.489710763393" y="470.0" />
-      <point x="-36.66666666666697" y="15.0" />
-    </edge>
-    <edge source="service.impl.replace_switch_with_command.Recent6MonthsUserHistoryListHandler" target="entity.UserHistoryEntity">
-      <point x="62.5" y="-15.0" />
-      <point x="8467.062330060913" y="700.0" />
-      <point x="8441.687330060913" y="700.0" />
-      <point x="8441.687330060913" y="80.0" />
-      <point x="5919.937353307253" y="80.0" />
-      <point x="42.166666666666515" y="15.0" />
+      <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="util.TimestampConvertHelper">
-      <point x="79.15789473684254" y="-15.0" />
-      <point x="4673.037776355191" y="1110.0" />
-      <point x="5280.022837163444" y="1110.0" />
-      <point x="-45.5" y="15.0" />
+      <point x="-69.26315789473665" y="-15.0" />
+      <point x="3796.3358217980085" y="1160.0" />
+      <point x="3400.91107395202" y="1160.0" />
+      <point x="45.5" y="15.0" />
     </edge>
     <edge source="dao.impl.UserHistoryDao" target="util.HibernateUtils">
-      <point x="-56.14285714285711" y="-15.0" />
-      <point x="8215.169472918056" y="310.0" />
-      <point x="2886.597897897896" y="310.0" />
-      <point x="54.222222222222626" y="15.0" />
+      <point x="56.14285714285688" y="-15.0" />
+      <point x="911.716720779219" y="480.0" />
+      <point x="4774.091930040571" y="480.0" />
+      <point x="-54.22222222222217" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="Const.UserOperateStatusType">
-      <point x="55.40625" y="-15.0" />
-      <point x="5590.429087163444" y="640.0" />
-      <point x="5954.175495653437" y="640.0" />
-      <point x="5954.175495653437" y="450.0" />
-      <point x="6549.84788732083" y="450.0" />
-      <point x="-21.5" y="15.0" />
+      <point x="-30.78125" y="-15.0" />
+      <point x="2787.12982395202" y="780.0" />
+      <point x="2794.1606004671717" y="780.0" />
+      <point x="2794.1606004671717" y="420.0" />
+      <point x="2734.908176385601" y="420.0" />
+      <point x="21.5" y="15.0" />
     </edge>
     <edge source="rpc.impl.UserCustomerLoginImpl" target="util.TimestampConvertHelper">
-      <point x="73.33333333333303" y="-15.0" />
-      <point x="4409.818478109576" y="1370.0" />
-      <point x="5571.830128830111" y="1370.0" />
-      <point x="5571.830128830111" y="1070.0" />
-      <point x="5310.356170496778" y="1070.0" />
-      <point x="-15.166666666666515" y="15.0" />
+      <point x="-73.33333333333303" y="-15.0" />
+      <point x="3987.85775162257" y="1710.0" />
+      <point x="3071.1194072853536" y="1710.0" />
+      <point x="3071.1194072853536" y="1260.0" />
+      <point x="3370.577740618687" y="1260.0" />
+      <point x="15.16666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerApplyService" target="entity.UserApplyArchiveEntity">
-      <point x="-63.33333333333303" y="-15.0" />
-      <point x="3398.3711096885236" y="1050.0" />
-      <point x="3112.4344791837193" y="1050.0" />
-      <point x="3112.4344791837193" y="160.0" />
-      <point x="2934.7847665847644" y="160.0" />
-      <point x="30.90909090909099" y="15.0" />
+      <point x="38.0" y="-15.0" />
+      <point x="5054.4191551313415" y="1280.0" />
+      <point x="5314.814152262794" y="1280.0" />
+      <point x="5314.814152262794" y="190.0" />
+      <point x="7443.788511237153" y="190.0" />
+      <point x="-34.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="Const.CardCurrencyType">
-      <point x="32.40540540540496" y="-15.0" />
-      <point x="1533.9290676464807" y="1300.0" />
-      <point x="2369.6663110155514" y="1300.0" />
+      <point x="-5.589743589743648" y="-15.0" />
+      <point x="7613.364667951854" y="1520.0" />
+      <point x="7295.933639660775" y="1520.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.command_pattern.GoldenAccCalculateExpiry" target="service.impl.command_pattern.CalculateExpiry">
-      <point x="-60.66666666666697" y="-15.0" />
-      <point x="1107.8683380425782" y="1050.0" />
-      <point x="695.8598287030004" y="1050.0" />
-      <point x="31.25" y="15.0" />
+      <point x="60.66666666666674" y="-15.0" />
+      <point x="8066.00479350693" y="930.0" />
+      <point x="8670.546460173595" y="930.0" />
+      <point x="-52.08333333333337" y="15.0" />
+    </edge>
+    <edge source="service.impl.facade_pattern.ConversionEligibility" target="service.impl.command_pattern.StudentAccCalculateExpiry">
+      <point x="-49.5" y="-15.0" />
+      <point x="8922.338126840263" y="1380.0" />
+      <point x="8255.838126840263" y="1380.0" />
+      <point x="46.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="dao.IUserDao">
-      <point x="-67.71875" y="-15.0" />
-      <point x="5467.304087163444" y="630.0" />
-      <point x="4733.366587163444" y="630.0" />
-      <point x="4733.366587163444" y="410.0" />
-      <point x="4094.584009009007" y="410.0" />
-      <point x="32.0" y="15.0" />
+      <point x="67.71875" y="-15.0" />
+      <point x="2885.62982395202" y="770.0" />
+      <point x="3575.81732395202" y="770.0" />
+      <point x="3575.81732395202" y="460.0" />
+      <point x="4422.439152262794" y="460.0" />
+      <point x="-32.0" y="15.0" />
     </edge>
     <edge source="dao.IUserCardDao" target="entity.UserCardEntity">
       <point x="0.0" y="-15.0" />
-      <point x="422.45352239669364" y="700.0" />
-      <point x="405.71191912366066" y="700.0" />
-      <point x="15.625" y="15.0" />
-    </edge>
-    <edge source="service.impl.UserCustomerService" target="service.impl.replace_switch_with_command.Recent6MonthsUserHistoryListHandler">
-      <point x="50.34999999999991" y="-15.0" />
-      <point x="7263.955128830112" y="1070.0" />
-      <point x="8310.812330060913" y="1070.0" />
-      <point x="-93.75" y="15.0" />
+      <point x="7680.248383250519" y="960.0" />
+      <point x="7676.873383250519" y="960.0" />
+      <point x="-15.625" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="service.impl.replace_switch_with_command.Handler">
-      <point x="59.625" y="15.0" />
-      <point x="7273.230128830111" y="1350.0" />
-      <point x="8342.721795496778" y="1350.0" />
-      <point x="-25.95833333333303" y="-15.0" />
+      <point x="-72.27272727272793" y="-15.0" />
+      <point x="1110.1212085603688" y="1400.0" />
+      <point x="4.8181818181801646" y="1400.0" />
+      <point x="4.8181818181801646" y="950.0" />
+      <point x="174.55681818181802" y="950.0" />
+      <point x="-32.36363636363603" y="15.0" />
+    </edge>
+    <edge source="service.impl.UserCustomerService" target="service.impl.replace_switch_with_command.Recent6MonthsUserHistoryListHandler">
+      <point x="-53.0" y="-15.0" />
+      <point x="1129.3939358330967" y="1360.0" />
+      <point x="334.63636363636215" y="1360.0" />
+      <point x="-62.5" y="15.0" />
     </edge>
     <edge source="dao.impl.UserHistoryDao" target="entity.UserHistoryEntity">
-      <point x="56.14285714285688" y="-15.0" />
-      <point x="8327.45518720377" y="470.0" />
-      <point x="8392.58536407449" y="470.0" />
-      <point x="8392.58536407449" y="90.0" />
-      <point x="5912.270686640586" y="90.0" />
-      <point x="34.5" y="15.0" />
+      <point x="-56.14285714285688" y="-15.0" />
+      <point x="799.4310064935053" y="610.0" />
+      <point x="696.4280303030291" y="610.0" />
+      <point x="696.4280303030291" y="170.0" />
+      <point x="2313.908176385601" y="170.0" />
+      <point x="-34.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerApplyService" target="service.impl.method_template_pattern.YoungSaversAccount">
-      <point x="-12.66666666666697" y="-15.0" />
-      <point x="3449.0377763551896" y="1010.0" />
-      <point x="3312.959009009007" y="1010.0" />
+      <point x="25.33333333333303" y="-15.0" />
+      <point x="5041.752488464675" y="1270.0" />
+      <point x="5224.314152262794" y="1270.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.CustomerLoginService" target="rpc.interceptor.AuthorizationInterceptor">
-      <point x="-13.75" y="-15.0" />
-      <point x="5881.788462163444" y="1050.0" />
-      <point x="6307.824830060913" y="1050.0" />
+      <point x="-68.75" y="-15.0" />
+      <point x="2491.66107395202" y="1200.0" />
+      <point x="2422.91107395202" y="1200.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="dao.impl.UserHistoryDao" target="Const.UserOperateStatusType">
-      <point x="-18.714285714285666" y="-15.0" />
-      <point x="8252.598044346629" y="290.0" />
-      <point x="6635.84788732083" y="290.0" />
-      <point x="64.5" y="15.0" />
+      <point x="37.42857142857065" y="-15.0" />
+      <point x="893.0024350649328" y="410.0" />
+      <point x="2648.908176385601" y="410.0" />
+      <point x="-64.5" y="15.0" />
     </edge>
     <edge source="service.impl.CustomerLoginService" target="Const.PinReplyType">
-      <point x="-68.75" y="-15.0" />
-      <point x="5826.788462163444" y="1060.0" />
-      <point x="5185.022837163444" y="1060.0" />
-      <point x="29.5" y="15.0" />
+      <point x="41.25" y="-15.0" />
+      <point x="2601.66107395202" y="1220.0" />
+      <point x="3155.91107395202" y="1220.0" />
+      <point x="-29.5" y="15.0" />
     </edge>
     <edge source="service.impl.replace_switch_with_command.Recent7DaysUserHistoryListHandler" target="service.impl.replace_switch_with_command.Handler">
-      <point x="88.5" y="15.0" />
-      <point x="8230.062330060915" y="1060.0" />
-      <point x="8303.437330060915" y="1060.0" />
-      <point x="8303.437330060915" y="1330.0" />
-      <point x="8357.55512883011" y="1330.0" />
-      <point x="-11.125" y="-15.0" />
+      <point x="-29.5" y="-15.0" />
+      <point x="895.6363636363621" y="900.0" />
+      <point x="247.375" y="900.0" />
+      <point x="40.45454545454595" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="util.RandomUtil">
-      <point x="-29.684210526315837" y="-15.0" />
-      <point x="4564.195671092033" y="910.0" />
-      <point x="4431.156377430059" y="910.0" />
-      <point x="0.0" y="15.0" />
+      <point x="29.684210526315837" y="-15.0" />
+      <point x="3895.283190219061" y="1250.0" />
+      <point x="4180.2220469996355" y="1250.0" />
+      <point x="4180.2220469996355" y="440.0" />
+      <point x="3996.388713666303" y="440.0" />
+      <point x="36.66666666666697" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="dao.IUserHistoryDao">
-      <point x="67.71875" y="-15.0" />
-      <point x="5602.741587163444" y="650.0" />
-      <point x="5965.175495653437" y="650.0" />
-      <point x="5965.175495653437" y="470.0" />
-      <point x="8233.833758632343" y="470.0" />
-      <point x="-26.800000000000182" y="15.0" />
+      <point x="-67.71875" y="-15.0" />
+      <point x="2750.19232395202" y="750.0" />
+      <point x="2578.9106004671717" y="750.0" />
+      <point x="2578.9106004671717" y="330.0" />
+      <point x="882.3738636363614" y="330.0" />
+      <point x="26.799999999999272" y="15.0" />
     </edge>
     <edge source="dao.impl.UserHistoryDao" target="dao.IUserHistoryDao">
-      <point x="37.428571428571445" y="-15.0" />
-      <point x="8308.740901489486" y="470.0" />
-      <point x="8314.233758632343" y="470.0" />
-      <point x="53.60000000000002" y="15.0" />
+      <point x="-37.42857142857065" y="-15.0" />
+      <point x="818.1452922077915" y="600.0" />
+      <point x="801.9738636363618" y="600.0" />
+      <point x="-53.600000000000364" y="15.0" />
     </edge>
     <edge source="rpc.impl.UserCustomerLoginImpl" target="service.IUserCustomerApplyService">
-      <point x="-14.66666666666697" y="-15.0" />
-      <point x="4321.818478109576" y="1350.0" />
-      <point x="4095.853972847144" y="1350.0" />
-      <point x="4095.853972847144" y="1070.0" />
-      <point x="4056.584009009007" y="1070.0" />
-      <point x="48.5" y="15.0" />
+      <point x="14.66666666666697" y="-15.0" />
+      <point x="4075.85775162257" y="1690.0" />
+      <point x="4406.210821798008" y="1690.0" />
+      <point x="4406.210821798008" y="1300.0" />
+      <point x="4540.978209319308" y="1300.0" />
+      <point x="-48.5" y="15.0" />
     </edge>
     <edge source="service.impl.method_template_pattern.YoungSaversAccount" target="service.impl.method_template_pattern.IAccounts">
-      <point x="-40.0" y="-15.0" />
-      <point x="3272.959009009007" y="630.0" />
-      <point x="3425.209009009007" y="630.0" />
-      <point x="-20.0" y="15.0" />
+      <point x="40.0" y="-15.0" />
+      <point x="5264.314152262794" y="880.0" />
+      <point x="6595.766972994108" y="880.0" />
+      <point x="-25.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="service.impl.command_pattern.StudentAccCalculateExpiry">
-      <point x="-11.783783783784202" y="-15.0" />
-      <point x="1489.7398784572915" y="1230.0" />
-      <point x="755.5350047092452" y="1230.0" />
-      <point x="0.0" y="15.0" />
+      <point x="30.743589743589837" y="-15.0" />
+      <point x="7649.698001285187" y="1630.0" />
+      <point x="8162.838126840263" y="1630.0" />
+      <point x="-46.5" y="15.0" />
     </edge>
     <edge source="rpc.impl.UserCustomerLoginImpl" target="Const.UserAccountType">
-      <point x="-73.33333333333303" y="-15.0" />
-      <point x="4263.15181144291" y="1370.0" />
-      <point x="3311.4544430218566" y="1370.0" />
-      <point x="35.0" y="15.0" />
+      <point x="73.33333333333303" y="-15.0" />
+      <point x="4134.524418289237" y="1710.0" />
+      <point x="5195.489408891544" y="1710.0" />
+      <point x="5195.489408891544" y="1340.0" />
+      <point x="6078.164072433801" y="1340.0" />
+      <point x="6078.164072433801" y="970.0" />
+      <point x="8965.343239100468" y="970.0" />
+      <point x="-56.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerApplyService" target="dao.impl.UserApplyDao">
-      <point x="-88.66666666666697" y="-15.0" />
-      <point x="3373.0377763551896" y="1070.0" />
-      <point x="2997.134479183719" y="1070.0" />
+      <point x="-12.66666666666697" y="-15.0" />
+      <point x="5003.752488464675" y="1220.0" />
+      <point x="4909.314152262794" y="1220.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="dao.impl.SysConfigDao" target="entity.SysConfigEntity">
-      <point x="24.600000000000364" y="-15.0" />
-      <point x="1637.4600047092454" y="400.0" />
-      <point x="1644.0350047092452" y="400.0" />
-      <point x="1644.0350047092452" y="130.0" />
-      <point x="1623.8858108108093" y="130.0" />
-      <point x="32.5" y="15.0" />
+      <point x="-24.59999999999991" y="-15.0" />
+      <point x="6727.666972994108" y="560.0" />
+      <point x="7361.433639660774" y="560.0" />
+      <point x="7361.433639660774" y="140.0" />
+      <point x="7275.288511237153" y="140.0" />
+      <point x="-32.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="util.PINGenerator">
-      <point x="-69.26315789473665" y="-15.0" />
-      <point x="4524.616723723612" y="950.0" />
-      <point x="2803.2385332377735" y="950.0" />
-      <point x="29.5" y="15.0" />
+      <point x="69.26315789473665" y="-15.0" />
+      <point x="3934.862137587482" y="1300.0" />
+      <point x="4383.978209319308" y="1300.0" />
+      <point x="-29.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="Const.UserOperateStatusType">
-      <point x="-18.550000000000182" y="-15.0" />
-      <point x="7195.055128830111" y="780.0" />
-      <point x="7085.787330060914" y="780.0" />
-      <point x="7085.787330060914" y="360.0" />
-      <point x="6592.84788732083" y="360.0" />
-      <point x="21.5" y="15.0" />
+      <point x="24.090909090909918" y="-15.0" />
+      <point x="1206.4848449240067" y="1130.0" />
+      <point x="1851.991983203784" y="1130.0" />
+      <point x="1851.991983203784" y="420.0" />
+      <point x="2691.908176385601" y="420.0" />
+      <point x="-21.5" y="15.0" />
     </edge>
     <edge source="dao.ISysConfigDao" target="entity.SysConfigEntity">
       <point x="0.0" y="-15.0" />
-      <point x="1570.5350047092452" y="130.0" />
-      <point x="1558.8858108108093" y="130.0" />
-      <point x="-32.5" y="15.0" />
+      <point x="7434.933639660774" y="130.0" />
+      <point x="7340.288511237153" y="130.0" />
+      <point x="32.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="service.impl.replace_constructors_with_creation_methods.NewTransferHistoryFactory">
-      <point x="-18.46875" y="-15.0" />
-      <point x="5516.554087163444" y="590.0" />
-      <point x="5138.366587163444" y="590.0" />
+      <point x="18.46875" y="-15.0" />
+      <point x="2836.37982395202" y="730.0" />
+      <point x="3190.81732395202" y="730.0" />
+      <point x="3190.81732395202" y="420.0" />
+      <point x="3761.827310157531" y="420.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="Const.PinReplyType">
-      <point x="69.26315789473665" y="-15.0" />
-      <point x="4663.143039513086" y="1090.0" />
-      <point x="5126.022837163444" y="1090.0" />
-      <point x="-29.5" y="15.0" />
+      <point x="-79.15789473684163" y="-15.0" />
+      <point x="3786.4410849559035" y="1170.0" />
+      <point x="3214.91107395202" y="1170.0" />
+      <point x="29.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="dao.IUserAccountDao">
-      <point x="-50.34999999999991" y="-15.0" />
-      <point x="7163.255128830111" y="840.0" />
-      <point x="6966.824830060913" y="840.0" />
-      <point x="6966.824830060913" y="560.0" />
-      <point x="262.14189189189074" y="560.0" />
-      <point x="55.600000000000364" y="15.0" />
+      <point x="53.0" y="-15.0" />
+      <point x="1235.3939358330967" y="1190.0" />
+      <point x="2141.91107395202" y="1190.0" />
+      <point x="2141.91107395202" y="820.0" />
+      <point x="5751.666636536365" y="820.0" />
+      <point x="-55.59999999999991" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="service.impl.SysEmailService">
-      <point x="-89.05263157894751" y="-15.0" />
-      <point x="4504.827250039401" y="970.0" />
-      <point x="1947.860004709245" y="970.0" />
-      <point x="32.5" y="15.0" />
+      <point x="89.05263157894751" y="-15.0" />
+      <point x="3954.6516112716927" y="1330.0" />
+      <point x="5970.164072433801" y="1330.0" />
+      <point x="-32.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="entity.UserEntity">
-      <point x="-9.89473684210543" y="-15.0" />
-      <point x="4583.985144776243" y="1090.0" />
-      <point x="4581.156377430059" y="1090.0" />
-      <point x="4581.156377430059" y="200.0" />
-      <point x="4119.91734234234" y="200.0" />
-      <point x="33.33333333333303" y="15.0" />
+      <point x="9.894736842104976" y="-15.0" />
+      <point x="3875.49371653485" y="1230.0" />
+      <point x="3888.222046999636" y="1230.0" />
+      <point x="3888.222046999636" y="120.0" />
+      <point x="4712.480818929461" y="120.0" />
+      <point x="-33.33333333333303" y="15.0" />
     </edge>
     <edge source="service.impl.CustomerLoginService" target="service.ICustomerLoginService">
-      <point x="41.25" y="-15.0" />
-      <point x="5936.788462163444" y="1070.0" />
-      <point x="6500.324830060913" y="1070.0" />
-      <point x="0.0" y="15.0" />
+      <point x="13.75" y="-15.0" />
+      <point x="2574.16107395202" y="1200.0" />
+      <point x="2671.41107395202" y="1200.0" />
+      <point x="56.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="Const.CardStatus">
-      <point x="38.29729729729752" y="-15.0" />
-      <point x="1539.8209595383732" y="1320.0" />
-      <point x="2518.829968547382" y="1320.0" />
+      <point x="39.12820512820508" y="-15.0" />
+      <point x="7658.0826166698025" y="1660.0" />
+      <point x="8692.378190942825" y="1660.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="service.impl.command_pattern.GoldenAccCalculateExpiry">
-      <point x="-5.891891891891646" y="-15.0" />
-      <point x="1495.631770349184" y="1210.0" />
-      <point x="1168.5350047092452" y="1210.0" />
+      <point x="27.94871794871824" y="-15.0" />
+      <point x="7646.903129490316" y="1620.0" />
+      <point x="8005.338126840263" y="1620.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerHistoryService" target="service.impl.replace_constructors_with_creation_methods.NewChargeHistoryFactory">
-      <point x="30.78125" y="-15.0" />
-      <point x="5565.804087163444" y="620.0" />
-      <point x="5836.505128830111" y="620.0" />
+      <point x="-18.46875" y="-15.0" />
+      <point x="2799.44232395202" y="700.0" />
+      <point x="2911.908176385601" y="700.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="dao.impl.UserDao" target="entity.UserApplyArchiveEntity">
-      <point x="-23.25" y="-15.0" />
-      <point x="4045.334009009007" y="420.0" />
-      <point x="3134.4344791837193" y="420.0" />
-      <point x="3134.4344791837193" y="140.0" />
-      <point x="2965.6938574938554" y="140.0" />
-      <point x="61.81818181818198" y="15.0" />
+      <point x="23.25" y="-15.0" />
+      <point x="4485.439152262794" y="470.0" />
+      <point x="4512.939152262794" y="470.0" />
+      <point x="4512.939152262794" y="160.0" />
+      <point x="7409.788511237153" y="160.0" />
+      <point x="-68.0" y="15.0" />
     </edge>
     <edge source="service.impl.command_pattern.PersonalAccCalculateExpiry" target="service.impl.command_pattern.CalculateExpiry">
-      <point x="-63.0" y="-15.0" />
-      <point x="900.0350047092452" y="1060.0" />
-      <point x="675.0264953696674" y="1060.0" />
-      <point x="10.41666666666697" y="15.0" />
+      <point x="63.0" y="-15.0" />
+      <point x="8706.838126840263" y="960.0" />
+      <point x="8733.046460173595" y="960.0" />
+      <point x="10.416666666666629" y="15.0" />
     </edge>
     <edge source="service.impl.StaffService" target="Const.UserStatusType">
-      <point x="35.351351351351695" y="-15.0" />
-      <point x="1536.8750135924274" y="1310.0" />
-      <point x="2452.1663110155514" y="1310.0" />
-      <point x="2452.1663110155514" y="700.0" />
-      <point x="4463.156377430059" y="700.0" />
-      <point x="-43.0" y="15.0" />
+      <point x="-44.71794871794873" y="-15.0" />
+      <point x="7574.236462823649" y="1660.0" />
+      <point x="5574.872103630797" y="1660.0" />
+      <point x="5574.872103630797" y="1100.0" />
+      <point x="5471.266636536366" y="1100.0" />
+      <point x="5471.266636536366" y="770.0" />
+      <point x="4148.2220469996355" y="770.0" />
+      <point x="43.0" y="15.0" />
     </edge>
     <edge source="service.impl.method_template_pattern.YoungSaversAccount" target="service.impl.method_template_pattern.FeesTemplate">
-      <point x="40.0" y="-15.0" />
-      <point x="3352.959009009007" y="640.0" />
-      <point x="3600.959009009007" y="640.0" />
-      <point x="-45.0" y="15.0" />
+      <point x="-40.0" y="-15.0" />
+      <point x="5184.314152262794" y="840.0" />
+      <point x="6239.579536878179" y="840.0" />
+      <point x="-15.0" y="15.0" />
     </edge>
     <edge source="dao.impl.SysConfigDao" target="util.HibernateUtils">
-      <point x="49.19999999999982" y="-15.0" />
-      <point x="1662.0600047092448" y="430.0" />
-      <point x="2805.264564564562" y="430.0" />
-      <point x="-27.111111111111313" y="15.0" />
+      <point x="-49.19999999999982" y="-15.0" />
+      <point x="6703.066972994108" y="410.0" />
+      <point x="4868.980818929461" y="410.0" />
+      <point x="40.66666666666697" y="15.0" />
     </edge>
     <edge source="dao.impl.BankStaffDao" target="entity.BankStaffEntity">
       <point x="0.0" y="-15.0" />
-      <point x="2801.3711096885236" y="1010.0" />
-      <point x="2647.7663110155518" y="1010.0" />
-      <point x="2647.7663110155518" y="640.0" />
-      <point x="2548.7860360360337" y="640.0" />
-      <point x="42.33333333333303" y="15.0" />
+      <point x="5501.577231835925" y="1300.0" />
+      <point x="5515.266636536366" y="1300.0" />
+      <point x="5515.266636536366" y="940.0" />
+      <point x="7020.933639660774" y="940.0" />
+      <point x="-42.333333333333485" y="15.0" />
     </edge>
     <edge source="dao.impl.UserAccountTypeDao" target="entity.UserAccountTypeEntity">
-      <point x="-32.40000000000009" y="-15.0" />
-      <point x="7432.683186640586" y="670.0" />
-      <point x="7413.770686640586" y="670.0" />
-      <point x="7413.770686640586" y="450.0" />
-      <point x="7476.712330060914" y="450.0" />
-      <point x="-42.25" y="15.0" />
+      <point x="32.399999999999636" y="-15.0" />
+      <point x="1792.8919832037836" y="980.0" />
+      <point x="1811.804483203784" y="980.0" />
+      <point x="1811.804483203784" y="340.0" />
+      <point x="1612.773863636362" y="340.0" />
+      <point x="42.25" y="15.0" />
     </edge>
     <edge source="dao.IUserHistoryDao" target="entity.UserHistoryEntity">
       <point x="0.0" y="-15.0" />
-      <point x="8260.633758632343" y="100.0" />
-      <point x="5904.60401997392" y="100.0" />
-      <point x="26.833333333333485" y="15.0" />
+      <point x="855.5738636363621" y="180.0" />
+      <point x="2321.574843052268" y="180.0" />
+      <point x="-26.83333333333303" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerApplyService" target="dao.impl.UserDao">
-      <point x="50.66666666666697" y="-15.0" />
-      <point x="3512.3711096885236" y="1050.0" />
-      <point x="3889.584009009007" y="1050.0" />
-      <point x="3889.584009009007" y="680.0" />
-      <point x="4060.834009009007" y="680.0" />
-      <point x="-7.75" y="15.0" />
+      <point x="-63.33333333333303" y="-15.0" />
+      <point x="4953.0858217980085" y="1260.0" />
+      <point x="4696.978209319308" y="1260.0" />
+      <point x="4696.978209319308" y="810.0" />
+      <point x="4469.939152262794" y="810.0" />
+      <point x="7.75" y="15.0" />
     </edge>
     <edge source="service.impl.SysEmailService" target="service.ISysEmailService">
-      <point x="43.33333333333303" y="-15.0" />
-      <point x="1958.693338042578" y="670.0" />
-      <point x="1762.360004709245" y="670.0" />
+      <point x="0.0" y="-15.0" />
+      <point x="6002.664072433801" y="910.0" />
+      <point x="6900.766972994108" y="910.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="entity.UserHistoryEntity">
-      <point x="23.84999999999991" y="-15.0" />
-      <point x="7237.455128830112" y="1020.0" />
-      <point x="7669.062330060914" y="1020.0" />
-      <point x="7669.062330060914" y="120.0" />
-      <point x="5889.270686640586" y="120.0" />
-      <point x="11.5" y="15.0" />
+      <point x="-24.090909090909918" y="-15.0" />
+      <point x="1158.3030267421868" y="1300.0" />
+      <point x="1053.6363636363626" y="1300.0" />
+      <point x="1053.6363636363626" y="200.0" />
+      <point x="2336.908176385601" y="200.0" />
+      <point x="-11.5" y="15.0" />
     </edge>
     <edge source="service.impl.method_template_pattern.GoldenAccount" target="service.impl.method_template_pattern.IAccounts">
-      <point x="-32.25" y="-15.0" />
-      <point x="0.0" y="15.0" />
+      <point x="32.25" y="-15.0" />
+      <point x="6702.705132396231" y="730.0" />
+      <point x="6629.100306327442" y="730.0" />
+      <point x="8.333333333333485" y="15.0" />
     </edge>
     <edge source="dao.impl.UserCardDao" target="dao.IUserCardDao">
-      <point x="-23.600000000000364" y="-15.0" />
-      <point x="433.0898648648631" y="1120.0" />
-      <point x="437.57852239669364" y="1120.0" />
+      <point x="47.200000000000045" y="-15.0" />
+      <point x="7688.723383250519" y="1410.0" />
+      <point x="7695.373383250519" y="1410.0" />
       <point x="15.125" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerService" target="entity.UserPayeeEntity">
-      <point x="18.550000000000182" y="-15.0" />
-      <point x="7232.155128830112" y="1010.0" />
-      <point x="7605.070686640587" y="1010.0" />
-      <point x="7605.070686640587" y="320.0" />
-      <point x="7398.087330060914" y="320.0" />
-      <point x="49.125" y="15.0" />
+      <point x="-14.45454545454595" y="-15.0" />
+      <point x="1167.9393903785508" y="1050.0" />
+      <point x="1196.6363636363621" y="1050.0" />
+      <point x="1196.6363636363621" y="380.0" />
+      <point x="1302.3863636363621" y="380.0" />
+      <point x="-49.125" y="15.0" />
     </edge>
     <edge source="service.impl.CustomerLoginService" target="util.TimestampConvertHelper">
-      <point x="-41.25" y="-15.0" />
-      <point x="5854.288462163444" y="1050.0" />
-      <point x="5340.689503830111" y="1050.0" />
-      <point x="15.166666666666515" y="15.0" />
+      <point x="68.75" y="-15.0" />
+      <point x="2629.16107395202" y="1240.0" />
+      <point x="3309.91107395202" y="1240.0" />
+      <point x="-45.5" y="15.0" />
     </edge>
     <edge source="service.impl.UserCustomerLoginService" target="Const.UserOperateType">
-      <point x="9.894736842104976" y="-15.0" />
-      <point x="4603.774618460454" y="1090.0" />
-      <point x="4600.945851114269" y="1090.0" />
-      <point x="4600.945851114269" y="420.0" />
-      <point x="6343.72288732083" y="420.0" />
-      <point x="-52.125" y="15.0" />
+      <point x="-19.78947368421086" y="-15.0" />
+      <point x="3845.8095060085343" y="1200.0" />
+      <point x="3850.879941736478" y="1200.0" />
+      <point x="3850.879941736478" y="290.0" />
+      <point x="2590.033176385601" y="290.0" />
+      <point x="52.125" y="15.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.1" x="6155.0" y="2725.0" />
+  <settings layout="Hierarchic Group" zoom="0.40000000000000013" x="6240.964285714284" y="1006.0357142857142" />
   <SelectedNodes>
-    <node>dao.IUserPayeeDao</node>
+    <node>rpc.interceptor.AuthorizationInterceptor</node>
   </SelectedNodes>
   <Categories />
   <SCOPE>All</SCOPE>

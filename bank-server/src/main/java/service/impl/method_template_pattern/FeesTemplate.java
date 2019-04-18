@@ -5,7 +5,7 @@ package service.impl.method_template_pattern;
  */
 
 /*
-    Intent: Define the skeleton of an algorithm in an operation, deferring somesteps to
+    Intent: Define the skeleton of an algorithm in an operation, deferring some steps to
             subclasses. Template Method lets subclasses redefinecertain steps of an algorithm
             without changing the algorithm'sstructure.
      Participants:

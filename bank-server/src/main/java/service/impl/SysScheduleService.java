@@ -15,11 +15,11 @@ import java.text.MessageFormat;
 import static service.impl.method_template_pattern.IAccounts.allAccounts;
 
 
-public class SysScheduleService implements ISysScheduleService, Job {
+public class SysScheduleService implements Job {
     private IUserAccountTypeDao userAccountTypeDao;
     private IUserAccountDao userAccountDao = UserAccountDao.getInstance();
 
-    public void applyFeesToAllAccounts() {
+    public static void applyFeesToAllAccounts() {
         JobDetail job = JobBuilder.newJob(SysScheduleService.class).build();
         CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("1 0 1 3,6,9,12 * ?");
         Trigger trigger = TriggerBuilder.newTrigger().withSchedule(scheduleBuilder).build();
